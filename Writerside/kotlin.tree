@@ -7,6 +7,7 @@
         name="Kotlin 中文文档"
         start-page="home.topic"
 >
+    <toc-element topic="translator-says.md"/>
     <toc-element topic="home.topic"/>
     <toc-element topic="getting-started.md"/>
 
