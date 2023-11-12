@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="首页" id="home"
+>
+
+    <section-starting-page>
+        <title>Kotlin 中文文档（逐步翻译中）</title>
+        <description>
+            最新稳定版本: %kotlinVersion%
+        </description>
+        <spotlight>
+            <a
+                href="getting-started.md"
+                summary="在 IDE 中为您选择的平台创建您的第一个 Kotlin 项目：IntelliJ IDEA 或 Android Studio"
+                type="start"
+            >开始使用 Kotlin</a>
+            <a
+                href="https://play.kotlinlang.org/"
+                summary="直接在浏览器中编写、编辑、运行和共享 Kotlin 代码" type="install"
+            >
+                在线试用 Kotlin</a>
+        </spotlight>
+        <primary>
+            <title>第一步</title>
+            <a
+                href="basic-syntax.md"
+                summary="Kotlin 语法快速浏览：关键字、运算符、程序结构"
+            >基本语法</a>
+            <a
+                href="https://play.kotlinlang.org/byExample/overview"
+                summary="Kotlin 语法的简单注释示例"
+            >Kotlin 举例</a>
+            <a href="koans.md" summary="编程练习让您熟悉 Kotlin">Koans</a>
+            <a href="command-line.md" summary="下载并安装 Kotlin 编译器">命令行编译器</a>
+        </primary>
+        <secondary>
+            <title>特色主题</title>
+            <a
+                href="https://kotlinlang.org/api/latest/jvm/stdlib/"
+                summary="Kotlin日常工作的必备要素：IO、文件、线程、集合等等"
+            >标准库 API 参考</a>
+            <a
+                href="coding-conventions.md"
+                summary="代码组织、格式化和命名的建议"
+            >编码约定</a>
+            <a
+                href="basic-types.md"
+                summary="Kotlin 类型系统：数字、字符串、数组以及其他内置类型"
+            >基本类型</a>
+            <a href="control-flow.md" summary="条件和循环：if、when、for、while">控制流</a>
+            <a
+                href="null-safety.md"
+                summary="可空类型和非空类型，Elvis运算符，安全调用和转换"
+            >空安全</a>
+            <a href="coroutines-overview.md" summary="并发性：协程、流、通道">协程</a>
+        </secondary>
+        <misc>
+            <cards>
+                <title>新特性</title>
+                <a href="whatsnew1920.md" summary="最新特性：Kotlin K2 处于 Beta 阶段，稳定版 Kotlin 多平台">
+                    在 Kotlin 1.9.20 版本中的新特性
+                </a>
+                <a href="roadmap.md" summary="Kotlin 未来开发计划">Kotlin 公开路线图</a>
+            </cards>
+            <cards narrow="true">
+                <title>Kotlin 多平台</title>
+                <a href="multiplatform-get-started.md" summary="有用的链接，帮助你开始使用 SDK">
+                    开始使用
+                </a>
+                <a
+                    href="multiplatform-mobile-plugin-releases.md"
+                    summary="Kotlin 多平台移动插件的功能"
+                >
+                    Android Studio 插件发布版本
+                </a>
+                <a
+                    href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C"
+                    summary="在我们的 YouTube 频道上关于 Kotlin Multiplatform 的视频"
+                >Kotlin 多平台 多元宇宙</a>
+            </cards>
+            <links narrow="true">
+                <group>
+                    <title>Learn Kotlin</title>
+                    <a
+                        href="https://play.kotlinlang.org/byExample/overview"
+                        summary="Kotlin 语法的简单带注释示例"
+                    >Kotlin 示例</a>
+                    <a href="koans.md" summary="编程练习，帮助你熟悉 Kotlin">Koans</a>
+                    <a
+                        href="https://hyperskill.org/tracks?category=4&amp;utm_source=jbkotlin_hs&amp;utm_medium=referral&amp;utm_campaign=kotlinlang-docs&amp;utm_content=button_1&amp;utm_term=22.03.23"
+                        summary="JetBrains 学院的 Kotlin 核心学习轨迹"
+                    >JetBrains 学院</a>
+                    <a href="advent-of-code.md" summary="Kotlin 中的代码谜题，使用惯用的语法">Advent of Code</a>
+                    <a href="kotlin-hands-on.md" summary="完整的长篇教程，帮助深入理解一项技术">
+                        实践教程</a>
+                    <a
+                        href="edu-tools-learner.md"
+                        summary="用于学习和教授编程语言的集成开发环境（IDE）插件"
+                    >在 IntelliJ IDEA 中使用的 JetBrains 学院</a>
+                    <a
+                        href="books.md"
+                        summary="我们已经审阅并推荐用于学习 Kotlin 的书籍"
+                    >书籍</a>
+                </group>
+                <group>
+                    <title>在 YouTube 上观看 Kotlin 视频</title>
+                    <a
+                        href="https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw"
+                        summary="Kotlin YouTube 官方频道"
+                    >Kotlin YouTube 频道</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmxOJL0GSSZ1Vot4KL2Vwe7x"
+                        summary="将 Kotlin 与 Spring 结合使用的教程"
+                    >Spring 框架中的 Kotlin</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmx-dpq9nkdaVJX0GnrM1Mp1"
+                        summary="关于使用 Kotlin 进行服务器端开发的网络研讨会"
+                    >与专家举行的网络研讨会</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmy_oVc9YQzjasSNoAk4hk_C"
+                        summary="有关使用 Kotlin 多平台的教程"
+                    >Kotlin 多平台 多元宇宙</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmyQA0l15nAfE1-pnu6fSvvG"
+                        summary="Kotlin 用于竞技编程"
+                    >竞技编程</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmy6Fz9aq-JMlzk34ce5hJrg"
+                        summary="使用标准库的教程"
+                    >Kotlin 标准库</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmz1TwkP9SKCHU978dqLTANB"
+                        summary="《Talking Kotlin》播客"
+                    >《Talking Kotlin》播客</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmzT4cgLOGJYGnY6j0W2xoFA"
+                        summary="关于教授 Kotlin 的故事"
+                    >教育者的 Kotlin</a>
+                    <a
+                        href="https://www.youtube.com/playlist?list=PLlFc5cFwUnmxS9GQ0HtzUG1a7WQ2cvF6U"
+                        summary="来自 Kotlin 在线活动 2021 的演讲"
+                    >Kotlin 在线活动 2021</a>
+                </group>
+                <group>
+                    <title>保持联系并贡献</title>
+                    <a href="contribute.md" summary="你可以帮助 Kotlin 发展的方式">为 Kotlin 做出贡献</a>
+                    <a
+                        href="eap.md"
+                        summary="预览版本，用于在官方发布之前尝试新功能"
+                    >参与早期访问计划</a>
+                    <a
+                        href="https://surveys.jetbrains.com/s3/kotlin-slack-sign-up"
+                        summary="官方公共 Kotlin Slack"
+                    >加入 Kotlin Slack</a>
+                    <a href="https://twitter.com/kotlin" summary="Kotlin 官方 Twitter">在 Twitter 上关注 Kotlin</a>
+                    <a href="https://www.reddit.com/r/Kotlin/" summary="Reddit 上的 Kotlin 论坛">在 Reddit 上聊天</a>
+                    <a href="https://stackoverflow.com/questions/tagged/kotlin" summary="Stack Overflow 上的 Kotlin">
+                        参与 Stack Overflow 讨论</a>
+                </group>
+            </links>
+        </misc>
+    </section-starting-page>
+
+</topic>
