@@ -2,17 +2,16 @@
 
 <buildprofiles>
     <variables>
+        <!--启用Github编辑-->
         <enable-browser-edits>true</enable-browser-edits>
-        <browser-edits-url>https://github.com/T-miracle/kotlin-docs-cn/edit/master/Writerside/</browser-edits-url>
-        <browser-edits-url-override
-            for="coroutines-guide.md,coroutines-basics.md,coroutines-basic-jvm.md,cancellation-and-timeouts.md,composing-suspending-functions.md,coroutine-context-and-dispatchers.md,flow.md,channels.md,exception-handling.md,shared-mutable-state-and-concurrency.md,select-expression.md,debug-coroutines-with-idea.md,debug-flow-with-idea.md">
-            https://github.com/Kotlin/kotlinx.coroutines/edit/master/docs/topics/
-        </browser-edits-url-override>
+        <browser-edits-url>https://github.com/T-miracle/kotlin-docs-cn/edit/main/Writerside/</browser-edits-url>
+        <!--主题色-->
         <primary-color>purple</primary-color>
         <kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>
-        <product-web-url>%kotlinLatestUrl%</product-web-url>
+        <!--首页地址-->
+        <product-web-url>https://blog.namichong.com/translation-docs/kotlin-docs/</product-web-url>
         <generate-only-default-anchors>true</generate-only-default-anchors>
-        <web-root>https://kotlinlang.org/docs/</web-root>
+        <web-root>https://blog.namichong.com/translation-docs/kotlin-docs/</web-root>
         <og-image>https://kotlinlang.org/assets/images/open-graph/docs.png</og-image>
         <og-twitter>@kotlin</og-twitter>
         <web-community-path>Kotlin Community:https://kotlinlang.org/community/</web-community-path>
@@ -28,14 +27,23 @@
         <config-feedback-url>https://data.services.jetbrains.com/feedback</config-feedback-url>
         <config-webmaster>doc-feedback@kotlinlang.org</config-webmaster>
         <config-sideblocks>true</config-sideblocks>
-        <config-algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</config-algolia-api-key>
+        <!--<config-algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</config-algolia-api-key>
         <config-algolia-id>7961PKYRXV</config-algolia-id>
-        <config-algolia-index>prod_KOTLINLANG_WEBHELP</config-algolia-index>
+        <config-algolia-index>prod_KOTLINLANG_WEBHELP</config-algolia-index>-->
         <noindex-content-in-deprecated>true</noindex-content-in-deprecated>
         <noindex-content-in-eap>false</noindex-content-in-eap>
         <noindex-content-in-release>false</noindex-content-in-release>
         <config-search-scopes-provider>https://www.jetbrains.com/search/json/</config-search-scopes-provider>
         <generate-canonicals>true</generate-canonicals>
+        <!--谷歌分析-->
+        <analytics-head-script-file>google-analytics-code.html</analytics-head-script-file>
+        <analytics-body-html-file>google-analytics-noscript.html</analytics-body-html-file>
     </variables>
     <build-profile product="kotlin"/>
+
+    <footer>
+        <link href="https://github.com/JetBrains/kotlin">Github 源码</link>
+        <link href="https://twitter.com/kotlin">Twitter</link>
+        <link href="https://blog.namichong.com/">译者站点</link>
+    </footer>
 </buildprofiles>
