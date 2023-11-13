@@ -30,9 +30,9 @@
         <!--<config-algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</config-algolia-api-key>
         <config-algolia-id>7961PKYRXV</config-algolia-id>
         <config-algolia-index>prod_KOTLINLANG_WEBHELP</config-algolia-index>-->
-        <noindex-content-in-deprecated>true</noindex-content-in-deprecated>
-        <noindex-content-in-eap>false</noindex-content-in-eap>
-        <noindex-content-in-release>false</noindex-content-in-release>
+        <noindex-content status="deprecated">false</noindex-content>
+        <noindex-content status="eap">false</noindex-content>
+        <noindex-content status="release">false</noindex-content>
         <config-search-scopes-provider>https://www.jetbrains.com/search/json/</config-search-scopes-provider>
         <generate-canonicals>true</generate-canonicals>
         <!--谷歌分析-->
