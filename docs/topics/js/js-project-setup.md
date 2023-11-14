@@ -77,7 +77,7 @@ Kotlin-internal library files, which can be used from other projects, but not ru
 > This is typically faster than creating executable files,
 > and can be a possible optimization when dealing with non-leaf modules of your project.
 >
-{type="tip"}
+{style="tip"}
 
 The Kotlin Multiplatform plugin automatically configures its tasks for working with the selected environment.
 This includes downloading and installing the required environment and dependencies for running and testing the application.

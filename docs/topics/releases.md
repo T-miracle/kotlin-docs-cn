@@ -22,7 +22,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
 
 如果您正在迁移到新的功能发布版本，Kotlin 插件的迁移工具将帮助您完成迁移。
 
-## IDE 支持 {id=IDE支持}
+## IDE 支持 {id=ide-support}
 
 对于语言的最新版本，以下版本的 IntelliJ IDEA 和 Android Studio 提供 IDE 支持：
 
@@ -37,7 +37,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
 > 在 [IntelliJ IDEA 新功能页面](https://www.jetbrains.com/idea/whatsnew/) 的 **Kotlin** 部分了解有关最新 Kotlin 相关更新的更多信息。
 
 
-## 发布详情 {id=发布详情}
+## 发布详情 {id=release-details}
 
 以下表格列出了最新 Kotlin 发布的详细信息。
 
@@ -48,6 +48,16 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
         <th>构建信息</th>
         <th>构建亮点</th>
     </tr>
+    <tr>
+      <td><strong>1.9.21</strong>
+          <p>发布于： <strong>2023年11月23日</strong></p>
+          <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.21" target="_blank">GitHub 上的发布</a></p>
+      </td>
+      <td>
+          <p>Kotlin 1.9.20 的一个 bug 修复版本。</p>
+          <p>了解有关 Kotlin 1.9.20 的更多信息： <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 的新增功能</a>.</p>
+      </td>
+  </tr>
     <tr>
         <td><strong>1.9.20</strong>
             <p>发布于: <strong>2023 年 11 月 1 日</strong></p>

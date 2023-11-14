@@ -4,7 +4,7 @@
    <p>The IDE support for Kotlin 1.7.0 is available for IntelliJ IDEA 2021.2, 2021.3, and 2022.1.</p>
 </microformat>
 
-_[Released: 9 June 2022](releases.md#发布详情)_
+_[Released: 9 June 2022](releases.md#release-details)_
 
 Kotlin 1.7.0 has been released. It unveils the Alpha version of the new Kotlin/JVM K2 compiler, stabilizes language
 features, and brings performance improvements for the JVM, JS, and Native platforms.
@@ -53,7 +53,7 @@ Our benchmarks show some outstanding results on our internal projects:
 > The KLOC/s performance numbers stand for the number of thousands of lines of code that the compiler processes per
 > second.
 >
-> {type="tip"}
+> {style="tip"}
 
 You can check out the performance boost on your JVM projects and compare it with the results of the old compiler. To
 enable the Kotlin K2 compiler, use the following compiler option:
@@ -224,9 +224,9 @@ on [this YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-29974/Add-a-co
 
 ### Stable callable references to functional interface constructors
 
-[Callable references](reflection.md#可调用引用) to functional interface constructors are
+[Callable references](reflection.md#callable-references) to functional interface constructors are
 now [Stable](components-stability.md). Learn how
-to [migrate](fun-interfaces.md#从带构造函数的接口迁移到函数式接口)
+to [migrate](fun-interfaces.md#migration-from-an-interface-with-constructor-function-to-a-functional-interface)
 from an interface with a constructor function to a functional interface using callable references.
 
 Please report any issues you find in [YouTrack](https://youtrack.jetbrains.com/newissue?project=kt).
@@ -336,7 +336,7 @@ Starting with Kotlin 1.7.0, you no longer need to install the `cocoapods-generat
 CocoaPods in your projects.
 
 Previously, you needed to install both the CocoaPods dependency manager and the `cocoapods-generate` plugin to use
-CocoaPods, for example, to handle [iOS dependencies](multiplatform-mobile-ios-dependencies.md#with-cocoapods) in
+CocoaPods, for example, to handle [iOS dependencies](multiplatform-ios-dependencies.md#with-cocoapods) in
 Kotlin Multiplatform Mobile projects.
 
 Now setting up the CocoaPods integration is easier, and we've resolved the issue when `cocoapods-generate` couldn't be
@@ -1019,7 +1019,7 @@ the `KotlinCompilerPluginSupportPlugin` class instead.
 
 > The best practice is to use Kotlin plugins with versions 1.7.0 and higher throughout your project.
 >
-{type="tip"}
+{style="tip"}
 
 #### Removal of the deprecated coroutines DSL option and property
 

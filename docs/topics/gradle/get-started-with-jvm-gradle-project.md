@@ -13,7 +13,7 @@ To get started, first download and install the latest version of [IntelliJ IDEA]
    > Select the **Create Git repository** checkbox to place the new project under version control. You will be able to do
    > it later at any time.
    >
-   {type="tip"}
+   {style="tip"}
 
 4. From the **Language** list, select **Kotlin**.
 
@@ -80,7 +80,7 @@ application {
 
 As you can see, there are a few Kotlin-specific artifacts added to the Gradle build file:
 
-1. In the `plugins` block, there is the `kotlin("jvm")` artifact – the plugin defines the version of Kotlin to be used in the project.
+1. In the `plugins{}` block, there is the `kotlin("jvm")` artifact – the plugin defines the version of Kotlin to be used in the project.
 
 2. In the `dependencies` section, there is `testImplementation(kotlin("test"))`. 
    Learn more about [setting dependencies on test libraries](gradle-configure-project.md#set-dependencies-on-test-libraries).

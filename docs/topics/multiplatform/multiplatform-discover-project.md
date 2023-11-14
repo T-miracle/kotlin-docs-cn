@@ -250,7 +250,7 @@ in `appleMain`, and you can add the `randomUUID()` function here.
 > all intermediate source sets that Kotlin creates and sets up by default and learn what you should do
 > if Kotlin doesn't provide the intermediate source set you need by default.
 >
-{type="tip"}
+{style="tip"}
 
 During compilation to a specific target, Kotlin gets all of the source sets, including intermediate source sets, labeled
 with this target. Therefore, all the code written in the `commonMain`, `appleMain`, and `iosArm64Main` source sets is
@@ -261,7 +261,7 @@ combined during compilation to the `iosArm64` platform target:
 > It's okay if some source sets don't have sources. For example, in iOS development, there's usually no need to provide
 > code that is specific for iOS devices but not for iOS simulators. `iosArm64Main` is therefore rarely used.
 >
-{type="tip"}
+{style="tip"}
 
 #### Apple device and simulator targets {collapsible="true"}
 

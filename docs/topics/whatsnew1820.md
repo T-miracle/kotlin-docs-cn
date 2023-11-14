@@ -1,6 +1,6 @@
 [//]: # (title: What's new in Kotlin 1.8.20)
 
-_[Released: 25 April 2023](releases.md#发布详情)_
+_[Released: 25 April 2023](releases.md#release-details)_
 
 The Kotlin 1.8.20 release is out and here are some of its biggest highlights:
 
@@ -113,7 +113,7 @@ function. When called, the `entries` property returns a pre-allocated immutable 
 > The `values()` function is still supported, but we recommend that you use the `entries` property
 > instead.
 >
-{type="tip"}
+{style="tip"}
 
 ```kotlin
 enum class Color(val colorName: String, val rgb: String) {
@@ -166,7 +166,7 @@ tasks
 > Starting with IntelliJ IDEA 2023.1, if you have opted in to this feature, the appropriate IDE
 > inspection will notify you about converting from `values()` to `entries` and offer a quick-fix.
 >
-{type="tip"}
+{style="tip"}
 
 For more information on the proposal, see the [KEEP note](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries.md).
 
@@ -445,7 +445,7 @@ kotlin {
 
 > Check out the [GitHub repository with Kotlin/Wasm examples](https://github.com/Kotlin/kotlin-wasm-examples).
 >
-{type="tip"}
+{style="tip"}
 
 To run a Kotlin/Wasm project, you need to update the settings of the target environment:
 
@@ -1196,7 +1196,7 @@ decoding, any illegal characters are skipped and don't throw an exception.
 > The `Base64.Default` instance is the companion object of the `Base64` class. As a result, you can call its functions
 > via `Base64.encode()` and  `Base64.decode()` instead of `Base64.Default.encode()` and `Base64.Default.decode()`.
 >
-{type="tip"}
+{style="tip"}
 
 ```kotlin
 val foBytes = "fo".map { it.code.toByte() }.toByteArray()
@@ -1343,7 +1343,7 @@ more information, see our [YouTrack ticket](https://youtrack.jetbrains.com/issue
 > In Kotlin 2.0, we plan to promote the compile warning to a compiler error. We recommend
 > that you migrate your code if you see this warning.
 >
-{type="tip"}
+{style="tip"}
 
 ## Documentation updates
 

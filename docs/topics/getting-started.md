@@ -95,7 +95,7 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
    
    > 您还可以在[社区驱动的列表](https://libs.kmp.icerock.dev/)中找到多平台库。
    > 
-   {type="tip"}
+   {style="tip"}
 
 4. **了解有关 Kotlin 多平台的更多信息：**
    * 了解更多关于 [Kotlin Multiplatform](multiplatform-get-started.md)。
@@ -144,7 +144,7 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
    > 了解更多关于[添加库依赖项](multiplatform-add-dependencies.md)的信息。
    > 您还可以在[社区驱动的列表](https://libs.kmp.icerock.dev/)中找到多平台库。
    >
-   {type="tip"}
+   {style="tip"}
 
 3. **了解有关 Kotlin 多平台编程的更多信息：**
 

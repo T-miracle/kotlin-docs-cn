@@ -105,7 +105,7 @@ fun main() {
 > println("Their email address is: ${contact.email}")
 > ```
 >
-{type="tip"}
+{style="tip"}
 
 ## 成员函数
 

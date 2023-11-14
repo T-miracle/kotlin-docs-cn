@@ -197,16 +197,16 @@ class Shape
 类的属性可以在其声明或主体中列出。
 
 ```kotlin
-class Rectangle(var height: Double, var length: Double) {
-    var perimeter = (height + length) * 2 
+class Rectangle(val height: Double, val length: Double) {
+    val perimeter = (height + length) * 2 
 }
 ```
 
 默认构造函数，其中参数在类声明中列出，将自动可用。
 
 ```kotlin
-class Rectangle(var height: Double, var length: Double) {
-    var perimeter = (height + length) * 2 
+class Rectangle(val height: Double, val length: Double) {
+    val perimeter = (height + length) * 2 
 }
 fun main() {
 //sampleStart
@@ -224,8 +224,8 @@ fun main() {
 ```kotlin
 open class Shape
 
-class Rectangle(var height: Double, var length: Double): Shape() {
-    var perimeter = (height + length) * 2 
+class Rectangle(val height: Double, val length: Double): Shape() {
+    val perimeter = (height + length) * 2 
 }
 ```
 
@@ -246,7 +246,7 @@ Kotlin 中的块注释可以嵌套。
 
 ```kotlin
 /* 评论从这里开始
-/* 包含嵌套注释 *&#8288;/     
+/* 包含嵌套注释 */     
 并在此结束。 */
 ```
 

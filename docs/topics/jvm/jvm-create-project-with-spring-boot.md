@@ -55,7 +55,7 @@ Create a new Spring Boot project with Kotlin by using the Project Wizard in Inte
 
    > The IDE will generate and open a new project. It may take some time to download and import the project dependencies.
    >
-   {type="tip"} 
+   {style="tip"} 
 
 7. After this, you can observe the following structure in the **Project view**:
 
@@ -266,7 +266,7 @@ The Spring application is now ready to run:
     
     > You can also run the `./gradlew bootRun` command in the terminal.
     >
-    {type="tip"}
+    {style="tip"}
 
     This starts the local server on your computer.
 

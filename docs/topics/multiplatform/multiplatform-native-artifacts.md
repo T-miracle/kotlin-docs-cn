@@ -229,7 +229,7 @@ The registered Gradle task is `assembleMyframeFramework` that assembles all type
 > If for some reason the new DSL doesn't work for you, try [the previous approach](multiplatform-build-native-binaries.md#export-dependencies-to-binaries)
 > to export dependencies to binaries.
 >
-{type="tip"}
+{style="tip"}
 
 ### Fat frameworks
 
@@ -282,7 +282,7 @@ The registered Gradle task is `assembleMyfatframeFatFramework` that assembles al
 > If for some reason the new DSL doesn't work for you, try [the previous approach](multiplatform-build-native-binaries.md#build-universal-frameworks)
 > to build fat frameworks.
 >
-{type="tip"}
+{style="tip"}
 
 ### XCFrameworks
 
@@ -335,4 +335,4 @@ The registered Gradle task is `assembleSdkXCFramework` that assembles all types 
 > If for some reason the new DSL doesn't work for you, try [the previous approach](multiplatform-build-native-binaries.md#build-xcframeworks)
 > to build XCFrameworks.
 >
-{type="tip"}
+{style="tip"}

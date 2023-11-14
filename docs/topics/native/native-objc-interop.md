@@ -199,7 +199,7 @@ exception-throwing.
 
 > See how exceptions are handled in the Swift part of a [multiplatform project](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-upgrade-app.html#ios-app).
 >
-{type="tip"}
+{style="tip"}
 
 ### Enums
 
@@ -252,7 +252,7 @@ for details.
 > * See how Kotlin's suspending functions are used in the Swift part of a [multiplatform project](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-upgrade-app.html#ios-app). 
 > * Learn more about the [`async`/`await` mechanism in the Swift documentation](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html).
 >
-{type="tip"}
+{style="tip"}
 
 ### Extensions and category members
 

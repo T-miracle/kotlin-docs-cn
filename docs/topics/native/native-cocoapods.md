@@ -91,7 +91,7 @@ sudo gem install cocoapods
 </tab>
 </tabs>
 
-<procedure collapsible="true" title="If you use Kotlin prior to version 1.7.0">
+<procedure initial-collapse-state="collapsed" title="If you use Kotlin prior to version 1.7.0">
     <p>If your current version of Kotlin is earlier than 1.7.0, additionally install the <a href="https://github.com/square/cocoapods-generate"><code>cocoapods-generate</code></a> plugin:</p>
     <p>
         <code style="block"
@@ -222,7 +222,7 @@ an error message in the log.
 
 ## Possible issues and solutions
 
-### CocoaPods installation {collapsible="true"}
+### CocoaPods installation {initial-collapse-state="collapsed"}
 
 #### Ruby installation
 
@@ -240,7 +240,7 @@ install the [`cocoapods-generate`](https://github.com/square/cocoapods-generate#
 However, `cocoapods-generate` is not compatible with Ruby 3.0.0 or later. In this case, downgrade Ruby or upgrade Kotlin
 to 1.7.0 or later.
 
-### Module not found {collapsible="true"}
+### Module not found {initial-collapse-state="collapsed"}
 
 You may encounter a `module 'SomeSDK' not found` error that is connected with the [C-interop](native-c-interop.md) issue.
 Try these workarounds to avoid this error:
@@ -257,26 +257,21 @@ name, specify it explicitly:
         moduleName = "AppsFlyerLib"
     }
     ```
-#### Check the definition file
+#### Specify headers
 
-If the Pod doesn't contain a `.modulemap` file, like the `pod("NearbyMessages")`, in the generated `.def` file, replace
-modules with headers with the pointing main header:
+If the Pod doesn't contain a `.modulemap` file, like the `pod("NearbyMessages")`, specify the main header explicitly:
 
 ```kotlin
-tasks.named<org.jetbrains.kotlin.gradle.tasks.DefFileTask>("generateDefNearbyMessages").configure {
-    doLast {
-        outputFile.writeText("""
-            language = Objective-C
-            headers = GNSMessages.h
-        """.trimIndent())
-    }
+pod("NearbyMessages") {
+    version = "1.1.1"
+    headers = "GNSMessages.h"
 }
 ```
 
 Check the [CocoaPods documentation](https://guides.cocoapods.org/) for more information. If nothing works, and you still
 encounter this error, report an issue in [YouTrack](https://youtrack.jetbrains.com/newissue?project=kt).
 
-### Rsync error {collapsible="true"}
+### Rsync error {initial-collapse-state="collapsed"}
 
 You might encounter the `rsync error: some files could not be transferred` error. It's a [known issue](https://github.com/CocoaPods/CocoaPods/issues/11946)
 that occurs if the application target in Xcode has sandboxing of the user scripts enabled.

@@ -11,7 +11,7 @@ and [configure the project's dependencies](#configure-dependencies) there.
 
 ## Apply the plugin
 
-To apply the Kotlin Gradle plugin, use the [`plugins` block](https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block)
+To apply the Kotlin Gradle plugin, use the [`plugins{}` block](https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block)
 from the Gradle plugins DSL:
 
 <tabs group="build-script">

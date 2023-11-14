@@ -1,6 +1,6 @@
 [//]: # (title: What's new in Kotlin 1.9.0)
 
-_[Release date: July 6, 2023](releases.md#发布详情)_
+_[Release date: July 6, 2023](releases.md#release-details)_
 
 The Kotlin 1.9.0 release is out and the K2 compiler for the JVM is now in **Beta**. Additionally, here are some of the main highlights:
 
@@ -147,7 +147,7 @@ a modern and performant replacement for the synthetic `values()` function. In 1.
 > The `values()` function is still supported, but we recommend that you use the `entries`
 > property instead.
 >
-{type="tip"}
+{style="tip"}
 
 ```kotlin
 enum class Color(val colorName: String, val rgb: String) {

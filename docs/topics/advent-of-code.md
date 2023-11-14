@@ -191,7 +191,7 @@ Learn how to parse the input and introduce some domain classes for more convenie
 
 > You can find all the solutions for the Advent of Code 2020 puzzles in our [GitHub repository](https://github.com/kotlin-hands-on/advent-of-code-2020/).
 >
-{type="tip"}
+{style="tip"}
 
 ### Day 1: Report repair
 

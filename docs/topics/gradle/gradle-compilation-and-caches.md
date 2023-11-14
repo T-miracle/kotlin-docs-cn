@@ -29,7 +29,7 @@ Note: Any build with incremental compilation disabled invalidates incremental ca
 > Sometimes problems with incremental compilation become visible several rounds after the failure occurs. Use [build reports](#build-reports)
 > to track the history of changes and compilations. This can help you to provide reproducible bug reports.
 >
-{type="tip"}
+{style="tip"}
 
 ### A new approach to incremental compilation
 
@@ -72,7 +72,7 @@ the `gradle.properties` file:
 kotlin.compiler.preciseCompilationResultsBackup=true
 ```
 
-#### Example of using precise backup at JetBrains {collapsible="true"}
+#### Example of using precise backup at JetBrains {initial-collapse-state="collapsed"}
 
 In the following charts, you can see examples of using precise backup compared to full backup:
 
@@ -96,7 +96,7 @@ different results. The factors affecting performance include but are not limited
 * Which modules are affected by the changes and how big these modules are.
 * Whether the changes are ABI or non-ABI.
 
-#### Evaluating optimizations with build reports {collapsible="true"}
+#### Evaluating optimizations with build reports {initial-collapse-state="collapsed"}
 
 To estimate the impact of the optimization on your computer for your project and your scenarios, you can use 
 [Kotlin build reports](#build-reports). Enable reports in text file format by adding the following property 
@@ -280,8 +280,8 @@ When configuring the Kotlin daemon's JVM arguments, note that:
 
 ## The new Kotlin compiler
 
-The new Kotlin K2 compiler is in [Alpha](components-stability.md#stability-levels-explained).
-It has basic support for Kotlin JVM, JS, and Native projects.
+The new Kotlin K2 compiler is in [Beta](components-stability.md#stability-levels-explained).
+It has basic support for Kotlin JVM, Native, Wasm, and JS projects.
 
 The new compiler aims to speed up the development of new language features, unify all of the platforms Kotlin supports,
 bring performance improvements, and provide an API for compiler extensions.

@@ -99,7 +99,7 @@ Joshua Bloch 将仅从中 **读取** 的对象称为**生产者（Producers）**
 >
 > **PECS 代表 Producer-Extends（生产者 —— 继承者）, Consumer-Super（消费者 —— 超类型）.**
 >
-{type="tip"}
+{style="tip"}
 
 > 如果你使用生产者对象，例如 [`List<? extends Foo>`，则不能在该对象上调用 `add()` 或 `set()` 方法](why-producer-cant-use-set-and-add-function.md)。
 > 然而，这并不表示它是**不可变的**：

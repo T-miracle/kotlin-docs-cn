@@ -25,7 +25,7 @@ val oneByte: Byte = 1
 
 > 除了整数类型之外，Kotlin 还提供了无符号整数类型。有关更多信息，请参阅[无符号整数类型](unsigned-integer-types.md)。
 >
-{type="tip"}
+{style="tip"}
 
 ## 浮点数类型
 

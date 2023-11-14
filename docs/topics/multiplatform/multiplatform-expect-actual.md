@@ -6,7 +6,7 @@ You can provide platform-agnostic APIs in the common code.
 > This article describes the language mechanism of expected and actual declarations. For general recommendations on
 > different ways to use platform-specific APIs, see [Use platform-specific APIs](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html).
 >
-{type="tip"}
+{style="tip"}
 
 ## Rules for expected and actual declarations
 
@@ -289,6 +289,18 @@ With interfaces, you don't limit your design to one implementation per target pl
 substitute a fake implementation in tests or provide multiple implementations on a single platform.
 
 As a general rule, rely on standard language constructs wherever possible instead of using expected and actual declarations.
+
+If you do decide to use expected and actual classes, the Kotlin compiler will warn you about the Beta status
+of the feature. To suppress this warning, add the following compiler option to your Gradle build file:
+
+```kotlin
+kotlin {
+    compilerOptions {
+        // Common compiler options applied to all Kotlin source sets
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+}
+```
 
 #### Inheritance from platform classes
 

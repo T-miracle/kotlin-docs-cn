@@ -61,7 +61,7 @@ Download and install the latest version of [IntelliJ IDEA](https://www.jetbrains
    > Select the **Create Git repository** checkbox to place the new project under version control. You will be able to do
    > it later at any time.
    >
-   {type="tip"}
+   {style="tip"}
 
 4. From the **Language** list, select **Kotlin**.
 5. Select the **Gradle** build system.

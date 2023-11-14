@@ -173,7 +173,7 @@ fun main() {
 >     val fruitLocked: Set<String> = fruit
 > ```
 >
-{type="tip"}
+{style="tip"}
 
 > 由于集合是**无序的**，因此您无法访问特定索引处的项目。
 > 

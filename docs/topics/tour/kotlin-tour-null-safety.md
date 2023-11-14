@@ -59,7 +59,7 @@ fun main() {
 
 >`length` 是 [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/) 类的一个属性，包含字符串中的字符数。
 >
-{type="tip"}
+{style="tip"}
 
 ## 检查空值
 

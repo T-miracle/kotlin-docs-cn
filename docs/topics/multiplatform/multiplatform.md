@@ -61,7 +61,7 @@ Kotlin 提供以下代码共享机制：
 
 > 刚接触 Kotlin 吗？查看 [Kotlin 入门](getting-started.md)。
 >
-{type="tip"}
+{style="tip"}
 
 ### 示例项目
 

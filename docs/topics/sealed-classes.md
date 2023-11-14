@@ -69,10 +69,11 @@ open class CustomError(): Error // 可以在可见的任何地方扩展
 在[多平台项目](multiplatform-get-started.md)中还有一项继承限制：密封类的直接子类必须位于同一源代码集中。
 这适用于没有 [expected 和 actual 修饰符](multiplatform-expect-actual.md) 的密封类。
 
-如果在共同源代码集中将密封类声明为 `expect`，并在平台源代码集中有 `actual` 实现，那么 `expect` 和 `actual` 版本都可以在其源代码集中具有子类。
-此外，如果您使用[分层结构](multiplatform-share-on-platforms.md#share-code-on-similar-platforms)，可以在 `expect` 和 `actual` 声明之间的任何源代码集中创建子类。
+如果一个封闭类在公共源代码集中声明为 `expect`，并在平台源代码集中有 `actual` 实现，  
+那么 `expect` 和 `actual` 版本都可以在其源代码集中拥有子类。  
+此外，如果您使用层次结构，您可以在 `expect` 和 `actual` 声明之间的任何源代码集中创建子类。
 
-[了解有关多平台项目分层结构的更多信息](multiplatform-share-on-platforms.md#share-code-on-similar-platforms)。
+[了解有关多平台项目分层结构的更多信息](multiplatform-hierarchy.md)。
 
 ## 密封类和`when`表达式
 

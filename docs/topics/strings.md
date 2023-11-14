@@ -12,11 +12,11 @@ val str = "abcd 123"
 
 ```kotlin
 fun main() {
-val str = "abcd"
+    val str = "abcd" 
 //sampleStart
-for (c in str) {
-    println(c)
-}
+    for (c in str) {
+        println(c)
+    }
 //sampleEnd
 }
 ```
@@ -29,8 +29,14 @@ for (c in str) {
 fun main() {
 //sampleStart
     val str = "abcd"
-    println(str.uppercase()) // 创建并打印一个新的 String 对象
-    println(str) // 原始字符串保持不变
+   
+    // 创建并打印一个新的 String 对象
+    println(str.uppercase())
+    // ABCD
+   
+    // 原始字符串保持不变
+    println(str) 
+    // abcd
 //sampleEnd
 }
 ```
@@ -41,8 +47,9 @@ fun main() {
 ```kotlin
 fun main() {
 //sampleStart
-val s = "abc" + 1
-println(s + "def")
+    val s = "abc" + 1
+    println(s + "def")
+    // abc1def    
 //sampleEnd
 }
 ```
@@ -104,7 +111,8 @@ val text = """
 fun main() {
 //sampleStart
     val i = 10
-    println("i = $i") // 打印 “i = 10”
+    println("i = $i") 
+    // i = 10
 //sampleEnd
 }
 ```
@@ -116,7 +124,8 @@ fun main() {
 fun main() {
 //sampleStart
     val s = "abc"
-    println("$s.length is ${s.length}") // 打印 “abc.length is 3”
+    println("$s 的长度是 ${s.length}") 
+    // abc 的长度是 3
 //sampleEnd
 }
 ```
@@ -132,41 +141,43 @@ ${'$'}_9.99
 """
 ```
 
-## 字符串格式化
+## 字符串格式化 {id=string-formatting}
 
-> 使用 `String.format()` 函数进行字符串格式化仅在 Kotlin/JVM 中可用。
+> `String.format()` 函数的字符串格式化仅在 Kotlin/JVM 中可用。
 >
-{style="note"}
+{type="note"}
 
-为了按照特定要求格式化字符串，请使用 [`String.format()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/format.html) 函数。
+要按照您的特定要求格式化字符串，请使用 [`String.format()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/format.html) 函数。
 
-`String.format()` 函数接受一个格式字符串和一个或多个参数。
-格式字符串中包含每个剩余参数的一个占位符（`%`），后跟 [格式说明符](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html#summary)。
+`String.format()` 函数接受一个格式字符串和一个或多个参数。格式字符串包含一个占位符 (`%`) 用于每个剩余的参数，后面跟着
+[格式说明符](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html#summary)。
 格式说明符是相应参数的格式化指令。
-在输出中，每个参数都填充其对应的占位符以定义的格式：
+在输出中，每个参数都填充其在定义格式中的对应占位符：
 
-```Kotlin
-fun main() {
-    // 添加零使长度为七的格式
+```kotlin
+fun main() { 
+//sampleStart
+    // 格式化为添加零并使长度为七
     val integerNumber = String.format("%07d", 31416)
     println(integerNumber)
     // 0031416
 
-    // 带有四位小数和符号的格式
+    // 格式化为四位小数和符号
     val floatNumber = String.format("%+.4f", 3.141592)
     println(floatNumber)
     // +3.1416
 
-    // 使用大写字母表示两个占位符的格式
+    // 格式化为两个占位符的大写
     val helloString = String.format("%S %S", "hello", "world")
     println(helloString)
     // HELLO WORLD
+//sampleEnd    
 }
 ```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+{interpolate-variables="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-`String.format()` 函数提供了与字符串模板类似的功能。然而，`String.format()` 函数更为灵活，因为它提供了更多的格式选项。
+`String.format()` 函数提供了与字符串模板类似的功能。然而，`String.format()` 函数更加通用，因为提供了更多的格式化选项。
 
-此外，您可以将格式字符串赋值给一个变量。当格式字符串发生变化时，这在依赖用户区域设置的本地化情况下可能会很有用。
+此外，您可以将格式字符串从变量赋值。这在格式字符串发生变化时非常有用，例如在依赖用户区域的本地化情况下。
 
-在使用 `String.format()` 函数时要小心，因为很容易使参数的数量或位置与相应的占位符不匹配。
+使用 `String.format()` 函数时要小心，因为很容易使参数的数量或位置与其对应的占位符不匹配。

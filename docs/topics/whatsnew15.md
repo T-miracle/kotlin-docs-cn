@@ -1,6 +1,6 @@
 [//]: # (title: What's new in Kotlin 1.5.0)
 
-_[Released: 5 May 2021](releases.md#发布详情)_
+_[Released: 5 May 2021](releases.md#release-details)_
 
 Kotlin 1.5.0 introduces new language features, stable IR-based JVM compiler backend, performance improvements,
 and evolutionary changes such as stabilizing experimental features and deprecating outdated ones.
