@@ -1,75 +1,68 @@
-[//]: # (title: Kotlin Multiplatform)
-[//]: # (description: Kotlin Multiplatform allows creating cross-platform apps for desktop, web, and mobile devices.
-Share application logic while keeping native user experience.)
+[//]: # (title: Kotlin 多平台)
+[//]: # (描述：Kotlin Multiplatform 允许创建适用于桌面、Web 和移动设备的跨平台应用程序。在保持本地用户体验的同时共享应用逻辑。)
 
-The Kotlin Multiplatform technology is designed to simplify the development of cross-platform projects. It reduces time
-spent writing and maintaining the same code for [different platforms](#kotlin-multiplatform-use-cases)
-while retaining the flexibility and benefits of native programming.
+Kotlin 多平台 技术旨在简化跨平台项目的开发。
+它减少了在[不同平台](#Kotlin多平台用例)编写和维护相同代码所需的时间，同时保持了本地编程的灵活性和优势。
 
-![Kotlin Multiplatform](kotlin-multiplatform.svg){width=700}
+![Kotlin 多平台](kotlin-multiplatform.svg){width=700}
 
-## Kotlin Multiplatform use cases
+## Kotlin 多平台用例 {id="Kotlin多平台用例"}
 
-### Android and iOS applications
+### Android 和 iOS 应用程序
 
-Sharing code between mobile platforms is a major Kotlin Multiplatform use case. With Kotlin Multiplatform,
-you can build cross-platform mobile applications that share code between Android and iOS projects to implement networking,
-data storage and data validation, analytics, computations, and other application logic.
+在移动平台之间共享代码是 Kotlin 多平台 的一个主要用例。
+通过 Kotlin 多平台，你可以构建跨平台移动应用程序，实现在 Android 和 iOS 项目之间共享网络、数据存储和数据验证、分析、计算以及其他应用逻辑。
 
-Check out the [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html) and
-[Create a multiplatform app using Ktor and SQLDelight](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html) tutorials,
-where you will create applications for Android and iOS that include a module with shared code for both platforms.
+查看 [开始使用 Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html)
+和 [使用 Ktor 和 SQLDelight 创建多平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)
+教程，在这些教程中，你将为 Android 和 iOS 创建包含两个平台都共享的代码模块的应用程序。
 
-Thanks to [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/),
-a Kotlin-based declarative UI framework developed by JetBrains,
-you can also share UIs across Android and iOS to create fully cross-platform apps:
+借助由 JetBrains 开发的基于 Kotlin 的声明式 UI 框架 [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)，
+你还可以在 Android 和 iOS 之间共享 UI，创建完全跨平台的应用程序：
 
 ![Sharing different levels and UI](multiplatform-compose.svg){width=600}
 
-Check out the [Get started with Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform-ios-android-template/#readme)
-tutorial to create your own mobile application with UIs shared between both platforms.
+查看 [开始使用 Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform-ios-android-template/#readme) 教程，
+创建一个自己的移动应用程序，其中的 UI 在两个平台之间共享。
 
-### Multiplatform libraries
+### 多平台库
 
-Kotlin Multiplatform is also helpful for library authors. You can create a multiplatform library with common code and its
-platform-specific implementations for JVM, web, and native platforms. Once published, a multiplatform library can be used
-as a dependency in other cross-platform projects.
+Kotlin 多平台 对于库的作者也是有帮助的。
+你可以创建一个多平台库，包含通用代码以及针对 JVM、Web 和本地平台的特定平台实现。
+一旦发布，多平台库可以作为其他跨平台项目中的依赖使用。
 
-See the [Publish a multiplatform library](multiplatform-publish-lib.md) for more details.
+查看 [发布多平台库](multiplatform-publish-lib.md) 获取更多详细信息。
 
-### Desktop applications
+### 桌面应用程序
 
-Compose Multiplatform helps share UIs across desktop platforms like Windows, macOS, and Linux. Many applications,
-including the [JetBrains Toolbox app](https://blog.jetbrains.com/kotlin/2021/12/compose-multiplatform-toolbox-case-study/),
-have already adopted this approach.
+Compose Multiplatform 可以帮助在桌面平台（如 Windows、macOS 和 Linux）之间共享 UI。
+许多应用程序，包括 [JetBrains Toolbox 应用](https://blog.jetbrains.com/kotlin/2021/12/compose-multiplatform-toolbox-case-study/)，已经采用了这种方法。
 
-Try this [Compose Multiplatform desktop application](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
-template to create your own project with UIs shared among desktop platforms.
+尝试使用 [Compose Multiplatform 桌面应用程序](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme) 模板创建自己的项目，其中的 UI 在桌面平台之间共享。
 
-## Code sharing between platforms
+## 跨平台代码共享
 
-Kotlin Multiplatform allows you to maintain a single codebase of the application logic for [different platforms](multiplatform-dsl-reference.md#targets).
-You also get advantages of native programming, including great performance and full access to platform SDKs.
+Kotlin 多平台 允许你维护一个应用程序逻辑的单一代码库，用于[不同平台](multiplatform-dsl-reference.md#targets)。
+你还能够获得本地编程的优势，包括出色的性能和对平台 SDK 的完全访问。
 
-Kotlin provides the following code sharing mechanisms:
+Kotlin 提供以下代码共享机制：
 
-* Share common code among [all platforms](multiplatform-share-on-platforms.md#share-code-on-all-platforms) used in your project.
-* Share code among [some platforms](multiplatform-share-on-platforms.md#share-code-on-similar-platforms) included in your project to reuse much of the code in similar platforms:
+* 在[所有平台](multiplatform-share-on-platforms.md#share-code-on-all-platforms)中共享通用代码，该代码用于你的项目。
+* 在[一些平台](multiplatform-share-on-platforms.md#share-code-on-similar-platforms)中共享代码，以在相似的平台上重用大部分代码：
 
-  ![Code shared across different platforms](kotlin-multiplatform-hierarchical-structure.svg){width=700}
+  ![在不同平台之间共享的代码](kotlin-multiplatform-hierarchical-structure.svg){width=700}
 
-* If you need to access platform-specific APIs from the shared code, use the Kotlin mechanism of [expected and actual 
-declarations](multiplatform-expect-actual.md).
+* 如果需要从共享代码中访问特定于平台的 API，请使用 Kotlin 的 [expected 和 actual 声明机制](multiplatform-expect-actual.md)。
 
-## Get started
+## 开始使用
 
-* Begin with the [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html) if you want to create iOS and Android applications with shared code
-* Explore [sharing code principles and examples](multiplatform-share-on-platforms.md) if you want to create applications or libraries targeting other platforms
+* 如果你想创建共享代码的 iOS 和 Android 应用程序，请从 [开始使用 Kotlin 多平台](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html) 开始
+* 如果你想创建针对其他平台的应用程序或库，请探索 [代码共享原则和示例](multiplatform-share-on-platforms.md)
 
-> New to Kotlin? Take a look at [Getting started with Kotlin](getting-started.md).
+> 刚接触 Kotlin 吗？查看 [Kotlin 入门](getting-started.md)。
 >
 {type="tip"}
 
-### Sample projects
+### 示例项目
 
-Look through [cross-platform application samples](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html) to understand how Kotlin Multiplatform works.
+查看[跨平台应用程序示例](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)，了解 Kotlin Multiplatform 的工作原理。

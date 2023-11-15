@@ -1,79 +1,70 @@
-[//]: # (title: Kotlin for server side)
+[//]: # (title: 用于服务器端的 Kotlin)
 
-Kotlin is a great fit for developing server-side applications. It allows you to write concise and expressive code while
-maintaining full compatibility with existing Java-based technology stacks, all with a smooth learning curve:
+Kotlin 在开发服务器端应用程序方面表现出色。它允许你编写简洁而富有表现力的代码，同时保持与现有基于 Java 的技术堆栈的完全兼容性，而且学习曲线平缓：
 
-* **Expressiveness**: Kotlin's innovative language features, such as its support for [type-safe builders](type-safe-builders.md)
-  and [delegated properties](delegated-properties.md), help build powerful and easy-to-use abstractions.
-* **Scalability**: Kotlin's support for [coroutines](coroutines-overview.md) helps build server-side applications
-  that scale to massive numbers of clients with modest hardware requirements.
-* **Interoperability**: Kotlin is fully compatible with all Java-based frameworks, so you can use your
-  familiar technology stack while reaping the benefits of a more modern language.
-* **Migration**: Kotlin supports gradual migration of large codebases from Java to Kotlin. You can start
-  writing new code in Kotlin while keeping older parts of your system in Java.
-* **Tooling**: In addition to great IDE support in general, Kotlin offers framework-specific tooling (for example,
-  for Spring) in the plugin for IntelliJ IDEA Ultimate.
-* **Learning Curve**: For a Java developer, getting started with Kotlin is very easy. The automated Java-to-Kotlin converter included in the Kotlin plugin helps with the first steps. [Kotlin Koans](koans.md) can guide you through the key features of the language with a series of interactive exercises.
+* **表现力**: Kotlin 创新的语言特性，如对 [类型安全构建器](type-safe-builders.md) 和 [委托属性](delegated-properties.md) 的支持，有助于构建强大而易于使用的抽象。
+* **可扩展性**: Kotlin 对 [协程](coroutines-overview.md) 的支持有助于构建规模庞大、对硬件要求不高的服务器端应用程序。
+* **互操作性**: Kotlin 与所有基于 Java 的框架完全兼容，因此你可以在保持对更现代语言的利用的同时，使用熟悉的技术堆栈。
+* **迁移**: Kotlin 支持逐步从 Java 迁移到 Kotlin 的大型代码库。你可以在 Kotlin 中开始编写新代码，同时保留系统中旧部分的 Java 代码。
+* **工具支持**: 除了一般的出色 IDE 支持外，Kotlin 还在 IntelliJ IDEA Ultimate 插件中提供了面向框架的工具支持（例如 Spring）。
+* **学习曲线**: 对于 Java 开发者来说，入门 Kotlin 很容易。Kotlin 插件中包含的自动 Java 到 Kotlin 转换器有助于迈出第一步。[Kotlin Koans](koans.md) 可以通过一系列交互式练习引导你了解语言的关键特性。
 
-## Frameworks for server-side development with Kotlin
+## 使用 Kotlin 进行服务器端开发的框架
 
-Here are some examples of the server-side frameworks for Kotlin:
+以下是 Kotlin 的一些服务器端框架示例：
 
-* [Spring](https://spring.io) makes use of Kotlin's language features to offer [more concise APIs](https://spring.io/blog/2017/01/04/introducing-kotlin-support-in-spring-framework-5-0),
-  starting with version 5.0. The [online project generator](https://start.spring.io/#!language=kotlin) allows you to quickly generate a new project in Kotlin.
+* [Spring](https://spring.io) 利用 Kotlin 的语言特性，从 5.0 版本开始提供了 [更简洁的 API](https://spring.io/blog/2017/01/04/introducing-kotlin-support-in-spring-framework-5-0)。
+  [在线项目生成器](https://start.spring.io/#!language=kotlin)允许你快速生成一个新的 Kotlin 项目。
 
-* [Ktor](https://github.com/kotlin/ktor) is a framework built by JetBrains for creating Web applications in Kotlin, making use of coroutines for high scalability and offering an easy-to-use and idiomatic API.
+* [Ktor](https://github.com/kotlin/ktor) 是由 JetBrains 构建的用于在 Kotlin 中创建 Web 应用程序的框架，利用协程实现高可扩展性，并提供易于使用和惯用的 API。
 
-* [Quarkus](https://quarkus.io/guides/kotlin) provides first class support for using Kotlin. The framework is open source and maintained by Red Hat. Quarkus was built from the ground up for Kubernetes and provides a cohesive full-stack framework by leveraging a growing list of hundreds of best-of-breed libraries.
+* [Quarkus](https://quarkus.io/guides/kotlin) 对使用 Kotlin 提供了一流的支持。该框架是由 Red Hat 维护的开源框架。
+  Quarkus 是从头开始为 Kubernetes 构建的，并通过利用一个不断增长的数百个最佳库的列表，提供了一个完整的协同全栈框架。
 
-* [Vert.x](https://vertx.io), a framework for building reactive Web applications on the JVM, offers [dedicated support](https://github.com/vert-x3/vertx-lang-kotlin)
-  for Kotlin, including [full documentation](https://vertx.io/docs/vertx-core/kotlin/).
+* [Vert.x](https://vertx.io) 是用于在 JVM 上构建反应式 Web 应用程序的框架，为 Kotlin 提供了 [专门的支持](https://github.com/vert-x3/vertx-lang-kotlin)，包括 [完整的文档](https://vertx.io/docs/vertx-core/kotlin/)。
 
-* [kotlinx.html](https://github.com/kotlin/kotlinx.html) is a DSL that can be used to build HTML in Web applications.
-  It serves as an alternative to traditional templating systems such as JSP and FreeMarker.
+* [kotlinx.html](https://github.com/kotlin/kotlinx.html) 是一种 DSL，可用于在 Web 应用程序中构建 HTML。它作为传统模板系统（如 JSP 和 FreeMarker）的替代方案。
 
-* [Micronaut](https://micronaut.io/) is a modern JVM-based full-stack framework for building modular, easily testable microservices and serverless applications. It comes with a lot of useful built-in features.
+* [Micronaut](https://micronaut.io/) 是一个现代的基于 JVM 的全栈框架，用于构建模块化、易于测试的微服务和无服务器应用程序。它具有许多有用的内置功能。
 
-* [http4k](https://http4k.org/) is the functional toolkit with a tiny footprint for Kotlin HTTP applications, written in pure Kotlin. The library is based on the "Your Server as a Function" paper from Twitter and represents modeling both HTTP servers and clients as simple Kotlin functions that can be composed together.
+* [http4k](https://http4k.org/) 是用于 Kotlin HTTP 应用程序的功能工具包，体积很小，纯 Kotlin 编写。
+  该库基于 Twitter 的 "Your Server as a Function" 论文，将建模 HTTP 服务器和客户端的概念简化为可以组合在一起的简单 Kotlin 函数。
 
-* [Javalin](https://javalin.io) is a very lightweight web framework for Kotlin and Java which supports WebSockets, HTTP2, and async requests.
+* [Javalin](https://javalin.io) 是一个非常轻量级的 Kotlin 和 Java Web 框架，支持 WebSockets、HTTP2 和异步请求。
 
-* The available options for persistence include direct JDBC access, JPA, and using NoSQL databases through their Java drivers.
-  For JPA, the [kotlin-jpa compiler plugin](no-arg-plugin.md#jpa-support) adapts
-  Kotlin-compiled classes to the requirements of the framework.
+* 持久性的可用选项包括直接使用 JDBC 访问、JPA，以及通过它们的 Java 驱动程序使用 NoSQL 数据库。
+  对于 JPA，[kotlin-jpa 编译器插件](no-arg-plugin.md#jpa-support)使 Kotlin 编译的类适应了该框架的要求。
   
-> You can find more frameworks at [https://kotlin.link/](https://kotlin.link/resources).
+> 您可以在 [https://kotlin.link/](https://kotlin.link/resources) 找到更多框架。
 >
 {style="note"}
 
-## Deploying Kotlin server-side applications
+## 部署 Kotlin 服务器端应用程序 {id="部署Kotlin服务器端应用程序"}
 
-Kotlin applications can be deployed into any host that supports Java Web applications, including Amazon Web Services,
-Google Cloud Platform, and more.
+Kotlin 应用程序可以部署到支持 Java Web 应用程序的任何主机，包括Amazon Web Services、Google Cloud Platform 等。
 
-To deploy Kotlin applications on [Heroku](https://www.heroku.com), you can follow the [official Heroku tutorial](https://devcenter.heroku.com/articles/getting-started-with-kotlin).
+要在 [Heroku](https://www.heroku.com) 上部署 Kotlin 应用程序，可以按照
+[官方 Heroku 教程](https://devcenter.heroku.com/articles/getting-started-with-kotlin) 进行操作。
 
-AWS Labs provides a [sample project](https://github.com/awslabs/serverless-photo-recognition) showing the use of Kotlin
-for writing [AWS Lambda](https://aws.amazon.com/lambda/) functions.
+AWS Labs 提供了一个 [示例项目](https://github.com/awslabs/serverless-photo-recognition)，演示了使用 Kotlin 编写
+[AWS Lambda](https://aws.amazon.com/lambda/) 函数的用法。
 
-Google Cloud Platform offers a series of tutorials for deploying Kotlin applications to GCP, both for [Ktor and App Engine](https://cloud.google.com/community/tutorials/kotlin-ktor-app-engine-java8) and [Spring and App engine](https://cloud.google.com/community/tutorials/kotlin-springboot-app-engine-java8). In addition,
-there is an [interactive code lab](https://codelabs.developers.google.com/codelabs/cloud-spring-cloud-gcp-kotlin) for deploying a Kotlin Spring application.
+Google Cloud Platform 提供了一系列教程，用于将 Kotlin 应用程序部署到 GCP，包括
+[Ktor 和 App Engine](https://cloud.google.com/community/tutorials/kotlin-ktor-app-engine-java8)
+以及 [Spring 和 App Engine](https://cloud.google.com/community/tutorials/kotlin-springboot-app-engine-java8)。
+此外，还有一个 [交互式代码实验](https://codelabs.developers.google.com/codelabs/cloud-spring-cloud-gcp-kotlin)，用于部署 Kotlin Spring 应用程序。
 
-## Products that use Kotlin on the server side
+## 在服务器端使用 Kotlin 的产品 {id="在服务器端使用Kotlin的产品"}
 
-[Corda](https://www.corda.net/) is an open-source distributed ledger platform that is supported by major
-banks and built entirely in Kotlin.
+[Corda](https://www.corda.net/) 是一个由主要银行支持并完全用 Kotlin 构建的开源分布式账本平台。
 
-[JetBrains Account](https://account.jetbrains.com/), the system responsible for the entire license sales and validation
-process at JetBrains, is written in 100% Kotlin and has been running in production since 2015 with no major issues.
+[JetBrains Account](https://account.jetbrains.com/) 是 JetBrains 负责整个许可证销售和验证过程的系统，完全使用 Kotlin 编写，自 2015 年以来在生产环境中运行，没有出现重大问题。
 
-## Next steps
+## 下一步
 
-* For a more in-depth introduction to the language, check out the Kotlin documentation on this site and [Kotlin Koans](koans.md).
-* Watch a webinar ["Micronaut for microservices with Kotlin"](https://micronaut.io/2020/12/03/webinar-micronaut-for-microservices-with-kotlin/) and 
-  explore a detailed [guide](https://guides.micronaut.io/latest/micronaut-kotlin-extension-fns.html) 
-  showing how you can use [Kotlin extension functions](extensions.md#extension-functions) in the Micronaut framework.
-* http4k provides the [CLI](https://toolbox.http4k.org) to generate fully formed projects, and a [starter](https://start.http4k.org) repo to generate an entire CD pipeline using GitHub, Travis, and Heroku with a single bash command.
-* Want to migrate from Java to Kotlin? Learn how to perform [typical tasks with strings in Java and Kotlin](java-to-kotlin-idioms-strings.md).
+* 要深入了解这门语言，请查看本站上的 Kotlin 文档和 [Kotlin Koans](koans.md)。
+* 观看关于 ["使用 Kotlin 进行微服务的 Micronaut"](https://micronaut.io/2020/12/03/webinar-micronaut-for-microservices-with-kotlin/) 的网络研讨会，并探索一个详细的 [指南](https://guides.micronaut.io/latest/micronaut-kotlin-extension-fns.html)，展示了如何在 Micronaut 框架中使用 [Kotlin 扩展函数](extensions.md#extension-functions)。
+* http4k 提供 [CLI](https://toolbox.http4k.org) 以生成完整的项目，并提供一个 [starter](https://start.http4k.org) 存储库，使用单个 bash 命令即可生成使用 GitHub、Travis 和 Heroku 的整个 CD 流水线。
+* 想要从 Java 迁移到 Kotlin 吗？学习如何在 [Java 和 Kotlin 中执行典型的字符串任务](java-to-kotlin-idioms-strings.md)。
 
 

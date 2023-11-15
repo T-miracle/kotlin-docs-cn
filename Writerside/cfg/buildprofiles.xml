@@ -2,6 +2,7 @@
 
 <buildprofiles>
     <variables>
+        <!--<header-logo>logo.svg</header-logo>-->
         <!--启用Github编辑-->
         <enable-browser-edits>true</enable-browser-edits>
         <browser-edits-url>https://github.com/T-miracle/kotlin-docs-cn/edit/main/Writerside/</browser-edits-url>
@@ -39,7 +40,11 @@
         <analytics-head-script-file>google-analytics-code.html</analytics-head-script-file>
         <analytics-body-html-file>google-analytics-noscript.html</analytics-body-html-file>
     </variables>
-    <build-profile product="kotlin"/>
+    <build-profile product="kotlin">
+        <variables>
+            <noindex-content>false</noindex-content>
+        </variables>
+    </build-profile>
 
     <footer>
         <link href="https://github.com/JetBrains/kotlin">Github 源码</link>

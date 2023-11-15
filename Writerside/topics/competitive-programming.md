@@ -1,42 +1,33 @@
-[//]: # (title: Kotlin for competitive programming)
+[//]: # (title: 用于竞争性编程的 Kotlin)
 
-This tutorial is designed both for competitive programmers that did not use Kotlin before and 
-for Kotlin developers that did not participate in any competitive programming events before.
-It assumes the corresponding programming skills.
+这个教程旨在面向那些之前没有使用过 Kotlin 的竞技程序员以及之前没有参加过竞技编程活动的 Kotlin 开发者。它假定具备相应的编程技能。
 
-[Competitive programming](https://en.wikipedia.org/wiki/Competitive_programming)
-is a mind sport where contestants write programs to solve precisely specified 
-algorithmic problems within strict constraints. Problems can range from simple ones that can be solved by 
-any software developer and require little code to get a correct solution, to complex ones that require knowledge of 
-special algorithms, data structures, and a lot of practice. While not being specifically designed for competitive 
-programming, Kotlin incidentally fits well in this domain, reducing the typical amount of boilerplate that a 
-programmer needs to write and read while working with the code almost to the level offered by dynamically-typed 
-scripting languages, while having tooling and performance of a statically-typed language.
+[竞技编程](https://en.wikipedia.org/wiki/Competitive_programming) 是一种智力竞技，参赛者编写程序以在严格的约束条件下解决精确规定的算法问题。
+问题的难度各不相同，可以是简单的问题，任何软件开发人员都可以解决，只需编写很少的代码即可得到正确的解决方案；
+也可以是复杂的问题，需要了解特殊的算法、数据结构以及大量的实践经验。
+尽管 Kotlin 并非专为竞技编程而设计，但它巧妙地适用于这个领域，减少了程序员在编写和阅读代码时通常需要的样板代码，几乎达到了动态类型脚本语言提供的水平，同时具有静态类型语言的工具和性能。
 
-See [Get started with Kotlin/JVM](jvm-get-started.md) on how to set up development
-environment for Kotlin. In competitive programming, a single project is usually created and each problem's solution is 
-written in a single source file.
+请参阅 [使用 Kotlin/JVM 入门](jvm-get-started.md) 以了解如何配置 Kotlin 的开发环境。
+在竞技编程中，通常会创建一个项目，每个问题的解决方案都写在一个单独的源文件中。
 
-## Simple example: Reachable Numbers problem
+## 简单示例: 可达数字问题
 
-Let's take a look at a concrete example. 
+让我们看一个具体的例子。
 
-[Codeforces](https://codeforces.com/) 
-Round 555 was held on April 26th for 3rd Division, which means it had problems fit for any developer to try. 
-You can use [this link](https://codeforces.com/contest/1157) to read the problems. 
-The simplest problem in the set is the 
-[Problem A: Reachable Numbers](https://codeforces.com/contest/1157/problem/A).
-It asks to implement a straightforward algorithm described in the problem statement. 
+[Codeforces](https://codeforces.com/)
+第 555 场比赛于 4 月 26 日为第 3 组举办，这意味着它有适合任何开发者尝试的问题。
+您可以使用[此链接](https://codeforces.com/contest/1157)查看问题。
+这个集合中最简单的问题是
+[问题 A: 可达数字](https://codeforces.com/contest/1157/problem/A)。
+它要求实现问题陈述中描述的一个简单算法。
 
-We'd start solving it by creating a Kotlin source file with an arbitrary name. `A.kt` will do well.
-First, you need to implement a function specified in the problem statement as:
+我们将通过创建一个带有任意名称的 Kotlin 源文件来解决它。`A.kt` 就挺好。
+首先，您需要实现问题陈述中指定的一个函数，如下所示：
 
-Let's denote a function f(x) in such a way: we add 1 to x, then, while there is at least one trailing zero 
-in the resulting number, we remove that zero.
+我们用这样的方式表示一个函数 f(x)：我们将 1 加到 x，然后，在得到的数字中仍然有至少一个尾随零的情况下，我们就移除该零。
 
-Kotlin is a pragmatic and unopinionated language, supporting both imperative and function programming styles without 
-pushing the developer towards either one. You can implement the function `f` in functional style, using such Kotlin 
-features as [tail recursion](functions.md#tail-recursive-functions):
+Kotlin 是一种务实而没有强烈偏见的语言，支持命令式和函数式编程风格，而不会将开发者推向其中的任何一种。
+您可以使用 Kotlin 的功能，如[尾递归](functions.md#tail-recursive-functions)，以函数式风格实现函数 `f`：
 
 ```kotlin
 tailrec fun removeZeroes(x: Int): Int =
@@ -45,9 +36,7 @@ tailrec fun removeZeroes(x: Int): Int =
 fun f(x: Int) = removeZeroes(x + 1)
 ```
 
-Alternatively, you can write an imperative implementation of the function `f` using the traditional 
-[while loop](control-flow.md) and mutable variables that are denoted in Kotlin with 
-[var](basic-syntax.md#variables):
+或者，您可以使用传统的 [while 循环](control-flow.md) 和在 Kotlin 中用 [var](basic-syntax.md#variables) 表示的可变变量，编写函数 `f` 的命令式实现：
 
 ```kotlin
 fun f(x: Int): Int {
@@ -57,122 +46,104 @@ fun f(x: Int): Int {
 }
 ```
 
-Types in Kotlin are optional in many places due to pervasive use of type-inference, but every declaration still has 
-a well-defined static type that is known at compilation.
+在 Kotlin 中，由于广泛使用类型推断，许多地方都可以选择使用类型，但是每个声明在编译时仍然有一个明确定义的静态类型。
 
-Now, all is left is to write the main function that reads the input and implements the rest of the algorithm that the problem 
-statement asks for — to compute the number of different integers that are produced while repeatedly applying 
-function `f` to the initial number `n` that is given in the standard input.
+现在，唯一需要做的是编写主函数，该函数读取输入并实现问题陈述要求的算法的其余部分，即计算在将函数 `f` 重复应用于给定标准输入中的初始数字 `n` 时产生的不同整数的数量。
 
-By default, Kotlin runs on JVM and gives direct access to a rich and efficient collections library with 
-general-purpose collections and data-structures like dynamically-sized arrays (`ArrayList`), 
-hash-based maps and sets (`HashMap`/`HashSet`), tree-based ordered maps and sets (`TreeMap`/`TreeSet`). 
-Using a hash-set of integers to track values that were already reached while applying function `f`, 
-the straightforward imperative version of a solution to the problem can be written as shown below:
+默认情况下，Kotlin 在 JVM 上运行，并直接访问一个丰富而高效的集合库，具有通用集合和数据结构，如动态大小数组（`ArrayList`）、基于哈希的映射和集合（`HashMap`/`HashSet`）、基于树的有序映射和集合（`TreeMap`/`TreeSet`）。
+通过使用整数的哈希集来跟踪在应用函数 `f` 时已经达到的值，可以编写如下所示的直观命令式版本的问题解决方案：
 
 <tabs group="kotlin-versions">
-<tab title="Kotlin 1.6.0 and later" group-key="kotlin-1-6">
+<tab title="Kotlin 1.6.0 及更高版本" group-key="kotlin-1-6">
 
 ```kotlin
 fun main() {
-    var n = readln().toInt() // read integer from the input
-    val reached = HashSet<Int>() // a mutable hash set 
-    while (reached.add(n)) n = f(n) // iterate function f
-    println(reached.size) // print answer to the output
+    var n = readln().toInt() // 从输入中读取整数
+    val reached = HashSet<Int>() // 可变哈希集
+    while (reached.add(n)) n = f(n) // 迭代函数 f
+    println(reached.size) // 打印输出的答案
 }
 ```
 
-There is no need to handle the case of misformatted input in competitive programming. An input format is always precisely
-specified in competitive programming, and the actual input cannot deviate from the input specification in the problem
-statement. That's why you can use Kotlin's [`readln()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln.html) function. It asserts that the input string is present and throws
-an exception otherwise. Likewise, the [`String.toInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-int.html)
-function throws an exception if the input string is not an integer.
+在竞技编程中，无需处理格式错误的输入情况。输入格式总是在竞技编程中精确指定的，并且实际输入不能偏离问题陈述中的输入规范。
+这就是为什么可以使用 Kotlin 的 [`readln()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln.html) 函数的原因。
+它断言输入字符串存在，否则会抛出异常。
+同样，[`String.toInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-int.html) 函数在输入字符串不是整数时会抛出异常。
 
 </tab>
-<tab title="Earlier versions" group-key="kotlin-1-5">
+<tab title="早期版本" group-key="kotlin-1-5">
 
 ```kotlin
 fun main() {
-    var n = readLine()!!.toInt() // read integer from the input
-    val reached = HashSet<Int>() // a mutable hash set 
-    while (reached.add(n)) n = f(n) // iterate function f
-    println(reached.size) // print answer to the output
+    var n = readLine()!!.toInt() // 从输入中读取整数
+    val reached = HashSet<Int>() // 可变哈希集 
+    while (reached.add(n)) n = f(n) // 迭代函数 f
+    println(reached.size) // 打印输出的答案
 }
 ```
 
-Note the use of Kotlin's
-[null-assertion operator](null-safety.md#the-operator) `!!`
-after the [readLine()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/read-line.html) function call.
-Kotlin's `readLine()` function is defined to return a
-[nullable type](null-safety.md#nullable-types-and-non-nullable-types)
-`String?` and returns `null` on the end of the input, which explicitly forces the developer to handle the
-case of missing input.
+请注意，在 [readLine()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/read-line.html) 函数调用之后使用了 Kotlin 的
+[null 断言运算符](null-safety.md#the-operator) `!!`。
+Kotlin 的 `readLine()` 函数被定义为返回可空类型 `String?`，在输入结束时返回 `null`，这明确要求开发者处理缺少输入的情况。
 
-There is no need to handle the case of misformatted input in competitive programming.
-In competitive programming, an input format is always precisely specified and the actual input cannot deviate from
-the input specification in the problem statement. That's what the null-assertion operator `!!` essentially does —
-it asserts that the input string is present and throws an exception otherwise. Likewise,
-the [String.toInt()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-int.html).
+在竞技编程中，无需处理格式错误的输入情况。
+在竞技编程中，输入格式总是被精确指定的，实际输入不能偏离问题陈述中的输入规范。
+这就是 null 断言运算符 `!!` 的本质 — 它断言输入字符串存在，否则会抛出异常。同样，
+[String.toInt()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-int.html) 也是如此。
 
 </tab>
 </tabs>
 
-All online competitive programming events allow the use of pre-written code, so you can define your own library of 
-utility functions that are geared towards competitive programming to make your actual solution code somewhat easier 
-to read and write. You would then use this code as a template for your solutions. For example, you can define 
-the following helper functions for reading inputs in competitive programming:
+所有在线竞技编程活动都允许使用预先编写的代码，因此您可以定义自己的实用程序函数库，这些函数库专为竞技编程而设计，以使您的实际解决方案代码更易于阅读和编写。
+然后，您将使用此代码作为解决方案的模板。
+例如，您可以定义以下用于在竞技编程中读取输入的辅助函数：
 
 <tabs group="kotlin-versions">
-<tab title="Kotlin 1.6.0 and later" group-key="kotlin-1-6">
+<tab title="Kotlin 1.6.0 及更高版本" group-key="kotlin-1-6">
 
 ```kotlin
-private fun readStr() = readln() // string line
-private fun readInt() = readStr().toInt() // single int
-// similar for other types you'd use in your solutions
+private fun readStr() = readln() // 字符串行
+private fun readInt() = readStr().toInt() // 单整数
+// 与您在解决方案中使用的其他类型类似
 ```
 
 </tab>
-<tab title="Earlier versions" group-key="kotlin-1-5">
+<tab title="早期版本" group-key="kotlin-1-5">
 
 ```kotlin
-private fun readStr() = readLine()!! // string line
-private fun readInt() = readStr().toInt() // single int
-// similar for other types you'd use in your solutions
+private fun readStr() = readLine()!! // 字符串行
+private fun readInt() = readStr().toInt() // 单整数
+// 与您在解决方案中使用的其他类型类似
 ```
 
 </tab>
 </tabs>
 
-Note the use of `private` [visibility modifier](visibility-modifiers.md) here.
-While the concept of visibility modifier is not relevant for competitive programming at all, 
-it allows you to place multiple solution files based on the
-same template without getting an error for conflicting public declarations in the same package.
+请注意这里使用了 `private` [可见性修饰符](visibility-modifiers.md)。
+尽管可见性修饰符的概念对于竞技编程来说并不相关，但它允许您在相同包中基于相同模板放置多个解决方案文件，而不会因相同包中的冲突公共声明而产生错误。
 
-## Functional operators example: Long Number problem
+## 函数操作符示例: 长数字问题
 
-For more complicated problems, Kotlin's extensive library of functional operations on collections comes in handy to 
-minimize the boilerplate and turn the code into a linear top-to-bottom and left-to-right fluent data transformation 
-pipeline. For example, the 
-[Problem B: Long Number](https://codeforces.com/contest/1157/problem/B) problem 
-takes a simple greedy algorithm to implement and it can be written using this style without a single mutable variable:
+对于更复杂的问题，Kotlin 丰富的集合函数操作库非常方便，可以最小化样板代码，并将代码转化为线性自上而下和从左到右的流畅数据转换流水线。
+例如，[问题 B: 长数字](https://codeforces.com/contest/1157/problem/B) 可以使用简单的贪心算法来实现，而且可以使用这种风格编写，而不需要单个可变变量：
 
 <tabs group="kotlin-versions">
-<tab title="Kotlin 1.6.0 and later" group-key="kotlin-1-6">
+<tab title="Kotlin 1.6.0 及更高版本" group-key="kotlin-1-6">
 
 ```kotlin
 fun main() {
-    // read input
+    // 读取输入
     val n = readln().toInt()
     val s = readln()
     val fl = readln().split(" ").map { it.toInt() }
-    // define local function f
+    // 定义局部函数 f
     fun f(c: Char) = '0' + fl[c - '1']
-    // greedily find first and last indices
+    // 贪婪查找第一个和最后一个索引
     val i = s.indexOfFirst { c -> f(c) > c }
         .takeIf { it >= 0 } ?: s.length
     val j = s.withIndex().indexOfFirst { (j, c) -> j > i && f(c) < c }
         .takeIf { it >= 0 } ?: s.length
-    // compose and write the answer
+    // 撰写并写下答案
     val ans =
         s.substring(0, i) +
         s.substring(i, j).map { c -> f(c) }.joinToString("") +
@@ -182,22 +153,22 @@ fun main() {
 ```
 
 </tab>
-<tab title="Earlier versions" group-key="kotlin-1-5">
+<tab title="早期版本" group-key="kotlin-1-5">
 
 ```kotlin
 fun main() {
-    // read input
+    // 读取输入
     val n = readLine()!!.toInt()
     val s = readLine()!!
     val fl = readLine()!!.split(" ").map { it.toInt() }
-    // define local function f
+    // 定义局部函数 f
     fun f(c: Char) = '0' + fl[c - '1']
-    // greedily find first and last indices
+    // 贪婪查找第一个和最后一个索引
     val i = s.indexOfFirst { c -> f(c) > c }
         .takeIf { it >= 0 } ?: s.length
     val j = s.withIndex().indexOfFirst { (j, c) -> j > i && f(c) < c }
         .takeIf { it >= 0 } ?: s.length
-    // compose and write the answer
+    // 撰写并写下答案
     val ans =
         s.substring(0, i) +
         s.substring(i, j).map { c -> f(c) }.joinToString("") + 
@@ -209,102 +180,84 @@ fun main() {
 </tab>
 </tabs>
 
-In this dense code, in addition to collection transformations, you can see such handy Kotlin features as local functions
-and the [elvis operator](null-safety.md#elvis-operator) `?:`
-that allow to express 
-[idioms](idioms.md) like "take the value if it is positive or else use length" with a concise and readable 
-expressions like `.takeIf { it >= 0 } ?: s.length`, yet it is perfectly fine with Kotlin to create additional mutable
-variables and express the same code in imperative style, too.
+在这段密集的代码中，除了集合转换之外，您还可以看到一些方便的 Kotlin 功能，如局部函数和
+[elvis operator](null-safety.md#elvis-operator) `?:`，它们允许表达类似 "如果值为正则取其值，否则使用长度" 的
+[idioms](idioms.md) 以简洁可读的表达方式，例如 `.takeIf { it >= 0 } ?: s.length`。
+然而，在 Kotlin 中，创建额外的可变变量并以命令式风格表达相同的代码也是完全可以的。
 
-To make reading the input in competitive programming tasks like this more concise, 
-you can have the following list of helper input-reading functions:
+为了使竞赛性编程任务中的输入读取更为简洁，您可以使用以下辅助输入读取函数列表：
 
 <tabs group="kotlin-versions">
-<tab title="Kotlin 1.6.0 and later" group-key="kotlin-1-6">
+<tab title="Kotlin 1.6.0 及更高版本" group-key="kotlin-1-6">
 
 ```kotlin
-private fun readStr() = readln() // string line
-private fun readInt() = readStr().toInt() // single int
-private fun readStrings() = readStr().split(" ") // list of strings
-private fun readInts() = readStrings().map { it.toInt() } // list of ints
+private fun readStr() = readln() // 字符串行
+private fun readInt() = readStr().toInt() // 单整数
+private fun readStrings() = readStr().split(" ") // 字符串列表
+private fun readInts() = readStrings().map { it.toInt() } // 整数列表
 ```
 
 </tab>
-<tab title="Earlier versions" group-key="kotlin-1-5">
+<tab title="早期版本" group-key="kotlin-1-5">
 
 ```kotlin
-private fun readStr() = readLine()!! // string line
-private fun readInt() = readStr().toInt() // single int
-private fun readStrings() = readStr().split(" ") // list of strings
-private fun readInts() = readStrings().map { it.toInt() } // list of ints
+private fun readStr() = readLine()!! // 字符串行
+private fun readInt() = readStr().toInt() // 单整数
+private fun readStrings() = readStr().split(" ") // 字符串列表
+private fun readInts() = readStrings().map { it.toInt() } // 整数列表
 ```
 
 </tab>
 </tabs>
 
-With these helpers, the part of code for reading input becomes simpler, closely following the input 
-specification in the problem statement line by line:
+有了这些辅助函数，用于读取输入的代码部分变得更简单，紧密地按照问题陈述中的输入规范逐行进行：
 
 ```kotlin
-// read input
+// 读取输入
 val n = readInt()
 val s = readStr()
 val fl = readInts()
 ```
 
-Note that in competitive programming it is customary to give variables shorter names than it is 
-typical in industrial programming practice, since the code is to be written just once and not supported thereafter. 
-However, these names are usually still mnemonic — `a` for arrays,
-`i`, `j`, and others for indices, `r`, and `c` for row and column numbers in tables, `x` and `y` for coordinates, and so on.
-It is easier to keep the same names for input data as it is given in the problem statement. 
-However, more complex problems require more code which leads to using longer self-explanatory
-variable and function names.
+请注意，在竞赛性编程中，通常习惯给变量起比工业编程实践中更短的名字，因为代码只需编写一次，之后不再进行维护。
+然而，这些名称通常仍然是助记的 — `a` 用于数组，`i`、`j` 等用于索引，`r` 和 `c` 用于表中的行和列号，`x` 和 `y` 用于坐标等等。
+在输入数据中使用与问题陈述中给出的相同名称更容易。
+然而，更复杂的问题需要更多的代码，因此需要使用更长、自说明的变量和函数名称。
 
-## More tips and tricks
+## 更多提示和技巧
 
-Competitive programming problems often have input like this:
+竞赛性编程问题通常有以下类型的输入：
 
-The first line of the input contains two integers `n` and `k`
+输入的第一行包含两个整数 `n` 和 `k`
 
-In Kotlin this line can be concisely parsed with the following statement using
-[destructuring declaration](destructuring-declarations.md) 
-from a list of integers:
+在 Kotlin 中，可以使用以下语句简洁地解析此行，使用整数列表进行 [解构声明](destructuring-declarations.md)：
 
 ```kotlin
 val (n, k) = readInts()
 ```
 
-It might be temping to use JVM's `java.util.Scanner` class to parse less structured 
-input formats. Kotlin is designed to interoperate well with JVM libraries, so that their use feels quite
-natural in Kotlin. However, beware that `java.util.Scanner` is extremely slow. So slow, in fact, that parsing
-10<sup>5</sup> or more integers with it might not fit into a typical 2 second time-limit, which a simple Kotlin's 
-`split(" ").map { it.toInt() }` would handle. 
+使用 JVM 的 `java.util.Scanner` 类来解析结构较少的输入格式可能会很诱人。
+Kotlin 被设计为与 JVM 库良好互操作，因此在 Kotlin 中使用它们会感觉相当自然。
+然而，请注意，`java.util.Scanner` 的速度非常慢。
+实际上，它的速度如此之慢，以至于使用它解析 10<sup>5</sup> 或更多个整数可能不符合典型的 2 秒时间限制，而简单的 Kotlin 的
+`split(" ").map { it.toInt() }` 可以处理。
 
-Writing output in Kotlin is usually straightforward with 
-[println(...)](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) 
-calls and using Kotlin's 
-[string templates](strings.md#string-templates). However, care must be taken when output 
-contains on order of 10<sup>5</sup> lines or more. Issuing so many `println` calls is too slow, since the output 
-in Kotlin is automatically flushed after each line. 
-A faster way to write many lines from an array or a list is using
-[joinToString()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/join-to-string.html) function
-with `"\n"` as the separator, like this:
+在 Kotlin 中通常使用 [println(...)](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) 函数以及使用
+Kotlin 的 [字符串模板](strings.md#string-templates) 来直接编写输出。
+然而，当输出包含大约 10<sup>5</sup> 行或更多时，必须小心。
+发出如此多的 `println` 调用太慢，因为在 Kotlin 中，输出在每行后自动刷新。
+从数组或列表写入多行的更快方法是使用 [joinToString()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/join-to-string.html) 函数，以 `"\n"` 作为分隔符，如下所示：
 
 ```kotlin
-println(a.joinToString("\n")) // each element of array/list of a separate line
+println(a.joinToString("\n")) // 单独行的数组/列表的每个元素
 ```
 
-## Learning Kotlin
+## 学习 Kotlin
 
-Kotlin is easy to learn, especially for those who already know Java.
-A short introduction to the basic syntax of Kotlin for software developers can be found directly in the
-reference section of the website starting from [basic syntax](basic-syntax.md). 
+Kotlin 很容易学习，尤其是对于那些已经了解 Java 的人来说。
+对于软件开发人员，可以直接在网站的参考部分找到 Kotlin 基本语法的简短介绍，从 [basic syntax](basic-syntax.md) 开始。
 
-IDEA has built-in 
-[Java-to-Kotlin converter](https://www.jetbrains.com/help/idea/converting-a-java-file-to-kotlin-file.html). 
-It can be used by people familiar with Java to learn the corresponding Kotlin syntactic constructions, but it
-is not perfect, and it is still worth familiarizing yourself with Kotlin and learning the 
-[Kotlin idioms](idioms.md).
+IDEA 内置了 [Java-to-Kotlin 转换器](https://www.jetbrains.com/help/idea/converting-a-java-file-to-kotlin-file.html)。
+熟悉 Java 的人可以使用它来学习相应的 Kotlin 语法构造，但它并不完美，因此熟悉 Kotlin 并学习 [Kotlin 习惯用语](idioms.md) 仍然是值得的。
 
-A great resource to study Kotlin syntax and API of the Kotlin standard library are
-[Kotlin Koans](koans.md).
+学习 Kotlin 语法和 Kotlin 标准库 API 的一个很好的资源是 [Kotlin Koans](koans.md)。

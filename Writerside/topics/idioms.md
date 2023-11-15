@@ -1,4 +1,4 @@
-[//]: # (title: Idioms)
+[//]: # (title: 惯用语法)
 
 A collection of random and frequently used idioms in Kotlin. If you have a favorite idiom, contribute it by sending a pull request.
 

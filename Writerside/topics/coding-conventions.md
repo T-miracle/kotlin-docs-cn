@@ -1,4 +1,4 @@
-[//]: # (title: Coding conventions)
+[//]: # (title: 编码约定)
 
 Commonly known and easy-to-follow coding conventions are vital for any programming language.
 Here we provide guidelines on the code style and code organization for projects that use Kotlin.

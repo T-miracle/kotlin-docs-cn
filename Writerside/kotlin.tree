@@ -36,7 +36,7 @@
         <toc-element topic="whatsnew1920.md" toc-title="Kotlin 1.9.20" accepts-web-file-names="whatsnew.html"/>
         <toc-element topic="whatsnew19.md" toc-title="Kotlin 1.9.0"/>
         <toc-element topic="whatsnew-eap.md" toc-title="Kotlin 1.9.20-RC2" hidden="true"/>
-        <toc-element toc-title="Earlier versions">
+        <toc-element toc-title="早期版本">
             <toc-element topic="whatsnew1820.md" toc-title="Kotlin 1.8.20"/>
             <toc-element topic="whatsnew18.md" toc-title="Kotlin 1.8.0"/>
             <toc-element topic="whatsnew1720.md" toc-title="Kotlin 1.7.20"/>
@@ -63,7 +63,7 @@
     <toc-element toc-title="基础">
         <toc-element topic="basic-syntax.md"/>
         <toc-element topic="idioms.md"/>
-        <toc-element href="https://play.kotlinlang.org/byExample/overview" toc-title="Kotlin by example"/>
+        <toc-element href="https://play.kotlinlang.org/byExample/overview" toc-title="Kotlin 实例讲解"/>
         <toc-element topic="coding-conventions.md"/>
     </toc-element>
 
