@@ -135,19 +135,19 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-when-expression-boolean"}
 [打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAuMWADhgLwYCMADkrVaDZrADOYAE54OLPBEy8A7gAsYmCplq6A9HowBJJK3ZcAPBgAMGPBNbSUMADQYJMFg8ky5CpawQGOQgdDDSAJ4YkIxQISK6NGycGFa2ALQAfMGh4VExcSAJiQbGpsmW%2FLb2js5uHl4YPrLyipgsQSE4GABGeCzRELHxOolmKVZ8Gdldvf2Dw0WjJYYm45UATNUOLE6u7p7eMFIt%2Fu2dICo40lgjY0nmqRhbGFk5Vzd396UAyodNx18rQCHRyaggLBCdlMaCCHGkMDoihQDkgaCg%2FTadgcEhwCgkSDwMDiy10MEYHleMxA4MhIHuY2KAF9ivCCCxGERmn42sRiqUPrcqGgmSAXCAWNcAOaeAAKjDxSAgNwQIAAVjgGGLwBBOHhGOEAGrhCRtVV8AB0AE4LVMQEygA%3D%3D%3D?_gl=1*xksuc7*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4NzE2MC4xOC4wLjE2OTk3ODcxNjAuNjAuMC4w&_ga=2.153986616.1684546783.1699700997-2060274793.1694940376)
 
-## Ranges（范围）
+## Ranges（区间）
 
-在讨论循环之前，了解如何构造循环迭代的范围是很有用的。
+在讨论循环之前，了解如何构造循环迭代的区间是很有用的。
 
-在 Kotlin 中创建范围的最常见方法是使用`..`运算符。例如，`1..4`相当于`1, 2, 3, 4`。
+在 Kotlin 中创建区间的最常见方法是使用`..`运算符。例如，`1..4`相当于`1, 2, 3, 4`。
 
-要声明不包括结束值的范围，请使用`..<`运算符。例如，`1..<4`相当于`1, 2, 3`。
+要声明不包括结束值的区间，请使用`..<`运算符。例如，`1..<4`相当于`1, 2, 3`。
 
-要声明以相反顺序的范围，请使用`downTo`。例如，`4 downTo 1`相当于`4, 3, 2, 1`。
+要声明以相反顺序的区间，请使用`downTo`。例如，`4 downTo 1`相当于`4, 3, 2, 1`。
 
-要声明以非1的步长递增的范围，请使用`step`和您想要的递增值。例如，`1..5 step 2`相当于`1, 3, 5`。
+要声明以非1的步长递增的区间，请使用`step`和您想要的递增值。例如，`1..5 step 2`相当于`1, 3, 5`。
 
-您也可以对`Char`范围执行相同的操作：
+您也可以对`Char`区间执行相同的操作：
 * `'a'..'d'`相当于`'a', 'b', 'c', 'd'`
 * `'z' downTo 's' step 2`相当于`'z', 'x', 'v', 't'`
 
@@ -157,9 +157,9 @@ fun main() {
 
 ### For
 
-利用你对范围的新认识，你可以创建一个`for`循环，迭代从1到5的数字，并在每次迭代时打印该数字。
+利用你对区间的新认识，你可以创建一个`for`循环，迭代从1到5的数字，并在每次迭代时打印该数字。
 
-将迭代器和范围放在括号`()`内，使用关键字`in`。在花括号`{}`内添加你想要完成的操作：
+将迭代器和区间放在括号`()`内，使用关键字`in`。在花括号`{}`内添加你想要完成的操作：
 
 ```kotlin
 fun main() {
@@ -293,7 +293,7 @@ fun main() {
     )
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-control-flow-solution-1"}
+{collapsible="true" collapsed-title="Example solution"}
 
 ### 练习 2 {collapsible="true"}
 
@@ -340,7 +340,7 @@ fun main() {
     println("There are $pizzaSlices slices of pizza. Hooray! We have a whole pizza! :D")
 }
 ```
-{collapsible="true" collapsed-title="Example solution 1" id="kotlin-tour-control-flow-exercise-2-solution-1"}
+{collapsible="true" collapsed-title="Example solution 1"}
 
 |---|---|
 ```kotlin
@@ -355,7 +355,7 @@ fun main() {
 }
 
 ```
-{collapsible="true" collapsed-title="Example solution 2" id="kotlin-tour-control-flow-exercise-2-solution-2"}
+{collapsible="true" collapsed-title="Example solution 2"}
 
 ### 练习 3 {collapsible="true"}
 
@@ -393,7 +393,7 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-control-flow-solution-3"}
+{collapsible="true" collapsed-title="Example solution"}
 
 ### 练习 4 {collapsible="true"}
 
@@ -426,7 +426,7 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-control-flow-solution-4"}
+{collapsible="true" collapsed-title="Example solution"}
 
 ## 下一步
 

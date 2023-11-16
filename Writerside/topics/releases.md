@@ -78,7 +78,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.0" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
-            <p>一个功能发布，包括 Kotlin K2 编译器的更新、新的枚举类值函数、开放范围的新操作符、Kotlin Multiplatform 中 Gradle 配置缓存的预览、Kotlin 多平台 中 Android 目标支持的更改，以及 Kotlin/Native 中自定义内存分配器的预览。</p>
+            <p>一个功能发布，包括 Kotlin K2 编译器的更新、新的枚举类值函数、开放区间的新操作符、Kotlin Multiplatform 中 Gradle 配置缓存的预览、Kotlin 多平台 中 Android 目标支持的更改，以及 Kotlin/Native 中自定义内存分配器的预览。</p>
             <p>了解更多信息：</p>
             <list>
                 <li><a href="whatsnew19.md" target="_blank">Kotlin 1.9.0 的新增功能</a></li>

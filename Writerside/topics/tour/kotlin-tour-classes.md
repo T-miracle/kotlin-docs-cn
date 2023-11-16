@@ -273,7 +273,7 @@ fun main() {
     println(emp)
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-classes-solution-1"}
+{collapsible="true" collapsed-title="Example solution"}
 
 ### 练习 2 {collapsible="true"}
 
@@ -290,7 +290,7 @@ fun main() {
 
 <deflist collapsible="true" id="kotlin-tour-classes-exercise-2-hint-2">
     <def title="提示">
-        <code>Random.nextInt(from = ..., until = ...)</code> 给你一个在指定范围内的随机 <code>Int</code> 数字。
+        <code>Random.nextInt(from = ..., until = ...)</code> 给你一个在指定区间内的随机 <code>Int</code> 数字。
     </def>
 </deflist>
 
@@ -338,7 +338,7 @@ fun main() {
     println(empGen.generateEmployee())
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-classes-solution-2"}
+{collapsible="true" collapsed-title="Example solution"}
 
 ## 下一步
 
