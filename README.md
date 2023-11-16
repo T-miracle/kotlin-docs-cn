@@ -1,8 +1,8 @@
-# 译者说
+# Kotlin 中文文档（逐步翻译中...）
 
 ## 注意
 
-本中文翻译文档会尽量及时同步官方文档（非Fork分支），但是不保证每次都能及时更新，如果您介意这一点，请以 [官方文档](https://kotlinlang.org/docs) 为准！
+本中文翻译文档会尽量及时同步官方文档，但是不保证每次都能及时更新，如果您介意这一点，请以 [官方文档](https://kotlinlang.org/docs) 为准！
 
 如果您觉得本文档有错误，或者有晦涩难懂的地方，请提交 [issue](https://github.com/T-miracle/kotlin-docs-cn/issues)。
 
