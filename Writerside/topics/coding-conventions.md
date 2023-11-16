@@ -1,62 +1,56 @@
-[//]: # (title: 编码约定)
+# 编码约定
 
-Commonly known and easy-to-follow coding conventions are vital for any programming language.
-Here we provide guidelines on the code style and code organization for projects that use Kotlin.
+通用且易于遵循的编码规范对于任何编程语言都至关重要。
+在这里，我们提供了使用 Kotlin 的项目的代码风格和代码组织指南。
 
-## Configure style in IDE
+## 在 IDE 中配置风格
 
-Two most popular IDEs for Kotlin - [IntelliJ IDEA](https://www.jetbrains.com/idea/) and [Android Studio](https://developer.android.com/studio/)
-provide powerful support for code styling. You can configure them to automatically format your code in consistence with
-the given code style. 
- 
-### Apply the style guide
+Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/idea/) 和[Android Studio](https://developer.android.com/studio/)
+提供了强大的代码风格支持。
+您可以配置它们以使您的代码自动符合给定的代码风格。
 
-1. Go to **Settings/Preferences | Editor | Code Style | Kotlin**.
-2. Click **Set from...**.
-3. Select **Kotlin style guide** .
+### 应用代码风格指南
 
-### Verify that your code follows the style guide
+1. 转到 **Settings/Preferences | Editor | Code Style | Kotlin（设置/首选项 | 编辑器 | 代码样式 | Kotlin）**。
+2. 点击 **Set from...（设置自...）**。
+3. 选择 **Kotlin style guide（Kotlin 样式指南）**。
 
-1. Go to **Settings/Preferences | Editor | Inspections | General**.
-2. Switch on **Incorrect formatting** inspection.
-Additional inspections that verify other issues described in the style guide (such as naming conventions) are enabled by default.
+### 验证您的代码是否遵循代码风格
 
-## Source code organization
+1. 转到 **Settings/Preferences | Editor | Inspections | General（设置/首选项 | 编辑器 | 检查 | 常规）**。
+2. 打开 **Incorrect formatting（格式设置不正确）** 检查。
+   额外的检查，验证代码风格指南中描述的其他问题（如命名约定）默认已启用。
 
-### Directory structure
+## 源代码组织
 
-In pure Kotlin projects, the recommended directory structure follows the package structure with
-the common root package omitted. For example, if all the code in the project is in the `org.example.kotlin` package and its
-subpackages, files with the `org.example.kotlin` package should be placed directly under the source root, and
-files in `org.example.kotlin.network.socket` should be in the `network/socket` subdirectory of the source root.
+### 目录结构
 
->On JVM: In projects where Kotlin is used together with Java, Kotlin source files should reside in the same 
->source root as the Java source files, and follow the same directory structure: each file should be stored in the 
->directory corresponding to each package statement.
+在纯 Kotlin 项目中，推荐的目录结构遵循包结构，省略了共同的根包。
+例如，如果项目中的所有代码都在 `org.example.kotlin` 包及其子包中，那么带有 `org.example.kotlin` 包的文件应直接放在源目录下，而
+`org.example.kotlin.network.socket` 中的文件应该位于源目录的 `network/socket` 子目录下。
+
+> 在 JVM 上：在与 Java 一起使用 Kotlin 的项目中，Kotlin 源文件应存放在与 Java 源文件相同的源目录中，并遵循相同的目录结构：
+> 每个文件应存储在与每个 package 语句相对应的目录中。
 >
 {style="note"}
 
-### Source file names
+### 源文件命名
 
-If a Kotlin file contains a single class or interface (potentially with related top-level declarations), its name should be the same
-as the name of the class, with the `.kt` extension appended. It applies to all types of classes and interfaces.
-If a file contains multiple classes, or only top-level declarations, choose a name describing what the file contains, and name the file accordingly.
-Use [an upper camel case](https://en.wikipedia.org/wiki/Camel_case) with an uppercase first letter (also known as Pascal case),
-for example, `ProcessDeclarations.kt`.
+如果一个 Kotlin 文件包含一个单一的类或接口（可能带有相关的顶级声明），其名称应与类的名称相同，附加 `.kt` 扩展名。这适用于所有类型的类和接口。
+如果一个文件包含多个类或仅包含顶级声明，请选择一个描述文件内容的名称，并相应地命名文件。
+使用[大驼峰命名法](https://en.wikipedia.org/wiki/Camel_case)（首字母大写，也称为帕斯卡命名法），例如，`ProcessDeclarations.kt`。
 
-The name of the file should describe what the code in the file does. Therefore, you should avoid using meaningless
-words such as `Util` in file names.
+文件名应描述文件中代码的功能。因此，应避免在文件名中使用无意义的词汇，如 `Util`。
 
-#### Multiplatform projects
+#### 多平台项目
 
-In multiplatform projects, files with top-level declarations in platform-specific source sets should have a suffix
-associated with the name of the source set. For example:
+在多平台项目中，具有平台特定源代码集中顶级声明的文件应具有与源代码集名称相关联的后缀。例如：
 
 * **jvm**Main/kotlin/Platform.**jvm**.kt
 * **android**Main/kotlin/Platform.**android**.kt
 * **ios**Main/kotlin/Platform.**ios**.kt
 
-As for the common source set, files with top-level declarations should not have a suffix. For example, `commonMain/kotlin/Platform.kt`.
+至于公共源代码集，具有顶级声明的文件不应具有后缀。例如，`commonMain/kotlin/Platform.kt`。
 
 ##### Technical details {collapsible="true"}
 
@@ -1030,7 +1024,6 @@ indentation, or `trimMargin` when internal indentation is required:
 
 ```kotlin
 fun main() {
-//sampleStart
    println("""
     Not
     trimmed
@@ -1052,10 +1045,10 @@ fun main() {
           |}""".trimMargin()
 
    println(a)
-//sampleEnd
 }
 ```
 {kotlin-runnable="true"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNADgE4EAuANkeSB15jRgHIQm1Xk0ZYsMKMJpMYADyE8aXTpyXFK0hszaEV3XhgAqYiVKUZZC6Rn0gAdKLxYAkmlhomJaRqpLtnrq%2B0gBuOCwYOBgAvLaqHCbOZpYQ2Dj0AOYElvJM8DaGNAA%2BeEiEUQB8GACMpBQWhRhFhvQwTCj0mDgFhUUAvnaOYgCy6VlEwf6MgUQ4k30gADQgTGNtAAosOExIEPRYCCAAVjhhS%2BAQWLR4LDD0AGp3AM54EGiH1fYAnPYATAAMID6QA%3D%3D%3D?_gl=1*1c0z4i0*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDE0NDQ1MS4zMi4wLjE3MDAxNDQ0NTEuNjAuMC4w&_ga=2.69185428.408218914.1700050452-2060274793.1694940376)
 
 Learn the difference between [Java and Kotlin multiline strings](java-to-kotlin-idioms-strings.md#use-multiline-strings).
 
@@ -1142,4 +1135,4 @@ When writing libraries, it's recommended to follow an additional set of rules to
  * Provide [KDoc](kotlin-doc.md) comments for all public members, except for overrides that do not require any new documentation
    (to support generating documentation for the library)
 
-Learn more about best practices and ideas to consider when writing an API for your library in [library creators' guidelines](jvm-api-guidelines-introduction.md).
+Learn more about best practices and ideas to consider when writing an API for your library in [library creators' guidelines](https://kotlinlang.org/docs/jvm-api-guidelines-introduction.html).

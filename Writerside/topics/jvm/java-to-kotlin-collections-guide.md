@@ -422,7 +422,7 @@ numbers.forEach { (k, v) -> println("Key = $k, Value = $v") }
 ```
 {id="traverse-map-kotlin"}
 
-## Get the first and the last items of a possibly empty collection
+## 获取可能为空的集合中的第一项和最后一项 {id=获取可能为空的集合中的第一项和最后一项}
 
 In Java, you can safely get the first and the last items by checking the size of the collection and using indices:
 

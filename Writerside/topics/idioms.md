@@ -1,43 +1,43 @@
 [//]: # (title: 惯用语法)
 
-A collection of random and frequently used idioms in Kotlin. If you have a favorite idiom, contribute it by sending a pull request.
+这是一个包含 Kotlin 中随机和常用语法习惯的集合。如果你有自己喜欢的语法习惯和风格，请通过发送 pull request 贡献给我们~
 
-## Create DTOs (POJOs/POCOs)
+## 创建 DTOs (POJOs/POCOs)
 
 ```kotlin
 data class Customer(val name: String, val email: String)
 ```
 
-provides a `Customer` class with the following functionality:
+提供一个具有以下功能的 `Customer` 类：
 
-* getters (and setters in case of `var`s) for all properties
+* 所有属性的 getters（对于 `var`，还包括 setters）
 * `equals()`
 * `hashCode()`
 * `toString()`
 * `copy()`
-* `component1()`, `component2()`, ..., for all properties (see [Data classes](data-classes.md))
+* `component1()`、`component2()` 等，对应于所有属性（参见[数据类](data-classes.md)）
 
-## Default values for function parameters
+## 函数参数的默认值
 
 ```kotlin
 fun foo(a: Int = 0, b: String = "") { ... }
 ```
 
-## Filter a list
+## 过滤列表
 
 ```kotlin
 val positives = list.filter { x -> x > 0 }
 ```
 
-Or alternatively, even shorter:
+或者，甚至更短：
 
 ```kotlin
 val positives = list.filter { it > 0 }
 ```
 
-Learn the difference between [Java and Kotlin filtering](java-to-kotlin-collections-guide.md#filter-elements).
+了解 [Java 和 Kotlin 过滤](java-to-kotlin-collections-guide.md#filter-elements) 之间的区别。
 
-## Check the presence of an element in a collection
+## 检查集合中元素是否存在
 
 ```kotlin
 if ("john@example.com" in emailsList) { ... }
@@ -45,15 +45,15 @@ if ("john@example.com" in emailsList) { ... }
 if ("jane@example.com" !in emailsList) { ... }
 ```
 
-## String interpolation
+## 字符串插值
 
 ```kotlin
 println("Name $name")
 ```
 
-Learn the difference between [Java and Kotlin string concatenation](java-to-kotlin-idioms-strings.md#concatenate-strings).
+了解 [Java 和 Kotlin 字符串连接](java-to-kotlin-idioms-strings.md#concatenate-strings) 之间的区别。
 
-## Instance checks
+## 实例检查
 
 ```kotlin
 when (x) {
@@ -63,25 +63,25 @@ when (x) {
 }
 ```
 
-## Read-only list
+## 只读列表
 
 ```kotlin
 val list = listOf("a", "b", "c")
 ```
-## Read-only map
+## 只读映射
 
 ```kotlin
 val map = mapOf("a" to 1, "b" to 2, "c" to 3)
 ```
 
-## Access a map entry
+## 访问映射条目
 
 ```kotlin
 println(map["key"])
 map["key"] = value
 ```
 
-## Traverse a map or a list of pairs
+## 遍历映射或键值对列表。
 
 ```kotlin
 for ((k, v) in map) {
@@ -89,27 +89,27 @@ for ((k, v) in map) {
 }
 ```
 
-`k` and `v` can be any convenient names, such as `name` and `age`.
+`k` 和 `v` 可以是任何方便的名称，比如 `name` 和 `age`。
 
-## Iterate over a range
+## 迭代一个区间
 
 ```kotlin
-for (i in 1..100) { ... }  // closed-ended range: includes 100
-for (i in 1..<100) { ... } // open-ended range: does not include 100
+for (i in 1..100) { ... }  // 封闭区间：包括 100
+for (i in 1..<100) { ... } // 开放区间：不包括 100
 for (x in 2..10 step 2) { ... }
 for (x in 10 downTo 1) { ... }
 (1..10).forEach { ... }
 ```
 
-## Lazy property
+## 延迟属性
 
 ```kotlin
-val p: String by lazy { // the value is computed only on first access
-    // compute the string
+val p: String by lazy { // 该值仅在第一次访问时计算
+    // 计算字符串
 }
 ```
 
-## Extension functions
+## 扩展功能
 
 ```kotlin
 fun String.spaceToCamelCase() { ... }
@@ -117,7 +117,7 @@ fun String.spaceToCamelCase() { ... }
 "Convert this to camelcase".spaceToCamelCase()
 ```
 
-## Create a singleton
+## 创建单例
 
 ```kotlin
 object Resource {
@@ -125,7 +125,7 @@ object Resource {
 }
 ```
 
-## Instantiate an abstract class
+## 实例化抽象类
 
 ```kotlin
 abstract class MyAbstractClass {
@@ -146,23 +146,23 @@ fun main() {
 }
 ```
 
-## If-not-null shorthand
+## If-not-null （非空）简写
 
 ```kotlin
 val files = File("Test").listFiles()
 
-println(files?.size) // size is printed if files is not null
+println(files?.size) // 如果文件不为空，则打印大小
 ```
 
-## If-not-null-else shorthand
+## If-not-null-else （非空否则）简写
 
 ```kotlin
 val files = File("Test").listFiles()
 
-// For simple fallback values:
-println(files?.size ?: "empty") // if files is null, this prints "empty"
+// 对于简单的备用值：
+println(files?.size ?: "empty") // 如果 `files` 为 null，则打印 "empty"。
 
-// To calculate a more complicated fallback value in a code block, use `run`
+// 要在代码块中计算更复杂的备用值，请使用 `run`。
 val filesSize = files?.size ?: run { 
     val someSize = getSomeSize()
     someSize * 2
@@ -170,42 +170,42 @@ val filesSize = files?.size ?: run {
 println(filesSize)
 ```
 
-## Execute a statement if null
+## If-null（空值）执行语句
 
 ```kotlin
 val values = ...
 val email = values["email"] ?: throw IllegalStateException("Email is missing!")
 ```
 
-## Get first item of a possibly empty collection
+## 获取可能为空的集合的第一个元素
 
 ```kotlin
-val emails = ... // might be empty
+val emails = ... // 可能是空的集合
 val mainEmail = emails.firstOrNull() ?: ""
 ```
 
-Learn the difference between [Java and Kotlin first item getting](java-to-kotlin-collections-guide.md#get-the-first-and-the-last-items-of-a-possibly-empty-collection).
+了解 [Java 和 Kotlin 第一个元素获取](java-to-kotlin-collections-guide.md#获取可能为空的集合中的第一项和最后一项) 之间的区别。
 
-## Execute if not null
+## If-not-null（非空）执行语句 {id=非空执行语句}
 
 ```kotlin
 val value = ...
 
 value?.let {
-    ... // execute this block if not null
+    ... // 如果不为空则执行此块
 }
 ```
 
-## Map nullable value if not null
+## 映射可空值 If-not-null（非空）转换 {id=映射可空值If-not-null转换}
 
 ```kotlin
 val value = ...
 
 val mapped = value?.let { transformValue(it) } ?: defaultValue 
-// defaultValue is returned if the value or the transform result is null.
+// 如果值或转换结果为 null，则返回 defaultValue。
 ```
 
-## Return on when statement
+## 返回 when 表达式
 
 ```kotlin
 fun transform(color: String): Int {
@@ -218,7 +218,7 @@ fun transform(color: String): Int {
 }
 ```
 
-## try-catch expression
+## try-catch 表达式
 
 ```kotlin
 fun test() {
@@ -228,11 +228,11 @@ fun test() {
         throw IllegalStateException(e)
     }
 
-    // Working with result
+    // 处理结果
 }
 ```
 
-## if expression
+## if 表达式
 
 ```kotlin
 val y = if (x == 1) {
@@ -244,7 +244,7 @@ val y = if (x == 1) {
 }
 ```
 
-## Builder-style usage of methods that return Unit
+## 返回 Unit 类型的方法的构建器风格用法
 
 ```kotlin
 fun arrayOfMinusOnes(size: Int): IntArray {
@@ -252,13 +252,13 @@ fun arrayOfMinusOnes(size: Int): IntArray {
 }
 ```
 
-## Single-expression functions
+## 单表达式函数
 
 ```kotlin
 fun theAnswer() = 42
 ```
 
-This is equivalent to
+这相当于
 
 ```kotlin
 fun theAnswer(): Int {
@@ -266,7 +266,7 @@ fun theAnswer(): Int {
 }
 ```
 
-This can be effectively combined with other idioms, leading to shorter code. For example, with the `when` expression:
+它可以与其它惯用语法有效地结合，从而使代码更简短。例如，使用 `when` 表达式：
 
 ```kotlin
 fun transform(color: String): Int = when (color) {
@@ -277,7 +277,7 @@ fun transform(color: String): Int = when (color) {
 }
 ```
 
-## Call multiple methods on an object instance (with)
+## 在一个对象实例上调用多个方法（with）
 
 ```kotlin
 class Turtle {
@@ -288,7 +288,7 @@ class Turtle {
 }
 
 val myTurtle = Turtle()
-with(myTurtle) { //draw a 100 pix square
+with(myTurtle) { // 画一个100像素的正方形
     penDown()
     for (i in 1..4) {
         forward(100.0)
@@ -298,7 +298,7 @@ with(myTurtle) { //draw a 100 pix square
 }
 ```
 
-## Configure properties of an object (apply)
+## 配置对象的属性（apply）
 
 ```kotlin
 val myRectangle = Rectangle().apply {
@@ -308,9 +308,9 @@ val myRectangle = Rectangle().apply {
 }
 ```
 
-This is useful for configuring properties that aren't present in the object constructor.
+这用于配置 在对象构造函数中不存在的属性 非常有用。
 
-## Java 7's try-with-resources
+## Java 7 的 try-with-resources
 
 ```kotlin
 val stream = Files.newInputStream(Paths.get("/some/file.txt"))
@@ -319,7 +319,7 @@ stream.buffered().reader().use { reader ->
 }
 ```
 
-## Generic function that requires the generic type information
+## 需要泛型类型信息的泛型函数
 
 ```kotlin
 //  public final class Gson {
@@ -330,7 +330,7 @@ stream.buffered().reader().use { reader ->
 inline fun <reified T: Any> Gson.fromJson(json: JsonElement): T = this.fromJson(json, T::class.java)
 ```
 
-## Swap two variables
+## 交换两个变量
 
 ```kotlin
 var a = 1
@@ -338,21 +338,21 @@ var b = 2
 a = b.also { b = a }
 ```
 
-## Mark code as incomplete (TODO)
- 
-Kotlin's standard library has a `TODO()` function that will always throw a `NotImplementedError`.
-Its return type is `Nothing` so it can be used regardless of expected type.
-There's also an overload that accepts a reason parameter:
+## 将代码标记为不完整 (TODO)
+
+Kotlin 的标准库有一个 `TODO()` 函数，它总是抛出一个 `NotImplementedError`。
+其返回类型是 `Nothing`，因此可以在期望类型不明确的情况下使用。
+还有一个接受原因参数的重载：
 
 ```kotlin
 fun calcTaxes(): BigDecimal = TODO("Waiting for feedback from accounting")
 ```
 
-IntelliJ IDEA's kotlin plugin understands the semantics of `TODO()` and automatically adds a code pointer in the TODO tool window. 
+IntelliJ IDEA 的 Kotlin 插件理解 `TODO()` 的语义，并自动在 TODO 工具窗口中添加代码指示。
 
-## What's next?
+## 下一步是什么？
 
-* Solve [Advent of Code puzzles](advent-of-code.md) using the idiomatic Kotlin style.
-* Learn how to perform [typical tasks with strings in Java and Kotlin](java-to-kotlin-idioms-strings.md).
-* Learn how to perform [typical tasks with collections in Java and Kotlin](java-to-kotlin-collections-guide.md).
-* Learn how to [handle nullability in Java and Kotlin](java-to-kotlin-nullability-guide.md).
+* 用符合惯用 Kotlin 风格的方式解决 [Advent of Code 谜题](advent-of-code.md)。
+* 学习如何[在 Java 和 Kotlin 中执行字符串的典型任务](java-to-kotlin-idioms-strings.md)。
+* 学习如何[在 Java 和 Kotlin 中执行集合的典型任务](java-to-kotlin-collections-guide.md)。
+* 学习如何[在 Java 和 Kotlin 中处理可空性](java-to-kotlin-nullability-guide.md)。
