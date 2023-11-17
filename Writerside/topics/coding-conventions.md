@@ -52,85 +52,72 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 至于公共源代码集，具有顶级声明的文件不应具有后缀。例如，`commonMain/kotlin/Platform.kt`。
 
-##### Technical details {collapsible="true"}
+##### 技术细节 {collapsible="true"}
 
-We recommend following this file naming scheme in multiplatform projects due to JVM limitations: it doesn't allow
-top-level members (functions, properties).
+由于 JVM 的限制，我们建议在多平台项目中遵循这种文件命名方案：不允许顶级成员（函数、属性）。
 
-To work around this, the Kotlin JVM compiler creates wrapper classes (so-called "file facades") that contain top-level
-member declarations. File facades have an internal name derived from the file name.
+为了解决这个问题，Kotlin JVM 编译器会创建包含顶级成员声明的包装类（所谓的“文件门面（file facades）”）。文件门面的内部名称派生自文件名。
 
-In turn, JVM doesn't allow several classes with the same fully qualified name (FQN). This might lead to situations when
-a Kotlin project cannot be compiled to JVM:
+反过来，JVM 不允许具有相同 完全限定名（FQN，fully qualified name） 的多个类。这可能导致 Kotlin 项目无法编译到 JVM：
 
 ```none
 root
-|- commonMain/kotlin/myPackage/Platform.kt // contains 'fun count() { }'
-|- jvmMain/kotlin/myPackage/Platform.kt // contains 'fun multiply() { }'
+|- commonMain/kotlin/myPackage/Platform.kt // 包含 'fun count() { }'
+|- jvmMain/kotlin/myPackage/Platform.kt // 包含 'fun multiply() { }'
 ```
 
-Here both `Platform.kt` files are in the same package, so the Kotlin JVM compiler produces two file facades, both of which
-have FQN `myPackage.PlatformKt`. This produces the "Duplicate JVM classes" error.
+在这里，`Platform.kt` 文件都在相同的包中，因此 Kotlin JVM 编译器会生成两个文件门面，它们的 FQN 都是 `myPackage.PlatformKt`。
+这会导致 "Duplicate JVM classes（重复的 JVM 类）" 错误。
 
-The simplest way to avoid that is renaming one of the files according to the guideline above. This naming scheme helps
-avoid clashes while retaining code readability.
+最简单的避免方法是根据上述准则之一重命名其中一个文件。这种命名方案有助于避免冲突同时保持代码可读性。
 
-> There are two cases when these recommendations may seem redundant, but we still advise to follow them:
-> 
-> * Non-JVM platforms don't have issues with duplicating file facades. However, this naming scheme can help you keep
-> file naming consistent.
-> * On JVM, if source files don't have top-level declarations, the file facades aren't generated, and you won't face
-> naming clashes.
-> 
->   However, this naming scheme can help you avoid situations when a simple refactoring
-> or an addition could include a top-level function and result in the same "Duplicate JVM classes" error.
+> 有两种情况，这些建议可能看起来多余，但我们仍然建议遵循它们：
+>
+> * 非 JVM 平台不会出现重复文件门面的问题。然而，这种命名方案有助于保持文件命名的一致性。
+> * 在 JVM 上，如果源文件没有顶级声明，将不会生成文件门面，因此不会出现命名冲突。
+>
+>   但是，这种命名方案有助于避免在简单的重构或添加操作中包含顶级函数并导致相同的 "Duplicate JVM classes" 错误的情况。
 
 
-### Source file organization
+### 源文件组织
 
-Placing multiple declarations (classes, top-level functions or properties) in the same Kotlin source file is encouraged
-as long as these declarations are closely related to each other semantically, and the file size remains reasonable
-(not exceeding a few hundred lines).
+我们鼓励将多个声明（类、顶层函数或属性）放置在同一个 Kotlin 源文件中，只要这些声明在语义上彼此密切相关，并且文件大小保持合理（不超过几百行）。
 
-In particular, when defining extension functions for a class which are relevant for all clients of this class,
-put them in the same file with the class itself. When defining extension functions that make sense 
-only for a specific client, put them next to the code of that client. Avoid creating files just to hold 
-all extensions of some class.
+特别是在为一个类定义适用于该类所有客户端的扩展函数时，请将它们放在与该类本身相同的文件中。
+在为仅对特定客户端有意义的扩展函数时，将它们放在该客户端代码的旁边。
+避免仅为容纳某个类的所有扩展而创建文件。
 
-### Class layout
+### 类布局
 
-The contents of a class should go in the following order:
+类的内容应按以下顺序排列：
 
-1. Property declarations and initializer blocks
-2. Secondary constructors
-3. Method declarations
-4. Companion object
+1. 属性声明和初始化块
+2. 辅助构造函数
+3. 方法声明
+4. 伴生对象
 
-Do not sort the method declarations alphabetically or by visibility, and do not separate regular methods
-from extension methods. Instead, put related stuff together, so that someone reading the class from top to bottom can 
-follow the logic of what's happening. Choose an order (either higher-level stuff first, or vice versa) and stick to it.
+不要按字母顺序或可见性对方法声明进行排序，也不要将常规方法与扩展方法分开。
+相反，将相关的内容放在一起，以便从上到下阅读类的人能够理解发生的逻辑。
+选择一种顺序（首先是更高级别的内容，或相反），并坚持遵循它。
 
-Put nested classes next to the code that uses those classes. If the classes are intended to be used externally and aren't
-referenced inside the class, put them in the end, after the companion object.
+将嵌套类放在使用这些类的代码旁边。如果这些类旨在被外部使用且在类内部未被引用，请将它们放在伴生对象之后的末尾。
 
-### Interface implementation layout
+### 接口实现布局
 
-When implementing an interface, keep the implementing members in the same order as members of the interface (if necessary,
-interspersed with additional private methods used for the implementation).
+在实现接口时，将实现的成员保持与接口成员相同的顺序（必要时，与用于实现的额外私有方法交错）。
 
-### Overload layout
+### 重载布局
 
-Always put overloads next to each other in a class.
+始终将重载放在类中彼此相邻的位置。
 
-## Naming rules
+## 命名规则
 
-Package and class naming rules in Kotlin are quite simple:
+在 Kotlin 中，包和类的命名规则非常简单：
 
-* Names of packages are always lowercase and do not use underscores (`org.example.project`). Using multi-word
-names is generally discouraged, but if you do need to use multiple words, you can either just concatenate them together
-or use the camel case (`org.example.myProject`).
+* 包的名称始终为小写，并且不使用下划线（`org.example.project`）。
+  通常不鼓励使用多个单词的名称，但如果确实需要使用多个单词，可以将它们简单拼接在一起，或者使用驼峰式命名（`org.example.myProject`）。
 
-* Names of classes and objects start with an uppercase letter and use the camel case:
+* 类和对象的名称以大写字母开头，使用驼峰式命名：
 
 ```kotlin
 open class DeclarationProcessor { /*...*/ }
@@ -138,16 +125,16 @@ open class DeclarationProcessor { /*...*/ }
 object EmptyDeclarationProcessor : DeclarationProcessor() { /*...*/ }
 ```
 
-### Function names
+### 函数名称
  
-Names of functions, properties and local variables start with a lowercase letter and use the camel case and no underscores:
+函数、属性和局部变量的名称以小写字母开头，使用驼峰式大小写且不带下划线：
 
 ```kotlin
 fun processDeclarations() { /*...*/ }
 var declarationCount = 1
 ```
 
-Exception: factory functions used to create instances of classes can have the same name as the abstract return type:
+例外：用于创建类实例的工厂函数可以与抽象返回类型同名：
 
 ```kotlin
 interface Foo { /*...*/ }
@@ -157,11 +144,10 @@ class FooImpl : Foo { /*...*/ }
 fun Foo(): Foo { return FooImpl() }
 ```
 
-### Names for test methods
+### 测试方法的命名
 
-In tests (and **only** in tests), you can use method names with spaces enclosed in backticks.
-Note that such method names are currently not supported by the Android runtime. Underscores in method names are
-also allowed in test code.
+**当且仅当**在测试中，您可以使用用反引号括起来的带有空格的方法名称。
+请注意，当前 Android 运行时不支持此类方法名称。在测试代码中也允许在方法名称中使用下划线。
 
 ```kotlin
 class MyTestCase {
@@ -171,36 +157,32 @@ class MyTestCase {
 }
 ```
 
-### Property names
+### 属性命名
 
-Names of constants (properties marked with `const`, or top-level or object `val` properties with no custom `get` function
-that hold deeply immutable data) should use uppercase underscore-separated ([screaming snake case](https://en.wikipedia.org/wiki/Snake_case))
-names:
+常量的名称（使用`const`标记的属性，或者没有自定义的`get`函数并且包含深度不可变数据的顶级/对象`val`属性）应该使用大写下划线分隔的命名风格（[尖叫蛇命名](https://en.wikipedia.org/wiki/Snake_case)）：
 
 ```kotlin
 const val MAX_COUNT = 8
 val USER_NAME_FIELD = "UserName"
 ```
 
-Names of top-level or object properties which hold objects with behavior or mutable data should use camel case names:
+持有具有行为或可变数据的对象的顶级或对象属性应该使用驼峰命名法：
 
 ```kotlin
 val mutableCollection: MutableSet<String> = HashSet()
 ```
 
-Names of properties holding references to singleton objects can use the same naming style as `object` declarations:
+持有对单例对象引用的属性可以使用与`object`声明相同的命名风格：
 
 ```kotlin
 val PersonComparator: Comparator<Person> = /*...*/
 ```
 
-For enum constants, it's OK to use either uppercase underscore-separated names ([screaming snake case](https://en.wikipedia.org/wiki/Snake_case))
-(`enum class Color { RED, GREEN }`) or upper camel case names, depending on the usage. 
-   
-### Names for backing properties
+对于枚举常量，可以使用大写下划线分隔的名称（[尖叫蛇命名](https://en.wikipedia.org/wiki/Snake_case)）（`enum class Color { RED, GREEN }`）或者大写驼峰命名法，具体取决于用途。
 
-If a class has two properties which are conceptually the same but one is part of a public API and another is an implementation
-detail, use an underscore as the prefix for the name of the private property:
+### 幕后属性的命名
+
+如果一个类有两个在概念上相同，但一个是公共 API 的一部分，另一个是实现细节的属性，请使用下划线作为私有属性名称的前缀：
 
 ```kotlin
 class C {
@@ -211,28 +193,24 @@ class C {
 }
 ```
 
-### Choose good names
+### 选择良好的命名
 
-The name of a class is usually a noun or a noun phrase explaining what the class _is_: `List`, `PersonReader`.
+类的名称通常是一个名词或一个解释类是什么的名词短语：`List`（列表），`PersonReader`（人员阅读器）。
 
-The name of a method is usually a verb or a verb phrase saying what the method _does_: `close`, `readPersons`.
-The name should also suggest if the method is mutating the object or returning a new one. For instance `sort` is
-sorting a collection in place, while `sorted` is returning a sorted copy of the collection.
+方法的名称通常是一个动词或一个解释方法做什么的动词短语：`close`（关闭），`readPersons`（读取人员）。
+名称还应该表明方法是否改变对象或返回一个新对象。例如，`sort`（排序）正在就地对集合进行排序，而 `sorted`（已排序）返回集合的已排序副本。
 
-The names should make it clear what the purpose of the entity is, so it's best to avoid using meaningless words
-(`Manager`, `Wrapper`) in names.
+名称应该清楚地表明实体的目的，因此最好避免在名称中使用无意义的词汇（`Manager`（管理器），`Wrapper`（包装器））。
 
-When using an acronym as part of a declaration name, capitalize it if it consists of two letters (`IOStream`);
-capitalize only the first letter if it is longer (`XmlFormatter`, `HttpInputStream`).
+在声明名称中使用首字母缩写时，如果它由两个字母组成，则将其大写（`IOStream`）；如果它更长，则仅大写第一个字母（`XmlFormatter`，`HttpInputStream`）。
 
-## Formatting
+## 格式化
 
-### Indentation
+### 缩进
 
-Use four spaces for indentation. Do not use tabs.
+使用四个空格进行缩进，不要使用制表符。
 
-For curly braces, put the opening brace at the end of the line where the construct begins, and the closing brace
-on a separate line aligned horizontally with the opening construct.
+对于花括号，将开放的花括号放在构造开始的行的末尾，将闭合的花括号放在与开放构造横向对齐的单独行上。
 
 ```kotlin
 if (elements != null) {
@@ -242,20 +220,20 @@ if (elements != null) {
 }
 ```
 
->In Kotlin, semicolons are optional, and therefore line breaks are significant. The language design assumes 
->Java-style braces, and you may encounter surprising behavior if you try to use a different formatting style.
+> 在 Kotlin 中，分号是可选的，因此换行是有意义的。
+> 语言设计假定采用 Java 风格的花括号，如果尝试使用不同的格式化风格，可能会遇到意外的行为。
 >
 {style="note"}
 
-### Horizontal whitespace
+### 水平空白
 
-* Put spaces around binary operators (`a + b`). Exception: don't put spaces around the "range to" operator (`0..i`).
+* 在二元运算符周围加上空格（`a + b`）。例外：在“范围运算符（range to）”（`0..i`）周围不加空格。
 
-* Do not put spaces around unary operators (`a++`).
+* 不要在一元运算符周围加上空格（`a++`）。
 
-* Put spaces between control flow keywords (`if`, `when`, `for`, and `while`) and the corresponding opening parenthesis.
+* 在控制流关键字（`if`、`when`、`for`和`while`）与相应的开括号之间加上空格。
 
-* Do not put a space before an opening parenthesis in a primary constructor declaration, method declaration or method call.
+* 在主构造函数声明、方法声明或方法调用中，不要在开括号前加上空格。
 
 ```kotlin
 class A(val x: Int)
@@ -267,20 +245,19 @@ fun bar() {
 }
 ```
 
-* Never put a space after `(`, `[`, or before `]`, `)`
+* 在 `(`、`[` 之后和 `]`、`)` 之前不加空格。
 
-* Never put a space around `.` or `?.`: `foo.bar().filter { it > 2 }.joinToString()`, `foo?.bar()`
+* 在 `.` 或 `?.` 周围不加空格：`foo.bar().filter { it > 2 }.joinToString()`，`foo?.bar()`
 
-* Put a space after `//`: `// This is a comment`
+* 在 `//` 后加上空格：`// 这是一条注释`
 
-* Do not put spaces around angle brackets used to specify type parameters: `class Map<K, V> { ... }`
+* 在用于指定类型参数的尖括号周围不加空格：`class Map<K, V> { ... }`
 
-* Do not put spaces around `::`: `Foo::class`, `String::length`
+* 在 `::` 周围不加空格：`Foo::class`，`String::length`
 
-* Do not put a space before `?` used to mark a nullable type: `String?`
+* 在标记可空类型的 `?` 前不加空格：`String?`
 
-As a general rule, avoid horizontal alignment of any kind. Renaming an identifier to a name with a different length
-should not affect the formatting of either the declaration or any of the usages.
+作为一般规则，避免任何形式的水平对齐。将标识符重命名为不同长度的名称不应该影响声明或者任何用法的格式。
 
 ### Colon
 
