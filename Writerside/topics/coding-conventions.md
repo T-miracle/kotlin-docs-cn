@@ -259,17 +259,17 @@ fun bar() {
 
 作为一般规则，避免任何形式的水平对齐。将标识符重命名为不同长度的名称不应该影响声明或者任何用法的格式。
 
-### Colon
+### 冒号
 
-Put a space before `:` in the following cases:
+在以下情况下，在 `:` 前面加上空格：
 
-* when it's used to separate a type and a supertype
-* when delegating to a superclass constructor or a different constructor of the same class
-* after the `object` keyword
-    
-Don't put a space before `:` when it separates a declaration and its type.
- 
-Always put a space after `:`.
+* 用于分隔类型和超类型时
+* 在委托到超类构造函数或同一类的不同构造函数时
+* 在 `object` 关键字后
+
+在声明和其类型之间用冒号时，不要在 `:` 前面加空格。
+
+始终在 `:` 后面加上空格。
 
 ```kotlin
 abstract class Foo<out T : Any> : IFoo {
@@ -283,17 +283,16 @@ class FooImpl : Foo() {
 } 
 ```
 
-### Class headers
+### 类头部
 
-Classes with a few primary constructor parameters can be written in a single line:
+具有少量主构造函数参数的类可以写在单行上：
 
 ```kotlin
 class Person(id: Int, name: String)
 ```
 
-Classes with longer headers should be formatted so that each primary constructor parameter is in a separate line with indentation.
-Also, the closing parenthesis should be on a new line. If you use inheritance, the superclass constructor call, or 
-the list of implemented interfaces should be located on the same line as the parenthesis:
+具有较长头部的类应该进行格式化，使每个主构造函数参数都在单独的一行，并进行缩进。
+此外，闭括号应该在新的一行上。如果使用继承，超类构造函数调用或实现的接口列表应该位于与括号相同的行上：
 
 ```kotlin
 class Person(
@@ -303,8 +302,7 @@ class Person(
 ) : Human(id, name) { /*...*/ }
 ```
 
-For multiple interfaces, the superclass constructor call should be located first and then each interface should
-be located in a different line:
+对于多个接口，应该放置超类构造函数调用在第一位，然后每个接口应该位于不同的行：
 
 ```kotlin
 class Person(
@@ -315,7 +313,7 @@ class Person(
     KotlinMaker { /*...*/ }
 ```
 
-For classes with a long supertype list, put a line break after the colon and align all supertype names horizontally:
+对于具有长超类型列表的类，在冒号后进行换行，并水平对齐所有超类的名称：
 
 ```kotlin
 class MyFavouriteVeryLongClassHolder :
@@ -327,8 +325,7 @@ class MyFavouriteVeryLongClassHolder :
 }
 ```
 
-To clearly separate the class header and body when the class header is long, either put a blank line
-following the class header (as in the example above), or put the opening curly brace on a separate line:
+为了在类头部较长时清晰地分隔类头和类体，可以在类头部后面加上一个空行（如上面的示例）或将开花括号放在单独的一行：
 
 ```kotlin
 class MyFavouriteVeryLongClassHolder :
@@ -340,12 +337,11 @@ class MyFavouriteVeryLongClassHolder :
 }
 ```
 
-Use regular indent (four spaces) for constructor parameters. This ensures that properties declared in the primary constructor have the same indentation as properties
-declared in the body of a class.
+对于构造函数参数，请使用常规缩进（四个空格）。这确保在主构造函数中声明的属性与类体中声明的属性具有相同的缩进。
 
-### Modifiers order
+### 修饰符顺序
 
-If a declaration has multiple modifiers, always put them in the following order:
+如果一个声明有多个修饰符，请按照以下顺序放置它们：
 
 ```kotlin
 public / protected / private / internal
@@ -358,7 +354,7 @@ tailrec
 vararg
 suspend
 inner
-enum / annotation / fun // as a modifier in `fun interface` 
+enum / annotation / fun // 作为 `fun interface` 中的修饰符
 companion
 inline / value
 infix
@@ -366,112 +362,109 @@ operator
 data
 ```
 
-Place all annotations before modifiers:
+将所有注解放在修饰符之前：
 
 ```kotlin
 @Named("Foo")
 private val foo: Foo
 ```
 
-Unless you're working on a library, omit redundant modifiers (for example, `public`).
+除非你在开发一个库，否则省略冗余的修饰符（例如，`public`）。
 
-### Annotations
+### 注解
 
-Place annotations on separate lines before the declaration to which they are attached, and with the same indentation:
+将注解放在它们所附加的声明之前的单独行上，并且使用相同的缩进：
 
 ```kotlin
 @Target(AnnotationTarget.PROPERTY)
 annotation class JsonExclude
 ```
 
-Annotations without arguments may be placed on the same line:
+没有参数的注解可以放在同一行上：
 
 ```kotlin
 @JsonExclude @JvmField
 var x: String
 ```
 
-A single annotation without arguments may be placed on the same line as the corresponding declaration:
+没有参数的单个注解可以与相应的声明放在同一行上：
 
 ```kotlin
 @Test fun foo() { /*...*/ }
 ```
 
-### File annotations
+### 文件注解
 
-File annotations are placed after the file comment (if any), before the `package` statement, 
-and are separated from `package` with a blank line (to emphasize the fact that they target the file and not the package).
+文件注解放在文件注释（如果有的话）之后，在 `package` 语句之前，与 `package` 之间用一个空行分隔（以强调它们针对的是文件而不是包）。
 
 ```kotlin
-/** License, copyright and whatever */
+/** 许可、版权等等 */
 @file:JvmName("FooBar")
 
 package foo.bar
 ```
 
-### Functions
+### 函数
 
-If the function signature doesn't fit on a single line, use the following syntax:
+如果函数签名不适合放在一行上，请使用以下语法：
 
 ```kotlin
 fun longMethodName(
     argument: ArgumentType = defaultValue,
     argument2: AnotherArgumentType,
 ): ReturnType {
-    // body
+    // 主体
 }
 ```
 
-Use regular indent (four spaces) for function parameters. It helps ensure consistency with constructor parameters.
+对于函数参数，请使用常规缩进（四个空格）。这有助于确保与构造函数参数的一致性。
 
-Prefer using an expression body for functions with the body consisting of a single expression.
+对于函数体只包含单个表达式的函数，最好使用表达式体。
 
 ```kotlin
-fun foo(): Int {     // bad
+fun foo(): Int {     // 坏的写法
     return 1 
 }
 
-fun foo() = 1        // good
+fun foo() = 1        // 好的写法
 ```
 
-### Expression bodies
+### 表达式体
 
-If the function has an expression body whose first line doesn't fit on the same line as the declaration, put the `=` sign on the first line
-and indent the expression body by four spaces.
+如果函数有一个表达式体，其第一行不能放在与声明相同的行上，请将 `=` 符号放在第一行，并将表达式体缩进四个空格。
 
 ```kotlin
 fun f(x: String, y: String, z: String) =
     veryLongFunctionCallWithManyWords(andLongParametersToo(), x, y, z)
 ```
 
-### Properties
+### 属性
 
-For very simple read-only properties, consider one-line formatting:
+对于非常简单的只读属性，请考虑单行格式化：
 
 ```kotlin
 val isEmpty: Boolean get() = size == 0
 ```
 
-For more complex properties, always put `get` and `set` keywords on separate lines:
+对于更复杂的属性，请始终将 `get` 和 `set` 关键字放在不同的行上：
 
 ```kotlin
 val foo: String
     get() { /*...*/ }
 ```
 
-For properties with an initializer, if the initializer is long, add a line break after the `=` sign
-and indent the initializer by four spaces:
+对于带有初始化程序的属性，如果初始化程序很长，请在 `=` 符号之后添加一个换行，并将初始化程序缩进四个空格：
 
 ```kotlin
 private val defaultCharset: Charset? =
     EncodingRegistry.getInstance().getDefaultCharsetForPropertiesFiles(file)
 ```
 
-### Control flow statements
+### 控制流语句
 
-If the condition of an `if` or `when` statement is multiline, always use curly braces around the body of the statement.
-Indent each subsequent line of the condition by four spaces relative to the statement start. 
-Put the closing parentheses of the condition together with the opening curly brace on a separate line:
+如果 `if` 或 `when` 语句的条件跨足多行，请始终在语句体周围使用花括号。
+相对于语句的开始，将条件的每一行缩进四个空格。
+将条件的闭括号与开花括号放在单独的一行上：
 
 ```kotlin
 if (!component.isSyncing &&
@@ -481,26 +474,25 @@ if (!component.isSyncing &&
 }
 ```
 
-This helps align the condition and statement bodies. 
+这有助于对齐条件和语句体。
 
-Put the `else`, `catch`, `finally` keywords, as well as the `while` keyword of a `do-while` loop, on the same line as the 
-preceding curly brace:
+将 `else`、`catch`、`finally` 关键字，以及 `do-while` 循环的 `while` 关键字放在前面花括号的同一行：
 
 ```kotlin
 if (condition) {
-    // body
+    // 主体
 } else {
-    // else part
+    // else 部分
 }
 
 try {
-    // body
+    // 主体
 } finally {
-    // cleanup
+    // 清理
 }
 ```
 
-In a `when` statement, if a branch is more than a single line, consider separating it from adjacent case blocks with a blank line:
+在 `when` 语句中，如果一个分支超过一行，请考虑在它与相邻的 case 块之间加上一个空行：
 
 ```kotlin
 private fun parsePropertyValue(propName: String, token: Token) {
@@ -514,19 +506,19 @@ private fun parsePropertyValue(propName: String, token: Token) {
 }
 ```
 
-Put short branches on the same line as the condition, without braces.
+将短的分支放在与条件相同的行上，不使用花括号。
 
 ```kotlin
 when (foo) {
-    true -> bar() // good
-    false -> { baz() } // bad
+    true -> bar() // 好的写法
+    false -> { baz() } // 坏的写法
 }
 ```
 
-### Method calls
+### 方法调用
 
-In long argument lists, put a line break after the opening parenthesis. Indent arguments by four spaces. 
-Group multiple closely related arguments on the same line.
+在较长的参数列表中，在开括号后进行换行。通过四个空格缩进参数。
+将多个密切相关的参数组合在同一行上。
 
 ```kotlin
 drawSquare(
@@ -536,11 +528,11 @@ drawSquare(
 )
 ```
 
-Put spaces around the `=` sign separating the argument name and value.
+在分隔参数名和值的 `=` 符号周围加上空格。
 
-### Wrap chained calls
+### 包装链式调用
 
-When wrapping chained calls, put the `.` character or the `?.` operator on the next line, with a single indent:
+在包装链式调用时，将 `.` 字符或 `?.` 操作符放在下一行，缩进单倍空格：
 
 ```kotlin
 val anchor = owner
@@ -549,18 +541,17 @@ val anchor = owner
     .dropWhile { it is PsiComment || it is PsiWhiteSpace }
 ```
 
-The first call in the chain should usually have a line break before it, but it's OK to omit it if the code makes more sense that way.
+链中的第一个调用通常应该在其前面有一个换行，但如果代码以这种方式更有意义，也可以省略。
 
-### Lambdas
+### Lambda 表达式
 
-In lambda expressions, spaces should be used around the curly braces, as well as around the arrow which separates the parameters
-from the body. If a call takes a single lambda, pass it outside parentheses whenever possible.
+在 Lambda 表达式中，应在花括号周围以及将 参数 与 代码体 分隔的箭头周围使用空格。如果调用接受一个 Lambda，请尽可能将其放在括号外传递。
 
 ```kotlin
 list.filter { it > 10 }
 ```
 
-If assigning a label for a lambda, do not put a space between the label and the opening curly brace:
+如果为 Lambda 分配一个标签，请不要在标签和开放花括号之间加上空格：
 
 ```kotlin
 fun foo() {
@@ -570,7 +561,7 @@ fun foo() {
 }
 ```
 
-When declaring parameter names in a multiline lambda, put the names on the first line, followed by the arrow and the newline:
+在多行 Lambda 中声明参数名称时，请将名称放在第一行，然后是箭头和换行符：
 
 ```kotlin
 appendCommaSeparated(properties) { prop ->
@@ -578,7 +569,7 @@ appendCommaSeparated(properties) { prop ->
 }
 ```
 
-If the parameter list is too long to fit on a line, put the arrow on a separate line:
+如果参数列表太长无法放在一行上，请将箭头放在单独的一行上：
 
 ```kotlin
 foo {
@@ -589,99 +580,100 @@ foo {
 }
 ```
 
-### Trailing commas
+### 尾随逗号
 
-A trailing comma is a comma symbol after the last item in a series of elements:
+尾随逗号是一系列元素中最后一个元素之后的逗号符号：
 
 ```kotlin
 class Person(
     val firstName: String,
     val lastName: String,
-    val age: Int, // trailing comma
+    val age: Int, // 尾随逗号
 )
 ```
 
-Using trailing commas has several benefits:
+使用尾随逗号有几个好处：
 
-* It makes version-control diffs cleaner – as all the focus is on the changed value.
-* It makes it easy to add and reorder elements – there is no need to add or delete the comma if you manipulate elements.
-* It simplifies code generation, for example, for object initializers. The last element can also have a comma.
+* 使版本控制的差异更清晰 - 因为所有的焦点都在更改的值上。
+* 使添加和重新排序元素变得简单 - 如果操作元素，就无需添加或删除逗号。
+* 简化代码生成，例如，对于对象初始化器。最后一个元素也可以有一个逗号。
 
-Trailing commas are entirely optional – your code will still work without them. The Kotlin style guide encourages the use of trailing commas at the declaration site and leaves it at your discretion for the call site.
+尾随逗号是完全可选的 - 没有它们，你的代码仍然可以正常工作。Kotlin 风格指南鼓励在声明处使用尾逗号，并将其作为在调用处的自由裁量。
 
-To enable trailing commas in the IntelliJ IDEA formatter, go to **Settings/Preferences | Editor | Code Style | Kotlin**, 
-open the **Other** tab and select the **Use trailing comma** option.
+要在 IntelliJ IDEA 格式化器中启用尾逗号，请转到
+**Settings/Preferences | Editor | Code Style | Kotlin（设置/首选项 | 编辑器 | 代码样式 | Kotlin）**，
+打开 **Other（其他）** 选项卡，并选择 **Use trailing comma（使用尾随逗号）** 选项。
 
-#### Enumerations {collapsible="true"}
+#### 枚举 {collapsible="true"}
 
 ```kotlin
 enum class Direction {
     NORTH,
     SOUTH,
     WEST,
-    EAST, // trailing comma
+    EAST, // 尾随逗号
 }
 ```
 
-#### Value arguments {collapsible="true"}
+#### 值参数 {collapsible="true"}
 
 ```kotlin
 fun shift(x: Int, y: Int) { /*...*/ }
 shift(
     25,
-    20, // trailing comma
+    20, // 尾随逗号
 )
 val colors = listOf(
     "red",
     "green",
-    "blue", // trailing comma
+    "blue", // 尾随逗号
 )
 ```
 
-#### Class properties and parameters {collapsible="true"}
+#### 类属性和参数 {collapsible="true"}
 
 ```kotlin
 class Customer(
     val name: String,
-    val lastName: String, // trailing comma
+    val lastName: String, // 尾随逗号
 )
 class Customer(
     val name: String,
-    lastName: String, // trailing comma
+    lastName: String, // 尾随逗号
 )
 ```
 
-#### Function value parameters {collapsible="true"}
+#### 函数值参数 {collapsible="true"}
 
 ```kotlin
 fun powerOf(
     number: Int, 
-    exponent: Int, // trailing comma
+    exponent: Int, // 尾随逗号
 ) { /*...*/ }
 constructor(
     x: Comparable<Number>,
-    y: Iterable<Number>, // trailing comma
+    y: Iterable<Number>, // 尾随逗号
 ) {}
 fun print(
     vararg quantity: Int,
-    description: String, // trailing comma
+    description: String, // 尾随逗号
 ) {}
 ```
 
-#### Parameters with optional type (including setters) {collapsible="true"}
+#### 具有可选类型的参数（包括设置器） {collapsible="true"}
 
 ```kotlin
 val sum: (Int, Int, Int) -> Int = fun(
     x,
     y,
-    z, // trailing comma
+    z, // 尾随逗号
 ): Int {
     return x + y + x
 }
 println(sum(8, 8, 8))
 ```
 
-#### Indexing suffix {collapsible="true"}
+#### 索引后缀 {collapsible="true"}
 
 ```kotlin
 class Surface {
@@ -690,17 +682,17 @@ class Surface {
 fun getZValue(mySurface: Surface, xValue: Int, yValue: Int) =
     mySurface[
         xValue,
-        yValue, // trailing comma
+        yValue, // 尾随逗号
     ]
 ```
 
-#### Parameters in lambdas {collapsible="true"}
+#### lambda 中的参数 {collapsible="true" id="lambda中的参数"}
 
 ```kotlin
 fun main() {
     val x = {
             x: Comparable<Number>,
-            y: Iterable<Number>, // trailing comma
+            y: Iterable<Number>, // 尾随逗号
         ->
         println("1")
     }
@@ -708,19 +700,19 @@ fun main() {
 }
 ```
 
-#### `when` entry {collapsible="true"}
+#### `when` 入口 {collapsible="true"}
 
 ```kotlin
 fun isReferenceApplicable(myReference: KClass<*>) = when (myReference) {
     Comparable::class,
     Iterable::class,
-    String::class, // trailing comma
+    String::class, // 尾随逗号
         -> true
     else -> false
 }
 ```
 
-#### Collection literals (in annotations) {collapsible="true"}
+#### 集合字面量（在注解中） {collapsible="true"}
 
 ```kotlin
 annotation class ApplicableFor(val services: Array<String>)
@@ -728,24 +720,24 @@ annotation class ApplicableFor(val services: Array<String>)
     "serializer",
     "balancer",
     "database",
-    "inMemoryCache", // trailing comma
+    "inMemoryCache", // 尾随逗号
 ])
 fun run() {}
 ```
 
-#### Type arguments {collapsible="true"}
+#### 类型实参 {collapsible="true"}
 
 ```kotlin
 fun <T1, T2> foo() {}
 fun main() {
     foo<
             Comparable<Number>,
-            Iterable<Number>, // trailing comma
+            Iterable<Number>, // 尾随逗号
             >()
 }
 ```
 
-#### Type parameters {collapsible="true"}
+#### 类型形参 {collapsible="true"}
 
 ```kotlin
 class MyMap<
@@ -754,7 +746,7 @@ class MyMap<
         > {}
 ```
 
-#### Destructuring declarations {collapsible="true"}
+#### 解构声明 {collapsible="true"}
 
 ```kotlin
 data class Car(val manufacturer: String, val model: String, val year: Int)
@@ -762,7 +754,7 @@ val myCar = Car("Tesla", "Y", 2019)
 val (
     manufacturer,
     model,
-    year, // trailing comma
+    year, // 尾随逗号
 ) = myCar
 val cars = listOf<Car>()
 fun printMeanValue() {
@@ -770,7 +762,7 @@ fun printMeanValue() {
     for ((
         _,
         _,
-        year, // trailing comma
+        year, // 尾随逗号
     ) in cars) {
         meanValue += year
     }
@@ -779,148 +771,139 @@ fun printMeanValue() {
 printMeanValue()
 ```
 
-## Documentation comments
+## 文档注释
 
-For longer documentation comments, place the opening `/**` on a separate line and begin each subsequent line
-with an asterisk:
+对于较长的文档注释，请将起始符 `/**` 放在独立的一行，并在后续每一行以星号开头：
 
 ```kotlin
 /**
- * This is a documentation comment
- * on multiple lines.
+ * 这是文档注释
+ * 在多行上。
  */
 ```
 
-Short comments can be placed on a single line:
+简短注释可以放在单独的一行：
 
 ```kotlin
-/** This is a short documentation comment. */
+/** 这是一个简短的文档注释。 */
 ```
 
-Generally, avoid using `@param` and `@return` tags. Instead, incorporate the description of parameters and return values
-directly into the documentation comment, and add links to parameters wherever they are mentioned. Use `@param` and
-`@return` only when a lengthy description is required which doesn't fit into the flow of the main text.
+通常避免使用 `@param` 和 `@return` 标签。
+相反，将参数和返回值的描述直接融入文档注释中，并在提及参数的地方添加参数链接。
+仅在需要提供无法融入主文本流的详细描述时使用 `@param` 和 `@return`。
 
 ```kotlin
-// Avoid doing this:
+// 避免这样做：
 
 /**
- * Returns the absolute value of the given number.
- * @param number The number to return the absolute value for.
- * @return The absolute value.
- */
-fun abs(number: Int): Int { /*...*/ }
-
-// Do this instead:
-
-/**
- * Returns the absolute value of the given [number].
+ * 返回给定数字的绝对值。
+ * @param number 要返回其绝对值的数字。
+ * @return The 绝对值。
  */
 fun abs(number: Int): Int { /*...*/ }
+
+// 改为这样做：
+
+/**
+ * 返回给定 [number] 的绝对值。
+ */
+fun abs(number: Int): Int { /*...*/ }
 ```
 
-## Avoid redundant constructs
+## 避免冗余结构
 
-In general, if a certain syntactic construction in Kotlin is optional and highlighted by the IDE
-as redundant, you should omit it in your code. Do not leave unnecessary syntactic elements in code
-just "for clarity".
+通常情况下，如果 Kotlin 中的某种语法结构是可选的并且由 IDE 标识为冗余的，应该在代码中省略它。
+不要在代码中保留不必要的语法元素仅仅是为了“清晰”。
 
-### Unit return type
+### Unit 返回类型
 
-If a function returns Unit, the return type should be omitted:
+如果函数返回 Unit，应省略返回类型：
 
 ```kotlin
-fun foo() { // ": Unit" is omitted here
+fun foo() { // `": Unit"` 在这里被省略。
 
 }
 ```
 
-### Semicolons
+### 分号
 
-Omit semicolons whenever possible.
+尽可能地省略分号。
 
-### String templates
+### 字符串模板
 
-Don't use curly braces when inserting a simple variable into a string template. Use curly braces only for longer expressions.
+在将简单变量插入字符串模板时，不要使用花括号。仅在表达式较长时使用花括号。
 
 ```kotlin
 println("$name has ${children.size} children")
 ```
 
-## Idiomatic use of language features
+## 语言特性的惯用方式
 
-### Immutability
+### 不可变性
 
-Prefer using immutable data to mutable. Always declare local variables and properties as `val` rather than `var` if
-they are not modified after initialization.
+更倾向于使用不可变数据而非可变数据。如果在初始化后不会修改，始终将局部变量和属性声明为 `val` 而不是 `var`。
 
-Always use immutable collection interfaces (`Collection`, `List`, `Set`, `Map`) to declare collections which are not
-mutated. When using factory functions to create collection instances, always use functions that return immutable
-collection types when possible:
+总是使用不可变集合接口（`Collection`，`List`，`Set`，`Map`）声明不会被修改的集合。
+在使用工厂函数创建集合实例时，尽量使用返回不可变集合类型的函数：
 
 ```kotlin
-// Bad: use of a mutable collection type for value which will not be mutated
+// 坏的写法：使用可变集合类型来获取不会改变的值
 fun validateValue(actualValue: String, allowedValues: HashSet<String>) { ... }
 
-// Good: immutable collection type used instead
+// 好的写法：使用不可变集合类型代替
 fun validateValue(actualValue: String, allowedValues: Set<String>) { ... }
 
-// Bad: arrayListOf() returns ArrayList<T>, which is a mutable collection type
+// 坏的写法： arrayListOf() 返回 ArrayList<T>，这是一个可变集合类型
 val allowedValues = arrayListOf("a", "b", "c")
 
-// Good: listOf() returns List<T>
+// 好的写法：listOf() 返回 List<T>
 val allowedValues = listOf("a", "b", "c")
 ```
 
-### Default parameter values
+### 默认参数值
 
-Prefer declaring functions with default parameter values to declaring overloaded functions.
+更倾向于使用带有默认参数值的函数声明，而不是声明重载函数。
 
 ```kotlin
-// Bad
+// 坏的写法
 fun foo() = foo("a")
 fun foo(a: String) { /*...*/ }
 
-// Good
+// 好的写法
 fun foo(a: String = "a") { /*...*/ }
 ```
 
-### Type aliases
+### 类型别名
 
-If you have a functional type or a type with type parameters which is used multiple times in a codebase, prefer defining
-a type alias for it:
+如果在代码库中多次使用功能型类型或具有类型形参的类型，请更倾向于为其定义一个类型别名：
 
 ```kotlin
 typealias MouseClickHandler = (Any, MouseEvent) -> Unit
 typealias PersonIndex = Map<String, Person>
 ```
-If you use a private or internal type alias for avoiding name collision, prefer the `import ... as ...` mentioned in 
-[Packages and Imports](packages.md).
+如果使用私有或内部类型别名以避免名称冲突，更倾向于使用 [包和导入](packages.md) 中提到的 `import ... as ...`。
 
-### Lambda parameters
+### Lambda 参数 {id="lambda参数"}
 
-In lambdas which are short and not nested, it's recommended to use the `it` convention instead of declaring the parameter
-explicitly. In nested lambdas with parameters, always declare parameters explicitly.
+在简短且不嵌套的 Lambda 中，建议使用 `it` 约定而不是显式声明参数。在带有参数的嵌套 Lambda 中，始终显式声明参数。
 
-### Returns in a lambda
+### Lambda 中的返回 {id="lambda中的返回"}
 
-Avoid using multiple labeled returns in a lambda. Consider restructuring the lambda so that it will have a single exit point.
-If that's not possible or not clear enough, consider converting the lambda into an anonymous function.
+避免在 Lambda 中使用多个带标签的返回。考虑重构 Lambda 以使其具有单一的退出点。如果这不可行或不够清晰，请考虑将 Lambda 转换为匿名函数。
 
-Do not use a labeled return for the last statement in a lambda.
+不要对 Lambda 中的最后一条语句使用带标签的返回。
 
-### Named arguments
+### 具名函数
 
-Use the named argument syntax when a method takes multiple parameters of the same primitive type, or for parameters of `Boolean` type,
-unless the meaning of all parameters is absolutely clear from context.
+当方法接受多个相同原始类型的参数，或者是 `Boolean` 类型的参数时，请使用具名函数语法，除非从上下文中完全清晰地了解所有参数的含义。
 
 ```kotlin
 drawSquare(x = 10, y = 10, width = 100, height = 100, fill = true)
 ```
 
-### Conditional statements
+### 条件语句
 
-Prefer using the expression form of `try`, `if`, and `when`.
+优先使用 `try`、`if` 和 `when` 的表达式形式。
 
 ```kotlin
 return if (x) foo() else bar()
@@ -933,7 +916,7 @@ return when(x) {
 }
 ```
 
-The above is preferable to:
+上述内容优于：
 
 ```kotlin
 if (x)
@@ -949,16 +932,16 @@ when(x) {
 }    
 ```
 
-### if versus when
+### if 与 when 的选择
 
-Prefer using `if` for binary conditions instead of `when`. 
-For example, use this syntax with `if`:
+在二元条件中，推荐使用 `if` 而不是 `when`。
+例如，使用以下 `if` 语法：
 
 ```kotlin
 if (x == null) ... else ...
 ```
 
-instead of this one with `when`:
+而不是以下 `when` 语法：
 
 ```kotlin
 when (x) {
@@ -967,56 +950,54 @@ when (x) {
 }
 ```
 
-Prefer using `when` if there are three or more options.
+如果有三个或更多选项，请优先使用 `when`。
 
-### Nullable Boolean values in conditions
+### 在条件语句中使用可空布尔值
 
-If you need to use a nullable `Boolean` in a conditional statement, use `if (value == true)` or `if (value == false)` checks.
+如果需要在条件语句中使用可空的 `Boolean`，请使用 `if (value == true)` 或 `if (value == false)` 进行检查。
 
-### Loops
+### 循环
 
-Prefer using higher-order functions (`filter`, `map` etc.) to loops. Exception: `forEach` (prefer using a regular `for` loop instead,
-unless the receiver of `forEach` is nullable or `forEach` is used as part of a longer call chain).
+优先使用高阶函数（`filter`、`map` 等）而不是循环。
+例外情况：`forEach`（优先使用普通的 `for` 循环，除非 `forEach` 的接收者可空或 `forEach` 作为较长调用链的一部分使用）。
 
-When making a choice between a complex expression using multiple higher-order functions and a loop, understand the cost
-of the operations being performed in each case and keep performance considerations in mind. 
+在选择使用多个高阶函数和循环之间时，了解每种情况下执行的操作开销，并考虑性能方面的考虑。
 
-### Loops on ranges
+### 区间上的循环
 
-Use the `..<` operator to loop over an open-ended range:
+使用 `..<` 运算符循环遍历开放区间：
 
 ```kotlin
-for (i in 0..n - 1) { /*...*/ }  // bad
-for (i in 0..<n) { /*...*/ }  // good
+for (i in 0..n - 1) { /*...*/ }  // 坏的写法
+for (i in 0..<n) { /*...*/ }  // 好的写法
 ```
 
-### Strings
+### 字符串
 
-Prefer string templates to string concatenation.
+优先使用字符串模板而不是字符串连接。
 
-Prefer multiline strings to embedding `\n` escape sequences into regular string literals.
+优先使用多行字符串而不是将 `\n` 转义序列嵌入常规字符串文字中。
 
-To maintain indentation in multiline strings, use `trimIndent` when the resulting string does not require any internal
-indentation, or `trimMargin` when internal indentation is required:
+为保持多行字符串的缩进，当生成的字符串不需要任何内部缩进时，请使用 `trimIndent`，或者当需要内部缩进时，请使用 `trimMargin`：
 
 ```kotlin
 fun main() {
    println("""
-    Not
-    trimmed
-    text
+    不是
+    修剪过的
+    文本
     """
    )
 
    println("""
-    Trimmed
-    text
+    修剪过的
+    文本
     """.trimIndent()
    )
 
    println()
 
-   val a = """Trimmed to margin text:
+   val a = """修剪到边距文本：
           |if(a > 1) {
           |    return a
           |}""".trimMargin()
@@ -1027,38 +1008,37 @@ fun main() {
 {kotlin-runnable="true"}
 [打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNADgE4EAuANkeSB15jRgHIQm1Xk0ZYsMKMJpMYADyE8aXTpyXFK0hszaEV3XhgAqYiVKUZZC6Rn0gAdKLxYAkmlhomJaRqpLtnrq%2B0gBuOCwYOBgAvLaqHCbOZpYQ2Dj0AOYElvJM8DaGNAA%2BeEiEUQB8GACMpBQWhRhFhvQwTCj0mDgFhUUAvnaOYgCy6VlEwf6MgUQ4k30gADQgTGNtAAosOExIEPRYCCAAVjhhS%2BAQWLR4LDD0AGp3AM54EGiH1fYAnPYATAAMID6QA%3D%3D%3D?_gl=1*1c0z4i0*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDE0NDQ1MS4zMi4wLjE3MDAxNDQ0NTEuNjAuMC4w&_ga=2.69185428.408218914.1700050452-2060274793.1694940376)
 
-Learn the difference between [Java and Kotlin multiline strings](java-to-kotlin-idioms-strings.md#use-multiline-strings).
+了解 [Java 和 Kotlin 多行字符串](java-to-kotlin-idioms-strings.md#use-multiline-strings) 之间的区别。
 
-### Functions vs properties
+### 函数与属性的选择
 
-In some cases, functions with no arguments might be interchangeable with read-only properties. 
-Although the semantics are similar, there are some stylistic conventions on when to prefer one to another.
+在某些情况下，没有参数的函数可能与只读属性可互换。尽管语义相似，但在何时更喜欢其中一个时存在一些风格约定。
 
-Prefer a property over a function when the underlying algorithm:
+当底层算法：
 
-* does not throw
-* is cheap to calculate (or cached on the first run)
-* returns the same result over invocations if the object state hasn't changed
+* 不会抛出异常
+* 计算廉价（或在第一次运行时缓存）
+* 在对象状态未更改的情况下在调用之间返回相同结果时
 
-### Extension functions
+优先使用属性而不是函数。
 
-Use extension functions liberally. Every time you have a function that works primarily on an object, consider making it
-an extension function accepting that object as a receiver. To minimize API pollution, restrict the visibility of
-extension functions as much as it makes sense. As necessary, use local extension functions, member extension functions,
-or top-level extension functions with private visibility.
+### 扩展函数
 
-### Infix functions
+你可以自由地使用扩展函数。每当有一个主要作用于对象的函数时，考虑将其作为接收该对象的扩展函数。
+为了最小化 API 污染，根据情况限制扩展函数的可见性。
+必要时使用局部扩展函数、成员扩展函数，或者具有私有可见性的顶层扩展函数。
 
-Declare a function as `infix` only when it works on two objects which play a similar role. Good examples: `and`, `to`, `zip`.
-Bad example: `add`.
+### 中缀函数
 
-Do not declare a method as `infix` if it mutates the receiver object.
+只有在函数作用于两个扮演相似角色的对象时才将函数声明为 `infix`。良好的例子包括：`and`、`to`、`zip`。不好的例子是：`add`。
 
-### Factory functions
+如果方法会改变接收者对象，请勿将其声明为 `infix`。
 
-If you declare a factory function for a class, avoid giving it the same name as the class itself. Prefer using a distinct name,
-making it clear why the behavior of the factory function is special. Only if there is really no special semantics,
-you can use the same name as the class.
+### 工厂函数
+
+如果为类声明工厂函数，请避免将其命名为与类本身相同的名称。
+最好使用一个独特的名称，清楚表明工厂函数的行为为何特殊。
+仅当真的没有特殊语义时，才可以使用与类相同的名称。
 
 ```kotlin
 class Point(val x: Double, val y: Double) {
@@ -1068,19 +1048,17 @@ class Point(val x: Double, val y: Double) {
 }
 ```
 
-If you have an object with multiple overloaded constructors that don't call different superclass constructors and
-can't be reduced to a single constructor with default argument values, prefer to replace the overloaded constructors with
-factory functions.
+如果你有一个对象有多个重载的构造函数，并且它们不调用不同的超类构造函数，也不能简化为带有默认参数值的单个构造函数，建议用工厂函数替换重载的构造函数。
 
-### Platform types
+### 平台类型
 
-A public function/method returning an expression of a platform type must declare its Kotlin type explicitly:
+返回平台类型表达式的公共函数/方法必须明确声明其 Kotlin 类型：
 
 ```kotlin
 fun apiCall(): String = MyJavaApi.getProperty("name")
 ```
 
-Any property (package-level or class-level) initialized with an expression of a platform type must declare its Kotlin type explicitly:
+任何使用平台类型表达式初始化的属性（包级别或类级别）都必须明确声明其 Kotlin 类型：
 
 ```kotlin
 class Person {
@@ -1088,7 +1066,7 @@ class Person {
 }
 ```
 
-A local value initialized with an expression of a platform type may or may not have a type declaration:
+使用平台类型表达式初始化的局部值可能具有类型声明，也可能没有类型声明：
 
 ```kotlin
 fun main() {
@@ -1097,19 +1075,17 @@ fun main() {
 }
 ```
 
-### Scope functions apply/with/run/also/let
+### 作用域函数 apply/with/run/also/let
 
-Kotlin provides a set of functions to execute a block of code in the context of a given object: `let`, `run`, `with`, `apply`, and `also`.
-For the guidance on choosing the right scope function for your case, refer to [Scope Functions](scope-functions.md).
+Kotlin 提供了一组函数，用于在给定对象的上下文中执行一块代码：`let`、`run`、`with`、`apply` 和 `also`。
+关于在特定情况下选择正确的作用域函数的指导，请参考[作用域函数](scope-functions.md)。
 
-## Coding conventions for libraries
+## 库的编码约定
 
-When writing libraries, it's recommended to follow an additional set of rules to ensure API stability:
+在编写库时，建议遵循一组额外的规则，以确保 API 的稳定性：
 
- * Always explicitly specify member visibility (to avoid accidentally exposing declarations as public API)
- * Always explicitly specify function return types and property types (to avoid accidentally changing the return type
-   when the implementation changes)
- * Provide [KDoc](kotlin-doc.md) comments for all public members, except for overrides that do not require any new documentation
-   (to support generating documentation for the library)
+* 始终明确指定成员的可见性（以避免意外将声明暴露为公共 API）
+* 始终明确指定函数返回类型和属性类型（以避免在实现更改时意外更改返回类型）
+* 为所有公共成员提供[KDoc](kotlin-doc.md)注释，除了不需要任何新文档的覆盖（以支持为库生成文档）
 
-Learn more about best practices and ideas to consider when writing an API for your library in [library creators' guidelines](https://kotlinlang.org/docs/jvm-api-guidelines-introduction.html).
+在[库创建者指南](https://kotlinlang.org/docs/jvm-api-guidelines-introduction.html)中了解有关在为库编写 API 时考虑的最佳实践和想法。
