@@ -41,7 +41,7 @@ Since this release, the Kotlin/Wasm supports the new K2 compiler.
 > Support for K2 in the kapt compiler plugin is [Experimental](components-stability.md).
 > Opt-in is required (see details below), and you should use it only for evaluation purposes.
 >
-{type="warning"}
+{style="warning"}
 
 In 1.9.20-RC, you can try using the [kapt compiler plugin](kapt.md) with the K2 compiler.
 To use the K2 compiler in your project, add the following options to your `gradle.properties` file:
@@ -356,7 +356,7 @@ the number of tasks performed on each allocation and, therefore, helps to minimi
 > It may be dropped or changed at any time. Opt-in is required (see details below).
 > Use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin %kotlinEapVersion% introduces a new compilation time optimization for Kotlin/Native.
 The compilation of `klib` artifacts into native code is now partially incremental.
@@ -397,7 +397,7 @@ Feel free to update your Xcode and continue working on your Kotlin projects for 
 >
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 ### New `wasm-wasi` target, and the renaming of the `wasm` target to `wasm-js`
 

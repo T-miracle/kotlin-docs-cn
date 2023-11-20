@@ -70,7 +70,7 @@
     <toc-element toc-title="概念">
         <toc-element toc-title="类型">
             <toc-element toc-title="基本类型">
-                <toc-element topic="basic-types.md" toc-title="Overview"/>
+                <toc-element topic="basic-types.md" toc-title="概述"/>
                 <toc-element topic="numbers.md"/>
                 <toc-element topic="unsigned-integer-types.md"/>
                 <toc-element topic="booleans.md"/>

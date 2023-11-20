@@ -3,7 +3,7 @@
 > Kotlin scripting is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > Use it only for evaluation purposes. We appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 _Kotlin scripting_ is the technology that enables executing Kotlin code as scripts without prior compilation or
 packaging into executables.

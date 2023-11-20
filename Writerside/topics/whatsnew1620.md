@@ -22,7 +22,7 @@ In Kotlin 1.6.20, you can try two new language features:
 > Use context receivers only in your toy projects.
 > We appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/KT).
 >
-{type="warning"}
+{style="warning"}
 
 With Kotlin 1.6.20, you are no longer limited to having one receiver. If you need more, you can make functions, properties, and classes context-dependent (or _contextual_) by adding context receivers to their declaration. A contextual declaration does the following:
 
@@ -66,7 +66,7 @@ If you run into any problems, please [file a new issue](https://kotl.in/issue).
 > but migration steps may be required in the future.
 > We'll do our best to minimize any changes you have to make.
 >
-{type="warning"}
+{style="warning"}
 
 To provide better interoperability when extending generic Java classes and interfaces, Kotlin 1.6.20 allows you to mark a generic type parameter as definitely non-nullable on the use site with the new syntax `T & Any`.
 The syntactic form comes from a notation of [intersection types](https://en.wikipedia.org/wiki/Intersection_type) and is now limited to a type parameter with nullable upper bounds on the left side of `&` and non-nullable `Any` on the right side:
@@ -165,7 +165,7 @@ For more information about default methods in the Java interop, see the [interop
 > It may be dropped or changed at any time. Opt-in is required (see details below), and you should use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-46085).
 >
-{type="warning"}
+{style="warning"}
 
 We are continuing our work to [improve the new JVM IR backend compilation time](https://youtrack.jetbrains.com/issue/KT-46768).
 In Kotlin 1.6.20, we added the experimental JVM IR backend mode to compile all the files in a module in parallel.
@@ -194,7 +194,7 @@ If your project consists of lots of small modules and has a build parallelized b
 > It may be dropped or changed at any time. Opt-in is required (see details below), and you should use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-47939).
 >
-{type="warning"}
+{style="warning"}
 
 Support for [callable references](reflection.md#callable-references) to functional interface constructors adds a source-compatible way to migrate from an interface with a constructor function to a [functional interface](fun-interfaces.md).
 
@@ -293,7 +293,7 @@ Learn more about [instantiation of annotation classes](annotations.md#instantiat
 > Concurrency interoperability with Swift async/await is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > You should use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-47610).
 >
-{type="warning"}
+{style="warning"}
 
 We've continued working on the [experimental interop with Swift's async/await](whatsnew1530.md#experimental-interoperability-with-swift-5-5-async-await) (available since Swift 5.5).
 Kotlin 1.6.20 differs from previous versions in the way it works with `suspend` functions with the `Unit` return type.
@@ -314,7 +314,7 @@ We plan to make this behavior the default in future Kotlin releases.
 > Using libbacktrace for resolving source locations is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > You should use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-48424).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin/Native is now able to produce detailed stack traces with file locations and line numbers
 for better debugging of `linux*` (except `linuxMips32` and `linuxMipsel32`) and `androidNative*` targets.
@@ -733,7 +733,7 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
 
 > Changing the name of the lockfile may cause dependency inspection tools to no longer pick up the file.
 > 
-{type="warning"}
+{style="warning"}
 
 ### Installation of npm dependencies with --ignore-scripts by default
 

@@ -254,7 +254,7 @@ platform dependencies.
 > They are almost stable, but migration steps may be required in the future.
 > We'll do our best to minimize any further changes for you to make.
 >
-{type="warning"}
+{style="warning"}
 
 You can use expected and actual classes to implement the same solution:
 

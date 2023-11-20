@@ -215,7 +215,7 @@ In most cases, you will only have a single instance of your data object at runti
 However, in the edge case where another object of the same type is generated at runtime (for example, by using platform reflection with `java.lang.reflect` or a JVM serialization library that uses this API under the hood), this ensures that the objects are treated as being equal.
 
 > Make sure that you only compare `data objects` structurally (using the `==` operator) and never by reference (using the `===` operator). This helps you to avoid pitfalls when more than one instance of a data object exists at runtime.
-{type="warning"}
+{style="warning"}
 
 ```kotlin
 import java.lang.reflect.Constructor

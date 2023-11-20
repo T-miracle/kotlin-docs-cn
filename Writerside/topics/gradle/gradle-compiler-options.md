@@ -187,7 +187,7 @@ Here is a complete list of options for Gradle tasks:
 > We are going to deprecate the attribute `freeCompilerArgs` in future releases. If you miss some option in the Kotlin Gradle DSL,
 > please, [file an issue](https://youtrack.jetbrains.com/newissue?project=kt).
 >
-{type="warning"}
+{style="warning"}
 
 #### Example of additional arguments usage via freeCompilerArgs {collapsible="true"}
 

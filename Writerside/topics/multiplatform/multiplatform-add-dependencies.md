@@ -155,7 +155,7 @@ Multiplatform Mobile plugin will automatically add the corresponding parts to an
 
 > You cannot set dependencies on platform-specific libraries in the common source set.
 >
-{type="warning"}
+{style="warning"}
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">

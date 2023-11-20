@@ -5,7 +5,7 @@
 >
 > 我们希望您在 [YouTrack](https://kotl.in/issue) 上提供反馈。
 >
-{type="warning"}
+{style="warning"}
 
 [WebAssembly (Wasm)](https://webassembly.org) 是一种基于堆栈的虚拟机的二进制指令格式。
 这种格式是独立于平台的，因为它在自己的虚拟机上运行。
@@ -36,7 +36,7 @@ Kotlin/Wasm 允许您在 Kotlin 中同时使用 JavaScript 代码和浏览器 AP
 > 我们将感谢您在公共 Slack 频道 [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web) 中提供反馈。
 > 如果遇到任何问题，请在 [GitHub](https://github.com/JetBrains/compose-multiplatform/issues) 上报告。
 >
-{type="warning"}
+{style="warning"}
 
 用于 Web 的 Compose Multiplatform 基于新的 Kotlin/Wasm 目标。
 您可以创建一个 Kotlin 多平台 项目，并尝试在 Web 上共享您的移动或桌面 UI。

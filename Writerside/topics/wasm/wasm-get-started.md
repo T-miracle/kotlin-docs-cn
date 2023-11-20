@@ -2,7 +2,7 @@
 
 > Kotlin/Wasm is an [Experimental](components-stability.md) feature. It may be dropped or changed at any time. It is available only starting with [Kotlin 1.8.20](releases.md).
 >
-{type="warning"}
+{style="warning"}
 
 This tutorial demonstrates how to work with a Kotlin/Wasm application in IntelliJ IDEA.
 

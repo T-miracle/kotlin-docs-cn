@@ -263,7 +263,7 @@ import YandexMK.YMKDistance
 > It may be dropped or changed at any time. Use it only for evaluation purposes.
 > We'd appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Some Objective-C libraries, specifically those that serve as wrappers for Swift libraries,
 have `@import` directives in their headers. By default, cinterop doesn't provide support for these directives.

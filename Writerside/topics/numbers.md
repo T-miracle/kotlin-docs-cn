@@ -1,21 +1,20 @@
-[//]: # (title: Numbers)
+[//]: # (title: 数字（Numbers）)
 
-## Integer types
+## 整数类型 {id=整数类型}
 
-Kotlin provides a set of built-in types that represent numbers.  
-For integer numbers, there are four types with different sizes and, hence, value ranges:
+Kotlin 提供了一组内置类型来表示数字。对于整数，有四种类型，它们具有不同的大小，因此值的范围也不同：
 
-| Type	 |Size (bits)| Min value| Max value|
-|--------|-----------|----------|--------- |
-| `Byte`	 | 8         |-128      |127       |
-| `Short`	 | 16        |-32768    |32767     |
-| `Int`	 | 32        |-2,147,483,648 (-2<sup>31</sup>)| 2,147,483,647 (2<sup>31</sup> - 1)|
-| `Long`	 | 64        |-9,223,372,036,854,775,808 (-2<sup>63</sup>)|9,223,372,036,854,775,807 (2<sup>63</sup> - 1)|
+| 类型      | 大小（位） | 最小值                                          | 最大值                                            |
+|---------|-------|----------------------------------------------|------------------------------------------------|
+| `Byte`  | 8     | -128                                         | 127                                            |
+| `Short` | 16    | -32768                                       | 32767                                          |
+| `Int`   | 32    | -2,147,483,648 (-2<sup>31</sup>)             | 2,147,483,647 (2<sup>31</sup> - 1)             |
+| `Long`  | 64    | -9,223,372,036,854,775,808 (-2<sup>63</sup>) | 9,223,372,036,854,775,807 (2<sup>63</sup> - 1) |
 
-When you initialize a variable with no explicit type specification, the compiler automatically infers the type with the 
-smallest range enough to represent the value starting from `Int`. If it is not exceeding the range of `Int`, the type is `Int`.
-If it exceeds, the type is `Long`. To specify the `Long` value explicitly, append the suffix `L` to the value. 
-Explicit type specification triggers the compiler to check the value not to exceed the range of the specified type.
+当你初始化一个没有指定显式类型的变量时，编译器会自动推断类型，该类型从 `Int` 开始推断，直到找到符合值范围的类型。
+如果不超过 `Int` 的范围，类型为 `Int`。
+如果超过范围，则类型为 `Long`。要明确指定 `Long` 值，请将后缀 `L` 追加到值。
+显式类型规定会触发编译器检查值是否超过指定类型的范围。
 
 ```kotlin
 val one = 1 // Int
@@ -24,43 +23,42 @@ val oneLong = 1L // Long
 val oneByte: Byte = 1
 ```
 
-> In addition to integer types, Kotlin also provides unsigned integer types. For more information, see [Unsigned integer types](unsigned-integer-types.md).
+> 除了整数类型之外，Kotlin 还提供了无符号整数类型。有关更多信息，请参阅[无符号整数类型](unsigned-integer-types.md)。
 >
 {type="tip"}
 
-## Floating-point types
+## 浮点数类型
 
-For real numbers, Kotlin provides floating-point types `Float` and `Double` that adhere to the [IEEE 754 standard](https://en.wikipedia.org/wiki/IEEE_754).
-`Float` reflects the IEEE 754 _single precision_, while `Double` reflects _double precision_.
+对于实数，Kotlin 提供了遵循 [IEEE 754 标准](https://en.wikipedia.org/wiki/IEEE_754) 的浮点数类型 `Float` 和 `Double`。
+`Float` 表示 IEEE 754 的 **单精度**，而 `Double` 表示 **双精度**。
 
-These types differ in their size and provide storage for floating-point numbers with different precision:
+这些类型在大小上有所不同，并提供了不同精度的浮点数存储：
 
-| Type	 |Size (bits)|Significant bits|Exponent bits|Decimal digits|
-|--------|-----------|--------------- |-------------|--------------|
-| `Float`	 | 32        |24              |8            |6-7            |
-| `Double` | 64        |53              |11           |15-16          |    
+| 类型       | 大小（位） | 有效位数 | 指数位数 | 十进制数字位数 |
+|----------|-------|------|------|---------|
+| `Float`  | 32    | 24   | 8    | 6-7     |
+| `Double` | 64    | 53   | 11   | 15-16   |    
 
-You can initialize `Double` and `Float` variables  with numbers having a fractional part.
-It's separated from the integer part by a period (`.`)
-For variables initialized with fractional numbers, the compiler infers the `Double` type:
+你可以用具有小数部分的数字初始化 `Double` 和 `Float` 变量。
+小数部分与整数部分由句点（`.`）分隔。
+对于用小数初始化的变量，编译器会推断为 `Double` 类型：
 
 ```kotlin
 val pi = 3.14 // Double
-// val one: Double = 1 // Error: type mismatch
+// val one: Double = 1 // 错误：类型不匹配
 val oneDouble = 1.0 // Double
 ```
 
-To explicitly specify the `Float` type for a value, add the suffix `f` or `F`.
-If such a value contains more than 6-7 decimal digits, it will be rounded:
+要显式指定值为 `Float` 类型，请添加后缀 `f` 或 `F`。
+如果这样的值包含超过 6-7 个小数位，它将被舍入：
 
 ```kotlin
 val e = 2.7182818284 // Double
-val eFloat = 2.7182818284f // Float, actual value is 2.7182817
+val eFloat = 2.7182818284f // Float，实际值为2.7182817
 ```
 
-Unlike some other languages, there are no implicit widening conversions for numbers in Kotlin.
-For example, a function with a `Double` parameter can be called only on `Double` values, but not `Float`,
-`Int`, or other numeric values:
+与其他一些语言不同，在 Kotlin 中，数字没有隐式的扩展转换。
+例如，具有 `Double` 参数的函数只能在 `Double` 值上调用，而不能在 `Float`、`Int` 或其他数值上调用：
 
 ```kotlin
 fun main() {
@@ -71,32 +69,32 @@ fun main() {
     val f = 1.0f 
 
     printDouble(d)
-//    printDouble(i) // Error: Type mismatch
-//    printDouble(f) // Error: Type mismatch
+//    printDouble(i) // 错误：类型不匹配
+//    printDouble(f) // 错误：类型不匹配
 }
 ```
 
-To convert numeric values to different types, use [explicit conversions](#explicit-number-conversions).
+要将数字值转换为不同类型，请使用[显式转换](#显式数字转换)。
 
-## Literal constants for numbers
+## 数字的字面常量
 
-There are the following kinds of literal constants for integral values:
+对于整数值，有以下几种字面常量：
 
-* Decimals: `123`
-* Longs are tagged by a capital `L`: `123L`
-* Hexadecimals: `0x0F`
-* Binaries: `0b00001011`
+* 十进制：`123`
+* 长整型使用大写 `L` 标记：`123L`
+* 十六进制：`0x0F`
+* 二进制：`0b00001011`
 
-> Octal literals are not supported in Kotlin.
+> 在 Kotlin 中不支持八进制字面常量。
 >
 {style="note"}
 
-Kotlin also supports a conventional notation for floating-point numbers:
+Kotlin 还支持浮点数的传统表示法：
 
-* Doubles by default: `123.5`, `123.5e10`
-* Floats are tagged by `f` or `F`: `123.5f`
+* 默认为双精度：`123.5`，`123.5e10`
+* 浮点数使用 `f` 或 `F` 标记：`123.5f`
 
-You can use underscores to make number constants more readable:
+你可以使用下划线使数字常量更易读：
 
 ```kotlin
 val oneMillion = 1_000_000
@@ -106,21 +104,20 @@ val hexBytes = 0xFF_EC_DE_5E
 val bytes = 0b11010010_01101001_10010100_10010010
 ```
 
-> There are also special tags for unsigned integer literals.  
-> Read more about [literals for unsigned integer types](unsigned-integer-types.md).
+> 对于无符号整数字面常量，还有特殊的标记。  
+> 详细了解 [无符号整数类型的字面常量](unsigned-integer-types.md)。
 
 
-## Numbers representation on the JVM
+## JVM 平台上的数字表示
 
-On the JVM platform, numbers are stored as primitive types: `int`, `double`, and so on.
-Exceptions are cases when you create a nullable number reference such as `Int?` or use generics.
-In these cases numbers are boxed in Java classes `Integer`, `Double`, and so on.
+在 JVM 平台上，数字被存储为原始类型：`int`、`double` 等。
+特例是当你创建可空的数字引用，如 `Int?` 或使用泛型时。
+在这些情况下，数字会被装箱为 Java 类 `Integer`、`Double` 等。
 
-Nullable references to the same number can refer to different objects:
+对同一数字的可空引用可能引用不同的对象：
 
 ```kotlin
 fun main() {
-//sampleStart
     val a: Int = 100
     val boxedA: Int? = a
     val anotherBoxedA: Int? = a
@@ -131,58 +128,56 @@ fun main() {
     
     println(boxedA === anotherBoxedA) // true
     println(boxedB === anotherBoxedB) // false
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYY7wYCSaALhgLwYBGAAxDqtBswBGEAB4woAQTacuAfj4sxNCSzQQuACxgAnAEKz5Sjt3X8cWjA52Tl3DcJGjM4phmlyoU1c1DUknXxw9QxNzAKDrEP4w7xoHAAdjAi5GIn9LPl47KKMzC0VSAHoKjC5jFBh0zO4cwjzAgqL9Etj5U0rqpCYAZwaqNABfEAAaEC4cYwBzGC4ABUYcLiQIYywEEAArHAZp8AgsNLxGEwA1EyG8CDQ9gQA6AE4XgCYhEHGgA%3D?_gl=1*v5wyrp*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.143512188.893500249.1700440749-2060274793.1694940376)
 
-All nullable references to `a` are actually the same object because of the memory optimization that JVM applies to `Integer`s
-between `-128` and `127`. It doesn't apply to the `b` references, so they are different objects.
+所有对于 `a` 的可空引用实际上都是相同的对象，这是因为 JVM 在 `-128` 到 `127` 之间的 `Integer` 上应用的内存优化。
+这并不适用于 `b` 引用，因此它们是不同的对象。
 
-On the other hand, they are still equal:
+另一方面，它们仍然是相等的：
 
 ```kotlin
 fun main() {
-//sampleStart
     val b: Int = 10000
-    println(b == b) // Prints 'true'
+    println(b == b) // 打印 'true'
     val boxedB: Int? = b
     val anotherBoxedB: Int? = b
-    println(boxedB == anotherBoxedB) // Prints 'true'
-//sampleEnd
+    println(boxedB == anotherBoxedB) // 打印 'true'
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBG8GAkmgC4YC8GAIwAGUcOq0ADgCcC3RkRb8BLUgHo1GAAqyeAZwwBybtJQxDEmg2YsIADxhQAQuy7cA%2FP1aX6TDDjQIbgALGGkne0cXTh5PFR8ZOQVCWwdnZX9AkLCItKd1TR05A2NTc0pKAF8QABoQbhxpAHMYbi1GHG4kCGksBBAAKxwGWvAILEk8RjCANTC9PAg0fsEAOgBOVYAmYRBKoA%3D%3D?_gl=1*rwc5oq*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.34739560.893500249.1700440749-2060274793.1694940376)
 
-## Explicit number conversions
+## 显式数字转换 {id=显式数字转换}
 
-Due to different representations, smaller types _are not subtypes_ of bigger ones.
-If they were, we would have troubles of the following sort:
+由于不同的表示方式，较小的类型 **并不是** 较大类型的子类型。
+如果是的话，我们将会遇到以下类似的问题：
 
 ```kotlin
-// Hypothetical code, does not actually compile:
-val a: Int? = 1 // A boxed Int (java.lang.Integer)
-val b: Long? = a // Implicit conversion yields a boxed Long (java.lang.Long)
-print(b == a) // Surprise! This prints "false" as Long's equals() checks whether the other is Long as well
+// 假设的代码，实际上无法编译：
+val a: Int? = 1 // 一个装箱 Int (java.lang.Integer)
+val b: Long? = a // 隐式转换产生一个装箱的 Long (java.lang.Long)
+print(b == a) // 惊喜！这会打印出 "false"，因为 `Long` 的 `equals()` 方法检查另一个是否也是 `Long` 类型。
 ```
 
-So equality would have been lost silently, not to mention identity.
+因此，相等性会默默丧失，更不用说标识了。
 
-As a consequence, smaller types _are NOT implicitly converted_ to bigger types.
-This means that assigning a value of type `Byte` to an `Int` variable requires an explicit conversion:
+因此，较小的类型 **不会被隐式转换** 为较大的类型。
+这意味着将 `Byte` 类型的值分配给 `Int` 变量需要进行显式转换：
 
 ```kotlin
 fun main() {
-//sampleStart
-    val b: Byte = 1 // OK, literals are checked statically
-    // val i: Int = b // ERROR
+    val b: Byte = 1 // OK，文字是静态检查的
+    // val i: Int = b // 错误
     val i1: Int = b.toInt()
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBG8GAQgJ4AuMGAXgwBGDAHoxGAPIBpADQZGePgCcmAZww4V%2FMAAsYYANYwoGdTxw88YJoy7VaE%2Bkwx52ASTQ9BrcZIBRACUgqSDHGgZmPGFPb18WADoeCC8eEkpKAF8QORBLFQBzGB4ABUYrJAgVLAQQACscBlzwCCwABzxGGBUANR71PAg0OuFEgE5EgCYABhAsoA%3D%3D?_gl=1*1v488vi*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.37886186.893500249.1700440749-2060274793.1694940376)
 
-All number types support conversions to other types:
+所有数字类型都支持转换为其他类型：
 
 * `toByte(): Byte`
 * `toShort(): Short`
@@ -191,132 +186,124 @@ All number types support conversions to other types:
 * `toFloat(): Float`
 * `toDouble(): Double`
 
-In many cases, there is no need for explicit conversions because the type is inferred from the context,
-and arithmetical operations are overloaded for appropriate conversions, for example:
+在许多情况下，不需要显式转换，因为类型会从上下文中推断出来，并且算术操作已经为适当的转换进行了重载，例如：
 
 ```kotlin
 val l = 1L + 3 // Long + Int => Long
 ```
 
-## Operations on numbers
+## 数字的运算
 
-Kotlin supports the standard set of arithmetical operations over numbers: `+`, `-`, `*`, `/`, `%`. They are declared
-as members of appropriate classes:
+Kotlin 支持一组标准的数字算术操作：`+`、`-`、`*`、`/`、`%`。
+它们被声明为适当类的成员：
 
 ```kotlin
 fun main() {
-//sampleStart
     println(1 + 2)
     println(2_500_000_000L - 1L)
     println(3.14 * 2.71)
     println(10.0 / 3)
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGADgE4EAuANkQIwYDUGATMWq1GLdoT4B9AKwAGGRLnzFAGQwBaDB2WDMwpmjZEAzADoOAFgwAqfiYDsHHbXr7DhDjJMyMAegxGdSgBfEAAaEGYcBgBzGGYABVYcZiQIBiwEEAArHAA3HDDwCCw6PFYYBgA1CoBnPAg0TI4TAE4TPhkQIKA%3D%3D?_gl=1*pznp1c*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.268580920.893500249.1700440749-2060274793.1694940376)
 
-You can also override these operators for custom classes. See [Operator overloading](operator-overloading.md) for details.
+你还可以为自定义类重写这些操作符。有关详细信息，请参阅[运算符重载](operator-overloading.md)。
 
-### Division of integers
+### 整数的除法
 
-Division between integers numbers always returns an integer number. Any fractional part is discarded.
+整数之间的除法始终返回一个整数。任何小数部分都将被丢弃。
 
 ```kotlin
 fun main() {
-//sampleStart
     val x = 5 / 2
-    //println(x == 2.5) // ERROR: Operator '==' cannot be applied to 'Int' and 'Double'
+    //println(x == 2.5) // 错误：无法将操作符 '==' 应用于 'Int' 和 'Double'
     println(x == 2)
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAeGAvBgKwYD0GAJmq1evAA4AnAgBdGRNu04CAdF1KiMAUQBK2gPLb4GPWJgSc0iBIwByRTYxgcaNBGkYARjAw4xYxngwUBiWtgCSaNIOzsE2ACIQKB6MMDbCNJIycoQKSsSUlAC%2BIAA0INI4EgDmMNIACowWSFZYCCAAVjgMpeAQWGJ4KRIAamYAzngQaG0AjMoAnMoCAAwghUA%3D?_gl=1*fz193u*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.1347832.893500249.1700440749-2060274793.1694940376)
 
-This is true for a division between any two integer types:
+这对于任何两个整数类型之间的除法都是成立的：
 
 ```kotlin
 fun main() {
-//sampleStart
     val x = 5L / 2
     println(x == 2L)
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAeGAvBgKwAyGA9BgBM1WgAcATgQAujIm3achPYpUoBfEABoQ0nBIDmMaQAVGOaUggSsCEACscDbeAhYxeRjAkA1bwGc8CDQ7AEYAOgBOcKEABhB1IA%3D%3D?_gl=1*1poal25*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.96768342.893500249.1700440749-2060274793.1694940376)
 
-To return a floating-point type, explicitly convert one of the arguments to a floating-point type:
+如果想返回浮点类型，请显式将其中一个参数转换为浮点类型：
 
 ```kotlin
 fun main() {
-//sampleStart
     val x = 5 / 2.toDouble()
     println(x == 2.5)
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAeGAvBgKwYD0GAJgB0AFwgARCCgBGjGCWq0ADgCcCIxkTbtOwrsUqUAviAA0IEThUBzGCIAKjHCKQQVWBCABWOBmfAQWEp4cioAajAqAM54EGieAIxCAJxCAgAMIEZAA?_gl=1*1fqt807*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.96834006.893500249.1700440749-2060274793.1694940376)
 
-### Bitwise operations
+### 位运算
 
-Kotlin provides a set of _bitwise operations_ on integer numbers. They operate on the binary level directly with
-bits of the numbers' representation.
-Bitwise operations are represented by functions that can be called in infix form. They can be applied only to `Int` and `Long`:
+Kotlin 提供了一组在整数数字上进行 **位运算** 的操作。
+它们直接在二进制级别上操作数字表示的位。
+位运算由可以以中缀形式调用的函数表示。它们仅适用于 `Int` 和 `Long`：
 
 ```kotlin
 val x = (1 shl 2) and 0x000FF000
 ```
 
-Here is the complete list of bitwise operations:
+以下是完整的位运算列表：
 
-* `shl(bits)` – signed shift left
-* `shr(bits)` – signed shift right
-* `ushr(bits)` – unsigned shift right
-* `and(bits)` – bitwise **AND**
-* `or(bits)` – bitwise **OR**
-* `xor(bits)` – bitwise **XOR**
-* `inv()` – bitwise inversion
+* `shl(bits)` – 有符号左移
+* `shr(bits)` – 有符号右移
+* `ushr(bits)` – 无符号右移
+* `and(bits)` – 按位 **与**
+* `or(bits)` – 按位 **或**
+* `xor(bits)` – 按位 **异或**
+* `inv()` – 按位求反
 
-### Floating-point numbers comparison
+### 浮点数的比较
 
-The operations on floating-point numbers discussed in this section are:
+本节讨论的浮点数上的操作有：
 
-* Equality checks: `a == b` and `a != b`
-* Comparison operators: `a < b`, `a > b`, `a <= b`, `a >= b`
-* Range instantiation and range checks: `a..b`, `x in a..b`, `x !in a..b`
+* 相等性检查：`a == b` 和 `a != b`
+* 比较运算符：`a < b`、`a > b`、`a <= b`、`a >= b`
+* 区间的创建和检查：`a..b`、`x in a..b`、`x !in a..b`
 
-When the operands `a` and `b` are statically known to be `Float` or `Double` or their nullable counterparts (the type is
-declared or inferred or is a result of a [smart cast](typecasts.md#smart-casts)), the operations on the
-numbers and the range that they form follow the [IEEE 754 Standard for Floating-Point Arithmetic](https://en.wikipedia.org/wiki/IEEE_754).
+当操作数 `a` 和 `b` 在静态上已知为 `Float` 或 `Double` 或它们的可空对应类型（类型被声明、推断或是 [智能转换](typecasts.md#smart-casts) 的结果）时，
+这些数字和它们形成的区间的操作遵循 [IEEE 754 浮点运算标准](https://en.wikipedia.org/wiki/IEEE_754)。
 
-However, to support generic use cases and provide total ordering, the behavior is different for operands that are **not**
-statically typed as floating-point numbers. For example, `Any`, `Comparable<...>`, or `Collection<T>` types. In this case, the 
-operations use the `equals` and `compareTo` implementations for `Float` and `Double`. As a result:
+然而，为了支持泛型场景并提供总体排序，对于 **非** 静态类型为浮点数的情况，行为是不同的。
+例如，`Any`、`Comparable<...>` 或 `Collection<T>` 类型。
+在这种情况下，这些操作使用 `Float` 和 `Double` 的 `equals` 和 `compareTo` 实现。因此：
 
-* `NaN` is considered equal to itself
-* `NaN` is considered greater than any other element including `POSITIVE_INFINITY`
-* `-0.0` is considered less than `0.0`
+* `NaN` 被视为等于自身
+* `NaN` 被视为大于任何其他元素，包括 `POSITIVE_INFINITY（正无穷大）`
+* `-0.0` 被视为小于 `0.0`
 
-Here is an example that shows the difference in behavior between operands statically typed as floating-point numbers 
-(`Double.NaN`) and operands **not** statically typed as floating-point numbers (`listOf(T)`).
+下面是一个示例，展示了在作为静态类型为浮点数的操作数（`Double.NaN`）和作为 **非** 静态类型为浮点数的操作数（`listOf(T)`）之间的行为差异。
 
 ```kotlin
 fun main() {
-    //sampleStart
-    // Operand statically typed as floating-point number
+    // 操作数在静态上已知为浮点数
     println(Double.NaN == Double.NaN)                 // false
-    // Operand NOT statically typed as floating-point number
-    // So NaN is equal to itself
+    // 操作数在静态上不已知为浮点数
+    // 因此 NaN 等于它自己
     println(listOf(Double.NaN) == listOf(Double.NaN)) // true
 
-    // Operand statically typed as floating-point number
+    // 操作数在静态上已知为浮点数
     println(0.0 == -0.0)                              // true
-    // Operand NOT statically typed as floating-point number
-    // So -0.0 is less than 0.0
+    // 操作数在静态上不已知为浮点数
+    // 因此 -0.0 小于 0.0
     println(listOf(0.0) == listOf(-0.0))              // false
 
     println(listOf(Double.NaN, Double.POSITIVE_INFINITY, 0.0, -0.0).sorted())
     // [-0.0, 0.0, Infinity, NaN]
-    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-numbers-floating-comp"}
+[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11A9PRgPIAOMATjmlBgM4AXHALxgcAG3EBPDAKnteOPhiTiIwggHMAtKwgEBGNCiwAjTrTqsOB8UQAiEFKfEwAdADkcHjAF5fGI7Orp7epHQRkRGMKhJ8MJYMTGyc3LwezAAq%2FEIiYpIycgoYSipqGmg6egZGJuYciRgxAMoQGF4%2BeMowAI4oErJteALx4kiN1rZE4l0CzEiEQS7uHaT%2BGDOC84tOy6EexKQxAhwoCWiNMSlcPDka%2BdKy8jCKyqrqIpW6%2BmiGxmYWKjUSa%2FOyEAAMbnBfgC2kh4PCUSRyKRx1O52iyXYN3SWTueQkjyKLxKb3KnyqPz%2BdUBmIwrQwcKhGC6GxgfGUAgAFtwMPCJjZQdNZtt4WsAps5gsmQjESikrFxPFKAKpoRJdsliEOgAaQK7EIABWYzQAkplTQA1ACiAH1TR4AGIO80ATT18L1MuIbj4EA4AheJGIlyYAG0ZR6oXrTWgkARhlI9R0ALqNSgAXxAOpAQg4mhgAkN4mESH9WAQIAAVjgAG44bPgCBYVh4VwcS2cPh4CBoSsARjcAE43AAmcEgDNAA%3D%3D?_gl=1*1ayytvc*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.68876760.893500249.1700440749-2060274793.1694940376)

@@ -137,7 +137,7 @@ We're making multiple changes that are bringing us closer to fully stable builde
 
     > Note that clients of these builders will need to specify the same `-Xenable-builder-inference` compiler option.
     >
-    {type="warning"}
+    {style="warning"}
 
 * With the `-Xenable-builder-inference`, builder inference automatically activates if a regular type inference cannot get enough information about a type.
 
@@ -242,7 +242,7 @@ Kotlin/Native is receiving multiple improvements and component updates, some of 
 > It may be dropped or changed at any time. Opt-in is required (see details below), and you should use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-48525).
 >
-{type="warning"}
+{style="warning"}
 
 With Kotlin 1.6.0, you can try the development preview of the new Kotlin/Native memory manager.
 It moves us closer to eliminating the differences between the JVM and Native platforms to provide a consistent developer experience in multiplatform projects.
@@ -293,7 +293,7 @@ The compiler caches have been available for these targets since Kotlin 1.5.0 wit
 > It may be dropped or changed at any time. Opt-in is required (see details below), and you should use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-48595).
 >
-{type="warning"}
+{style="warning"}
 
 In previous versions, authors of compiler plugins had to provide separate artifacts for Kotlin/Native because of the differences in the ABI.
 
@@ -660,7 +660,7 @@ See the [collection ordering](collection-ordering.md) section for reference.
 
 > The Kover Gradle plugin is Experimental. We would appreciate your feedback on it in [GitHub](https://github.com/Kotlin/kotlinx-kover/issues).
 >
-{type="warning"}
+{style="warning"}
 
 With Kotlin 1.6.0, we're introducing Kover – a Gradle plugin for the [IntelliJ](https://github.com/JetBrains/intellij-coverage) and [JaCoCo](https://github.com/jacoco/jacoco) Kotlin code coverage agents.
 It works with all language constructs, including inline functions.

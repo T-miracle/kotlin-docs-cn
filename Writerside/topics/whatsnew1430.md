@@ -27,7 +27,7 @@ Learn more about the new features preview in [this blog post](https://blog.jetbr
 > The JVM records feature is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > Opt-in is required (see the details below), and you should use it only for evaluation purposes.  We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-42430).
 >
-{type="warning"}
+{style="warning"}
 
 The [JDK 16 release](https://openjdk.java.net/projects/jdk/16/) includes plans to stabilize a new Java class type called
 [record](https://openjdk.java.net/jeps/395). To provide all the benefits of Kotlin and maintain its interoperability
@@ -55,7 +55,7 @@ Learn more about implementation, restrictions, and the syntax in [KEEP](https://
 > Sealed interfaces are [Experimental](components-stability.md). They may be dropped or changed at any time.
 > Opt-in is required (see the details below), and you should use them only for evaluation purposes.  We would appreciate your feedback on them in [YouTrack](https://youtrack.jetbrains.com/issue/KT-42433).
 >
-{type="warning"}
+{style="warning"}
 
 In Kotlin 1.4.30, we're shipping the prototype of _sealed interfaces_. They complement sealed classes and make it possible
 to build more flexible restricted class hierarchies.
@@ -104,7 +104,7 @@ with us using this [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-424
 > Package-wide hierarchies of sealed classes are [Experimental](components-stability.md). They may be dropped or changed at any time.
 > Opt-in is required (see the details below), and you should use them only for evaluation purposes.  We would appreciate your feedback on them in [YouTrack](https://youtrack.jetbrains.com/issue/KT-42433).
 >
-{type="warning"}
+{style="warning"}
 
 Sealed classes can now form more flexible hierarchies. They can have subclasses in all files of the same compilation unit
 and the same package. Previously, all subclasses had to appear in the same file.
@@ -122,7 +122,7 @@ if you would share your feedback with us using this [YouTrack ticket](https://yo
 > Inline value classes are in [Beta](components-stability.md). They are almost stable, but migration steps may be required
 > in the future. We'll do our best to minimize any changes you have to make. We would appreciate your feedback on the inline classes feature in [YouTrack](https://youtrack.jetbrains.com/issue/KT-42434).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.4.30 promotes [inline classes](inline-classes.md) to [Beta](components-stability.md) and brings the following
 features and improvements to them:
@@ -256,7 +256,7 @@ We have added support for the new libraries delivered with Xcode 12.2. You can n
 > Lazy initialization of top-level properties is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > Opt-in is required (see the details below), and you should use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-44320).
 >
-{type="warning"}
+{style="warning"}
 
 The [IR backend](js-ir-compiler.md) for Kotlin/JS is receiving a prototype implementation of lazy initialization for
 top-level properties. This reduces the need to initialize all top-level properties when the application starts, and it
@@ -288,7 +288,7 @@ or [set up the IntelliJ based IDE]( https://docs.gradle.org/current/userguide/co
 > Use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-42437).
 >
-{type="warning"}
+{style="warning"}
 
 This release introduces the experimental locale-agnostic API for changing the case of strings and characters.
 The current `toLowerCase()`, `toUpperCase()`, `capitalize()`, `decapitalize()` API functions are locale-sensitive.
@@ -335,7 +335,7 @@ See the full list of changes to the text processing functions in [KEEP](https://
 > Use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-44333).
 >
-{type="warning"}
+{style="warning"}
 
 The current `Char` to numbers conversion functions, which return UTF-16 codes expressed in different numeric types, are
 often confused with the similar String-to-Int conversion, which returns the numeric value of a string:

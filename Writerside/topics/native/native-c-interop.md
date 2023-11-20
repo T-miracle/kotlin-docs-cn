@@ -7,7 +7,7 @@
 > Native platform libraries shipped with Kotlin/Native (like Foundation, UIKit, and POSIX),
 > require opt-in only for some APIs. In such cases, you get an IDE warning.
 > 
-{type="warning"}
+{style="warning"}
 
 Kotlin/Native follows the general tradition of Kotlin to provide excellent
 existing platform software interoperability. In the case of a native platform,

@@ -110,7 +110,7 @@ project
 > 
 > Instead, you can use `src/main/java`.
 >
-{type="warning"} 
+{style="warning"} 
 
 The corresponding `sourceSets` property should be updated if you are not using the default convention:
 
@@ -251,7 +251,7 @@ to solve this issue.
 > }
 > ```
 >
-{type="warning"} 
+{style="warning"} 
 
 Gradle 6.7 introduced [Java toolchains support](https://docs.gradle.org/current/userguide/toolchains.html).
 Using this feature, you can:

@@ -59,7 +59,7 @@ with optimized variables because you don't see their values.
 > **Never use this option in production**: Disabling this feature via `-Xdebug` can
 > [cause memory leaks](https://youtrack.jetbrains.com/issue/KT-48678/Coroutine-debugger-disable-was-optimised-out-compiler-feature#focus=Comments-27-6015585.0-0).
 >
-{type="warning"}
+{style="warning"}
 
 ### Removal of the old backend
 
@@ -459,7 +459,7 @@ and to integrate them better into the Kotlin tasks, we made lots of changes:
 > The `kotlinOptions` task input and the `kotlinOptions{...}` task DSL are in support mode and will be deprecated in
 > upcoming releases. Improvements will be made only to `compilerOptions` and `toolOptions`.
 >
-{type="warning"}
+{style="warning"}
 
 Calling any setter or getter on `kotlinOptions` delegates to the related property in the `compilerOptions`.
 This introduces the following limitations:
@@ -644,7 +644,7 @@ fun wait(timeout: Long, unit: TimeUnit) {
 > The new functionality of `TimeMarks` is [Experimental](components-stability.md#stability-levels-explained), and to use it
 > you need to opt in by using `@OptIn(ExperimentalTime::class)` or `@ExperimentalTime`.
 >
-{type="warning"}
+{style="warning"}
 
 Before Kotlin 1.8.0, if you wanted to calculate the time difference between multiple `TimeMarks` and **now**, you could
 only call `elapsedNow()` on one `TimeMark` at a time. This made it difficult to compare the results because the
@@ -704,7 +704,7 @@ or compare, multiple `TimeMarks` representing different frames.
 > To use them, you need to opt in with `@OptIn(kotlin.io.path.ExperimentalPathApi::class)` or `@kotlin.io.path.ExperimentalPathApi`.
 > Alternatively, you can use the compiler option `-opt-in=kotlin.io.path.ExperimentalPathApi`.
 >
-{type="warning"}
+{style="warning"}
 
 We have introduced two new extension functions for `java.nio.file.Path`, `copyToRecursively()` and `deleteRecursively()`,
 which allow you to recursively:

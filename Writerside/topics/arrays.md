@@ -231,7 +231,7 @@ fun main() {
 > 
 > To learn more about why arrays in Kotlin behave this way, see our [blog post](https://blog.jetbrains.com/kotlin/2015/09/feedback-request-limitations-on-data-classes/#Appendix.Comparingarrays).
 > 
-{type="warning"}
+{style="warning"}
 
 ### Transform arrays
 

@@ -78,7 +78,7 @@ sudo gem install cocoapods
 > However, it cannot be updated with Homebrew, and if the installed Xcodeproj doesn't support the newest Xcode version yet,
 > you'll get errors with Pod installation. If this is the case, try other tools to install CocoaPods.
 >
-{type="warning"}
+{style="warning"}
 
 1. Install [Homebrew](https://brew.sh/) in case you don't have it yet.
 

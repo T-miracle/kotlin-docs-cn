@@ -6,7 +6,7 @@
 > If the new DSL doesn't work for you, see [the previous approach](multiplatform-build-native-binaries.md)
 > to building native binaries.
 > 
-{type="warning"}
+{style="warning"}
 
 [Kotlin/Native targets](multiplatform-dsl-reference.md#native-targets) are compiled to the `*.klib` library artifacts,
 which can be consumed by Kotlin/Native itself as a dependency but cannot be used as a native library.

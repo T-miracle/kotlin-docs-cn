@@ -7,7 +7,7 @@
 > Native platform libraries shipped with Kotlin/Native (like Foundation, UIKit, and POSIX),
 > require opt-in only for some APIs. In such cases, you get an IDE warning.
 >
-{type="warning"}
+{style="warning"}
 
 This document covers some details of Kotlin/Native interoperability with
 Swift/Objective-C.
@@ -239,7 +239,7 @@ switch color {
 > It may be dropped or changed at any time.
 > Use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-47610).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin's [suspending functions](coroutines-basics.md) (`suspend`) are presented in the generated Objective-C headers as
 functions with callbacks, or [completion handlers](https://developer.apple.com/documentation/swift/calling_objective-c_apis_asynchronously)
@@ -501,7 +501,7 @@ To override different methods with clashing Kotlin signatures, you can add a
 > Suppressing an error on clashing Kotlin signatures is a temporary workaround. Stability isn't guaranteed in this case so
 > use it with caution. We're working on fixing this behavior in future Kotlin releases.
 > 
-{type="warning"}
+{style="warning"}
 
 By default, the Kotlin/Native compiler doesn't allow calling a non-designated
 Objective-C initializer as a `super(...)` constructor. This behaviour can be
@@ -521,7 +521,7 @@ such as unsafe pointers, structs, and so on.
 > Opt-in is required (see the details below), and you should use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-38600).
 >
-{type="warning"}
+{style="warning"}
 
 By default, [KDocs](kotlin-doc.md) documentation comments are not translated into corresponding comments when generating an Objective-C header.  
 For example, the following Kotlin code with KDoc: 

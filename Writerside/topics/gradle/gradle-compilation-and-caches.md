@@ -57,7 +57,7 @@ Learn how the new approach to incremental compilation is implemented under the h
 > Precise backup of compilation tasks' outputs is [Experimental](components-stability.md#stability-levels-explained).
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue/experimental-ic-optimizations).
 >
-{type="warning"}
+{style="warning"}
 
 Starting with Kotlin 1.8.20, you can enable precise backup, whereby only those classes that Kotlin recompiles in 
 the incremental compilation are backed up. Both full and precise backups help to run builds incrementally again 
@@ -200,7 +200,7 @@ When passing arguments, follow these rules:
 >
 > To overcome this, upgrade Gradle to the version 7.2 (or higher) or use the `kotlin.daemon.jvmargs` property – see the following section.
 >
-{type="warning"}
+{style="warning"}
 
 #### kotlin.daemon.jvmargs property
 
@@ -423,7 +423,7 @@ If there is insufficient memory to run the compilation, you can see a message ab
 > Opt-in is required (see details below). Use them only for evaluation purposes. We appreciate your feedback on them
 > in [YouTrack](https://youtrack.jetbrains.com/issues/KT).
 >
-{type="warning"}
+{style="warning"}
 
 Build reports contain the durations of different compilation phases and any reasons why compilation couldn't be incremental.
 Use build reports to investigate performance issues when the compilation time is too long or when it differs for the same

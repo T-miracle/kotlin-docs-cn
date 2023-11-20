@@ -54,7 +54,7 @@ set-only properties.
 > This feature is [Experimental](components-stability.md#stability-levels-explained). It may be dropped or changed at any time.
 > We recommend that you use it only for evaluation purposes.
 >
-{type="warning"}
+{style="warning"}
 
 Starting from Kotlin 1.8.20, you can create references to Java synthetic properties. Consider the following Java code:
 

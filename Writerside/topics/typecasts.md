@@ -69,7 +69,7 @@ when (x) {
 
 > Note that smart casts work only when the compiler can guarantee that the variable won't change between the check and its usage.
 >
-{type="warning"}
+{style="warning"}
 
 Smart casts can be used in the following conditions:
 

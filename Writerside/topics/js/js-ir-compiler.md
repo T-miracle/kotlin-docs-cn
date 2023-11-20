@@ -28,7 +28,7 @@ kotlin {
 
 > The old compiler backend has been deprecated since Kotlin 1.8.0. Starting with Kotlin 1.9.0, using compiler types `LEGACY` or `BOTH` leads to an error.
 >
-{type="warning"}
+{style="warning"}
 
 The compiler type can also be set in the `gradle.properties` file, with the key `kotlin.js.compiler=ir`.
 This behaviour is overwritten by any settings in the `build.gradle(.kts)`, however.
@@ -82,7 +82,7 @@ kotlin.js.ir.output.granularity=whole-program // 'per-module' is the default
 > _Ignore compilation errors_ mode is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > Opt-in is required (see the details below), and you should use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issues/KT).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin/JS IR compiler provides a new compilation mode unavailable in the default backend – _ignoring compilation errors_.
 In this mode, you can try out your application even while its code contains errors.
@@ -137,7 +137,7 @@ kotlin {
 > The generation of TypeScript declaration files (`d.ts`) is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > Opt-in is required (see the details below), and you should use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issues?q=%23%7BKJS:%20d.ts%20generation%7D).
 >
-{type="warning"}
+{style="warning"}
 
 The Kotlin/JS IR compiler is capable of generating TypeScript definitions from your Kotlin code. These definitions can be
 used by JavaScript tools and IDEs when working on hybrid apps to provide autocompletion, support static analyzers, and

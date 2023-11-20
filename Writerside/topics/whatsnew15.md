@@ -187,7 +187,7 @@ Learn how to add compiler options in [Gradle](gradle-compiler-options.md), [Mave
 > Compiling plain Kotlin lambdas into invokedynamic is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > Opt-in is required (see details below), and you should use it only for evaluation purposes. We would appreciate hearing your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-45375).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.5.0 is introducing experimental support for compiling plain Kotlin lambdas (which are not converted to an instance
 of a functional interface) into dynamic invocations (`invokedynamic`). The implementation produces lighter binaries by using
@@ -297,7 +297,7 @@ that brings incompatible changes. If you're using a custom webpack configuration
 > The Kotlin/JS IR compiler is in [Alpha](components-stability.md). It may change incompatibly and require manual migration
 >in the future. We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issues/KT).
 >
-{type="warning"}
+{style="warning"}
 
 Along with working on the IR-based backend for Kotlin/JS compiler, we encourage and help library authors to build their
 projects in `both` mode. This means they are able to produce artifacts for both Kotlin/JS compilers, therefore growing
@@ -459,7 +459,7 @@ fun main() {
 > The Duration API is [Experimental](components-stability.md). It may be dropped or changed at any time.
 > Use it only for evaluation purposes. We would appreciate hearing your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issues/KT).
 >
-{type="warning"}
+{style="warning"}
 
 There is an experimental [Duration](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.time/-duration/) class for representing
 duration amounts in different time units. In 1.5.0, the Duration API has received the following changes:

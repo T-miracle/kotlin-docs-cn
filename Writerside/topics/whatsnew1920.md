@@ -45,7 +45,7 @@ Since this release, the Kotlin/Wasm supports the new K2 compiler.
 > Support for K2 in the kapt compiler plugin is [Experimental](components-stability.md).
 > Opt-in is required (see details below), and you should use it only for evaluation purposes.
 >
-{type="warning"}
+{style="warning"}
 
 In 1.9.20, you can try using the [kapt compiler plugin](kapt.md) with the K2 compiler.
 To use the K2 compiler in your project, add the following options to your `gradle.properties` file:
@@ -199,7 +199,7 @@ the number of tasks performed on each allocation and, therefore, helps to minimi
 > It may be dropped or changed at any time. Opt–in is required (see details below).
 > Use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.9.20 introduces a new compilation time optimization for Kotlin/Native.
 The compilation of `klib` artifacts into native code is now partially incremental.
@@ -708,7 +708,7 @@ machine, libraries delivered with Xcode 15 will be visible but not accessible.
 >
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 ### Compatibility with Wasm GC phase 4 and final opcodes
 
@@ -895,7 +895,7 @@ and there are some new features:
 > This feature is [Experimental](components-stability.md#stability-levels-explained). It may be dropped or changed at any time.
 > Opt–in is required (see details below). Use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 In Kotlin 1.9.0, the `entries` property for enum classes became Stable. The `entries` property is a modern and performant
 replacement for the synthetic `values()` function. As part of Kotlin 1.9.20, there is a replacement for the generic 
@@ -938,7 +938,7 @@ we finally conclude this work and make the Kotlin/Native standard library Stable
 * The [`printStackTrace()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throwable/print-stack-trace.html) function from the `Throwable` class now prints to `STDERR` instead of `STDOUT`.
   > The output format of `printStackTrace()` isn't Stable and is subject to change.
   >
-  {type="warning"}
+  {style="warning"}
 
 #### Improvements to the Atomics API
 
@@ -952,7 +952,7 @@ designed specifically to be consistent with Java's atomic arrays so that in the 
   > try them out, opt in with `@OptIn(ExperimentalStdlibApi)`. Use them only for evaluation purposes. We would
   > appreciate your feedback in [YouTrack](https://kotl.in/issue).
   >
-  {type="warning"}
+  {style="warning"}
 * In the `kotlin.native.concurrent package`, the Atomics API that was deprecated in Kotlin 1.9.0 with deprecation level: `WARNING`, has had its deprecation level raised to: `ERROR`.
 * In the `kotlin.concurrent` package, member functions of the [`AtomicInt`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.concurrent/-atomic-int/index.html) and [`AtomicLong`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.concurrent/-atomic-long/index.html) classes that had deprecation level: `ERROR`, have been removed.
 * All [member functions](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.concurrent/-atomic-reference/#functions) of the `AtomicReference` class now use atomic intrinsic functions.

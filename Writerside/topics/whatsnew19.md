@@ -34,7 +34,7 @@ The Kotlin 1.9.0 plugin will be included with IntelliJ IDEA 2023.2 in the upcomi
 
 > To download Kotlin artifacts and dependencies, [configure your Gradle settings](#configure-gradle-settings) to use the Maven Central Repository.
 >
-{type="warning"}
+{style="warning"}
 
 ## New Kotlin K2 compiler updates
 
@@ -691,7 +691,7 @@ For example, `productionExecutable` was in `build/distributions`. In Kotlin 1.9.
 
 > If you have a pipeline in place that uses the results of these builds, make sure to update the directory.
 >
-{type="warning"}
+{style="warning"}
 
 ### Extract org.w3c declarations from stdlib-js
 
@@ -844,7 +844,7 @@ the Kotlin compilation task. This behavior has been fixed in Kotlin 1.9.0. If yo
 >```
 > {validate="false"}
 > 
-{type="warning"}
+{style="warning"}
 
 For more information, see our [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-54468/KAPT-Gradle-plugin-causes-eager-task-creation).
 
@@ -1131,7 +1131,7 @@ sourcePath.copyToRecursively(
 > and to use them, you can opt in with `@OptIn(ExperimentalStdlibApi::class)` or the compiler argument
 > `-opt-in=kotlin.ExperimentalStdlibApi`.
 >
-{type="warning"}
+{style="warning"}
 
 In 1.9.0, the [`HexFormat`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/-hexformat/) class and its related 
 extension functions are provided as an Experimental feature that allows you to convert between numerical values and 

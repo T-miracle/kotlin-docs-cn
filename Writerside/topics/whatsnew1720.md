@@ -36,7 +36,7 @@ Starting with this 1.7.20 release, the Kotlin K2 compiler supports the following
 > The Alpha version of the new K2 compiler only works with JVM projects.
 > It doesn't support Kotlin/JS, Kotlin/Native, or other multiplatform projects.
 >
-{type="warning"}
+{style="warning"}
 
 Learn more about the new compiler and its benefits in the following videos:
 * [The Road to the New Kotlin Compiler](https://www.youtube.com/watch?v=iTdJJq_LyoY)
@@ -93,7 +93,7 @@ Kotlin 1.7.20 introduces preview versions for new language features, as well as 
 
 > The new operator is [Experimental](components-stability.md#stability-levels-explained), and it has limited support in the IDE.
 >
-{type="warning"}
+{style="warning"}
 
 This release introduces the new `..<` operator. Kotlin has the `..` operator to express a range of values. The new `..<`
 operator acts like the `until` function and helps you define the open-ended range.
@@ -173,7 +173,7 @@ the `-opt-in=kotlin.ExperimentalStdlibApi` compiler option.
 
 > Data objects are [Experimental](components-stability.md#stability-levels-explained), and have limited support in the IDE at the moment.
 >
-{type="warning"}
+{style="warning"}
 
 This release introduces a new type of `object` declaration for you to use: `data object`. [Data object](https://youtrack.jetbrains.com/issue/KT-4107)
 behaves conceptually identical to a regular `object` declaration but comes with a clean `toString` representation out of the box.
@@ -352,7 +352,7 @@ IR in the kapt stub generating task, making it possible to use all the newest Ko
 > It may be dropped or changed at any time. Opt-in is required (see details below), and you should use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-52994).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.7.20 allows the underlying type of JVM inline classes to be a type parameter. The compiler maps it to `Any?` or,
 generally, to the upper bound of the type parameter.
@@ -422,7 +422,7 @@ We would appreciate your feedback on this feature in [YouTrack](https://youtrack
 > Support for the JVM IR backend in the kapt stub generating task is an [Experimental](components-stability.md) feature.
 > It may be changed at any time. Opt-in is required (see details below), and you should use it only for evaluation purposes.
 >
-{type="warning"}
+{style="warning"}
 
 Before 1.7.20, the kapt stub generating task used the old backend, and [repeatable annotations](annotations.md#repeatable-annotations)
 didn't work with [kapt](kapt.md). With Kotlin 1.7.20, we've added support for the [JVM IR backend](whatsnew15.md#stable-jvm-ir-backend)
@@ -503,7 +503,7 @@ kotlin.native.binary.objcExportSuspendFunctionLaunchThreadRestriction=none
 > Do not add this option if you use the `native-mt` version of `kotlinx.coroutines` or other libraries that have the same
 > "dispatch to the original thread" approach.
 >
-{type="warning"}
+{style="warning"}
 
 The Kotlin team is very grateful to [Ahmed El-Helw](https://github.com/ahmedre) for implementing this option.
 
@@ -629,7 +629,7 @@ Kotlin 1.7.20 offers new [extension functions](extensions.md#extension-functions
 > The new extension functions for `java.nio.file.Path` are [Experimental](components-stability.md).
 > They may be changed at any time. Opt-in is required (see details below), and you should use them only for evaluation purposes.
 >
-{type="warning"}
+{style="warning"}
 
 Here are some things you can do with these new extension functions:
 

@@ -290,7 +290,7 @@ artifacts for Native and other supported platforms.
 > Learn how to prepare your plugin for the update in
 > this [YouTrack issue](https://youtrack.jetbrains.com/issue/KT-48595).
 >
-{type="warning"}
+{style="warning"}
 
 ### Support for standalone Android executables
 
@@ -737,7 +737,7 @@ This release introduces new build reports, support for Gradle plugin variants, n
 > Opt-in is required (see the details below). We encourage you to use it only for evaluation purposes, and we would
 > appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issues/KT).
 >
-{type="warning"}
+{style="warning"}
 
 In Kotlin 1.7.0, we've reworked incremental compilation for cross-module changes. Now incremental compilation is also
 supported for changes made inside dependent non-Kotlin modules, and it is compatible with
@@ -775,7 +775,7 @@ The Kotlin team is very grateful to [Ivan Gavrilovic](https://github.com/gavra0)
 > Opt-in is required (see details below). Use them only for evaluation purposes. We appreciate your feedback on them
 > in [YouTrack](https://youtrack.jetbrains.com/issues/KT).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.7.0 introduces build reports that help track compiler performance. Reports contain the durations of different
 compilation phases and reasons why compilation couldn't be incremental.

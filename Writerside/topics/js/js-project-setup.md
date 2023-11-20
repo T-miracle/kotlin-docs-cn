@@ -693,7 +693,7 @@ rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.yarn.YarnPlu
 
 > Changing the name of the lockfile may cause dependency inspection tools to no longer pick up the file.
 > 
-{type="warning"}
+{style="warning"}
 
 To learn more about `yarn.lock`, visit the [official Yarn documentation](https://classic.yarnpkg.com/lang/en/docs/yarn-lock/).
 

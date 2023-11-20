@@ -29,7 +29,7 @@ The Kotlin plugins that support 1.8.20 are available for:
 > To download Kotlin artifacts and dependencies properly, [configure Gradle settings](#configure-gradle-settings)
 > to use the Maven Central repository.
 >
-{type="warning"}
+{style="warning"}
 
 ## New Kotlin K2 compiler updates
 
@@ -74,7 +74,7 @@ The previous `-Xuse-k2` compiler option has been deprecated.
 > The Alpha version of the new K2 compiler only works with JVM and JS IR projects.
 > It doesn't support Kotlin/Native or any of the multiplatform projects yet.
 >
-{type="warning"}
+{style="warning"}
 
 ### Leave your feedback on the new K2 compiler
 
@@ -102,7 +102,7 @@ As Kotlin continues to evolve, we're introducing preview versions for new langua
 > It may be dropped or changed at any time. Opt-in is required (see details below). Use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Enum classes have a synthetic `values()` function, which returns an array of defined enum constants. However, using an
 array can lead to [hidden performance issues](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries.md#examples-of-performance-issues)
@@ -319,7 +319,7 @@ tasks
 > This feature is [Experimental](components-stability.md#stability-levels-explained). It may be dropped or changed at any time.
 > Opt-in is required (see details below). Use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.8.20 lifts restrictions on the use of secondary constructors with bodies
 in [inline classes](inline-classes.md).
@@ -500,7 +500,7 @@ and [support for the JVM IR backend in the kapt stub generating task by default]
 > It may be dropped or changed at any time. Use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.8.20 introduces the ability to create references to Java synthetic properties, for example, for such Java code:
 
@@ -636,7 +636,7 @@ deprecated [starting with this release](#update-for-kotlin-native-targets) and w
 > It may be dropped or changed at any time. Opt-in is required (see details below). Use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin/Native can now import Objective-C headers with `@import` directives. This feature is useful for consuming Swift
 libraries that have auto-generated Objective-C headers or classes of CocoaPods dependencies written in Swift.
@@ -748,7 +748,7 @@ Kotlin 1.8.20 strives to improve the developer experience with the following upd
 > It may be changed in future Kotlin releases without prior notice. Opt-in is required (see the details below).
 > We would appreciate your feedback in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 Kotlin 1.8.20 offers a new way of setting up source set hierarchy in your multiplatform projects − the default target
 hierarchy. The new approach is intended to replace target shortcuts like `ios`, which have their [design flaws](#why-replace-shortcuts).
@@ -904,7 +904,7 @@ our [Dukat tool](https://github.com/Kotlin/dukat) instead.
 > The Dukat tool is [Experimental](components-stability.md#stability-levels-explained).
 > It may be dropped or changed at any time.
 >
-{type="warning"}
+{style="warning"}
 
 ### Kotlin variable and function names in source maps
 
@@ -936,7 +936,7 @@ map to improve the readability of your stack trace. Happy debugging!
 > The addition of variable and function names in source maps is [Experimental](components-stability.md#stability-levels-explained).
 > It may be dropped or changed at any time.
 >
-{type="warning"}
+{style="warning"}
 
 ### Opt in for generation of TypeScript definition files
 
@@ -963,7 +963,7 @@ kotlin {
 > The generation of TypeScript definitions (`d.ts`)
 > is [Experimental](components-stability.md#stability-levels-explained). It may be dropped or changed at any time.
 >
-{type="warning"}
+{style="warning"}
 
 ## Gradle
 
@@ -1002,7 +1002,7 @@ We would appreciate your feedback on this. You can [file an issue](https://kotl.
 > To use it, add `kotlin.compiler.preciseCompilationResultsBackup=true` to `gradle.properties`.
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue/experimental-ic-optimizations).
 >
-{type="warning"}
+{style="warning"}
 
 Starting with Kotlin 1.8.20, you can enable precise backup, whereby only those classes that Kotlin recompiles in
 the [incremental compilation](gradle-compilation-and-caches.md#incremental-compilation) will be backed up.
@@ -1128,7 +1128,7 @@ Kotlin 1.8.20 adds a variety of new features, including some that are particular
 > you need to opt in with `@OptIn(ExperimentalStdlibApi::class)` or the compiler argument `-opt-in=kotlin.ExperimentalStdlibApi`.
 >
 
-{type="warning"}
+{style="warning"}
 
 The `AutoCloseable` interface has been added to the common standard library so that you can use one common interface for
 all libraries to close resources. In Kotlin/JVM, the `AutoCloseable` interface is an alias
@@ -1181,7 +1181,7 @@ fun writeBooksTo(writer: XMLWriter) {
 > and to use it, you need to opt in with `@OptIn(ExperimentalEncodingApi::class)` or the
 > compiler argument `-opt-in=kotlin.io.encoding.ExperimentalEncodingApi`.
 >
-{type="warning"}
+{style="warning"}
 
 We've added support for Base64 encoding and decoding. We provide 3 class instances, each using different encoding
 schemes and displaying different behaviors. Use the `Base64.Default` instance for the standard [Base64 encoding scheme](https://www.rfc-editor.org/rfc/rfc4648#section-4).
@@ -1227,7 +1227,7 @@ Base64 encoding and decoding with input and output streams.
 > It may be dropped or changed at any time. Opt-in is required (see details below).
 > Use it only for evaluation purposes. We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 If you annotate a `var` property with `@Volatile`, then the backing field is marked so that any reads or writes to this
 field are atomic, and writes are always made visible to other threads.
@@ -1291,7 +1291,7 @@ and [prohibits serializer customization via companion object](#prohibit-implicit
 > [Alpha](components-stability.md#stability-levels-explained). To use it,
 > [enable the Kotlin K2 compiler](#how-to-enable-the-kotlin-k2-compiler).
 >
-{type="warning"}
+{style="warning"}
 
 Starting with 1.8.20, the serialization compiler plugin works with the Kotlin K2 compiler.
 Give it a try and [share your feedback with us](#leave-your-feedback-on-the-new-k2-compiler)!

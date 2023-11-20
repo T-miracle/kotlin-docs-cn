@@ -295,7 +295,7 @@ are exported as well.
 > In most cases, you don't need to add all these dependencies to the framework API.
 > Use `export` explicitly for the dependencies you need to directly access from your Swift or Objective-C code.
 >
-{type="warning"}
+{style="warning"}
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -335,7 +335,7 @@ framework on both 32-bit and 64-bit devices.
 
 > The fat framework must have the same base name as the initial frameworks. Otherwise, you'll get an error.
 >
-{type="warning"}
+{style="warning"}
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -474,7 +474,7 @@ for publishing to private or public podspec repositories.
 > Publishing Kotlin frameworks to public repositories is not recommended if those frameworks are built for different versions
 > of Kotlin. Doing so might lead to conflicts in the end-users' projects.
 >
-{type="warning"}
+{style="warning"}
 
 ## Customize the Info.plist file
 
