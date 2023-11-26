@@ -47,7 +47,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lists-declaration"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGA9PRgEow5QYRoA2AnhtzwBnAC406ANxzcMAJzZQA8j14BlABY4ADjCEYAvAOEjFSQhRAjZeHGgDm3GBYA0lEEICOKHPJduweLJgjhbE4rRa1mgi3ETy7Mp8Gtq6YZh0jBgA2lY29o6unt7yrgFBjgC64ZTptJkAsigiOABGjkaiGADueCLqGDAAHlqCASIYIrw6GLDBPjgieFzVUjJCmjpC8BiNzW0wADLGADyqufYAfAbYTa2OR6Km5pbWtg5OIK4WRT4fX%2BCBYIfNJ0DCRAgxIjrFJCEEZJg5V75GCFLy%2FUqAypUKgAX0%2Blh8dhgIgACtwFkgILIsAgQAArHBSfGQLBaPCOWQANRgsiESzQtIAjAA6ACcwsFAAYQDigA?_gl=1*e5z6aw*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.242527874.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGA9PRgEow5QYRoA2AnhtzwBnAC406ANxzcMAJzZQA8j14BlABY4ADjCEYAvAOEjFSQhRAjZeHGgDm3GBYA0lEEICOKHPJduweLJgjhbE4rRa1mgi3ETy7Mp8Gtq6YZh0jBgA2lY29o6unt7yrgFBjgC64ZTptJkAsigiOABGjkaiGADueCLqGDAAHlqCASIYIrw6GLDBPjgieFzVUjJCmjpC8BiNzW0wADLGADyqufYAfAbYTa2OR6Km5pbWtg5OIK4WRT4fX%2BCBYIfNJ0DCRAgxIjrFJCEEZJg5V75GCFLy%2FUqAypUKgAX0%2Blh8dhgIgACtwFkgILIsAgQAArHBSfGQLBaPCOWQANRgsiESzQtIAjAA6ACcwsFAAYQDigA?_gl=1*e5z6aw*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.242527874.1684546783.1699700997-2060274793.1694940376)
 
 > 为了防止不必要的修改，您可以通过将可变列表分配给 `List` 来获得只读视图：
 > ```kotlin
@@ -66,7 +66,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-access"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4BlABY4ADjADOGALwYmeCQBcuSQhRCLWeHGgDmTGOoA0lEBICOKHO2OmweVmAPriNOqK1pFTIuoAqQjAYSA5KGHiKMFjhmIqBcgqK4RLwGAAkwOycPPzCYpIA2gAMALoAvi5utAD01RgBQSGsYRFRMRhxQfItKR1aOvqG1GhlIEYa1rowigAKTDiKSBCsWAggAFY4jGPgEFiieAasAGowzXgQaGsAjAB0AJy310UgZUA?_gl=1*e5z6aw*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.242527874.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4BlABY4ADjADOGALwYmeCQBcuSQhRCLWeHGgDmTGOoA0lEBICOKHO2OmweVmAPriNOqK1pFTIuoAqQjAYSA5KGHiKMFjhmIqBcgqK4RLwGAAkwOycPPzCYpIA2gAMALoAvi5utAD01RgBQSGsYRFRMRhxQfItKR1aOvqG1GhlIEYa1rowigAKTDiKSBCsWAggAFY4jGPgEFiieAasAGowzXgQaGsAjAB0AJy310UgZUA?_gl=1*e5z6aw*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.242527874.1684546783.1699700997-2060274793.1694940376)
 
 要获取列表中的第一个或最后一个项目，请分别使用 [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和 [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html) 函数：
 
@@ -78,7 +78,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-first"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4BlABY4ADjADOGALwYmeCQBcuSQhRCLWeHGgDmTGOoA0lEBICOKHO2OmweVmAPriNOqK1pFTIuoAqQjAYSA5KGHiKMFjhmIqBcgqK4RLwGAAkwOycPPzCYpIAdCGsSiQAvi5utAD01RgBQcVhEVExGHFB8s0p7Vo6%2BobUaGUgRhrWujCKAApMOIpIEKxYCCAAVjiMo%2BAQWKJ4BqwAajAleBBoqwCMBQCcBVcADCBlQA%3D?_gl=1*1n21fcf*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.148882103.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4BlABY4ADjADOGALwYmeCQBcuSQhRCLWeHGgDmTGOoA0lEBICOKHO2OmweVmAPriNOqK1pFTIuoAqQjAYSA5KGHiKMFjhmIqBcgqK4RLwGAAkwOycPPzCYpIAdCGsSiQAvi5utAD01RgBQcVhEVExGHFB8s0p7Vo6%2BobUaGUgRhrWujCKAApMOIpIEKxYCCAAVjiMo%2BAQWKJ4BqwAajAleBBoqwCMBQCcBVcADCBlQA%3D?_gl=1*1n21fcf*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.148882103.1684546783.1699700997-2060274793.1694940376)
 
 > [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和 [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html)
 > 函数是**扩展**函数的示例。要在对象上调用扩展函数，请在对象后写函数名，并加上一个点 `.`
@@ -98,7 +98,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-count"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4BlABY4ADjADOGALwYmeCQBcuSQhRCLWeHGgDmTGOoA0lEBICOKHO2OmweVmAPriNOqK1pFTIuoAqQgpyCooYIlIAJMDsnDz8wmKSAHSQ6IokAL4YeIowWBIubrQA9MUYAUHySmE4UgDM2bn5VFQZIEYa1rowigAKTDiKSBCsWAggAFY4jO3gEFiieAasAGowrBJ4EGjjAIxJAJxJuwAMIBlAA%3D%3D?_gl=1*1n21fcf*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.148882103.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4BlABY4ADjADOGALwYmeCQBcuSQhRCLWeHGgDmTGOoA0lEBICOKHO2OmweVmAPriNOqK1pFTIuoAqQgpyCooYIlIAJMDsnDz8wmKSAHSQ6IokAL4YeIowWBIubrQA9MUYAUHySmE4UgDM2bn5VFQZIEYa1rowigAKTDiKSBCsWAggAFY4jO3gEFiieAasAGowrBJ4EGjjAIxJAJxJuwAMIBlAA%3D%3D?_gl=1*1n21fcf*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4wLjE2OTk3ODI2MzAuNjAuMC4w&_ga=2.148882103.1684546783.1699700997-2060274793.1694940376)
 
 要检查一个项目是否在列表中，请使用 [`in` 运算符](operator-overloading.md#in-operator)：
 
@@ -110,7 +110,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-in"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4DKACxwAHGAGcMAXgyM84gC6ckhciAUs8ONAHNGMNQBoMa8QEcUONkZPg8LMPrXFqtEZrQLGRNWHuODEAwCVnYuHgFhMXEXTFoAeniMDRQDKjQAXxBDdSsdGAUABUYcBSQIFiwEEAArHAZs8AgsETx9FgA1GBZxPAg0aoBGADoATmHBgAYQDKA%3D%3D%3D?_gl=1*1wuwie7*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.146271796.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4DKACxwAHGAGcMAXgyM84gC6ckhciAUs8ONAHNGMNQBoMa8QEcUONkZPg8LMPrXFqtEZrQLGRNWHuODEAwCVnYuHgFhMXEXTFoAeniMDRQDKjQAXxBDdSsdGAUABUYcBSQIFiwEEAArHAZs8AgsETx9FgA1GBZxPAg0aoBGADoATmHBgAYQDKA%3D%3D%3D?_gl=1*1wuwie7*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.146271796.1684546783.1699700997-2060274793.1694940376)
 
 要从可变列表中添加或删除项目，请分别使用 [`.add()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/add.html)
 和 [`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) 函数：
@@ -130,7 +130,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-add-remove"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYDOAFjgA4yvwYBZFABccAIyYwAMnlbCAPAGVhAJwIBzAHwYAvNhHjJMuQHkkhCiFV4cadZMsAaSiFYBHFDhUwnLsHhUwBxBiGjoAenCMAEEoKBceNFF1CGoQDGEIDPYYDCZZYTDaDm5eADocOIsQROTUy1IijC41JKYiEp5WUkpMCKiAbWtbexhnd09vZ39AyWdanBS0AF0qJsiMACUYLAh6XOEcjCQAuQSYJMX69KQVCCxs3Py5Js7y71396oWlht66ZqtYTtQhvbq0daDYZ2OZsDxeMYYGZBGCrahoAC%2BIEcVi86hgwgACkwcMIkBAVFgECAAFY4RjY8D3Lh4SQqABqMBUrDwqWpAEYygBOMr8gAMIAxQA?_gl=1*nf02nl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.155479739.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYDOAFjgA4yvwYBZFABccAIyYwAMnlbCAPAGVhAJwIBzAHwYAvNhHjJMuQHkkhCiFV4cadZMsAaSiFYBHFDhUwnLsHhUwBxBiGjoAenCMAEEoKBceNFF1CGoQDGEIDPYYDCZZYTDaDm5eADocOIsQROTUy1IijC41JKYiEp5WUkpMCKiAbWtbexhnd09vZ39AyWdanBS0AF0qJsiMACUYLAh6XOEcjCQAuQSYJMX69KQVCCxs3Py5Js7y71396oWlht66ZqtYTtQhvbq0daDYZ2OZsDxeMYYGZBGCrahoAC%2BIEcVi86hgwgACkwcMIkBAVFgECAAFY4RjY8D3Lh4SQqABqMBUrDwqWpAEYygBOMr8gAMIAxQA?_gl=1*nf02nl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.155479739.1684546783.1699700997-2060274793.1694940376)
 
 ## Set（集合）
 
@@ -156,7 +156,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-sets-declaration"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ4YBnGABdqtAG45uGAE6soAeR68AYjJR5hGALyCRCpIXIgcAB1PcYxgDQZjAIxxonOG3fAALGDJm83xsC8fPxBiMRoGDABZFGEce0s9LQB3TQ8MGAAPCzwwTQxhXlMYDFgwbhwZHGE8LnCMSWkkdU14aNj4ywBlEQAeLuEZAgBzAD4dbA6EmB7hAyMTc0t%2FEEdnZxXA719NoJ3Q%2BvrTIbRhbiI5NiU%2BNQ1hMMxaSIBtMwsYWzWXWy3ggF1KJQAL4gawgOIyYYiAAKFWESAgMiwCBAACscJJQeAIFhTHhLDIAGreAS1NAogCMADoAJxUikABhAQKAA%3D?_gl=1*nf02nl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.155479739.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ4YBnGABdqtAG45uGAE6soAeR68AYjJR5hGALyCRCpIXIgcAB1PcYxgDQZjAIxxonOG3fAALGDJm83xsC8fPxBiMRoGDABZFGEce0s9LQB3TQ8MGAAPCzwwTQxhXlMYDFgwbhwZHGE8LnCMSWkkdU14aNj4ywBlEQAeLuEZAgBzAD4dbA6EmB7hAyMTc0t%2FEEdnZxXA719NoJ3Q%2BvrTIbRhbiI5NiU%2BNQ1hMMxaSIBtMwsYWzWXWy3ggF1KJQAL4gawgOIyYYiAAKFWESAgMiwCBAACscJJQeAIFhTHhLDIAGreAS1NAogCMADoAJxUikABhAQKAA%3D?_gl=1*nf02nl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.155479739.1684546783.1699700997-2060274793.1694940376)
 
 您可以在先前的示例中看到，因为集合只包含唯一的元素，重复的 `"cherry"` 项目被删除。
 
@@ -182,7 +182,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-set-count"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4AxVijwAXDAF4MAZxiiuSQhRA4ADqqYxlAGkogARjjRGcOvWAAWMVqz5nll67eXEadVawKimRZQBULPGkZOQwLHGCAEmB2Th5%2BIRFRADpIdFESAF8MMRgsaRc3WgB6YowAoJDxcOCAZhzRPILqNEyQbRBRHFYAczkABSYcUSQIViwEEAArHEZ28AgsVTxNVgA1a2k8CDRJgEZkgE5kvYAGEEygA%3D?_gl=1*nf02nl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.155479739.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYYBOMOUA8mkwJ4AxVijwAXDAF4MAZxiiuSQhRA4ADqqYxlAGkogARjjRGcOvWAAWMVqz5nll67eXEadVawKimRZQBULPGkZOQwLHGCAEmB2Th5%2BIRFRADpIdFESAF8MMRgsaRc3WgB6YowAoJDxcOCAZhzRPILqNEyQbRBRHFYAczkABSYcUSQIViwEEAArHEZ28AgsVTxNVgA1a2k8CDRJgEZkgE5kvYAGEEygA%3D?_gl=1*nf02nl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.155479739.1684546783.1699700997-2060274793.1694940376)
 
 要检查某个项目是否在集合中，请使用 [`in` 运算符](operator-overloading.md#in-operator)：
 
@@ -194,7 +194,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-set-in"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BiLFHgAuGALwYAzjBGckhciBwAHFYxhKANBiUAjHGkM5tu8AAsYLFr1NKwl67ZDFqtFSwIjGRfcaNKGASs7Fw8AkKirpi0APSxGCJCmlRoAL4gWiAiOCwA5rIACow4IkgQLFgIIABWOAyZ4BBYKngaLABqVlJ4EGjVAIwAdACcQwMADCBpQA?_gl=1*df6h0r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.148867639.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BiLFHgAuGALwYAzjBGckhciBwAHFYxhKANBiUAjHGkM5tu8AAsYLFr1NKwl67ZDFqtFSwIjGRfcaNKGASs7Fw8AkKirpi0APSxGCJCmlRoAL4gWiAiOCwA5rIACow4IkgQLFgIIABWOAyZ4BBYKngaLABqVlJ4EGjVAIwAdACcQwMADCBpQA?_gl=1*df6h0r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.148867639.1684546783.1699700997-2060274793.1694940376)
 
 要从可变集合中添加或删除项目，请分别使用 [`.add()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/add.html)
 和 [`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) 函数：
@@ -210,7 +210,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-set-add-remove"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYZIBOKeALvBgLIouOAEZMYAZRhcAPOK5sCAcwB8GALzZBIsZK4B5JIQogcAB1NjjAGkohhONA5zXbYABYw2bAJ4vj7zx9jYho6dk4uADocKCgjECg2HEUINHDuYLoMAHpsjABBWNtE5NT0rmMMLggqjwwAZylQ2lMFNC4mInLSLN6s3IwAbTMLGBt7R0cbAK9vGxKUtI5uAF1mykww5ai2GCwIehh4hbLtzIGAJT2DmGKkxfLK9ggsWtvGis2Wto6u7Z6%2Bn0BsNzGJxk4phgZj41tQ0ABfEBWEBCNiKKQABSYOC4SAgbCwCBAACscIwkeAXqY8GI2AA1Tz1PCpIkARkiAE5IqyAAwgeFAA%3D%3D%3D?_gl=1*df6h0r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.148867639.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGAbjgDYZIBOKeALvBgLIouOAEZMYAZRhcAPOK5sCAcwB8GALzZBIsZK4B5JIQogcAB1NjjAGkohhONA5zXbYABYw2bAJ4vj7zx9jYho6dk4uADocKCgjECg2HEUINHDuYLoMAHpsjABBWNtE5NT0rmMMLggqjwwAZylQ2lMFNC4mInLSLN6s3IwAbTMLGBt7R0cbAK9vGxKUtI5uAF1mykww5ai2GCwIehh4hbLtzIGAJT2DmGKkxfLK9ggsWtvGis2Wto6u7Z6%2Bn0BsNzGJxk4phgZj41tQ0ABfEBWEBCNiKKQABSYOC4SAgbCwCBAACscIwkeAXqY8GI2AA1Tz1PCpIkARkiAE5IqyAAwgeFAA%3D%3D%3D?_gl=1*df6h0r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.148867639.1684546783.1699700997-2060274793.1694940376)
 
 ## Map（映射）
 
@@ -249,7 +249,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-maps-declaration"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ7Y4ADtVoA3HNwwAnVlADyPXgCkUeMDACyMNCgwBeAYLlJC5EEMHcYZjABcIGAIwAGZwBoMZgNZ4A7nht7JwBOd08QCCkcNABzaxA7BxdnYhEaQSkCW24iGTYFPhU1TW0UVMxaBjILKz1kjx9%2FOtCPSOi4utcAX0o0%2BkYNFFscACMrQwx%2FWwALDBgAD0s1PFs7XkEYDFgwbhwo2zwuPvFJACtVdS0deAxB4bHNIQAeAGVbTNiPAEk0WwA%2BfTYIajKwaITGUzmQSWeKJJyuDzePwBBJBRwtcJtWKwtGucq0DAZLI5QjnYpXMp9KrAGowTphRp4ZphLEdZI9KhoLogNwgYZSOK2AAKu1sSEiWAQIFOOHEPPAECwgjwVikADUYFIAM6HNBSxwAOmCBpcIC6QA?_gl=1*hygxby*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.190800171.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ7Y4ADtVoA3HNwwAnVlADyPXgCkUeMDACyMNCgwBeAYLlJC5EEMHcYZjABcIGAIwAGZwBoMZgNZ4A7nht7JwBOd08QCCkcNABzaxA7BxdnYhEaQSkCW24iGTYFPhU1TW0UVMxaBjILKz1kjx9%2FOtCPSOi4utcAX0o0%2BkYNFFscACMrQwx%2FWwALDBgAD0s1PFs7XkEYDFgwbhwo2zwuPvFJACtVdS0deAxB4bHNIQAeAGVbTNiPAEk0WwA%2BfTYIajKwaITGUzmQSWeKJJyuDzePwBBJBRwtcJtWKwtGucq0DAZLI5QjnYpXMp9KrAGowTphRp4ZphLEdZI9KhoLogNwgYZSOK2AAKu1sSEiWAQIFOOHEPPAECwgjwVikADUYFIAM6HNBSxwAOmCBpcIC6QA?_gl=1*hygxby*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.190800171.1684546783.1699700997-2060274793.1694940376)
 
 > 为了防止不必要的修改，通过将可变映射转换为 `Map` 来获取只读视图：
 > ```kotlin
@@ -268,7 +268,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-access"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ7Y4ADtVoA3HNwwAnVlADyPXgCkUeMDACyMNCgwBeAYLlJC5EEMHcYZjABcIGAIwAGZwBoMZgNZ4A7nht7JwBOd08QCCkcNABzaxA7BxdnYhEaQSkCW24iMwAVAAsYDHFuFGKIJAwLKwwAK1V1DDwAZ3gMABJgGTYFPhU1TW0UAG0zGviAXQBfM1TMWgYMQuLS8oxK6sFLYobB5ranV0pKaZA3EFscKTjbAAVuHFskSKwEEDqccXPwCCxBPBWKQANRgUhaeC470cADpgjCXCBpkA%3D%3D?_gl=1*hygxby*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.190800171.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ7Y4ADtVoA3HNwwAnVlADyPXgCkUeMDACyMNCgwBeAYLlJC5EEMHcYZjABcIGAIwAGZwBoMZgNZ4A7nht7JwBOd08QCCkcNABzaxA7BxdnYhEaQSkCW24iMwAVAAsYDHFuFGKIJAwLKwwAK1V1DDwAZ3gMABJgGTYFPhU1TW0UAG0zGviAXQBfM1TMWgYMQuLS8oxK6sFLYobB5ranV0pKaZA3EFscKTjbAAVuHFskSKwEEDqccXPwCCxBPBWKQANRgUhaeC470cADpgjCXCBpkA%3D%3D?_gl=1*hygxby*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.190800171.1684546783.1699700997-2060274793.1694940376)
 
 要获取映射中的项目数，请使用 [`.count()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/count.html) 函数：
 
@@ -281,7 +281,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-count"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ7Y4ADtVoA3HNwwAnVlADyPXgCkUeMDACyMNCgwBeAYLlJC5EEMHcYZjABcIGAIwAGZwBoMZgNZ4A7nht7JwBOd08QCCkcNABzaxA7BxdnYhEaQSkCW24iMwAVAAs8AGdDDAKcUoASYBk2BT4VNU1tFAA6SHRbEgBfDC8YXnZxbhQYDEF8KWKzVMxaBgxCkrKK0oBmfsHhiTGJqZmqNB6QNxBbHCk42wAFbhxbJEisBBAAKxxxU%2FAILEE8KxSABqMGmeC4r0cbWCbRcIB6QA%3D%3D?_gl=1*a4o9yc*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.219975321.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgEow5QC0EaANgJ7Y4ADtVoA3HNwwAnVlADyPXgCkUeMDACyMNCgwBeAYLlJC5EEMHcYZjABcIGAIwAGZwBoMZgNZ4A7nht7JwBOd08QCCkcNABzaxA7BxdnYhEaQSkCW24iMwAVAAs8AGdDDAKcUoASYBk2BT4VNU1tFAA6SHRbEgBfDC8YXnZxbhQYDEF8KWKzVMxaBgxCkrKK0oBmfsHhiTGJqZmqNB6QNxBbHCk42wAFbhxbJEisBBAAKxxxU%2FAILEE8KxSABqMGmeC4r0cbWCbRcIB6QA%3D%3D?_gl=1*a4o9yc*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.219975321.1684546783.1699700997-2060274793.1694940376)
 
 要从可变映射中添加或删除项目，请分别使用 [`.put()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/put.html)
 和 [`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) 函数：
@@ -299,7 +299,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-put-remove"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBWKeYMAsjGivBi4oALjgBGjbjgAOAHgDKwgE4EA5gBoMASTTCAfBgC82EeMlcZAeSSFyIGdMl2MwiBgCMABk%2Ba7AazwAdzxnVw8ATh8MOwglHDRVGFC3L09ialo2Dm5eFAA6aRFbcAhIPmE7TXcAVjSMAHp6jABBKCgMPxgAT2iSspFnYOEAC3omFBgPWpc3EcncaQyaaRVdRiIszh4%2BdMxaRrIHSUNUzQDgk8jNWPjEk%2B9NSH7hE9qAX0ol1nYt3LylGBYCB0GDFG4JJIgUj7JoAJUBwMmnR6MTiEOcSCUECwLmG8xkXxWBGE60ImxyOy%2BB2ARxg9yi5zwlyiTwg5Veng%2BVDQbxA6hAoiUiWEAAVGDhhEhYlgECAWDgGHySlhpHhJEoAGowJQAZzwbNl7jy4TyXhAbyAA%3D%3D?_gl=1*yqfuhk*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.216909334.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBWKeYMAsjGivBi4oALjgBGjbjgAOAHgDKwgE4EA5gBoMASTTCAfBgC82EeMlcZAeSSFyIGdMl2MwiBgCMABk%2Ba7AazwAdzxnVw8ATh8MOwglHDRVGFC3L09ialo2Dm5eFAA6aRFbcAhIPmE7TXcAVjSMAHp6jABBKCgMPxgAT2iSspFnYOEAC3omFBgPWpc3EcncaQyaaRVdRiIszh4%2BdMxaRrIHSUNUzQDgk8jNWPjEk%2B9NSH7hE9qAX0ol1nYt3LylGBYCB0GDFG4JJIgUj7JoAJUBwMmnR6MTiEOcSCUECwLmG8xkXxWBGE60ImxyOy%2BB2ARxg9yi5zwlyiTwg5Veng%2BVDQbxA6hAoiUiWEAAVGDhhEhYlgECAWDgGHySlhpHhJEoAGowJQAZzwbNl7jy4TyXhAbyAA%3D%3D?_gl=1*yqfuhk*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.216909334.1684546783.1699700997-2060274793.1694940376)
 
 要检查映射中是否已包含特定键，请使用 [`.containsKey()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/contains-key.html) 函数：
 
@@ -311,7 +311,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-contains-keys"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BSKPGBgBZGGhQYAvNhwAHTkkLkQC%2BYxiqMAFwgYAjAAYjAGgyqA1ngDuebXsMBOMxZAQWONAHMtIXfrGRsTUtPIsBDqMRGwc3HyCwmISKAB0kGg6%2BGgAzgDSMLwqINZ2qsQhmLQA9NW6LChaVGgAviCmIFksvjoACow4OkgeWAggAFY4DO3gEFjyeJosAGowLDl4EGhjBqlOqcYgLUA%3D?_gl=1*yqfuhk*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.216909334.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BSKPGBgBZGGhQYAvNhwAHTkkLkQC%2BYxiqMAFwgYAjAAYjAGgyqA1ngDuebXsMBOMxZAQWONAHMtIXfrGRsTUtPIsBDqMRGwc3HyCwmISKAB0kGg6%2BGgAzgDSMLwqINZ2qsQhmLQA9NW6LChaVGgAviCmIFksvjoACow4OkgeWAggAFY4DO3gEFjyeJosAGowLDl4EGhjBqlOqcYgLUA%3D?_gl=1*yqfuhk*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.216909334.1684546783.1699700997-2060274793.1694940376)
 
 要获取映射的键或值的集合，请分别使用 [`keys`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/keys.html)
 和 [`values`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/values.html) 属性：
@@ -326,7 +326,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-keys-values"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BSKPGBgBZGGhQYAvNhwAHTkkLkQC%2BYxiqMAFwgYAjAAYjAGgyqA1ngDuebXsMBOMxZAQWONAHMtIXfrGRsTUtPIsBDqMRGwc3HyCwmISKAB0ljC8AM4hmLQA9PkYANrqmubWduYeXr4AuqE04ZHRhLFcPAJCIuKSqQyMKDA5jRiFJUHmBi5TJg1UaAC%2BIKYgOjgsvjoACow4OkgeWAggAFY4DCvgEFjyeJosAGowLFl4EGgnBqlOqcYgiyAA?_gl=1*yqfuhk*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.216909334.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BSKPGBgBZGGhQYAvNhwAHTkkLkQC%2BYxiqMAFwgYAjAAYjAGgyqA1ngDuebXsMBOMxZAQWONAHMtIXfrGRsTUtPIsBDqMRGwc3HyCwmISKAB0ljC8AM4hmLQA9PkYANrqmubWduYeXr4AuqE04ZHRhLFcPAJCIuKSqQyMKDA5jRiFJUHmBi5TJg1UaAC%2BIKYgOjgsvjoACow4OkgeWAggAFY4DCvgEFjyeJosAGowLFl4EGgnBqlOqcYgiyAA?_gl=1*yqfuhk*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.216909334.1684546783.1699700997-2060274793.1694940376)
 
 > [`keys`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/keys.html) 和 [`values`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/values.html)
 > 是对象的**属性**的示例。要访问对象的属性，请在对象之后添加一个点 `.`，然后写入属性名。
@@ -348,7 +348,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-in"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BSKPGBgBZGGhQYAvNhwAHTkkLkQC%2BYxiqMAFwgYAjAAYjAGgyqA1ngDuebXsMBOMxZAQWONAHMtIXfrGRsTUtPIsBDqMRKoeXr7aBKzsXDwCQiLikgB0ljC8AM4hmLQA9KW6LChaJTThkdGEAEwmGElsHNx8gsJiEijZDIzVRaE05RhITAU1lAC%2BIKYgOjgsvjoACow4OkgeWAggAFY4DIvgEFjyeJosAGowLAV4EGiHBtlO2cYgc0A%3D?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBOMOUA8mowJ4BSKPGBgBZGGhQYAvNhwAHTkkLkQC%2BYxiqMAFwgYAjAAYjAGgyqA1ngDuebXsMBOMxZAQWONAHMtIXfrGRsTUtPIsBDqMRKoeXr7aBKzsXDwCQiLikgB0ljC8AM4hmLQA9KW6LChaJTThkdGEAEwmGElsHNx8gsJiEijZDIzVRaE05RhITAU1lAC%2BIKYgOjgsvjoACow4OkgeWAggAFY4DIvgEFjyeJosAGowLAV4EGiHBtlO2cYgc0A%3D?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
 
 要了解有关您可以使用集合执行的操作的更多信息，请参阅 [Collections](collections-overview.md)。
 
@@ -370,7 +370,7 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-collections-exercise-1"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYYDmATjDGgHIpYBGMLAM4YAvBnp5BAFwDySQgEYANBgAsKgEwBmYpWq0GGNlG58BwsROlzFAdk26q1APTOMAdRZ4pMDAE8IFBYMSFgMAAsBGEoAXxAlECkcFiYYKQAFehwpJAgWLAQQACscOnjwCCwABzx6AQA1czwINEKFADoATnaFAAYQGKA%3D%3D?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYYDmATjDGgHIpYBGMLAM4YAvBnp5BAFwDySQgEYANBgAsKgEwBmYpWq0GGNlG58BwsROlzFAdk26q1APTOMAdRZ4pMDAE8IFBYMSFgMAAsBGEoAXxAlECkcFiYYKQAFehwpJAgWLAQQACscOnjwCCwABzx6AQA1czwINEKFADoATnaFAAYQGKA%3D%3D?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
 
 |---|---|
 ```kotlin
@@ -397,7 +397,7 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-collections-exercise-2"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYYDKAqgApsDyASgCoCiAEQwBeDAGcYAF05JC5EAAlevNgoA0GBctVMNWkADFVC4pWq0GGAE4wAjihjipMKKIPisUgA4LzFukY8cSYUb28Iaxc3MQB6WIwAdWs8FwwATwgUawxIWAwACxhbLSpqbxS0KXoiBVDwyKkMJEiMABJbBydo%2BHbg%2Boio11NKAF8QdRApHGsAc2k2ehwpFussBBAAKxw6CfAILG88emKANWLxPAg0DYBGADoATnvbgAYQUaA%3D%3D%3D?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYYDKAqgApsDyASgCoCiAEQwBeDAGcYAF05JC5EAAlevNgoA0GBctVMNWkADFVC4pWq0GGAE4wAjihjipMKKIPisUgA4LzFukY8cSYUb28Iaxc3MQB6WIwAdWs8FwwATwgUawxIWAwACxhbLSpqbxS0KXoiBVDwyKkMJEiMABJbBydo%2BHbg%2Boio11NKAF8QdRApHGsAc2k2ehwpFussBBAAKxw6CfAILG88emKANWLxPAg0DYBGADoATnvbgAYQUaA%3D%3D%3D?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
 
 <deflist collapsible="true" id="kotlin-tour-collections-exercise-2-hint">
     <def title="示意">
@@ -430,7 +430,7 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-collections-exercise-3"}
-[打开训练场>>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYZopYBGMATgEwDuEHUDAF4MAelEYA6hzwAXGBgCeEFBwyRYGABacYlarQZNhGLvoMAHGWln0i5EABJMeAM4ZXFmPVkYc7gHJHYAAeaTkFZVV1aAUdDgUAPgBfAIdiSmSQABoQWRwOAHMYWQAFehxZJH4sBBAAKxw6HPAILAs8ek4ANU5XPAg0OoBGADoATlHhgAYQZKA?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYZopYBGMATgEwDuEHUDAF4MAelEYA6hzwAXGBgCeEFBwyRYGABacYlarQZNhGLvoMAHGWln0i5EABJMeAM4ZXFmPVkYc7gHJHYAAeaTkFZVV1aAUdDgUAPgBfAIdiSmSQABoQWRwOAHMYWQAFehxZJH4sBBAAKxw6HPAILAs8ek4ANU5XPAg0OoBGADoATlHhgAYQZKA?_gl=1*6yjf0i*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc4MjYzMC4xNy4xLjE2OTk3ODI5MzkuNTMuMC4w&_ga=2.214281879.1684546783.1699700997-2060274793.1694940376)
 
 |---|---|
 ```kotlin
