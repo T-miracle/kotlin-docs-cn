@@ -1,41 +1,40 @@
-[//]: # (title: Conditions and loops)
+[//]: # (title: 条件和循环)
 
-## If expression
+## If 表达式 {id=if表达式}
 
-In Kotlin, `if` is an expression: it returns a value.
-Therefore, there is no ternary operator (`condition ? then : else`) because ordinary `if` works fine in this role.
+在 Kotlin 中，`if` 是一个表达式：它返回一个值。
+因此，Kotlin 没有三目运算符 (`condition ? then : else`)，因为普通的 `if` 在这个角色中已经表现得很好了。
 
 ```kotlin
 fun main() {
     val a = 2
     val b = 3
 
-    //sampleStart
     var max = a
     if (a < b) max = b
 
-    // With else
+    // 跟 else 一起
     if (a > b) {
       max = a
     } else {
       max = b
     }
 
-    // As expression
+    // 作为表达式
     max = if (a > b) a else b
 
-    // You can also use `else if` in expressions:
+    // 您还可以在表达式中使用 “else if”：
     val maxLimit = 1
     val maxOrLimit = if (maxLimit > a) maxLimit else if (a > b) a else b
 
-    //sampleEnd
     println("max is $max")
     println("maxOrLimit is $maxOrLimit")
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="if-else-if-kotlin"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYY4YC8GATJdbQxgEasMAZkpduYngCdsOAB6CcEjHiQZCzADz9SueWz6iq1APTGMAdTwAXABYYY9AM4wlKtcwB82skuq6FSgC%2B9k4wPkbc%2FvpBhtwYphgAgo72sgAOkjCOjngQaEpRyqrqGF58pMwOzvyx3AkAmhAoGGA4mAyOEBgo1QAGVWEqvcqYMOmZ2blojvBKdIy6ADJ4WNaCAIxzvLoA8pLLq1aCboRLK2teODpyB2sDRe6l3pWhNfkRShkEVvRE5CD%2BPApAAkun%2BxE%2Bkm%2Bv0I%2F12%2B3ORyBGFBcj2tys4MogRAABoQFYcJIAOYwKwABXoOCsSAgkiwCBAACscHQ8eAIFg0nh6DBJAA1Pk5PKM9YAOgAnGL2AAGECBIA)
 
-Branches of an `if` expression can be blocks. In this case, the last expression is the value of a block:
+`if` 表达式的分支可以是代码块。在这种情况下，代码块的最后一个表达式是该块的值：
 
 ```kotlin
 val max = if (a > b) {
@@ -47,13 +46,12 @@ val max = if (a > b) {
 }
 ```
 
-If you're using `if` as an expression, for example, for returning its value or
-assigning it to a variable, the `else` branch is mandatory.
+如果你将 `if` 用作表达式，例如用于 返回它的值 或 赋值给变量，`else` 分支是必需的。
 
-## When expression
+## When 表达式 {id=when表达式}
 
-`when` defines a conditional expression with multiple branches. It is similar to the `switch` statement in C-like languages.
-Its simple form looks like this.
+`when` 定义了一个带有多个分支的条件表达式。它类似于 C 语言中的 `switch` 语句。
+它的简单形式如下：
 
 ```kotlin
 when (x) {
@@ -65,18 +63,16 @@ when (x) {
 }
 ```
 
-`when` matches its argument against all branches sequentially until some branch condition is satisfied.
+`when` 会按顺序将其参数与所有分支进行匹配，直到某个分支的条件达到满足。
 
-`when` can be used either as an expression or as a statement. If it is used as an expression, the value
-of the first matching branch becomes the value of the overall expression. If it is used as a statement, the values of
-individual branches are ignored. Just like with `if`, each branch can be a block, and its value
-is the value of the last expression in the block.
+`when` 可以作为表达式或语句使用。如果它作为表达式使用，则第一个匹配分支的值成为整体表达式的值。
+如果它作为语句使用，则忽略各个分支的值。
+与 `if` 一样，每个分支都可以是一个代码块，其值是代码块中的最后一个表达式的值。
 
-The `else` branch is evaluated if none of the other branch conditions are satisfied.
+如果没有其他分支的条件得到满足，将执行 `else` 分支。
 
-If `when` is used as an _expression_, the `else` branch is mandatory,
-unless the compiler can prove that all possible cases are covered with branch conditions,
-for example, with [`enum` class](enum-classes.md) entries and [`sealed` class](sealed-classes.md) subtypes).
+如果 `when` 作为一个 **表达式** 使用，`else` 分支是必需存在的，除非编译器能够证明所有可能的情况都通过分支条件覆盖。
+例如，使用 [`enum` 类](enum-classes.md) 条目和 [`sealed` 类](sealed-classes.md) 的子类型。
 
 ```kotlin
 enum class Bit {
@@ -86,14 +82,13 @@ enum class Bit {
 val numericValue = when (getRandomBit()) {
     Bit.ZERO -> 0
     Bit.ONE -> 1
-    // 'else' is not required because all cases are covered
+    // 不需要“else”，因为涵盖了所有情况
 }
 ```
 
-In `when` _statements_, the `else` branch is mandatory in the following conditions:
-* `when` has a subject of a `Boolean`, [`enum`](enum-classes.md),
-or [`sealed`](sealed-classes.md) type, or their nullable counterparts.
-* branches of `when` don't cover all possible cases for this subject.
+在 `when` _语句_ 中，以下情况下 `else` 分支是必需存在的：
+* `when` 的主语（subject，译注：指 `when` 所判断的表达式）是 `Boolean`、[`enum`](enum-classes.md) 或 [`sealed`](sealed-classes.md) 类型，或它们的可空对应类型。
+* `when` 的分支没有覆盖此主语的所有可能情况。
 
 ```kotlin
 enum class Color {
@@ -104,17 +99,17 @@ when (getColor()) {
     Color.RED -> println("red")
     Color.GREEN -> println("green")   
     Color.BLUE -> println("blue")
-    // 'else' is not required because all cases are covered
+    // 不需要“else”，因为涵盖了所有情况
 }
 
 when (getColor()) {
-    Color.RED -> println("red") // no branches for GREEN and BLUE
-    else -> println("not red") // 'else' is required
+    Color.RED -> println("red") // GREEN 和 BLUE 没有分支
+    else -> println("not red") // “其他”为必填项
 }
 ```
 
 
-To define a common behavior for multiple cases, combine their conditions in a single line with a comma: 
+为了使多个情况定义共同的行为，请将它们的条件用逗号在一行中组合：
 
 ```kotlin
 when (x) {
@@ -123,7 +118,7 @@ when (x) {
 }
 ```
 
-You can use arbitrary expressions (not only constants) as branch conditions
+你可以使用任意表达式（不仅限于常量）作为分支条件。
 
 ```kotlin
 when (x) {
@@ -132,7 +127,7 @@ when (x) {
 }
 ```
 
-You can also check a value for being `in` or `!in` a [range](ranges.md) or a collection:
+你还可以检查一个值是否在（`in`）或不在（`!in`）[区间](ranges.md)或集合中：
 
 ```kotlin
 when (x) {
@@ -143,9 +138,8 @@ when (x) {
 }
 ```
 
-Another option is checking that a value `is` or `!is` of a particular type. Note that,
-due to [smart casts](typecasts.md#smart-casts), you can access the methods and properties of the type without
-any extra checks.
+另一种选择是检查一个值是否 是（`is`） 或 不是（`!is`） 特定类型。请注意，
+由于[智能转换](typecasts.md#智能转换)，你可以访问该类型的方法和属性而无需进行额外的检查。
 
 ```kotlin
 fun hasPrefix(x: Any) = when(x) {
@@ -154,8 +148,8 @@ fun hasPrefix(x: Any) = when(x) {
 }
 ```
 
-`when` can also be used as a replacement for an `if`-`else` `if` chain.
-If no argument is supplied, the branch conditions are simply boolean expressions, and a branch is executed when its condition is true:
+`when` 也可以用作替代 `if`-`else` `if` 链的方式。
+如果没有提供参数，分支条件就是布尔表达式，当其条件为真时执行相应的分支：
 
 ```kotlin
 when {
@@ -165,7 +159,7 @@ when {
 }
 ```
 
-You can capture *when* subject in a variable using following syntax:
+你可以使用以下语法将 **when** 的主语捕获到一个变量中：
 
 ```kotlin
 fun Request.getBody() =
@@ -175,18 +169,17 @@ fun Request.getBody() =
     }
 ```
 
-The scope of variable introduced in *when* subject is restricted to the body of this *when*.
+**when** 表达式中引入的变量的作用域限制在 **when** 的主体内。
 
-## For loops
+## For 循环 {id=for循环}
 
-The `for` loop iterates through anything that provides an iterator. This is equivalent to the `foreach` loop in languages like C#.
-The syntax of `for` is the following:
+`for` 循环用于迭代任何提供迭代器的对象。在类似 C# 的语言中，这类似于 `foreach` 循环。`for` 的语法如下：
 
 ```kotlin
 for (item in collection) print(item)
 ```
 
-The body of `for` can be a block.
+`for` 的主体可以是一个代码块。
 
 ```kotlin
 for (item: Int in ints) {
@@ -194,67 +187,63 @@ for (item: Int in ints) {
 }
 ```
 
-As mentioned before, `for` iterates through anything that provides an iterator. This means that it:
+如上所述，`for` 循环迭代任何提供迭代器的对象。这意味着：
 
-* has a member or an extension function `iterator()` that returns `Iterator<>`:
-  * has a member or an extension function `next()`
-  * has a member or an extension function `hasNext()` that returns `Boolean`.
+* 它有一个成员或扩展函数 `iterator()` 返回 `Iterator<>`：
+  * 有一个成员或扩展函数 `next()`
+  * 有一个成员或扩展函数 `hasNext()` 返回 `Boolean`。
 
-All of these three functions need to be marked as `operator`.
+这三个函数都需要标记为 `operator`。
 
-To iterate over a range of numbers, use a [range expression](ranges.md):
+要迭代一系列数字，使用 [区间表达式](ranges.md)：
 
 ```kotlin
 fun main() {
-//sampleStart
     for (i in 1..3) {
         println(i)
     }
     for (i in 6 downTo 0 step 2) {
         println(i)
     }
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGSEAThoXhgRgIwB0XAzKRUy1hABwYEALgBsieYtVoBfBTXpMWbTADYMUCAHc0AFQgYADBgDOEmCIwAmASuEYxkmS3lCayqmkUgADQgEjgMAOYwEgAKUjgSalgIIABWOABuOEHgEFgieFIwDABqRZZ4EGjJ3ACcXPZmIIpAA%3D)
 
-A `for` loop over a range or an array is compiled to an index-based loop that does not create an iterator object.
+`for` 循环遍历区间或数组会被编译为基于索引的循环，而不会创建迭代器对象。
 
-If you want to iterate through an array or a list with an index, you can do it this way:
-
-```kotlin
-fun main() {
-val array = arrayOf("a", "b", "c")
-//sampleStart
-    for (i in array.indices) {
-        println(array[i])
-    }
-//sampleEnd
-}
-```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-Alternatively, you can use the `withIndex` library function:
+如果你想通过索引遍历数组或列表，可以这样做：
 
 ```kotlin
 fun main() {
     val array = arrayOf("a", "b", "c")
-//sampleStart
-    for ((index, value) in array.withIndex()) {
-        println("the element at $index is $value")
+    for (i in array.indices) {
+        println(array[i])
     }
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6aAbjgDYY4BOjOAnhgLwPNsDyShciBxCANBiEAjMRPBDilShmUYkERhkJ4MBbi1YA6AlDxgYAZ1IVMK2wAdGBAC60iTfQG08AXQU3lAL6KaAEgoiBOTADmME4ACrQ4TmqMWAggAFY4NGHgEFh2eLQwjABqJeZ4EGjpAIwGAJwGAEwADCABQA%3D)
 
-## While loops
+或者，你可以使用 `withIndex` 库函数：
 
-`while` and `do-while` loops execute their body continuously while their condition is satisfied.
-The difference between them is the condition checking time:
-* `while` checks the condition and, if it's satisfied, executes the body and then returns to the condition check.
-* `do-while` executes the body and then checks the condition. If it's satisfied, the loop repeats. So, the body of `do-while`
-executes at least once regardless of the condition. 
+```kotlin
+fun main() {
+    val array = arrayOf("a", "b", "c")
+    for ((index, value) in array.withIndex()) {
+        println("the element at $index is $value")
+    }
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYY4BOzOAnhgLxOscDySQuRA4RAGgwiARhKngRxSpWrUkEZhkKECsAB6S69FDFIFebdgDoA7ngAuACwCSafSVIUqq1QAdmBPb0RCJOMBgw9DBYMGj2TPEAJLowehh4AM4YiUYmiiqqAL7KaIUg4iD2LADmMPYACvQ49urMWAggAFY4dOXgEFi%2BeFHMAGowzBl4EGgdAIxWAJxWAEwADCCFQA%3D)
+
+## While 循环 {id=while循环}
+
+`while` 和 `do-while` 循环在其条件满足的情况下持续执行其主体。
+它们之间的区别在于条件检查的时间：
+* `while` 先检查条件，如果条件满足，则执行主体，然后返回到条件检查。
+* `do-while` 先执行主体，然后再检查条件。如果条件满足，循环重复。因此，`do-while` 的主体至少执行一次，不管条件如何。
 
 ```kotlin
 while (x > 0) {
@@ -266,6 +255,6 @@ do {
 } while (y != null) // y is visible here!
 ```
 
-## Break and continue in loops
+## 循环中的 Break 和 Continue
 
-Kotlin supports traditional `break` and `continue` operators in loops. See [Returns and jumps](returns.md).
+Kotlin 支持在循环中使用传统的 `break` 和 `continue` 操作符。详见[返回和跳转](returns.md)。

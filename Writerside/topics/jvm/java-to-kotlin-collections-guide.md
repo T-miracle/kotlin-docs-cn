@@ -149,7 +149,7 @@ val immutableNumbers = listOf("one", "two")
 ```
 {id="mutability-kotlin"}
 
-Read more about immutability on the [Kotlin coding conventions](coding-conventions.md#immutability) page.
+Read more about immutability on the [Kotlin coding conventions](coding-conventions.md#不可变性) page.
 
 ## Covariance
 
@@ -597,7 +597,7 @@ public void objectIsInstance() {
 {id="filter-by-type-java"}
 
 In Kotlin, you just call [`filterIsInstance<NEEDED_TYPE>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/filter-is-instance.html) on your collection, 
-and the type cast is done by [Smart casts](typecasts.md#smart-casts):
+and the type cast is done by [Smart casts](typecasts.md#智能转换):
 
 ```kotlin
 // Kotlin

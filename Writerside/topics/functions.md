@@ -31,7 +31,7 @@ parameter must be explicitly typed:
 fun powerOf(number: Int, exponent: Int): Int { /*...*/ }
 ```
 
-You can use a [trailing comma](coding-conventions.md#trailing-commas) when you declare function parameters:
+You can use a [trailing comma](coding-conventions.md#尾随逗号) when you declare function parameters:
 
 ```kotlin
 fun powerOf(
@@ -231,7 +231,7 @@ val a = arrayOf(1, 2, 3)
 val list = asList(-1, 0, *a, 4)
 ```
 
-If you want to pass a [primitive type array](arrays.md#primitive-type-arrays)
+If you want to pass a [primitive type array](arrays.md#原始类型数组)
 into `vararg`, you need to convert it to a regular (typed) array using the `toTypedArray()` function:
 
 ```kotlin

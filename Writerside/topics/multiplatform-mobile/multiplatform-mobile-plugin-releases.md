@@ -56,7 +56,7 @@ Released: 9 November, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](releases.md#release-details)
+* [Any of Kotlin plugin versions](releases.md#发布详情)
 
 </td>
 </tr>
@@ -82,7 +82,7 @@ Released: 5 October, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](releases.md#release-details)
+* [Any of Kotlin plugin versions](releases.md#发布详情)
 
 </td>
 </tr>
@@ -104,7 +104,7 @@ Released: 24 May, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](releases.md#release-details)
+* [Any of Kotlin plugin versions](releases.md#发布详情)
 
 </td>
 </tr>
@@ -126,7 +126,7 @@ Released: 12 April, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](releases.md#release-details)
+* [Any of Kotlin plugin versions](releases.md#发布详情)
 
 </td>
 </tr>
@@ -149,7 +149,7 @@ Released: 30 January, 2023
 </td>
 <td>
 
-* [Any of Kotlin plugin versions](releases.md#release-details)
+* [Any of Kotlin plugin versions](releases.md#发布详情)
 
 </td>
 </tr>
@@ -168,7 +168,7 @@ Released: 30 November, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](releases.md#release-details)
+* [Kotlin 1.7.0—*](releases.md#发布详情)
 
 </td>
 </tr>
@@ -190,7 +190,7 @@ Released: 22 November, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—*](releases.md#release-details)
+* [Kotlin 1.7.0—*](releases.md#发布详情)
 
 </td>
 </tr>
@@ -219,7 +219,7 @@ Released: 12 September, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](releases.md#release-details)
+* [Kotlin 1.7.0—1.7.*](releases.md#发布详情)
 
 </td>
 </tr>
@@ -238,7 +238,7 @@ Released: 9 June, 2022
 </td>
 <td>
 
-* [Kotlin 1.7.0—1.7.*](releases.md#release-details)
+* [Kotlin 1.7.0—1.7.*](releases.md#发布详情)
 
 </td>
 </tr>
@@ -257,7 +257,7 @@ Released: 4 April, 2022
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](releases.md#release-details)
+* [Kotlin 1.5.0—1.6.*](releases.md#发布详情)
 
 </td>
 </tr>
@@ -281,7 +281,7 @@ Released: 15 February, 2022
 </td>
 <td>
 
-* [Kotlin 1.5.0—1.6.*](releases.md#release-details)
+* [Kotlin 1.5.0—1.6.*](releases.md#发布详情)
 
 </td>
 </tr>
@@ -310,7 +310,7 @@ Released: 16 November, 2021
 </td>
 <td>
 
-* [Kotlin 1.6.0](releases.md#release-details)
+* [Kotlin 1.6.0](releases.md#发布详情)
 
 </td>
 </tr>
@@ -336,7 +336,7 @@ Released: August 2, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](releases.md#release-details)
+* [Kotlin 1.5.10](releases.md#发布详情)
 
 </td>
 </tr>
@@ -356,7 +356,7 @@ Released: June 10, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](releases.md#release-details)
+* [Kotlin 1.5.10](releases.md#发布详情)
 
 </td>
 </tr>
@@ -375,7 +375,7 @@ Released: May 25, 2021
 </td>
 <td>
 
-* [Kotlin 1.5.10](releases.md#release-details)
+* [Kotlin 1.5.10](releases.md#发布详情)
 
 </td>
 </tr>
@@ -396,7 +396,7 @@ Use this version of the plugin with Android Studio 4.2 or Android Studio 2020.3.
 </td>
 <td>
 
-* [Kotlin 1.5.0](releases.md#release-details)
+* [Kotlin 1.5.0](releases.md#发布详情)
 
 </td>
 </tr>
@@ -419,7 +419,7 @@ Released: April 5, 2021
 </td>
 <td>
 
-* [Kotlin 1.4.30](releases.md#release-details)
+* [Kotlin 1.4.30](releases.md#发布详情)
 
 </td>
 </tr>
@@ -441,7 +441,7 @@ Released: March 3, 2021
 </td>
 <td>
 
-* [Kotlin 1.4.30](releases.md#release-details)
+* [Kotlin 1.4.30](releases.md#发布详情)
 
 </td>
 </tr>
@@ -462,7 +462,7 @@ Use this version of the plugin with Android Studio 4.2.
 </td>
 <td>
 
-* [Kotlin 1.4.30](releases.md#release-details)
+* [Kotlin 1.4.30](releases.md#发布详情)
 
 </td>
 </tr>
@@ -488,7 +488,7 @@ Released: November 23, 2020
 </td>
 <td>
 
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.20](releases.md#发布详情)
 
 </td>
 </tr>
@@ -508,8 +508,8 @@ Released: October 2, 2020
 </td>
 <td>
 
-* [Kotlin 1.4.10](releases.md#release-details)
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.10](releases.md#发布详情)
+* [Kotlin 1.4.20](releases.md#发布详情)
 
 </td>
 </tr>
@@ -529,8 +529,8 @@ Released: September 29, 2020
 </td>
 <td>
 
-* [Kotlin 1.4.10](releases.md#release-details)
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.10](releases.md#发布详情)
+* [Kotlin 1.4.20](releases.md#发布详情)
 
 </td>
 </tr>
@@ -550,8 +550,8 @@ Released: September 10, 2020
 </td>
 <td>
 
-* [Kotlin 1.4.10](releases.md#release-details)
-* [Kotlin 1.4.20](releases.md#release-details)
+* [Kotlin 1.4.10](releases.md#发布详情)
+* [Kotlin 1.4.20](releases.md#发布详情)
 
 </td>
 </tr>
@@ -570,8 +570,8 @@ Released: August 31, 2020
 </td>
 <td>
 
-* [Kotlin 1.4.0](releases.md#release-details)
-* [Kotlin 1.4.10](releases.md#release-details)
+* [Kotlin 1.4.0](releases.md#发布详情)
+* [Kotlin 1.4.10](releases.md#发布详情)
 
 </td>
 </tr>

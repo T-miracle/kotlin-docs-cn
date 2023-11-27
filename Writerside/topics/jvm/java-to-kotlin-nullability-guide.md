@@ -88,7 +88,7 @@ If you don't perform this check, the code will fail to compile with the followin
 "Only [safe (?.)](null-safety.md#safe-calls) or [non-nullable asserted (!!.) calls](null-safety.md#the-operator) are allowed
 on a [nullable receiver](extensions.md#nullable-receiver) of type String?".
 
-You can write the same shorter – use the [safe-call operator ?. (If-not-null shorthand)](idioms.md#if-not-null-shorthand), 
+You can write the same shorter – use the [safe-call operator ?. (If-not-null shorthand)](idioms.md#if-not-null简写), 
 which allows you to combine a null check and a method call into a single operation:
 
 ```kotlin
@@ -192,7 +192,7 @@ if (order != null){
 ```
 {id="process-customer-if-not-null-kotlin"}
 
-Use the [safe-call operator `?.` (If-not-null shorthand)](idioms.md#if-not-null-shorthand) 
+Use the [safe-call operator `?.` (If-not-null shorthand)](idioms.md#if-not-null简写) 
 in combination with any of the [scope functions](scope-functions.md) from the standard library.
 The `let` function is usually used for this:
 
@@ -315,7 +315,7 @@ void main() {
 ```
 {id="casting-types-java"}
 
-To avoid exceptions in Kotlin, use the [safe cast operator](typecasts.md#safe-nullable-cast-operator) `as?`, which returns `null` on failure:
+To avoid exceptions in Kotlin, use the [safe cast operator](typecasts.md#安全可空强制转换运算符) `as?`, which returns `null` on failure:
 
 ```kotlin
 // Kotlin

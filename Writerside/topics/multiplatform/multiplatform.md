@@ -40,7 +40,7 @@ Compose Multiplatform 可以帮助在桌面平台（如 Windows、macOS 和 Linu
 
 尝试使用 [Compose Multiplatform 桌面应用程序](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme) 模板创建自己的项目，其中的 UI 在桌面平台之间共享。
 
-## 跨平台代码共享
+## 跨平台代码共享 {id=跨平台代码共享}
 
 Kotlin 多平台 允许你维护一个应用程序逻辑的单一代码库，用于[不同平台](multiplatform-dsl-reference.md#targets)。
 你还能够获得本地编程的优势，包括出色的性能和对平台 SDK 的完全访问。

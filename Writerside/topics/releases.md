@@ -13,7 +13,7 @@
 
 了解更多关于 [Kotlin 发布的类型和兼容性](kotlin-evolution.md#feature-releases-and-incremental-releases)。
 
-## 升级到新版本
+## 升级到新版本 {id=升级到新版本}
 
 IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当您接受建议时，它会自动将 Kotlin 插件更新到新版本。
 您可以在 **工具** | **Kotlin** | **配置 Kotlin 插件更新** 中检查 Kotlin 版本。
@@ -22,7 +22,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
 
 如果您正在迁移到新的功能发布版本，Kotlin 插件的迁移工具将帮助您完成迁移。
 
-## IDE 支持
+## IDE 支持 {id=IDE支持}
 
 对于语言的最新版本，以下版本的 IntelliJ IDEA 和 Android Studio 提供 IDE 支持：
 
@@ -37,7 +37,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
 > 在 [IntelliJ IDEA 新功能页面](https://www.jetbrains.com/idea/whatsnew/) 的 **Kotlin** 部分了解有关最新 Kotlin 相关更新的更多信息。
 
 
-## 发布详细信息
+## 发布详情 {id=发布详情}
 
 以下表格列出了最新 Kotlin 发布的详细信息。
 

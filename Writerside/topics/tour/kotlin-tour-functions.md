@@ -55,7 +55,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgM4oLYAoAPeDASTQBcAaDATxPIoEoHKNgAdTDHgJxgopemQhgDUdLgF8uXVJlwBDAJZp8Tdlx48ADr1UUANmpwEAjDQBMTJlu0B6exgDM0kFRAVFvAOYCACoaKFEgQvLgIIABWigBuiu7gELg6yoYwvABqGVjKEGiRZgB0AJxFZgAMIFJAA%3D%3D?_ga=2.214682007.1684546783.1699700997-2060274793.1694940376&_gl=1*p26qel*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
-> 我们在我们的[编码规范](coding-conventions.md#function-names)中建议以小写字母开头，
+> 我们在我们的[编码规范](coding-conventions.md#函数名称)中建议以小写字母开头，
 > 并使用驼峰命名法，不使用下划线来命名函数。
 > 
 {style="note"}
@@ -66,7 +66,7 @@ fun main() {
 然而，包含参数名能够使你的代码更易读。这被称为使用**命名参数**。
 如果你包含参数名，那么你可以以任意顺序编写这些参数。
 
-> 在以下示例中，[字符串模板](strings.md#string-templates)（`$`）被用于访问参数的值，
+> 在以下示例中，[字符串模板](strings.md#字符串模板)（`$`）被用于访问参数的值，
 > 将它们转换为 `String` 类型，然后将它们连接成一个字符串以便打印。
 
 

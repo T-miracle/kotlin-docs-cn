@@ -79,7 +79,7 @@ you can create subclasses in any source set between the `expect` and `actual` de
 
 ## Sealed classes and when expression
 
-The key benefit of using sealed classes comes into play when you use them in a [`when`](control-flow.md#when-expression)
+The key benefit of using sealed classes comes into play when you use them in a [`when`](control-flow.md#when表达式)
 expression. 
 If it's possible to verify that the statement covers all cases, you don't need to add an `else` clause to the statement:
 

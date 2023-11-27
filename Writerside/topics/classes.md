@@ -81,7 +81,7 @@ Such declarations can also include default values of the class properties:
 class Person(val firstName: String, val lastName: String, var isEmployed: Boolean = true)
 ```
 
-You can use a [trailing comma](coding-conventions.md#trailing-commas) when you declare class properties:
+You can use a [trailing comma](coding-conventions.md#尾随逗号) when you declare class properties:
 
 ```kotlin
 class Person(

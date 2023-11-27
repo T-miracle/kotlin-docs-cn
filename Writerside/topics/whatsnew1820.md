@@ -1,6 +1,6 @@
 [//]: # (title: What's new in Kotlin 1.8.20)
 
-_[Released: 25 April 2023](releases.md#release-details)_
+_[Released: 25 April 2023](releases.md#发布详情)_
 
 The Kotlin 1.8.20 release is out and here are some of its biggest highlights:
 

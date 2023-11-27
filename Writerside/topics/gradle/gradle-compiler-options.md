@@ -1,7 +1,7 @@
 [//]: # (title: Compiler options in the Kotlin Gradle plugin)
 
 Each release of Kotlin includes compilers for the supported targets:
-JVM, JavaScript, and native binaries for [supported platforms](native-overview.md#target-platforms).
+JVM, JavaScript, and native binaries for [supported platforms](native-overview.md#目标平台).
 
 These compilers are used by:
 * The IDE, when you click the __Compile__ or __Run__ button for your Kotlin project.

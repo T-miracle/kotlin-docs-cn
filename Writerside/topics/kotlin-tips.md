@@ -54,7 +54,7 @@ Watch Sebastian Aigner give a quick overview of the [`measureTimedValue()`](http
 
 ## Improving loops
 
-In this video, Sebastian Aigner will demonstrate how to improve [loops](control-flow.md#for-loops) to make your code more readable, understandable, and concise:
+In this video, Sebastian Aigner will demonstrate how to improve [loops](control-flow.md#for循环) to make your code more readable, understandable, and concise:
 
 <video width="560" height="315" href="i-kyPp1qFBA" title="Kotlin Tips: Improving Loops"/>
 

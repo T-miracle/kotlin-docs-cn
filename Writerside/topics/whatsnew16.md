@@ -1,6 +1,6 @@
 [//]: # (title: What's new in Kotlin 1.6.0)
 
-_[Released: 16 November 2021](releases.md#release-details)_
+_[Released: 16 November 2021](releases.md#发布详情)_
 
 Kotlin 1.6.0 introduces new language features, optimizations and improvements to existing features, and a lot of improvements to the Kotlin standard library.
 
@@ -21,7 +21,7 @@ It also includes various type inference improvements and support for annotations
 
 ### Stable exhaustive when statements for enum, sealed, and Boolean subjects
 
-An _exhaustive_ [`when`](control-flow.md#when-expression) statement contains branches for all possible types or values of 
+An _exhaustive_ [`when`](control-flow.md#when表达式) statement contains branches for all possible types or values of 
 its subject, or for some types plus an `else` branch. It covers all possible cases, making your code safer.
 
 We will soon prohibit non-exhaustive `when` statements to make the behavior consistent with `when` expressions. 

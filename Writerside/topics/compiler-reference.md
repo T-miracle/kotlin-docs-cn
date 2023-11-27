@@ -1,7 +1,7 @@
 [//]: # (title: Kotlin compiler options)
 
 Each release of Kotlin includes compilers for the supported targets: 
-JVM, JavaScript, and native binaries for [supported platforms](native-overview.md#target-platforms).
+JVM, JavaScript, and native binaries for [supported platforms](native-overview.md#目标平台).
 
 These compilers are used by:
 * The IDE, when you click the __Compile__ or __Run__ button for your Kotlin project.
@@ -274,7 +274,7 @@ Add the specified prefix to paths in the source map.
 
 ## Kotlin/Native compiler options
 
-Kotlin/Native compiler compiles Kotlin source files into native binaries for the [supported platforms](native-overview.md#target-platforms). 
+Kotlin/Native compiler compiles Kotlin source files into native binaries for the [supported platforms](native-overview.md#目标平台). 
 The command-line tool for Kotlin/Native compilation is `kotlinc-native`.
 
 In addition to the [common options](#common-options), Kotlin/Native compiler has the options listed below.

@@ -20,7 +20,7 @@ Kotlin fixes a series of issues that Java suffers from:
     [top-level functions](functions.md), [extension functions](extensions.md#extension-functions), or [@JvmStatic](java-to-kotlin-interop.md#static-methods).
 * [Wildcard-types](generics.md) are replaced with [declaration-site variance](generics.md#declaration-site-variance) and
     [type projections](generics.md#type-projections).
-* [Ternary-operator `a ? b : c`](control-flow.md#if-expression) is replaced with [if expression](control-flow.md#if-expression). 
+* [Ternary-operator `a ? b : c`](control-flow.md#if表达式) is replaced with [if expression](control-flow.md#if表达式). 
 
 
 ## What Kotlin has that Java does not

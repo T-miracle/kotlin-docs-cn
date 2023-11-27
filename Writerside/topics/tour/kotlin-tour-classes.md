@@ -40,7 +40,7 @@ class Contact(val id: Int, var email: String) {
 你可以在括号内声明没有 `val` 或 `var` 的属性，但是这些属性在实例创建后是不可访问的。
 
 > * 括号 `()` 中包含的内容称为**类头**。
-> * 在声明类属性时，你可以使用 [尾随逗号](coding-conventions.md#trailing-commas)。
+> * 在声明类属性时，你可以使用 [尾随逗号](coding-conventions.md#尾随逗号)。
 >
 {style="note"}
 

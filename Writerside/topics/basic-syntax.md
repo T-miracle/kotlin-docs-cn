@@ -128,7 +128,7 @@ fun main() {
 
 请参阅 [函数](functions.md)。
 
-## 变量
+## 变量 {id=变量}
 
 使用关键字 `val` 定义只读本地变量。
 它们只能被赋值一次。
@@ -261,7 +261,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-string-templates"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgE4Y4YC8GAjNbQPS8YAzniwAHADYwMaHFikEMAFxhjxOZfB40G4oZ3YZyIVnkEYAJDiOHMtLSwMAme%2FxaMARnkWMmATwwwAB6ijDCCwhCYCsqq6jCatto4uoKOBkbmwIKcAHShEjhgMIRGpkYANIYgAO44gkbEAL6V7iiK0hDVGKYWViCU9iEEiuJEqcSUjSDlIIpMAOYwigAKaopIEIxYCCAAVjgM0%2BAQYniSjABqMIwRaDu5AJw5jgAMII1AA%3D?_gl=1*jilf08*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDEwMjYyNi4yOC4wLjE3MDAxMDI2MjYuNjAuMC4w&_ga=2.101642116.408218914.1700050452-2060274793.1694940376)
 
-查看 [字符串模板](strings.md#string-templates) 以获取详细信息。
+查看 [字符串模板](strings.md#字符串模板) 以获取详细信息。
 
 ## 条件表达式
 
@@ -293,7 +293,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-if-expression"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AZgVxQAgLYEMAPAeTQAp95sBJFAFwBpsAjK2ugSmwF5sBLNNgrYAfCy75sMADYBnGC1RL0WPPj4oyXYKmx7sABwBOGutM1IQBQtgiCADNnwoo2ACwAmfrOwASYNakZPZMnhwAvpYcqOEgDCB0%2BEYA5jB0AArS%2BHRoEEa4CCAAVvgAbvhx4BC4BnzSMEYAag2yfBAohQCMAHQAnN0e9iDhQA%3D%3D?_gl=1*jilf08*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDEwMjYyNi4yOC4wLjE3MDAxMDI2MjYuNjAuMC4w&_ga=2.101642116.408218914.1700050452-2060274793.1694940376)
 
-查看 [`if`-表达式](control-flow.md#if-expression)。
+查看 [`if`-表达式](control-flow.md#if表达式)。
 
 ## for 循环
 
@@ -321,7 +321,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-for-loop-indices"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYZ4AuMWAzhgLwaN5OrAPJJC5EDgAOUxjAkAaDBIBGONOpyLlIANZ4A7niQAnFGwnFqtJBBMZCBWAA8WmNh04A6J3jAxOUgpMWlCpEwJWRiIJDywMHFYMABInGFdBFOA4zgBtNOcAXQBfS2saUqo0YpAFEFYcEwBzGFYABUZE2xMsBBAAKxwGWvAILCk8ORMANRgTTjwIND6ARi8ATi8AJgAGEGKgA%3D?_gl=1*f6bo6l*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDEwMjYyNi4yOC4wLjE3MDAxMDI2MjYuNjAuMC4w&_ga=2.115404547.408218914.1700050452-2060274793.1694940376)
 
-查看 [for 循环](control-flow.md#for-loops)。
+查看 [for 循环](control-flow.md#for循环)。
 
 ## while 循环
 
@@ -338,7 +338,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-while-loop"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYZ4AuMWAzhgLwaN5OrAPJJC5EDgAOUxjAkAaDBIBGONOpyLlIANZ4A7niQAnFGwnFqtBiZZpYAD14YADNZoGAFnjkZCBE4YADws7FwAdJx4AF4wpBSYtMlSJgSsjEQSbBwYOKwYACSBMM6CRcA5XADaJY4AugC%2Blh7J9k4A1B2tzVRojSAKIKw4JgDmMKwACoz5SBAmWAggAFY4DIPgEFhSvjAmAGr70RBoywCMEQCcEQBMriCNQA%3D?_gl=1*f6bo6l*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDEwMjYyNi4yOC4wLjE3MDAxMDI2MjYuNjAuMC4w&_ga=2.115404547.408218914.1700050452-2060274793.1694940376)
 
-请参阅 [while 循环](control-flow.md#while-loops)。
+请参阅 [while 循环](control-flow.md#while循环)。
 
 ## when 表达式
 
@@ -363,7 +363,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-when-expression"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AZgVxQAlgZzACcBLAIxgAoJSArebAQRQE8BKegZQBcSUBzbAF5U2UdgDuACxg4qtVtmAixKgIwqN2ALQA%2BbEhAB5FDAPLNBgBIwANjYgGVu%2FSADihGDC7F%2BZnJuxiPGwAGQh%2BJz0DMN9kf00AQiDsbl4BZwMAOQgubABDbDweHz4%2FAOxbPBgAjJAAVRQAaxQIcRQysQBfVB70LGwAWzyfCgUleOwAB14uGxQKfCIySlVWVnMpmbmFmAIScgorW3sDNY3pn1n5xf2VgAYHkLOJi5Qrnb3ligAmZ5VX943L4GHLSQindYoTogAA0IC4eUIfC8AAUbHkuGgIIQBggQDQ8gA3PKw8AQAaTYg2GCEABqNLwxHCeNUADoAJys753ECdIA%3D%3D?_gl=1*f6bo6l*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDEwMjYyNi4yOC4wLjE3MDAxMDI2MjYuNjAuMC4w&_ga=2.115404547.408218914.1700050452-2060274793.1694940376)
 
-请参阅 [when 表达式](control-flow.md#when-expression)。
+请参阅 [when 表达式](control-flow.md#when表达式)。
 
 ## Ranges（区间）
 

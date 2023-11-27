@@ -146,7 +146,7 @@ fun main() {
 }
 ```
 
-## If-not-null （非空）简写
+## If-not-null （非空）简写 {id=if-not-null简写}
 
 ```kotlin
 val files = File("Test").listFiles()

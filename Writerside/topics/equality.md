@@ -41,10 +41,10 @@ When an equality check operands are statically known to be `Float` or `Double` (
 
 Otherwise, structural equality is used, which disagrees with the standard so that `NaN` is equal to itself, `NaN` is considered greater than any other element, including `POSITIVE_INFINITY`, and `-0.0` is not equal to `0.0`.
 
-For more information, see [Floating-point numbers comparison](numbers.md#floating-point-numbers-comparison).
+For more information, see [Floating-point numbers comparison](numbers.md#浮点数的比较).
 
 ## Array equality
 
 To compare whether two arrays have the same elements in the same order, use [`contentEquals()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/content-equals.html).
 
-For more information, see [Compare arrays](arrays.md#compare-arrays).
+For more information, see [Compare arrays](arrays.md#比较数组).

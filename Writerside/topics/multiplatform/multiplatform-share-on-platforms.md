@@ -72,4 +72,4 @@ you can work with third-party native libraries consumed with the [`cinterop` mec
 
 * Check out examples of code sharing using the Kotlin mechanism of [expect and actual declarations](multiplatform-expect-actual.md)
 * Learn more about [hierarchical project structure](multiplatform-hierarchy.md)
-* See our recommendations on [naming source files in multiplatform projects](coding-conventions.md#source-file-names)
+* See our recommendations on [naming source files in multiplatform projects](coding-conventions.md#源文件命名)

@@ -36,7 +36,7 @@ tailrec fun removeZeroes(x: Int): Int =
 fun f(x: Int) = removeZeroes(x + 1)
 ```
 
-或者，您可以使用传统的 [while 循环](control-flow.md) 和在 Kotlin 中用 [var](basic-syntax.md#variables) 表示的可变变量，编写函数 `f` 的命令式实现：
+或者，您可以使用传统的 [while 循环](control-flow.md) 和在 Kotlin 中用 [var](basic-syntax.md#变量) 表示的可变变量，编写函数 `f` 的命令式实现：
 
 ```kotlin
 fun f(x: Int): Int {
@@ -243,7 +243,7 @@ Kotlin 被设计为与 JVM 库良好互操作，因此在 Kotlin 中使用它们
 `split(" ").map { it.toInt() }` 可以处理。
 
 在 Kotlin 中通常使用 [println(...)](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) 函数以及使用
-Kotlin 的 [字符串模板](strings.md#string-templates) 来直接编写输出。
+Kotlin 的 [字符串模板](strings.md#字符串模板) 来直接编写输出。
 然而，当输出包含大约 10<sup>5</sup> 行或更多时，必须小心。
 发出如此多的 `println` 调用太慢，因为在 Kotlin 中，输出在每行后自动刷新。
 从数组或列表写入多行的更快方法是使用 [joinToString()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/join-to-string.html) 函数，以 `"\n"` 作为分隔符，如下所示：

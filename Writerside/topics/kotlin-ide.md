@@ -39,7 +39,7 @@ If you want to contribute to the plugin, send a pull request to the [Kotlin for 
 
 For IntelliJ IDEA and Android Studio the Kotlin plugin is bundled with each IDE release.
 When the new Kotlin version is released, these IDEs will suggest updating Kotlin to the latest version automatically.
-See the latest supported language version for each IDE in [Kotlin releases](releases.md#ide-support).
+See the latest supported language version for each IDE in [Kotlin releases](releases.md#IDE支持).
 
 ## Other IDEs support
 
