@@ -2,7 +2,7 @@
 
 <buildprofiles>
     <variables>
-        <!--<header-logo>logo.svg</header-logo>-->
+        <header-logo>logo.svg</header-logo>
         <!--启用Github编辑-->
         <enable-browser-edits>true</enable-browser-edits>
         <browser-edits-url>https://github.com/T-miracle/kotlin-docs-cn/edit/main/Writerside/</browser-edits-url>
