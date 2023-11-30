@@ -156,8 +156,8 @@ Kotlin supports the following operators and special symbols:
      - separates the condition and body of a [when expression](control-flow.md#when表达式) branch.
  * `@`
      - introduces an [annotation](annotations.md#usage).
-     - introduces or references a [loop label](returns.md#break-and-continue-labels).
-     - introduces or references a [lambda label](returns.md#return-to-labels).
+     - introduces or references a [loop label](returns.md).
+     - introduces or references a [lambda label](returns.md#返回到标签).
      - references a ['this' expression from an outer scope](this-expressions.md#qualified-this).
      - references an [outer superclass](inheritance.md#calling-the-superclass-implementation).
  * `;` separates multiple statements on the same line.

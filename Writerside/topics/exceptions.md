@@ -1,98 +1,94 @@
-[//]: # (title: Exceptions)
+[//]: # (title: 异常)
 
-## Exception classes
+## 异常类
 
-All exception classes in Kotlin inherit the `Throwable` class.
-Every exception has a message, a stack trace, and an optional cause.
+Kotlin 中的所有异常类都继承自 `Throwable` 类。
+每个异常都有一个消息、一个堆栈跟踪和一个可选的原因。
 
-To throw an exception object, use the `throw` expression:
+要抛出一个异常对象，请使用 `throw` 表达式：
 
 ```kotlin
 fun main() {
-//sampleStart
     throw Exception("Hi There!")
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-To catch an exception, use the `try`...`catch` expression:
+要捕获异常，请使用 `try`...`catch` 表达式：
 
 ```kotlin
 try {
-    // some code
+    // 一些代码
 } catch (e: SomeException) {
-    // handler
+    // 捕获并处理
 } finally {
-    // optional finally block
+    // 带有可选 `finally` 块：
 }
 ```
 
-There may be zero or more `catch` blocks, and the `finally` block may be omitted.
-However, at least one `catch` or `finally` block is required.
+可能有零个或多个 `catch` 块，并且 `finally` 块可以被省略。
+但是，`catch` 或 `finally` 块至少需要有一个。
 
-### Try is an expression
+### Try 是一个表达式
 
-`try` is an expression, which means it can have a return value:
+`try` 是一个表达式，这意味着它可以有一个返回值：
 
 ```kotlin
 val a: Int? = try { input.toInt() } catch (e: NumberFormatException) { null }
 ```
 
-The returned value of a `try` expression is either the last expression in the `try` block or the
-last expression in the `catch` block (or blocks).
-The contents of the `finally` block don't affect the result of the expression.
+`try` 表达式的返回值要么是 `try` 块中的最后一个表达式，要么是 `catch` 块（或块）中的最后一个表达式。
+`finally` 块的内容不影响表达式的结果。
 
-## Checked exceptions
+## 受检异常
 
-Kotlin does not have checked exceptions. There are many reasons for this, but we will provide a simple example that illustrates why it is the case.
+Kotlin 没有受检异常。这背后有很多原因，我们将提供一个简单的示例，说明为什么会这样。
 
-The following is an example interface from the JDK implemented by the `StringBuilder` class:
+以下是 JDK 中由 `StringBuilder` 类实现的示例接口：
 
-``` java
+```java
 Appendable append(CharSequence csq) throws IOException;
 ```
 
-This signature says that every time I append a string to something (a `StringBuilder`, some kind of a log, a console, etc.),
-I have to catch the `IOExceptions`. Why? Because the implementation might be performing IO operations (`Writer` also implements `Appendable`).
-The result is code like this all over the place:
+这个签名表示，每次我将一个字符串追加到某个地方（例如 `StringBuilder`、某种日志、控制台等）时，我都必须捕获 `IOException` 异常。
+为什么？因为实现可能正在执行 I/O 操作（`Writer` 也实现了 `Appendable`）。结果是到处都是这样的代码：
 
 ```kotlin
 try {
     log.append(message)
 } catch (IOException e) {
-    // Must be safe
+    // 一定要安全
 }
 ```
 
-And that's not good. Just take a look at [Effective Java, 3rd Edition](https://www.oracle.com/technetwork/java/effectivejava-136174.html), Item 77: *Don't ignore exceptions*.
+这不是一个好的设计。
+只需查看 [《Effective Java 第3版》](https://www.oracle.com/technetwork/java/effectivejava-136174.html)，第 77 条：**不要忽略异常**。
 
-Bruce Eckel says this about checked exceptions:
+Bruce Eckel 在关于受检异常的问题上说：
 
-> Examination of small programs leads to the conclusion that requiring exception specifications
->could both enhance developer productivity and enhance code quality, but experience with large software projects suggests
->a different result – decreased productivity and little or no increase in code quality.
+> 对小型程序的研究得出的结论是，要求异常规范既可以提高开发人员的生产率，又可以提高代码质量，
+> 但大型软件项目的经验表明了不同的结果 —— 生产率下降，代码质量几乎没有提高。
 
-And here are some additional thoughts on the matter:
+以下是关于这个问题的一些建议：
 
-* [Java's checked exceptions were a mistake](https://radio-weblogs.com/0122027/stories/2003/04/01/JavasCheckedExceptionsWereAMistake.html) (Rod Waldhoff)
-* [The Trouble with Checked Exceptions](https://www.artima.com/intv/handcuffs.html) (Anders Hejlsberg)
+* [Java 的受检异常是一个错误](https://radio-weblogs.com/0122027/stories/2003/04/01/JavasCheckedExceptionsWereAMistake.html)（Rod Waldhoff）
+* [受检异常的麻烦](https://www.artima.com/intv/handcuffs.html)（Anders Hejlsberg）
 
-If you want to alert callers about possible exceptions when calling Kotlin code from Java, Swift, or Objective-C,
-you can use the `@Throws` annotation. Read more about using this annotation [for Java](java-to-kotlin-interop.md#checked-exceptions)
-and [for Swift and Objective-C](native-objc-interop.md#errors-and-exceptions).
+如果你希望在从 Java、Swift 或 Objective-C 调用 Kotlin 代码时通知调用者可能发生的异常，你可以使用 `@Throws` 注解。
+阅读更多关于如何在 [Java 中使用此注解](java-to-kotlin-interop.md#checked-exceptions)
+以及在 [Swift 和 Objective-C 中使用此注解](native-objc-interop.md#errors-and-exceptions) 的信息。
 
-## The Nothing type
+## Nothing 类型 {id=Nothing类型}
 
-`throw` is an expression in Kotlin, so you can use it, for example, as part of an Elvis expression:
+`throw` 是 Kotlin 中的一个表达式，因此你可以将其用作 Elvis（空值合并）表达式的一部分，例如：
 
 ```kotlin
-val s = person.name ?: throw IllegalArgumentException("Name required")
+val s = person.name ?: throw IllegalArgumentException("姓名必填")
 ```
 
-The `throw` expression has the type `Nothing`.
-This type has no values and is used to mark code locations that can never be reached.
-In your own code, you can use `Nothing` to mark a function that never returns:
+`throw` 表达式的类型是 `Nothing`。
+这种类型没有值，用于标记永远不会到达的代码位置。
+在你自己的代码中，你可以使用 `Nothing` 来标记一个永远不会返回的函数：
 
 ```kotlin
 fun fail(message: String): Nothing {
@@ -100,23 +96,21 @@ fun fail(message: String): Nothing {
 }
 ```
 
-When you call this function, the compiler will know that the execution doesn't continue beyond the call:
+当您调用此函数时，编译器将知道不会在该调用之后继续执行：
 
 ```kotlin
 val s = person.name ?: fail("Name required")
-println(s)     // 's' is known to be initialized at this point
+println(s)     // 's' 在此时已知已初始化
 ```
 
-You may also encounter this type when dealing with type inference. The nullable variant of this type,
-`Nothing?`, has exactly one possible value, which is `null`. If you use `null` to initialize
-a value of an inferred type and there's no other information that can be used to determine a more
-specific type, the compiler will infer the `Nothing?` type:
+在处理类型推断时，你可能也会遇到这种类型。这种类型的可空变体，`Nothing?`，有一个可能的值，即 `null`。
+如果你使用 `null` 初始化推断类型的值，并且没有其他信息可用于确定更具体的类型，编译器将推断为 `Nothing?` 类型：
 
 ```kotlin
-val x = null           // 'x' has type `Nothing?`
-val l = listOf(null)   // 'l' has type `List<Nothing?>
+val x = null           // 'x' 的类型是 `Nothing?`
+val l = listOf(null)   // 'l' 的类型是 `List<Nothing?>`
 ```
 
-## Java interoperability
+## Java 互操作性
 
-Please see the section on exceptions in the [Java interoperability page](java-interop.md) for information about Java interoperability.
+有关 Java 互操作性的信息，请参阅 [Java 互操作性页面](java-interop.md) 中关于异常的部分。

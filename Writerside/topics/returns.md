@@ -12,7 +12,7 @@ Kotlin 有三个结构性跳转表达式：
 val s = person.name ?: return
 ```
 
-这些表达式的类型是 [Nothing 类型](exceptions.md#the-nothing-type)。
+这些表达式的类型是 [Nothing 类型](exceptions.md#Nothing类型)。
 
 Kotlin 中的任何表达式都可以用 **标签** 进行标记。
 标签的形式是标识符后跟 `@` 符号，例如 `abc@` 或 `fooBar@`。
@@ -39,7 +39,7 @@ loop@ for (i in 1..100) {
 
 通俗点说，带标签的 `break` 可以中断指定循环，而带标签的 `continue` 可以跳到指定循环的下一次迭代。
 
-## 返回到标签
+## 返回到标签 {id=返回到标签}
 
 在 Kotlin 中，函数可以使用函数字面量、局部函数和对象表达式进行嵌套。
 使用带有标签的 `return` 可以从外部函数中返回。
