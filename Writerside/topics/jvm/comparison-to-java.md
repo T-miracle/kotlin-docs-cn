@@ -38,7 +38,7 @@ Kotlin fixes a series of issues that Java suffers from:
 * [Declaration-site variance & Type projections](generics.md)
 * [Range expressions](ranges.md)
 * [Operator overloading](operator-overloading.md)
-* [Companion objects](classes.md#companion-objects)
+* [Companion objects](classes.md#伴生对象)
 * [Data classes](data-classes.md)
 * [Separate interfaces for read-only and mutable collections](collections-overview.md)
 * [Coroutines](coroutines-overview.md)

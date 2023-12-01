@@ -190,7 +190,7 @@ fun main() {
 }
 ```
 
-See [Imports](packages.md#imports) for more information.
+See [Imports](packages.md#导入) for more information.
 
 ## Declaring extensions as members
 

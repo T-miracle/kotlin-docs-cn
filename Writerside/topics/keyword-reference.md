@@ -6,7 +6,7 @@ The following tokens are always interpreted as keywords and cannot be used as id
 
  * `as`
      - is used for [type casts](typecasts.md#不安全强制转换运算符).
-     - specifies an [alias for an import](packages.md#imports)
+     - specifies an [alias for an import](packages.md#导入)
  * `as?` is used for [safe type casts](typecasts.md#安全可空强制转换运算符).
  * `break` [terminates the execution of a loop](returns.md).
  * `class` declares a [class](classes.md).
@@ -39,11 +39,11 @@ The following tokens are always interpreted as keywords and cannot be used as id
  * `package` specifies the [package for the current file](packages.md).
  * `return` [returns from the nearest enclosing function or anonymous function](returns.md).
  * `super`
-     - [refers to the superclass implementation of a method or property](inheritance.md#calling-the-superclass-implementation).
-     - [calls the superclass constructor from a secondary constructor](classes.md#inheritance).
+     - [refers to the superclass implementation of a method or property](inheritance.md#调用超类实现).
+     - [calls the superclass constructor from a secondary constructor](classes.md#继承).
  * `this`
      - refers to [the current receiver](this-expressions.md).
-     - [calls another constructor of the same class from a secondary constructor](classes.md#constructors).
+     - [calls another constructor of the same class from a secondary constructor](classes.md#构造函数).
  * `throw` [throws an exception](exceptions.md).
  * `true` specifies the 'true' value of the [Boolean type](booleans.md).
  * `try` [begins an exception-handling block](exceptions.md).
@@ -63,7 +63,7 @@ as identifiers in other contexts:
      - [delegates the implementation of an interface to another object](delegation.md).
      - [delegates the implementation of the accessors for a property to another object](delegated-properties.md).
  * `catch` begins a block that [handles a specific exception type](exceptions.md).
- * `constructor` declares a [primary or secondary constructor](classes.md#constructors).
+ * `constructor` declares a [primary or secondary constructor](classes.md#构造函数).
  * `delegate` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `dynamic` references a [dynamic type](dynamic-type.md) in Kotlin/JS code.
  * `field` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
@@ -73,7 +73,7 @@ as identifiers in other contexts:
      - declares the [getter of a property](properties.md#getters-and-setters).
      - is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `import` [imports a declaration from another package into the current file](packages.md).
- * `init` begins an [initializer block](classes.md#constructors).
+ * `init` begins an [initializer block](classes.md#构造函数).
  * `param` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `property` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `receiver`is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
@@ -89,7 +89,7 @@ as identifiers in other contexts:
 The following tokens act as keywords in modifier lists of declarations, and they can be used as identifiers
 in other contexts:
 
- * `abstract` marks a class or member as [abstract](classes.md#abstract-classes).
+ * `abstract` marks a class or member as [abstract](classes.md#抽象类).
  * `actual` denotes a platform-specific implementation in [multiplatform projects](multiplatform.md).
  * `annotation` declares an [annotation class](annotations.md).
  * `companion` declares a [companion object](object-declarations.md#companion-objects).
@@ -99,17 +99,17 @@ in other contexts:
  * `enum` declares an [enumeration](enum-classes.md).
  * `expect` marks a declaration as [platform-specific](multiplatform.md), expecting an implementation in platform modules.
  * `external` marks a declaration as implemented outside of Kotlin (accessible through [JNI](java-interop.md#using-jni-with-kotlin) or in [JavaScript](js-interop.md#external-modifier)).
- * `final` forbids [overriding a member](inheritance.md#overriding-methods).
+ * `final` forbids [overriding a member](inheritance.md#重写方法).
  * `infix` allows calling a function using [infix notation](functions.md#infix-notation).
  * `inline` tells the compiler to [inline a function and the lambdas passed to it at the call site](inline-functions.md).
  * `inner` allows referring to an outer class instance from a [nested class](nested-classes.md).
  * `internal` marks a declaration as [visible in the current module](visibility-modifiers.md).
  * `lateinit` allows initializing a [non-nullable property outside of a constructor](properties.md#late-initialized-properties-and-variables).
  * `noinline` turns off [inlining of a lambda passed to an inline function](inline-functions.md#noinline).
- * `open` allows [subclassing a class or overriding a member](classes.md#inheritance).
+ * `open` allows [subclassing a class or overriding a member](classes.md#继承).
  * `operator` marks a function as [overloading an operator or implementing a convention](operator-overloading.md).
  * `out` marks a type parameter as [covariant](generics.md#declaration-site-variance).
- * `override` marks a member as an [override of a superclass member](inheritance.md#overriding-methods).
+ * `override` marks a member as an [override of a superclass member](inheritance.md#重写方法).
  * `private` marks a declaration as [visible in the current class or file](visibility-modifiers.md).
  * `protected` marks a declaration as [visible in the current class and its subclasses](visibility-modifiers.md).
  * `public` marks a declaration as [visible anywhere](visibility-modifiers.md).
@@ -159,7 +159,7 @@ Kotlin supports the following operators and special symbols:
      - introduces or references a [loop label](returns.md).
      - introduces or references a [lambda label](returns.md#返回到标签).
      - references a ['this' expression from an outer scope](this-expressions.md#qualified-this).
-     - references an [outer superclass](inheritance.md#calling-the-superclass-implementation).
+     - references an [outer superclass](inheritance.md#调用超类实现).
  * `;` separates multiple statements on the same line.
  * `$` references a variable or expression in a [string template](strings.md#字符串模板).
  * `_`

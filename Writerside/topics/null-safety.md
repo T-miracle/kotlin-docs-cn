@@ -14,7 +14,7 @@ The only possible causes of an NPE in Kotlin are:
 * Usage of the `!!` operator that is described below.
 * Data inconsistency with regard to initialization, such as when:
   * An uninitialized `this` available in a constructor is passed and used somewhere (a "leaking `this`").
-  * A [superclass constructor calls an open member](inheritance.md#derived-class-initialization-order) whose implementation
+  * A [superclass constructor calls an open member](inheritance.md#派生类初始化顺序) whose implementation
   in the derived class uses an uninitialized state.
 * Java interoperation:
   * Attempts to access a member of a `null` reference of a [platform type](java-interop.md#null-safety-and-platform-types);

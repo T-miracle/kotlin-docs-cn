@@ -2,7 +2,7 @@
 
 To denote the current _receiver_, you use `this` expressions:
 
-* In a member of a [class](classes.md#inheritance), `this` refers to the current object of that class.
+* In a member of a [class](classes.md#继承), `this` refers to the current object of that class.
 * In an [extension function](extensions.md) or a [function literal with receiver](lambdas.md#function-literals-with-receiver)
 `this` denotes the _receiver_ parameter that is passed on the left-hand side of a dot.
 

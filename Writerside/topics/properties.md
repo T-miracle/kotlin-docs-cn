@@ -210,7 +210,7 @@ outer types, or at top level in the same file.
 
 ## Overriding properties
 
-See [Overriding properties](inheritance.md#overriding-properties)
+See [Overriding properties](inheritance.md#重写属性)
 
 ## Delegated properties
 

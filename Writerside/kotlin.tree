@@ -95,7 +95,7 @@
             <toc-element topic="visibility-modifiers.md"/>
             <toc-element topic="extensions.md"/>
             <toc-element topic="data-classes.md"/>
-            <toc-element topic="sealed-classes.md" toc-title="Sealed classes and interfaces"/>
+            <toc-element topic="sealed-classes.md" toc-title="密封类和接口"/>
             <toc-element topic="generics.md"/>
             <toc-element topic="nested-classes.md"/>
             <toc-element topic="enum-classes.md"/>

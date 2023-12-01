@@ -13,6 +13,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGALgBYBOEA7hgKIAeYMADnTwQi5EAAk8GACoMYTGAEJRxSpQC%2BIADQg6OJgHMYdAAoAbHHSQQmWBCABWOAG44t4CFj55TcgGpyAZyE0OwBGADoATnCAJgAGEDUgA?_gl=1*hbha38*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTM4OTI2Ni41MS4xLjE3MDEzODk0OTIuNjAuMC4w&_ga=2.176031138.1244175791.1701270364-2060274793.1694940376)
 
 要捕获异常，请使用 `try`...`catch` 表达式：
 

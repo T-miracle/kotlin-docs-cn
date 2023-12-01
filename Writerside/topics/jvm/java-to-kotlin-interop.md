@@ -482,7 +482,7 @@ void draw(String label, int lineWidth) { }
 void draw(String label) { }
 ```
 
-Note that, as described in [Secondary constructors](classes.md#secondary-constructors), if a class has default
+Note that, as described in [Secondary constructors](classes.md#次构造函数), if a class has default
 values for all constructor parameters, a public constructor with no arguments will be generated for it. This works even
 if the `@JvmOverloads` annotation is not specified.
 

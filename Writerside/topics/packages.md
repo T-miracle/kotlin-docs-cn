@@ -1,6 +1,6 @@
-[//]: # (title: Packages and imports)
+[//]: # (title: 包和导入)
 
-A source file may start with a package declaration:
+一个源文件通常可能是以包声明开始：
 
 ```kotlin
 package org.example
@@ -11,15 +11,15 @@ class Message { /*...*/ }
 // ...
 ```
 
-All the contents, such as classes and functions, of the source file are included in this package.
-So, in the example above, the full name of `printMessage()` is `org.example.printMessage`,
-and the full name of `Message` is `org.example.Message`. 
+源文件的所有内容，如类和函数，都包含在这个包中。
+因此，在上面的示例中，`printMessage()` 的全名是 `org.example.printMessage`，
+而 `Message` 的全名是 `org.example.Message`。
 
-If the package is not specified, the contents of such a file belong to the _default_ package with no name.
+如果没有指定包，这种文件的内容将属于没有名称的 **默认** 包。
 
-## Default imports
+## 默认导入
 
-A number of packages are imported into every Kotlin file by default:
+每个 Kotlin 文件默认导入了一些包：
 
 - [kotlin.*](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/index.html)
 - [kotlin.annotation.*](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/index.html)
@@ -30,44 +30,44 @@ A number of packages are imported into every Kotlin file by default:
 - [kotlin.sequences.*](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/index.html)
 - [kotlin.text.*](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/index.html)
 
-Additional packages are imported depending on the target platform:
+根据目标平台，还会导入一些其他的包：
 
 - JVM:
   - java.lang.*
   - [kotlin.jvm.*](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/index.html)
 
-- JS:    
+- JS:
   - [kotlin.js.*](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/index.html)
 
-## Imports
+## 导入 {id=导入}
 
-Apart from the default imports, each file may contain its own `import` directives.
+除了默认导入外，每个文件都可以包含自己的 `import` 指令。
 
-You can import either a single name:
-
-```kotlin
-import org.example.Message // Message is now accessible without qualification
-```
-
-or all the accessible contents of a scope: package, class, object, and so on:
+你可以导入单个名称：
 
 ```kotlin
-import org.example.* // everything in 'org.example' becomes accessible
+import org.example.Message // 现在可以直接访问 Message，无需限定符
 ```
 
-If there is a name clash, you can disambiguate by using `as` keyword to locally rename the clashing entity:
+或者导入一个作用域范围内的所有可访问内容：包、类、对象等：
 
 ```kotlin
-import org.example.Message // Message is accessible
-import org.test.Message as TestMessage // TestMessage stands for 'org.test.Message'
+import org.example.* // 'org.example' 中的所有内容都变得可访问
 ```
 
-The `import` keyword is not restricted to importing classes; you can also use it to import other declarations:
+如果存在名称冲突，可以使用 `as` 关键字进行消歧义，将冲突的实体在本地重命名：
 
-  * top-level functions and properties
-  * functions and properties declared in [object declarations](object-declarations.md#object-declarations-overview)
-  * [enum constants](enum-classes.md)
+```kotlin
+import org.example.Message // Message 可以访问
+import org.test.Message as TestMessage // TestMessage 代表 'org.test.Message'
+```
 
-## Visibility of top-level declarations
+`import` 关键字不仅限于导入类，还可以用于导入其他声明：
 
-If a top-level declaration is marked `private`, it is private to the file it's declared in (see [Visibility modifiers](visibility-modifiers.md)).
+* 顶层函数和属性
+* 在 [对象声明](object-declarations.md#object-declarations-overview) 中声明的函数和属性
+* [枚举常量](enum-classes.md)
+
+## 顶层声明的可见性
+
+如果顶层声明标记为 `private`，它对声明所在的文件是私有的（参见[可见性修饰符](visibility-modifiers.md)）。

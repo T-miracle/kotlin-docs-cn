@@ -1,4 +1,4 @@
-[//]: # (title: Functions)
+[//]: # (title: 函数)
 
 Kotlin functions are declared using the `fun` keyword:
 
@@ -341,7 +341,7 @@ Member functions are called with dot notation:
 Sample().foo() // creates instance of class Sample and calls foo
 ```
 
-For more information on classes and overriding members see [Classes](classes.md) and [Inheritance](classes.md#inheritance).
+For more information on classes and overriding members see [Classes](classes.md) and [Inheritance](classes.md#继承).
 
 ## Generic functions
 

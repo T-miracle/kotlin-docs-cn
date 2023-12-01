@@ -31,7 +31,7 @@ class DatabaseError(val source: DataSource): IOError()
 object RuntimeError : Error
 ```
 
-A sealed class is [abstract](classes.md#abstract-classes) by itself, it cannot be instantiated directly and can have `abstract` members.
+A sealed class is [abstract](classes.md#抽象类) by itself, it cannot be instantiated directly and can have `abstract` members.
 
 Constructors of sealed classes can have one of two [visibilities](visibility-modifiers.md): `protected` (by default) or
 `private`:
