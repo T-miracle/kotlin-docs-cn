@@ -186,7 +186,7 @@ A type that does not have a run-time representation (for example, a non-reified 
 
 ## Inline properties
 
-The `inline` modifier can be used on accessors of properties that don't have [backing fields](properties.md#backing-fields).
+The `inline` modifier can be used on accessors of properties that don't have [backing fields](properties.md#幕后字段).
 You can annotate individual property accessors:
 
 ```kotlin

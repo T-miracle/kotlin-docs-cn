@@ -131,7 +131,7 @@ class JavaClient {
 }
 ```
 
-[Late-Initialized](properties.md#late-initialized-properties-and-variables) properties are also exposed as fields. 
+[Late-Initialized](properties.md#延迟初始化属性和变量) properties are also exposed as fields. 
 The visibility of the field will be the same as the visibility of `lateinit` property setter.
 
 ## Static fields
@@ -162,7 +162,7 @@ Key.COMPARATOR.compare(key1, key2);
 // public static final field in Key class
 ```
 
-A [late-initialized](properties.md#late-initialized-properties-and-variables) property in an object or a companion object
+A [late-initialized](properties.md#延迟初始化属性和变量) property in an object or a companion object
 has a static backing field with the same visibility as the property setter.
 
 ```kotlin

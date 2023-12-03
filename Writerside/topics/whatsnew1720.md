@@ -391,7 +391,7 @@ The `$delegate` field will now be omitted if a delegate is:
   ```
   {validate="false"}
 
-* A final `val` property with a [backing field](properties.md#backing-fields) and a default getter in the same module:
+* A final `val` property with a [backing field](properties.md#幕后字段) and a default getter in the same module:
 
   ```kotlin
   val impl: ReadOnlyProperty<Any?, String> = ...

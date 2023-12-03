@@ -70,7 +70,7 @@ as identifiers in other contexts:
  * `file` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `finally` begins a block that [is always executed when a try block exits](exceptions.md).
  * `get`
-     - declares the [getter of a property](properties.md#getters-and-setters).
+     - declares the [getter of a property](properties.md#getters和setters).
      - is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `import` [imports a declaration from another package into the current file](packages.md).
  * `init` begins an [initializer block](classes.md#构造函数).
@@ -78,7 +78,7 @@ as identifiers in other contexts:
  * `property` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `receiver`is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `set`
-     - declares the [setter of a property](properties.md#getters-and-setters).
+     - declares the [setter of a property](properties.md#getters和setters).
      - is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
 * `setparam` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
 * `value` with the `class` keyword declares an [inline class](inline-classes.md).
@@ -93,7 +93,7 @@ in other contexts:
  * `actual` denotes a platform-specific implementation in [multiplatform projects](multiplatform.md).
  * `annotation` declares an [annotation class](annotations.md).
  * `companion` declares a [companion object](object-declarations.md#companion-objects).
- * `const` marks a property as a [compile-time constant](properties.md#compile-time-constants).
+ * `const` marks a property as a [compile-time constant](properties.md#编译时常量).
  * `crossinline` forbids [non-local returns in a lambda passed to an inline function](inline-functions.md#non-local-returns).
  * `data` instructs the compiler to [generate canonical members for a class](data-classes.md).
  * `enum` declares an [enumeration](enum-classes.md).
@@ -104,7 +104,7 @@ in other contexts:
  * `inline` tells the compiler to [inline a function and the lambdas passed to it at the call site](inline-functions.md).
  * `inner` allows referring to an outer class instance from a [nested class](nested-classes.md).
  * `internal` marks a declaration as [visible in the current module](visibility-modifiers.md).
- * `lateinit` allows initializing a [non-nullable property outside of a constructor](properties.md#late-initialized-properties-and-variables).
+ * `lateinit` allows initializing a [non-nullable property outside of a constructor](properties.md#延迟初始化属性和变量).
  * `noinline` turns off [inlining of a lambda passed to an inline function](inline-functions.md#noinline).
  * `open` allows [subclassing a class or overriding a member](classes.md#继承).
  * `operator` marks a function as [overloading an operator or implementing a convention](operator-overloading.md).
@@ -124,7 +124,7 @@ in other contexts:
 The following identifiers are defined by the compiler in specific contexts, and they can be used as regular
 identifiers in other contexts:
 
- * `field` is used inside a property accessor to refer to the [backing field of the property](properties.md#backing-fields).
+ * `field` is used inside a property accessor to refer to the [backing field of the property](properties.md#幕后字段).
  * `it` is used inside a lambda to [refer to its parameter implicitly](lambdas.md#it-implicit-name-of-a-single-parameter).
 
 ## Operators and special symbols

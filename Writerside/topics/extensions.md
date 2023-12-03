@@ -137,7 +137,7 @@ val <T> List<T>.lastIndex: Int
 ```
 
 > Since extensions do not actually insert members into classes, there's no efficient way for an extension
-> property to have a [backing field](properties.md#backing-fields). This is why _initializers are not allowed for
+> property to have a [backing field](properties.md#幕后字段). This is why _initializers are not allowed for
 > extension properties_. Their behavior can only be defined by explicitly providing getters/setters.
 >
 {style="note"}

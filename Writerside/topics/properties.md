@@ -1,6 +1,6 @@
 [//]: # (title: 属性)
 
-## 声明属性
+## 声明属性 {id=声明属性}
 
 在 Kotlin 类中，属性可以分为可变（读写）和只读两种类型。可变属性使用 `var` 关键字声明，而只读属性则使用 `val` 关键字声明。
 
@@ -26,7 +26,7 @@ fun copyAddress(address: Address): Address {
 }
 ```
 
-## Getter 和 Setter
+## Getters 和 Setters {id=getters和setters}
 
 声明属性的完整语法如下：
 
@@ -94,7 +94,7 @@ var setterWithAnnotation: Any? = null
     @Inject set // 用 Inject 注释 setter
 ```
 
-### 幕后字段
+### 幕后字段 {id=幕后字段}
 
 > 译者注：
 > 
@@ -130,7 +130,7 @@ val isEmpty: Boolean
     get() = this.size == 0
 ```
 
-### 幕后属性
+### 幕后属性 {id=幕后属性}
 
 > 译者注：
 > 
@@ -155,7 +155,7 @@ public val table: Map<String, Int>
 >
 {style="note"}
 
-## 编译时常量
+## 编译时常量 {id=编译时常量}
 
 如果只读属性的值在编译时已知，可以使用 `const` 修饰符将其标记为 **编译时常量**。这样的属性需要满足以下要求：
 
@@ -187,7 +187,7 @@ public static final void foo() { ... }
 
 可以发现，`@Deprecated` 中的 `SUBSYSTEM_DEPRECATED` 被替换成了实际值。
 
-## 延迟初始化属性和变量
+## 延迟初始化属性和变量 {id=延迟初始化属性和变量}
 
 通常，声明为非空类型的属性在构造函数中必须初始化。然而，有时情况并不方便。
 例如，属性可能通过依赖注入进行初始化，或者在单元测试的设置方法中初始化。
@@ -229,11 +229,11 @@ if (foo::bar.isInitialized) {
 - 在外部类型之一中 
 - 在同一文件的顶层
 
-## 覆盖属性
+## 覆盖属性 {id=覆盖属性}
 
 参见 [覆盖属性](inheritance.md#重写属性)
 
-## 委托属性
+## 委托属性 {id=委托属性}
 
 最常见的一类属性就是简单地从幕后字段中读取（也可能是写入），但使用自定义的 getter 和 setter 允许你实现属性的任何行为。
 介于第一种的简单性和第二种的多样性之间，存在一些属性可以做什么的通用模式。
