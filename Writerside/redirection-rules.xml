@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rules SYSTEM "https://resources.jetbrains.com/writerside/1.0/redirection-rules.dtd">
+<rules>
+    <!-- format is as follows
+    <rule id="<unique id>">
+        <accepts>page.html</accepts>
+    </rule>
+    -->
+    <rule id="77877d61">
+        <description><![CDATA[Created after removal of "<backing-property.md>" from Kotlin 中文文档]]></description>
+        <accepts>backing-property.html</accepts>
+    </rule>
+    <rule id="e466e2e">
+        <description>Created after removal of "幕后属性（Backing Properties）和 幕后字段（Backing Fields）" from Kotlin
+            中文文档
+        </description>
+        <accepts>backing-properties-and-backing-fields.html</accepts>
+    </rule>
+</rules>

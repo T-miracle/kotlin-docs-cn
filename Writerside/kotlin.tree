@@ -460,4 +460,8 @@
         <toc-element topic="kotlin-brand-assets.md" accepts-web-file-names="kotlin-logo.html"/>
         <toc-element toc-title="Press kit" href="https://kotlinlang.org/assets/kotlin-media-kit.pdf"/>
     </toc-element>
+
+    <toc-element toc-title="词汇表" hidden="true">
+        <toc-element topic="implicit-backing-field.md"/>
+    </toc-element>
 </instance-profile>
