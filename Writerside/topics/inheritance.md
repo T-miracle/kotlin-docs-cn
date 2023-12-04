@@ -23,10 +23,10 @@ open class Base(p: Int)
 class Derived(p: Int) : Base(p)
 ```
 
-当派生类拥有一个主构造函数时，其基类可以（且必须）在主构造函数中使用传递的参数进行初始化。
+当<tooltip term="派生类">派生类</tooltip>拥有一个主构造函数时，其基类可以（且必须）在主构造函数中使用传递的参数进行初始化。
 
-但是，如果派生类没有主构造函数，那么每个次构造函数都必须使用 `super` 关键字来初始化基类，或者它必须委托给另一个能够执行此初始化操作的构造函数。
-这确保了基类在派生类的构造过程中得到适当的初始化。
+但是，如果<tooltip term="派生类">派生类</tooltip>没有主构造函数，那么每个次构造函数都必须使用 `super` 关键字来初始化基类，或者它必须委托给另一个能够执行此初始化操作的构造函数。
+这确保了基类在<tooltip term="派生类">派生类</tooltip>的构造过程中得到适当的初始化。
 
 值得注意的是，在这种情况下，不同的次构造函数可以调用基类的不同构造函数，以满足特定的初始化需求：
 
@@ -70,7 +70,7 @@ open class Rectangle() : Shape() {
 ## 重写属性 {id=重写属性}
 
 重写属性的机制与方法类似。
-如果在超类中声明了一个属性，然后在派生类中重新声明，必须使用 `override` 关键字，同时确保它们的类型是兼容的。
+如果在超类中声明了一个属性，然后在<tooltip term="派生类">派生类</tooltip>中重新声明，必须使用 `override` 关键字，同时确保它们的类型是兼容的。
 每个被声明的属性可以被 具有初始化程序的属性 或 带有 `get` 方法的属性 重写：
 
 ```kotlin
@@ -84,7 +84,7 @@ class Rectangle : Shape() {
 ```
 
 你还可以使用 `var` 属性来重写 `val` 属性，但是反过来是不允许的。
-这是因为 `val` 属性本质上声明了一个 `get` 方法，而将其重写为 `var` 就在派生类中额外声明了一个 `set` 方法。
+这是因为 `val` 属性本质上声明了一个 `get` 方法，而将其重写为 `var` 就在<tooltip term="派生类">派生类</tooltip>中额外声明了一个 `set` 方法。
 
 值得注意的是，你可以在主构造函数中的属性声明中使用 `override` 关键字：
 
@@ -102,7 +102,7 @@ class Polygon : Shape {
 
 ## 派生类初始化顺序 {id=派生类初始化顺序}
 
-在构造派生类的新实例期间，基类初始化是第一步完成的（仅在基类构造函数的参数求值之前），这意味着它在派生类的初始化逻辑运行之前发生。
+在构造<tooltip term="派生类">派生类</tooltip>的新实例期间，基类初始化是第一步完成的（仅在基类构造函数的参数求值之前），这意味着它在<tooltip term="派生类">派生类</tooltip>的初始化逻辑运行之前发生。
 
 ```kotlin
 open class Base(val name: String) {
@@ -132,13 +132,13 @@ fun main() {
 {kotlin-runnable="true"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7CAHGKAEYA2AhgM5HYBCxMAFAG4F7YoEC2M82AygC4BOAligDmASmzBUqbFOwC%2BXMdnT8UXPCipIQASRRy%2B9PgC8Bg7AWwAjSrkIlNogL4Sc0jFmx0GRI22w75ALzYktKhTKwAdHhYglwAFhH0RBAKSgKq6po6egbGQtjehjAyOPHFVkTF%2BMRE7AAkcvbYTigtqNUk2AAiMPw0MFAaLlLhvtzKggA0IVKe2LZcAHIsY7wm0yii7BSVVKMRPDDohGAwAGJ8PERcAMJxBDwKchEAruiYPGCUVI6JeMmpZQZDQgACCPEEL1YKmwADMII8ypZrB1atgGlwmg5ROIUDMSnJAek1CDslx9HgjCYzNhYH0BjYaljnKEIP0ePxYB56AUfOx%2FNgAvjQlQiG9ehFCsUANTzYhLFZRGLxYR%2FAHARRAklZXTk3LUqUlbBIul8fpQRkkeqNECOVBtPEoWEvHDMAgCH5ifFpFTakA3CAoa48F5gcn5E29M0M1EaJCaOIwPB4CDxzSTYLxkAAdwReCgadt9nxPXpgwTSZT6eCObzBaLrRAkxAXAeghgXAACoQuPCeMwECAAFYEOhN8AQZjoPjRHgANV63kDg4AjBEAJwRABMAAYQA4gA%3D?_gl=1*tqulsc*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTM5MjQzMS41Mi4xLjE3MDEzOTY2NDMuNTkuMC4w&_ga=2.246417028.1244175791.1701270364-2060274793.1694940376)
 
-这意味着在执行基类构造函数时，派生类中声明或重写的属性尚未初始化。
+这意味着在执行基类构造函数时，<tooltip term="派生类">派生类</tooltip>中声明或重写的属性尚未初始化。
 在基类初始化逻辑中（直接或间接通过另一个重写的 `open` 成员实现）使用这些属性可能导致不正确的行为或运行时失败。
 因此，在设计基类时，应避免在构造函数、属性初始化程序或 `init` 块中使用 `open` 成员。
 
 ## 调用超类实现 {id=调用超类实现}
 
-在派生类中，可以使用 `super` 关键字调用其超类的函数和属性访问器实现：
+在<tooltip term="派生类">派生类</tooltip>中，可以使用 `super` 关键字调用其超类的函数和属性访问器实现：
 
 ```kotlin
 open class Rectangle {

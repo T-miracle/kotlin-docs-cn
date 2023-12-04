@@ -51,7 +51,8 @@ val simple: Int? // 类型为 Int，具有默认的 getter，必须在构造函�
 val inferredType = 1 // 类型为 Int，并且具有默认的 getter
 ```
 
-您可以为属性定义自定义访问器。如果定义了自定义 getter，每次访问属性时都会调用它（这样你可以实现一个计算属性）。下面是一个自定义 getter 的示例：
+您可以为属性定义自定义访问器。如果定义了自定义 getter，每次访问属性时都会调用它（这样你可以实现一个计算属性）。
+下面是一个自定义 getter 的示例：
 
 ```kotlin
 class Rectangle(val width: Int, val height: Int) {
@@ -65,6 +66,7 @@ fun main() {
 }
 ```
 {kotlin-runnable="true"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7MAbAhgZ2wAgCUYwAXTFAc3RgAoA3TdPAdwEsoSALePASRRIAaPAyacYrCpxI9%2BJAJR5gqPKpGM8mAE4xMsgXgD0hvAActEUzC0kAnnjtW8rfJZKsIKDdlZoYzkjwwcjwAI39fADNrHSg8SIsAWwdxPAoYEhJrAHJ8HRIAVy0UB1srFTVK9JIaRQBeFJcAOjYOTjwAKkbsJvFJaVQAX1RUSIKSxMxfWqUK1VE8HVJyKn8GomXKahoAZmEAFnk5sy1fEnQUGiQQAHV2LjqAEmAlsi2YFvvOQeE%2BqRIni9iG9Vr0JP8fpodJhAa8VtQmtpdMMQEcUIMQIIQGQtNUAApYEiRCBaRIIEAAK0wDEx4AgiVMrGoWgAatYfJ5yQBGJoATiaACYAAwgQZAA%3D%3D%3D?_gl=1*k3cnp1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTYxOTI2My41OS4xLjE3MDE2MTk5MDEuNjAuMC4w&_ga=2.58855081.562108859.1701591821-2060274793.1694940376)
 
 如果可以从 getter 推断出来，可以省略属性类型：
 
@@ -121,9 +123,9 @@ var counter = 0 // 初始化程序直接分配给了幕后属性
 
 `field` 标识符只能在属性的访问器中使用。
 
-如果属性使用至少一个访问器的默认实现，或者如果自定义访问器通过 `field` 标识符引用它，将会为该属性生成一个幕后属性。
+如果属性使用至少一个访问器的默认实现，或者如果自定义访问器通过 `field` 标识符引用它，将会为该属性生成一个幕后字段。
 
-例如，在以下情况下将不会有幕后属性：
+例如，在以下情况下将不会有幕后字段：
 
 ```kotlin
 val isEmpty: Boolean
@@ -185,7 +187,7 @@ public static final String SUBSYSTEM_DEPRECATED = "This subsystem is deprecated"
 public static final void foo() { ... }
 ```
 
-可以发现，`@Deprecated` 中的 `SUBSYSTEM_DEPRECATED` 被替换成了实际值。
+可以发现，`@Deprecated` 中的 `message` 被替换成了实际值，常量 `SUBSYSTEM_DEPRECATED` 也没有被删除。
 
 ## 延迟初始化属性和变量 {id=延迟初始化属性和变量}
 

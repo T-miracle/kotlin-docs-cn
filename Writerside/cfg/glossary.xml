@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE terms SYSTEM "https://resources.jetbrains.com/writerside/1.0/glossary.dtd">
+<terms>
+    <term name="派生">在面向对象编程中，"派生"通常指的是通过继承从一个类获取其属性和方法的过程。在这个过程中，原始类被称为父类或基类，而新创建的类被称为派生类或子类。派生类继承了父类的特性，并且可以额外拥有自己的属性和方法。</term>
+    <term name="派生类">"派生类"是在面向对象编程中用来描述通过继承关系创建的新类。</term>
+    <term name="超类型列表">在Kotlin中，"超类型列表"指的是在类的声明中通过冒号（:）后面列出的那些类或接口，它们被称为超类型。</term>
+</terms>

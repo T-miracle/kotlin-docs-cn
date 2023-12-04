@@ -56,7 +56,7 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 由于 JVM 的限制，我们建议在多平台项目中遵循这种文件命名方案：不允许顶级成员（函数、属性）。
 
-为了解决这个问题，Kotlin JVM 编译器会创建包含顶级成员声明的包装类（所谓的“文件门面（file facades）”）。文件门面的内部名称派生自文件名。
+为了解决这个问题，Kotlin JVM 编译器会创建包含顶级成员声明的包装类（所谓的“文件门面（file facades）”）。文件门面的内部名称<tooltip term="派生">派生</tooltip>自文件名。
 
 反过来，JVM 不允许具有相同 完全限定名（FQN，fully qualified name） 的多个类。这可能导致 Kotlin 项目无法编译到 JVM：
 
@@ -313,7 +313,7 @@ class Person(
     KotlinMaker { /*...*/ }
 ```
 
-对于具有长超类型列表的类，在冒号后进行换行，并水平对齐所有超类的名称：
+对于具有长<tooltip term="超类型列表">超类型列表</tooltip>的类，在冒号后进行换行，并水平对齐所有超类的名称：
 
 ```kotlin
 class MyFavouriteVeryLongClassHolder :
