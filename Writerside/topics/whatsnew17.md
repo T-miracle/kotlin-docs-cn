@@ -224,9 +224,9 @@ on [this YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-29974/Add-a-co
 
 ### Stable callable references to functional interface constructors
 
-[Callable references](reflection.md#callable-references) to functional interface constructors are
+[Callable references](reflection.md#可调用引用) to functional interface constructors are
 now [Stable](components-stability.md). Learn how
-to [migrate](fun-interfaces.md#migration-from-an-interface-with-constructor-function-to-a-functional-interface)
+to [migrate](fun-interfaces.md#从带构造函数的接口迁移到函数式接口)
 from an interface with a constructor function to a functional interface using callable references.
 
 Please report any issues you find in [YouTrack](https://youtrack.jetbrains.com/newissue?project=kt).

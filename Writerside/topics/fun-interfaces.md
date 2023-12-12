@@ -1,9 +1,17 @@
-[//]: # (title: Functional \(SAM\) interfaces)
+[//]: # (title: 函数式编程（SAM）接口)
 
-An interface with only one abstract method is called a _functional interface_, or a _Single Abstract
-Method (SAM) interface_. The functional interface can have several non-abstract members but only one abstract member.
+> 译者注：什么是 SAM？
+> 
+> SAM，全名为 Single Abstract Method，意思为“单一抽象方法”。
+> 它的用法和 JavaScript 中的匿名函数或高阶函数类似。
+> 主要用于将函数当做一个方法的参数进行传递的场景。
+> 
+{style=note}
 
-To declare a functional interface in Kotlin, use the `fun` modifier.
+一个仅包含一个抽象方法的接口被称为**函数式接口**，或者**单一抽象方法（SAM）接口**。
+函数式接口可以拥有多个非抽象成员，但只能有一个抽象成员。
+
+在Kotlin中声明函数式接口时，使用`fun`修饰符。
 
 ```kotlin
 fun interface KRunnable {
@@ -11,16 +19,14 @@ fun interface KRunnable {
 }
 ```
 
-## SAM conversions
+## SAM 转换 {id=sam-转换}
 
-For functional interfaces, you can use SAM conversions that help make your code more concise and readable by using
-[lambda expressions](lambdas.md#lambda-expressions-and-anonymous-functions).
+对于函数式接口，可以通过使用[lambda 表达式](lambdas.md#lambda-expressions-and-anonymous-functions)进行 SAM 转换来使代码更简洁、易读。
 
-Instead of creating a class that implements a functional interface manually, you can use a lambda expression.
-With a SAM conversion, Kotlin can convert any lambda expression whose signature matches
-the signature of the interface's single method into the code, which dynamically instantiates the interface implementation.
+不需手动创造函数式接口的实现类，可用 lambda 表达式替代。
+Kotlin 通过 SAM 转换，能将任何与接口单一方法签名匹配的 lambda 表达式转为代码，实现接口的动态实例化。
 
-For example, consider the following Kotlin functional interface:
+例如，有以下 Kotlin 函数式接口：
 
 ```kotlin
 fun interface IntPredicate {
@@ -28,10 +34,10 @@ fun interface IntPredicate {
 }
 ```
 
-If you don't use a SAM conversion, you will need to write code like this:
+如果不使用 SAM 转换，代码需要这样编写：
 
 ```kotlin
-// Creating an instance of a class
+// 创建类的实例
 val isEven = object : IntPredicate {
    override fun accept(i: Int): Boolean {
        return i % 2 == 0
@@ -39,14 +45,14 @@ val isEven = object : IntPredicate {
 }
 ```
 
-By leveraging Kotlin's SAM conversion, you can write the following equivalent code instead:
+通过充分利用 Kotlin 的 SAM 转换，可以用以下等效代码替代：
 
 ```kotlin
-// Creating an instance using lambda
+// 使用 lambda 创建实例
 val isEven = IntPredicate { it % 2 == 0 }
 ```
 
-A short lambda expression replaces all the unnecessary code.
+一个简短的 lambda 表达式替代了所有不必要的代码。
 
 ```kotlin
 fun interface IntPredicate {
@@ -60,14 +66,15 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.4"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgJZoC4wCckBDMGDASTwAUCYosxj8NgAdTDDVTUsgB1wAKLPEp4AlGIBCECABsYxNBwC%2BHDgDdi87AGcAoppiYAvONy16jZuWDZcGAKQYATBlPmADBnUq0PBgAtsQ4QhKsHFwY%2FAQ4uPJoQmwgFHoYAOwYMMZoAPwYALQYACTAWIa5AHR8MIJCGRLqIBJqIAA0ILjEBADmMJbyzEgQBEEIIABWxNod4BBB%2FFiKBABqhHpYEGgTAIxVAJxVrl4gqkA%3D?_gl=1*1i8ckie*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjI1MzkxNy42Mi4xLjE3MDIyNTQ2NDAuNTguMC4w&_ga=2.190076526.491535196.1702253918-2060274793.1694940376)
 
-You can also use [SAM conversions for Java interfaces](java-interop.md#sam-conversions).
+也可以使用[Java 接口的 SAM 转换](java-interop.md#sam-conversions)。
 
-## Migration from an interface with constructor function to a functional interface
+## 从带构造函数的接口迁移到函数式接口 {id=从带构造函数的接口迁移到函数式接口}
 
-Starting from 1.6.20, Kotlin supports [callable references](reflection.md#callable-references) to functional interface constructors, which
-adds a source-compatible way to migrate from an interface with a constructor function to a functional interface.
-Consider the following code:
+从1.6.20版本开始，Kotlin支持调用[可调用引用](reflection.md#可调用引用)的函数接口构造函数，使得从带构造函数的接口迁移到函数式接口更加源兼容。
+
+以下是相关代码示例：
 
 ```kotlin
 interface Printer { 
@@ -77,7 +84,7 @@ interface Printer {
 fun Printer(block: () -> Unit): Printer = object : Printer { override fun print() = block() }
 ```
 
-With callable references to functional interface constructors enabled, this code can be replaced with just a functional interface declaration:
+启用对函数式接口构造函数的可调用引用后，你可以仅通过使用函数式接口声明来替换这段代码：
 
 ```kotlin
 fun interface Printer { 
@@ -85,23 +92,22 @@ fun interface Printer {
 }
 ```
 
-Its constructor will be created implicitly, and any code using the `::Printer` function reference will compile. For example:
+它的构造函数将被隐式创建，并且任何使用 `::Printer` 函数引用的代码都将编译通过。例如：
 
 ```kotlin
 documentsStorage.addPrinter(::Printer)
 ```
 
-Preserve the binary compatibility by marking the legacy function `Printer` with the [`@Deprecated`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecated/)
-annotation with `DeprecationLevel.HIDDEN`:
+通过使用 [`@Deprecated`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-deprecated/) 注解和 `DeprecationLevel.HIDDEN`，保留二进制兼容性，标记旧的 `Printer` 函数：
 
 ```kotlin
-@Deprecated(message = "Your message about the deprecation", level = DeprecationLevel.HIDDEN)
+@Deprecated(message = "关于弃用的消息", level = DeprecationLevel.HIDDEN)
 fun Printer(...) {...}
 ```
 
-## Functional interfaces vs. type aliases
+## 函数接口 vs. 类型别名
 
-You can also simply rewrite the above using a [type alias](type-aliases.md) for a functional type:
+你也可以简单地使用[类型别名](type-aliases.md)来重写上述内容，作为函数类型的别名：
 
 ```kotlin
 typealias IntPredicate = (i: Int) -> Boolean
@@ -113,14 +119,17 @@ fun main() {
 }
 ```
 
-However, functional interfaces and [type aliases](type-aliases.md) serve different purposes.
-Type aliases are just names for existing types – they don't create a new type, while functional interfaces do.
-You can provide extensions that are specific to a particular functional interface to be inapplicable for plain functions or their type aliases.
+然而，函数式接口和[类型别名](type-aliases.md)有不同的用途。
+类型别名只是现有类型的名称，它们不创建新的类型；而函数式接口则会创建新类型。
+<tooltip term="直译">你可以提供专门适用于特定函数式接口的扩展，以确保其不适用于普通函数或其类型别名的情况。</tooltip>
 
-Type aliases can have only one member, while functional interfaces can have multiple non-abstract members and one abstract member.
-Functional interfaces can also implement and extend other interfaces.
+类型别名只能有一个成员，而函数式接口可以有多个非抽象成员和一个抽象成员。
+函数式接口还可以实现和扩展其他接口。
 
-Functional interfaces are more flexible and provide more capabilities than type aliases, but they can be more costly both syntactically and at runtime because they can require conversions to a specific interface.
-When you choose which one to use in your code, consider your needs:
-* If your API needs to accept a function (any function) with some specific parameter and return types – use a simple functional type or define a type alias to give a shorter name to the corresponding functional type.
-* If your API accepts a more complex entity than a function – for example, it has non-trivial contracts and/or operations on it that can't be expressed in a functional type's signature – declare a separate functional interface for it.
+函数式接口相对于类型别名来说更加灵活，能够提供更多的功能。
+但需要注意的是，在语法和运行时方面，它们可能会更耗资源，因为可能需要进行特定接口的转换。
+在选择在代码中使用哪一个时，请考虑您的需求：
+- 如果您的 API 需要接受具有特定参数和返回类型的函数（任何函数）—— 使用简单的函数类型或定义类型别名，以提供相应函数类型的更短的名称。
+- 如果您的 API 需要接受的实体比函数更为复杂 ——
+  例如，它具有不寻常的约定和/或涉及在函数类型签名中无法表示的操作，那么为其单独声明一个函数式接口可能更为适合。
+  这些“非平凡的合同”指的是不常见或特殊的规则和条件。

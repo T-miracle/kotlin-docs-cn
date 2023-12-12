@@ -172,7 +172,7 @@ If you need a build for JVM 1.6, you can still switch to this target. Learn how:
 
 Kotlin 1.5.0 now uses dynamic invocations (`invokedynamic`) for compiling SAM (Single Abstract Method) conversions:
 * Over any expression if the SAM type is a [Java interface](java-interop.md#sam-conversions)
-* Over lambda if the SAM type is a [Kotlin functional interface](fun-interfaces.md#sam-conversions)
+* Over lambda if the SAM type is a [Kotlin functional interface](fun-interfaces.md#sam-转换)
 
 The new implementation uses [`LambdaMetafactory.metafactory()`](https://docs.oracle.com/javase/8/docs/api/java/lang/invoke/LambdaMetafactory.html#metafactory-java.lang.invoke.MethodHandles.Lookup-java.lang.String-java.lang.invoke.MethodType-java.lang.invoke.MethodType-java.lang.invoke.MethodHandle-java.lang.invoke.MethodType-)
 and auxiliary wrapper classes are no longer generated during compilation. This decreases the size of the application's JAR,

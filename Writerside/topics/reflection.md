@@ -83,13 +83,12 @@ assert(widget is GoodWidget) { "Bad widget: ${widget::class.qualifiedName}" }
 You will obtain the reference to the exact class of an object, for example, `GoodWidget` or `BadWidget`,
 regardless of the type of the receiver expression (`Widget`).
 
-## Callable references
+## 可调用引用 {id=可调用引用}
 
-References to functions, properties, and constructors can
-also be called or used as instances of [function types](lambdas.md#function-types).
+函数、属性和构造函数的引用可以被调用或用作[函数类型](lambdas.md#function-types)的实例。
 
-The common supertype for all callable references is [`KCallable<out R>`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-callable/index.html),
-where `R` is the return value type. It is the property type for properties, and the constructed type for constructors.
+所有可调用引用的通用超类型是[`KCallable<out R>`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-callable/index.html)，其中 `R` 是返回值的类型。
+对于属性，它是属性的类型；对于构造函数，它是构造的类型。
 
 ### Function references
 
