@@ -1,4 +1,4 @@
-[//]: # (title: Extensions)
+[//]: # (title: 扩展)
 
 Kotlin provides the ability to extend a class or an interface with new functionality
 without having to inherit from the class or use design patterns such as _Decorator_.

@@ -211,7 +211,7 @@ At the call site, inline accessors are inlined as regular inline functions.
 ## Restrictions for public API inline functions
 
 When an inline function is `public` or `protected` but is not a part of a `private` or `internal` declaration,
-it is considered a [module](visibility-modifiers.md#modules)'s public API. It can be called in other modules and is
+it is considered a [module](visibility-modifiers.md#模块)'s public API. It can be called in other modules and is
 inlined at such call sites as well.
 
 This imposes certain risks of binary incompatibility caused by changes in the module that declares an inline function in

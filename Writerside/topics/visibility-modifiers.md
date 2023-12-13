@@ -1,73 +1,71 @@
-[//]: # (title: Visibility modifiers)
+[//]: # (title: 可见性修饰符)
 
-Classes, objects, interfaces, constructors, and functions, as well as properties and their setters, can have *visibility modifiers*.
-Getters always have the same visibility as their properties.
+类、对象、接口、构造函数和方法，以及属性及其设置器（setters），都可以拥有**可见性修饰符**。
+获取器（getters）的可见性始终与它们所属的属性相同。
 
-There are four visibility modifiers in Kotlin: `private`, `protected`, `internal`, and `public`.
-The default visibility is `public`.
+在 Kotlin 中有四个可见性修饰符：`private`、`protected`、`internal` 和 `public`。
+默认可见性是 `public`。
 
-On this page, you'll learn how the modifiers apply to different types of declaring scopes.
+在本页面上，你将学习这些修饰符如何适用于不同类型的声明范围。
 
-## Packages
+## 包 {id=包}
 
-Functions, properties, classes, objects, and interfaces can be declared at the "top-level" directly inside a package:
+函数、属性、类、对象和接口可以在包的“顶层”直接声明：
 
 ```kotlin
-// file name: example.kt
+// 文件名: example.kt
 package foo
 
 fun baz() { ... }
 class Bar { ... }
 ```
 
-* If you don't use a visibility modifier, `public` is used by default, which means that your declarations will be
-  visible everywhere.
-* If you mark a declaration as `private`, it will only be visible inside the file that contains the declaration.
-* If you mark it as `internal`, it will be visible everywhere in the same [module](#modules).
-* The `protected` modifier is not available for top-level declarations.
+* 如果你没有使用可见性修饰符，默认情况下将使用 `public`。这就意味着你的声明将在任何地方都可见。
+* 如果你将声明标记为 `private`，它只会在包含该声明的文件内可见。
+* 如果将其标记为 `internal`，它将在同一[模块](#模块)中的任何地方可见。
+* 请注意，`protected` 修饰符不适用于顶层声明。
 
->To use a visible top-level declaration from another package, you should [import](packages.md#导入) it.
+> 要从另一个包中使用可见的顶层声明，你应该进行[导入](packages.md#导入)。
 >
 {style="note"}
 
-Examples:
+示例：
 
 ```kotlin
-// file name: example.kt
+// 文件名: example.kt
 package foo
 
-private fun foo() { ... } // visible inside example.kt
+private fun foo() { ... } // 在 example.kt 中可见
 
-public var bar: Int = 5 // property is visible everywhere
-    private set         // setter is visible only in example.kt
+public var bar: Int = 5 // 属性在任何地方都可见
+    private set         // 设置器仅在 example.kt 中可见
     
-internal val baz = 6    // visible inside the same module
+internal val baz = 6    // 在同一模块中可见
 ```
 
-## Class members
+## 类成员 {id=类成员}
 
-For members declared inside a class:
+对于在类内声明的成员：
 
-* `private` means that the member is visible inside this class only (including all its members).
-* `protected` means that the member has the same visibility as one marked as `private`, but that it is also visible in subclasses.
-* `internal` means that any client *inside this module* who sees the declaring class sees its `internal` members.
-* `public` means that any client who sees the declaring class sees its `public` members.
+* `private` 表示该成员仅在该类内可见（包括其所有成员）。
+* `protected` 表示该成员具有与标记为 `private` 相同的可见性，但它还在子类中可见。
+* `internal` 表示在**此模块内**看到声明类的任何客户端都会看到其 `internal` 成员。
+* `public` 表示看到声明类的任何客户端都会看到其 `public` 成员。
 
-> In Kotlin, an outer class does not see private members of its inner classes.
+> 在 Kotlin 中，外部类看不到其内部类的私有成员。
 >
 {style="note"}
 
-If you override a `protected` or an `internal` member and do not specify the visibility explicitly, the overriding member
-will also have the same visibility as the original.
+如果你重新定义了一个 `protected` 或者 `internal` 成员，而没有明确指定它的可见性，那么重新定义的成员将会具有与原始成员相同的可见性。
 
-Examples:
+示例：
 
 ```kotlin
 open class Outer {
     private val a = 1
     protected open val b = 2
     internal open val c = 3
-    val d = 4  // public by default
+    val d = 4  // 默认情况下是 public
     
     protected class Nested {
         public val e: Int = 5
@@ -75,26 +73,26 @@ open class Outer {
 }
 
 class Subclass : Outer() {
-    // a is not visible
-    // b, c and d are visible
-    // Nested and e are visible
+    // a 不可见
+    // b, c 和 d 可见
+    // Nested 和 e 可见
 
-    override val b = 5   // 'b' is protected
-    override val c = 7   // 'c' is internal
+    override val b = 5   // 'b' 是 protected
+    override val c = 7   // 'c' 是 internal
 }
 
 class Unrelated(o: Outer) {
-    // o.a, o.b are not visible
-    // o.c and o.d are visible (same module)
-    // Outer.Nested is not visible, and Nested::e is not visible either 
+    // o.a, o.b 不可见
+    // o.c 和 o.d 可见（同一模块）
+    // Outer.Nested 不可见，Nested::e 也不可见
 }
 ```
 
-### Constructors
+### 构造函数 {id=构造函数}
 
-Use the following syntax to specify the visibility of the primary constructor of a class:
+使用以下语法指定类的主构造函数的可见性：
 
-> You need to add an explicit `constructor` keyword.
+> 你需要添加显式的 `constructor` 关键字。
 >
 {style="note"}
 
@@ -102,21 +100,21 @@ Use the following syntax to specify the visibility of the primary constructor of
 class C private constructor(a: Int) { ... }
 ```
 
-Here the constructor is private. By default, all constructors are `public`, which effectively
-amounts to them being visible everywhere the class is visible (this means that a constructor of an `internal` class is only
-visible within the same module).
+在这里，构造函数是私有的。
+默认情况下，所有构造函数都是公开的 (`public`)。
+这实际上意味着它们可以在类可见的任何地方被访问到（这也就是说，`internal` 类的构造函数只有在同一模块内才能被看到）。
 
-### Local declarations
+### 局部声明 {id=局部声明}
 
-Local variables, functions, and classes can't have visibility modifiers.
+局部变量、函数和类不能具有可见性修饰符。
 
-## Modules
+## 模块 {id=模块}
 
-The `internal` visibility modifier means that the member is visible within the same module. More specifically,
-a module is a set of Kotlin files compiled together, for example:
+`internal` 这个可见性修饰符表示，被标记的成员（通常是函数、类等）只能在同一个模块内可见。
+具体来说，模块是一组在编译时一起处理的 Kotlin 文件，例如：
 
-* An IntelliJ IDEA module.
-* A Maven project.
-* A Gradle source set (with the exception that the `test` source set can access the internal declarations of `main`).
-* A set of files compiled with one invocation of the `<kotlinc>` Ant task.
+* IntelliJ IDEA 的模块。
+* Maven 项目。
+* Gradle 的源代码集（但 `test` 源代码集只能访问 `main` 的内部声明）。
+* 使用 `<kotlinc>` Ant 任务的文件集。
 
