@@ -17,7 +17,7 @@ Kotlin fixes a series of issues that Java suffers from:
 * [Primitive types](basic-types.md) that are not classes. The byte-code uses primitives where possible, but they are not
     explicitly available.
 * [Static members](classes.md) are replaced with [companion objects](object-declarations.md#companion-objects),
-    [top-level functions](functions.md), [extension functions](extensions.md#extension-functions), or [@JvmStatic](java-to-kotlin-interop.md#static-methods).
+    [top-level functions](functions.md), [extension functions](extensions.md#扩展函数), or [@JvmStatic](java-to-kotlin-interop.md#static-methods).
 * [Wildcard-types](generics.md) are replaced with [declaration-site variance](generics.md#declaration-site-variance) and
     [type projections](generics.md#type-projections).
 * [Ternary-operator `a ? b : c`](control-flow.md#if表达式) is replaced with [if expression](control-flow.md#if表达式). 

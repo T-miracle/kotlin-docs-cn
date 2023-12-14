@@ -7,7 +7,7 @@ transformations, and so on.
 ## Extension and member functions
 
 Collection operations are declared in the standard library in two ways: [member functions](classes.md#类成员) of
-collection interfaces and [extension functions](extensions.md#extension-functions). 
+collection interfaces and [extension functions](extensions.md#扩展函数). 
 
 Member functions define operations that are essential for a collection type. For example, [`Collection`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html)
 contains the function [`isEmpty()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/is-empty.html)

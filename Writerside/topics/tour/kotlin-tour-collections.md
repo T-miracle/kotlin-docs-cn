@@ -83,7 +83,7 @@ fun main() {
 > [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和 [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html)
 > 函数是**扩展**函数的示例。要在对象上调用扩展函数，请在对象后写函数名，并加上一个点 `.`
 >
-> 有关扩展函数的更多信息，请参阅 [扩展函数](extensions.md#extension-functions)。
+> 有关扩展函数的更多信息，请参阅 [扩展函数](extensions.md#扩展函数)。
 > 对于本教程，您只需要知道如何调用它们。 
 > 
 {style="note"}

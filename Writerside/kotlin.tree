@@ -463,5 +463,6 @@
 
     <toc-element toc-title="词汇表" hidden="true">
         <toc-element topic="implicit-backing-field.md"/>
+        <toc-element topic="static-dispatchpic.md"/>
     </toc-element>
 </instance-profile>

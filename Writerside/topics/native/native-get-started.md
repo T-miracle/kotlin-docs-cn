@@ -86,7 +86,7 @@ performs the incremental build of the project.
 ### Count the unique letters in your name
 
 1. Open the file `Main.kt` in `src/nativeMain/kotlin`.
-2. Declare the new [extension function](extensions.md#extension-functions) `countDistinctCharacters()` for `String`:
+2. Declare the new [extension function](extensions.md#扩展函数) `countDistinctCharacters()` for `String`:
 
    * Convert the name to lowercase using the [`lowercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/lowercase.html) function.
    * Convert the input string to a list of characters using the [`toList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-list.html) function.

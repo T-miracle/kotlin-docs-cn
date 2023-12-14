@@ -145,7 +145,7 @@ person?.department?.head = managersPool.getManager()
 
 ## Nullable receiver
 
-Extension functions can be defined on a [nullable receiver](extensions.md#nullable-receiver).
+Extension functions can be defined on a [nullable receiver](extensions.md#可空接收者).
 This way you can specify behaviour for null values without the need to use null-checking logic at each call-site. 
 
 For example, the [`toString()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/to-string.html) function is defined on a nullable receiver. It returns the String "null" (as opposed to a `null` value). This can be helpful in certain situations, for example, logging:

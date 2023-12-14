@@ -63,7 +63,7 @@ Google Cloud Platform 提供了一系列教程，用于将 Kotlin 应用程序�
 ## 下一步
 
 * 要深入了解这门语言，请查看本站上的 Kotlin 文档和 [Kotlin Koans](koans.md)。
-* 观看关于 ["使用 Kotlin 进行微服务的 Micronaut"](https://micronaut.io/2020/12/03/webinar-micronaut-for-microservices-with-kotlin/) 的网络研讨会，并探索一个详细的 [指南](https://guides.micronaut.io/latest/micronaut-kotlin-extension-fns.html)，展示了如何在 Micronaut 框架中使用 [Kotlin 扩展函数](extensions.md#extension-functions)。
+* 观看关于 ["使用 Kotlin 进行微服务的 Micronaut"](https://micronaut.io/2020/12/03/webinar-micronaut-for-microservices-with-kotlin/) 的网络研讨会，并探索一个详细的 [指南](https://guides.micronaut.io/latest/micronaut-kotlin-extension-fns.html)，展示了如何在 Micronaut 框架中使用 [Kotlin 扩展函数](extensions.md#扩展函数)。
 * http4k 提供 [CLI](https://toolbox.http4k.org) 以生成完整的项目，并提供一个 [starter](https://start.http4k.org) 存储库，使用单个 bash 命令即可生成使用 GitHub、Travis 和 Heroku 的整个 CD 流水线。
 * 想要从 Java 迁移到 Kotlin 吗？学习如何在 [Java 和 Kotlin 中执行典型的字符串任务](java-to-kotlin-idioms-strings.md)。
 

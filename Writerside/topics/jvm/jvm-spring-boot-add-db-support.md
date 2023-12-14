@@ -262,7 +262,7 @@ Extend the functionality of the application to retrieve the individual messages 
     }
     ```
    
-    > The `.query()` function that is used to fetch the message by its id is a [Kotlin extension function](extensions.md#extension-functions) provided by the Spring Framework and requires an additional import as in the code above.
+    > The `.query()` function that is used to fetch the message by its id is a [Kotlin extension function](extensions.md#扩展函数) provided by the Spring Framework and requires an additional import as in the code above.
     >
     {style="note"}
 

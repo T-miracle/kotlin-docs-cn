@@ -86,7 +86,7 @@ in the scope where the compiler performs the check.
 
 If you don't perform this check, the code will fail to compile with the following message:
 "Only [safe (?.)](null-safety.md#safe-calls) or [non-nullable asserted (!!.) calls](null-safety.md#the-operator) are allowed
-on a [nullable receiver](extensions.md#nullable-receiver) of type String?".
+on a [nullable receiver](extensions.md#可空接收者) of type String?".
 
 You can write the same shorter – use the [safe-call operator ?. (If-not-null shorthand)](idioms.md#if-not-null简写), 
 which allows you to combine a null check and a method call into a single operation:

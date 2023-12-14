@@ -1,59 +1,53 @@
 [//]: # (title: 扩展)
 
-Kotlin provides the ability to extend a class or an interface with new functionality
-without having to inherit from the class or use design patterns such as _Decorator_.
-This is done via special declarations called _extensions_.
+Kotlin 提供了一种扩展类或接口功能的能力，而无需继承自该类或使用设计模式，比如 **装饰者（Decorator）**。
+这是通过称为 **扩展（extensions）** 的特殊声明完成的。
 
-For example, you can write new functions for a class or an interface from a third-party library that you can't modify.
-Such functions can be called in the usual way, as if they were methods of the original class.
-This mechanism is called an _extension function_. There are also _extension properties_ that let you define
-new properties for existing classes.
+例如，你可以为无法修改的第三方库中的类或接口编写新的函数。
+这些函数可以像原始类的方法一样常规调用。
+这个机制被称为 **扩展函数（extension function）**。
+还有 **扩展属性（extension properties）** 允许你为现有类定义新属性。
 
-## Extension functions
+## 扩展函数 {id=扩展函数}
 
-To declare an extension function, prefix its name with a _receiver type_, which refers to the type being extended.
-The following adds a `swap` function to `MutableList<Int>`:
+要声明扩展函数，请在其名称前加上**接收者类型（receiver type）**，该类型指的是被扩展的类型。
+以下示例向 `MutableList<Int>` 添加了一个名为 `swap` 的函数：
 
 ```kotlin
 fun MutableList<Int>.swap(index1: Int, index2: Int) {
-    val tmp = this[index1] // 'this' corresponds to the list
+    val tmp = this[index1] // 'this' 对应该列表
     this[index1] = this[index2]
     this[index2] = tmp
 }
 ```
 
-The `this` keyword inside an extension function corresponds to the receiver object (the one that is passed before the dot).
-Now, you can call such a function on any `MutableList<Int>`:
+在扩展函数内部，关键字 `this` 对应于接收者对象（即在点号之前传递的对象）。现在，你可以在任何 `MutableList<Int>` 上调用这个函数：
 
 ```kotlin
 val list = mutableListOf(1, 2, 3)
-list.swap(0, 2) // 'this' inside 'swap()' will hold the value of 'list'
+list.swap(0, 2) // 'swap()' 内部的 'this' 将持有 'list' 的值
 ```
 
-This function makes sense for any `MutableList<T>`, and you can make it generic:
+这个函数对于任何 `MutableList<T>` 都是有意义的，你可以使它成为通用的：
 
 ```kotlin
 fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
-    val tmp = this[index1] // 'this' corresponds to the list
+    val tmp = this[index1] // 'this' 对应于列表
     this[index1] = this[index2]
     this[index2] = tmp
 }
 ```
 
-You need to declare the generic type parameter before the function name to make it available in the receiver type expression.
-For more information about generics, see [generic functions](generics.md).
+你需要在函数名称之前声明泛型类型参数，以便在接收者类型表达式中使用。有关泛型的更多信息，请参见[泛型函数](generics.md)。
 
-## Extensions are resolved _statically_
+## 扩展是**静态**解析的
 
-Extensions do not actually modify the classes they extend. By defining an extension, you are not inserting new members into
-a class, only making new functions callable with the dot-notation on variables of this type.
+扩展实际上不会修改它们所扩展的类。通过定义扩展，你并没有在类内部添加新成员，只是让该类型的变量能够使用点符号调用新的函数。
 
-Extension functions are dispatched _statically_. So which extension function is called is already known at compile time
-based on the receiver type. For example:
+需要注意的是，扩展函数是[**静态**分派](static-dispatchpic.md)的。这意味着在编译时就已经根据接收者类型确定调用哪个扩展函数。例如：
 
 ```kotlin
 fun main() {
-//sampleStart
     open class Shape
     class Rectangle: Shape()
     
@@ -65,20 +59,17 @@ fun main() {
     }
     
     printClassName(Rectangle())
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGEADjJmADY4DO7GAygBY6NqtVhy4AlGGAAuONAHMWMeD36MSQmhoypMfATAB0cmFIByOLDBIYAvBnIg9gkFp0YJ02QsPGzFq6R2Dh4y8ooOWq7oGPQATgRSAMJsnOaWhOzKTjCkFJi0BXEJLETsRiZpAcRaAL6R%2BTRFaEkp7JWEIV6KJNVUaDUgADQgMrG%2BAApsUkgQsVgIIABWOABuOEPgEFj0eIqxAGowsex4EGgLAIwGAJwGAEwADCA1QA%3D%3D%3D?_gl=1*1j74nc5*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjUzOTIuNTUuMC4w&_ga=2.167288056.791462809.1702344662-2060274793.1694940376)
 
-This example prints _Shape_, because the extension function called depends only on the declared type of the
-parameter `s`, which is the `Shape` class.
+这个例子会打印出 **Shape**，因为被调用的扩展函数仅取决于参数 `s` 的声明类型，即 `Shape` 类。
 
-If a class has a member function, and an extension function is defined which has the same receiver type,
-the same name, and is applicable to given arguments, the _member always wins_. For example:
+如果一个类同时拥有一个成员函数和一个具有相同接收者类型、相同名称以及适用相同参数的扩展函数，那么**成员函数始终优先**被执行。例如：
 
 ```kotlin
 fun main() {
-//sampleStart
     class Example {
         fun printFunctionType() { println("Class method") }
     }
@@ -86,18 +77,17 @@ fun main() {
     fun Example.printFunctionType() { println("Extension function") }
     
     Example().printFunctionType()
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGYANjgM5MYCiAHjlgA70xlqtYakw8ATgQAuAMXRgpeCGgAqATx4wSZDBOn0i5EAGFGLbDCkALaEdIBfITUeZaTjKPZde%2FAHR60WXlFZXVNbWBdSUCDQiNOKRg0JiVMUQVUuwwXYXdObj4tYn9ooLQM0I0iykp7EAAaECkccQBzSwAFRikkCHEsBBAAKxwANxwG8AhePH5xADUYcRTlQYBGXwBOXwAmAAYQeyA%3D%3D%3D?_gl=1*6owo4o*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjUzOTIuNTUuMC4w&_ga=2.167221624.791462809.1702344662-2060274793.1694940376)
 
-This code prints _Class method_.
+这段代码会打印出 **Class method**。
 
-However, it's perfectly OK for extension functions to overload member functions that have the same name but a different signature:
+然而对于扩展函数来说，重载具有相同名称但不同签名的成员函数是完全没有问题的：
 
 ```kotlin
 fun main() {
-//sampleStart
     class Example {
         fun printFunctionType() { println("Class method") }
     }
@@ -105,58 +95,56 @@ fun main() {
     fun Example.printFunctionType(i: Int) { println("Extension function #$i") }
     
     Example().printFunctionType(1)
-//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGYANjgM5MYCiAHjlgA70xlqtYakw8ATgQAuAMXRgpeCGgAqATx4wSZDBOn0i5EAGFGLbDCkALaEdIBfITUeZaTjKPZde%2FAHR60WXlFZXVNQjx4DABJQNJgXUlAg0IjTikYNCYlTFEFHIwAYgASPDsMF2F3Tm4%2BLWJ%2FJKC0fNCNLQBGYkpKexAAGhApHHEAc0sABUYpJAhxLAQQACscADccAfAIXjx%2BcQA1GHFs5UWO3wBOXwAmAAYQeyA%3D%3D%3D?_gl=1*6owo4o*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjUzOTIuNTUuMC4w&_ga=2.167221624.791462809.1702344662-2060274793.1694940376)
 
-## Nullable receiver
+## 可空接收者 {id=可空接收者}
 
-Note that extensions can be defined with a nullable receiver type. These extensions can be called on an object variable
-even if its value is null. If the receiver is `null`, then `this` is also `null`. So when defining an extension with a 
-nullable receiver type, we recommend performing a `this == null` check inside the function body to avoid compiler errors. 
+请注意，扩展函数可以使用可空的接收者类型进行定义。这意味着即使对象变量的值为 `null`，也可以在其上调用这些扩展函数。
+如果接收者为 `null`，那么 `this` 也为 `null`。
+因此，在使用可空接收者类型定义扩展时，我们建议在函数体内执行 `this == null` 检查以避免编译器错误。
 
-You can call `toString()` in Kotlin without checking for `null`, as the check already happens inside the extension function:
+在 Kotlin 中，你可以调用 `toString()` 而无需检查 `null`，因为这个检查已经在扩展函数内部发生了：
 
 ```kotlin
 fun Any?.toString(): String {
     if (this == null) return "null"
-    // After the null check, 'this' is autocast to a non-nullable type, so the toString() below
-    // resolves to the member function of the Any class
+    // 在空检查之后，'this' 自动转换为非空类型，因此下面的 toString() 解析为 Any 类的成员函数
     return toString()
 }
 ```
 
-## Extension properties
+## 扩展属性 {id=扩展属性}
 
-Kotlin supports extension properties much like it supports functions:
+与扩展函数类似，Kotlin 同样支持扩展属性：
 
 ```kotlin
 val <T> List<T>.lastIndex: Int
     get() = size - 1
 ```
 
-> Since extensions do not actually insert members into classes, there's no efficient way for an extension
-> property to have a [backing field](properties.md#幕后字段). This is why _initializers are not allowed for
-> extension properties_. Their behavior can only be defined by explicitly providing getters/setters.
+> 由于扩展实际上不会向类中插入成员，因此扩展属性没有有效的方式来拥有[幕后字段](properties.md#幕后字段)。
+> 这就是为什么**扩展属性不允许使用初始化器**的原因。
+> 它们的行为只能通过显式提供的 getter/setter 来定义。
 >
 {style="note"}
 
-Example:
+例子：
 
 ```kotlin
-val House.number = 1 // error: initializers are not allowed for extension properties
+val House.number = 1 // 错误：扩展属性不允许使用初始值设定项
 ```
 
-## Companion object extensions
+## 伴生对象扩展
 
-If a class has a [companion object](object-declarations.md#companion-objects) defined, you can also define extension
-functions and properties for the companion object. Just like regular members of the companion object,
-they can be called using only the class name as the qualifier:
+如果一个类定义了[伴生对象](object-declarations.md#companion-objects)，你还可以为伴生对象定义扩展函数和属性。
+与伴生对象的常规成员一样，它们可以只使用类名作为限定符来调用：
 
 ```kotlin
 class MyClass {
-    companion object { }  // will be called "Companion"
+    companion object { }  // 将被称为 "Companion"
 }
 
 fun MyClass.Companion.printCompanion() { println("companion") }
@@ -166,10 +154,11 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAWQJ4GFUNNgAdAO0ys0gFsAHFcgSwkogCMArGMAFxKYAvlQD0ozAHdmSJJg4waKWTCiZSIfBAZNW5DRSEUKAMwCulPIXRoAdFp0s2t%2BgCdm5Pg8ZPyACgBKQTcPPiR%2FDTofPQ0go31yc0paFA9AkgpqHAIiOxDPb102QMMQABoQPhRXAHMYPgAFVD4TCFdaBBAuFAA3FHLwbXoZGFcANVG0PU6ARlsATlsAJgAGECEgA?_gl=1*1c6msaa*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjYwMDcuNjAuMC4w&_ga=2.167743992.791462809.1702344662-2060274793.1694940376)
 
-## Scope of extensions
+## 扩展的作用域
 
-In most cases, you define extensions on the top level, directly under packages:
+在大多数情况下，你会在顶层直接在包下定义扩展：
 
 ```kotlin
 package org.example.declarations
@@ -177,7 +166,7 @@ package org.example.declarations
 fun List<String>.getLongestString() { /*...*/}
 ```
 
-To use an extension outside its declaring package, import it at the call site:
+要在声明扩展的包之外使用它，请在调用处导入：
 
 ```kotlin
 package org.example.usage
@@ -190,55 +179,61 @@ fun main() {
 }
 ```
 
-See [Imports](packages.md#导入) for more information.
+请参阅[导入](packages.md#导入)获取更多信息。
 
-## Declaring extensions as members
+## 将扩展声明为成员
 
-You can declare extensions for one class inside another class. Inside such an extension, there are multiple _implicit receivers_ -
-objects whose members can be accessed without a qualifier. An instance of a class in which the extension is declared is called a
-_dispatch receiver_, and an instance of the receiver type of the extension method is called an _extension receiver_.
+你可以在一个类内部为另一个类声明扩展。
+在这样的扩展内部，有多个**隐式接收者（implicit receivers）** - 可以无需限定符访问其成员的对象。
+在扩展中声明的类的实例被称为**分发接收者（dispatch receiver）**，扩展方法的接收者类型的实例被称为**扩展接收者（extension receiver）**。
 
 ```kotlin
 class Host(val hostname: String) {
-    fun printHostname() { print(hostname) }
+    // 构造函数
+    fun printHostname() { print(hostname) }  // 方法
+
 }
 
 class Connection(val host: Host, val port: Int) {
-    fun printPort() { print(port) }
+    // 构造函数
+    fun printPort() { print(port) }  // 方法
 
+    // Host类的扩展函数
     fun Host.printConnectionString() {
-        printHostname()   // calls Host.printHostname()
+        printHostname()   // 调用Host类的printHostname()方法
         print(":")
-        printPort()   // calls Connection.printPort()
+        printPort()   // 调用Connection类的printPort()方法
     }
 
     fun connect() {
         /*...*/
-        host.printConnectionString()   // calls the extension function
+        host.printConnectionString()   // 调用扩展函数
     }
 }
 
 fun main() {
-    Connection(Host("kotl.in"), 443).connect()
-    //Host("kotl.in").printConnectionString()  // error, the extension function is unavailable outside Connection
+    Connection(Host("kotl.in"), 443).connect()   // 创建Connection实例并调用connect()方法
+
+    // Host("kotl.in").printConnectionString()  // 错误，扩展函数在Connection外部不可用
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBACQmgLgBQBuKSmAFnvgHYoC2M8mAyvgE4CWNA5gJSZgAHRqYxmAGYBXUQAcuNfLgJ1GhAcEzzuRKioYwBAXxEmaIsKgyYAwhBo0YYfJ3skylas2X4ANJlJyWQh2fGYASUUNEXFJGS0FfAAFEKINBJ1CYNDjERjxaVEfADptRTsHJxd7NgUedUF82LEypWpVGAaxAHpuzDAyJCwS1p8O9Sbm1sIhBFm%2BSdjWlNCuzF7%2BwawKx2dXGlLElbTJs0nC%2FvtdtMbRZp6AKmLnh%2B7F8T18Q50dqv3a7j1AQ9PoDJBDTD4CgwTAwAAe%2BBgNDQ%2BziND29lOpjyNAu9BQ3AawjuYl%2BGJohB8MxAAGsIPgkMVuPN%2FAAWVkAZj4xUglWcExJ626VNmdIZTPMIG5rTJ1RoAN4XQ2MHY7BC%2FihMPhiORqMK5MwnCwMhQpE4qAARkgYRApPgUbBbFc%2FpiaEYQL4QPgUOweDBkqh8BIQvQECAAFamlAe8AQeiyc0qgBqKpR9jDAEZigBOYoAJgADCAjEA%3D%3D%3D?_gl=1*1kjmd5q*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjYwMDcuNjAuMC4w&_ga=2.175011300.791462809.1702344662-2060274793.1694940376)
 
-In the event of a name conflict between the members of a dispatch receiver and an extension receiver, the extension receiver takes
-precedence. To refer to the member of the dispatch receiver, you can use the [qualified `this` syntax](this-expressions.md#qualified-this).
+在分发接收者和扩展接收者的成员之间发生名称冲突时，扩展接收者具有优先权。
+要引用分发接收者的成员，您可以使用[限定的 `this` 语法](this-expressions.md#qualified-this)。
 
 ```kotlin
 class Connection {
     fun Host.getConnectionString() {
-        toString()         // calls Host.toString()
-        this@Connection.toString()  // calls Connection.toString()
+        toString()         // 调用 Host.toString()
+        this@Connection.toString()  // 调用 Connection.toString()
     }
 }
 ```
 
-Extensions declared as members can be declared as `open` and overridden in subclasses. This means that the dispatch of such
-functions is virtual with regard to the dispatch receiver type, but static with regard to the extension receiver type.
+声明为成员的扩展可以使用`open`关键字声明，并允许在子类中进行重写。
+这意味着对于调度接收者类型，这些函数的分派是虚拟的，但对于扩展接收者类型，分派是静态的。
 
 ```kotlin
 open class Base { }
@@ -255,7 +250,7 @@ open class BaseCaller {
     }
 
     fun call(b: Base) {
-        b.printFunctionInfo()   // call the extension function
+        b.printFunctionInfo()   // 调用扩展函数
     }
 }
 
@@ -271,16 +266,17 @@ class DerivedCaller: BaseCaller() {
 
 fun main() {
     BaseCaller().call(Base())   // "Base extension function in BaseCaller"
-    DerivedCaller().call(Base())  // "Base extension function in DerivedCaller" - dispatch receiver is resolved virtually
-    DerivedCaller().call(Derived())  // "Base extension function in DerivedCaller" - extension receiver is resolved statically
+    DerivedCaller().call(Base())  // "Base extension function in DerivedCaller" - 分发接收者在虚拟上解析
+    DerivedCaller().call(Derived())  // "Base extension function in DerivedCaller" - 扩展接收者在静态上解析
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIIAcYDsAEYA2BDAzvhgEIEwbAYC%2BAOmnTgUQCIwBOAlgG4xQbwkyACgCUFanTop0WPIUH4YAYVzZs7CnQzaM0zADMArplKKAdMk5oALgDFjYaxwhoAkmn0RRmzDr%2BWOG2w0IRoQU3IYAA9rdHxnAwcnFwxAhWVVdTYwkS0dWnpfbT0MI0xWTh4oCys7JIT3T29gPL9tAKCQsIruXgxo2LR4lLLHBNSTMhU1dhzWiUK%2FMqxMoQAjAQixFqK2tZrAurQxl0avMW0AekuVtQxrAAtImLjx0eTF%2FLoChjkWdl6UGmWU2U0y7Ga8wgPDYnFgpWM6QONnsxw%2BZ0hu38tWCoXCZH6LyGb3qKTSPSqwNmIFyux%2Bu2h7Dh5GWFN4yKOJzcHnOPjaOg61lx3QBVUJg2GiTR43Jot4VOyNPmBXpywAtrhApi%2FBEFaIzGBVhFRBcMNcMGEIuLXiNSZg0rrwYr5mygU79Ya1EJjSILubLQSBjapVyJhhXQqwhgALQYKAcfDIXDWMAPDBsGBgGC9NipIgZ%2FAQbBirgcNjWQyZACeLrlbpmbA9q1dJquNwDimtxNt0rJ5TrkZAMa7kvTmezMLzY8Lxb6%2BGsyY4nuwNbQVBAABoQAu2ABzGDWAAKeGsnjYaoQIAAVrguLhN%2BAIGrkBwsgA1diSy8ARjMAE4zAAJgABhAKggA%3D%3D?_gl=1*wnmasl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjYwMDcuNjAuMC4w&_ga=2.204510678.791462809.1702344662-2060274793.1694940376)
 
-## Note on visibility
+## 关于可见性的注意事项
 
-Extensions utilize the same [visibility modifiers](visibility-modifiers.md) as regular functions declared in the same scope would.
-For example:
+扩展函数和在相同作用域声明的普通函数一样，使用相同的[可见性修饰符](visibility-modifiers.md)。
+例如：
 
-* An extension declared at the top level of a file has access to the other `private` top-level declarations in the same file.
-* If an extension is declared outside its receiver type, it cannot access the receiver's `private` or `protected` members.
+* 在文件的顶层声明的扩展可以访问文件中其他的 `private` 顶层声明。
+* 如果扩展在其接收者类型之外声明，它将无法访问接收者的 `private` 或 `protected` 成员。

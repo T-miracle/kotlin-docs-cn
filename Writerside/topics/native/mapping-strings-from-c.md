@@ -229,7 +229,7 @@ fun passStringToC() {
 ```
 
 Passing a Kotlin string to C is easy, thanks to the fact that there is `String.cstr` 
-[extension property](extensions.md#extension-properties)
+[extension property](extensions.md#扩展属性)
 in Kotlin for it. There is also `String.wcstr` for cases when you
 need UTF-16 wide characters.
 
