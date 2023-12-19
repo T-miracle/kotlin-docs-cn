@@ -465,4 +465,5 @@
         <toc-element topic="implicit-backing-field.md"/>
         <toc-element topic="static-dispatchpic.md"/>
     </toc-element>
+    <toc-element topic="type-covariant.md"/>
 </instance-profile>

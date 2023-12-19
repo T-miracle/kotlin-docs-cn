@@ -22,7 +22,7 @@ The following tokens are always interpreted as keywords and cannot be used as id
      - is used as an infix operator to check that a value belongs to [a range](ranges.md),
        a collection, or another entity that [defines a 'contains' method](operator-overloading.md#in-operator).
      - is used in [when expressions](control-flow.md#when表达式) for the same purpose.
-     - marks a type parameter as [contravariant](generics.md#declaration-site-variance).
+     - marks a type parameter as [contravariant](generics.md#声明处型变).
  * `!in`
      - is used as an operator to check that a value does NOT belong to [a range](ranges.md),
        a collection, or another entity that [defines a 'contains' method](operator-overloading.md#in-operator).
@@ -82,7 +82,7 @@ as identifiers in other contexts:
      - is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
 * `setparam` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
 * `value` with the `class` keyword declares an [inline class](inline-classes.md).
-* `where` specifies the [constraints for a generic type parameter](generics.md#upper-bounds).
+* `where` specifies the [constraints for a generic type parameter](generics.md#上界).
 
 ## Modifier keywords
 
@@ -108,7 +108,7 @@ in other contexts:
  * `noinline` turns off [inlining of a lambda passed to an inline function](inline-functions.md#noinline).
  * `open` allows [subclassing a class or overriding a member](classes.md#继承).
  * `operator` marks a function as [overloading an operator or implementing a convention](operator-overloading.md).
- * `out` marks a type parameter as [covariant](generics.md#declaration-site-variance).
+ * `out` marks a type parameter as [covariant](generics.md#声明处型变).
  * `override` marks a member as an [override of a superclass member](inheritance.md#重写方法).
  * `private` marks a declaration as [visible in the current class or file](visibility-modifiers.md).
  * `protected` marks a declaration as [visible in the current class and its subclasses](visibility-modifiers.md).

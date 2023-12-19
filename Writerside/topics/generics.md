@@ -1,6 +1,6 @@
-[//]: # (title: Generics: in, out, where)
+[//]: # (title: 泛型：in、out、where)
 
-Classes in Kotlin can have type parameters, just like in Java:
+在 Kotlin 中，类可以具有类型形参，就像在 Java 中一样：
 
 ```kotlin
 class Box<T>(t: T) {
@@ -8,42 +8,40 @@ class Box<T>(t: T) {
 }
 ```
 
-To create an instance of such a class, simply provide the type arguments:
+要创建这样一个类的实例，只需提供类型实参：
 
 ```kotlin
 val box: Box<Int> = Box<Int>(1)
 ```
 
-But if the parameters can be inferred, for example, from the constructor arguments,
-you can omit the type arguments:
+但是如果参数可以被推断，例如从构造函数的参数中，那么你可以省略类型实参：
 
 ```kotlin
-val box = Box(1) // 1 has type Int, so the compiler figures out that it is Box<Int>
+val box = Box(1) // 1 的类型是 Int，因此编译器会推断它是 Box<Int>
 ```
 
-## Variance
+## 型变 {id=型变}
 
-One of the trickiest aspects of Java's type system is the wildcard types (see [Java Generics FAQ](http://www.angelikalanger.com/GenericsFAQ/JavaGenericsFAQ.html)).
-Kotlin doesn't have these. Instead, Kotlin has declaration-site variance and type projections.
+Java类型系统中最棘手的部分之一是通配符类型（参见[Java泛型FAQ](http://www.angelikalanger.com/GenericsFAQ/JavaGenericsFAQ.html)）。
+而Kotlin则没有这种类型。相反，Kotlin 拥有声明处型变和类型投影。
 
-Let's think about why Java needs these mysterious wildcards. The problem is explained well in 
-[Effective Java, 3rd Edition](http://www.oracle.com/technetwork/java/effectivejava-136174.html), 
-Item 31: _Use bounded wildcards to increase API flexibility_.
-First, generic types in Java are _invariant_, meaning that `List<String>` is _not_ a subtype of `List<Object>`.
-If `List` were not _invariant_, it would have been no better than Java's arrays, as the following code would have 
-compiled but caused an exception at runtime:
+让我们思考一下为什么Java需要这些神秘的通配符。
+问题在 [《Effective Java, 3rd Edition》](http://www.oracle.com/technetwork/java/effectivejava-136174.html) 的第31项中得到了很好的解释：**使用有界通配符提高API的灵活性**。
+首先，在Java中，泛型类型是 **不变的**，这意味着`List<String>` **不是** `List<Object>` 的子类型。
+如果`List`不是 **不变的**，那么它也不会比 Java 的数组好到哪里去，因为以下代码将会编译通过但在运行时引发异常：
 
 ```java
 // Java
 List<String> strs = new ArrayList<String>();
-List<Object> objs = strs; // !!! A compile-time error here saves us from a runtime exception later.
-objs.add(1); // Put an Integer into a list of Strings
-String s = strs.get(0); // !!! ClassCastException: Cannot cast Integer to String
+List<Object> objs = strs; // !!! 这里的编译时错误在后来阻止了我们遇到运行时异常。
+objs.add(1); // 在字符串列表中放入一个整数
+String s = strs.get(0); // !!! ClassCastException: 无法将整数转换为字符串
 ```
 
-Java prohibits such things in order to guarantee run-time safety. But this has implications. For example,
-consider the `addAll()` method from the `Collection` interface. What's the signature of this method? Intuitively,
-you'd write it this way:
+Java为了保证运行时安全性，禁止了这样的操作。
+但这也带来了一些影响。
+例如，考虑`Collection`接口中的`addAll()`方法。这个方法的签名是什么呢？
+直觉上，你可能会这样写：
 
 ```java
 // Java
@@ -52,21 +50,22 @@ interface Collection<E> ... {
 }
 ```
 
-But then, you would not be able to do the following (which is perfectly safe):
+但是之后你将无法执行以下操作（这是完全安全的）：
 
 ```java
 // Java
 void copyAll(Collection<Object> to, Collection<String> from) {
     to.addAll(from);
-    // !!! Would not compile with the naive declaration of addAll:
-    // Collection<String> is not a subtype of Collection<Object>
+    // !!! 在简单声明addAll的情况下，无法编译通过：
+    // Collection<String> 不是 Collection<Object> 的子类型
 }
 ```
 
-(In Java, you probably learned this the hard way, see [Effective Java, 3rd Edition](http://www.oracle.com/technetwork/java/effectivejava-136174.html), 
-Item 28: _Prefer lists to arrays_)
+（在Java中，这可能需要你通过痛苦的挫折经历才能学到这个教训，详见
+[《Effective Java, 3rd Edition》](http://www.oracle.com/technetwork/java/effectivejava-136174.html)，第28项：
+**推荐使用列表而非数组**）
 
-That's why the actual signature of `addAll()` is the following:
+这就是为什么`addAll()`的实际签名如下：
 
 ```java
 // Java
@@ -75,42 +74,37 @@ interface Collection<E> ... {
 }
 ```
 
-The _wildcard type argument_ `? extends E` indicates that this method accepts a collection of objects of `E`
-_or a subtype of_ `E`, not just `E` itself. This means that you can safely _read_ `E`'s from items
-(elements of this collection are instances of a subclass of E), but _cannot write_ to
-it as you don't know what objects comply with that unknown subtype of `E`.
-In return for this limitation, you get the desired behavior: `Collection<String>` _is_ a subtype of `Collection<? extends Object>`.
-In other words, the wildcard with an _extends_\-bound (_upper_ bound) makes the type _covariant_.
+通配符类型参数 `? extends E` 表示该方法接受一个包含 `E` 对象或 `E` 的子类型的集合，而不仅仅是 `E` 本身。
+这意味着你可以安全地从 items 中 **读取** `E`（该集合的元素是 `E` 子类的实例），但 **不能写入**，因为你不知道哪些对象符合未知的 `E` 子类型。
+作为对这个限制的回报，你得到了期望的行为：`Collection<String>` **是** `Collection<? extends Object>` 的子类型。
+换句话说，带有 **extends** 限定（**上界** 限定）的通配符使得类型可以更灵活地适应子类型，实现了[类型的**协变**（covariant）](type-covariant.md)。
 
-The key to understanding why this works is rather simple: if you can only _take_ items from a collection,
-then using a collection of `String`s and reading `Object`s from it is fine. Conversely, if you can only _put_ items
-into the collection, it's okay to take a collection of `Object`s and put `String`s into it: in Java there is
-`List<? super String>`, which accepts `String`s or any of its supertypes.
+理解为什么这样能够工作的关键相当简单：
+如果你只能从集合中**取出**东西，那么你可以从包含`String`的集合中读取`Object`。
+反之亦然，如果你只能**放入**东西到集合中，那么你可以往包含`Object`的集合中放入`String`：
+在 Java 中还有 `List<? super String>`，它可以接受 `String` 或任何其超类型。
 
-The latter is called _contravariance_, and you can only call methods that take `String` as an argument on `List<? super String>`
-(for example, you can call `add(String)` or `set(int, String)`).  If you call something that returns `T` in `List<T>`,
-you don't get a `String`, but rather an `Object`.
+后者被称为**逆变性（contravariance）**。在 `List<? super String>` 上，你只能调用那些接受 `String` 作为参数的方法（比如 `add(String)` 或 `set(int, String)`）。
+如果你调用返回类型是 `T` 的 `List<T>` 中的某些方法，你将得到的结果不是 `String`，而是 `Object`。
 
-Joshua Bloch gives the name _Producers_ to objects you only _read from_ and _Consumers_ to those you only _write to_. He recommends:
+Joshua Bloch 将仅从中 **读取** 的对象称为**生产者（Producers）**，而仅向其中 **写入** 的对象称为**消费者（Consumers）**。他建议：
 
->"For maximum flexibility, use wildcard types on input parameters that represent producers or consumers",
-> and proposes the following mnemonic:
+> "为了最大化灵活性，使用通配符类型作为表示生产者或消费者的输入参数"，并提出以下记忆口诀：
 >
->_PECS stands for Producer-Extends, Consumer-Super._
+> **PECS 代表 Producer-Extends（生产者 —— 继承者）, Consumer-Super（消费者 —— 超类型）.**
 >
 {type="tip"}
 
-> If you use a producer-object, say, `List<? extends Foo>`, you are not allowed to call `add()` or `set()` on this object,
-> but this does not mean that it is _immutable_: for example, nothing prevents you from calling `clear()`
-> to remove all the items from the list, since `clear()` does not take any parameters at all.
+> 如果你使用生产者对象，比如 `List<? extends Foo>`，你不能在这个对象上调用 `add()` 或 `set()`，但这并不意味着它是 **不可变的**：
+> 例如，没有什么阻止你调用 `clear()` 来从列表中移除所有项目，因为 `clear()` 根本不接受任何参数。
 >
->The only thing guaranteed by wildcards (or other types of variance) is _type safety_. Immutability is a completely different story.
+> 通配符（或其他类型的变体）唯一保证的是 **类型安全**。不可变性是完全不同的问题。
 >
 {style="note"}
 
-### Declaration-site variance
+### 声明处型变 {id=声明处型变}
 
-Let's suppose that there is a generic interface `Source<T>` that does not have any methods that take `T` as a parameter, only methods that return `T`:
+假设有一个泛型接口 `Source<T>`，该接口没有任何以 `T` 为参数的方法，只有返回 `T` 的方法：
 
 ```java
 // Java
@@ -119,25 +113,23 @@ interface Source<T> {
 }
 ```
 
-Then, it would be perfectly safe to store a reference to an instance of `Source<String>` in a variable of
-type `Source<Object>` - there are no consumer-methods to call. But Java does not know this, and still prohibits it:
+然后，将 `Source<String>` 的实例引用存储在类型为 `Source<Object>` 的变量中是完全安全的 —— 没有使用 `T` 作为参数的方法。
+但是 Java 不知道这一点，仍然禁止这样做：
 
 ```java
 // Java
 void demo(Source<String> strs) {
-    Source<Object> objects = strs; // !!! Not allowed in Java
+    Source<Object> objects = strs; // !!! 在Java中不允许
     // ...
 }
 ```
 
-To fix this, you should declare objects of type `Source<? extends Object>`. Doing so is meaningless,
-because you can call all the same methods on such a variable as before, so there's no value added by the more complex type.
-But the compiler does not know that.
+为了解决这个问题，您应该声明类型为 `Source<? extends Object>` 的变量。
+这样做是毫无意义的，因为您可以在这样的变量上调用与以前相同的所有方法，所以更复杂的类型并没有增加任何价值。但编译器并不知道这一点。
 
-In Kotlin, there is a way to explain this sort of thing to the compiler. This is called _declaration-site variance_:
-you can annotate the _type parameter_ `T` of `Source` to make sure that it is only _returned_ (produced) from members
-of `Source<T>`, and never consumed.
-To do this, use the `out` modifier:
+在 Kotlin 中，有一种方法可以向编译器解释这类情况。这被称为“声明处型变”：
+您可以注解 `Source` 的 **类型形参** `T`，确保它仅在 `Source<T>` 的成员中作为返回值（产生），而不被消费。
+要实现这一点，使用 `out` 修饰符：
 
 ```kotlin
 interface Source<out T> {
@@ -145,23 +137,20 @@ interface Source<out T> {
 }
 
 fun demo(strs: Source<String>) {
-    val objects: Source<Any> = strs // This is OK, since T is an out-parameter
+    val objects: Source<Any> = strs // 这是可以的，因为 T 是一个协变参数
     // ...
 }
 ```
 
-The general rule is this: when a type parameter `T` of a class `C` is declared `out`, it may occur only in the _out_-position
-in the members of `C`, but in return `C<Base>` can safely be a supertype of `C<Derived>`.
+一般规则是这样的：当类 `C` 的类型形参 `T` 被声明为 `out` 时，它只能出现在 `C` 的成员的 **out** 位置，但返回的 `C<Base>` 安全地可以是 `C<Derived>` 的超类型。
 
-In other words, you can say that the class `C` is _covariant_ in the parameter `T`, or that `T` is a _covariant_ type parameter.
-You can think of `C` as being a _producer_ of `T`'s, and NOT a _consumer_ of `T`'s.
+换句话说，您可以说类 `C` 在参数 `T` 上是 **协变** 的，或者 `T` 是一个**协变**类型参数。
+您可以将 `C` 视为 `T` 的 **生产者**，而不是 `T` 的 **消费者**。
 
-The `out` modifier is called a _variance annotation_, and  since it is provided at the type parameter declaration site,
-it provides _declaration-site variance_.
-This is in contrast with Java's _use-site variance_ where wildcards in the type usages make the types covariant.
+`out` 修饰符被称为 **型变注解**，由于它是在类型形参声明处提供的，因此提供了 **声明处型变**。
+这与 Java 的 **使用处型变** 形成对比，在那里，通配符在类型使用中使得类型是协变的。
 
-In addition to `out`, Kotlin provides a complementary variance annotation: `in`. It makes a type parameter _contravariant_, meaning
-it can only be consumed and never produced. A good example of a contravariant type is `Comparable`:
+除了 `out` 之外，Kotlin 还提供了一个互补的型变注解：`in`。它使得类型参数**逆变**，意味着它只能被消费而不能被产生。一个很好的逆变类型的例子是 `Comparable`：
 
 ```kotlin
 interface Comparable<in T> {
@@ -169,24 +158,21 @@ interface Comparable<in T> {
 }
 
 fun demo(x: Comparable<Number>) {
-    x.compareTo(1.0) // 1.0 has type Double, which is a subtype of Number
-    // Thus, you can assign x to a variable of type Comparable<Double>
+    x.compareTo(1.0) // 1.0 具有类型 Double，它是 Number 的子类型
+    // 因此，您可以将 x 分配给类型为 Comparable<Double> 的变量
     val y: Comparable<Double> = x // OK!
 }
 ```
 
-The words _in_ and _out_ seem to be self-explanatory (as they've already been used successfully in C# for quite some time),
-and so the mnemonic mentioned above is not really needed.  It can in fact be rephrased at a higher level of abstraction:
+单词 **in** 和 **out** 似乎是不言自明的（因为它们在 C# 中已经成功使用了相当长的时间），因此上面提到的助记法实际上并不是真正需要的。实际上，它可以以更高层次的抽象重新表达：
 
-**[The Existential](https://en.wikipedia.org/wiki/Existentialism) Transformation: Consumer in, Producer out\!** :-)
+**[存在主义](https://en.wikipedia.org/wiki/Existentialism) 转换：消费者逆变，生产者协变\!** :-)
 
-## Type projections
+## 类型投影 {id=类型投影}
 
-### Use-site variance: type projections
+### 使用处型变：类型投影 {id=使用处型变-类型投影}
 
-It is very easy to declare a type parameter `T` as `out` and avoid trouble with subtyping on the use site,
-but some classes _can't_ actually be restricted to only return `T`'s!
-A good example of this is `Array`:
+将类型形参 `T` 声明为 `out` 并在使用处避免子类型问题非常容易，但有些类实际上**不能**仅限于返回 `T`！一个很好的例子是 `Array`：
 
 ```kotlin
 class Array<T>(val size: Int) {
@@ -195,7 +181,7 @@ class Array<T>(val size: Int) {
 }
 ```
 
-This class can be neither co- nor contravariant in `T`. And this imposes certain inflexibilities. Consider the following function:
+这个类既不能是协变也不能是逆变于 `T`。这带来了一定的不灵活性。考虑以下函数：
 
 ```kotlin
 fun copy(from: Array<Any>, to: Array<Any>) {
@@ -205,111 +191,108 @@ fun copy(from: Array<Any>, to: Array<Any>) {
 }
 ```
 
-This function is supposed to copy items from one array to another. Let's try to apply it in practice:
+这个函数应该从一个数组复制项目到另一个数组。让我们尝试在实践中应用它：
 
 ```kotlin
 val ints: Array<Int> = arrayOf(1, 2, 3)
 val any = Array<Any>(3) { "" } 
 copy(ints, any)
-//   ^ type is Array<Int> but Array<Any> was expected
+//   ^ 类型为 Array<Int>，但期望的是 Array<Any>
 ```
 
-Here you run into the same familiar problem: `Array<T>` is _invariant_ in `T`, and so neither `Array<Int>` nor `Array<Any>`
-is a subtype of the other. Why not? Again, this is because `copy` could have an unexpected behavior, for example, it may attempt to
-write a `String` to `from`, and if you actually pass an array of `Int` there, a `ClassCastException` will be thrown later.
+在这里，您遇到了同样熟悉的问题：`Array<T>` 在 `T` 上是**不变的**，因此 `Array<Int>` 和 `Array<Any>` 都不是对方的子类型。
+为什么呢？
+同样，这是因为 `copy` 可能有意外的行为，例如，它可能尝试将 `String` 写入 `from`，如果您实际上传递了一个 `Int` 数组，稍后会抛出 `ClassCastException`。
 
-To prohibit the `copy` function from _writing_ to `from`, you can do the following:
+为了禁止 `copy` 函数对 `from` 进行**写操作**，您可以进行如下操作：
 
 ```kotlin
 fun copy(from: Array<out Any>, to: Array<Any>) { ... }
 ```
 
-This is _type projection_, which means that `from` is not a simple array, but is rather a restricted (_projected_) one.
-You can only call methods that return the type parameter `T`, which in this case means that you can only call `get()`.
-This is our approach to _use-site variance_, and it corresponds to Java's `Array<? extends Object>` while being slightly simpler.
+这就是**类型投影**，这意味着 `from` 不是一个简单的数组，而是一个受限制的（**投影的**）数组。
+您只能调用返回类型形参 `T` 的方法，这在这种情况下意味着您只能调用 `get()`。
+这是我们对**使用处型变**的方法，它对应于 Java 的 `Array<? extends Object>`，但稍微简单一些。
 
-You can project a type with `in` as well:
+您也可以使用 `in` 进行类型投影：
 
 ```kotlin
 fun fill(dest: Array<in String>, value: String) { ... }
 ```
 
-`Array<in String>` corresponds to Java's `Array<? super String>`. This means that you can pass an array of `CharSequence`
-or an array of `Object` to the `fill()` function.
+`Array<in String>` 对应于 Java 的 `Array<? super String>`。
+这意味着您可以将 `CharSequence` 数组或 `Object` 数组传递给 `fill()` 函数。
 
-### Star-projections
+### 星投影（`*`投影）{id=星投影}
 
-Sometimes you want to say that you know nothing about the type argument, but you still want to use it in a safe way.
-The safe way here is to define such a projection of the generic type, that every concrete instantiation of that generic
-type will be a subtype of that projection.
+有时候你想表达你对类型实参一无所知，但仍然希望以安全的方式使用它。
+在这里，安全的方式是定义泛型类型的这种投影，使得该泛型类型的每个具体实例都是该投影的子类型。
 
-Kotlin provides so-called _star-projection_ syntax for this:
+Kotlin 提供了所谓的**星投影**语法：
 
-- For `Foo<out T : TUpper>`, where `T` is a covariant type parameter with the upper bound `TUpper`, `Foo<*>` is
-  equivalent to `Foo<out TUpper>`. This means that when the `T` is unknown you can safely _read_ values of `TUpper` from `Foo<*>`.
-- For `Foo<in T>`, where `T` is a contravariant type parameter, `Foo<*>` is equivalent to `Foo<in Nothing>`. This means
-  there is nothing you can _write_ to `Foo<*>` in a safe way when `T` is unknown.
-- For `Foo<T : TUpper>`, where `T` is an invariant type parameter with the upper bound `TUpper`, `Foo<*>` is equivalent
-  to `Foo<out TUpper>` for reading values and to `Foo<in Nothing>` for writing values.
+- 对于 `Foo<out T : TUpper>`，其中 `T` 是具有上界 `TUpper` 的协变类型参数，`Foo<*>` 相当于 `Foo<out TUpper>`。
+  这意味着当 `T` 是未知的时候，您可以安全地从 `Foo<*>` 中_读取_ `TUpper` 的值。
+- 对于 `Foo<in T>`，其中 `T` 是逆变类型参数，`Foo<*>` 相当于 `Foo<in Nothing>`。
+  这意味着在 `T` 未知的情况下，没有安全的方式可以_写入_ `Foo<*>`。
+- 对于 `Foo<T : TUpper>`，其中 `T` 是具有上界 `TUpper` 的不变类型参数，`Foo<*>` 相当于对于读取值是 `Foo<out TUpper>`，对于写入值是 `Foo<in Nothing>`。
 
-If a generic type has several type parameters, each of them can be projected independently.
-For example, if the type is declared as `interface Function<in T, out U>` you could use the following star-projections:
+如果泛型类型有多个类型参数，则每个参数都可以独立投影。
+例如，如果该类型声明为 `interface Function<in T, out U>`，则可以使用以下星投影：
 
-* `Function<*, String>` means `Function<in Nothing, String>`.
-* `Function<Int, *>` means `Function<Int, out Any?>`.
-* `Function<*, *>` means `Function<in Nothing, out Any?>`.
+* `Function<*, String>` 意味着 `Function<in Nothing, String>`。
+* `Function<Int, *>` 意味着 `Function<Int, out Any?>`。
+* `Function<*, *>` 意味着 `Function<in Nothing, out Any?>`。
 
-> Star-projections are very much like Java's raw types, but safe.
+> 星投影非常类似于 Java 的原始类型，但是更安全。
 >
 {style="note"}
 
-## Generic functions
+## 泛型函数 {id=泛型函数}
 
-Classes aren't the only declarations that can have type parameters. Functions can, too. Type parameters are placed _before_ the name of the function:
+不仅类可以拥有类型形参，函数也可以。类型形参被放置在函数名之前：
 
 ```kotlin
 fun <T> singletonList(item: T): List<T> {
     // ...
 }
 
-fun <T> T.basicToString(): String { // extension function
+fun <T> T.basicToString(): String { // 扩展函数
     // ...
 }
 ```
 
-To call a generic function, specify the type arguments at the call site _after_ the name of the function:
+要调用泛型函数，在调用点的函数名之后指定类型实参：
 
 ```kotlin
 val l = singletonList<Int>(1)
 ```
 
-Type arguments can be omitted if they can be inferred from the context, so the following example works as well:
+如果可以从上下文中推断出类型实参，可以省略类型实参，因此以下示例同样有效：
 
 ```kotlin
 val l = singletonList(1)
 ```
 
-## Generic constraints
+## 泛型约束 {id=泛型约束}
 
-The set of all possible types that can be substituted for a given type parameter may be restricted by _generic constraints_.
+对于给定的类型形参，可以替代的所有可能类型的集合可以通过**泛型约束**进行限制。
 
-### Upper bounds
+### 上界 {id=上界}
 
-The most common type of constraint is an _upper bound_, which corresponds to Java's `extends` keyword:
+最常见的约束类型是**上界**，它对应于 Java 的 `extends` 关键字：
 
 ```kotlin
 fun <T : Comparable<T>> sort(list: List<T>) {  ... }
 ```
 
-The type specified after a colon is the _upper bound_, indicating that only a subtype of `Comparable<T>` can be substituted for `T`. For example:
+冒号后指定的类型是**上界**，表示只有 `Comparable<T>` 的子类型可以替代 `T`。例如：
 
 ```kotlin
-sort(listOf(1, 2, 3)) // OK. Int is a subtype of Comparable<Int>
-sort(listOf(HashMap<Int, String>())) // Error: HashMap<Int, String> is not a subtype of Comparable<HashMap<Int, String>>
+sort(listOf(1, 2, 3)) // OK。Int 是 Comparable<Int> 的子类型
+sort(listOf(HashMap<Int, String>())) // 错误：HashMap<Int, String> 不是 Comparable<HashMap<Int, String>> 的子类型
 ```
 
-The default upper bound (if there was none specified) is `Any?`. Only one upper bound can be specified inside the angle brackets.
-If the same type parameter needs more than one upper bound, you need a separate _where_\-clause:
+如果未指定上界，则默认上界为 `Any?`。在尖括号内只能指定一个上界。如果同一个类型形参需要多个上界，则需要一个独立的 **where** 子句：
 
 ```kotlin
 fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
@@ -319,20 +302,17 @@ fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
 }
 ```
 
-The passed type must satisfy all conditions of the `where` clause simultaneously. In the above example, the `T` type
-must implement _both_ `CharSequence` and `Comparable`.
+传递的类型必须同时满足 **where** 子句的所有条件。在上面的例子中，`T` 类型必须同时实现 **CharSequence** 和 **Comparable**。
 
-## Definitely non-nullable types
+## 绝对非空类型 {id=绝对非空类型}
 
-To make interoperability with generic Java classes and interfaces easier, Kotlin supports declaring a generic type parameter
-as **definitely non-nullable**. 
+为了更容易与泛型 Java 类和接口进行交互，Kotlin 支持将泛型类型形参声明为**绝对非空类型**。
 
-To declare a generic type `T` as definitely non-nullable, declare the type with `& Any`. For example: `T & Any`.
+要将泛型类型 `T` 声明为绝对非空类型，请使用 `& Any` 声明类型，例如：`T & Any`。
 
-A definitely non-nullable type must have a nullable [upper bound](#upper-bounds).
+绝对非空类型必须具有可为空的[上界](#上界)。
 
-The most common use case for declaring definitely non-nullable types is when you want to override a Java method that 
-contains `@NotNull` as an argument. For example, consider the `load()` method:
+声明绝对非空类型的最常见用例是当你想要覆盖包含 `@NotNull` 作为参数的 Java 方法时。例如，考虑 `load()` 方法：
 
 ```java
 import org.jetbrains.annotations.*;
@@ -344,61 +324,56 @@ public interface Game<T> {
 }
 ```
 
-To override the `load()` method in Kotlin successfully, you need `T1` to be declared as definitely non-nullable:
+要成功覆盖 Kotlin 中的 `load()` 方法，您需要将 `T1` 声明为绝对非空类型：
 
 ```kotlin
 interface ArcadeGame<T1> : Game<T1> {
     override fun save(x: T1): T1
-    // T1 is definitely non-nullable
+    // T1 绝对不可为空
     override fun load(x: T1 & Any): T1 & Any
 }
 ```
 
-When working only with Kotlin, it's unlikely that you will need to declare definitely non-nullable types explicitly because 
-Kotlin's type inference takes care of this for you.
+在仅使用 Kotlin 的情况下，你不太可能需要显式声明绝对非空类型，因为 Kotlin 的类型推断会为你处理这个问题。
 
-## Type erasure
+## 类型擦除 {id=类型擦除}
 
-The type safety checks that Kotlin performs for generic declaration usages are done at compile time.
-At runtime, the instances of generic types do not hold any information about their actual type arguments.
-The type information is said to be _erased_. For example, the instances of `Foo<Bar>` and `Foo<Baz?>` are erased to
-just `Foo<*>`.
+Kotlin 对泛型声明用法进行的类型安全检查是在编译时进行的。
+在运行时，泛型类型的实例不包含有关其实际类型实参的任何信息。
+这种类型信息被说成是**擦除**的。例如，`Foo<Bar>` 和 `Foo<Baz?>` 的实例在运行时被擦除为 `Foo<*>`。
 
-### Generics type checks and casts
+### 泛型类型检查和转换 {id=泛型类型检查和转换}
 
-Due to the type erasure, there is no general way to check whether an instance of a generic type was created with certain type
-arguments at runtime, and the compiler prohibits such `is`-checks such as
-`ints is List<Int>` or `list is T` (type parameter). However, you can check an instance against a star-projected type:
+由于类型擦除，没有一般的方法可以在运行时检查泛型类型的实例是否使用了特定的类型实参，而且编译器禁止这样的 `is` 检查，例如 `ints is List<Int>` 或 `list is T`（类型形参）。
+但是，您可以将实例与星投影类型进行检查：
 
 ```kotlin
 if (something is List<*>) {
-    something.forEach { println(it) } // The items are typed as `Any?`
+    something.forEach { println(it) } // 项目的类型为 `Any?`
 }
 ```
 
-Similarly, when you already have the type arguments of an instance checked statically (at compile time),
-you can make an `is`-check or a cast that involves the non-generic part of the type. Note that
-angle brackets are omitted in this case:
+类似地，当您已经在静态（编译时）检查实例的类型实参时，可以进行涉及类型的非泛型部分的 `is` 检查或转换。
+请注意，在这种情况下，尖括号被省略：
 
 ```kotlin
 fun handleStrings(list: MutableList<String>) {
     if (list is ArrayList) {
-        // `list` is smart-cast to `ArrayList<String>`
+        // `list` 智能转换为 `ArrayList<String>`
     }
 }
 ```
 
-The same syntax but with the type arguments omitted can be used for casts that do not take type arguments into account: `list as ArrayList`.
+相同的语法，但省略了类型实参，也可以用于不考虑类型实参的转换：`list as ArrayList`。
 
-The type arguments of generic function calls are also only checked at compile time. Inside the function bodies,
-the type parameters cannot be used for type checks, and type casts to type parameters (`foo as T`) are unchecked.
-The only exclusion is inline functions with [reified type parameters](inline-functions.md#reified-type-parameters),
-which have their actual type arguments inlined at each call site. This enables type checks and casts for the type parameters.
-However, the restrictions described above still apply for instances of generic types used inside checks or casts.
-For example, in the type check `arg is T`, if `arg` is an instance of a generic type itself, its type arguments are still erased.
+泛型函数调用的类型实参也只在编译时进行检查。在函数体内，类型形参不能用于类型检查，对类型形参的类型转换（`foo as T`）是未检查的。
+唯一的例外是具有
+[具体化的类型形参](https://kotlinlang.org/docs/inline-functions.html#reified-type-parameters)
+的内联函数，在每个调用点都会内联其实际类型实参。这样可以实现类型形参的类型检查和转换。
+然而，仍然适用于在检查或转换中使用的泛型类型的实例的上述限制。
+例如，在类型检查 `arg is T` 中，如果 `arg` 本身是泛型类型的实例，其类型实参仍然会被擦除。
 
 ```kotlin
-//sampleStart
 inline fun <reified A, reified B> Pair<*, *>.asPairOf(): Pair<A, B>? {
     if (first !is A || second !is B) return null
     return first as A to second as B
@@ -410,51 +385,45 @@ val somePair: Pair<Any?, Any?> = "items" to listOf(1, 2, 3)
 val stringToSomething = somePair.asPairOf<String, Any>()
 val stringToInt = somePair.asPairOf<String, Int>()
 val stringToList = somePair.asPairOf<String, List<*>>()
-val stringToStringList = somePair.asPairOf<String, List<String>>() // Compiles but breaks type safety!
-// Expand the sample for more details
-
-//sampleEnd
+val stringToStringList = somePair.asPairOf<String, List<String>>() // 编译通过但破坏了类型安全！
 
 fun main() {
     println("stringToSomething = " + stringToSomething)
     println("stringToInt = " + stringToInt)
     println("stringToList = " + stringToList)
     println("stringToStringList = " + stringToStringList)
-    //println(stringToStringList?.second?.forEach() {it.length}) // This will throw ClassCastException as list items are not String
+    //println(stringToStringList?.second?.forEach() {it.length}) // 这会抛出ClassCastException，因为列表项不是String类型。
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AligNhmACAZgK4q4A8ATjGvmjFLgIIA0ul1t9AQgHy4AKAQzTlSAKhajuAOgEBnQcIDy%2BABQBKePyEjmuHgH5cwVLlO5quFTXKyALrgCEaWY1wAfN7lkxIKek5dONVYYW0JyEhRCTEwTM0owiIJhO1w5V1sILx8IPzTA1ABfVFQANwFMLwgAWxgFck160gYUAE99Fhb23gBeXCQQNFsYatkB3EzcbDtlFQBGFgAmFgBmNRKUMoqvW3IMAHMAFQgAZRrQgAsD3D7Zc%2FqZeW1lUhPdg8627nUtyrs9lBHCAASRQ9lu920j3qLzeAP2LFBtm%2B6xQ5T%2B70BxwAMs5wVVag85DD8K9MQjcLi7GJuCjfjt4cc4Qcqfi7oSocTnqTmYCWKyyfDaepcAB6UW4ADCNQADmhMDAXAAjQj2JWUAQAaxctlaMrwsgE%2BFCrQcqHFuAAogAPGUCPK2C4GgTVGUKggQci4aqevCwWxCTBjTYh1BEEjVIQoEXGEhmGUA2yYaMDf4HJnnR3XPrjADUDPTp0zV0BqLMuATGCTKZAaaxILBN36IFw%2BbrQKRZfjieTKlT5JxeKbeYL9dZXdMlbBvf7jNO5NZw5bbYH8%2Fh47ipnFU%2BrKnbTIXeP0Um8vigx%2FwnstAjAFxjQykCsBjsKwQthyuLgA7vLKo7yBAX5SpgciyJKci2DaYAwDKthoLk%2BRTEOQwjC4AiULgKAQPYvL7EUIBMCAAbkPsoR8CBtiXuQ1QICAABWAjlAR4CyvKMDkAAauxsjwSgtFzFIACcUiLHMICFEAA%3D?_gl=1*p79cvt*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjk1NzA0Ni44My4xLjE3MDI5NTcxMjYuNTkuMC4w&_ga=2.17713721.1268011611.1702957046-2060274793.1694940376)
 
-### Unchecked casts
+### 未经检查的强制类型转换 {id=未经检查的强制类型转换}
 
-Type casts to generic types with concrete type arguments such as `foo as List<String>` cannot be checked at runtime.  
-These unchecked casts can be used when type safety is implied by the high-level program logic but cannot be inferred 
-directly by the compiler. See the example below.
+对于具有具体类型参数的泛型类型的类型转换，如 `foo as List<String>`，无法在运行时进行检查。  
+这些未经检查的强制类型转换可在高级程序逻辑隐含类型安全的情况下使用，但编译器无法直接推断。请参阅下面的示例。
 
 ```kotlin
 fun readDictionary(file: File): Map<String, *> = file.inputStream().use { 
-    TODO("Read a mapping of strings to arbitrary elements.")
+    TODO("读取字符串到任意元素的映射。")
 }
 
-// We saved a map with `Int`s into this file
+// 我们保存了一个带有`Int`的映射到这个文件
 val intsFile = File("ints.dictionary")
 
-// Warning: Unchecked cast: `Map<String, *>` to `Map<String, Int>`
+// 警告：未经检查的强制类型转换：`Map<String, *>` 到 `Map<String, Int>`
 val intsDictionary: Map<String, Int> = readDictionary(intsFile) as Map<String, Int>
 ```
-A warning appears for the cast in the last line. The compiler can't fully check it at runtime and provides
-no guarantee that the values in the map are `Int`.
+在最后一行的强制类型转换会产生一个警告。编译器无法在运行时完全检查它，并且无法保证映射中的值为 `Int`。
 
-To avoid unchecked casts, you can redesign the program structure. In the example above, you could use the
-`DictionaryReader<T>` and `DictionaryWriter<T>` interfaces with type-safe implementations for different types.
-You can introduce reasonable abstractions to move unchecked casts from the call site to the implementation details.
-Proper use of [generic variance](#variance) can also help.
+为了避免未经检查的强制类型转换，你可以重新设计程序结构。
+在上面的示例中，你可以使用 `DictionaryReader<T>` 和 `DictionaryWriter<T>` 接口，为不同类型提供类型安全的实现。
+你可以引入合理的抽象，将未经检查的强制类型转换从调用点移动到实现细节。合理使用 [泛型型变](#型变) 也能有所帮助。
 
-For generic functions, using [reified type parameters](inline-functions.md#reified-type-parameters) makes casts
-like `arg as T` checked, unless `arg`'s type has *its own* type arguments that are erased.
+对于泛型函数，使用 [具体化的类型参数](inline-functions.md#reified-type-parameters)
+使得像 `arg as T` 这样的强制类型转换得到检查，除非 `arg` 的类型具有 *自己的* 被擦除的类型参数。
 
-An unchecked cast warning can be suppressed by [annotating](annotations.md) the statement or the
-declaration where it occurs with `@Suppress("UNCHECKED_CAST")`:
+通过在出现未经检查的强制类型转换的语句或声明上添加 `@Suppress("UNCHECKED_CAST")` 注解，可以抑制未经检查的强制类型转换警告：
 
 ```kotlin
 inline fun <reified T> List<*>.asListOfType(): List<T>? =
@@ -464,20 +433,19 @@ inline fun <reified T> List<*>.asListOfType(): List<T>? =
         null
 ```
 
->**On the JVM**: [array types](arrays.md) (`Array<Foo>`) retain information about the erased type of
->their elements, and type casts to an array type are partially checked: the
->nullability and actual type arguments of the element type are still erased. For example,
->the cast `foo as Array<List<String>?>` will succeed if `foo` is an array holding any `List<*>`, whether it is nullable or not.
+> **在 JVM 上**: [数组类型](arrays.md) (`Array<Foo>`) 保留了关于其元素被擦除类型的信息，对数组类型的类型转换是部分检查的：
+> 元素类型的可为 null 属性和实际类型参数仍然被擦除。例如，
+> 如果 `foo` 是包含任何 `List<*>` 的数组，无论它是否可为 null，转换 `foo as Array<List<String>?>` 将成功。
 >
 {style="note"}
 
-## Underscore operator for type arguments
+## 用于类型实参的下划线运算符 {id=用于类型实参的下划线运算符}
 
-The underscore operator `_` can be used for type arguments. Use it to automatically infer a type of the argument when other types are explicitly specified:
+下划线运算符 `_` 可以用于类型实参。在其他类型被明确指定时，可以使用它来自动推断参数的类型：
 
 ```kotlin
 abstract class SomeClass<T> {
-    abstract fun execute() : T
+    abstract fun execute(): T
 }
 
 class SomeImplementation : SomeClass<String>() {
@@ -489,17 +457,17 @@ class OtherImplementation : SomeClass<Int>() {
 }
 
 object Runner {
-    inline fun <reified S: SomeClass<T>, T> run() : T {
+    inline fun <reified S : SomeClass<T>, T> run(): T {
         return S::class.java.getDeclaredConstructor().newInstance().execute()
     }
 }
 
 fun main() {
-    // T is inferred as String because SomeImplementation derives from SomeClass<String>
+    // T 被推断为 String，因为 SomeImplementation 派生自 SomeClass<String>
     val s = Runner.run<SomeImplementation, _>()
     assert(s == "Test")
 
-    // T is inferred as Int because OtherImplementation derives from SomeClass<Int>
+    // T 被推断为 Int，因为 OtherImplementation 派生自 SomeClass<Int>
     val n = Runner.run<OtherImplementation, _>()
     assert(n == 42)
 }

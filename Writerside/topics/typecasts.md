@@ -4,7 +4,7 @@
 类型转换将对象转换为不同的类型。
 
 > 要了解关于 **泛型** 类型检查和转换（例如 `List<T>`、`Map<K,V>`）的具体信息，请参阅
-> [泛型类型检查和转换](generics.md#generics-type-checks-and-casts)。
+> [泛型类型检查和转换](generics.md#泛型类型检查和转换)。
 > 
 {type="tip"}
 

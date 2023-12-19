@@ -144,7 +144,7 @@ interface ArcadeGame<T1> : Game<T1> {
 }
 ```
 
-Learn more about generic types that are [definitely non-nullable](generics.md#definitely-non-nullable-types).
+Learn more about generic types that are [definitely non-nullable](generics.md#绝对非空类型).
 
 ## Checking the result of a function call
 

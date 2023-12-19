@@ -158,7 +158,7 @@ fun main() {
 
 Kotlin 中的数组是 **不变** 的。这意味着 Kotlin 不允许将 `Array<String>` 赋值给 `Array<Any>`，以防止可能的运行时失败。
 相反，您可以使用 `Array<out Any>`。
-有关更多信息，请参阅 [类型投影](generics.md#type-projections)。
+有关更多信息，请参阅 [类型投影](generics.md#类型投影)。
 
 ## 使用数组进行操作
 

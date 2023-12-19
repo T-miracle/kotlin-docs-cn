@@ -8,7 +8,7 @@ Kotlin fixes a series of issues that Java suffers from:
 * [No raw types](java-interop.md#java-generics-in-kotlin)
 * Arrays in Kotlin are [invariant](arrays.md)
 * Kotlin has proper [function types](lambdas.md#function-types), as opposed to Java's SAM-conversions
-* [Use-site variance](generics.md#use-site-variance-type-projections)  without wildcards
+* [Use-site variance](generics.md#使用处型变-类型投影)  without wildcards
 * Kotlin does not have checked [exceptions](exceptions.md)
 
 ## What Java has that Kotlin does not
@@ -18,8 +18,8 @@ Kotlin fixes a series of issues that Java suffers from:
     explicitly available.
 * [Static members](classes.md) are replaced with [companion objects](object-declarations.md#companion-objects),
     [top-level functions](functions.md), [extension functions](extensions.md#扩展函数), or [@JvmStatic](java-to-kotlin-interop.md#static-methods).
-* [Wildcard-types](generics.md) are replaced with [declaration-site variance](generics.md#declaration-site-variance) and
-    [type projections](generics.md#type-projections).
+* [Wildcard-types](generics.md) are replaced with [declaration-site variance](generics.md#声明处型变) and
+    [type projections](generics.md#类型投影).
 * [Ternary-operator `a ? b : c`](control-flow.md#if表达式) is replaced with [if expression](control-flow.md#if表达式). 
 
 

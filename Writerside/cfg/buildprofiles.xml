@@ -8,7 +8,7 @@
         <browser-edits-url>https://github.com/T-miracle/kotlin-docs-cn/edit/main/Writerside/</browser-edits-url>
         <!--主题色-->
         <primary-color>purple</primary-color>
-        <kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>
+        <!--<kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>-->
         <!--首页地址-->
         <product-web-url>https://blog.namichong.com/translation-docs/kotlin-docs/</product-web-url>
         <generate-only-default-anchors>true</generate-only-default-anchors>

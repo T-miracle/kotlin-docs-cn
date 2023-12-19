@@ -535,7 +535,7 @@ This way we get a `NullPointerException` in the Java code immediately.
 
 ## Variant generics
 
-When Kotlin classes make use of [declaration-site variance](generics.md#declaration-site-variance), there are two 
+When Kotlin classes make use of [declaration-site variance](generics.md#声明处型变), there are two 
 options of how their usages are seen from the Java code. For example, imagine you have the following class and two functions that use it:
 
 ```kotlin
