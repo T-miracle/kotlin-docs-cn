@@ -464,6 +464,10 @@
     <toc-element toc-title="词汇表" hidden="true">
         <toc-element topic="implicit-backing-field.md"/>
         <toc-element topic="static-dispatchpic.md"/>
+        <toc-element topic="type-covariant.md"/>
     </toc-element>
-    <toc-element topic="type-covariant.md"/>
+
+    <toc-element toc-title="内容解析" hidden="true">
+        <toc-element topic="why-producer-cant-use-set-and-add-function.md"/>
+    </toc-element>
 </instance-profile>
