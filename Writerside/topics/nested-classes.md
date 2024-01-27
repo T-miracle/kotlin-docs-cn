@@ -1,6 +1,6 @@
-[//]: # (title: Nested and inner classes)
+[//]: # (title: 嵌套类和内部类)
 
-Classes can be nested in other classes:
+类可以嵌套在其他类中：
 
 ```kotlin
 class Outer {
@@ -13,8 +13,7 @@ class Outer {
 val demo = Outer.Nested().foo() // == 2
 ```
 
-You can also use interfaces with nesting. All combinations of classes and interfaces are possible: You can nest interfaces
-in classes, classes in interfaces, and interfaces in interfaces.
+你也可以在嵌套中使用接口。所有类和接口的组合都是可能的：你可以将接口嵌套在类中，类嵌套在接口中，以及接口嵌套在接口中。
 
 ```kotlin
 interface OuterInterface {
@@ -28,9 +27,9 @@ class OuterClass {
 }
 ```
 
-## Inner classes
+## 内部类
 
-A nested class marked as `inner` can access the members of its outer class. Inner classes carry a reference to an object of an outer class:
+被标记为 `inner` 的嵌套类可以访问其外部类的成员。内部类携带对外部类对象的引用：
 
 ```kotlin
 class Outer {
@@ -43,11 +42,11 @@ class Outer {
 val demo = Outer().Inner().foo() // == 1
 ```
 
-See [Qualified `this` expressions](this-expressions.md) to learn about disambiguation of `this` in inner classes.
+查看 [合格的 `this` 表达式](this-expressions.md) 了解有关内部类中 `this` 的消歧义的详细信息。
 
-## Anonymous inner classes
+## 匿名内部类
 
-Anonymous inner class instances are created using an [object expression](object-declarations.md#object-expressions):
+使用 [对象表达式](object-declarations.md#object-expressions) 创建匿名内部类的实例：
 
 ```kotlin
 window.addMouseListener(object : MouseAdapter() {
@@ -58,10 +57,9 @@ window.addMouseListener(object : MouseAdapter() {
 })
 ```
 
-> On the JVM, if the object is an instance of a functional Java interface (that means a Java interface with a single 
-> abstract method), you can create it using a lambda expression prefixed with the type of the interface:
+> 在 JVM 上，如果对象是函数式 Java 接口的实例（即带有单个抽象方法的 Java 接口），则可以使用带有接口类型前缀的 lambda 表达式来创建它：
 >
->```kotlin
+> ```kotlin
 > val listener = ActionListener { println("clicked") }
 > ```
 >

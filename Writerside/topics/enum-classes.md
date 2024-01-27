@@ -1,15 +1,16 @@
-[//]: # (title: Enum classes)
+[//]: # (title: 枚举类)
 
-The most basic use case for enum classes is the implementation of type-safe enums:
+枚举类最基本的用例是实现类型安全的枚举：
 
 ```kotlin
 enum class Direction {
     NORTH, SOUTH, WEST, EAST
 }
 ```
-Each enum constant is an object. Enum constants are separated by commas.
 
-Since each enum is an instance of the enum class, it can be initialized as:
+每个枚举常量都是一个对象。枚举常量之间用逗号分隔。
+
+由于每个枚举都是枚举类的实例，因此可以像这样进行初始化：
 
 ```kotlin
 enum class Color(val rgb: Int) {
@@ -19,10 +20,9 @@ enum class Color(val rgb: Int) {
 }
 ```
 
-## Anonymous classes
+## 匿名类
 
-Enum constants can declare their own anonymous classes with their corresponding methods, as well as with overriding base
-methods.
+枚举常量可以声明它们自己的匿名类，包括相应的方法，以及覆盖基本方法。
 
 ```kotlin
 enum class ProtocolState {
@@ -38,19 +38,17 @@ enum class ProtocolState {
 }
 ```
 
-If the enum class defines any members, separate the constant definitions from the member definitions with a semicolon.
+如果枚举类定义了任何成员，请使用分号将常量定义与成员定义分隔开。
 
-## Implementing interfaces in enum classes
+## 在枚举类中实现接口
 
-An enum class can implement an interface (but it cannot derive from a class), providing either a common implementation of
-interface members for all the entries, or separate implementations for each entry within its anonymous class.
-This is done by adding the interfaces you want to implement to the enum class declaration as follows:
+枚举类具有实现接口的能力（但无法从其他类继承）。它可以为所有枚举条目提供接口成员的共同实现，或者在每个枚举条目的匿名类中单独实现。
+要实现接口，只需在枚举类声明中添加希望实现的接口，如下所示：
 
 ```kotlin
 import java.util.function.BinaryOperator
 import java.util.function.IntBinaryOperator
 
-//sampleStart
 enum class IntArithmetics : BinaryOperator<Int>, IntBinaryOperator {
     PLUS {
         override fun apply(t: Int, u: Int): Int = t + u
@@ -61,7 +59,6 @@ enum class IntArithmetics : BinaryOperator<Int>, IntBinaryOperator {
     
     override fun applyAsInt(t: Int, u: Int) = apply(t, u)
 }
-//sampleEnd
 
 fun main() {
     val a = 13
@@ -73,66 +70,62 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-All enum classes implement the [Comparable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html)
-interface by default. Constants in the enum class are defined in the natural order. For more information, see [Ordering](collection-ordering.md).
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWBbADhATgFwAQCsBDAN0IDoBXbJAGzIDMKA7MaiJsgISScMwE8A8mhiZC2LAB0mqDDgIlyVWg2ask7MgEkm2brwHDR4qU2nSYTCilxgahAM4PcO7AEFMSbAAsUMamDO8Lj6fEIiYhKYADyuAHwANC66oYYRJpi4wNK4ubgACgAyAKoAylk5eVUQxKKesLiMTLiEaGg0%2FAAU2MGuSRS9ugCUg3gAvLh4ANS4FJW5AL4J87gAKloAsgCi5dnNVXk1dUgNTS1tHd2j%2FaMjyeOTuABUsysLANwrK0eY9TCNzHO7X4bgcriu9xu9yGuAmrWB3X6Q2kC3MZiYZxQhB4nRheyqpBoLVhuAAjABmFaE3AAIxJ5NJK3oWFwnXouB49w8Xl8%2FiQgTIlmwnhgDjxKyqaE8uhoTE6khAABJ6J1FYQkoqaTCJorgPQyPDLuraUNUSBkftFiiQAkQNg%2BABzfz5ezYZmYFAIEBEUg28AQdC0UQANVEDg0TC9pLIAE4yAAmeMgBZAA%3D%3D?_gl=1*1qdqpk*_ga*NTY1OTE4MDk4LjE3MDYzNDk2NTA.*_ga_9J976DJZ68*MTcwNjM0OTY1MC4xLjEuMTcwNjM0OTk3NC4wLjAuMA..&_ga=2.113754119.1688572274.1706349650-565918098.1706349650)
 
-## Working with enum constants
+所有枚举类默认都实现了 [Comparable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html) 接口。
+枚举类中的常量按照自然顺序定义。有关详细信息，请参阅 [排序](collection-ordering.md)。
 
-Enum classes in Kotlin have synthetic methods for listing the defined enum constants and getting an enum constant by 
-its name. The signatures of these methods are as follows (assuming the name of the enum class is `EnumClass`):
+## 使用枚举常量
+
+Kotlin 中的枚举类具有用于列出定义的枚举常量和通过名称获取枚举常量的合成方法。这些方法的签名如下（假设枚举类的名称为 `EnumClass`）：
 
 ```kotlin
 EnumClass.valueOf(value: String): EnumClass
 EnumClass.values(): Array<EnumClass>
 ```
 
-Below is an example of these methods in action:
+以下是这些方法的示例用法：
 
 ```kotlin
 enum class RGB { RED, GREEN, BLUE }
 
 fun main() {
-    for (color in RGB.values()) println(color.toString()) // prints RED, GREEN, BLUE
-    println("The first color is: ${RGB.valueOf("RED")}") // prints "The first color is: RED"
+    for (color in RGB.values()) println(color.toString()) // 打印 RED, GREEN, BLUE
+    println("The first color is: ${RGB.valueOf("RED")}") // 打印 "The first color is: RED"
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="rgb-enums-kotlin"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIYDsCuBbABGANgQwGcDMAlAcQCFNhSBRAEQBpMyTbaA5ZigGQFVamAL4AdZGIBmqZJnR4AlsgAUASmpjMmzBIgAnTEsg49mRaUoA6FABdd8mATUAHO8ms5lRvResQAyraKAOaqagD0YZguitbEbEwsbJzc%2FLQaWtFuHkoiIAAqABYw2vK6BNbYEMb68gTwmAAkwOQUFgBueDioMADyEjkg8bkqoiDhkZmxmLmFxRKl5ZXVpnV09LliQiCMINZ4ukEw1gAK%2BNY6uugIIABWeB3b4BDoTvI4MLoAah8E8hDI1wAjBYAJwWABM4JAQiAA?_gl=1*1r6bvpl*_ga*NTY1OTE4MDk4LjE3MDYzNDk2NTA.*_ga_9J976DJZ68*MTcwNjM0OTY1MC4xLjEuMTcwNjM0OTk3NC4wLjAuMA..&_ga=2.21802811.1688572274.1706349650-565918098.1706349650)
 
-The `valueOf()` method throws an `IllegalArgumentException` if the specified name does
-not match any of the enum constants defined in the class.
+`valueOf()` 方法如果指定的名称与类中定义的任何枚举常量不匹配，则会抛出 `IllegalArgumentException`。
 
-In Kotlin 1.9.0, the `entries` property is introduced as a replacement for the `values()` function. The 
-`entries` property returns a pre-allocated immutable list of your enum constants. This is particularly useful when you 
-are working with [collections](collections-overview.md) and can help you avoid [performance issues](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries.md#examples-of-performance-issues).
+在 Kotlin 1.9.0 中，引入了 `entries` 属性作为 `values()` 函数的替代。
+`entries` 属性返回预分配的枚举常量的不可变列表。在处理 [集合](collections-overview.md) 时，这特别有用，并且有助于避免 [性能问题](https://github.com/Kotlin/KEEP/blob/master/proposals/enum-entries.md#examples-of-performance-issues)。
 
-For example:
+例如：
+
 ```kotlin
 enum class RGB { RED, GREEN, BLUE }
 
 fun main() {
-    for (color in RGB.entries) println(color.toString())
-    // prints RED, GREEN, BLUE
+    for (color in RGB.entries) println(color.toString()) // 打印 RED, GREEN, BLUE
 }
 ```
 
-Every enum constant also has properties: [`name`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/name.html)
-and [`ordinal`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/ordinal.html), for obtaining its name and 
-position (starting from 0) in the enum class declaration:
+每个枚举常量还具有 [`name`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/name.html) 和 [`ordinal`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-enum/ordinal.html) 属性，用于获取其名称和在枚举类声明中的位置（从 0 开始，相当于索引）：
 
 ```kotlin
 enum class RGB { RED, GREEN, BLUE }
 
 fun main() {
-    //sampleStart
-    println(RGB.RED.name) // prints RED
-    println(RGB.RED.ordinal) // prints 0
-    //sampleEnd
+    println(RGB.RED.name) // 打印 RED
+    println(RGB.RED.ordinal) // 打印 0
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="rgb-enums-properties-kotlin"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIYDsCuBbABGANgQwGcDMAlAcQCFNhSBRAEQBpMyTbaA5ZigGQFVamAL4AdZGIBmqZJnR4AlsgAUASmpjMmzBq0AHAE6KALjmXkKAOjb0LyPOhhqtAemeYDx4tZ2aPyE2aUVgwWEPpQing4aq7uhv7EAAw%2B2shCIIwgRnj6AOYwRgAK%2BEYSYegIIABWeABueBngEOi68jgw%2BgBqHQTyEMiVAIwWAJwWAEzjIEJAA%3D%3D%3D?_gl=1*11lwcr7*_ga*NTY1OTE4MDk4LjE3MDYzNDk2NTA.*_ga_9J976DJZ68*MTcwNjM0OTY1MC4xLjEuMTcwNjM0OTk3NC4wLjAuMA..&_ga=2.85452697.1688572274.1706349650-565918098.1706349650)
 
-You can access the constants in an enum class in a generic way using
-the [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) and [`enumValueOf<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-value-of.html) functions:
+可以使用 [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) 和 [`enumValueOf<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-value-of.html) 函数以一种通用的方式访问枚举类中的常量：
 
 ```kotlin
 enum class RGB { RED, GREEN, BLUE }
@@ -141,21 +134,19 @@ inline fun <reified T : Enum<T>> printAllValues() {
     println(enumValues<T>().joinToString { it.name })
 }
 
-printAllValues<RGB>() // prints RED, GREEN, BLUE
+printAllValues<RGB>() // 打印 RED, GREEN, BLUE
 ```
 
-> For more information about inline functions and reified type parameters, see [Inline functions](inline-functions.md).
+> 有关内联函数和具体化类型参数的更多信息，请参阅 [内联函数](inline-functions.md)。
 >
 > {type="tip"}
- 
-In Kotlin 1.9.20, the `enumEntries<T>()` function is introduced as a future replacement for the [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html)
-function.
 
-The `enumValues<T>()` function is still supported, but we recommend that you use the `enumEntries<T>()` function instead
-because it has less performance impact. Every time you call `enumValues<T>()` a new array is created, whereas whenever
-you call `enumEntries<T>()` the same list is returned each time, which is far more efficient.
+在 Kotlin 1.9.20 中，引入了 `enumEntries<T>()` 函数，作为 [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) 函数的未来替代。
 
-For example:
+`enumValues<T>()` 函数仍然受支持，但我们建议改用 `enumEntries<T>()` 函数，因为它的性能影响较小。
+每次调用 `enumValues<T>()` 都会创建一个新数组，而每次调用 `enumEntries<T>()` 时都会返回相同的列表，这更为高效。
+
+例如：
 
 ```kotlin
 enum class RGB { RED, GREEN, BLUE }
@@ -169,7 +160,7 @@ printAllValues<RGB>()
 // RED, GREEN, BLUE
 ```
 
-> The `enumEntries<T>()` function is Experimental. To use it, opt in with `@OptIn(ExperimentalStdlibApi)`, and
-> [set the language version to at least 1.9](gradle-compiler-options.md#attributes-common-to-jvm-and-js).
+> `enumEntries<T>()` 函数是实验性的。
+> 要使用它，请通过 `@OptIn(ExperimentalStdlibApi)` 进行选择，并将 [语言版本设置至少为 1.9](gradle-compiler-options.md#attributes-common-to-jvm-and-js)。
 >
 {style="warning"}

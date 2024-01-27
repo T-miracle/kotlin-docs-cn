@@ -1,55 +1,57 @@
-[//]: # (title: Inline value classes)
+[//]: # (title: 内联值类)
 
-Sometimes it is necessary for business logic to create a wrapper around some type. However, it introduces runtime 
-overhead due to additional heap allocations. Moreover, if the wrapped type is primitive, the performance hit is terrible, 
-because primitive types are usually heavily optimized by the runtime, while their wrappers don't get any special treatment. 
+有时候，为了处理某个特定类型，我们需要创建一个包装器来围绕它构建业务逻辑。
+然而，这样做会引入额外的堆分配，导致运行时开销增加。
+特别是当包装的类型是原始类型时，性能损耗会更显著，因为原始类型通常在运行时进行了大量的优化，而它们的包装器却没有得到同样的处理。
 
-To solve such issues, Kotlin introduces a special kind of class called an _inline class_. 
-Inline classes are a subset of [value-based classes](https://github.com/Kotlin/KEEP/blob/master/notes/value-classes.md). They don't have an identity and can only hold values.
+为了解决这些问题，Kotlin 引入了一种特殊的类别，称为**内联类**。
+内联类是[value-based classes](https://github.com/Kotlin/KEEP/blob/master/notes/value-classes.md)的一个子集。
+它们没有身份，只能保存值。
 
-To declare an inline class, use the `value` modifier before the name of the class:
+要声明内联类，在类名之前使用 `value` 修饰符：
 
 ```kotlin
 value class Password(private val s: String)
 ```
 
-To declare an inline class for the JVM backend, use the `value` modifier along with the `@JvmInline` annotation before the class declaration: 
+若要在 JVM 后端声明内联类，只需在类声明前使用 `value` 修饰符并添加 `@JvmInline` 注解：
 
 ```kotlin
-// For JVM backends
+// 适用于 JVM 后端
 @JvmInline
 value class Password(private val s: String)
 ```
 
-An inline class must have a single property initialized in the primary constructor. At runtime, instances of the inline 
-class will be represented using this single property (see details about runtime representation [below](#representation)):
+内联类必须有一个在主构造函数中初始化的属性。
+在运行时，内联类的实例将使用此单个属性表示（有关运行时表示的详细信息，请参见下文 [表示](#表示)）：
 
 ```kotlin
-// No actual instantiation of class 'Password' happens
-// At runtime 'securePassword' contains just 'String'
-val securePassword = Password("Don't try this in production") 
+// 实际上不会实例化 'Password' 类
+// 在运行时 'securePassword' 只包含 'String'
+val securePassword = Password("不要在生产环境中尝试这个")
 ```
 
-This is the main feature of inline classes, which inspired the name *inline*: data of the class is *inlined* into its 
-usages (similar to how content of [inline functions](inline-functions.md) is inlined to call sites).
+这是内联类的主要特性，它灵感来源于 `inline` 这个名称：
+类的数据被**内联**到该类使用的地方（类似于[内联函数](inline-functions.md)的内容被内联到该函数调用的地方）。
 
-## Members
+[// TODO]: (校对至此处)
 
-Inline classes support some functionality of regular classes. In particular, they are allowed to declare properties and 
-functions, have an `init` block and [secondary constructors](classes.md#次构造函数):
+## 成员
+
+内联类支持常规类的一些功能。特别是，它们可以声明属性和函数，具有 `init` 块和[次构造函数](classes.md#次构造函数)：
 
 ```kotlin
 @JvmInline
 value class Person(private val fullName: String) {
     init {
         require(fullName.isNotEmpty()) {
-            "Full name shouldn't be empty"
+            "全名不能为空"
         }
     }
 
     constructor(firstName: String, lastName: String) : this("$firstName $lastName") {
         require(lastName.isNotBlank()) {
-            "Last name shouldn't be empty"
+            "姓氏不能为空"
         }
     }
 
@@ -57,25 +59,24 @@ value class Person(private val fullName: String) {
         get() = fullName.length
 
     fun greet() {
-        println("Hello, $fullName")
+        println("你好，$fullName")
     }
 }
 
 fun main() {
     val name1 = Person("Kotlin", "Mascot")
     val name2 = Person("Kodee")
-    name1.greet() // the `greet()` function is called as a static method
-    println(name2.length) // property getter is called as a static method
+    name1.greet() // `greet()` 函数被调用为静态方法
+    println(name2.length) // 属性 getter 被调用为静态方法
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.9"}
 
-Inline class properties cannot have [backing fields](properties.md#幕后字段). They can only have simple computable 
-properties (no `lateinit`/delegated properties).
+内联类的属性不能有[幕后字段](properties.md#幕后字段)。它们只能有简单的可计算属性（没有 `lateinit`/委托属性）。
 
-## Inheritance
+## 继承
 
-Inline classes are allowed to inherit from interfaces:
+内联类允许从接口继承：
 
 ```kotlin
 interface Printable {
@@ -89,22 +90,21 @@ value class Name(val s: String) : Printable {
 
 fun main() {
     val name = Name("Kotlin")
-    println(name.prettyPrint()) // Still called as a static method
+    println(name.prettyPrint()) // 仍然作为静态方法调用
 }
 ```
 
-It is forbidden for inline classes to participate in a class hierarchy. This means that inline classes cannot extend 
-other classes and are always `final`.
+内联类被禁止参与类层次结构。这意味着内联类不能扩展其他类，并且始终是 `final`。
 
-## Representation
+## 表示 {id=表示}
 
-In generated code, the Kotlin compiler keeps a *wrapper* for each inline class. Inline class instances can be represented 
-at runtime either as wrappers or as the underlying type. This is similar to how `Int` can be 
-[represented](numbers.md#JVM平台上的数字表示) either as a primitive `int` or as the wrapper `Integer`.
+在生成的代码中，Kotlin 编译器为每个内联类保留一个*包装器*。
+内联类实例在运行时可以表示为包装器或基础类型。
+这类似于 `Int` 可以被[表示](numbers.md#JVM平台上的数字表示)为基本类型 `int` 或包装器 `Integer` 的方式。
 
-The Kotlin compiler will prefer using underlying types instead of wrappers to produce the most performant and optimized code. 
-However, sometimes it is necessary to keep wrappers around. As a rule of thumb, inline classes are boxed whenever they 
-are used as another type.
+Kotlin 编译器将优先使用基础类型而不是包装器，以生成性能最佳且经过优化的代码。
+但是，有时需要保留包装器。
+一般而言，当内联类作为另一种类型使用时，它们会被装箱。
 
 ```kotlin
 interface I
@@ -122,52 +122,49 @@ fun <T> id(x: T): T = x
 fun main() {
     val f = Foo(42) 
     
-    asInline(f)    // unboxed: used as Foo itself
-    asGeneric(f)   // boxed: used as generic type T
-    asInterface(f) // boxed: used as type I
-    asNullable(f)  // boxed: used as Foo?, which is different from Foo
+    asInline(f)    // 未装箱：作为 Foo 本身使用
+    asGeneric(f)   // 装箱：作为泛型类型 T 使用
+    asInterface(f) // 装箱：作为类型 I 使用
+    asNullable(f)  // 装箱：作为 Foo? 使用，与 Foo 不同
     
-    // below, 'f' first is boxed (while being passed to 'id') and then unboxed (when returned from 'id') 
-    // In the end, 'c' contains unboxed representation (just '42'), as 'f' 
+    // 在下面的示例中，'f' 首先在传递给 'id' 时装箱，然后在从 'id' 返回时取消装箱
+    // 最终，'c' 包含未装箱的表示（只是 '42'），与 'f' 一致
     val c = id(f)  
 }
 ```
 
-Because inline classes may be represented both as the underlying value and as a wrapper, [referential equality](equality.md#referential-equality) 
-is pointless for them and is therefore prohibited.
+由于内联类可能既表示基础值又表示包装器，[引用相等性](equality.md#referential-equality)对它们来说毫无意义，因此被禁止。
 
-Inline classes can also have a generic type parameter as the underlying type. In this case, the compiler maps it to `Any?`
-or, generally, to the upper bound of the type parameter.
+内联类还可以具有泛型类型参数作为基础类型。在这种情况下，编译器将其映射为`Any?`，或者通常是类型参数的上界。
 
 ```kotlin
 @JvmInline
 value class UserId<T>(val value: T)
 
-fun compute(s: UserId<String>) {} // compiler generates fun compute-<hashcode>(s: Any?)
+fun compute(s: UserId<String>) {} // 编译器生成 fun compute-<hashcode>(s: Any?)
 ```
 
-### Mangling
+### 重命名
 
-Since inline classes are compiled to their underlying type, it may lead to various obscure errors, for example unexpected platform signature clashes:
+由于内联类被编译为其基础类型，这可能导致各种晦涩的错误，例如意外的平台签名冲突：
 
 ```kotlin
 @JvmInline
 value class UInt(val x: Int)
 
-// Represented as 'public final void compute(int x)' on the JVM
+// 在 JVM 上表示为 'public final void compute(int x)'
 fun compute(x: Int) { }
 
-// Also represented as 'public final void compute(int x)' on the JVM!
+// 在 JVM 上也表示为 'public final void compute(int x)'！
 fun compute(x: UInt) { }
 ```
 
-To mitigate such issues, functions using inline classes are _mangled_ by adding some stable hashcode to the function name. 
-Therefore, `fun compute(x: UInt)` will be represented as `public final void compute-<hashcode>(int x)`, which solves the clash problem.
+为了缓解这类问题，使用内联类的函数会通过在函数名后添加一些稳定的哈希码来进行*重命名*。
+因此，`fun compute(x: UInt)` 将被表示为 `public final void compute-<hashcode>(int x)`，从而解决了冲突问题。
 
-### Calling from Java code
+### 从 Java 代码调用
 
-You can call functions that accept inline classes from Java code. To do so, you should manually disable mangling:
-add the `@JvmName` annotation before the function declaration:
+你可以从 Java 代码调用接受内联类的函数。为此，你应该手动禁用重命名：在函数声明之前添加 `@JvmName` 注解：
 
 ```kotlin
 @JvmInline
@@ -179,16 +176,13 @@ fun compute(x: Int) { }
 fun compute(x: UInt) { }
 ```
 
-## Inline classes vs type aliases
+## 内联类 vs 类型别名
 
-At first sight, inline classes seem very similar to [type aliases](type-aliases.md). Indeed, both seem to introduce 
-a new type and both will be represented as the underlying type at runtime.
+乍一看，内联类似乎与[type aliases](type-aliases.md)非常相似。事实上，两者都似乎引入了一个新类型，并且在运行时都将被表示为基础类型。
 
-However, the crucial difference is that type aliases are *assignment-compatible* with their underlying type (and with 
-other type aliases with the same underlying type), while inline classes are not.
+然而，关键的区别在于类型别名与其基础类型（以及具有相同基础类型的其他类型别名）是*赋值兼容*的，而内联类则不是。
 
-In other words, inline classes introduce a truly _new_ type, contrary to type aliases which only introduce an alternative name 
-(alias) for an existing type:
+换句话说，内联类引入了一个真正的 _新_ 类型，而类型别名只是为现有类型引入了一个替代名称（别名）：
 
 ```kotlin
 typealias NameTypeAlias = String
@@ -205,18 +199,18 @@ fun main() {
     val nameInlineClass: NameInlineClass = NameInlineClass("")
     val string: String = ""
 
-    acceptString(nameAlias) // OK: pass alias instead of underlying type
-    acceptString(nameInlineClass) // Not OK: can't pass inline class instead of underlying type
+    acceptString(nameAlias) // OK：传递别名而不是基础类型
+    acceptString(nameInlineClass) // 不OK：不能传递内联类而不是基础类型
 
-    // And vice versa:
-    acceptNameTypeAlias(string) // OK: pass underlying type instead of alias
-    acceptNameInlineClass(string) // Not OK: can't pass underlying type instead of inline class
+    // 反之亦然：
+    acceptNameTypeAlias(string) // OK：传递基础类型而不是别名
+    acceptNameInlineClass(string) // 不OK：不能传递基础类型而不是内联类
 }
 ```
 
-## Inline classes and delegation
+## 内联类和委托
 
-Implementation by delegation to inlined value of inlined class is allowed with interfaces:
+通过接口进行内联类的内联值的委托实现是允许的：
 
 ```kotlin
 interface MyInterface {
@@ -230,9 +224,9 @@ value class MyInterfaceWrapper(val myInterface: MyInterface) : MyInterface by my
 fun main() {
     val my = MyInterfaceWrapper(object : MyInterface {
         override fun bar() {
-            // body
+            // 体
         }
     })
-    println(my.foo()) // prints "foo"
+    println(my.foo()) // 输出 "foo"
 }
 ```
