@@ -1,34 +1,32 @@
-[//]: # (title: Build a web application with React and Kotlin/JS — tutorial)
+[//]: # (title: 使用 React 和 Kotlin/JS 构建 Web 应用程序 — 教程)
 
-This tutorial will teach you how to build a browser application with Kotlin/JS and the [React](https://reactjs.org/)
-framework. You will:
+这个教程将教你如何使用 Kotlin/JS 和 [React](https://reactjs.org/) 框架构建一个浏览器应用程序。你将会：
 
-* Complete common tasks associated with building a typical React application.
-* Explore how [Kotlin's DSLs](type-safe-builders.md) can be used to help express concepts concisely and uniformly without
-  sacrificing readability, allowing you to write a full-fledged application completely in Kotlin.
-* Learn how to use ready-made npm components, use external libraries, and publish the final application.
+* 完成与构建典型 React 应用程序相关的常见任务。
+* 了解如何利用 [Kotlin 的 DSL](type-safe-builders.md) 来简洁、一致地表达概念，同时保持可读性，从而实现全面采用 Kotlin
+  编写成熟应用程序的目标。
+* 学习如何使用现成的 npm 组件，使用外部库，并发布最终应用程序。
 
-The output will be a _KotlinConf Explorer_ web app dedicated to the [KotlinConf](https://kotlinconf.com/) event,
-with links to conference talks. Users will be able to watch all the talks on one page and mark them as seen or unseen.
+这个输出将是一个专门用于 [KotlinConf](https://kotlinconf.com/) 活动的 **KotlinConf Explorer** web 应用程序，其中包含会议演讲的链接。
+用户将能够在一个页面上观看所有演讲，并将其标记为已观看或未观看。
 
-The tutorial assumes you have prior knowledge of Kotlin and basic knowledge of HTML and CSS. Understanding the basic
-concepts behind React may help you understand some sample code, but it is not strictly required.
+本教程假设您具有 Kotlin 的先前知识和基本的 HTML 和 CSS 知识。了解 React 背后的基本概念可能有助于理解一些示例代码，但并不是严格要求。
 
-> You can get the final application [here](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle/tree/finished).
+> 您可以在[这里](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle/tree/finished)获取最终的应用程序。
 >
 {style="note"}
 
-## Before you start
+## 开始之前
 
-1. Download and install the latest version of [IntelliJ IDEA](https://www.jetbrains.com/idea/download/index.html).
-2. Clone the [project template](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle) and open it in IntelliJ
-   IDEA. The template includes a basic Kotlin Multiplatform Gradle project with all required configurations and dependencies
+1. 下载并安装最新版本的 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/index.html)。
+2. 克隆 [项目模板](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle) 并在 IntelliJ IDEA 中打开。
+   模板包括一个基本的 Kotlin 多平台 Gradle 项目，具有所有必需的配置和依赖项。
 
-   * Dependencies and tasks in the `build.gradle.kts` file:
-   
+    * `build.gradle.kts` 文件中的依赖项和任务：
+
    ```kotlin
    dependencies {
-       // React, React DOM + Wrappers
+       // React、React DOM + 包装器
        implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:1.0.0-pre.430"))
        implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
        implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
@@ -36,20 +34,19 @@ concepts behind React may help you understand some sample code, but it is not st
        // Kotlin React Emotion (CSS)
        implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
    
-       // Video Player
+       // 视频播放器
        implementation(npm("react-player", "2.12.0"))
    
-       // Share Buttons
+       // 分享按钮
        implementation(npm("react-share", "4.4.1"))
    
-       // Coroutines & serialization
+       // 协程和序列化
        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
    }
    ```
 
-   * An HTML template page in `src/jsMain/resources/index.html` for inserting JavaScript code that you'll be using in
-   this tutorial:
+    * `src/jsMain/resources/index.html` 中的 HTML 模板页面，用于插入此教程中将要使用的 JavaScript 代码：
 
    ```html
    <!doctype html>
@@ -66,12 +63,11 @@ concepts behind React may help you understand some sample code, but it is not st
    ```
    {validate="false"}
 
-   Kotlin/JS projects are automatically bundled with all of your code and its dependencies into a single JavaScript file
-   with the same name as the project, `confexplorer.js`, when you build them. As a typical [JavaScript convention](https://faqs.skillcrush.com/article/176-where-should-js-script-tags-be-linked-in-html-documents),
-   the content of the body (including the `root` div) is loaded first to ensure that the browser loads all page elements
-   before the scripts.
+   当您构建 Kotlin/JS 项目时，您的所有代码及其依赖项将自动捆绑到一个名为 `confexplorer.js` 的单个 JavaScript 文件中。
+   作为典型的 [JavaScript 约定](https://faqs.skillcrush.com/article/176-where-should-js-script-tags-be-linked-in-html-documents)
+   ，body 的内容（包括 `root` div）首先加载，以确保浏览器在加载所有页面元素之前加载脚本。
 
-* A code snippet in `src/jsMain/kotlin/Main.kt`:
+* `src/jsMain/kotlin/Main.kt` 中的代码片段：
 
    ```kotlin
    import kotlinx.browser.document
@@ -81,60 +77,56 @@ concepts behind React may help you understand some sample code, but it is not st
    }
    ```
 
-### Run the development server
+### 运行开发服务器
 
-By default, the Kotlin Multiplatform Gradle plugin comes with support for an embedded `webpack-dev-server`, allowing you to run
-the application from the IDE without manually setting up any servers.
+默认情况下，Kotlin 多平台 Gradle 插件带有对内嵌的 `webpack-dev-server` 的支持，允许您在 IDE 中运行应用程序，而无需手动设置任何服务器。
 
-To test that the program successfully runs in the browser, start the development server by invoking the `run` or
-`browserDevelopmentRun` task (available in the `other` or `kotlin browser` directory) from the Gradle tool window inside
-IntelliJ IDEA:
+为了测试程序在浏览器中成功运行，通过在 IntelliJ IDEA 内的 Gradle 工具窗口中调用
+`run` 或 `browserDevelopmentRun` 任务（在 `other` 或 `kotlin browser` 目录中可用）来启动开发服务器：
 
-![Gradle tasks list](browser-development-run.png){width=700}
+![Gradle 任务列表](browser-development-run.png){width=700}
 
-To run the program from the Terminal, use `./gradlew run` instead.
+要从终端运行程序，使用 `./gradlew run`。
 
-When the project is compiled and bundled, a blank red page will appear in a browser window:
+当项目编译并捆绑完成时，在浏览器窗口中将会显示一个空白的红色页面：
 
-![Blank red page](red-page.png){width=700}
+![空白的红色页面](red-page.png){width=700}
 
-### Enable hot reload / continuous mode
+### 启用热重载 / 连续模式
 
-Configure _[continuous compilation](dev-server-continuous-compilation.md)_ mode so you don't have to manually compile and
-execute your project every time you make changes. Make sure to stop all running development server instances before
-proceeding.
+配置 _[连续编译](dev-server-continuous-compilation.md)_ 模式，这样您就不必每次更改后手动编译和执行项目。
+在继续之前，请确保停止所有正在运行的开发服务器实例。
 
-1. Edit the run configuration that IntelliJ IDEA automatically generates after running the Gradle `run` task for the first time:
+1. 编辑 IntelliJ IDEA 在第一次运行 Gradle `run` 任务后自动生成的运行配置：
 
-   ![Edit a run configuration](edit-configurations-continuous.png){width=700}
+   ![编辑运行配置](edit-configurations-continuous.png){width=700}
 
-2. In the **Run/Debug Configurations** dialog, add the `--continuous` option to the arguments for the run configuration:
+2. 在 **Run/Debug Configurations** 对话框中，将 `--continuous` 选项添加到运行配置的参数中：
 
-   ![Enable continuous mode](continuous-mode.png){width=700}
+   ![启用连续模式](continuous-mode.png){width=700}
 
-   After applying the changes, you can use the **Run** button inside IntelliJ IDEA to start the development server back up.
-   To run the continuous Gradle builds from the Terminal, use `./gradlew run --continuous` instead.
+   应用更改后，您可以使用 IntelliJ IDEA 中的 **Run** 按钮重新启动开发服务器。
+   要从终端运行连续 Gradle 构建，请改用 `./gradlew run --continuous`。
 
-3. To test this feature, change the color of the page to blue in the `Main.kt` file while the Gradle task is running:
+3. 要测试此功能，请在 Gradle 任务正在运行时将页面颜色更改为蓝色，位于 `Main.kt` 文件中：
 
    ```kotlin
    document.bgColor = "blue"
    ```
 
-   The project then recompiles, and after a reload the browser page will be the new color.
+   项目然后重新编译，在重新加载页面后，浏览器页面将显示新颜色。
 
-You can keep the development server running in continuous mode during the development process. It will automatically
-rebuild and reload the page when you make changes.
+您可以在开发过程中保持开发服务器以连续模式运行。当您进行更改时，它将自动重新构建和重新加载页面。
 
-> You can find this state of the project on the `master` branch [here](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle/tree/master).
+> 您可以在 `master` 分支 [这里](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle/tree/master)找到项目的此状态。
 >
 {style="note"}
 
-## Create a web app draft
+## 创建一个 web 应用草稿
 
-### Add the first static page with React
+### 添加第一个使用 React 的静态页面
 
-To make your app display a simple message, replace the code in the `Main.kt` file with the following:
+为了让您的应用程序显示一个简单的消息，将 `Main.kt` 文件中的代码替换为以下内容：
 
 ```kotlin
 import kotlinx.browser.document
@@ -159,29 +151,28 @@ fun main() {
     })
 }
 ```
+
 {validate="false"}
 
-* The `render()` function instructs [kotlin-react-dom](https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-react-dom)
-  to render the first HTML element inside a [fragment](https://reactjs.org/docs/fragments.html) to the `root` element.
-  This element is a container defined in `src/jsMain/resources/index.html`, which was included in the template.
-* The content is an `<h1>` header and uses a typesafe DSL to render HTML.
-* `h1` is a function that takes a lambda parameter. When you add the `+` sign in front of a string literal,
-  the `unaryPlus()` function is actually invoked using [operator overloading](operator-overloading.md).
-  It appends the string to the enclosed HTML element.
+* `render()` 函数指示 [kotlin-react-dom](https://github.com/JetBrains/kotlin-wrappers/tree/master/kotlin-react-dom)
+  在 [fragment](https://reactjs.org/docs/fragments.html) 内部将第一个 HTML 元素渲染到 `root`
+  元素上。这个元素是在模板中包含的 `src/jsMain/resources/index.html` 中定义的容器。
+* 内容是一个 `<h1>` 标题，并使用类型安全的 DSL 渲染 HTML。
+* `h1` 是一个接受 lambda 参数的函数。当您在字符串字面量前面添加 `+` 符号时，实际上调用了 `unaryPlus()`
+  函数，这是使用 [运算符重载](operator-overloading.md) 实现的。它将字符串附加到封闭的 HTML 元素上。
 
-When the project recompiles, the browser displays this HTML page:
+项目重新编译后，浏览器将显示这个 HTML 页面：
 
-![An HTML page example](hello-react-js.png){width=700}
+![HTML 页面示例](hello-react-js.png){width=700}
 
-### Convert HTML to Kotlin's typesafe HTML DSL
+### 将 HTML 转换为 Kotlin 的类型安全 HTML DSL
 
-The Kotlin [wrappers](https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-react/README.md) for React come
-with a [domain-specific language (DSL)](type-safe-builders.md) that makes it possible to write HTML in
-pure Kotlin code. In this way, it's similar to [JSX](https://reactjs.org/docs/introducing-jsx.html) from JavaScript.
-However, with this markup being Kotlin, you get all the benefits of a statically typed language, such as autocomplete or
-type checking.
+Kotlin 对 React 的 [wrappers](https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-react/README.md)
+包含了一种 [领域特定语言 (DSL)](type-safe-builders.md)，可以让您在纯 Kotlin 代码中编写 HTML。
+这种方式类似于 JavaScript 中的 [JSX](https://reactjs.org/docs/introducing-jsx.html)。
+但是，由于这个标记是 Kotlin，您将获得静态类型语言的所有好处，比如自动完成或类型检查。
 
-Compare the classic HTML code for your future web app and its typesafe variant in Kotlin:
+比较一下经典的 HTML 代码和其在 Kotlin 中类型安全的变体：
 
 <tabs>
 <tab title="HTML">
@@ -242,20 +233,19 @@ div {
 </tab>
 </tabs>
 
-Copy the Kotlin code and update the `Fragment.create()` function call inside the `main()` function, replacing the previous `h1` tag.
+复制 Kotlin 代码，并更新 `main()` 函数中的 `Fragment.create()` 函数调用，替换之前的 `h1` 标签。
 
-Wait for the browser to reload. The page should now look like this:
+等待浏览器重新加载。页面现在应该是这样的：
 
-![The web app draft](website-draft.png){width=700}
+![web 应用草稿](website-draft.png){width=700}
 
-### Add videos using Kotlin constructs in markup
+### 使用 Kotlin 构造在标记中添加视频
 
-There are some advantages to writing HTML in Kotlin using this DSL. You can manipulate your app using regular Kotlin
-constructs, like loops, conditions, collections, and string interpolation.
+使用这种 DSL 在 Kotlin 中编写 HTML 有一些优势。您可以使用常规的 Kotlin 构造来操作您的应用程序，比如循环、条件、集合和字符串插值。
 
-You can now replace the hardcoded list of videos with a list of Kotlin objects:
+现在，您可以用 Kotlin 对象的列表来替换硬编码的视频列表：
 
-1. In `Main.kt`, create a `Video` [data class](data-classes.md) to keep all video attributes in one place:
+1. 在 `Main.kt` 中，创建一个 `Video` [数据类](data-classes.md)，将所有视频属性集中在一个地方：
 
    ```kotlin
    data class Video(
@@ -266,8 +256,7 @@ You can now replace the hardcoded list of videos with a list of Kotlin objects:
    )
    ```
 
-2. Fill up the two lists, for unwatched videos and watched videos, respectively. Add these declarations at
-   file-level in `Main.kt`:
+2. 填充两个列表，分别用于未观看的视频和已观看的视频。在 `Main.kt` 中的文件级别添加以下声明：
 
    ```kotlin
    val unwatchedVideos = listOf(
@@ -281,8 +270,8 @@ You can now replace the hardcoded list of videos with a list of Kotlin objects:
    )
    ```
 
-3. To use these videos on the page, write a Kotlin `for` loop to iterate over the collection of unwatched `Video` objects.
-   Replace the three `p` tags under "Videos to watch" with the following snippet:
+3. 要在页面上使用这些视频，编写一个 Kotlin 的 `for` 循环来遍历未观看的 `Video` 对象的集合。
+   将 "Videos to watch" 下面的三个 `p` 标签替换为以下代码片段：
 
    ```kotlin
    for (video in unwatchedVideos) {
@@ -291,8 +280,8 @@ You can now replace the hardcoded list of videos with a list of Kotlin objects:
        }
    }
    ```
-   
-4. Apply the same process to modify the code for the single tag following "Videos watched" as well:
+
+4. 对 "Videos watched" 下的单个标签应用相同的流程：
 
    ```kotlin
    for (video in watchedVideos) {
@@ -302,17 +291,16 @@ You can now replace the hardcoded list of videos with a list of Kotlin objects:
    }
    ```
 
-Wait for the browser to reload. The layout should stay the same as before. You can add some more videos to the list to make
-sure that the loop is working.
+等待浏览器重新加载。布局应该与之前保持一致。您可以向列表中添加更多视频以确保循环正常工作。
 
-### Add styles with typesafe CSS
+### 使用类型安全的 CSS 添加样式
 
-The [kotlin-emotion](https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-emotion/) wrapper for the [Emotion](https://emotion.sh/docs/introduction)
-library makes it possible to specify CSS attributes – even dynamic ones – right alongside HTML with JavaScript. Conceptually, that
-makes it similar to [CSS-in-JS](https://reactjs.org/docs/faq-styling.html#what-is-css-in-js) – but for Kotlin.
-The benefit of using a DSL is that you can use Kotlin code constructs to express formatting rules.
+[kotlin-emotion](https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-emotion/) 对
+[Emotion](https://emotion.sh/docs/introduction) 库的包装使得可以直接在 HTML 中指定 CSS 属性，甚至是动态属性。
+从概念上讲，这使得它类似于 [CSS-in-JS](https://reactjs.org/docs/faq-styling.html#what-is-css-in-js) —— 但是针对的是 Kotlin。
+使用 DSL 的好处是您可以使用 Kotlin 代码构造来表达格式规则。
 
-The template project for this tutorial already includes the dependency needed to use `kotlin-emotion`:
+此教程的模板项目已经包含了使用 `kotlin-emotion` 所需的依赖关系：
 
 ```kotlin
 dependencies {
@@ -323,10 +311,9 @@ dependencies {
 }
 ```
 
-With `kotlin-emotion`, you can specify a `css` block inside HTML elements `div` and `h3`, where you can define the styles.
+使用 `kotlin-emotion`，您可以在 HTML 元素 `div` 和 `h3` 内指定一个 `css` 块，其中您可以定义样式。
 
-To move the video player to the top right-hand corner of the page, use CSS and adjust the code for the video player
-(the last `div` in the snippet):
+要将视频播放器移动到页面的右上角，请使用 CSS 并调整视频播放器的代码（片段中的最后一个 `div`）：
 
 ```kotlin
 div {
@@ -344,35 +331,31 @@ div {
 }
 ```
 
-Feel free to experiment with some other styles. For example, you could change the `fontFamily` or add some `color` to your UI.
+随意尝试一些其他样式。例如，您可以更改 `fontFamily` 或为 UI 添加一些 `color`。
 
-## Design app components
+## 设计应用程序组件
 
-The basic building blocks in React are called _[components](https://reactjs.org/docs/components-and-props.html)_.
-Components themselves can also be composed of other, smaller components. By combining components, you build your application.
-If you structure components to be generic and reusable, you'll be able to use them in multiple parts of the app without
-duplicating code or logic.
+在 React 中，基本构建块被称为 **[组件](https://reactjs.org/docs/components-and-props.html)**。
+组件本身也可以由其他更小的组件组成。
+通过组合组件，您构建您的应用程序。
+如果您将组件结构化为通用且可重用的形式，您将能够在应用程序的多个部分中使用它们，而不会重复代码或逻辑。
 
-The content of the `render()` function generally describes a basic component. The current layout of your application looks
-like this:
+`render()` 函数的内容通常描述一个基本组件。您当前应用程序的布局如下所示：
 
-![Current layout](current-layout.png){width=700}
+![当前布局](current-layout.png){width=700}
 
-If you decompose your application into individual components, you'll end up with a more structured layout in which
-each component handles its responsibilities:
+如果您将应用程序分解为单独的组件，您将得到一个更结构化的布局，其中每个组件都处理其职责：
 
-![Structured layout with components](structured-layout.png){width=700}
+![带有组件的结构化布局](structured-layout.png){width=700}
 
-Components encapsulate a particular functionality. Using components shortens source code and makes it easier to read and
-understand.
+组件封装了特定的功能。使用组件可以缩短源代码并使其更易于阅读和理解。
 
-### Add the main component
+### 添加主要组件
 
-To start creating the application's structure, first explicitly specify `App`, the main component for rendering to the
-`root`element:
+为了开始创建应用程序的结构，首先明确指定 `App`，作为渲染到 `root` 元素的主要组件：
 
-1. Create a new `App.kt` file in the `src/jsMain/kotlin` folder.
-2. Inside this file, add the following snippet and move the typesafe HTML from `Main.kt` into it:
+1. 在 `src/jsMain/kotlin` 文件夹中创建一个新的 `App.kt` 文件。
+2. 在此文件中，添加以下代码片段，并将类型安全的 HTML 从 `Main.kt` 移动到其中：
 
    ```kotlin
    import kotlinx.coroutines.async
@@ -395,10 +378,10 @@ To start creating the application's structure, first explicitly specify `App`, t
        // typesafe HTML goes here, starting with the first h1 tag!
    }
    ```
-   
-   The `FC` function creates a [function component](https://reactjs.org/docs/components-and-props.html#function-and-class-components).
 
-3. In the `Main.kt` file, update the `main()` function as follows:
+   `FC` 函数创建了一个 [函数组件](https://reactjs.org/docs/components-and-props.html#function-and-class-components)。
+
+3. 在 `Main.kt` 文件中，更新 `main()` 函数如下：
 
    ```kotlin
    fun main() {
@@ -407,19 +390,17 @@ To start creating the application's structure, first explicitly specify `App`, t
    }
    ```
 
-   Now the program creates an instance of the `App` component and renders it to the specified container.
+   现在程序创建了一个 `App` 组件的实例，并将其渲染到指定的容器中。
 
-For more information about React concepts, see the [documentation and guides](https://reactjs.org/docs/hello-world.html#how-to-read-this-guide).
+要了解更多关于 React 概念的信息，请参阅[文档和指南](https://reactjs.org/docs/hello-world.html#how-to-read-this-guide)。
 
-### Extract a list component
+### 提取列表组件
 
-Since the `watchedVideos` and `unwatchedVideos` lists each contain a list of videos, it makes sense to create a single
-reusable component, and only adjust the content displayed in the lists.
+由于 `watchedVideos` 和 `unwatchedVideos` 列表都包含一系列视频，因此创建一个单一可重用的组件，并仅调整列表中显示的内容是有意义的。
 
-The `VideoList` component follows the same pattern as the `App` component. It uses the `FC` builder function,
-and contains the code from the `unwatchedVideos` list.
+`VideoList` 组件遵循与 `App` 组件相同的模式。它使用了 `FC` 构建器函数，并包含来自 `unwatchedVideos` 列表的代码。
 
-1. Create a new `VideoList.kt` file in the `src/jsMain/kotlin` folder and add the following code:
+1. 在 `src/jsMain/kotlin` 文件夹中创建一个新的 `VideoList.kt` 文件，并添加以下代码：
 
    ```kotlin
    import kotlinx.browser.window
@@ -436,7 +417,7 @@ and contains the code from the `unwatchedVideos` list.
    }
    ```
 
-2. In `App.kt`, use the `VideoList` component by invoking it without parameters:
+2. 在 `App.kt` 中，通过不带参数调用 `VideoList` 组件来使用它：
 
    ```kotlin
    // . . .
@@ -456,29 +437,24 @@ and contains the code from the `unwatchedVideos` list.
    // . . .
    ```
 
-   For now, the `App` component has no control over the content that is shown by the `VideoList` component. It's hard-coded,
-   so you see the same list twice.
+   目前，`App` 组件无法控制由 `VideoList` 组件显示的内容。它是硬编码的，所以您会看到两个相同的列表。
 
-### Add props to pass data between components
+### 添加属性以在组件之间传递数据
 
-Since you're going to reuse the `VideoList` component, you'll need to be able to fill it with different content. You can add
-the ability to pass the list of items as an attribute to the component. In React, these attributes are called _props_.
-When the props of a component are changed in React, the framework automatically re-renders the component.
+由于您要重用 `VideoList` 组件，您需要能够填充不同的内容到其中。您可以添加将项目列表作为属性传递给组件的功能。在 React 中，这些属性称为 _props_。当在 React 中更改组件的 props 时，框架会自动重新渲染组件。
 
-For `VideoList`, you'll need a prop containing the list of videos to be shown. Define an interface
-that holds all the props which can be passed to a `VideoList` component:
+对于 `VideoList`，您需要一个包含要显示的视频列表的属性。定义一个接口，其中包含可以传递给 `VideoList` 组件的所有 props：
 
-1. Add the following definition to the `VideoList.kt` file:
+1. 将以下定义添加到 `VideoList.kt` 文件中：
 
    ```kotlin
    external interface VideoListProps : Props {
        var videos: List<Video>
    }
    ```
-   The [external](js-interop.md#external-modifier) modifier tells the compiler that the interface's implementation is provided
-   externally, so it doesn't try to generate JavaScript code from the declaration.
+   [external](js-interop.md#external-modifier) 修饰符告诉编译器接口的实现是外部提供的，因此它不会尝试从声明生成 JavaScript 代码。
 
-2. Adjust the class definition of `VideoList` to make use of the props that are passed into the `FC` block as a parameter:
+2. 调整 `VideoList` 的类定义，以使用传递到 `FC` 块中的 props 作为参数：
 
    ```kotlin
    val VideoList = FC<VideoListProps> { props ->
@@ -491,14 +467,10 @@ that holds all the props which can be passed to a `VideoList` component:
    }
    ```
 
-   The `key` attribute helps the React renderer figure out what to do when the value of `props.videos` changes. It uses
-   the key to determine which parts of a list need to be refreshed and which ones stay the same. You can find more information
-   about lists and keys in the [React guide](https://reactjs.org/docs/lists-and-keys.html).
+   `key` 属性帮助 React 渲染器确定在 `props.videos` 的值更改时应该执行什么操作。它使用键来确定列表的哪些部分需要刷新，哪些部分保持不变。您可以在 [React 指南](https://reactjs.org/docs/lists-and-keys.html) 中找到有关列表和键的更多信息。
 
-3. In the `App` component, make sure that the child components are instantiated with the proper attributes. In `App.kt`,
-   replace the two loops underneath the `h3` elements with an invocation of `VideoList` together with the attributes for
-   `unwatchedVideos` and `watchedVideos`.
-   In the Kotlin DSL, you assign them inside a block belonging to the `VideoList` component:
+3. 在 `App` 组件中，确保使用正确的属性实例化子组件。在 `App.kt` 中，将位于 `h3` 元素下方的两个循环替换为对 `VideoList` 的调用，以及 `unwatchedVideos` 和 `watchedVideos` 的属性。
+   在 Kotlin DSL 中，您将它们分配到属于 `VideoList` 组件的块中：
 
    ```kotlin
    h3 {
@@ -515,12 +487,11 @@ that holds all the props which can be passed to a `VideoList` component:
    }
    ```
 
-After a reload, the browser will show that the lists now render correctly.
+重新加载后，浏览器将显示列表现在正确地呈现。
 
-### Make the list interactive
+### 使列表可交互
 
-First, add an alert message that pops up when users click on a list entry. In `VideoList.kt`, add an
-`onClick` handler function that triggers an alert with the current video:
+首先，在用户点击列表条目时添加一个弹出警告消息。在 `VideoList.kt` 中，添加一个 `onClick` 处理函数，用于触发一个包含当前视频信息的警告：
 
 ```kotlin
 // . . .
@@ -536,27 +507,24 @@ p {
 // . . .
 ```
 
-If you click on one of the list items in the browser window, you'll get information about the video in an alert
-window like this:
+如果您在浏览器窗口中点击列表项之一，您将会在弹出的警告窗口中看到有关视频的信息，如下所示：
 
-![Browser alert window](alert-window.png){width=700}
+![浏览器警告窗口](alert-window.png){width=700}
 
-> Defining an `onClick` function directly as lambda is concise and very useful for prototyping. However, due to the way equality
-> [currently works](https://youtrack.jetbrains.com/issue/KT-15101) in Kotlin/JS, performance-wise it's not the most optimized way
-> to pass click handlers. If you want to optimize rendering performance, consider storing your functions in a variable
-> and passing them.
+> 直接将 `onClick` 函数定义为 lambda 是简洁的，对于原型设计非常有用。
+> 但是，由于目前 Kotlin/JS 中相等性的处理方式，从性能角度来看，这并不是传递点击处理程序的最优方式。
+> 如果您想要优化渲染性能，请考虑将函数存储在变量中并传递它们。
 >
 {type="tip"}
 
-### Add state to keep values
+### 添加状态以保存数值
 
-Instead of just alerting the user, you can add some functionality for highlighting the selected video with a ▶ triangle.
-To do that, introduce some _state_ specific to this component.
+您可以添加一些功能来突出显示所选视频，并使用 ▶ 三角形标记它，而不仅仅是向用户发出警告。为此，引入此组件特定的 _状态_。
 
-State is one of the core concepts in React. In modern React (which uses the so-called _Hooks API_),
-state is expressed using the [`useState` hook](https://reactjs.org/docs/hooks-state.html).
+状态是 React 中的核心概念之一。在现代 React（使用所谓的 **Hooks API**）中，状态使用
+[`useState` hook](https://reactjs.org/docs/hooks-state.html) 表示。
 
-1. Add the following code to the top of the `VideoList` declaration:
+1. 将以下代码添加到 `VideoList` 声明的顶部：
 
    ```kotlin
    val VideoList = FC<VideoListProps> { props ->
@@ -566,17 +534,15 @@ state is expressed using the [`useState` hook](https://reactjs.org/docs/hooks-st
    ```
    {validate="false"}
 
-   * The `VideoList` functional component keeps state (a value that is independent of the current function invocation). State is nullable, and has the `Video?` type. Its default value is `null`.
-   * The `useState()` function from React instructs the framework to keep track of state across multiple invocations
-     of the function. For example, even though you specify a default value, React makes sure that the default value is only
-     assigned in the beginning. When state changes, the component will re-render based on the new state.
-   * The `by` keyword indicates that `useState()` acts as a [delegated property](delegated-properties.md).
-     Like with any other variable, you read and write values. The implementation behind `useState()` takes care of the machinery
-     required to make state work.
+   * `VideoList` 函数组件保留状态（一个与当前函数调用无关的值）。状态是可空的，并且具有 `Video?` 类型。其默认值为 `null`。
+   * `React` 中的 `useState()` 函数指示框架跟踪状态以跨多个函数调用。例如，即使您指定了默认值，React
+     也会确保默认值仅在开始时分配。当状态更改时，组件将基于新状态进行重新渲染。
+   * `by` 关键字表示 `useState()` 作为[委托属性](delegated-properties.md)。
+     与任何其他变量一样，您可以读取和写入值。`useState()` 背后的实现负责处理使状态工作所需的机制。
 
-   To learn more about the State Hook, check out the [React documentation](https://reactjs.org/docs/hooks-state.html).
+   要了解有关 State Hook 的更多信息，请查看[React 文档](https://reactjs.org/docs/hooks-state.html)。
 
-2. Change the `onClick` handler and the text in the `VideoList` component to look as follows:
+2. 更改 `VideoList` 组件中的 `onClick` 处理程序和文本，如下所示：
 
    ```kotlin
    val VideoList = FC<VideoListProps> { props ->
@@ -596,36 +562,31 @@ state is expressed using the [`useState` hook](https://reactjs.org/docs/hooks-st
    }
    ```
 
-   * When the user clicks a video, its value is assigned to the `selectedVideo` variable.
-   * When the selected list entry is rendered, the triangle is prepended.
+   * 当用户单击视频时，其值将分配给 `selectedVideo` 变量。
+   * 当渲染所选列表条目时，三角形将被前置。
 
-You can find more details about state management in the [React FAQ](https://reactjs.org/docs/faq-state.html).
+请检查浏览器并点击列表中的项目，以确保一切正常工作。
 
-Check the browser and click an item in the list to make sure that everything is working correctly.
+## 组合组件
 
-## Compose components
+当前，两个视频列表各自工作，这意味着每个列表都跟踪所选视频。即使只有一个播放器，用户也可以在未观看列表和观看列表中分别选择两个视频：
 
-Currently, the two video lists work on their own, meaning that each list keeps track of a selected video.
-Users can select two videos, one in the unwatched list and one in watched, even though there's only one player:
+![两个视频同时在两个列表中被选择](two-videos-select.png){width=700}
 
-![Two videos are selected in both lists simultaneously](two-videos-select.png){width=700}
+一个列表无法同时跟踪其自身以及兄弟列表中的所选视频。
+原因是所选视频不是列表状态的一部分，而是应用程序状态的一部分。
+这意味着您需要将状态从各个组件中 **提升** 出来。
 
-A list can't keep track of which video is selected both inside itself, and inside a sibling list. The reason is that the
-selected video is part not of the _list_ state, but of the _application_ state. This means you need to _lift_ state
-out of the individual components.
+### 提升状态
 
-### Lift state
+React 确保 props 只能从父组件传递给其子组件。这样可以防止组件之间相互耦合。
 
-React makes sure that props can only be passed from a parent component to its children. This prevents components from
-being hard-wired together.
+如果一个组件想要改变一个兄弟组件的状态，它需要通过它们的父组件来实现。
+在这种情况下，状态也不再属于任何子组件，而是属于上级父组件。
 
-If a component wants to change state of a sibling component, it needs to do so via its parent.
-At that point, state also no longer belongs to any of the child components but to the overarching parent component.
+将状态从组件迁移到它们的父组件的过程称为 _提升状态_。对于您的应用程序，将 `currentVideo` 作为状态添加到 `App` 组件中：
 
-The process of migrating state from components to their parents is called _lifting state_. For your app, add `currentVideo`
-as state to the `App` component:
-
-1. In `App.kt`, add the following to the top of the definition of the `App` component:
+1. 在 `App.kt` 中，在 `App` 组件的定义顶部添加以下内容：
 
    ```kotlin
    val App = FC<Props> {
@@ -635,11 +596,10 @@ as state to the `App` component:
    }
    ```
 
-   The `VideoList` component no longer needs to keep track of state. It will receive the current video as a prop instead.
+   `VideoList` 组件不再需要跟踪状态。它将作为属性接收当前视频。
 
-2. Remove the `useState()` call in `VideoList.kt`.
-3. Prepare the `VideoList` component to receive the selected video as a prop. To do so, expand the `VideoListProps`
-   interface to contain the `selectedVideo`:
+2. 在 `VideoList.kt` 中删除 `useState()` 调用。
+3. 准备 `VideoList` 组件接收所选视频作为属性。为此，扩展 `VideoListProps` 接口以包含 `selectedVideo`：
 
    ```kotlin
    external interface VideoListProps : Props {
@@ -648,7 +608,7 @@ as state to the `App` component:
    }
    ```
 
-4. Change the condition of the triangle so that it uses `props` instead of `state`:
+4. 更改三角形的条件，使其使用 `props` 而不是 `state`：
 
    ```kotlin
    if (video == props.selectedVideo) {
@@ -656,17 +616,15 @@ as state to the `App` component:
    }
    ```
 
-### Pass handlers
+### 传递处理程序
 
-At the moment, there's no way to assign a value to a prop, so the `onClick` function won't work the way it is currently
-set up. To change state of a parent component, you need to lift state again.
+目前，没有办法给属性赋值，因此 `onClick` 函数无法按照当前设置正常工作。要从子组件更改父组件的状态，您需要再次提升状态。
 
-In React, state always flows from parent to child. So, to change the _application_ state from one of the child components,
-you need to move the logic for handling user interaction to the parent component and then pass the logic in as a prop.
-Remember that in Kotlin, variables can have the [type of a function](lambdas.md#function-types).
+在 React 中，状态始终从父级流向子级。
+因此，要从一个子组件更改 _应用程序_ 状态，您需要将处理用户交互的逻辑移到父组件中，然后将逻辑作为属性传递进去。
+请记住，在 Kotlin 中，变量可以具有[函数类型](lambdas.md#function-types)。
 
-1. Expand the `VideoListProps` interface again so that it contains a variable `onSelectVideo`, which is a function that takes a
-   `Video` and returns `Unit`:
+1. 再次扩展 `VideoListProps` 接口，使其包含一个名为 `onSelectVideo` 的变量，它是一个接受 `Video` 并返回 `Unit` 的函数：
 
    ```kotlin
    external interface VideoListProps : Props {
@@ -675,18 +633,17 @@ Remember that in Kotlin, variables can have the [type of a function](lambdas.md#
    }
    ```
 
-2. In the `VideoList` component, use the new prop in the `onClick` handler:
+2. 在 `VideoList` 组件中，在 `onClick` 处理程序中使用新属性：
 
    ```kotlin
    onClick = {
        props.onSelectVideo(video)
    }
    ```
-   
-   You can now delete the `selectedVideo` variable from the `VideoList` component.
 
-3. Go back to the `App` component and pass `selectedVideo` and a handler for `onSelectVideo`
-   for each of the two video lists:
+   您现在可以删除 `VideoList` 组件中的 `selectedVideo` 变量。
+
+3. 回到 `App` 组件，并为两个视频列表中的每一个传递 `selectedVideo` 和 `onSelectVideo` 的处理程序：
 
    ```kotlin
    VideoList {
@@ -698,19 +655,17 @@ Remember that in Kotlin, variables can have the [type of a function](lambdas.md#
    }
    ```
 
-4. Repeat the previous step for the watched videos list.
+4. 对于已观看的视频列表，重复上一步。
 
-Switch back to your browser and make sure that when selecting a video the selection jumps between the two lists without duplication.
+切换回浏览器，确保在选择视频时，选择在两个列表之间跳转而不重复。
 
-## Add more components
+### 提取视频播放器组件
 
-### Extract the video player component
+您现在可以创建另一个独立的组件，视频播放器，它目前是一个占位图像。
+您的视频播放器需要知道演讲标题、演讲者和视频链接。
+这些信息已经包含在每个 `Video` 对象中，因此您可以将其作为属性传递并访问其属性。
 
-You can now create another self-contained component, a video player, which is currently a placeholder image. Your video player
-needs to know the talk title, the author of the talk, and the link to the video. This information is already contained
-in each `Video` object, so you can pass it as a prop and access its attributes.
-
-1. Create a new `VideoPlayer.kt` file and add the following implementation for the `VideoPlayer` component:
+1. 创建一个名为 `VideoPlayer.kt` 的新文件，并添加以下 `VideoPlayer` 组件的实现：
 
    ```kotlin
    import csstype.*
@@ -742,10 +697,9 @@ in each `Video` object, so you can pass it as a prop and access its attributes.
    }
    ```
 
-2. Because the `VideoPlayerProps` interface specifies that the `VideoPlayer` component takes a non-nullable `Video`, make
-   sure to handle this in the `App` component accordingly.
+2. 因为 `VideoPlayerProps` 接口指定了 `VideoPlayer` 组件接受一个非空的 `Video`，请确保在 `App` 组件中相应地处理。
 
-   In `App.kt`, replace the previous `div` snippet for the video player with the following:
+   在 `App.kt` 中，将视频播放器的先前 `div` 代码片段替换为以下内容：
 
    ```kotlin
    currentVideo?.let { curr ->
@@ -755,21 +709,18 @@ in each `Video` object, so you can pass it as a prop and access its attributes.
    }
    ```
 
-   The [`let` scope function](scope-functions.md#let) ensures that the `VideoPlayer` component is only added
-   when `state.currentVideo` is not null.
+   [`let` 作用域函数](scope-functions.md#let)确保只有在 `state.currentVideo` 不为 null 时才添加 `VideoPlayer` 组件。
 
-Now clicking an entry in the list will bring up the video player and populate it with the information from the clicked entry.
+现在，单击列表中的条目将会显示视频播放器，并使用单击条目的信息填充它。
 
-### Add a button and wire it
+### 添加按钮并连接
 
-To make it possible for users to mark a video as watched or unwatched and to move it between the two lists,
-add a button to the `VideoPlayer` component.
+为了让用户能够将视频标记为已观看或未观看，并在两个列表之间移动，将按钮添加到 `VideoPlayer` 组件中。
 
-Since this button will move videos between two different lists, the logic handling state change needs to be _lifted_
-out of the `VideoPlayer` and passed in from the parent as a prop. The button should look different based on whether the
-video has been watched or not. This is also information you need to pass as a prop.
+由于此按钮将在两个不同的列表之间移动视频，处理状态更改的逻辑需要从 `VideoPlayer` 中提取出来，并作为一个属性从父组件传递进来。
+该按钮的外观应基于视频是否已观看而有所不同。这也是您需要作为属性传递的信息。
 
-1. Expand the `VideoPlayerProps` interface in `VideoPlayer.kt` to include properties for those two cases:
+1. 在 `VideoPlayer.kt` 中扩展 `VideoPlayerProps` 接口，包括这两种情况的属性：
 
    ```kotlin
    external interface VideoPlayerProps : Props {
@@ -779,8 +730,7 @@ video has been watched or not. This is also information you need to pass as a pr
    }
    ```
 
-2. You can now add the button to the actual component. Copy the following snippet into the body of the `VideoPlayer`
-   component, between the `h3` and `img` tags:
+2. 您现在可以将按钮添加到实际组件中了。将以下代码片段复制到 `VideoPlayer` 组件的主体中，放在 `h3` 和 `img` 标签之间：
 
    ```kotlin
    button {
@@ -792,23 +742,22 @@ video has been watched or not. This is also information you need to pass as a pr
            props.onWatchedButtonPressed(props.video)
        }
        if (props.unwatchedVideo) {
-           +"Mark as watched"
+           +"标记为已观看"
        } else {
-           +"Mark as unwatched"
+           +"标记为未观看"
        }
    }
    ```
 
-   With the help of Kotlin CSS DSL that make it possible to change styles dynamically, you can change the color of the button using
-   a basic Kotlin `if` expression.
+   通过 Kotlin CSS DSL 可以动态地更改按钮的颜色，使用基本的 Kotlin `if` 表达式。
 
-### Move video lists to the application state
+### 将视频列表移到应用程序状态中
 
-Now it's time to adjust the `VideoPlayer` usage site in the `App` component. When the button is clicked, a video
-should be moved from the unwatched list to the watched list or vice versa. Since these lists can now actually
-change, move them into the application state:
+现在是时候调整 `App` 组件中的 `VideoPlayer` 使用位置了。
+当点击按钮时，视频应该从未观看列表移动到已观看列表，反之亦然。
+由于这些列表现在实际上可以改变，将它们移到应用程序状态中：
 
-1. In `App.kt`, add the following properties with `useState()` calls to the top of the `App` component:
+1. 在 `App.kt` 中，在 `App` 组件的顶部添加以下属性和 `useState()` 调用：
 
    ```kotlin
    val App = FC<Props> {
@@ -826,9 +775,9 @@ change, move them into the application state:
    }
    ```
 
-2. Since all the demo data is included in the default values for `watchedVideos` and `unwatchedVideos` directly,
-   you no longer need the file-level declarations. In `Main.kt`, delete the declarations for `watchedVideos` and `unwatchedVideos`.
-3. Change the call-site for `VideoPlayer` in the `App` component that belongs to the video player to look like this:
+2. 由于所有的演示数据都直接包含在 `watchedVideos` 和 `unwatchedVideos` 的默认值中，您不再需要文件级别的声明。
+   在 `Main.kt` 中，删除对 `watchedVideos` 和 `unwatchedVideos` 的声明。
+3. 更改属于视频播放器的 `App` 组件中 `VideoPlayer` 的调用位置，使其如下所示：
 
    ```kotlin
    VideoPlayer {
@@ -846,42 +795,37 @@ change, move them into the application state:
    }
    ```
 
-Go back to the browser, select a video, and press the button a few times. The video will jump between the two lists.
+返回浏览器，选择一个视频，然后多次点击按钮。视频将在两个列表之间跳转。
 
-## Use packages from npm
+## 使用 npm 包
 
-To make the app usable, you still need a video player that actually plays videos and some buttons to help people
-share the content.
+要使应用程序可用，您仍然需要一个实际播放视频的视频播放器以及一些按钮来帮助用户分享内容。
 
-React has a rich ecosystem with a lot of pre-made components you can use instead of building this functionality yourself.
+React 拥有丰富的生态系统，提供了许多预制的组件，您可以使用它们来替代自己构建这些功能。
 
-### Add the video player component
+### 添加视频播放器组件
 
-To replace the placeholder video component with an actual YouTube player, use the `react-player` package from npm.
-It can play videos and allows you to control the appearance of the player.
+要将占位符视频组件替换为实际的 YouTube 播放器，请使用 npm 中的 `react-player` 包。它可以播放视频并允许您控制播放器的外观。
 
-For the component documentation and the API description, see its [README](https://www.npmjs.com/package/react-player)
-in GitHub.
+有关组件文档和 API 描述，请参阅其在 GitHub 上的 [README](https://www.npmjs.com/package/react-player)。
 
-1. Check the `build.gradle.kts` file. The `react-player` package should be already included:
+1. 检查 `build.gradle.kts` 文件。`react-player` 包应该已经包含在内：
 
    ```kotlin
    dependencies {
        // ...
-       // Video Player
+       // 视频播放器
        implementation(npm("react-player", "2.12.0"))
        // ...
    }
    ```
 
-   As you can see, npm dependencies can be added to a Kotlin/JS project by using the `npm()` function in the `dependencies`
-   block of the build file. The Gradle plugin then takes care of downloading and installing these dependencies for you.
-   To do so, it uses its own bundled installation of the [`yarn`](https://yarnpkg.com/) package manager.
+   正如您所见，可以通过在构建文件的 `dependencies` 块中使用 `npm()` 函数来将 npm 依赖项添加到 Kotlin/JS 项目中。
+   然后，Gradle 插件会负责为您下载和安装这些依赖项。为此，它使用自己捆绑的安装了 [`yarn`](https://yarnpkg.com/) 包管理器。
 
-2. To use the JavaScript package from inside the React application, it's necessary to tell the Kotlin compiler what to
-   expect by providing it with [external declarations](js-interop.md).
+2. 要在 React 应用程序内部使用 JavaScript 包，必须告诉 Kotlin 编译器要期望什么，为此需要提供[外部声明](js-interop.md)。
 
-   Create a new `ReactYouTube.kt` file and add the following content:
+   创建一个新的 `ReactYouTube.kt` 文件，并添加以下内容：
 
    ```kotlin
    @file:JsModule("react-player")
@@ -893,20 +837,19 @@ in GitHub.
    external val ReactPlayer: ComponentClass<dynamic>
    ```
 
-   When the compiler sees an external declaration like `ReactPlayer`, it assumes that the implementation for the
-   corresponding class is provided by the dependency and doesn't generate code for it.
+   当编译器看到像 `ReactPlayer` 这样的外部声明时，它会假定对应类的实现由依赖项提供，并不为其生成代码。
 
-   The last two lines are equivalent to a JavaScript import like `require("react-player").default;`. They tell
-   the compiler that it's certain that a component will conform to `ComponentClass<dynamic>` at runtime.
+   最后两行等同于 JavaScript 的 `require("react-player").default;` 导入。
+   它们告诉编译器，在运行时，一个组件将符合 `ComponentClass<dynamic>`。
 
-However, in this configuration, the generic type for the props accepted by `ReactPlayer` is set to `dynamic`. That means
-the compiler will accept any code, at the risk of breaking things at runtime.
+但是，在这种配置中，`ReactPlayer` 接受的 props 的泛型类型设置为 `dynamic`。
+这意味着编译器将接受任何代码，存在在运行时破坏代码的风险。
 
-A better alternative is to create an `external interface` that specifies what kind of properties belong to the
-props for this external component. You can learn about the props' interface in the [README](https://www.npmjs.com/package/react-player)
-for the component. In this case, use the `url` and `controls` props:
+更好的选择是创建一个外部接口，指定属于此外部组件 props 的属性的类型。
+您可以在组件的 [README](https://www.npmjs.com/package/react-player) 中了解有关 props 接口的信息。
+在这种情况下，使用 `url` 和 `controls` props：
 
-1. Adjust the content of `ReactYouTube.kt` by replacing `dynamic` with an external interface:
+1. 通过将 `dynamic` 替换为外部接口来调整 `ReactYouTube.kt` 的内容：
 
    ```kotlin
    @file:JsModule("react-player")
@@ -923,8 +866,8 @@ for the component. In this case, use the `url` and `controls` props:
    }
    ```
 
-2. You can now use the new `ReactPlayer` to replace the gray placeholder rectangle in the `VideoPlayer` component. In
-   `VideoPlayer.kt`, replace the `img` tag with the following snippet:
+2. 您现在可以使用新的 `ReactPlayer` 来替换 `VideoPlayer` 组件中的灰色占位符矩形。
+   在 `VideoPlayer.kt` 中，用以下代码段替换 `img` 标签：
 
    ```kotlin
    ReactPlayer {
@@ -933,28 +876,28 @@ for the component. In this case, use the `url` and `controls` props:
    }
    ```
 
-### Add social share buttons
+### 添加社交分享按钮
 
-An easy way to share the application's content is to have social share buttons for messengers and email. You can use
-an off-the-shelf React component for this as well, for example, [react-share](https://github.com/nygardk/react-share/blob/master/README.md):
+分享应用程序内容的简便方法是为 Messenger 和电子邮件添加社交分享按钮。
+您也可以使用现成的 React 组件，例如 [react-share](https://github.com/nygardk/react-share/blob/master/README.md)：
 
-1. Check the `build.gradle.kts` file. This npm library should already be included:
+1. 检查 `build.gradle.kts` 文件。这个 npm 库应该已经包含在内：
 
    ```kotlin
    dependencies {
        // ...
-       // Share Buttons
+       // 分享按钮
        implementation(npm("react-share", "4.4.1"))
        // ...
    }
    ```
 
-2. To use `react-share` from Kotlin, you'll need to write more basic external declarations. The [examples on GitHub](https://github.com/nygardk/react-share/blob/master/demo/Demo.tsx#L61)
-   show that a share button consists of two React components: `EmailShareButton` and `EmailIcon`, for example. Different types
-   of share buttons and icons all have the same kind of interface.
-   You'll create the external declarations for each component the same way you already did for the video player.
+2. 要从 Kotlin 中使用 `react-share`，您需要编写更基本的外部声明。
+   GitHub 上的 [示例](https://github.com/nygardk/react-share/blob/master/demo/Demo.tsx#L61) 显示，一个分享按钮由两个
+   React 组件组成：`EmailShareButton` 和 `EmailIcon`，例如：
+   不同类型的分享按钮和图标都具有相同的接口。您将为每个组件创建与您已经为视频播放器创建的相同方式的外部声明。
 
-   Add the following code to a new `ReactShare.kt` file:
+   将以下代码添加到一个新的 `ReactShare.kt` 文件中：
 
    ```kotlin
    @file:JsModule("react-share")
@@ -985,8 +928,7 @@ an off-the-shelf React component for this as well, for example, [react-share](ht
    }
    ```
 
-3. Add new components into the user interface of the application. In `VideoPlayer.kt`, add two share buttons in a `div`
-   right above the usage of `ReactPlayer`:
+3. 将新组件添加到应用程序的用户界面中。在 `VideoPlayer.kt` 中，在 `ReactPlayer` 的使用之前，添加一个 `div`，其中包含两个分享按钮：
 
    ```kotlin
    // . . .
@@ -1016,56 +958,57 @@ an off-the-shelf React component for this as well, for example, [react-share](ht
    // . . .
    ```
 
-You can now check your browser and see whether the buttons actually work. When clicking on the button, a _share window_ should
-appear with the URL of the video. If the buttons don't show up or work, you may need to disable your ad and social media blocker.
+现在您可以检查您的浏览器，查看按钮是否有效。
+单击按钮时，应该会出现一个带有视频 URL 的“分享窗口”。
+如果按钮不显示或不起作用，您可能需要禁用广告和社交媒体阻止器。
 
-![Share window](social-buttons.png){width=700}
+![分享窗口](social-buttons.png){width=700}
 
-Feel free to repeat this step with share buttons for other social networks available in [react-share](https://github.com/nygardk/react-share/blob/master/README.md#features).
+随意根据 [react-share](https://github.com/nygardk/react-share/blob/master/README.md#features)
+中提供的其他社交网络的分享按钮重复此步骤。
 
-## Use an external REST API
+## 使用外部 REST API
 
-You can now replace the hard-coded demo data with some real data from a REST API in the app.
+您现在可以在应用程序中使用来自 REST API 的真实数据来替换硬编码的演示数据。
 
-For this tutorial, there's a [small API](https://my-json-server.typicode.com/kotlin-hands-on/kotlinconf-json/videos/1).
-It offers only a single endpoint, `videos`, and takes a numeric parameter to access an element from the list. If you visit
-the API with your browser, you will see that the objects returned from the API have the same structure as `Video` objects.
+对于本教程，有一个 [小型 API](https://my-json-server.typicode.com/kotlin-hands-on/kotlinconf-json/videos/1)。
+它只提供一个端点，`videos`，并接受一个数字参数以从列表中获取元素。
+如果您访问该 API，您会发现从 API 返回的对象具有与 `Video` 对象相同的结构。
 
-### Use JS functionality from Kotlin
+### 使用 Kotlin 调用 JS 功能
 
-Browsers already come with a large variety of [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API). You can also use
-them from Kotlin/JS, since it includes wrappers for these APIs out of the box. One example is the
-[fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), which is used for making HTTP requests.
+浏览器已经内置了大量的 [Web API](https://developer.mozilla.org/en-US/docs/Web/API)。
+您也可以从 Kotlin/JS 中使用它们，因为它已经包含了对这些 API 的包装器。
+一个例子是 [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)，用于进行 HTTP 请求。
 
-The first potential issue is that browser APIs like `fetch()` use [callbacks](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)
-to perform non-blocking operations. When multiple callbacks are supposed to run one after the other, they need to be nested.
-Naturally, the code gets heavily indented, with more and more pieces of functionality stacked inside each other, which makes it harder to read.
+第一个潜在问题是，像 `fetch()` 这样的浏览器 API 使用
+[回调](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) 执行非阻塞操作。
+当多个回调需要依次运行时，它们需要被嵌套。
+自然地，代码会被大量缩进，越来越多的功能被堆叠在一起，这使得代码变得更难阅读。
 
-To overcome this, you can use Kotlin's coroutines, a better approach for such functionality.
+为了解决这个问题，您可以使用 Kotlin 的协程，这是更好的处理此类功能的方法。
 
-The second issue arises from the dynamically typed nature of JavaScript. There are no guarantees about the type
-of data returned from the external API. To solve this, you can use the `kotlinx.serialization` library.
+第二个问题源于 JavaScript 动态类型的特性。从外部 API 返回的数据类型没有任何保证。
+为了解决这个问题，您可以使用 `kotlinx.serialization` 库。
 
-Check the `build.gradle.kts` file. The relevant snippet should already exist:
+检查 `build.gradle.kts` 文件。相关的代码段应该已经存在：
 
 ```kotlin
 dependencies {
     // . . .
 
-    // Coroutines & serialization
+    // 协程 & 序列化
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 }
 ```
 
-### Add serialization
+### 添加序列化
 
-When you call an external API, you get back JSON-formatted text that still needs to be turned into a Kotlin object that
-can be worked with.
+当调用外部 API 时，您会得到 JSON 格式的文本，它仍然需要转换为 Kotlin 对象，以便进行处理。
 
-[`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization) is a library that makes it possible to write
-these types of conversions from JSON strings to Kotlin objects.
+[`kotlinx.serialization`](https://github.com/Kotlin/kotlinx.serialization) 是一个库，可以实现从 JSON 字符串到 Kotlin 对象的这种转换。
 
-1. Check the `build.gradle.kts` file. The corresponding snippet should already exist:
+1. 检查 `build.gradle.kts` 文件。相关的代码段应该已经存在：
 
    ```kotlin
    plugins {
@@ -1076,13 +1019,12 @@ these types of conversions from JSON strings to Kotlin objects.
    dependencies {
        // . . .
 
-       // Serialization
+       // 序列化
        implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
    }
    ```
 
-2. As preparation for fetching the first video, it's necessary to tell the serialization library about the `Video` class.
-   In `Main.kt`, add the `@Serializable` annotation to its definition:
+2. 在获取第一个视频之前，需要告诉序列化库关于 `Video` 类。在 `Main.kt` 中，给其定义添加 `@Serializable` 注解：
 
    ```kotlin
    @Serializable
@@ -1094,9 +1036,9 @@ these types of conversions from JSON strings to Kotlin objects.
    )
    ```
 
-### Fetch videos
+### 获取视频
 
-To fetch a video from the API, add the following function in `App.kt` (or a new file):
+要从 API 中获取视频，请在 `App.kt`（或一个新文件）中添加以下函数：
 
 ```kotlin
 suspend fun fetchVideo(id: Int): Video {
@@ -1109,20 +1051,20 @@ suspend fun fetchVideo(id: Int): Video {
 }
 ```
 
-* _Suspending function_ `fetch()` fetches a video with a given `id` from the API. This response may take a while, so you `await()`
-  the result. Next, `text()`, which uses a callback, reads the body from the response. Then you `await()` its completion.
-* Before returning the value of the function, you pass it to `Json.decodeFromString`, a function from `kotlinx.coroutines`.
-  It converts the JSON text you received from the request into a Kotlin object with the appropriate fields.
-* The `window.fetch` function call returns a `Promise` object. You normally would have to define a callback handler that gets
-  invoked once the `Promise` is resolved and a result is available. However, with coroutines, you can `await()` those promises.
-  Whenever a function like `await()` is called, the method stops (suspends) its execution. Its execution continues once
-  the `Promise` can be resolved.
+* **挂起函数** `fetch()` 从 API 中获取具有给定 `id` 的视频。
+  这个响应可能需要一段时间，因此您需要 `await()` 结果。
+  接下来，`text()` 使用回调，从响应中读取主体。然后，您等待其完成。
+* 在函数返回值之前，将其传递给 `Json.decodeFromString`，这是来自 `kotlinx.coroutines` 的函数。
+  它将您从请求中收到的 JSON 文本转换为具有适当字段的 Kotlin 对象。
+* `window.fetch` 函数调用返回一个 `Promise` 对象。
+  通常情况下，您需要定义一个回调处理程序，一旦 `Promise` 解决并且结果可用，就会调用该处理程序。
+  但是，通过协程，您可以 `await()` 这些 promises。每当调用类似 `await()` 这样的函数时，方法都会停止（挂起）执行。
+  一旦 `Promise` 可以解决，它的执行就会继续。
 
-To give users a selection of videos, define the `fetchVideos()` function, which will fetch 25 videos from the same API
-as above. To run all the requests concurrently, use the [`async`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html)
-functionality provided by Kotlin's coroutines:
+为了给用户提供视频的选择，定义 `fetchVideos()` 函数，它将从上述相同的 API 中获取 25 个视频。
+要并行运行所有请求，请使用 Kotlin 协程提供的 [`async`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/async.html) 功能：
 
-1. Add the following implementation to your `App.kt`:
+1. 将以下实现添加到您的 `App.kt`：
 
    ```kotlin
    suspend fun fetchVideos(): List<Video> = coroutineScope {
@@ -1134,12 +1076,11 @@ functionality provided by Kotlin's coroutines:
    }
    ```
 
-   Following the principle of [structured concurrency](https://kotlinlang.org/docs/coroutines-basics.html#structured-concurrency),
-   the implementation is wrapped in a `coroutineScope`. You can then start 25 asynchronous tasks (one per request) and wait
-   for all of them to complete.
+   遵循 [结构化并发原则](https://kotlinlang.org/docs/coroutines-basics.html#structured-concurrency)，该实现包装在 `coroutineScope` 中。
+   然后，您可以启动 25 个异步任务（每个请求一个），并等待它们全部完成。
 
-2. You can now add data to your application. Add the definition for a `mainScope`, and change your `App` component
-   so it starts with the following snippet. Don't forget to replace demo values with `emptyLists` instances as well:
+2. 您现在可以向应用程序添加数据了。
+   添加 `mainScope` 的定义，并更改您的 `App` 组件，使其以以下片段开头。不要忘记将演示值替换为 `emptyLists` 实例：
 
    ```kotlin
    val mainScope = MainScope()
@@ -1159,49 +1100,43 @@ functionality provided by Kotlin's coroutines:
    ```
    {validate="false"}
 
-   * The [`MainScope()`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-scope.html)
-     is a part of Kotlin's structured concurrency model and creates the scope for asynchronous tasks to run in.
-   * `useEffectOnce` is another React _hook_ (specifically, a simplified version of the [useEffect](https://reactjs.org/docs/hooks-effect.html) hook).
-     It indicates that the component performs a _side effect_. It doesn't just render itself but also communicates over
-     the network.
+   * [`MainScope()`](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-main-scope.html)
+     是 Kotlin 结构化并发模型的一部分，它创建了异步任务运行的范围。
+   * `useEffectOnce` 是另一个 React **hook**（具体来说是 [useEffect](https://reactjs.org/docs/hooks-effect.html) hook 的简化版本）。
+      它表示组件执行了 _副作用_。它不仅仅渲染自身，还通过网络进行通信。
 
-Check your browser. The application should show actual data:
+检查您的浏览器。应用程序应该显示实际数据：
 
-![Fetched data from API](website-api-data.png){width=700}
+![从 API 获取的数据](website-api-data.png){width=700}
 
-When you load the page:
+当您加载页面时：
 
-* The code of the `App` component will be invoked. This starts the code in the `useEffectOnce` block.
-* The `App` component is rendered with empty lists for the watched and unwatched videos.
-* When the API requests finish, the `useEffectOnce` block assigns it to the `App` component's state. This triggers
-  a re-render.
-* The code of the `App` component will be invoked again, but the `useEffectOnce` block _will not_ run for a second time.
+* `App` 组件的代码将被调用。这启动了 `useEffectOnce` 块中的代码。
+* `App` 组件以空列表作为已观看和未观看视频的参数进行渲染。
+* 当 API 请求完成时，`useEffectOnce` 块将其分配给 `App` 组件的状态。这会触发重新渲染。
+* `App` 组件的代码将再次被调用，但 `useEffectOnce` 块 _不会_ 第二次运行。
 
-If you want to get an in-depth understanding of how coroutines work, check out this [tutorial on coroutines](coroutines-and-channels.md).
+如果您想深入了解协程的工作原理，请查看此 [协程教程](coroutines-and-channels.md)。
 
-## Deploy to production and the cloud
+## 部署到生产环境和云端
 
-It's time to get the application published to the cloud and make it accessible to other people.
+是时候将应用程序发布到云端，并使其对其他人可访问了。
 
-### Package a production build
+### 打包生产版本
 
-To package all assets in production mode, run the `build` task in Gradle via the tool window in IntelliJ IDEA or by
-running `./gradlew build`. This generates an optimized project build, applying various improvements such as DCE
-(dead code elimination).
+要打包所有资产以生产模式运行，请通过 IntelliJ IDEA 的工具窗口运行 Gradle 中的 `build` 任务，或者运行 `./gradlew build`。
+这将生成一个经过优化的项目构建，应用各种改进，如 DCE（无用代码消除）。
 
-Once the build has finished, you can find all the files needed for deployment in `/build/dist`. They include
-the JavaScript files, HTML files, and other resources required to run the application. You can put them on a static HTTP server,
-serve them using GitHub Pages, or host them on a cloud provider of your choice.
+构建完成后，您可以在 `/build/dist` 中找到部署所需的所有文件。它们包括 JavaScript 文件、HTML 文件和运行应用程序所需的其他资源。
+您可以将它们放在静态 HTTP 服务器上，使用 GitHub Pages 提供服务，或将它们托管在您选择的云提供商上。
 
-### Deploy to Heroku
+### 部署到 Heroku
 
-Heroku makes it quite simple to spin up an application that is reachable under its own domain. Their free tier should be
-sufficient for development purposes.
+Heroku 可以非常简单地启动一个可通过其自己的域名访问的应用程序。对于开发目的，它们的免费层应该是足够的。
 
-1. [Create an account](https://signup.heroku.com/).
-2. [Install and authenticate the CLI client](https://devcenter.heroku.com/articles/heroku-cli).
-3. Create a Git repository and attach a Heroku app by running the following commands in the Terminal while in the project
-   root:
+1. [创建一个账号](https://signup.heroku.com/)。
+2. [安装并认证 CLI 客户端](https://devcenter.heroku.com/articles/heroku-cli)。
+3. 在项目根目录中，在终端中运行以下命令创建一个 Git 仓库，并附加一个 Heroku 应用：
 
    ```bash
    git init
@@ -1210,27 +1145,26 @@ sufficient for development purposes.
    git commit -m "initial commit"
    ```
 
-4. Unlike a regular JVM application that would run on Heroku (one written with Ktor or Spring Boot, for example), your app
-   generates static HTML pages and JavaScript files that need to be served accordingly. You can adjust the required
-   buildpacks to serve the program properly:
+4. 与普通的在 Heroku 上运行的 JVM 应用程序（例如使用 Ktor 或 Spring Boot 编写的应用程序）不同，您的应用程序生成静态 HTML
+   页面和 JavaScript 文件，需要相应地进行服务。您可以调整所需的构建包以正确地提供程序：
 
    ```bash
    heroku buildpacks:set heroku/gradle
    heroku buildpacks:add https://github.com/heroku/heroku-buildpack-static.git
    ```
 
-5. To allow the `heroku/gradle` buildpack to run properly, a `stage` task needs to be in the `build.gradle.kts` file.
-   This task is equivalent to the `build` task, and the corresponding alias is already included at the bottom of the file:
+5. 为了让 `heroku/gradle` 构建包正常运行，`build.gradle.kts` 文件中需要一个 `stage` 任务。
+   该任务等效于 `build` 任务，文件底部已包含相应的别名：
 
    ```kotlin
-   // Heroku Deployment
+   // Heroku 部署
    tasks.register("stage") {
        dependsOn("build")
    }
    ```
 
-6. Add a new `static.json` file to the project root to configure the `buildpack-static`.
-7. Add the `root` property inside the file:
+6. 在项目根目录中添加一个新的 `static.json` 文件以配置 `buildpack-static`。
+7. 在文件中添加 `root` 属性：
 
    ```xml
    {
@@ -1239,7 +1173,7 @@ sufficient for development purposes.
    ```
    {validate="false"}
 
-8. You can now trigger a deployment, for example, by running the following command:
+8. 您现在可以触发部署，例如，通过运行以下命令：
 
    ```bash
    git add -A
@@ -1247,48 +1181,50 @@ sufficient for development purposes.
    git push heroku master
    ```
 
-> If you're pushing from a non-main branch, adjust the command to push to the `main` remote, for example, `git push heroku feature-branch:main`.
+> 如果您从非主分支推送，请将命令调整为推送到 `main` 远程，例如，`git push heroku feature-branch:main`。
 >
 {type="tip"}
 
-If the deployment is successful, you will see the URL people can use to reach the application on the internet.
+如果部署成功，您将看到可以在互联网上访问该应用程序的 URL。
 
-![Web app deployment to production](deployment-to-production.png){width=700}
+![将 Web 应用部署到生产环境](deployment-to-production.png){width=700}
 
-> You can find this state of the project on the `finished` branch [here](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle/tree/finished).
+> 您可以在 `finished`
+> 分支中找到项目的此状态 [此处](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle/tree/finished)。
 >
 {style="note"}
 
-## What's next
+## 接下来做什么
 
-### Add more features {collapsible="true"}
+### 添加更多功能 {collapsible="true"}
 
-You can use the resulting app as a jumping-off point to explore more advanced topics in the realm of React, Kotlin/JS, and more.
+您可以使用生成的应用程序作为探索 React、Kotlin/JS 等领域更高级主题的起点。
 
-* **Search**. You can add a search field to filter the list of talks – by title or by author, for example. Learn
-  about how [HTML form elements work in React](https://reactjs.org/docs/forms.html).
-* **Persistence**. Currently, the application loses track of the viewer's watch list every time the page gets reloaded.
-  Consider building your own backend, using one of the web frameworks available for Kotlin (such as [Ktor](https://ktor.io/)).
-  Alternatively, look into ways to [store information on the client](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
-* **Complex APIs**. Lots of datasets and APIs are available. You can pull all sorts of data into your application. For example,
-  you can build a visualizer for [cat photos](https://thecatapi.com/) or a [royalty-free stock photo API](https://unsplash.com/developers).
+* **搜索**。您可以添加一个搜索字段来过滤演讲列表 -
+  按标题或作者进行过滤，例如。了解有关 [React 中 HTML 表单元素的工作原理](https://reactjs.org/docs/forms.html)。
+* **持久性**。目前，每次重新加载页面时，应用程序都会丢失观看者的观看列表。
+  考虑构建自己的后端，使用 Kotlin 可用的 Web 框架之一（例如 [Ktor](https://ktor.io/)）。
+  或者，探索在客户端 [存储信息的方法](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)。
+* **复杂的 API**。有大量的数据集和 API
+  可用。您可以将各种数据拉入应用程序。例如，您可以构建一个 [猫照片的可视化器](https://thecatapi.com/)
+  或 [免费的库存照片 API](https://unsplash.com/developers)。
 
-### Improve the style: responsiveness and grids {collapsible="true"}
+### 改进样式：响应式和网格 {collapsible="true"}
 
-The application design is still very simple and won't look great on mobile devices or in narrow windows. Explore
-more of the CSS DSL to make the app more accessible.
+应用程序设计仍然非常简单，在移动设备或窄窗口中可能看起来不太好。探索更多的 CSS DSL，使应用程序更易于访问。
 
-### Join the community and get help {collapsible="true"}
+### 加入社区并获取帮助 {collapsible="true"}
 
-The best way to report problems and get help is the [kotlin-wrappers issue tracker](https://github.com/JetBrains/kotlin-wrappers/issues).
-If you can't find a ticket for your issue, feel free to file a new one. You can also join the official [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up).
-There are channels for `#javascript` and `#react`.
+报告问题和获取帮助的最佳途径是 [kotlin-wrappers 问题跟踪器](https://github.com/JetBrains/kotlin-wrappers/issues)。
+如果找不到与您的问题相关的票，可以随时提交新票。
+您还可以加入官方的 [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)。
+有 `#javascript` 和 `#react` 等频道。
 
-### Learn more about coroutines {collapsible="true"}
+### 了解更多关于协程的知识 {collapsible="true"}
 
-If you're interested in finding out more about how you can write concurrent code, check out the tutorial on [coroutines](coroutines-and-channels.md).
+如果您对了解如何编写并发代码感兴趣，请查看关于 [协程](coroutines-and-channels.md) 的教程。
 
-### Learn more about React {collapsible="true"}
+### 了解更多关于 React 的知识 {collapsible="true" id="了解更多关于React的知识"}
 
-Now that you know the basic React concepts and how they translate to Kotlin, you can convert some other concepts outlined
-in [React's documentation](https://react.dev/learn) into Kotlin.
+现在您已经了解了基本的 React 概念以及它们如何转换为 Kotlin，您可以将[React 文档](https://react.dev/learn)中概述的其他概念转换为
+Kotlin。

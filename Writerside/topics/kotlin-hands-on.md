@@ -1,7 +1,7 @@
-[//]: # (title: Kotlin hands-on)
+[//]: # (title: Kotlin 实践)
 
-A series of hands-on tutorials where you can create applications with Kotlin using a variety of different technologies and targeting multiple platforms.
-The exercises are divided into a series of steps, walking you through each section.
+一系列实践教程，您可以使用 Kotlin 创造应用程序，涵盖各种不同的技术，并针对多个平台进行目标设置。
+这些练习被分成一系列步骤，引导您完成每个部分。
 
 ## Building Reactive Spring Boot applications with Kotlin coroutines and RSocket
 
@@ -9,11 +9,11 @@ Build a simple chat application using Spring Boot and Kotlin, and learn about th
 
 [**Start**](https://spring.io/guides/tutorials/spring-webflux-kotlin-rsocket/)
 
-## Building web applications with React and Kotlin/JS
+## 使用 React 和 Kotlin/JS 构建 Web 应用程序
 
-Create a React Application using Kotlin/JS, and see how you can leverage Kotlin's type system, library ecosystem, and interoperability features.
+创建一个使用 Kotlin/JS 的 React 应用程序，并查看如何利用 Kotlin 的类型系统、库生态系统和互操作功能。
 
-[**Start**](js-react.md)
+[**开始**](js-react.md)
 
 ## Building web applications with Spring Boot and Kotlin
 
