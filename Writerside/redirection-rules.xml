@@ -16,4 +16,8 @@
         </description>
         <accepts>backing-properties-and-backing-fields.html</accepts>
     </rule>
+    <rule id="3de82807">
+        <description>Created after removal of "非平凡超类型" from Kotlin 中文文档</description>
+        <accepts>nontrivial-supertypes.html</accepts>
+    </rule>
 </rules>

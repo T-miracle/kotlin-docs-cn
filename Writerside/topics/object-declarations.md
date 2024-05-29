@@ -1,42 +1,41 @@
-[//]: # (title: Object expressions and declarations)
+[//]: # (title: 对象表达式与对象声明)
 
-Sometimes you need to create an object that is a slight modification of some class, without explicitly declaring a new
-subclass for it. Kotlin can handle this with _object expressions_ and _object declarations_.
+有时你需要创建一个对某个类进行轻微修改的对象，而不需要显式地为它声明一个新的子类。
+Kotlin 可以通过 **对象表达式** 和 **对象声明** 来处理这种情况。
 
-## Object expressions
+## 对象表达式
 
-_Object expressions_ create objects of anonymous classes, that is, classes that aren't explicitly declared with the `class`
-declaration. Such classes are useful for one-time use. You can define them from scratch, inherit from existing classes,
-or implement interfaces. Instances of anonymous classes are also called _anonymous objects_ because they are defined by
-an expression, not a name.
+**对象表达式** 会创建匿名类的对象，也就是说，这些类不是通过 `class` 声明显式声明的。
+这些类对于一次性使用非常有用。
+你可以从头定义它们，继承现有类，或实现接口。
+匿名类的实例也被称为 **匿名对象**，因为它们是通过表达式定义的，而不是通过名称定义的。
 
-### Creating anonymous objects from scratch
+### 从头创建匿名对象
 
-Object expressions start with the `object` keyword.
+对象表达式以 `object` 关键字开始。
 
-If you just need an object that doesn't have any nontrivial supertypes, write its members in curly braces after `object`:
+如果你只需要一个没有任何复杂超类型的对象，可以在 `object` 之后的花括号内编写它的成员：
 
 ```kotlin
-
 fun main() {
-//sampleStart
     val helloWorld = object {
         val hello = "Hello"
         val world = "World"
-        // object expressions extend Any, so `override` is required on `toString()`
+        // 对象表达式继承自 Any，因此 `toString()` 需要 `override`
         override fun toString() = "$hello $world"
     }
 
     print(helloWorld)
-//sampleEnd
 }
 ```
 {kotlin-runnable="true"}
 
-### Inheriting anonymous objects from supertypes
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAWMjjEA6hAE6NQMAXgwQARgCsYYAC5lqtRQ2ZsOEYRnIgAEu05aFimsowB3PgI1ae%2FKAcxGaAeiejJ0uTAAeAB14wAZwC8CDQAjG8ZGDRBAEE0AE8AGgwA9QADCDoYXl48WHSMPHD%2FAEcUPH9BUIx0mQgAZRk8tABzEnTDIyycvNgMVEx6ppb20hEtABJVTgxJ81t7RQBfSi6%2FAhlCGe4LKGI1tGWQJJAZHF5WmBkABUYcGSQ%2BLAQQCRwGE%2FAILB88RhyADUcsFQq8AEwAOgADDCQMsgA%3D%3D%3D?_gl=1*valhh1*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNjk0Mjg1NC4yLjEuMTcxNjk0NDgyNy4wLjAuMA..&_ga=2.83524882.547518147.1716942854-239646288.1706355474)
 
-To create an object of an anonymous class that inherits from some type (or types), specify this type after `object` and a
-colon (`:`). Then implement or override the members of this class as if you were [inheriting](inheritance.md) from it:
+### 继承匿名对象的超类型
+
+要创建一个继承某种类型（或多种类型）的匿名类对象，可以在 `object` 后面加上类型和冒号 (`:`)。
+然后像 [继承](inheritance.md) 该类一样实现或重写该类的成员：
 
 ```kotlin
 window.addMouseListener(object : MouseAdapter() {
@@ -46,8 +45,8 @@ window.addMouseListener(object : MouseAdapter() {
 })
 ```
 
-If a supertype has a constructor, pass appropriate constructor parameters to it.
-Multiple supertypes can be specified as a comma-delimited list after the colon:
+如果超类型有构造函数，请传递适当的构造函数参数。
+可以在冒号后以逗号分隔的列表形式指定多个超类型：
 
 ```kotlin
 open class A(x: Int) {
@@ -61,10 +60,9 @@ val ab: A = object : A(1), B {
 }
 ```
 
-### Using anonymous objects as return and value types
+### 将匿名对象用作返回值和变量类型
 
-When an anonymous object is used as a type of a local or [private](visibility-modifiers.md#包) but not [inline](inline-functions.md)
-declaration (function or property), all its members are accessible via this function or property:
+当匿名对象被用作局部或 [私有](visibility-modifiers.md#包) 声明（方法或属性）类型时，所有它的成员都可以通过此方法或属性访问，前提是不 [内联](inline-functions.md)：
 
 ```kotlin
 class C {
@@ -78,13 +76,12 @@ class C {
 }
 ```
 
-If this function or property is public or private inline, its actual type is:
-* `Any` if the anonymous object doesn't have a declared supertype
-* The declared supertype of the anonymous object, if there is exactly one such type
-* The explicitly declared type if there is more than one declared supertype
+如果该方法或属性是公共或私有内联的，其实际类型如下：
+* 如果匿名对象没有声明超类型，则为 `Any`
+* 如果匿名对象有一个声明的超类型，则为该声明的超类型
+* 如果有多个声明的超类型，则为显式声明的类型
 
-In all these cases, members added in the anonymous object are not accessible. Overridden members are accessible if they
-are declared in the actual type of the function or property:
+在所有这些情况下，添加到匿名对象中的成员是不可访问的。如果重写的成员在方法或属性的实际类型中声明，则它们是可访问的：
 
 ```kotlin
 interface A {
@@ -93,28 +90,28 @@ interface A {
 interface B
 
 class C {
-    // The return type is Any; x is not accessible
+    // 返回类型是 Any；x 不可访问
     fun getObject() = object {
         val x: String = "x"
     }
 
-    // The return type is A; x is not accessible
+    // 返回类型是 A；x 不可访问
     fun getObjectA() = object: A {
         override fun funFromA() {}
         val x: String = "x"
     }
 
-    // The return type is B; funFromA() and x are not accessible
-    fun getObjectB(): B = object: A, B { // explicit return type is required
+    // 返回类型是 B；funFromA() 和 x 不可访问
+    fun getObjectB(): B = object: A, B { // 需要显式的返回类型
         override fun funFromA() {}
         val x: String = "x"
     }
 }
 ```
 
-### Accessing variables from anonymous objects
+### 访问匿名对象中的变量
 
-The code in object expressions can access variables from the enclosing scope:
+对象表达式中的代码可以访问其外部作用域中的变量：
 
 ```kotlin
 fun countClicks(window: JComponent) {
@@ -134,11 +131,10 @@ fun countClicks(window: JComponent) {
 }
 ```
 
-## Object declarations
+## 对象声明
 {id="object-declarations-overview"}
 
-The [Singleton](https://en.wikipedia.org/wiki/Singleton_pattern) pattern can be useful in several cases,
-and Kotlin makes it easy to declare singletons:
+[单例](https://en.wikipedia.org/wiki/Singleton_pattern) 模式在多种情况下都很有用，Kotlin 使得声明单例变得非常容易：
 
 ```kotlin
 object DataProviderManager {
@@ -151,19 +147,17 @@ object DataProviderManager {
 }
 ```
 
-This is called an _object declaration_, and it always has a name following the `object` keyword.
-Just like a variable declaration, an object declaration is not an expression, and it cannot be used on the right-hand side
-of an assignment statement.
+这称为 **对象声明**，它总是有一个在 `object` 关键字后面的名称。就像变量声明一样，对象声明不是表达式，不能用在赋值语句的右边。
 
-The initialization of an object declaration is thread-safe and done on first access.
+对象声明的初始化是线程安全的，并在第一次访问时完成。
 
-To refer to the object, use its name directly:
+要引用该对象，直接使用它的名称：
 
 ```kotlin
 DataProviderManager.registerDataProvider(...)
 ```
 
-Such objects can have supertypes:
+此类对象可以具有超类型：
 
 ```kotlin
 object DefaultListener : MouseAdapter() {
@@ -173,14 +167,13 @@ object DefaultListener : MouseAdapter() {
 }
 ```
 
-> Object declarations can't be local (that is, they can't be nested directly inside a function), but they can be nested
-> into other object declarations or non-inner classes.
+> 对象声明不能是局部的（即，不能直接嵌套在方法中），但可以嵌套在其他对象声明或非内部类中。
 >
 {style="note"}
 
-### Data objects
+### 数据对象
 
-When printing a plain `object` declaration in Kotlin, the string representation contains both its name and the hash of the object:
+在 Kotlin 中打印普通的 `object` 声明时，其字符串表示包含其名称和对象的哈希值：
 
 ```kotlin
 object MyObject
@@ -190,16 +183,16 @@ fun main() {
 }
 ```
 
-Just like [data classes](data-classes.md), you can mark an `object` declaration with the `data` modifier. This instructs the compiler to generate a number of functions for your object:
+就像 [数据类](data-classes.md) 一样，你可以用 `data` 修饰符标记一个 `object` 声明。这会告诉编译器为你的对象生成一些函数：
 
-* `toString()` returns the name of the data object
-* `equals()`/`hashCode()` pair
+* `toString()` 返回数据对象的名称
+* `equals()`/`hashCode()` 对
 
-  > You can't provide a custom `equals` or `hashCode` implementation for a `data object`.
+  > 你不能为 `data object` 提供自定义的 `equals` 或 `hashCode` 实现。
   >
   {style="note"}
 
-The `toString()` function of a data object returns the name of the object:
+数据对象的 `toString()` 函数返回对象的名称：
 ```kotlin
 data object MyDataObject {
     val x: Int = 3
@@ -210,11 +203,11 @@ fun main() {
 }
 ```
 
-The `equals()` function for a `data object` ensures that all objects that have the type of your `data object` are considered equal.
-In most cases, you will only have a single instance of your data object at runtime (after all, a `data object` declares a singleton).
-However, in the edge case where another object of the same type is generated at runtime (for example, by using platform reflection with `java.lang.reflect` or a JVM serialization library that uses this API under the hood), this ensures that the objects are treated as being equal.
+`data object` 的 `equals()` 函数确保所有具有你的 `data object` 类型的对象被视为相等。
+在大多数情况下，你在运行时只会有一个数据对象的实例（毕竟，数据对象声明了一个单例）。
+然而，在另一个对象使用相同类型在运行时生成的边缘情况下（例如，使用 `java.lang.reflect` 进行平台反射，或者使用 JVM 序列化库，该库在幕后使用此 API），这确保了这些对象被视为相等。
 
-> Make sure that you only compare `data objects` structurally (using the `==` operator) and never by reference (using the `===` operator). This helps you to avoid pitfalls when more than one instance of a data object exists at runtime.
+> 确保你仅通过结构比较（使用 `==` 操作符）而不是引用比较（使用 `===` 操作符）来比较数据对象。这有助于避免在运行时存在多个数据对象实例时遇到问题。
 {style="warning"}
 
 ```kotlin
@@ -228,33 +221,36 @@ fun main() {
     println(MySingleton) // MySingleton
     println(evilTwin) // MySingleton
 
-    // Even when a library forcefully creates a second instance of MySingleton, its `equals` method returns true:
+    // 即使库强制创建了 MySingleton 的第二个实例，其 `equals` 方法也会返回 true：
     println(MySingleton == evilTwin) // true
 
-    // Do not compare data objects via ===.
+    // 不要通过 === 比较数据对象。
     println(MySingleton === evilTwin) // false
 }
 
 fun createInstanceViaReflection(): MySingleton {
-    // Kotlin reflection does not permit the instantiation of data objects.
-    // This creates a new MySingleton instance "by force" (i.e. Java platform reflection)
-    // Don't do this yourself!
+    // Kotlin 反射不允许实例化数据对象。
+    // 这将通过强制方式创建一个新的 MySingleton 实例（即 Java 平台反射）
+    // 不要自己这样做！
     return (MySingleton.javaClass.declaredConstructors[0].apply { isAccessible = true } as Constructor<MySingleton>).newInstance()
 }
 ```
 
-The generated `hashCode()` function has behavior that is consistent with the `equals()` function, so that all runtime instances of a `data object` have the same hash code.
+生成的 `hashCode()` 函数的行为与 `equals()` 函数一致，以便所有 `data object` 的运行时实例具有相同的哈希码。
 
-#### Differences between data objects and data classes
+#### 数据对象和数据类之间的区别
 
-While `data object` and `data class` declarations are often used together and have some similarities, there are some functions that are not generated for a `data object`:
+虽然 `data object` 和 `data class` 声明经常一起使用并具有一些相似之处，但有一些函数不会为 `data object` 生成：
 
-* No `copy()` function. Because a `data object` declaration is intended to be used as singleton objects, no `copy()` function is generated. The singleton pattern restricts the instantiation of a class to a single instance, which would be violated by allowing copies of the instance to be created.
-* No `componentN()` function. Unlike a `data class`, a `data object` does not have any data properties. Since attempting to destructure such an object without data properties would not make sense, no `componentN()` functions are generated.
+* 没有 `copy()` 函数。因为 `data object` 声明旨在用作单例对象，所以不会生成 `copy()` 函数。
+  单例模式将类的实例化限制为单个实例，允许创建实例的副本将违反此限制。
+* 没有 `componentN()` 函数。与 `data class` 不同，`data object` 没有任何数据属性。
+  由于尝试解构没有数据属性的对象是没有意义的，因此不会生成 `componentN()` 函数。
 
-#### Using data objects with sealed hierarchies
+#### 使用数据对象处理密封层次结构
 
-`data object` declarations are a particularly useful for sealed hierarchies, like [sealed classes or sealed interfaces](sealed-classes.md), since they allow you to maintain symmetry with any data classes you may have defined alongside the object:
+`data object` 声明特别适用于密封层次结构，比如
+[密封类或密封接口](sealed-classes.md)，因为它们允许你与你可能已经定义的任何数据类保持对称：
 
 ```kotlin
 sealed interface ReadResult
@@ -275,9 +271,9 @@ fun main() {
 }
 ```
 
-### Companion objects
+### 伴生对象
 
-An object declaration inside a class can be marked with the `companion` keyword:
+类内部的对象声明可以使用 `companion` 关键字标记：
 
 ```kotlin
 class MyClass {
@@ -287,13 +283,13 @@ class MyClass {
 }
 ```
 
-Members of the companion object can be called simply by using the class name as the qualifier:
+伴生对象的成员可以通过使用类名作为限定符来简单调用：
 
 ```kotlin
 val instance = MyClass.create()
 ```
 
-The name of the companion object can be omitted, in which case the name `Companion` will be used:
+如果省略了伴生对象的名称，那么将使用 `Companion` 作为名称：
 
 ```kotlin
 class MyClass {
@@ -303,10 +299,9 @@ class MyClass {
 val x = MyClass.Companion
 ```
 
-Class members can access the private members of the corresponding companion object.
+类成员可以访问相应伴生对象的私有成员。
 
-The name of a class used by itself (not as a qualifier to another name) acts as a reference to the companion
-object of the class (whether named or not):
+一个类的名称（不作为另一个名称的限定符）被用作对类的伴生对象的引用（无论是否命名）：
 
 ```kotlin
 class MyClass1 {
@@ -322,8 +317,7 @@ class MyClass2 {
 val y = MyClass2
 ```
 
-Note that even though the members of companion objects look like static members in other languages, at runtime those
-are still instance members of real objects, and can, for example, implement interfaces:
+请注意，尽管伴生对象的成员在其他语言中看起来像静态成员，但在运行时，这些成员仍然是真实对象的实例成员，可以实现接口，例如：
 
 ```kotlin
 interface Factory<T> {
@@ -339,15 +333,13 @@ class MyClass {
 val f: Factory<MyClass> = MyClass
 ```
 
-However, on the JVM you can have members of companion objects generated as real static methods and fields if you use
-the `@JvmStatic` annotation. See the [Java interoperability](java-to-kotlin-interop.md#static-fields) section
-for more detail.
+然而，在 JVM 上，如果使用 `@JvmStatic` 注解，可以将伴生对象的成员生成为真正的静态方法和字段。
+有关详细信息，请参阅[Java 互操作性](java-to-kotlin-interop.md#static-fields)部分。
 
-### Semantic difference between object expressions and declarations
+### 对象表达式和声明之间的语义差异
 
-There is one important semantic difference between object expressions and object declarations:
+对象表达式和对象声明之间有一个重要的语义差异：
 
-* Object expressions are executed (and initialized) _immediately_, where they are used.
-* Object declarations are initialized _lazily_, when accessed for the first time.
-* A companion object is initialized when the corresponding class is loaded (resolved) that matches the semantics of a Java
-  static initializer.
+* 对象表达式在使用它们的地方 **立即** 执行（和初始化）。
+* 对象声明在 **首次访问时** 延迟初始化。
+* 伴生对象在与之对应的类加载（解析）时初始化，这符合 Java 静态初始化器的语义。
