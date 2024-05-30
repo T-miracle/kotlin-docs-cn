@@ -22,7 +22,7 @@ Kotlin/Wasm 是 Kotlin 的一个新的编译目标。您可以在 Kotlin Multipl
 
 要在浏览器中运行使用 Kotlin/Wasm 构建的应用程序，您需要一个支持新的 [垃圾回收功能](https://github.com/WebAssembly/gc) 的版本。
 
-[在《开始使用 Kotlin/Wasm》中了解更多](wasm-get-started.md#troubleshooting)。
+[在《开始使用 Kotlin/Wasm》中了解更多](wasm-get-started.md#故障排除)。
 
 ## 互操作性
 

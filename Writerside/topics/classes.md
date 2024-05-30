@@ -239,4 +239,4 @@ abstract class WildShape : Polygon() {
 
 如果你需要编写一个函数，该函数可以在没有类实例的情况下调用，但需要访问类的内部（例如工厂方法），你可以将其编写为该类内部的 [对象声明](object-declarations.md) 的成员。
 
-更具体地说，如果你在类内部声明了一个[伴生对象](object-declarations.md#companion-objects)，你可以只使用类名作为限定符访问其成员。
+更具体地说，如果你在类内部声明了一个[伴生对象](object-declarations.md#伴生对象)，你可以只使用类名作为限定符访问其成员。

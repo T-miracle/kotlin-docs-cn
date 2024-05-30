@@ -27,7 +27,7 @@
 我们用这样的方式表示一个函数 f(x)：我们将 1 加到 x，然后，在得到的数字中仍然有至少一个尾随零的情况下，我们就移除该零。
 
 Kotlin 是一种务实而没有强烈偏见的语言，支持命令式和函数式编程风格，而不会将开发者推向其中的任何一种。
-您可以使用 Kotlin 的功能，如[尾递归](functions.md#tail-recursive-functions)，以函数式风格实现函数 `f`：
+您可以使用 Kotlin 的功能，如[尾递归](functions.md#尾递归函数)，以函数式风格实现函数 `f`：
 
 ```kotlin
 tailrec fun removeZeroes(x: Int): Int =

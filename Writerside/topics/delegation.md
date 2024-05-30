@@ -1,9 +1,8 @@
-[//]: # (title: Delegation)
+[//]: # (title: 委托)
 
-The [Delegation pattern](https://en.wikipedia.org/wiki/Delegation_pattern) has proven to be a good alternative to 
-implementation inheritance, and Kotlin supports it natively requiring zero boilerplate code.
+[委托模式](https://en.wikipedia.org/wiki/Delegation_pattern) 已被证明是实现继承的一个良好替代方案，Kotlin 原生支持它，并且不需要任何样板代码。
 
-A class `Derived` can implement an interface `Base` by delegating all of its public members to a specified object:
+类 `Derived` 可以通过将其所有公共成员委托给指定对象来实现接口 `Base`：
 
 ```kotlin
 interface Base {
@@ -23,14 +22,12 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-The `by`-clause in the supertype list for `Derived` indicates that `b` will be stored internally in objects 
-of `Derived` and the compiler will generate all the methods of `Base` that forward to `b`.
+在 `Derived` 类的超类型列表中使用 `by` 子句意味着 `b` 对象将会被内部存储在 `Derived` 对象中，编译器会自动生成所有转发到 `b` 的 `Base` 类方法。
 
-## Overriding a member of an interface implemented by delegation 
+## 重写通过委托实现的接口成员
 
-[Overrides](inheritance.md#重写方法) work as you expect: the compiler will use your `override` 
-implementations instead of those in the delegate object. If you want to add `override fun printMessage() { print("abc") }` to 
-`Derived`, the program would print *abc* instead of *10* when `printMessage` is called:
+[重写](inheritance.md#重写方法) 如你所预期：编译器将使用你的 `override` 实现，而不是委托对象中的实现。
+如果你想在 `Derived` 中添加 `override fun printMessage() { print("abc") }`，那么在调用 `printMessage` 时，程序将打印 *abc* 而不是 *10*：
 
 ```kotlin
 interface Base {
@@ -55,8 +52,7 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-Note, however, that members overridden in this way do not get called from the members of the 
-delegate object, which can only access its own implementations of the interface members:
+但是，请注意，以这种方式重写的成员不会从委托对象的成员中被调用，委托对象只能访问其自身的接口成员实现：
 
 ```kotlin
 interface Base {
@@ -70,7 +66,7 @@ class BaseImpl(val x: Int) : Base {
 }
 
 class Derived(b: Base) : Base by b {
-    // This property is not accessed from b's implementation of `print`
+    // 此属性不会从 b 的 `print` 实现中访问
     override val message = "Message of Derived"
 }
 
@@ -83,4 +79,4 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-Learn more about [delegated properties](delegated-properties.md).
+了解更多关于 [委托属性](delegated-properties.md) 的信息。

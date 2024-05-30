@@ -49,7 +49,8 @@ As Kotlin/Native needs to download a platform specific toolchain, you need to sp
 `-Dhttp.proxyHost=xxx -Dhttp.proxyPort=xxx` as the compiler's or `gradlew` arguments,
 or set it via the `JAVA_OPTS` environment variable.
 
-## How do I specify a custom Objective-C prefix/name for my Kotlin framework?
+## How do I specify a custom Objective-C prefix/name for my Kotlin framework? 
+{id=how-do-i-specify-a-custom-objective-c-prefix-name-for-my-kotlin-framework}
 
 Use the `-module-name` compiler option or matching Gradle DSL statement.
 

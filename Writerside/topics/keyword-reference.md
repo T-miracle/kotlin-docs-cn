@@ -92,7 +92,7 @@ in other contexts:
  * `abstract` marks a class or member as [abstract](classes.md#抽象类).
  * `actual` denotes a platform-specific implementation in [multiplatform projects](multiplatform.md).
  * `annotation` declares an [annotation class](annotations.md).
- * `companion` declares a [companion object](object-declarations.md#companion-objects).
+ * `companion` declares a [companion object](object-declarations.md#伴生对象).
  * `const` marks a property as a [compile-time constant](properties.md#编译时常量).
  * `crossinline` forbids [non-local returns in a lambda passed to an inline function](inline-functions.md#non-local-returns).
  * `data` instructs the compiler to [generate canonical members for a class](data-classes.md).
@@ -116,8 +116,8 @@ in other contexts:
  * `reified` marks a type parameter of an inline function as [accessible at runtime](inline-functions.md#reified-type-parameters).
  * `sealed` declares a [sealed class](sealed-classes.md) (a class with restricted subclassing).
  * `suspend` marks a function or lambda as suspending (usable as a [coroutine](coroutines-overview.md)).
- * `tailrec` marks a function as [tail-recursive](functions.md#tail-recursive-functions) (allowing the compiler to replace recursion with iteration).
- * `vararg` allows [passing a variable number of arguments for a parameter](functions.md#variable-number-of-arguments-varargs).
+ * `tailrec` marks a function as [tail-recursive](functions.md#尾递归函数) (allowing the compiler to replace recursion with iteration).
+ * `vararg` allows [passing a variable number of arguments for a parameter](functions.md#可变参数数量varargs).
 
 ## Special identifiers
 
@@ -132,10 +132,10 @@ identifiers in other contexts:
 Kotlin supports the following operators and special symbols:
 
  * `+`, `-`, `*`, `/`, `%` - mathematical operators
-     - `*` is also used to [pass an array to a vararg parameter](functions.md#variable-number-of-arguments-varargs).
+     - `*` is also used to [pass an array to a vararg parameter](functions.md#可变参数数量varargs).
  * `=`
      - assignment operator.
-     - is used to specify [default values for parameters](functions.md#default-arguments).
+     - is used to specify [default values for parameters](functions.md#默认参数).
  * `+=`, `-=`, `*=`, `/=`, `%=` - [augmented assignment operators](operator-overloading.md#augmented-assignments).
  * `++`, `--` - [increment and decrement operators](operator-overloading.md#increments-and-decrements).
  * `&&`, `||`, `!` - logical 'and', 'or', 'not' operators (for bitwise operations, use the corresponding [infix functions](numbers.md#数字的运算) instead).

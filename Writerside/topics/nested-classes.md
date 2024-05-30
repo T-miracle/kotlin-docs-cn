@@ -27,7 +27,7 @@ class OuterClass {
 }
 ```
 
-## 内部类
+## 内部类 {id=内部类}
 
 被标记为 `inner` 的嵌套类可以访问其外部类的成员。内部类携带对外部类对象的引用：
 
@@ -46,7 +46,7 @@ val demo = Outer().Inner().foo() // == 1
 
 ## 匿名内部类
 
-使用 [对象表达式](object-declarations.md#object-expressions) 创建匿名内部类的实例：
+使用 [对象表达式](object-declarations.md#对象表达式) 创建匿名内部类的实例：
 
 ```kotlin
 window.addMouseListener(object : MouseAdapter() {

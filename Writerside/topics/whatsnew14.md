@@ -111,7 +111,7 @@ with the value `strict` or `warning`.
 
 ### Mixing named and positional arguments
 
-In Kotlin 1.3, when you called a function with [named arguments](functions.md#named-arguments), you had to place all the
+In Kotlin 1.3, when you called a function with [named arguments](functions.md#具名参数), you had to place all the
 arguments without names (positional arguments) before the first named argument. For example, you could call `f(1, y = 2)`, 
 but you couldn't call `f(x = 1, 2)`.
 
@@ -245,7 +245,7 @@ fun test() {
 
 In Kotlin 1.3, you could not use unqualified `break` and `continue` inside `when` expressions included in loops. The reason was that these keywords were reserved for possible [fall-through behavior](https://en.wikipedia.org/wiki/Switch_statement#Fallthrough) in `when` expressions. 
 
-That's why if you wanted to use `break` and `continue` inside `when` expressions in loops, you had to [label](returns.md#break-and-continue-labels) them, which became rather cumbersome.
+That's why if you wanted to use `break` and `continue` inside `when` expressions in loops, you had to [label](returns.md#中断和继续标签) them, which became rather cumbersome.
 
 ```kotlin
 fun test(xs: List<Int>) {

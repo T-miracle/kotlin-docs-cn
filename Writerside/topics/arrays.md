@@ -167,7 +167,7 @@ Kotlin 中的数组是 **不变** 的。这意味着 Kotlin 不允许将 `Array<
 
 ### 向函数传递可变数量的参数
 
-在 Kotlin 中，您可以通过 [`vararg`](functions.md#variable-number-of-arguments-varargs) 参数向函数传递可变数量的参数。
+在 Kotlin 中，您可以通过 [`vararg`](functions.md#可变参数数量varargs) 参数向函数传递可变数量的参数。
 当您事先不知道参数的数量时，比如在格式化消息或创建 SQL 查询时，这非常有用。
 
 要将包含可变数量参数的数组传递给函数，请使用 **扩展** 操作符 (`*`)。扩展操作符将数组的每个元素作为个别参数传递给您选择的函数：
@@ -188,7 +188,7 @@ fun printAllStrings(vararg strings: String) {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-vararg-array-kotlin"}
 [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYb0wAuLMATgM4CCHHOAJ4YAvBhz8hAeSSFy4eQBoM8qPOKVq1AA4cCLHvXoBlFnrQBzLnJA4lKkACN7AKmZtOvSYI1VqAen9xRzA1NABfSkpUTF19QxMzAitCOgEOCwwuJMsueAxTcwtSCj8MJAgODEJsoowCLJyrEs0tNri0Fhqm3zbIiJBFEBYJC1YABXocFgqOLAQQACscOkHwCCxtPGYOADVPPAg0BYBGADoATjOAJgAGEHCgA%3D%3D?_gl=1*1t2d88r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.6083251.1212359242.1701001969-2060274793.1694940376)
 
-有关更多信息，请参阅 [可变数量的参数（varargs）](functions.md#variable-number-of-arguments-varargs)。
+有关更多信息，请参阅 [可变数量的参数（varargs）](functions.md#可变参数数量varargs)。
 
 ### 比较数组 {id=比较数组}
 

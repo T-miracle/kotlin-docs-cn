@@ -40,7 +40,7 @@
 
    ![运行 Kotlin/Wasm 应用程序](wasm-app-run.png){width=650}
 
-### 故障排除
+### 故障排除 {id=故障排除}
 
 尽管大多数浏览器都支持 WebAssembly，但您需要更新浏览器的设置。
 

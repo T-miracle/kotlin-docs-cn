@@ -272,7 +272,7 @@ Kotlin 中的函数可以在文件的顶层声明，这意味着你不需要像�
 【[Scala 3 顶层定义](https://docs.scala-lang.org/scala3/book/taste-toplevel-definitions.html#inner-main)】）。
 除了顶层函数，Kotlin 函数还可以在本地声明为成员函数和扩展函数。
 
-### 局部函数
+### 局部函数 {id=局部函数}
 
 Kotlin 支持局部函数，即在其他函数内部定义的函数：
 
@@ -303,7 +303,7 @@ fun dfs(graph: Graph) {
 }
 ```
 
-### 成员函数
+### 成员函数 {id=成员函数}
 
 成员函数是在类或对象内部定义的函数：
 
@@ -331,7 +331,7 @@ fun <T> singletonList(item: T): List<T> { /*...*/ }
 
 有关泛型函数的更多信息，请参阅[泛型](generics.md)。
 
-## 尾递归函数
+## 尾递归函数 {id=尾递归函数}
 
 Kotlin支持一种称为[尾递归](https://en.wikipedia.org/wiki/Tail_call)的函数式编程风格。
 对于一些通常使用循环的算法，您可以使用递归函数代替，而不会出现堆栈溢出的风险。

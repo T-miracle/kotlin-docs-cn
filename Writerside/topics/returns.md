@@ -14,6 +14,8 @@ val s = person.name ?: return
 
 这些表达式的类型是 [Nothing 类型](exceptions.md#Nothing类型)。
 
+## 中断和继续标签 {id=中断和继续标签}
+
 Kotlin 中的任何表达式都可以用 **标签** 进行标记。
 标签的形式是标识符后跟 `@` 符号，例如 `abc@` 或 `fooBar@`。
 要给表达式加标签，只需在其前面添加一个标签。

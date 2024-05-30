@@ -74,7 +74,7 @@ These types have a special notation that corresponds to the signatures of the fu
 
 * All function types have a parenthesized list of parameter types and a return type: `(A, B) -> C` denotes a type that
   represents functions that take two arguments of types `A` and `B` and return a value of type `C`.
-  The list of parameter types may be empty, as in `() -> A`. The [`Unit` return type](functions.md#unit-returning-functions)
+  The list of parameter types may be empty, as in `() -> A`. The [`Unit` return type](functions.md#返回Unit的函数)
   cannot be omitted.
 
 * Function types can optionally have an additional *receiver* type, which is specified before the dot in the notation:
@@ -337,7 +337,7 @@ function will return from the anonymous function itself.
 
 ### Closures
 
-A lambda expression or anonymous function (as well as a [local function](functions.md#local-functions) and an [object expression](object-declarations.md#object-expressions))
+A lambda expression or anonymous function (as well as a [local function](functions.md#局部函数) and an [object expression](object-declarations.md#对象表达式))
 can access its *closure*, which includes the variables declared in the outer scope. The variables captured in the closure
 can be modified in the lambda:
 
