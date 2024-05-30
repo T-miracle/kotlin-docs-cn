@@ -1,13 +1,13 @@
-[//]: # (title: Delegated properties)
+[//]: # (title: 委托属性)
 
-With some common kinds of properties, even though you can implement them manually every time you need them,
-it is more helpful to implement them once, add them to a library, and reuse them later. For example:
+当我们频繁使用一些常见类型的属性时，虽然我们可以每次需要时手动实现它们，但更方便的做法是将它们实现一次，添加到库中，以后可以重复使用。
+例如：
 
-* _Lazy_ properties: the value is computed only on first access.
-* _Observable_ properties: listeners are notified about changes to this property.
-* Storing properties in a _map_ instead of a separate field for each property.
+* **延迟初始化**属性：值仅在首次访问时计算。
+* **可观察**属性：监听器会被通知该属性的更改。
+* 将属性存储在 **映射** 中，而不是为每个属性单独的字段。
 
-To cover these (and other) cases, Kotlin supports _delegated properties_:
+为了涵盖这些（和其他）情况，Kotlin 支持 **委托属性**：
 
 ```kotlin
 class Example {
@@ -15,11 +15,11 @@ class Example {
 }
 ```
 
-The syntax is: `val/var <property name>: <Type> by <expression>`. The expression after `by` is a _delegate_,
-because the `get()` (and `set()`) that correspond to the property will be delegated to its `getValue()` and `setValue()` methods.
-Property delegates don't have to implement an interface, but they have to provide a `getValue()` function (and `setValue()` for `var`s).
+语法是：`val/var <property name>: <Type> by <expression>`。
+`by` 后面的表达式是一个 **委托**，因为与属性对应的 `get()`（和 `set()`）将被委托给它的 `getValue()` 和 `setValue()` 方法。
+属性委托不需要实现接口，但必须提供 `getValue()` 函数（对于 `var`，还需要 `setValue()`）。
 
-For example:
+例如：
 
 ```kotlin
 import kotlin.reflect.KProperty
@@ -35,48 +35,48 @@ class Delegate {
 }
 ```
 
-When you read from `p`, which delegates to an instance of `Delegate`, the `getValue()` function from `Delegate` is called.
-Its first parameter is the object you read `p` from, and the second parameter holds a description of `p` itself
-(for example, you can take its name). 
+当你读取委托给 `Delegate` 实例的 `p` 时，会调用 `Delegate` 的 `getValue()` 函数。
+它的第一个参数是你读取 `p` 的对象，第二个参数包含 `p` 本身的描述（例如，你可以获取它的名称）。
 
 ```kotlin
 val e = Example()
 println(e.p)
 ```
 
-This prints:
+这将打印：
 
 ```
 Example@33a17727, thank you for delegating 'p' to me!
 ```
 
-Similarly, when you assign to `p`, the `setValue()` function is called. The first two parameters are the same, and
-the third holds the value being assigned:
+类似地，当你给 `p` 赋值时，会调用 `setValue()` 函数。
+前两个参数是相同的，第三个参数是被赋的值：
 
 ```kotlin
 e.p = "NEW"
 ```
 
-This prints:
- 
+这将打印：
+
 ```
 NEW has been assigned to 'p' in Example@33a17727.
 ```
 
-The specification of the requirements to the delegated object can be found [below](#property-delegate-requirements).
+关于委托对象的要求规范可以在[下面](#property-delegate-requirements)找到。
 
-You can declare a delegated property inside a function or code block; it doesn't have to be a member of a class.
-Below you can find [an example](#local-delegated-properties).
+你可以在函数或代码块中声明一个委托属性；它不必是类的成员。
+你可以在[此处](#local-delegated-properties)找到一个示例。
 
-## Standard delegates
+## 标准委托
 
-The Kotlin standard library provides factory methods for several useful kinds of delegates.
+Kotlin 标准库提供了几个有用的委托的工厂方法。
 
-### Lazy properties
+### 延迟初始化属性
 
-[`lazy()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/lazy.html) is a function that takes a lambda and returns an instance of `Lazy<T>`, which can serve as a delegate for implementing a lazy property.
-The first call to `get()` executes the lambda passed to `lazy()` and remembers the result.
-Subsequent calls to `get()` simply return the remembered result. 
+[`lazy()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/lazy.html)
+是一个函数，它接受一个 lambda 并返回一个 `Lazy<T>` 实例，可以作为实现延迟初始化属性的委托。
+第一次调用 `get()` 会执行传递给 `lazy()` 的 lambda 并记住结果。
+随后的 `get()` 调用只会返回记住的结果。
 
 ```kotlin
 val lazyValue: String by lazy {
@@ -91,20 +91,18 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-By default, the evaluation of lazy properties is *synchronized*: the value is computed only in one thread, but all threads
-will see the same value. If the synchronization of the initialization delegate is not required to allow multiple threads
-to execute it simultaneously, pass `LazyThreadSafetyMode.PUBLICATION` as a parameter to `lazy()`.
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBuBDANgAjSgXgTwDV0BXGeDAZQBcAnASwDsBzDAIzy1w%2BAB0GMBGAA70GVNAwAUPcBAC2Q4lRhQAhDICUfQRhkAJGGjQQZfAL58%2BAM2L85KRpI0Ze%2FQSMbip2fETSktNwEPMQlJH0ISGECzEAAaECoUGiYYKgAFbCorCBo5BBAAKxRUeNkFOjQYGgJqgGc6CAYCgCYAOgAGTpAzIA?_gl=1*11yt7fq*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.151672125.547518147.1716942854-239646288.1706355474)
 
-If you're sure that the initialization will always happen in the same thread as the one where you use the property,
-you can use `LazyThreadSafetyMode.NONE`. It doesn't incur any thread-safety guarantees and related overhead.
+默认情况下，延迟属性的计算是 **同步** 的：值只会在一个线程中计算，但所有线程都会看到相同的值。
+如果不需要对初始化委托进行同步以允许多个线程同时执行它，可以将 `LazyThreadSafetyMode.PUBLICATION` 作为参数传递给 `lazy()`。
 
-### Observable properties
+如果你确定初始化总是在使用属性的同一线程中发生，可以使用 `LazyThreadSafetyMode.NONE`。它不提供任何线程安全保证和相关开销。
 
-[`Delegates.observable()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/observable.html)
-takes two arguments: the initial value and a handler for modifications.
+### 可观察属性
 
-The handler is called every time you assign to the property (*after* the assignment has been performed). It has three
-parameters: the property being assigned to, the old value, and the new value:
+[`Delegates.observable()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/observable.html) 接受两个参数：初始值和修改处理程序。
+
+每次对属性进行赋值（*在*赋值执行之后）时，都会调用处理程序。它有三个参数：被赋值的属性、旧值和新值：
 
 ```kotlin
 import kotlin.properties.Delegates
@@ -124,19 +122,19 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-If you want to intercept assignments and *veto* them, use [`vetoable()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/vetoable.html) instead of `observable()`.
-The handler passed to `vetoable` will be called *before* the assignment of a new property value.
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWBbADhATgFwAQGsJsAbJAOwDo1MI0YckYBnCgERmJgHMBDbZgDpkhYYjyZNcAVSb1cwIbiW4Abj0y4yPFDHi4AytkzkuuAEYBPXO069%2BLCGdmY1ZzgAoBIADxkIm7RgAPi8ASnlFZSjqWgAaXAhiKHiyGAB3XABaELIo6OMyEjJPEAASRKgsoNxS1LSwyKUAXyEW4TIAMwBXXJQecndwhVzlNWJcLudcAF5pZ0HGiecKLR0Z3C8OpEwmbC9FyfoVwPWvWUgyKH2yJpBYkGx1LhhsAAUxbA6sFAQQACseGo7uAIOgkJxMAA1ehMJAQMi%2FABMFAADKiQE0gA%3D%3D?_gl=1*1wv6u43*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.189559343.547518147.1716942854-239646288.1706355474)
 
-## Delegating to another property
+如果你想拦截赋值并进行 *否决*，请使用 [`vetoable()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/vetoable.html) 而不是 `observable()`。
+传递给 `vetoable` 的处理程序将在对新属性值进行赋值之前被调用。
 
-A property can delegate its getter and setter to another property. Such delegation is available for
-both top-level and class properties (member and extension). The delegate property can be:
-* A top-level property
-* A member or an extension property of the same class
-* A member or an extension property of another class
+## 委托给另一个属性
 
-To delegate a property to another property, use the `::` qualifier in the delegate name, for example, `this::delegate` or
-`MyClass::delegate`.
+属性可以将其 getter 和 setter 委托给另一个属性。此类委托适用于顶层属性和类属性（成员属性和扩展属性）。委托属性可以是：
+* 顶层属性
+* 同一类的成员或扩展属性
+* 另一个类的成员或扩展属性
+
+要将属性委托给另一个属性，请在委托名称中使用 `::` 限定符，例如 `this::delegate` 或 `MyClass::delegate`。
 
 ```kotlin
 var topLevelInt: Int = 0
@@ -151,8 +149,7 @@ class MyClass(var memberInt: Int, val anotherClassInstance: ClassWithDelegate) {
 var MyClass.extDelegated: Int by ::topLevelInt
 ```
 
-This may be useful, for example, when you want to rename a property in a backward-compatible way: introduce a new property,
-annotate the old one with the `@Deprecated` annotation, and delegate its implementation.
+这在某些情况下可能很有用，例如当你想以向后兼容的方式重命名属性时：引入一个新属性，用 `@Deprecated` 注解旧属性，并委托其实现。
 
 ```kotlin
 class MyClass {
@@ -170,11 +167,13 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.4"}
 
-## Storing properties in a map
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAWQJ4GFUNNgAdAO0yoDcUAnTcmAdwDkUBbGeTASXIAumALyYADBSqYAAgBEYABzowwKATCgAKUiACqaGJgDkTNpxhHMAS3Jp1KKDoA0mAEqLUYGAHUrAgBbaIKbsXDoAlOGSNPSYEEhQodx8gpgARriYAVZo8PAh5hQAvhQAZgCulBwoNprhJNGYtEiYHAREWKJ4hOhodY0A9AOYrBACVqVWquMQ5DxG8YnmPPwCljmYsEoqahoAdIPD%2BoYmLEnrtvaOlFRtPRh7i0kimAAsAEyNSjYCSOSadw6ewKXHqQzen3IRRAThAAnoAHMYAIAAqoASlCB0DgIEAAKxQtBh4AgHAUViQMDoADUqWgrLNce89mIWSAikA%3D%3D%3D?_gl=1*1wv6u43*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.189559343.547518147.1716942854-239646288.1706355474)
 
-One common use case is storing the values of properties in a map.
-This comes up often in applications for things like parsing JSON or performing other dynamic tasks.
-In this case, you can use the map instance itself as the delegate for a delegated property.
+## 将属性存储在映射中
+
+一个常见的用例是将属性值存储在映射中。
+这在应用程序中经常出现，比如解析 JSON 或执行其他动态任务时。
+在这种情况下，你可以使用映射实例本身作为委托属性的委托者。
 
 ```kotlin
 class User(val map: Map<String, Any?>) {
@@ -183,7 +182,7 @@ class User(val map: Map<String, Any?>) {
 }
 ```
 
-In this example, the constructor takes a map:
+在这个例子中，构造函数接受一个映射：
 
 ```kotlin
 val user = User(mapOf(
@@ -192,7 +191,7 @@ val user = User(mapOf(
 ))
 ```
 
-Delegated properties take values from this map through string keys, which are associated with the names of properties:
+委托属性通过字符串键从该映射获取值，这些键与属性的名称关联：
 
 ```kotlin
 class User(val map: Map<String, Any?>) {
@@ -205,15 +204,15 @@ fun main() {
         "name" to "John Doe",
         "age"  to 25
     ))
-//sampleStart
-    println(user.name) // Prints "John Doe"
-    println(user.age)  // Prints 25
-//sampleEnd
+    println(user.name) // 输出 "John Doe"
+    println(user.age)  // 输出 25
 }
 ```
 {kotlin-runnable="true"}
 
-This also works for `var`'s properties if you use a `MutableMap` instead of a read-only `Map`:
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAVTTATgBQBuKSmAtigA7yYCyNAPAMoAu%2BAlgHYDmANJgCC3AJ4B%2BAHwBKTMAA63TMsyly3FBRh12XPpgBGoyjUUrVZTCl7bMASW5tzh41WqKAvosUAzAK5KVDyEsgpKKmqYfnj4mAC8ODGEbgDyPoRmzsryIBpaOZhsEJg5AFIQABZKACIQMDn8mVk51vUgykWYAEwArE2Y0tLe4crUemxI3ITRBAB0eTCyAPRLmAAK41hllTV1Of1jPBNTM%2FizrbKYK%2Bub3X3cniD8IGwo%2BDZsa6hsPhD4FAgQAArFCkJ7gCAUaicJAEABqBDQnAg3EBXVmAAZMSAPEA%3D%3D%3D?_gl=1*17aknjd*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.75183510.547518147.1716942854-239646288.1706355474)
+
+如果你使用可变的 `MutableMap` 而不是只读的 `Map`，这对于 `var` 属性也是适用的：
 
 ```kotlin
 class MutableUser(val map: MutableMap<String, Any?>) {
@@ -222,10 +221,10 @@ class MutableUser(val map: MutableMap<String, Any?>) {
 }
 ```
 
-## Local delegated properties
+## 局部委托属性 {id=local-delegated-properties}
 
-You can declare local variables as delegated properties.
-For example, you can make a local variable lazy:
+你可以将局部变量声明为委托属性。
+例如，你可以将局部变量声明为延迟初始化：
 
 ```kotlin
 fun example(computeFoo: () -> Foo) {
@@ -237,17 +236,17 @@ fun example(computeFoo: () -> Foo) {
 }
 ```
 
-The `memoizedFoo` variable will be computed on first access only.
-If `someCondition` fails, the variable won't be computed at all.
+`memoizedFoo` 变量只会在首次访问时计算。
+如果 `someCondition` 失败，则根本不会计算该变量。
 
-## Property delegate requirements
+## 属性委托要求 {id=property-delegate-requirements}
 
-For a *read-only* property (`val`), a delegate should provide an operator function `getValue()` with the following parameters:
+对于*只读*属性（`val`），委托应该提供一个带有以下参数的操作符函数 `getValue()`：
 
-* `thisRef` must be the same type as, or a supertype of, the *property owner* (for extension properties, it should be the type being extended).
-* `property`  must be of type `KProperty<*>` or its supertype.
+* `thisRef` 必须与*属性所有者*相同类型或是其超类型（对于扩展属性，它应该是被扩展的类型）。
+* `property` 必须是 `KProperty<*>` 类型或其超类型。
 
-`getValue()` must return the same type as the property (or its subtype).
+`getValue()` 必须返回与属性相同的类型（或其子类型）。
 
 ```kotlin
 class Resource
@@ -263,13 +262,12 @@ class ResourceDelegate {
 }
 ```
 
-For a *mutable* property (`var`), a delegate has to additionally provide an operator function `setValue()`
-with the following parameters:
+对于*可变*属性（`var`），委托还必须提供一个带有以下参数的操作符函数 `setValue()`：
 
-* `thisRef` must be the same type as, or a supertype of, the *property owner* (for extension properties, it should be the type being extended).
-* `property` must be of type `KProperty<*>` or its supertype.
-* `value` must be of the same type as the property (or its supertype).
- 
+* `thisRef` 必须与*属性所有者*相同类型或是其超类型（对于扩展属性，它应该是被扩展的类型）。
+* `property` 必须是 `KProperty<*>` 类型或其超类型。
+* `value` 必须与属性相同的类型（或其超类型）。
+
 ```kotlin
 class Resource
 
@@ -289,13 +287,13 @@ class ResourceDelegate(private var resource: Resource = Resource()) {
 }
 ```
 
-`getValue()` and/or `setValue()` functions can be provided either as member functions of the delegate class or as extension functions.
-The latter is handy when you need to delegate a property to an object that doesn't originally provide these functions.
-Both of the functions need to be marked with the `operator` keyword.
+`getValue()` 和/或 `setValue()` 函数可以作为委托类的成员函数或扩展函数提供。
+当你需要将属性委托给原始不提供这些函数的对象时，后者很方便。
+这两个函数都需要用 `operator` 关键字标记。
 
-You can create delegates as anonymous objects without creating new classes, by using the interfaces `ReadOnlyProperty` and `ReadWriteProperty` from the Kotlin standard library.
-They provide the required methods: `getValue()` is declared in `ReadOnlyProperty`; `ReadWriteProperty`
-extends it and adds `setValue()`. This means you can pass a `ReadWriteProperty` whenever a `ReadOnlyProperty` is expected.
+你可以通过使用 Kotlin 标准库中的 `ReadOnlyProperty` 和 `ReadWriteProperty` 接口，将委托创建为匿名对象，而无需创建新类。
+它们提供了所需的方法：`ReadOnlyProperty` 中声明了 `getValue()`；`ReadWriteProperty` 扩展了它并添加了 `setValue()`。
+这意味着可以在期望 `ReadOnlyProperty` 的地方传递 `ReadWriteProperty`。
 
 ```kotlin
 fun resourceDelegate(resource: Resource = Resource()): ReadWriteProperty<Any?, Resource> =
@@ -311,24 +309,23 @@ val readOnlyResource: Resource by resourceDelegate()  // ReadWriteProperty as va
 var readWriteResource: Resource by resourceDelegate()
 ```
 
-## Translation rules for delegated properties
+## 委托属性的翻译规则 {id=translation-rules-for-delegated-properties}
 
-Under the hood, the Kotlin compiler generates auxiliary properties for some kinds of delegated properties and then delegates to them. 
+在底层，Kotlin编译器为某些类型的委托属性生成辅助属性，然后委托给它们。
 
-> For the optimization purposes, the compiler [_does not_ generate auxiliary properties in several cases](#optimized-cases-for-delegated-properties). 
-> Learn about the optimization on the example of [delegating to another property](#translation-rules-when-delegating-to-another-property).
+> 为了优化目的，编译器[_在几种情况下不生成辅助属性_](#optimized-cases-for-delegated-properties)。
+> 通过[委托给另一个属性的示例](#translation-rules-when-delegating-to-another-property)来了解这种优化。
 >
 {style="note"}
 
-For example, for the property `prop` it generates the hidden property `prop$delegate`, and the code of the accessors
-simply delegates to this additional property:
+例如，对于属性`prop`，它会生成隐藏属性`prop$delegate`，并且访问器的代码简单地委托给这个额外的属性：
 
 ```kotlin
 class C {
     var prop: Type by MyDelegate()
 }
 
-// this code is generated by the compiler instead:
+// 编译器生成的代码如下：
 class C {
     private val prop$delegate = MyDelegate()
     var prop: Type
@@ -337,13 +334,13 @@ class C {
 }
 ```
 
-The Kotlin compiler provides all the necessary information about `prop` in the arguments: the first argument `this`
-refers to an instance of the outer class `C`, and `this::prop` is a reflection object of the `KProperty` type describing `prop` itself.
+Kotlin编译器在参数中提供了关于`prop`的所有必要信息：第一个参数`this`是指外部类`C`的实例，而`this::prop`是描述`prop`本身的`KProperty`类型的反射对象。
 
-### Optimized cases for delegated properties
+### 委托属性的优化情况 {id=optimized-cases-for-delegated-properties}
 
-The `$delegate` field will be omitted if a delegate is:
-* A referenced property:
+如果委托是以下情况之一，`$delegate`字段将被省略：
+
+* 引用属性：
 
   ```kotlin
   class C<Type> {
@@ -352,7 +349,7 @@ The `$delegate` field will be omitted if a delegate is:
   }
   ```
 
-* A named object:
+* 命名对象：
 
   ```kotlin
   object NamedObject {
@@ -362,7 +359,7 @@ The `$delegate` field will be omitted if a delegate is:
   val s: String by NamedObject
   ```
 
-* A final `val` property with a backing field and a default getter in the same module:
+* 具有相同模块中的备份字段和默认getter的最终`val`属性：
 
   ```kotlin
   val impl: ReadOnlyProperty<Any?, String> = ...
@@ -372,22 +369,22 @@ The `$delegate` field will be omitted if a delegate is:
   }
   ```
 
-* A constant expression, enum entry, `this`, `null`. The example of `this`:
+* 常量表达式、枚举项、`this`、`null`。`this`的示例：
 
   ```kotlin
   class A {
       operator fun getValue(thisRef: Any?, property: KProperty<*>) ...
- 
+
       val s by this
   }
   ```
 
-### Translation rules when delegating to another property
+### 委托给另一个属性时的翻译规则 {id=translation-rules-when-delegating-to-another-property}
 
-When delegating to another property, the Kotlin compiler generates immediate access to the referenced property.
-This means that the compiler doesn't generate the field `prop$delegate`. This optimization helps save memory.
+当委托给另一个属性时，Kotlin编译器会立即访问所引用的属性。
+这意味着编译器不会生成字段`prop$delegate`。这种优化有助于节省内存。
 
-Take the following code, for example:
+例如，考虑以下代码：
 
 ```kotlin
 class C<Type> {
@@ -396,10 +393,9 @@ class C<Type> {
 }
 ```
 
-Property accessors of the `prop` variable invoke the `impl` variable directly, skipping the delegated property's `getValue`and `setValue` operators, 
-and thus the `KProperty` reference object is not needed.
+`prop`变量的属性访问器直接调用`impl`变量，跳过了委托属性的`getValue`和`setValue`操作符，因此不需要`KProperty`引用对象。
 
-For the code above, the compiler generates the following code:
+对于上述代码，编译器生成以下代码：
 
 ```kotlin
 class C<Type> {
@@ -411,19 +407,18 @@ class C<Type> {
             impl = value
         }
     
-    fun getProp$delegate(): Type = impl // This method is needed only for reflection
+    fun getProp$delegate(): Type = impl // 这个方法只对反射有用
 }
 ```
 
-## Providing a delegate
+## 提供委托
 
-By defining the `provideDelegate` operator, you can extend the logic for creating the object to which the property implementation
-is delegated. If the object used on the right-hand side of `by` defines `provideDelegate` as a member or extension function,
-that function will be called to create the property delegate instance.
+通过定义`provideDelegate`操作符，你可以扩展创建属性实现委托的逻辑。
+如果右侧使用的对象定义了`provideDelegate`作为成员或扩展函数，那么该函数将被调用来创建属性委托实例。
 
-One of the possible use cases of `provideDelegate` is to check the consistency of the property upon its initialization.
+`provideDelegate`的一个可能的用例是在属性初始化时检查其一致性。
 
-For example, to check the property name before binding, you can write something like this:
+例如，要在绑定之前检查属性名称，你可以这样写：
 
 ```kotlin
 class ResourceDelegate<T> : ReadOnlyProperty<MyUI, T> {
@@ -436,7 +431,7 @@ class ResourceLoader<T>(id: ResourceID<T>) {
             prop: KProperty<*>
     ): ReadOnlyProperty<MyUI, T> {
         checkProperty(thisRef, prop.name)
-        // create delegate
+        // 创建委托
         return ResourceDelegate()
     }
 
@@ -451,19 +446,17 @@ class MyUI {
 }
 ```
 
-The parameters of `provideDelegate` are the same as those of `getValue`:
+`provideDelegate`的参数与`getValue`相同：
 
-* `thisRef` must be the same type as, or a supertype of, the _property owner_ (for extension properties, it should be the type being extended);
-* `property` must be of type `KProperty<*>` or its supertype.
+* `thisRef`必须与属性的所有者类型相同或是其超类型（对于扩展属性，它应该是被扩展的类型）；
+* `property`必须是`KProperty<*>`类型或其超类型。
 
-The `provideDelegate` method is called for each property during the creation of the `MyUI` instance, and it performs
-the necessary validation right away.
+在创建`MyUI`实例期间，`provideDelegate`方法将为每个属性调用，并立即执行必要的验证。
 
-Without this ability to intercept the binding between the property and its delegate, to achieve the same functionality
-you'd have to pass the property name explicitly, which isn't very convenient:
+如果没有拦截属性和其委托之间绑定的能力，要实现相同的功能，你将不得不显式传递属性名称，这不是很方便：
 
 ```kotlin
-// Checking the property name without "provideDelegate" functionality
+// 没有"provideDelegate"功能时检查属性名称
 class MyUI {
     val image by bindResource(ResourceID.image_id, "image")
     val text by bindResource(ResourceID.text_id, "text")
@@ -474,23 +467,22 @@ fun <T> MyUI.bindResource(
         propertyName: String
 ): ReadOnlyProperty<MyUI, T> {
     checkProperty(this, propertyName)
-    // create delegate
+    // 创建委托
 }
 ```
 
-In the generated code, the `provideDelegate` method is called to initialize the auxiliary `prop$delegate` property.
-Compare the generated code for the property declaration `val prop: Type by MyDelegate()` with the generated code
-[above](#translation-rules-for-delegated-properties) (when the `provideDelegate` method is not present):
+在生成的代码中，将调用`provideDelegate`方法来初始化辅助的`prop$delegate`属性。
+比较属性声明`val prop: Type by MyDelegate()`的生成代码和上面（当`provideDelegate`方法不存在时）生成的代码：
 
 ```kotlin
 class C {
     var prop: Type by MyDelegate()
 }
 
-// this code is generated by the compiler 
-// when the 'provideDelegate' function is available:
+// 编译器生成的代码 
+// 当'provideDelegate'函数可用时：
 class C {
-    // calling "provideDelegate" to create the additional "delegate" property
+    // 调用 "provideDelegate" 来创建额外的 "delegate" 属性
     private val prop$delegate = MyDelegate().provideDelegate(this, this::prop)
     var prop: Type
         get() = prop$delegate.getValue(this, this::prop)
@@ -498,10 +490,9 @@ class C {
 }
 ```
 
-Note that the `provideDelegate` method affects only the creation of the auxiliary property and doesn't affect the code
-generated for the getter or the setter.
+请注意，`provideDelegate`方法仅影响辅助属性的创建，不影响生成的getter或setter的代码。
 
-With the `PropertyDelegateProvider` interface from the standard library, you can create delegate providers without creating new classes.
+使用标准库中的`PropertyDelegateProvider`接口，你可以创建委托提供者而不创建新类。
 
 ```kotlin
 val provider = PropertyDelegateProvider { thisRef: Any?, property ->
