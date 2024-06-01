@@ -1,21 +1,16 @@
-[//]: # (title: Higher-order functions and lambdas)
+[//]: # (title: 高阶函数和 lambda 表达式)
 
-Kotlin functions are [first-class](https://en.wikipedia.org/wiki/First-class_function), which means they can
-be stored in variables and data structures, and can be passed as arguments to and returned from other
-[higher-order functions](#higher-order-functions). You can perform any operations on functions that are possible for other
-non-function values.
+Kotlin 函数是[一等公民](https://en.wikipedia.org/wiki/First-class_function)，这意味着它们可以存储在变量和数据结构中，并且可以作为参数传递给其他[高阶函数](#higher-order-functions)，也可以从其他高阶函数中返回。
+你可以对函数执行任何操作，就像对其他非函数值进行的操作一样。
 
-To facilitate this, Kotlin, as a statically typed programming language, uses a family of
-[function types](#function-types) to represent functions, and provides a set of specialized language constructs, such as
-[lambda expressions](#lambda-expressions-and-anonymous-functions).
+为了方便这一点，Kotlin 作为一种静态类型的编程语言，使用一系列[函数类型](#function-types)来表示函数，并提供一套专门的语言构造，比如[lambda 表达式](#lambda-expressions-and-anonymous-functions)。
 
-## Higher-order functions
+## 高阶函数 {id=higher-order-functions}
 
-A higher-order function is a function that takes functions as parameters, or returns a function.
+高阶函数是一种接受函数作为参数或返回函数的函数。
 
-A good example of a higher-order function is the [functional programming idiom `fold`](https://en.wikipedia.org/wiki/Fold_(higher-order_function))
-for collections. It takes an initial accumulator value and a combining function and builds its return value by consecutively
-combining the current accumulator value with each collection element, replacing the accumulator value each time:
+一个非常好的高阶函数例子是集合操作中的[函数式编程风格的`fold`](https://en.wikipedia.org/wiki/Fold_(higher-order_function))。
+`Fold`函数接受一个初始值和一个组合函数，然后通过遍历集合中的每个元素，将初始值与当前元素进行组合，并不断更新这个初始值，直到遍历完所有元素，最终返回累加的结果。
 
 ```kotlin
 fun <T, R> Collection<T>.fold(
@@ -30,97 +25,89 @@ fun <T, R> Collection<T>.fold(
 }
 ```
 
-In the code above, the `combine` parameter has the [function type](#function-types) `(R, T) -> R`, so it accepts a function
-that takes two arguments of types `R` and `T` and returns a value of type `R`.
-It is [invoked](#invoking-a-function-type-instance) inside the `for` loop, and the return value is then assigned to `accumulator`.
+[//]: # (TODO 上次校对位置)
 
-To call `fold`, you need to pass an [instance of the function type](#instantiating-a-function-type) to it as an argument,
-and lambda expressions ([described in more detail below](#lambda-expressions-and-anonymous-functions)) are widely used for
-this purpose at higher-order function call sites:
+在上面的代码中，`combine` 参数具有[函数类型](#function-types) `(R, T) -> R`，因此它接受一个函数，该函数接受类型为 `R` 和 `T` 的两个参数，并返回类型为 `R` 的值。
+它在`for`循环内[被调用](#invoking-a-function-type-instance)，然后将返回值分配给`accumulator`。
+
+要调用 `fold`，你需要将一个[函数类型的实例](#instantiating-a-function-type)作为参数传递给它，lambda 表达式（[下文将更详细地描述](#lambda-expressions-and-anonymous-functions)）在高阶函数调用点广泛使用：
 
 ```kotlin
 fun main() {
-    //sampleStart
     val items = listOf(1, 2, 3, 4, 5)
     
-    // Lambdas are code blocks enclosed in curly braces.
+    // Lambda 是用花括号括起来的代码块。
     items.fold(0, { 
-        // When a lambda has parameters, they go first, followed by '->'
+        // 当 lambda 有参数时，它们放在前面，后跟 '->'
         acc: Int, i: Int -> 
         print("acc = $acc, i = $i, ") 
         val result = acc + i
         println("result = $result")
-        // The last expression in a lambda is considered the return value:
+        // lambda 中的最后一个表达式被认为是返回值：
         result
     })
     
-    // Parameter types in a lambda are optional if they can be inferred:
+    // 如果 lambda 的参数可以推断出类型，则 lambda 中的参数类型是可选的：
     val joinedToString = items.fold("Elements:", { acc, i -> acc + " " + i })
     
-    // Function references can also be used for higher-order function calls:
+    // 函数引用也可以用于高阶函数调用：
     val product = items.fold(1, Int::times)
-    //sampleEnd
     println("joinedToString = $joinedToString")
     println("product = $product")
 }
 ```
 {kotlin-runnable="true"}
 
-## Function types
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYZ4AuMWAzhgLwZM8XNgHkkhAIwAaDACYZAZhkAWGQFZitOluoB6XRgAyOLACMoOHjgBOMDJFgZTTCGADWPGGjAuuMKKyYYCjWTACeTtY4YDBcAHQ6rBzccUgQTFCEAAwywBiJdBj6GADqABZeGDgCJubVZZYYAA42JjAc1lwybBURAOYQGEh4nWwyaUwuAO7%2BThEA5AC0AHzzBXTRYPAYAJJoY6zbe2wYK%2FlUhdRN1gRshOQgm3wYACSbMnjPL3gyD6TrDGYGFsXBQTBO%2FCeAGpWADmjd9kwiA8QWCIa9UeC%2FnDigAVCo1YQYGAAD2usS4eAgmAIVRqZgsrB4kDQlNgtgCPTstjYIUwjCYKBg8DhmLYiQAvpoLudCsUAAqtLDtGDWDBsMJNWKBOlMWqMmx2CBNNhUtBAvBIdW9ew4TCmOwEJCqjkimUCjAAKwgBH8uIgAGU2Ai%2Bs92Jx4hNMg8AKJMTheNhcEUgXJVMBgD6nZbpsAYGEPfIgfOsDBSxKJYoAMXQYFN1OBMGdtm82rAdqqTC4gwdGBQfgCaTVZTwfQq1kWEGs7KGtfrQWYXbdhQ912gKDrYeSkfSmWku328HgpuVXGlhUS11uSPuIG9vqg%2FqDIa%2B97QfsDwYIfWxMqviOREA1ygDd0ReYDQN%2FCVUxANgbD6dp5T1NghywBA7xwRgYMgLAmjweNrAANVVSlqXQ2Q4iySiQAlIA%3D?_gl=1*1hill1u*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzI1MDk2Ny45LjEuMTcxNzI1MDk2OC41OS4wLjA.&_ga=2.138174648.904535943.1717248348-239646288.1706355474)
 
-Kotlin uses function types, such as `(Int) -> String`, for declarations that deal with functions: `val onClick: () -> Unit = ...`.
+## 函数类型 {id=function-types}
 
-These types have a special notation that corresponds to the signatures of the functions - their parameters and return values:
+Kotlin 使用函数类型，比如 `(Int) -> String`，来声明处理函数的声明：`val onClick: () -> Unit = ...`。
 
-* All function types have a parenthesized list of parameter types and a return type: `(A, B) -> C` denotes a type that
-  represents functions that take two arguments of types `A` and `B` and return a value of type `C`.
-  The list of parameter types may be empty, as in `() -> A`. The [`Unit` return type](functions.md#返回Unit的函数)
-  cannot be omitted.
+这些类型有一种特殊的表示法，对应于函数的签名 - 它们的参数和返回值：
 
-* Function types can optionally have an additional *receiver* type, which is specified before the dot in the notation:
-  the type `A.(B) -> C` represents functions that can be called on a receiver object `A` with a parameter `B` and
-  return a value `C`.
-  [Function literals with receiver](#function-literals-with-receiver) are often used along with these types.
+- 所有函数类型都有一个带括号的参数类型列表和一个返回类型：`(A, B) -> C` 表示一个代表接受两个类型为 `A` 和 `B` 的参数并返回类型为 `C` 的值的函数类型。
+  参数类型列表可以为空，比如 `() -> A`。[`Unit` 返回类型](functions.md#返回Unit的函数)不能省略。
 
-* [Suspending functions](coroutines-basics.md#extract-function-refactoring) belong to a special kind of function type that have
-  a *suspend* modifier in their notation, such as `suspend () -> Unit` or `suspend A.(B) -> C`.
+- 函数类型可以选择性地有一个额外的 **接收者** 类型，在表示法中的点之前指定：类型 `A.(B) -> C` 表示可以在接收者对象 `A` 上调用带有参数 `B` 并返回值 `C` 的函数。
+  [具有接收者的函数字面值](#function-literals-with-receiver)经常与这些类型一起使用。
 
-The function type notation can optionally include names for the function parameters: `(x: Int, y: Int) -> Point`.
-These names can be used for documenting the meaning of the parameters.
+- [挂起函数](coroutines-basics.md#extract-function-refactoring)属于一种特殊类型的函数类型，其表示法中有一个 **suspend** 修饰符，比如 `suspend () -> Unit` 或 `suspend A.(B) -> C`。
 
-To specify that a function type is [nullable](null-safety.md#nullable-types-and-non-nullable-types), use parentheses as follows:
-`((Int, Int) -> Int)?`.
+函数类型表示法还可以选择性地包括函数参数的名称：`(x: Int, y: Int) -> Point`。这些名称可用于记录参数的含义。
 
-Function types can also be combined using parentheses: `(Int) -> ((Int) -> Unit)`.
+要指定函数类型为[可空类型](null-safety.md#nullable-types-and-non-nullable-types)，使用括号如下：`((Int, Int) -> Int)?`。
 
-> The arrow notation is right-associative, `(Int) -> (Int) -> Unit` is equivalent to the previous example, but not to `((Int) -> (Int)) -> Unit`.
+函数类型也可以使用括号进行组合：`(Int) -> ((Int) -> Unit)`。
+
+> 箭头表示法是右结合的，`(Int) -> (Int) -> Unit` 等同于前面的例子，但不等同于 `((Int) -> (Int)) -> Unit`。
 >
 {style="note"}
 
-You can also give a function type an alternative name by using [a type alias](type-aliases.md):
+你还可以使用 [类型别名](type-aliases.md) 给函数类型取一个别名：
 
 ```kotlin
 typealias ClickHandler = (Button, ClickEvent) -> Unit
 ```
 
-### Instantiating a function type
+### 实例化函数类型 {id=instantiating-a-function-type}
 
-There are several ways to obtain an instance of a function type:
+有几种方法可以获得函数类型的实例：
 
-* Use a code block within a function literal, in one of the following forms:
-    * a [lambda expression](#lambda-expressions-and-anonymous-functions): `{ a, b -> a + b }`,
-    * an [anonymous function](#anonymous-functions): `fun(s: String): Int { return s.toIntOrNull() ?: 0 }`
+* 在函数字面值中使用代码块，有以下几种形式之一：
+  * [lambda 表达式](#lambda-expressions-and-anonymous-functions)：`{ a, b -> a + b }`,
+  * [匿名函数](#anonymous-functions)：`fun(s: String): Int { return s.toIntOrNull() ?: 0 }`
 
-  [Function literals with receiver](#function-literals-with-receiver) can be used as values of function types with receiver.
+  [具有接收者的函数字面值](#function-literals-with-receiver)可以作为具有接收者的函数类型的值使用。
 
-* Use a callable reference to an existing declaration:
-    * a top-level, local, member, or extension [function](reflection.md#function-references): `::isOdd`, `String::toInt`,
-    * a top-level, member, or extension [property](reflection.md#property-references): `List<Int>::size`,
-    * a [constructor](reflection.md#constructor-references): `::Regex`
+* 使用对现有声明的可调用引用：
+  * 顶层、局部、成员或扩展[函数](reflection.md#function-references)：`::isOdd`、`String::toInt`,
+  * 顶层、成员或扩展[属性](reflection.md#property-references)：`List<Int>::size`,
+  * [构造函数](reflection.md#constructor-references)：`::Regex`
 
-  These include [bound callable references](reflection.md#bound-function-and-property-references) that point to a member of a particular instance: `foo::toString`.
+  这些包括指向特定实例的成员的[绑定可调用引用](reflection.md#bound-function-and-property-references)：`foo::toString`。
 
-* Use instances of a custom class that implements a function type as an interface:
+* 使用自定义类的实例来实现函数类型作为接口：
 
 ```kotlin
 class IntTransformer: (Int) -> Int {
@@ -130,19 +117,17 @@ class IntTransformer: (Int) -> Int {
 val intFunction: (Int) -> Int = IntTransformer()
 ```
 
-The compiler can infer the function types for variables if there is enough information:
+如果有足够的信息，编译器可以推断出变量的函数类型：
 
 ```kotlin
-val a = { i: Int -> i + 1 } // The inferred type is (Int) -> Int
+val a = { i: Int -> i + 1 } // 推断出的类型是 (Int) -> Int
 ```
 
-*Non-literal* values of function types with and without a receiver are interchangeable, so the receiver can stand in for
-the first parameter, and vice versa. For instance, a value of type `(A, B) -> C` can be passed or assigned where a value
-of type `A.(B) -> C` is expected, and the other way around:
+具有接收者和不具有接收者的函数类型的*非字面*值是可互换的，因此接收者可以代替第一个参数，反之亦然。
+例如，类型为 `(A, B) -> C` 的值可以在期望类型为 `A.(B) -> C` 的位置传递或赋值，反之亦然：
 
 ```kotlin
 fun main() {
-    //sampleStart
     val repeatFun: String.(Int) -> String = { times -> this.repeat(times) }
     val twoParameters: (String, Int) -> String = repeatFun // OK
     
@@ -150,32 +135,29 @@ fun main() {
         return f("hello", 3)
     }
     val result = runTransformation(repeatFun) // OK
-    //sampleEnd
     println("result = $result")
 }
 ```
 {kotlin-runnable="true"}
 
-> A function type with no receiver is inferred by default, even if a variable is initialized with a reference
-> to an extension function.
-> To alter that, specify the variable type explicitly.
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYYBOMADjDgC4Bi6eBgDKPVgQDmAOkIBJND1IBaAHwixkjAF4yGHniwwAzhlV6AFniNT2XXoX2GjpAL606jFjwDuEAAo4rDiGPDCsRkKEouJoEgA0GPKKpmrRmjq23PzoGAD0uRgA8gDS7jRU1KiYrOgAKkFoRkgQrLj6EERIkWmxCUnKqRqxxEI9EmRldNTsPCismEiE5CDmMExMEMsJAMzEk24VGJ5sxihMPNpsdQ1NLW14HYSZvAJopPlFpYeTHDE8TERluwjGcLjoACTA0HLPZoFwgOIgHiBCQwHh%2BJi8ZqtBAgABWOEYCPAECwHDwTDCADUwkYHmhcQAmKQABlZIBcQA%3D?_gl=1*nqfbp2*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzI1MDk2Ny45LjEuMTcxNzI1MDk2OC41OS4wLjA.&_ga=2.142298426.904535943.1717248348-239646288.1706355474)
+
+> 默认情况下推断不具有接收者的函数类型，即使变量被初始化为扩展函数的引用也是如此。
+> 要更改这一点，请明确指定变量类型。
 >
 {style="note"}
 
-### Invoking a function type instance
+### 调用函数类型实例 {id=invoking-a-function-type-instance}
 
-A value of a function type can be invoked by using its [`invoke(...)` operator](operator-overloading.md#invoke-operator):
-`f.invoke(x)` or just `f(x)`.
+可以使用其 [`invoke(...)` 运算符](operator-overloading.md#invoke-operator) 来调用函数类型的值：`f.invoke(x)` 或者简写为 `f(x)`。
 
-If the value has a receiver type, the receiver object should be passed as the first argument.
-Another way to invoke a value of a function type with receiver is to prepend it with the receiver object,
-as if the value were an [extension function](extensions.md): `1.foo(2)`.
+如果该值具有接收者类型，则应将接收者对象作为第一个参数传递。
+调用具有接收者类型的函数类型值的另一种方法是在接收者对象之前添加它，就像该值是一个[扩展函数](extensions.md)一样：`1.foo(2)`。
 
-Example:
+示例：
 
 ```kotlin
 fun main() {
-    //sampleStart
     val stringPlus: (String, String) -> String = String::plus
     val intPlus: Int.(Int) -> Int = Int::plus
     
@@ -185,84 +167,82 @@ fun main() {
     println(intPlus.invoke(1, 1))
     println(intPlus(1, 2))
     println(2.intPlus(3)) // extension-like call
-    //sampleEnd
 }
 ```
 {kotlin-runnable="true"}
 
-### Inline functions
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYYDOALgE4EDmACkxSt4GQgGUuvADQYJ3ND1IBaAHyzJCjAF518nvHgAHQa1p1GLAuwFCRASTTsAdIQftlat9oxuDxoWY0VNSG8uxMRBx6NqxOBPQQANYwhOQgADxKaTJpqmnExIEYoVYRhFG8MakgABIwTEwQOSDNAO4QnExQAIT5hcEYRSWOZVYxcWgJyYQAjDIzBUNho45VcxgATIsDw%2BFEGxPWJoQAzAUYAPQXGDAAHuwwaKx4EGhKTHjJGGDMTEWUAF8WiB2DhODwYEccOwkB0sAgQAArHCMYGQLCGPBMGCcABqOOerwRBwADE4SSAAUA?_gl=1*nqfbp2*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzI1MDk2Ny45LjEuMTcxNzI1MDk2OC41OS4wLjA.&_ga=2.142298426.904535943.1717248348-239646288.1706355474)
 
-Sometimes it is beneficial to use [inline functions](inline-functions.md), which provide flexible control flow, for higher-order functions.
+### 内联函数 {id=inline-functions}
 
-## Lambda expressions and anonymous functions
+有时候，为了高阶函数提供灵活的控制流，使用[内联函数](inline-functions.md)是很有益的。
 
-Lambda expressions and anonymous functions are *function literals*. Function literals are functions that are not declared
-but are passed immediately as an expression. Consider the following example:
+## Lambda 表达式和匿名函数 {id=lambda-expressions-and-anonymous-functions}
+
+Lambda 表达式和匿名函数都是 *函数字面值*。函数字面值是不声明但立即作为表达式传递的函数。考虑以下示例：
 
 ```kotlin
 max(strings, { a, b -> a.length < b.length })
 ```
 
-The function `max` is a higher-order function, as it takes a function value as its second argument. This second argument
-is an expression that is itself a function, called a function literal, which is equivalent to the following named function:
+函数 `max` 是一个高阶函数，因为它将一个函数值作为其第二个参数。
+这第二个参数是一个表达式，它本身就是一个函数，称为函数字面值，相当于以下命名函数：
 
 ```kotlin
 fun compare(a: String, b: String): Boolean = a.length < b.length
 ```
 
-### Lambda expression syntax
+### Lambda 表达式语法 {id=lambda-expression-syntax}
 
-The full syntactic form of lambda expressions is as follows:
+Lambda 表达式的完整语法形式如下：
 
 ```kotlin
 val sum: (Int, Int) -> Int = { x: Int, y: Int -> x + y }
 ```
 
-* A lambda expression is always surrounded by curly braces.
-* Parameter declarations in the full syntactic form go inside curly braces and have optional type annotations.
-* The body goes after the `->`.
-* If the inferred return type of the lambda is not `Unit`, the last (or possibly single) expression inside the lambda body is treated as the return value.
+* Lambda 表达式始终用花括号括起来。
+* 完整语法形式中的参数声明位于花括号内，并且具有可选的类型注解。
+* 箭头 `->` 后面是函数体。
+* 如果 lambda 的推断返回类型不是 `Unit`，那么 lambda 主体内最后的（或可能是单个的）表达式被视为返回值。
 
-If you leave all the optional annotations out, what's left looks like this:
+如果省略所有可选的注解，剩下的形式如下：
 
 ```kotlin
 val sum = { x: Int, y: Int -> x + y }
 ```
 
-### Passing trailing lambdas
+### 传递尾随 Lambda {id=passing-trailing-lambdas}
 
-According to Kotlin convention, if the last parameter of a function is a function, then a lambda expression passed as the
-corresponding argument can be placed outside the parentheses:
+根据 Kotlin 的约定，如果函数的最后一个参数是一个函数，那么作为相应参数传递的 lambda 表达式可以放在括号外面：
 
 ```kotlin
 val product = items.fold(1) { acc, e -> acc * e }
 ```
 
-Such syntax is also known as *trailing lambda*.
+这样的语法也被称为 *尾随 lambda*。
 
-If the lambda is the only argument in that call, the parentheses can be omitted entirely:
+如果 lambda 是该调用中的唯一参数，那么括号可以完全省略：
 
 ```kotlin
 run { println("...") }
 ```
 
-### `it`: implicit name of a single parameter
+### `it`: 单个参数的隐式名称 {id=it-implicit-name-of-a-single-parameter}
 
-It's very common for a lambda expression to have only one parameter.
+一个 lambda 表达式只有一个参数是非常常见的。
 
-If the compiler can parse the signature without any parameters, the parameter does not need to be declared and `->` can
-be omitted. The parameter will be implicitly declared under the name `it`:
+如果编译器可以在没有任何参数的情况下解析签名，那么参数就不需要声明，`->` 可以省略。该参数将隐式地以名称 `it` 声明：
 
 ```kotlin
-ints.filter { it > 0 } // this literal is of type '(it: Int) -> Boolean'
+ints.filter { it > 0 } // 这个字面量的类型是 '(it: Int) -> Boolean'
 ```
 
-### Returning a value from a lambda expression
+### 从 lambda 表达式返回值 {id=returning-a-value-from-a-lambda-expression}
 
-You can explicitly return a value from the lambda using the [qualified return](returns.md#返回到标签) syntax.
-Otherwise, the value of the last expression is implicitly returned.
+你可以使用 [qualified return](returns.md#返回到标签) 语法来显式地从 lambda 返回值。
+否则，最后一个表达式的值将隐式返回。
 
-Therefore, the two following snippets are equivalent:
+因此，以下两个代码片段是等价的：
 
 ```kotlin
 ints.filter {
@@ -276,37 +256,34 @@ ints.filter {
 }
 ```
 
-This convention, along with [passing a lambda expression outside of parentheses](#passing-trailing-lambdas), allows for
-[LINQ-style](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/) code:
+这个约定，以及 [将 lambda 表达式放在括号外传递](#passing-trailing-lambdas) ，使得可以编写[LINQ-style](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/)代码：
 
 ```kotlin
 strings.filter { it.length == 5 }.sortedBy { it }.map { it.uppercase() }
 ```
 
-### Underscore for unused variables
+### 下划线用于未使用的变量 {id=underscore-for-unused-variables}
 
-If the lambda parameter is unused, you can place an underscore instead of its name:
+如果 lambda 参数未使用，你可以用下划线代替其名称：
 
 ```kotlin
 map.forEach { (_, value) -> println("$value!") }
 ```
 
-### Destructuring in lambdas
+### lambda 中的解构 {id=destructuring-in-lambdas}
 
-Destructuring in lambdas is described as a part of [destructuring declarations](destructuring-declarations.md#destructuring-in-lambdas).
+lambda 中的解构被描述为 [解构声明](destructuring-declarations.md#destructuring-in-lambdas) 的一部分。
 
-### Anonymous functions
+### 匿名函数 {id=anonymous-functions}
 
-The lambda expression syntax above is missing one thing – the ability to specify the function's return type. In most cases,
-this is unnecessary because the return type can be inferred automatically. However, if you do need to specify it explicitly,
-you can use an alternative syntax: an *anonymous function*.
+上面的 lambda 表达式语法缺少一样东西 - 指定函数返回类型的能力。在大多数情况下，这是不必要的，因为返回类型可以自动推断。
+但是，如果你确实需要明确指定它，可以使用另一种语法：**匿名函数**。
 
 ```kotlin
 fun(x: Int, y: Int): Int = x + y
 ```
 
-An anonymous function looks very much like a regular function declaration, except its name is omitted. Its body can be
-either an expression (as shown above) or a block:
+匿名函数看起来非常像常规函数声明，只是省略了它的名称。它的主体可以是一个表达式（如上所示）或一个块：
 
 ```kotlin
 fun(x: Int, y: Int): Int {
@@ -314,32 +291,25 @@ fun(x: Int, y: Int): Int {
 }
 ```
 
-The parameters and the return type are specified in the same way as for regular functions, except the parameter types can
-be omitted if they can be inferred from the context:
+参数和返回类型的指定方式与常规函数相同，只是如果它们可以从上下文中推断出，则参数类型可以省略：
 
 ```kotlin
 ints.filter(fun(item) = item > 0)
 ```
 
-The return type inference for anonymous functions works just like for normal functions: the return type is inferred automatically
-for anonymous functions with an expression body, but it has to be specified explicitly (or is assumed to be `Unit`) for anonymous
-functions with a block body.
+对于匿名函数，返回类型的推断与常规函数一样工作：对于具有表达式主体的匿名函数，返回类型会自动推断，但对于具有块主体的匿名函数，必须明确指定返回类型（或假定为 `Unit`）。
 
-> When passing anonymous functions as parameters, place them inside the parentheses. The shorthand syntax that allows you to leave
-> the function outside the parentheses works only for lambda expressions.
+> 当将匿名函数作为参数传递时，请将它们放在括号内。允许你将函数放在括号外的简写语法仅适用于 lambda 表达式。
 >
 {style="note"}
 
-Another difference between lambda expressions and anonymous functions is the behavior of [non-local returns](inline-functions.md#non-local-returns).
-A `return`  statement without a label always returns from the function declared with the `fun` keyword. This means that
-a `return` inside a lambda expression will return from the enclosing function, whereas a `return` inside an anonymous
-function will return from the anonymous function itself.
+lambda 表达式和匿名函数之间的另一个区别是[非局部返回](inline-functions.md#non-local-returns)的行为。
+没有标签的 `return` 语句总是从使用 `fun` 关键字声明的函数中返回。
+这意味着 lambda 表达式中的 `return` 将从包含它的函数返回，而匿名函数中的 `return` 将从匿名函数本身返回。
 
-### Closures
+### 闭包 {id=closures}
 
-A lambda expression or anonymous function (as well as a [local function](functions.md#局部函数) and an [object expression](object-declarations.md#对象表达式))
-can access its *closure*, which includes the variables declared in the outer scope. The variables captured in the closure
-can be modified in the lambda:
+lambda 表达式或匿名函数（以及 [局部函数](functions.md#局部函数) 和 [对象表达式](object-declarations.md#对象表达式)）可以访问其*闭包*，其中包括外部作用域中声明的变量。在闭包中捕获的变量可以在 lambda 中进行修改：
 
 ```kotlin
 var sum = 0
@@ -349,36 +319,31 @@ ints.filter { it > 0 }.forEach {
 print(sum)
 ```
 
-### Function literals with receiver
+### 带接收者的函数字面值 {id=function-literals-with-receiver}
 
-[Function types](#function-types) with receiver, such as `A.(B) -> C`, can be instantiated with a special form of function
-literals – function literals with receiver.
+带接收者的 [函数类型](#function-types)，如 `A.(B) -> C`，可以使用特殊形式的函数字面值——带接收者的函数字面值来实例化。
 
-As mentioned above, Kotlin provides the ability [to call an instance](#invoking-a-function-type-instance) of a function
-type with receiver while providing the *receiver object*.
+如上所述，Kotlin 提供了在提供 **接收者对象** 的同时调用函数类型实例的能力。
 
-Inside the body of the function literal, the receiver object passed to a call becomes an *implicit* `this`, so that you
-can access the members of that receiver object without any additional qualifiers, or access the receiver object using
-a [`this` expression](this-expressions.md).
+在函数字面值的主体内，传递给调用的接收者对象成为 **隐式** 的 `this`，因此您可以在函数体内访问该接收者对象的成员，而无需任何额外的限定符，或者使用 [`this` 表达式](this-expressions.md) 访问接收者对象。
 
-This behavior is similar to that of [extension functions](extensions.md), which also allow you to access the members of
-the receiver object inside the function body.
+这种行为类似于 [扩展函数](extensions.md) 的行为，后者也允许您在函数体内访问接收者对象的成员。
 
-Here is an example of a function literal with receiver along with its type, where `plus` is called on the receiver object:
+下面是一个带接收者的函数字面值及其类型的示例，其中在接收者对象上调用 `plus`：
 
 ```kotlin
 val sum: Int.(Int) -> Int = { other -> plus(other) }
 ```
 
-The anonymous function syntax allows you to specify the receiver type of a function literal directly.
-This can be useful if you need to declare a variable of a function type with receiver, and then to use it later.
+匿名函数语法允许您直接指定函数字面值的接收者类型。
+如果需要声明带接收者的函数类型的变量，然后稍后使用它，这可能很有用。
 
 ```kotlin
 val sum = fun Int.(other: Int): Int = this + other
 ```
 
-Lambda expressions can be used as function literals with receiver when the receiver type can be inferred from the context.
-One of the most important examples of their usage is [type-safe builders](type-safe-builders.md):
+当接收者类型可以从上下文中推断出时，lambda 表达式可以用作带接收者的函数字面值。
+它们的使用中最重要的例子之一是 [类型安全的构建器](type-safe-builders.md)：
 
 ```kotlin
 class HTML {
@@ -386,13 +351,13 @@ class HTML {
 }
 
 fun html(init: HTML.() -> Unit): HTML {
-    val html = HTML()  // create the receiver object
-    html.init()        // pass the receiver object to the lambda
+    val html = HTML()  // 创建接收者对象
+    html.init()        // 将接收者对象传递给 lambda
     return html
 }
 
-html {       // lambda with receiver begins here
-    body()   // calling a method on the receiver object
+html {       // 带接收者的 lambda 从这里开始
+    body()   // 在接收者对象上调用方法
 }
 ```
 
