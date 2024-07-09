@@ -107,7 +107,7 @@
         </toc-element>
         <toc-element toc-title="函数">
             <toc-element topic="functions.md"/>
-            <toc-element topic="lambdas.md" toc-title="Lambdas"/>
+            <toc-element topic="lambdas.md" toc-title="Lambdas 表达式"/>
             <toc-element topic="inline-functions.md"/>
             <toc-element topic="operator-overloading.md"/>
             <toc-element toc-title="Builders">

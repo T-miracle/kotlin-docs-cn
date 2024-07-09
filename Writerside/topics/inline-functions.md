@@ -1,18 +1,19 @@
-[//]: # (title: Inline functions)
+[//]: # (title: 内联函数)
 
-Using [higher-order functions](lambdas.md) imposes certain runtime penalties: each function is an object, and it captures
-a closure. A closure is a scope of variables that can be accessed in the body of the function.
-Memory allocations (both for function objects and classes) and virtual calls introduce runtime overhead.
+使用[高阶函数](lambdas.md)会带来一定的运行时损耗：每个函数都是一个对象，并且它捕获一个闭包。
+闭包可以在函数体内访问外部变量的作用域。
+函数对象和类的内存分配以及虚拟调用都引入了运行时开销。
 
-But it appears that in many cases this kind of overhead can be eliminated by inlining the lambda expressions.
-The functions shown below are good examples of this situation. The `lock()` function could be easily inlined at call-sites.
-Consider the following case:
+但是，在许多情况下，这种开销可以通过内联 Lambda 表达式来消除。
+下面显示的函数就是这种情况的良好示例。
+`lock()` 函数可以很容易地在调用点内联。
+考虑以下情况：
 
 ```kotlin
 lock(l) { foo() }
 ```
 
-Instead of creating a function object for the parameter and generating a call, the compiler could emit the following code:
+编译器可以直接生成以下代码，而不是为参数创建一个函数对象并生成调用：
 
 ```kotlin
 l.lock()
@@ -23,95 +24,91 @@ try {
 }
 ```
 
-To make the compiler do this, mark the `lock()` function with the `inline` modifier:
+要使编译器这样做，请使用 `inline` 修饰符标记 `lock()` 函数：
 
 ```kotlin
 inline fun <T> lock(lock: Lock, body: () -> T): T { ... }
 ```
 
-The `inline` modifier affects both the function itself and the lambdas passed to it: all of those will be inlined
-into the call site.
+`inline` 修饰符影响函数本身及传递给它的 Lambda：所有这些都会被内联到调用点。
 
-Inlining may cause the generated code to grow. However, if you do it in a reasonable way (avoiding inlining large
-functions), it will pay off in performance, especially at "megamorphic" call-sites inside loops.
+内联可能导致生成的代码增长。
+然而，如果以合理的方式进行（避免内联大函数），它会在性能上有所回报，特别是在循环内的“多态（megamorphic）”调用点。
 
-## `noinline`
+## `noinline` {id=noinline}
 
-If you don't want all of the lambdas passed to an inline function to be inlined, mark some of your function
-parameters with the `noinline` modifier:
+如果你不希望传递给内联函数的所有 Lambda 都被内联，请使用 `noinline` 修饰符标记一些函数参数：
 
 ```kotlin
 inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) { ... }
 ```
 
-Inlinable lambdas can only be called inside inline functions or passed as inlinable arguments. `noinline` lambdas,
-however, can be manipulated in any way you like, including being stored in fields or passed around.
+可内联的 Lambda 只能在内联函数内部调用或作为可内联参数传递。`noinline` 的 Lambda 可以以任何方式操作，包括存储在字段中或传递。
 
-> If an inline function has no inlinable function parameters and no
-> [reified type parameters](#reified-type-parameters), the compiler will issue a warning, since inlining such functions
-> is very unlikely to be beneficial (you can use the `@Suppress("NOTHING_TO_INLINE")` annotation to suppress the warning
-> if you are sure the inlining is needed).
+> 如果一个内联函数没有可内联的函数参数，也没有[具化类型参数](#reified-type-parameters)，
+> 编译器会发出警告，因为内联这样的函数不太可能有益（如果你确定需要内联，
+> 可以使用 `@Suppress("NOTHING_TO_INLINE")` 注释来抑制警告）。
 >
 {style="note"}
 
-## Non-local returns
+## 非局部返回 {id=non-local-returns}
 
-In Kotlin, you can only use a normal, unqualified `return` to exit a named function or an anonymous function.
-To exit a lambda, use a [label](returns.md#返回到标签). A bare `return` is forbidden
-inside a lambda because a lambda cannot make the enclosing function `return`:
+在 Kotlin 中，你只能使用普通的、未限定的 `return` 来退出一个命名函数或匿名函数。
+要退出 lambda，请使用一个[标签](returns.md#返回到标签)。
+在 lambda 内部禁止使用裸 `return`，因为 lambda 无法使包围它的函数 `return`：
 
 ```kotlin
 fun ordinaryFunction(block: () -> Unit) {
     println("hi!")
 }
-//sampleStart
+
 fun foo() {
     ordinaryFunction {
-        return // ERROR: cannot make `foo` return here
+        return // ERROR: 无法让 `foo` 返回这里
     }
 }
-//sampleEnd
+
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true" validate="false"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAggJygSzQENsBPAMXTABc8I0AKAIwBsIwBreDegSgwFoAfBgCqaPFT7AAOpgzyADtgJVmDaSAAWeAIQaesgL6zZqTEggReGGXPk58RUhTTVamW%2FK9fsMKimxMAHogjABRACUIgHkIrjBCNDQIKgwAW0J2GAwAAwsIHIxff0CMTRhfWW9jNBrTdHTCAmtPL3zeIxAAGhAqYgBzPwAFZkIqC2w0hBAAK0IAN0Ju8Ag0hTxmCoA1CoBnd2mAJgA6AAYzkEMgA?_gl=1*e7sulx*_ga*MTE1NjIyMzg3NC4xNzIwNDg0ODI0*_ga_9J976DJZ68*MTcyMDQ4NDgyNC4xLjEuMTcyMDQ4NDgzNi4wLjAuMA..)
 
-But if the function the lambda is passed to is inlined, the return can be inlined, as well. So it is allowed:
+但是，如果传递给 lambda 的函数是内联的，`return` 也可以被内联。因此，这是允许的：
 
 ```kotlin
 inline fun inlined(block: () -> Unit) {
     println("hi!")
 }
-//sampleStart
+
 fun foo() {
     inlined {
-        return // OK: the lambda is inlined
+        return // OK：lambda 是内联的
     }
 }
-//sampleEnd
+
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true"}
+[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWA7ANqmACAZgVxS1QxRigAoAjNCMAa3i3IEosBaAPiwFUUkAXVsAA6hLOIAOAJ1T80KcsJAALJAEIlzUQF9Ro%2FIRwQILLCLHjimKGdHj79qTH54phAPTusAeQDSjfmVsNABDAFtKKBCiAGcidGs7e10UFP0CLDCQ1FNzByMTLVSQABoQfhCpAHNnAAVQ%2FiMpMIQQACsQgDcQ0vAIMIkkNBgpADURmKQIFFaAJgA6AAYlkG0gA%3D%3D%3D?_gl=1*e7sulx*_ga*MTE1NjIyMzg3NC4xNzIwNDg0ODI0*_ga_9J976DJZ68*MTcyMDQ4NDgyNC4xLjEuMTcyMDQ4NDgzNi4wLjAuMA..)
 
-Such returns (located in a lambda, but exiting the enclosing function) are called *non-local* returns. This sort of
-construct usually occurs in loops, which inline functions often enclose:
+这种返回（位于 lambda 中，但退出包围它的函数）称为**非局部**返回。这种结构通常出现在内联函数常常包含的循环中：
 
 ```kotlin
 fun hasZeros(ints: List<Int>): Boolean {
     ints.forEach {
-        if (it == 0) return true // returns from hasZeros
+        if (it == 0) return true // 从 hasZeros 返回
     }
     return false
 }
 ```
 
-Note that some inline functions may call the lambdas passed to them as parameters not directly from the function body,
-but from another execution context, such as a local object or a nested function. In such cases, non-local control flow
-is also not allowed in the lambdas. To indicate that the lambda parameter of the inline function cannot use non-local
-returns, mark the lambda parameter with the `crossinline` modifier:
+请注意，一些内联函数可能不是直接从函数体中调用传递给它们的 Lambda，而是从另一个执行上下文（例如本地对象或嵌套函数）中调用。
+在这种情况下，Lambda 中的非局部控制流也是不允许的。
+要表示内联函数的 Lambda 参数不能使用非局部返回，请使用 `crossinline` 修饰符标记 Lambda 参数：
 
 ```kotlin
 inline fun f(crossinline body: () -> Unit) {
@@ -122,13 +119,13 @@ inline fun f(crossinline body: () -> Unit) {
 }
 ```
 
-> `break` and `continue` are not yet available in inlined lambdas, but we are planning to support them, too.
+> `break` 和 `continue` 在内联 Lambda 中尚不可用，但我们计划支持它们。
 >
 {style="note"}
 
-## Reified type parameters
+## 具化类型参数 {id=reified-type-parameters}
 
-Sometimes you need to access a type passed as a parameter:
+有时候你需要访问作为参数传递的类型：
 
 ```kotlin
 fun <T> TreeNode.findParentOfType(clazz: Class<T>): T? {
@@ -141,20 +138,19 @@ fun <T> TreeNode.findParentOfType(clazz: Class<T>): T? {
 }
 ```
 
-Here, you walk up a tree and use reflection to check whether a node has a certain type.
-It's all fine, but the call site is not very pretty:
+在这里，你遍历一棵树并使用反射来检查节点是否具有某种类型。这样是可以的，但调用点不是很优雅：
 
 ```kotlin
 treeNode.findParentOfType(MyTreeNode::class.java)
 ```
 
-A better solution would be to simply pass a type to this function. You can call it as follows:
+更好的解决方案是简单地将类型传递给此函数。你可以这样调用它：
 
 ```kotlin
 treeNode.findParentOfType<MyTreeNode>()
 ```
 
-To enable this, inline functions support *reified type parameters*, so you can write something like this:
+为了实现这一点，内联函数支持**具化类型参数**，所以你可以这样写：
 
 ```kotlin
 inline fun <reified T> TreeNode.findParentOfType(): T? {
@@ -166,11 +162,11 @@ inline fun <reified T> TreeNode.findParentOfType(): T? {
 }
 ```
 
-The code above qualifies the type parameter with the `reified` modifier to make it accessible inside the function,
-almost as if it were a normal class. Since the function is inlined, no reflection is needed and normal operators like `!is`
-and `as` are now available for you to use. Also, you can call the function as shown above: `myTree.findParentOfType<MyTreeNodeType>()`.
+上面的代码使用 `reified` 修饰符限定类型参数，使其在函数内部可访问，几乎就像它是一个普通的类一样。
+由于函数是内联的，不需要反射，现在可以使用正常的操作符，如 `!is` 和 `as`。
+你也可以像上面所示那样调用该函数：`myTree.findParentOfType<MyTreeNodeType>()`。
 
-Though reflection may not be needed in many cases, you can still use it with a reified type parameter:
+尽管在许多情况下可能不需要反射，但你仍然可以使用具化类型参数进行反射：
 
 ```kotlin
 inline fun <reified T> membersOf() = T::class.members
@@ -180,14 +176,11 @@ fun main(s: Array<String>) {
 }
 ```
 
-Normal functions (not marked as inline) cannot have reified parameters.
-A type that does not have a run-time representation (for example, a non-reified type parameter or a fictitious type like
-`Nothing`) cannot be used as an argument for a reified type parameter.
+普通函数（未标记为内联的）不能具有具化参数。没有运行时表示的类型（例如，非具化类型参数或像 `Nothing` 这样的虚构类型）不能用作具化类型参数的实参。
 
-## Inline properties
+## 内联属性 {id=inline-properties}
 
-The `inline` modifier can be used on accessors of properties that don't have [backing fields](properties.md#幕后字段).
-You can annotate individual property accessors:
+`inline` 修饰符可以用于没有[幕后字段](properties.md#幕后字段)的属性访问器。你可以注解单个属性访问器：
 
 ```kotlin
 val foo: Foo
@@ -198,7 +191,7 @@ var bar: Bar
     inline set(v) { ... }
 ```
 
-You can also annotate an entire property, which marks both of its accessors as `inline`:
+你也可以注解整个属性，这会将它的两个访问器都标记为 `inline`：
 
 ```kotlin
 inline var bar: Bar
@@ -206,20 +199,17 @@ inline var bar: Bar
     set(v) { ... }
 ```
 
-At the call site, inline accessors are inlined as regular inline functions.
+在调用点，内联访问器会像普通的内联函数一样被内联。
 
-## Restrictions for public API inline functions
+## 公共 API 内联函数的限制 {id=restrictions-for-public-api-inline-functions}
 
-When an inline function is `public` or `protected` but is not a part of a `private` or `internal` declaration,
-it is considered a [module](visibility-modifiers.md#模块)'s public API. It can be called in other modules and is
-inlined at such call sites as well.
+当一个内联函数是 `public` 或 `protected`，但不是 `private` 或 `internal`
+声明的一部分时，它被视为一个[模块](visibility-modifiers.md#模块)的公共 API。
+它可以在其他模块中被调用，并且在这些调用点内联。
 
-This imposes certain risks of binary incompatibility caused by changes in the module that declares an inline function in
-case the calling module is not re-compiled after the change.
+这带来了某些二进制不兼容的风险，当声明内联函数的模块发生变化而调用模块没有重新编译时，可能会引发不兼容问题。
 
-To eliminate the risk of such incompatibility being introduced by a change in a *non*-public API of a module, public
-API inline functions are not allowed to use non-public-API declarations, i.e. `private` and `internal` declarations and
-their parts, in their bodies.
+为了消除这种风险，公共 API 内联函数不允许在其主体中使用非公共 API 声明，即 `private` 和 `internal` 声明及其部分。
 
-An `internal` declaration can be annotated with `@PublishedApi`, which allows its use in public API inline functions.
-When an `internal` inline function is marked as `@PublishedApi`, its body is checked too, as if it were public.
+一个 `internal` 声明可以用 `@PublishedApi` 注解，这样就允许在公共 API 内联函数中使用它。当一个 `internal` 
+内联函数被标记为 `@PublishedApi` 时，它的主体也会被检查，就像它是 `public` 一样。
