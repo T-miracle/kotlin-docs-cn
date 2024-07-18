@@ -1,11 +1,8 @@
-[//]: # (title: Using builders with builder type inference)
+[//]: # (title: 使用带有构建器类型推断的构建器)
 
-Kotlin supports _builder type inference_ (or builder inference), which can come in useful when you are working with 
-generic builders. It helps the compiler infer the type arguments of a builder call based on the type information
-about other calls inside its lambda argument.
+Kotlin 支持**构建器类型推断**（或构建器推断），这在使用泛型构建器时非常有用。它帮助编译器根据其 lambda 参数内部其他调用的类型信息来推断构建器调用的类型实参。
 
-Consider this example of [`buildMap()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-map.html)
-usage:
+考虑这个 [`buildMap()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-map.html) 使用示例：
 
 ```kotlin
 fun addEntryToMap(baseMap: Map<String, Number>, additionalEntry: Pair<String, Int>?) {
@@ -18,34 +15,32 @@ fun addEntryToMap(baseMap: Map<String, Number>, additionalEntry: Pair<String, In
 }
 ```
 
-There is not enough type information here to infer type arguments in a regular way, but builder inference can
-analyze the calls inside the lambda argument. Based on the type information about `putAll()` and `put()` calls,
-the compiler can automatically infer type arguments of the `buildMap()` call into `String` and `Number`. 
-Builder inference allows to omit type arguments while using generic builders.
+这里没有足够的类型信息来以常规方式推断类型实参，但构建器推断可以分析 lambda 参数内部的调用。
+基于 `putAll()` 和 `put()` 调用的类型信息，编译器可以自动将 `buildMap()` 调用的类型实参推断为 `String` 和 `Number`。
+构建器推断允许在使用泛型构建器时省略类型实参。
 
-## Writing your own builders
+## 编写你自己的构建器 {id=writing-your-own-builders}
 
-### Requirements for enabling builder inference
+### 启用构建器推断的要求 {id=requirements-for-enabling-builder-inference}
 
-> Before Kotlin 1.7.0, enabling builder inference for a builder function required `-Xenable-builder-inference` compiler option. 
-> In 1.7.0 the option is enabled by default.
+> 在 Kotlin 1.7.0 之前，启用构建器函数的构建器推断需要 `-Xenable-builder-inference` 编译器选项。
+> 在 1.7.0 中，该选项默认启用。
 >
 {style="note"}
 
-To let builder inference work for your own builder, make sure its declaration has a builder lambda parameter of a
-function type with a receiver. There are also two requirements for the receiver type:
+为了确保构建器能够在你自己的构建器中正常工作，请确保构建器的 lambda 参数声明了接收者的函数类型。
+接收者类型还有两个要求：
 
-1. It should use the type arguments that builder inference is supposed to infer. For example:
+1. 它应该使用构建器推断要推断的类型实参。例如：
    ```kotlin
    fun <V> buildList(builder: MutableList<V>.() -> Unit) { ... }
    ```
-   
-   > Note that passing the type parameter's type directly like `fun <T> myBuilder(builder: T.() -> Unit)` is not yet supported.
-   > 
+
+   > 请注意，直接传递类型参数的类型，如 `fun <T> myBuilder(builder: T.() -> Unit)` 目前尚不支持。
+   >
    {style="note"}
 
-2. It should provide public members or extensions that contain the corresponding type parameters in their signature. 
-   For example:
+2. 它应该提供包含相应类型参数的签名的公共成员或扩展。例如：
    ```kotlin
    class ItemHolder<T> {
        private val items = mutableListOf<T>()
@@ -65,27 +60,28 @@ function type with a receiver. There are also two requirements for the receiver 
        ItemHolder<T>().apply(builder)
 
    fun test(s: String) {
-       val itemHolder1 = itemHolderBuilder { // Type of itemHolder1 is ItemHolder<String>
+       val itemHolder1 = itemHolderBuilder { // itemHolder1 的类型是 ItemHolder<String>
            addItem(s)
        }
-       val itemHolder2 = itemHolderBuilder { // Type of itemHolder2 is ItemHolder<String>
+       val itemHolder2 = itemHolderBuilder { // itemHolder2 的类型是 ItemHolder<String>
            addAllItems(listOf(s)) 
        }
-       val itemHolder3 = itemHolderBuilder { // Type of itemHolder3 is ItemHolder<String?>
+       val itemHolder3 = itemHolderBuilder { // itemHolder3 的类型是 ItemHolder<String?>
            val lastItem: String? = getLastItem()
            // ...
        }
    }
    ```
 
-### Supported features
+### 支持的功能 {id=supported-features}
 
-Builder inference supports: 
-* Inferring several type arguments
+构建器推断支持以下功能：
+
+* 推断多个类型实参
   ```kotlin
   fun <K, V> myBuilder(builder: MutableMap<K, V>.() -> Unit): Map<K, V> { ... }
   ```
-* Inferring type arguments of several builder lambdas within one call including interdependent ones
+* 在一次调用中推断多个构建器 lambda 表达式的类型参数，包括它们之间相互依赖的情况
   ```kotlin
   fun <K, V> myBuilder(
       listBuilder: MutableList<V>.() -> Unit,
@@ -98,10 +94,10 @@ Builder inference supports:
           { add(1) },
           { put("key", 2) }
       )
-      // result has Pair<List<Int>, Map<String, Int>> type
+      // result 的类型是 Pair<List<Int>, Map<String, Int>>
   }
   ```
-* Inferring type arguments whose type parameters are lambda's parameter or return types
+* 推断类型实参，其类型参数是 lambda 的参数或返回类型
   ```kotlin
   fun <K, V> myBuilder1(
       mapBuilder: MutableMap<K, V>.() -> K
@@ -112,29 +108,28 @@ Builder inference supports:
   ): Map<K, V> = mutableMapOf<K, V>().apply { mapBuilder(2 as K) }
   
   fun main() {
-      // result1 has the Map<Long, String> type inferred
+      // result1 的类型被推断为 Map<Long, String>
       val result1 = myBuilder1 {
           put(1L, "value")
           2
       }
       val result2 = myBuilder2 {
           put(1, "value 1")
-          // You can use `it` as "postponed type variable" type
-          // See the details in the section below
+          // 你可以将 `it` 用作“推迟类型变量”类型
+          // 详情见下节
           put(it, "value 2")
       }
   }
   ```
 
-## How builder inference works
+## 构建器推断如何工作 {id=how-builder-inference-works}
 
-### Postponed type variables
+### 推迟类型变量 {id=postponed-type-variables}
 
-Builder inference works in terms of _postponed type variables_, which appear inside the builder lambda during builder
-inference analysis. A postponed type variable is a type argument's type, which is in the process of inferring.
-The compiler uses it to collect type information about the type argument.
+构建器推断通过**推迟类型变量**来工作，这些变量在构建器推断分析期间，出现在构建器 lambda 内部。
+推迟类型变量是一种类型实参的类型，在推断过程中被使用。编译器使用它来收集关于类型实参的类型信息。
 
-Consider the example with [`buildList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html):
+考虑 [`buildList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html) 的这个示例：
 
 ```kotlin
 val result = buildList {
@@ -142,43 +137,41 @@ val result = buildList {
 }
 ```
 
-Here `x` has a type of postponed type variable: the `get()` call returns a value of type `E`, but `E` itself is not yet
-fixed. At this moment, a concrete type for `E` is unknown.
+这里 `x` 的类型是推迟类型变量：`get()` 调用返回一个类型为 `E` 的值，但 `E` 本身尚未确定。此时，`E` 的具体类型是未知的。
 
-When a value of a postponed type variable gets associated with a concrete type, builder inference collects this information
-to infer the resulting type of the corresponding type argument at the end of the builder inference analysis. For example:
+构造器推断会在延迟类型变量的值与具体类型关联时，收集这些信息。
+最终，在构造器推断分析结束时，利用收集到的信息推断出相应类型实参的结果类型。
+例如：
 
 ```kotlin
 val result = buildList {
     val x = get(0)
     val y: String = x
-} // result has the List<String> type inferred
+} // result 的类型被推断为 List<String>
 ```
 
-After the postponed type variable gets assigned to a variable of the `String` type, builder inference gets the information
-that `x` is a subtype of `String`. This assignment is the last statement in the builder lambda, so the builder inference
-analysis ends with the result of inferring the type argument `E` into `String`.
+当延迟类型变量被赋值给 `String` 类型的变量后，构造器推断会得出 `x` 是 `String` 的子类型。
+这条赋值语句是构造器 lambda 中的最后一条语句，因此，构造器推断分析会结束，并将类型实参 `E` 推断为 `String`。
 
-Note that you can always call `equals()`, `hashCode()`, and `toString()` functions with a postponed type variable as a
-receiver.
+请注意，您始终可以调用 `equals()`、`hashCode()` 和 `toString()` 函数，并将推迟类型变量作为接收者。
 
-### Contributing to builder inference results
+### 对构建器推断结果的贡献 {id=contributing-to-builder-inference-results}
 
-Builder inference can collect different varieties of type information that contribute to the analysis result.
-It considers:
-* Calling methods on a lambda's receiver that use the type parameter's type
+构建器推断可以收集不同类型的信息，这些信息都会对结果的分析产生贡献。它考虑以下几种情况：
+
+* 调用 lambda 接收者的方法时使用了类型参数的类型
   ```kotlin
   val result = buildList {
-      // Type argument is inferred into String based on the passed "value" argument
+      // 类型实参根据传递的 "value" 参数被推断为 String
       add("value")
-  } // result has the List<String> type inferred
+  } // result 的类型被推断为 List<String>
   ```
-* Specifying the expected type for calls that return the type parameter's type
+* 为返回类型参数类型的调用指定预期类型
   ```kotlin
   val result = buildList {
-      // Type argument is inferred into Float based on the expected type
+      // 类型实参数根据预期类型被推断为 Float
       val x: Float = get(0)
-  } // result has the List<Float> type
+  } // result 的类型是 List<Float>
   ```
   ```kotlin
   class Foo<T> {
@@ -191,10 +184,10 @@ It considers:
       val result = myBuilder {
           val x: List<CharSequence> = items
           // ...
-      } // result has the Foo<CharSequence> type
+      } // result 的类型是 Foo<CharSequence>
   }
   ```
-* Passing postponed type variables' types into methods that expect concrete types
+* 将推迟类型变量的类型传递给期望具体类型的方法
   ```kotlin
   fun takeMyLong(x: Long) { ... }
 
@@ -206,25 +199,25 @@ It considers:
       val result1 = buildList {
           val x = get(0)
           takeMyLong(x)
-      } // result1 has the List<Long> type
+      } // result1 的类型被推断为 List<Long>
 
       val result2 = buildList {
           val x = get(0)
           val isLong = x.isMoreThat3()
-      // ...
-      } // result2 has the List<String> type
+          // ...
+      } // result2 的类型被推断为 List<String>
   
       val result3 = buildList {
           takeListOfStrings(this)
-      } // result3 has the List<String> type
+      } // result3 的类型被推断为 List<String>
   }
   ```
-* Taking a callable reference to the lambda receiver's member
+* 获取 lambda 接收者成员的可调用引用
   ```kotlin
   fun main() {
       val result = buildList {
           val x: KFunction1<Int, Float> = ::get
-      } // result has the List<Float> type
+      } // result 的类型被推断为 List<Float>
   }
   ```
   ```kotlin
@@ -233,29 +226,27 @@ It considers:
   fun main() {
       val result = buildList {
           takeFunction(::get)
-      } // result has the List<Float> type
+      } // result 的类型被推断为 List<Float>
   }
   ```
 
-At the end of the analysis, builder inference considers all collected type information and tries to merge it into 
-the resulting type. See the example.
+分析结束时，构建器推断会考虑所有收集到的类型信息，并尝试将其合并为最终的类型。参见以下示例。
 
 ```kotlin
-val result = buildList { // Inferring postponed type variable E
-    // Considering E is Number or a subtype of Number
+val result = buildList { // 推断推迟的类型变量 E
+    // 认为 E 是 Number 或其子类型
     val n: Number? = getOrNull(0)
-    // Considering E is Int or a supertype of Int
+    // 认为 E 是 Int 或其超类型
     add(1)
-    // E gets inferred into Int
-} // result has the List<Int> type
+    // E 被推断为 Int
+} // result 的类型为 List<Int>
 ```
 
-The resulting type is the most specific type that corresponds to the type information collected during the analysis.
-If the given type information is contradictory and cannot be merged, the compiler reports an error.
+最终的类型是分析过程中收集到的类型信息所对应的最具体的类型。如果给定的类型信息存在矛盾且无法合并，编译器会报错。
 
-Note that the Kotlin compiler uses builder inference only if regular type inference cannot infer a type argument.
-This means you can contribute type information outside a builder lambda, and then builder inference analysis is not
-required. Consider the example:
+请注意，只有在常规类型推断无法推断出类型实参时，Kotlin 编译器才会使用构建器推断。
+这意味着你可以在构建器 lambda 外部提供类型信息，这样就不需要进行构建器推断分析。
+参见以下示例：
 
 ```kotlin
 fun someMap() = mutableMapOf<CharSequence, String>()
@@ -265,10 +256,10 @@ fun <E> MutableMap<E, String>.f(x: MutableMap<E, String>) { ... }
 fun main() {
     val x: Map<in String, String> = buildMap {
         put("", "")
-        f(someMap()) // Type mismatch (required String, found CharSequence)
+        f(someMap()) // 类型不匹配（要求 String，找到 CharSequence）
     }
 }
 ```
 
-Here a type mismatch appears because the expected type of the map is specified outside the builder lambda. 
-The compiler analyzes all the statements inside with the fixed receiver type `Map<in String, String>`.
+这里出现类型不匹配的原因是 map 的预期类型是在构建器 lambda 外部指定的。
+编译器分析 lambda 内的所有语句，并将接收者类型固定为 `Map<in String, String>`。
