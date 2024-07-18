@@ -110,7 +110,7 @@
             <toc-element topic="lambdas.md" toc-title="Lambdas 表达式"/>
             <toc-element topic="inline-functions.md"/>
             <toc-element topic="operator-overloading.md"/>
-            <toc-element toc-title="Builders">
+            <toc-element toc-title="构建器">
                 <toc-element topic="type-safe-builders.md"/>
                 <toc-element topic="using-builders-with-builder-inference.md"/>
             </toc-element>
