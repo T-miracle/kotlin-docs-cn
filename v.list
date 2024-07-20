@@ -5,6 +5,8 @@
 
     <var name="kotlinEapVersion" value="1.9.20-RC2" type="string"/>
 
+  <var name="commitId" value="b381b5ffe054ab61b2b0932f9326b9e81a6f1866" type="string"/>
+
     <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v1.9.20" type="string"/>
 
     <var name="kotlinReleaseDate" value="November 1, 2023" type="string"/>
