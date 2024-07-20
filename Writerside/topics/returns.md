@@ -49,6 +49,7 @@ loop@ for (i in 1..100) {
 简而言之，当我们编写如下代码时，`return` 表达式将从最近的封闭函数 `foo` 返回：
 
 ```kotlin
+//sampleStart
 fun foo() {
     listOf(1, 2, 3, 4, 5).forEach {
         if (it == 3) return // 非局部返回直接返回给调用 `foo()` 的调用者。
@@ -56,18 +57,19 @@ fun foo() {
     }
     println("这个点是无法到达的")
 }
+//sampleEnd
 
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AZgVxQAjRCAFAJTbCrYXYA2AlgM4AuA8mgQIwA02ATFwMxcALFwCsRAHR4ATgFEAhmAAWpcpTU002AjQbYAvHux8SUmAwxScAeivYUEFAFoqEMHKrZT5y9ig1TYAxUAJ7YDBBhijDYblRUMFLYEJp4hESqahQADlI0KAzaDOk4lAC%2BGdg5eUEoBEggDIr0lRDV2M1YpgqKcgBG8fXF5SioqJg4ALZyecQqJRSpxKilIBwNclIA5mYAClRyDNITCCAAVnIAbnKr4BATWTTxUgBqCXQ0Dids4gCc4twABhApSAA?_gl=1*9afmph*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTI3MDM1OS40Ni4xLjE3MDEyNzA0MjcuNTkuMC4w&_ga=2.146041908.1244175791.1701270364-2060274793.1694940376)
 
 需要注意的是，这种非局部返回只支持传递给[内联函数](inline-functions.md)的 lambda 表达式。
 如果想要从 lambda 表达式中返回，需要对其进行标记，然后使用带有标签的 `return`：
 
 ```kotlin
+//sampleStart
 fun foo() {
     listOf(1, 2, 3, 4, 5).forEach lit@{
         if (it == 3) return@lit // 局部返回给 lambda 的调用者 - `forEach` 循环。
@@ -75,17 +77,18 @@ fun foo() {
     }
     print(" 使用显式标签完成")
 }
+//sampleEnd
 
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AZgVxQAjRCAFAJTbCrYXYA2AlgM4AuA8mgQIwA02ATFwMxcALFwCsRAHR4ATgFEAhmAAW1GgwACZHJW0002AquwBeI9j4kpMBhiko1tBtgD0T6hDByq2S9dvYGEP6KMNgeVFQwUtgQegzB1HIAtgBGUHLYALRBIdLySm4QAA7k2pSFUjQoDAYMRCUUAL712OWV1Ugg2FAQKCEA7qrKMAAehbRghlRyyTBUHXUoTSioqJg4iXKVxKTNeIQLDSAcIAxyUgDmVgAKUwzSiQggAFZyAG5yR%2BAQiYU0EVIANUidBoPUebHEAE5xNwAAwgBpAA%3D?_gl=1*j7romn*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTI3MDM1OS40Ni4xLjE3MDEyNzA0MjcuNTkuMC4w&_ga=2.251462662.1244175791.1701270364-2060274793.1694940376)
 
 现在，它只从 lambda 表达式返回。通常使用 **隐式标签** 更方便，因为这样的标签与传递 lambda 的函数具有相同的名称。
 
 ```kotlin
+//sampleStart
 fun foo() {
     listOf(1, 2, 3, 4, 5).forEach {
         if (it == 3) return@forEach // 局部返回给 lambda 的调用者 - `forEach` 循环。
@@ -93,18 +96,19 @@ fun foo() {
     }
     print(" 使用隐式标签完成")
 }
+//sampleEnd
 
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AZgVxQAjRCAFAJTbCrYXYA2AlgM4AuA8mgQIwA02ATFwMxcALFwCsRAHR4ATgFEAhmAAWpcpTU002AjQbYAvHux8SUmAwxSUAAWnyl2APQPqEMHKrZT5y9gYRfijDYblRUMFLYEJoMgdRyALYARlBy2AC0AUG2CspU%2BAAOqmoU%2BVI0KAzaDERF2AC%2BtaXllUgg2FAQKEEA7jrKNPH5tGA6cYkwVK01KA0oqKiYOPFy5cQqOJR4hNN1IBwgDHJSAOZmAApUcgzS8QggAFZyAG5ye%2BAQgzRhUgBq4XQ0Tp3NjiACc4m4AAYQHUgA%3D%3D%3D?_gl=1*j7romn*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTI3MDM1OS40Ni4xLjE3MDEyNzA0MjcuNTkuMC4w&_ga=2.251462662.1244175791.1701270364-2060274793.1694940376)
 
 或者，您可以用[匿名函数](lambdas.md#anonymous-functions)替换 lambda 表达式。
 匿名函数中的 `return` 语句将从匿名函数本身返回。
 
 ```kotlin
+//sampleStart
 fun foo() {
     listOf(1, 2, 3, 4, 5).forEach(fun(value: Int) {
         if (value == 3) return  // 局部返回给匿名函数的调用者 - `forEach` 循环。
@@ -112,19 +116,20 @@ fun foo() {
     })
     print(" 使用匿名函数完成")
 }
+//sampleEnd
 
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AZgVxQAjRCAFAJTbCrYXYA2AlgM4AuA8mgQIwA02ATFwMxcALFwCsRAHR4ATgFEAhmAAWBTCgIA3OVQwx42AJIoGJMjkrmaabBq07sAXnvY%2BJKTAYYpZgPTfqEMC1sNw8vbAYIcMUYbECqKhgpbAgrBmjsORQIFABPAFsIDDpcLDAGGmzsAFoomOl5JX8IAAdyc0pmqRojG20YIjaKAF8BswpO7oYCJBBsKGyYgHcaNIys3IKikpQyipQZ0aHUY%2FQsbDy5buJSQdx8YlQhkA4QBjkpAHN3AAUqOQZpHkECAAFZyTTPcAQPLNGgJKQANUSdD2wLY4gAnOJuAAGEBDIA%3D%3D%3D?_gl=1*j7romn*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTI3MDM1OS40Ni4xLjE3MDEyNzA0MjcuNTkuMC4w&_ga=2.251462662.1244175791.1701270364-2060274793.1694940376)
 
 请注意，前面三个例子中的局部返回的使用类似于在常规循环中使用 `continue`。
 
 对于 `break` 没有直接的等价物，但可以通过添加另一个嵌套的 lambda 并从其中进行非局部返回来模拟：
 
 ```kotlin
+//sampleStart
 fun foo() {
     run loop@{
         listOf(1, 2, 3, 4, 5).forEach {
@@ -134,13 +139,13 @@ fun foo() {
     }
     print(" 使用嵌套循环完成")
 }
+//sampleEnd
 
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AZgVxQAjRCAFAJTbCrYXYBOW2ANvgA4ACZOlHdAlgM4AuAeTQEAjABpsAJgkBmCQBYJAViIA6PFQCiAQzAALUuQ7GKXNNgJc%2B2ALw3sMklRh8MVFMwYRG2APS%2FsFAgUAFoGMG06ahc3HDQqCABbbD49GHptRIAjKG1sRm0eHhgoFIhqLCMTDkYqLhQ%2BSz4iKuMAX1aO9gpa%2BsakEGwoYPSAdysDFBh%2BEvomAZaULtRUTBxE7XriQ27cfGJUNpAxED5tKgBzFwAFOm0%2BDUSEEAArbQA3bWPwJMYuOhgVAAaoCeFxgs8RKoAJyqSQABhAbSAA%3D%3D?_gl=1*j7romn*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTI3MDM1OS40Ni4xLjE3MDEyNzA0MjcuNTkuMC4w&_ga=2.251462662.1244175791.1701270364-2060274793.1694940376)
 
 当返回一个值时，解析器会优先选用标签限定的返回：
 

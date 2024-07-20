@@ -34,6 +34,7 @@ fun <T, R> Collection<T>.fold(
 
 ```kotlin
 fun main() {
+    //sampleStart
     val items = listOf(1, 2, 3, 4, 5)
     
     // Lambda 是用花括号括起来的代码块。
@@ -52,13 +53,12 @@ fun main() {
     
     // 函数引用也可以用于高阶函数调用：
     val product = items.fold(1, Int::times)
+    //sampleEnd
     println("joinedToString = $joinedToString")
     println("product = $product")
 }
 ```
 {kotlin-runnable="true"}
-
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYZ4AuMWAzhgLwZM8XNgHkkhAIwAaDACYZAZhkAWGQFZitOluoB6XRgAyOLACMoOHjgBOMDJFgZTTCGADWPGGjAuuMKKyYYCjWTACeTtY4YDBcAHQ6rBzccUgQTFCEAAwywBiJdBj6GADqABZeGDgCJubVZZYYAA42JjAc1lwybBURAOYQGEh4nWwyaUwuAO7%2BThEA5AC0AHzzBXTRYPAYAJJoY6zbe2wYK%2FlUhdRN1gRshOQgm3wYACSbMnjPL3gyD6TrDGYGFsXBQTBO%2FCeAGpWADmjd9kwiA8QWCIa9UeC%2FnDigAVCo1YQYGAAD2usS4eAgmAIVRqZgsrB4kDQlNgtgCPTstjYIUwjCYKBg8DhmLYiQAvpoLudCsUAAqtLDtGDWDBsMJNWKBOlMWqMmx2CBNNhUtBAvBIdW9ew4TCmOwEJCqjkimUCjAAKwgBH8uIgAGU2Ai%2Bs92Jx4hNMg8AKJMTheNhcEUgXJVMBgD6nZbpsAYGEPfIgfOsDBSxKJYoAMXQYFN1OBMGdtm82rAdqqTC4gwdGBQfgCaTVZTwfQq1kWEGs7KGtfrQWYXbdhQ912gKDrYeSkfSmWku328HgpuVXGlhUS11uSPuIG9vqg%2FqDIa%2B97QfsDwYIfWxMqviOREA1ygDd0ReYDQN%2FCVUxANgbD6dp5T1NghywBA7xwRgYMgLAmjweNrAANVVSlqXQ2Q4iySiQAlIA%3D?_gl=1*1hill1u*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzI1MDk2Ny45LjEuMTcxNzI1MDk2OC41OS4wLjA.&_ga=2.138174648.904535943.1717248348-239646288.1706355474)
 
 ## 函数类型 {id=function-types}
 
@@ -128,6 +128,7 @@ val a = { i: Int -> i + 1 } // 推断出的类型是 (Int) -> Int
 
 ```kotlin
 fun main() {
+    //sampleStart
     val repeatFun: String.(Int) -> String = { times -> this.repeat(times) }
     val twoParameters: (String, Int) -> String = repeatFun // OK
     
@@ -135,12 +136,11 @@ fun main() {
         return f("hello", 3)
     }
     val result = runTransformation(repeatFun) // OK
+    //sampleEnd
     println("result = $result")
 }
 ```
 {kotlin-runnable="true"}
-
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYYBOMADjDgC4Bi6eBgDKPVgQDmAOkIBJND1IBaAHwixkjAF4yGHniwwAzhlV6AFniNT2XXoX2GjpAL606jFjwDuEAAo4rDiGPDCsRkKEouJoEgA0GPKKpmrRmjq23PzoGAD0uRgA8gDS7jRU1KiYrOgAKkFoRkgQrLj6EERIkWmxCUnKqRqxxEI9EmRldNTsPCismEiE5CDmMExMEMsJAMzEk24VGJ5sxihMPNpsdQ1NLW14HYSZvAJopPlFpYeTHDE8TERluwjGcLjoACTA0HLPZoFwgOIgHiBCQwHh%2BJi8ZqtBAgABWOEYCPAECwHDwTDCADUwkYHmhcQAmKQABlZIBcQA%3D?_gl=1*nqfbp2*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzI1MDk2Ny45LjEuMTcxNzI1MDk2OC41OS4wLjA.&_ga=2.142298426.904535943.1717248348-239646288.1706355474)
 
 > 默认情况下推断不具有接收者的函数类型，即使变量被初始化为扩展函数的引用也是如此。
 > 要更改这一点，请明确指定变量类型。
@@ -158,6 +158,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+    //sampleStart
     val stringPlus: (String, String) -> String = String::plus
     val intPlus: Int.(Int) -> Int = Int::plus
     
@@ -167,11 +168,10 @@ fun main() {
     println(intPlus.invoke(1, 1))
     println(intPlus(1, 2))
     println(2.intPlus(3)) // extension-like call
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true"}
-
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYYDOALgE4EDmACkxSt4GQgGUuvADQYJ3ND1IBaAHyzJCjAF518nvHgAHQa1p1GLAuwFCRASTTsAdIQftlat9oxuDxoWY0VNSG8uxMRBx6NqxOBPQQANYwhOQgADxKaTJpqmnExIEYoVYRhFG8MakgABIwTEwQOSDNAO4QnExQAIT5hcEYRSWOZVYxcWgJyYQAjDIzBUNho45VcxgATIsDw%2BFEGxPWJoQAzAUYAPQXGDAAHuwwaKx4EGhKTHjJGGDMTEWUAF8WiB2DhODwYEccOwkB0sAgQAArHCMYGQLCGPBMGCcABqOOerwRBwADE4SSAAUA?_gl=1*nqfbp2*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzI1MDk2Ny45LjEuMTcxNzI1MDk2OC41OS4wLjA.&_ga=2.142298426.904535943.1717248348-239646288.1706355474)
 
 ### 内联函数 {id=inline-functions}
 

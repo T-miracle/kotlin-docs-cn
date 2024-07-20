@@ -105,6 +105,7 @@ class Polygon : Shape {
 在构造<tooltip term="派生类">派生类</tooltip>的新实例期间，基类初始化是第一步完成的（仅在基类构造函数的参数求值之前），这意味着它在<tooltip term="派生类">派生类</tooltip>的初始化逻辑运行之前发生。
 
 ```kotlin
+//sampleStart
 open class Base(val name: String) {
 
     init { println("初始化基类") }
@@ -123,6 +124,7 @@ class Derived(
     override val size: Int =
         (super.size + lastName.length).also { println("在派生类中初始化 size: $it") }
 }
+//sampleEnd
 
 fun main() {
     println("构造派生类(\"hello\", \"world\")")
@@ -130,7 +132,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7CAHGKAEYA2AhgM5HYBCxMAFAG4F7YoEC2M82AygC4BOAligDmASmzBUqbFOwC%2BXMdnT8UXPCipIQASRRy%2B9PgC8Bg7AWwAjSrkIlNogL4Sc0jFmx0GRI22w75ALzYktKhTKwAdHhYglwAFhH0RBAKSgKq6po6egbGQtjehjAyOPHFVkTF%2BMRE7AAkcvbYTigtqNUk2AAiMPw0MFAaLlLhvtzKggA0IVKe2LZcAHIsY7wm0yii7BSVVKMRPDDohGAwAGJ8PERcAMJxBDwKchEAruiYPGCUVI6JeMmpZQZDQgACCPEEL1YKmwADMII8ypZrB1atgGlwmg5ROIUDMSnJAek1CDslx9HgjCYzNhYH0BjYaljnKEIP0ePxYB56AUfOx%2FNgAvjQlQiG9ehFCsUANTzYhLFZRGLxYR%2FAHARRAklZXTk3LUqUlbBIul8fpQRkkeqNECOVBtPEoWEvHDMAgCH5ifFpFTakA3CAoa48F5gcn5E29M0M1EaJCaOIwPB4CDxzSTYLxkAAdwReCgadt9nxPXpgwTSZT6eCObzBaLrRAkxAXAeghgXAACoQuPCeMwECAAFYEOhN8AQZjoPjRHgANV63kDg4AjBEAJwRABMAAYQA4gA%3D?_gl=1*tqulsc*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTM5MjQzMS41Mi4xLjE3MDEzOTY2NDMuNTkuMC4w&_ga=2.246417028.1244175791.1701270364-2060274793.1694940376)
 
 这意味着在执行基类构造函数时，<tooltip term="派生类">派生类</tooltip>中声明或重写的属性尚未初始化。
 在基类初始化逻辑中（直接或间接通过另一个重写的 `open` 成员实现）使用这些属性可能导致不正确的行为或运行时失败。
@@ -164,6 +165,7 @@ open class Rectangle {
     val borderColor: String get() = "黑色"
 }
 
+//sampleStart
 class FilledRectangle: Rectangle() {
     override fun draw() {
         val filler = Filler()
@@ -179,6 +181,7 @@ class FilledRectangle: Rectangle() {
         }
     }
 }
+//sampleEnd
 
 fun main() {
     val fr = FilledRectangle()
@@ -186,7 +189,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIIAcYDsAEYA2BDAzvhgEoxgAuuaA5tjBsADqYasroYBmArplAE64A7gAoAlAwzJ%2BASzTlsaEYxAARQULnUMuDPzKUadFRIC%2BzVqwBuubBgBGEfrH4BhCNifwMAZXKyaDGoYcnEMAF4MFXs8MABrFWZzNGZmHAIiADEZbDooUgoqWhhvAsNisKYWNisYfllYLl4MAWFKi0tOmztOHLp%2BCIxs3LrxDs7WXpH%2BADpWoQBBNChh7DHqjGTO8Yw5NDqsPEIhvoOqicseTCm1iWApAIUlFVWtE02dzquWjSWVvvaGwurHw3FQ%2FAAAqsYPkDEU6HMNGEAPTIjCuWzYIhleEwADkRBkAFtkHQiehKOQZBBMBBOD82mJPsCbutgRNpHInso1BpMLobjC9HCjPRNOQABZYDxODAAEmAoPBUNOsMKopmjmcdXcnn45hAElRGAAqvgYNiRcUCbsSWSKbgqTSMHSHE4XLqnDbgqEmUDLFsA0lUik0N8ibg5ICurYuANItC1eU6GyWbN5utTCAADQgSj8H0ABTw5E4TiJCBAACtcDYc%2BAICScnUAGp1fDUtCVgCMMwAnDMAEwABhApiAA%3D%3D%3D?_gl=1*tqulsc*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTM5MjQzMS41Mi4xLjE3MDEzOTY2NDMuNTkuMC4w&_ga=2.246417028.1244175791.1701270364-2060274793.1694940376)
 
 ## 重写规则 {id=重写规则}
 

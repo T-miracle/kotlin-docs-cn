@@ -12,39 +12,41 @@ val str = "abcd 123"
 
 ```kotlin
 fun main() {
-    val str = "abcd"
-    for (c in str) {
-        println(c)
-    }
+val str = "abcd"
+//sampleStart
+for (c in str) {
+    println(c)
+}
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYYDOALgE4YC8G5IOARmCi8eaStWpIIHQmAwFm7UhSoSJABzYEW9ImGLiJAX0qUjIADQgWONgHMYLAAr0cLKWywIQAKxx1LcAgsdTx6GDYANQimPAg0bwBGADoATmSAJgAGECMgA%3D?_gl=1*n2gup6*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDQ1NTcuNTkuMC4w&_ga=2.9402037.1212359242.1701001969-2060274793.1694940376)
 
 字符串是不可变的。一旦初始化了一个字符串，就无法更改其值或为其赋新值。
 所有转换字符串的操作都会将结果返回到一个新的 `String` 对象中，原始字符串保持不变：
 
 ```kotlin
 fun main() {
+//sampleStart
     val str = "abcd"
     println(str.uppercase()) // 创建并打印一个新的 String 对象
     println(str) // 原始字符串保持不变
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOALgE4YC8G5IOAEZgo%2FajXE0A9FIwBhDjBxsYLDDjRQMABw4E2anBjQwA7hgDKnAgHMMEQQCsYYNpJ160bRkXYcAdCja2jAcYDgsMCTE7jIYAIIAQnIAIpKxsgAqABYw9no2BEys1mh2irgEamy5rDhYMO66%2Bj6EfqQZ6sKiVGgAviAANCBsOBw2MGwACozKSBAcWAggjjgMQ%2BAQWNp4jKEAaqEseBBoywCM%2FgCc%2FgBMAAwgfUA?_gl=1*n2gup6*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDQ1NTcuNTkuMC4w&_ga=2.9402037.1212359242.1701001969-2060274793.1694940376)
 
 要连接字符串，使用 `+` 运算符。这也适用于将字符串与其他类型的值连接起来，只要表达式中的第一个元素是字符串：
 
 ```kotlin
 fun main() {
-    val s = "abc" + 1
-    println(s + "def")
-    // abc1def
+//sampleStart
+val s = "abc" + 1
+println(s + "def")
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOGAvBuSDgEZjcMAagwBGarQAOAJwIAXRkTYjusJN2ISaAem0Y%2BYUWtpcqaAL4gANCDk5pAcxhyACoxxykEaVgQgAVjgM1uAQWJJ4jDDSAGrRLHgQaH6iAHQAnKkATAAMIOZAA%3D%3D?_gl=1*fadn00*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDQ1NTcuNTkuMC4w&_ga=2.267818382.1212359242.1701001969-2060274793.1694940376)
 
 > 在大多数情况下，使用 [字符串模板](#字符串模板) 或 [多行字符串](#多行字符串) 更可取，而不是字符串连接。
 > 
@@ -100,23 +102,25 @@ val text = """
 
 ```kotlin
 fun main() {
+//sampleStart
     val i = 10
     println("i = $i") // 打印 “i = 10”
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYZ4YC8GAjAAzW0AOAJwIAXRkXIhWHACR5JpPjQD0yluy68qaAL4gANCBE5BAcxgiACoxwikEQVgQgAVjgYHwELPzyMYggBqAQDOeBBozpwAdACc0QBM3CA6QA%3D?_gl=1*173njdq*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDQ1NTcuNTkuMC4w&_ga=2.7705906.1212359242.1701001969-2060274793.1694940376)
 
 或花括号中的表达式：
 
 ```kotlin
 fun main() {
+//sampleStart
     val s = "abc"
     println("$s.length is ${s.length}") // 打印 “abc.length is 3”
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOGAvBuSDgEZjdqtAA4AnAgBdGRbgBIWAOkYw0AcwkALDHjazgi5Ws0BfbqSE0A9JYx8wSleq06MAZkqVjIADQgJOUVUYCQAFRhwJJAhRLAQQACscBh9wCCxhPGVRADUYURY8CDQ4gEYFAE4FACYABhBjIA%3D?_gl=1*173njdq*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDQ1NTcuNTkuMC4w&_ga=2.7705906.1212359242.1701001969-2060274793.1694940376)
 
 你可以在多行字符串和转义字符串中都使用模板。
 在多行字符串（不支持反斜杠转义）中插入美元符号 `$`，在任何允许作为
@@ -160,7 +164,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAYA6aVGtGA9PRgGIQBOuALgM4acQYcUKBgBeMNhBi8caEbgDWMQRgA2MNAHNOACwwQkGbjABuGmnRM5VGApxiaJAORRYARhIwBeDAGVObASaAHRI7FyEFCAApAAMAOxQUQA0GADMAIwALBkAbMQWtAAOgWicqkR2Ds6uHmwFmHSMGLGxmTm5VIUMTKwcODwYAO54uhhhKGwYsGB4uKoyckZ4mtSNtFY2SKoQAy7unj7%2BpSFh%2FZyRMQDUwVlIKenB2RkArACcAEwNdBgldhWEba7Tj7OrfJpMK5pJ4dLrrHoscIDXgjMYoIpFCRgHDGcbsPhDARFVQ4MAwHQQVSwNjcbqbDA6GCqHbHILePwBIKhJEXKLRXwYfkPKKM5kQYUgQlsKlRcHFUrlIiilmcrRyhEACQAogAZHUAeQwAHV9QAlHUAEW6VAAviBkiBODg2I5OAAFEmcM5YBAgABWOCs9vAECwRTw6jYADUJNw8BA0L6MsE3sEPrEQDagA%3D?_gl=1*ixvesm*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDU0MjQuMi4wLjA.&_ga=2.5152179.1212359242.1701001969-2060274793.1694940376)
 
 `String.format()` 函数提供了与字符串模板类似的功能。然而，`String.format()` 函数更为灵活，因为它提供了更多的格式选项。
 

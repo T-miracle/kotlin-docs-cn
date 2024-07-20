@@ -18,15 +18,16 @@
 
 ```kotlin
 fun main() {
+//sampleStart
     val aChar: Char = 'a'
  
     println(aChar)
     println('\n') // 打印额外的换行符
     println('\uFF00')
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYY4DCAFjgE7wYfcYAvBgDkOEdWq0ADlwIAXRkTacuxKTVkKlhCZRGkA9IYwAFOWnkBnFphgAPeVxwY0MAO6MCMDGFU4weRguDQwtSx09FAAxaIAGOINKSgBfEAAaEHluAHMYeVNGHHkkCC4sBBAAKxwGDPAILGk8RmCANWCrPAg0SoBGADoATgGAJjiQFKA%3D%3D%3D?_gl=1*1nzn97m*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDQyODQuNTguMC4w&_ga=2.77977236.1212359242.1701001969-2060274793.1694940376)
 
 如果字符变量的值是数字，你可以使用
 [`digitToInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/digit-to-int.html) 函数将其明确转换为 `Int` 数字。

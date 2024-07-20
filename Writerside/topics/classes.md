@@ -36,6 +36,7 @@ class Person(firstName: String) { /*...*/ }
 在实例初始化期间，初始化块按照它们在类体中出现的顺序执行，与属性初始化器交替进行：
 
 ```kotlin
+//sampleStart
 class InitOrderDemo(name: String) {
     val firstProperty = "First property: $name".also(::println)
     
@@ -49,13 +50,13 @@ class InitOrderDemo(name: String) {
         println("Second initializer block that prints ${name.length}")
     }
 }
+//sampleEnd
 
 fun main() {
     InitOrderDemo("hello")
 }
 ```
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7MAbAhgZ2wAgEkUBLAFwHkAnWSgERgFsIAKFTBmePAZVMuJQBzAJR5gqPJLwA3TOjwAzYpWykACpQgAHGJVIBPPAF48SEADFlqvFs069%2BrgBI2HMwDo52FvHi2BpOgowhJSoZICZGLhUpL%2BKIEozGaWKqR4kaTEcsQAXrp4AEboEGAA1nikABaY6fGk%2BC7sMGYhKLEAvjExsvLYMJAoUBraugbGpiDcAxBDNnZjjnhOwK4w7ugwQtVdIJ7o3sy%2B9UFtsTGZ0e2xUidJZtODUBkkWTn5lEUl5ZU1dfwJRqrZobLaCHatGJdFDQ1CoBQAV3aDEwAmYonE10kRDIVBo9CYyRAVRg6BKkJhIAANCBSJhKIIYOosKQFBBKAwECAAFaYWTU8AQBhaYibSgANV02GIsy5AEZ3ABOdwAJgADCAOkA%3D?_gl=1*1g8lyzn*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTM5MjQzMS41Mi4xLjE3MDEzOTI5NjYuNTkuMC4w&_ga=2.140484659.1244175791.1701270364-2060274793.1694940376)
 
 主构造函数的参数可以在初始化块中使用，也可以在类体中声明的属性初始化器中使用：
 
@@ -132,6 +133,7 @@ class Person(val name: String) {
 即使类没有主构造函数，委托仍然会隐式发生，并且初始化块仍然会被执行：
 
 ```kotlin
+//sampleStart
 class Constructors {
     init {
         println("Init block")
@@ -141,13 +143,13 @@ class Constructors {
         println("Constructor $i")
     }
 }
+//sampleEnd
 
 fun main() {
     Constructors(1)
 }
 ```
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7MAbAhgZ2wAgGEIVsAXAJwFcxSJz9hU9m8BLFV0vRlFvvAA7l2pdCgAUSEAEkOXAEboIYANZSAlExYBfVFuaQSFarXLjW8PLNLru%2B%2FkJFjJIIkao06eACSsN93RRAvRQAM0peAFtMdnFbHj43Mg9TbHEARk0gkAAaEFJMcgBzGFIABSxSULpIhBAAK0wAN0xc8AhIgVZ0GHIANV7sVmI69IA6AE4xgCYABhBtIA%3D%3D%3D?_gl=1*4g9fkd*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTM5MjQzMS41Mi4xLjE3MDEzOTI5NjYuNTkuMC4w&_ga=2.209077650.1244175791.1701270364-2060274793.1694940376)
 
 如果一个非抽象类没有声明任何构造函数（主构造函数或次构造函数），它将具有一个生成的无参数主构造函数。构造函数的可见性将是 public。
 

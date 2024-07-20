@@ -982,6 +982,7 @@ for (i in 0..<n) { /*...*/ }  // 好的写法
 
 ```kotlin
 fun main() {
+//sampleStart
    println("""
     不是
     修剪过的
@@ -1003,10 +1004,10 @@ fun main() {
           |}""".trimMargin()
 
    println(a)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNADgE4EAuANkeSB15jRgHIQm1Xk0ZYsMKMJpMYADyE8aXTpyXFK0hszaEV3XhgAqYiVKUZZC6Rn0gAdKLxYAkmlhomJaRqpLtnrq%2B0gBuOCwYOBgAvLaqHCbOZpYQ2Dj0AOYElvJM8DaGNAA%2BeEiEUQB8GACMpBQWhRhFhvQwTCj0mDgFhUUAvnaOYgCy6VlEwf6MgUQ4k30gADQgTGNtAAosOExIEPRYCCAAVjhhS%2BAQWLR4LDD0AGp3AM54EGiH1fYAnPYATAAMID6QA%3D%3D%3D?_gl=1*1c0z4i0*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDE0NDQ1MS4zMi4wLjE3MDAxNDQ0NTEuNjAuMC4w&_ga=2.69185428.408218914.1700050452-2060274793.1694940376)
 
 了解 [Java 和 Kotlin 多行字符串](java-to-kotlin-idioms-strings.md#use-multiline-strings) 之间的区别。
 

@@ -118,6 +118,7 @@ val bytes = 0b11010010_01101001_10010100_10010010
 
 ```kotlin
 fun main() {
+//sampleStart
     val a: Int = 100
     val boxedA: Int? = a
     val anotherBoxedA: Int? = a
@@ -128,10 +129,10 @@ fun main() {
     
     println(boxedA === anotherBoxedA) // true
     println(boxedB === anotherBoxedB) // false
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYY7wYCSaALhgLwYBGAAxDqtBswBGEAB4woAQTacuAfj4sxNCSzQQuACxgAnAEKz5Sjt3X8cWjA52Tl3DcJGjM4phmlyoU1c1DUknXxw9QxNzAKDrEP4w7xoHAAdjAi5GIn9LPl47KKMzC0VSAHoKjC5jFBh0zO4cwjzAgqL9Etj5U0rqpCYAZwaqNABfEAAaEC4cYwBzGC4ABUYcLiQIYywEEAArHAZp8AgsNLxGEwA1EyG8CDQ9gQA6AE4XgCYhEHGgA%3D?_gl=1*v5wyrp*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.143512188.893500249.1700440749-2060274793.1694940376)
 
 所有对于 `a` 的可空引用实际上都是相同的对象，这是因为 JVM 在 `-128` 到 `127` 之间的 `Integer` 上应用的内存优化。
 这并不适用于 `b` 引用，因此它们是不同的对象。
@@ -140,15 +141,16 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     val b: Int = 10000
     println(b == b) // 打印 'true'
     val boxedB: Int? = b
     val anotherBoxedB: Int? = b
     println(boxedB == anotherBoxedB) // 打印 'true'
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBG8GAkmgC4YC8GAIwAGUcOq0ADgCcC3RkRb8BLUgHo1GAAqyeAZwwBybtJQxDEmg2YsIADxhQAQuy7cA%2FP1aX6TDDjQIbgALGGkne0cXTh5PFR8ZOQVCWwdnZX9AkLCItKd1TR05A2NTc0pKAF8QABoQbhxpAHMYbi1GHG4kCGksBBAAKxwGWvAILEk8RjCANTC9PAg0fsEAOgBOVYAmYRBKoA%3D%3D?_gl=1*rwc5oq*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.34739560.893500249.1700440749-2060274793.1694940376)
 
 ## 显式数字转换 {id=显式数字转换}
 
@@ -169,13 +171,14 @@ print(b == a) // 惊喜！这会打印出 "false"，因为 `Long` 的 `equals()`
 
 ```kotlin
 fun main() {
+//sampleStart
     val b: Byte = 1 // OK，文字是静态检查的
     // val i: Int = b // 错误
     val i1: Int = b.toInt()
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYBG8GAQgJ4AuMGAXgwBGDAHoxGAPIBpADQZGePgCcmAZww4V%2FMAAsYYANYwoGdTxw88YJoy7VaE%2Bkwx52ASTQ9BrcZIBRACUgqSDHGgZmPGFPb18WADoeCC8eEkpKAF8QORBLFQBzGB4ABUYrJAgVLAQQACscBlzwCCwABzxGGBUANR71PAg0OuFEgE5EgCYABhAsoA%3D%3D?_gl=1*1v488vi*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.37886186.893500249.1700440749-2060274793.1694940376)
 
 所有数字类型都支持转换为其他类型：
 
@@ -199,14 +202,15 @@ Kotlin 支持一组标准的数字算术操作：`+`、`-`、`*`、`/`、`%`。
 
 ```kotlin
 fun main() {
+//sampleStart
     println(1 + 2)
     println(2_500_000_000L - 1L)
     println(3.14 * 2.71)
     println(10.0 / 3)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGADgE4EAuANkQIwYDUGATMWq1GLdoT4B9AKwAGGRLnzFAGQwBaDB2WDMwpmjZEAzADoOAFgwAqfiYDsHHbXr7DhDjJMyMAegxGdSgBfEAAaEGYcBgBzGGYABVYcZiQIBiwEEAArHAA3HDDwCCw6PFYYBgA1CoBnPAg0TI4TAE4TPhkQIKA%3D%3D?_gl=1*pznp1c*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.268580920.893500249.1700440749-2060274793.1694940376)
 
 你还可以为自定义类重写这些操作符。有关详细信息，请参阅[运算符重载](operator-overloading.md)。
 
@@ -216,35 +220,38 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     val x = 5 / 2
     //println(x == 2.5) // 错误：无法将操作符 '==' 应用于 'Int' 和 'Double'
     println(x == 2)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAeGAvBgKwYD0GAJmq1evAA4AnAgBdGRNu04CAdF1KiMAUQBK2gPLb4GPWJgSc0iBIwByRTYxgcaNBGkYARjAw4xYxngwUBiWtgCSaNIOzsE2ACIQKB6MMDbCNJIycoQKSsSUlAC%2BIAA0INI4EgDmMNIACowWSFZYCCAAVjgMpeAQWGJ4KRIAamYAzngQaG0AjMoAnMoCAAwghUA%3D?_gl=1*fz193u*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.1347832.893500249.1700440749-2060274793.1694940376)
 
 这对于任何两个整数类型之间的除法都是成立的：
 
 ```kotlin
 fun main() {
+//sampleStart
     val x = 5L / 2
     println(x == 2L)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAeGAvBgKwAyGA9BgBM1WgAcATgQAujIm3achPYpUoBfEABoQ0nBIDmMaQAVGOaUggSsCEACscDbeAhYxeRjAkA1bwGc8CDQ7AEYAOgBOcKEABhB1IA%3D%3D?_gl=1*1poal25*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.96768342.893500249.1700440749-2060274793.1694940376)
 
 如果想返回浮点类型，请显式将其中一个参数转换为浮点类型：
 
 ```kotlin
 fun main() {
+//sampleStart
     val x = 5 / 2.toDouble()
     println(x == 2.5)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAeGAvBgKwYD0GAJgB0AFwgARCCgBGjGCWq0ADgCcCIxkTbtOwrsUqUAviAA0IEThUBzGCIAKjHCKQQVWBCABWOBmfAQWEp4cioAajAqAM54EGieAIxCAJxCAgAMIEZAA?_gl=1*1fqt807*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.96834006.893500249.1700440749-2060274793.1694940376)
 
 ### 位运算
 
@@ -289,6 +296,7 @@ val x = (1 shl 2) and 0x000FF000
 
 ```kotlin
 fun main() {
+    //sampleStart
     // 操作数在静态上已知为浮点数
     println(Double.NaN == Double.NaN)                 // false
     // 操作数在静态上不已知为浮点数
@@ -303,7 +311,7 @@ fun main() {
 
     println(listOf(Double.NaN, Double.POSITIVE_INFINITY, 0.0, -0.0).sorted())
     // [-0.0, 0.0, Infinity, NaN]
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-numbers-floating-comp"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11A9PRgPIAOMATjmlBgM4AXHALxgcAG3EBPDAKnteOPhiTiIwggHMAtKwgEBGNCiwAjTrTqsOB8UQAiEFKfEwAdADkcHjAF5fGI7Orp7epHQRkRGMKhJ8MJYMTGyc3LwezAAq%2FEIiYpIycgoYSipqGmg6egZGJuYciRgxAMoQGF4%2BeMowAI4oErJteALx4kiN1rZE4l0CzEiEQS7uHaT%2BGDOC84tOy6EexKQxAhwoCWiNMSlcPDka%2BdKy8jCKyqrqIpW6%2BmiGxmYWKjUSa%2FOyEAAMbnBfgC2kh4PCUSRyKRx1O52iyXYN3SWTueQkjyKLxKb3KnyqPz%2BdUBmIwrQwcKhGC6GxgfGUAgAFtwMPCJjZQdNZtt4WsAps5gsmQjESikrFxPFKAKpoRJdsliEOgAaQK7EIABWYzQAkplTQA1ACiAH1TR4AGIO80ATT18L1MuIbj4EA4AheJGIlyYAG0ZR6oXrTWgkARhlI9R0ALqNSgAXxAOpAQg4mhgAkN4mESH9WAQIAAVjgAG44bPgCBYVh4VwcS2cPh4CBoSsARjcAE43AAmcEgDNAA%3D%3D?_gl=1*1ayytvc*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMDQ4ODQ3MS40MC4xLjE3MDA0ODkxNzEuNTkuMC4w&_ga=2.68876760.893500249.1700440749-2060274793.1694940376)

@@ -66,7 +66,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-class-create-instance"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAYQgOwBcUwCAKANxSUwEsp5MBJQgGk0oCdMYBbFGpAwDKBDjTwBzAJQAdPHIBmAVzyY%2B40lMzA5mPeyqZIhYgUwBeHPiIlSARjYyQfDgE8AAhPVIAdJB5OsngAviAsIEQcEjAEAAqoBAoQHDwIIABWKJRh4BA8AA4CMBwAasVoNPhpdj4AnD52AAwgwUA%3D%3D%3D?_gl=1*l20p1l*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.247882247.1684546783.1699700997-2060274793.1694940376)
 
 在这个例子中：
 * `Contact` 是一个类。
@@ -99,7 +98,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-access-property"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAYQgOwBcUwCAKANxSUwEsp5MBJQgGk0oCdMYBbFGpAwDKBDjTwBzAJQAdPHIBmAVzyY%2B40lMzA5mPeyqZIhYgUwBeHPiIlSARjYyQfDgE8AAhPVIAdJB5Osqr6uvoA9GGYAApihFgEABYwBkhKyRAKmInJAA4cEDkwHASuDLz8SKF6eeIESHikxjYEPuUCWvqdIcF6EWoobp7efhAB8j2YfQCqOVAoBDDxSSlpmBlZy3kFRSVl3lVG1qat3haYTgBWKHgwQxUjASAHB30xtUvJNwDuK%2BmZ2ZgtoViqVuPsJjVCPVGkcSCcKh0up0XpErjc7gIHnIAL4gFggIgcCQwAhRVAEBQQDg8BAgK6UPHgUY5ARFABqRTQNHwtLsPgAnD47AAGEDYoA%3D?_gl=1*l20p1l*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.247882247.1684546783.1699700997-2060274793.1694940376)
 
 > 要将属性的值作为字符串的一部分连接起来，你可以使用字符串模板（`$`）。
 > 例如：
@@ -130,7 +128,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-member-function"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAYQgOwBcUwCAKANxSUwEsp5MBJQgGk0oCdMYBbFGpAwDKBDjTwBzAJSZgAHTyYlmAGYBXRQAcxhRlFIz5i5Se3iCSPKTpSFJgL4LHeBesV9xB2XeWVqkQmICTABeHHwiElIARjY5ED4OAE8AAQkPJAA6SB5422MlAHpCnCokLB5eACMYLjcSGnxMM119fJMAyIJMloI9LxNBzB8ikuinEBYQIg4JGAIABVQCFQgOHgQQACsUSknwCB5NAVqANVq0RrxN6MyATkzogAYQeyA%3D?_gl=1*d9y6fn*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.48071207.1684546783.1699700997-2060274793.1694940376)
 
 ## 数据类
 
@@ -168,13 +165,14 @@ data class User(val name: String, val id: Int)
 fun main() {
     val user = User("Alex", 1)
     
+    //sampleStart
     // 自动使用 toString() 函数，以便输出易于阅读
     println(user)            
     // User(name=Alex, id=1)
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-data-classes-print-string"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIoEMAuyAEYA2yDOeGAqnjAE4AUAbsthgHbIC2M8GAyqmQJb0DmAGgw063KGwCS9VAEoAOvQUAzAK70MTZLwoyMwBRkPDaGFaTIYAvMXMU5IAILYYAD3tCAjPPVGDvn4YA9IEYDiqoEJqo3GC02ACepqSEEZw8%2FDoYqvRg0RDqeBAYqAAWaBgQ4QAO4RjchDD4iREYZI1QfoZV6ajY9BRm5LpGIyOdGME25BSMLJZOrkJill7jCgC%2BIAIg6GR8MKgACrioShBkTAggAFbINFvgkVXczmQAauR43PlXHgB0AE4%2Fh4AAwgdZAA%3D%3D%3D?_gl=1*qfd152*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.249457159.1684546783.1699700997-2060274793.1694940376)
 
 这在调试或创建日志时特别有用。
 
@@ -186,6 +184,7 @@ fun main() {
 data class User(val name: String, val id: Int)
 
 fun main() {
+    //sampleStart
     val user = User("Alex", 1)
     val secondUser = User("Alex", 1)
     val thirdUser = User("Max", 2)
@@ -197,10 +196,10 @@ fun main() {
     // 将用户与第三个用户进行比较
     println("user == thirdUser: ${user == thirdUser}")   
     // user == thirdUser: false
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-data-classes-compare-instances"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIoEMAuyAEYA2yDOeGAqnjAE4AUAbsthgHbIC2M8GAyqmQJb0DmAGgw063KGwCS9VAEoAOvQUAzAK70MTZLwoyMwBRkMYDRkRhWkyGALzFLFOSACC2GAA9HQgIzz1p2hikkPRQJOQ2duQOzq4eIN6%2BRsIBqAAW3GShlhFhlI4AsshxQgBMviaGAPSVGADCEEwADshkMIQW4agQgTDBUOaWFRiNPNLY9NEdVta2QRAhuWwAJMBTNrO981nkAL6OukPVA%2BEzPX2LGFwqMEOHNfVNLW3HVl2X6ZkvQyO8qOOT2VOaQy2zIy1WgNswMyuT2IF0hjuL3W7xBFyUtFIt3oO3iIHQZD4MFQAAVcKglBAyEwECAAFbIGh4yBNbiuMgANXIeG481pXgAdABOAVeAAMIB2QA%3D?_gl=1*qfd152*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.249457159.1684546783.1699700997-2060274793.1694940376)
 
 ### 复制实例 {id=复制实例}
 
@@ -214,6 +213,7 @@ fun main() {
 data class User(val name: String, val id: Int)
 
 fun main() {
+    //sampleStart
     val user = User("Alex", 1)
     val secondUser = User("Alex", 1)
     val thirdUser = User("Max", 2)
@@ -229,10 +229,10 @@ fun main() {
     // 创建 id 为 3 的用户的副本
     println(user.copy(id = 3)) 
     // User(name=Alex, id=3)
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-data-classes-copy-instance"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIoEMAuyAEYA2yDOeGAqnjAE4AUAbsthgHbIC2M8GAyqmQJb0DmAGgw063KGwCS9VAEoAOvQUAzAK70MTZLwoyMwBRkMYDRkRhWkyGALzFLFOSACC2GAA9HQgIzz1p2hikkPRQJOQ2duQOzq4eIN6%2BRsIBqAAW3GShlhFhlI4AsshxQgBMviaGAPSVGADCZDBoMITI6u7IYKhYEAAOAJ4YEErmlhUYPTzS2PQUFuQAdJD9OrpJhmPVkZSMLNYu7kJi1j4KGzX1jajNGJhLA0Mj4QDu3GkMzKzGIIVxYxO8qGms0si16fWiP0cMlWZy2FB2MGsP0OUGO5T8VXODSaLW6%2FUGwzmVhebzEbAAzH9JoCZkTQcsxBFydDjBiMJtcvCPntYijrMyxgoAL7xEDoMh8GCoAAKuFQSggZCYCBAACtkDRRZAmD1uK4yAA1ch4bgQegqrzzACc8y8AAYQEKgA%3D?_gl=1*qfd152*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.249457159.1684546783.1699700997-2060274793.1694940376)
 
 创建实例的副本比修改原始实例更安全，因为依赖于原始实例的任何代码都不会受到副本及其操作的影响。
 
@@ -260,7 +260,6 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-classes-exercise-1"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcID0SAEB1ATgSwC41QE8IBXTVSWVACxkxgB0A7ZgMxKdQFsBDbJgBQBKVMGaoJqAG48ANqhhcADqgC8qAKLLZEQjBgCGIALI9MhIwBpUAJgAMQ8ZKU4muWYMVLHnSV4B0AM5yZoSoANTqAIx2ThIu%2FO6eyj4AviCWILhmAOYwuAAKsjy4rBCYXAggAFY8MhngEMrYsnQAanSB2BBMVVH%2BAJz%2BMSCpQA?_gl=1*qfd152*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.249457159.1684546783.1699700997-2060274793.1694940376)
 
 |---|---|
 ```kotlin
@@ -313,7 +312,6 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-classes-exercise-2"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWBbADhATgFwAQGsJsAbJAOwDpMBDMqCFCgJVvpQB0zOprtrcwxagGdhuAKLpiEAJ4wYACgBu1YrjLUUMeLgDK2TOQDmAGlwrMuYauqYZOgJJlsASk6cA9B9wB1Q9hhcGQgAV0tIWFwACxhMGHcyADMQslwUanIFF1xgTlx881VcGHQAcRhUgF5cFjoGSTRpORhysljeLAUARgAGMwBmHrdUgrRDZ2IyBRK0VoojCvaAhqb5LOGC3DHyEimZuYW2mmWpWTWXDdHx3emyivnF45gVs8ULvIL9%2B5RyXRs7XDVACsPQ%2B%2BS%2BlHSAA8%2FkIAdVeqCRvlthM9ndKIcls9Ts11pwAL4gEwgPiYBbYAAKQmwiSwKAQIAAVtQVMTwAw0EhiLEAGqxYRICBkRldCgATgovRABKAA?_gl=1*gdhz30*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTg4NzE1MC4yMS4xLjE2OTk4ODg1NzAuNjAuMC4w&_ga=2.188205608.1684546783.1699700997-2060274793.1694940376)
 
 |---|---|
 ```kotlin

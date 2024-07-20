@@ -21,6 +21,7 @@
 
   ```kotlin
   fun main() {
+  //sampleStart
       var riversArray = arrayOf("Nile", "Amazon", "Yangtze")
 
       // 使用 `+=` 赋值操作会创建一个新的 `riversArray`，
@@ -28,10 +29,10 @@
       riversArray += "Mississippi"
       println(riversArray.joinToString())
       // Nile, Amazon, Yangtze, Mississippi
+  //sampleEnd
   }
   ```
   {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-rivers-array-kotlin"}
-  [**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgE4aN50yMDOAgo4zgE8MAXgxN%2BAgPJJC5EADk8AGxhyANBjndcALwhUQGuQE0caAOYAXHapDFK1WgHonGAKqcC5jJYAWMDABqURxOT3M0LBg0SwwIAAcOHEs8fQwwRhhkmE4xDDQYAHcWNg4ePkE1RxoXdIS8HLj2Zj8AiFZzAhwlDBgVKJjcsygxKChcuQBZPDCZz3j4vDlqkubyiSDRKbmdhaWQFfjWGKUiVjXeCQA6ACsIAgAVCABlS2PzEntMZ1dFFQ1tDg9GgNKYLNYYBpprNZnsHGgAL6GECWJjmGCWAAKSmSSHaWAQIBuOAYyMgWEWKkYADUyqk0ISAIxXACcVwATAAGEAIoA?_gl=1*10gpnv9*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.6601010.1212359242.1701001969-2060274793.1694940376)
 
 * 您可以使用相等运算符 (`==`) 检查集合是否在结构上相等。
 * 但是对于数组，您不能使用该运算符。
@@ -49,28 +50,30 @@
 
 ```kotlin
 fun main() {
+//sampleStart
     // 创建一个值为 [1, 2, 3] 的数组
     val simpleArray = arrayOf(1, 2, 3)
     println(simpleArray.joinToString())
     // 1, 2, 3
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-simple-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgMIBOMOALjAM4Y6Y4WLHAE8MAdzwcAFhgBuOADYoeGANoBGADQYATDoDMAXWq0FijNzxYADopgBBIaIwBePs5EB5JIW17DYlMaGxYCDkUiK1t7J2ERADoAKwgCABUIAGUOMLQAcxIgzFoGDH99DANKSgBfEC0QDkE8mA4ABUVOJAgWLAQQJJwFevAIWzx7FgA1GBYrCDR%2BjQSATgTdAAYQGqA%3D%3D?_gl=1*t912li*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.3570096.1212359242.1701001969-2060274793.1694940376)
 
 此示例使用 [`arrayOfNulls()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/array-of-nulls.html#kotlin$arrayOfNulls(kotlin.Int))
 函数创建一个指定大小、填充有 `null` 元素的数组：
 
 ```kotlin
 fun main() {
+//sampleStart
     // 创建一个包含值 [null, null, null] 的数组
     val nullArray: Array<Int?> = arrayOfNulls(3)
     println(nullArray.joinToString())
     // null, null, null
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-null-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgMIBOMOALjAM4Y6Y4WLHAE8MAdzwcAFhgBuOADYoeGANpoUixQBoMm7XoOKAutVoLF%2BrYoCCQ0fAz3hIgDwBJNBwD8APgwAXj4HEQB5JAA5G25CAGZicxoABxYCDkUiYxdRADoAKwgCABUIAGUONLQAcxJEzFoGa0Nm3VbKSgBfEB0QDkFqmA4ABUVOJAgWLAQQfJwFHvAILGS8RRgWADUN7jwINBmARlyATlyAJgAGEE6gA%3D%3D%3D?_gl=1*13lnwo1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.77377557.1212359242.1701001969-2060274793.1694940376)
 
 此示例使用 [`emptyArray()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/empty-array.html) 函数创建一个空数组：
 
@@ -93,6 +96,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     // 创建一个用零 [0, 0, 0] 初始化的 Array<Int>
     val initArray = Array<Int>(3) { 0 }
     println(initArray.joinToString())
@@ -102,10 +106,10 @@ fun main() {
     val asc = Array(5) { i -> (i * i).toString() }
     asc.forEach { print(it) }
     // 014916
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-array-constructor-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgMIBOMOALjAM4Y6YBBFixwBPADwBJNBwB8GDgAtOGAng54cAGzwAvHhgDu6xRn0sIvANoAGADQZ7jgLrVaAN22q06oSNEYALwYfmJSMrKEAMykwI4YAL5uNAAOLAQcWkRqHKGiAHQAVhAEACoQAMoc6WgA5iTEyfSMTq2UTQzMbJwG%2FCHCYVU1tfLGShieWigGVuQgNnMOcwCMixhzACxrcwCc2yDLAGxzrpgeXjjcYEH9%2FoQArLGqGAC08oR4GABUqsT5HJVqgR6qQkmcaJcwPkkBAWABRHBgUxxNIZD4cUEdFrLDY7I7tNAJEB2EAcHAsWowDgABS0nBhLCwCBAhRwnmJ4AgWBSeC0MBYADV%2Bdw8BA0MzlvkdvkAEw2EAJIA%3D?_gl=1*13lnwo1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.77377557.1212359242.1701001969-2060274793.1694940376)
 
 > 与大多数编程语言一样，Kotlin 中的索引从 0 开始。
 >
@@ -117,6 +121,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     // 创建一个二维数组
     val twoDArray = Array(2) { Array<Int>(2) { 0 } }
     println(twoDArray.contentDeepToString())
@@ -126,10 +131,10 @@ fun main() {
     val threeDArray = Array(3) { Array(3) { Array<Int>(3) { 0 } } }
     println(threeDArray.contentDeepToString())
     // [[[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0]]]
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-multidimensional-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgMIBOMOALjAM4Y4YcA7hAC0UPFhhpueCGhwAbPixY4AntVoA3RQOEARAIIr1GALwZjqtYQBMpYJZNqAPAEk0HAHx2HGAAwYAL7BmjQADiwEHApEQhBGzgB0kJ5SHPowMOEAKhAAyhxRaADmJMRh9IwA2tX%2BADQBALqNdY3%2BTU2UlQzMbJw8fAIAFmwwYhJSMnK6OM6VOkoco1mJ1uZO1oQAzH5W6jt7zu6ePrtkAcFXQZWR0bGEy2Nr6ilyXJ6Z2XmFxWXEFUwtF6tTaAXaLQwYIazVaMPhnVa0IhcPaKKh8IhkNqmNhGLReORzU63TQQRA9RAHDmJRgHAACgpOEgICwsAgQAArHA6CngCBYcJ4BQwFgANVF0zQHIAjEkAJxJWz%2BEBBIA%3D%3D?_gl=1*13lnwo1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.77377557.1212359242.1701001969-2060274793.1694940376)
 
 > 嵌套数组不必具有相同的类型或相同的大小。
 >
@@ -141,6 +146,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     val simpleArray = arrayOf(1, 2, 3)
     val twoDArray = Array(2) { Array<Int>(2) { 0 } }
 
@@ -151,10 +157,10 @@ fun main() {
     // 打印修改后的元素
     println(simpleArray[0].toString()) // 10
     println(twoDArray[0][0].toString()) // 2
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-access-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOeWADozAIIBOfHAE8MAXgw4BwgPJJCARgA0GAEzKAzMWq0GzAC4B3CABF%2BgkeLPDCK0sAxWhAHgCSaPQD4bdjAAYMAL6BlNo0APRhDmBgMCwssRh6ABYwGDDcWDDuEmhQ2NB4SHgJeHqhrOxcvFJCANq%2BALpiGPK%2B5YYmjvUN3c0qIZi0ERgACnwEeiyJKflQhcV56TCZ7uUc4%2B6MRGyc3F2NAHR6EADKehsA5iSkw61rG3pbhB2mNd3dR6fnBFfEN5H9KhoAIgRQgPSSC4wPQjRg4PRICB8LAIEAAKxwDFB4AgnDw3D4ADUYHw2BA0Kj5AcAJwHFS%2BEABIA%3D%3D%3D?_gl=1*13lnwo1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.77377557.1212359242.1701001969-2060274793.1694940376)
 
 Kotlin 中的数组是 **不变** 的。这意味着 Kotlin 不允许将 `Array<String>` 赋值给 `Array<Any>`，以防止可能的运行时失败。
 相反，您可以使用 `Array<out Any>`。
@@ -186,7 +192,6 @@ fun printAllStrings(vararg strings: String) {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-vararg-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYb0wAuLMATgM4CCHHOAJ4YAvBhz8hAeSSFy4eQBoM8qPOKVq1AA4cCLHvXoBlFnrQBzLnJA4lKkACN7AKmZtOvSYI1VqAen9xRzA1NABfSkpUTF19QxMzAitCOgEOCwwuJMsueAxTcwtSCj8MJAgODEJsoowCLJyrEs0tNri0Fhqm3zbIiJBFEBYJC1YABXocFgqOLAQQACscOkHwCCxtPGYOADVPPAg0BYBGADoATjOAJgAGEHCgA%3D%3D?_gl=1*1t2d88r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.6083251.1212359242.1701001969-2060274793.1694940376)
 
 有关更多信息，请参阅 [可变数量的参数（varargs）](functions.md#可变参数数量varargs)。
 
@@ -198,6 +203,7 @@ fun printAllStrings(vararg strings: String) {
 
 ```kotlin
 fun main() {
+//sampleStart
     val simpleArray = arrayOf(1, 2, 3)
     val anotherArray = arrayOf(1, 2, 3)
 
@@ -209,10 +215,10 @@ fun main() {
     simpleArray[0] = 10
     println(simpleArray contentEquals anotherArray)
     // false
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-compare-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOeWADozAIIBOfHAE8MAXgw4BwgPJJCARgA0GAEzKAzMWq0GzHGggAXABYw%2B%2FQSPGTLshcrUZNlbTQD0bjAGEInSTBYMSDRDGBDAiCQJKSEWVwwOPgJDRiI2Tm4LYQA6YNCQgFEARxQmFkJ9I1NzGOItTFoPDEM%2BFBgXBvdPAFU2NABzDAIkPAAPDANDHEM8CDRlSD8%2BAKC5%2FMMIqJthQJwkUL4JTBhuLDDDDHimvECwY31%2BmCh49K5eGIBtAAYAXTEMeRfeKJZKpQivTIxVYhc7FUqMXaTapZIT1WgYJpIMrtKhoAC%2BIEUICmfEehgACoxpkgIHwsAgQAArHAMQngXwcPDcPgANTMbDmDPk2QAnNkVF8QHigA%3D%3D?_gl=1*1t2d88r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.6083251.1212359242.1701001969-2060274793.1694940376)
 
 > 不要使用等号 (`==`) 和不等号 (`!=`) [运算符](equality.md#structural-equality) 来比较数组的内容。
 > 这些运算符会检查分配的变量是否指向相同的对象。
@@ -234,15 +240,16 @@ Kotlin 提供了许多有用的函数来转换数组。
 
 ```Kotlin
 fun main() {
+//sampleStart
     val sumArray = arrayOf(1, 2, 3)
 
     // 对数组元素求和
     println(sumArray.sum())
     // 6
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-sum-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOKWAggE5c4CeGALwYcPfgHkkhAIwAaDACZ5AZmKVqtAPSaMAZXYsRYgTEYwsMNABcWGmgAcuBK4yJtOxgHTuSazFp0ANnU0AF8QWRArUQBzGCsABUYcKyQILiwEEAArHAYI8AgsezwzLgA1GC4WPAg0LOlPAE5PBQAGEFCgA%3D%3D%3D?_gl=1*1t2d88r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.6083251.1212359242.1701001969-2060274793.1694940376)
 
 > `.sum()` 函数仅适用于 [数字数据类型](numbers.md) 的数组，例如 `Int`。
 >
@@ -254,6 +261,7 @@ fun main() {
 
 ```Kotlin
 fun main() {
+//sampleStart
     val simpleArray = arrayOf(1, 2, 3)
 
     // 随机排列元素 [3, 2, 1]
@@ -263,10 +271,10 @@ fun main() {
     // 再次打乱元素 [2, 3, 1]
     simpleArray.shuffle()
     println(simpleArray.joinToString())
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-shuffle-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOeWADozAIIBOfHAE8MAXgw4BwgPJJCARgA0GAEzKAzMUrVaAel0YAygAsUSJNxYYY3LDDQAXKwG11ytRnkBdHTTadufkEhADoWU3NuEl8MDj4CB0Yify5eKVCAKwgCABUIQwd4tABzEi0qTD0DEzMLGCsbGDtHKxxi%2FExnDzdPH0q%2FdlSg4TCIuuj%2B2KLE5MHA9JCs3PzCglLicsoAXxBFEAdJYpgHAAVGHAckCD4sBBAMnAZd8AhOPG4%2BADUYPjYINDu8hCAE4QioAAwgLZAA%3D?_gl=1*1t2d88r*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.6083251.1212359242.1701001969-2060274793.1694940376)
 
 ### 将数组转换为集合
 
@@ -281,6 +289,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     val simpleArray = arrayOf("a", "b", "c", "c")
 
     // 转换为 Set
@@ -290,10 +299,10 @@ fun main() {
     // 转换为 List
     println(simpleArray.toList())
     // [a, b, c, c]
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-convert-list-set-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYDOeWADozAIIBOfHAE8MAXgw4BwgPJJC5EDgUAaDAoBGKteC0KwC4pWq0A9CYwBhCGjow%2BAFxYZ7ECRgDKMe8Zoc%2BBe0YiNk5ufkEhADoXT3sSQ0xTcwBtHFV1VTAAXSNEmjNLa1sHJxc3ABk8Fm88jD8AoMIQrl4pKJdK6vifDALU9MzMnKo0AF8QZRB7SQBzLwAFRhx7JAg%2BLAQQACscBgnwCE48bj4ANTs2a02ARkiATkiAJgAGEFGgA%3D%3D?_gl=1*jnabh1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.172930211.1212359242.1701001969-2060274793.1694940376)
 
 #### 转换为 Map
 
@@ -305,6 +314,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     val pairArray = arrayOf("apple" to 120, "banana" to 150, "cherry" to 90, "apple" to 140)
 
     // 转换为 Map
@@ -312,10 +322,11 @@ fun main() {
     // 注意键必须是唯一的，因此"apple"的最新值会覆盖第一个
     println(pairArray.toMap())
     // {apple=140, banana=150, cherry=90}
+
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-convert-map-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAO%2BATgILvs4CeGALwYcPfgHkkhciBwsWjGDIwAXCBgCMAJgAMAGgwyARjjSmcytZoCs%2Bw%2BAAWMHn0vqAnHZlyFSkKvUNABYdYkpqWgB6SIwAYQg0OmcVAGcAkQwAWTkImmiMABUnDABrGD400RgMJHYUPFSRNChVYoZGFBhK9mqVJzx2DDQULCNnDAgkDDAmCHY8LtyMfIA5CBVqhwgAd1LytKwUFJUMMYx0PABHToMU9T7qxhwN4%2FomTomp73lFGSX8iBJdjbeYvVrVJADY5LFjzNAqRhENgDbi8PgAOjU2RYJDCmCiMWAPkUgmCdhMZjMpNsBjAThcgk8AF9wlQ0EyQHoQCpRABzGAqAAKTxUSDmWAQIAAVjgGJzwBAsCw8Ip2AA1ZwpPAJSUadHudG6EBMoA%3D?_gl=1*jnabh1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.172930211.1212359242.1701001969-2060274793.1694940376)
 
 ## 原始类型数组 {id=原始类型数组}
 
@@ -339,14 +350,15 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     // 创建一个大小为 5 的 Int 数组，并初始化为 0
     val exampleArray = IntArray(5)
     println(exampleArray.joinToString())
     // 0, 0, 0, 0, 0
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="arrays-primitive-type-array-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGA9HRgMIBOMOALjAM4Y6Y4WLHAE8MEJBgCSaDuMnc8ALxgYArBgDueDgAsMANxwAbFD2q0jxjDAAeOLAAdjMAIJDRGALzTZ74SKEasQWNI4sBBzGRHYOzm4eIgB0AFYQBAAqEADKHBFoAOYkIZi0DBgADAA0lTXVtZWUlAC%2BIFUgHIIFMBwACsacSBAsWAggKThGbeAQTnguLABqMCyKEGhjAIxJAJxJAEwVIM1AA%3D%3D%3D?_gl=1*jnabh1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTAwMTk2OS40My4xLjE3MDEwMDYzNjEuNTUuMC4w&_ga=2.172930211.1212359242.1701001969-2060274793.1694940376)
 
 > 要将原始类型数组转换为对象类型数组，请使用 [`.toTypedArray()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/to-typed-array.html) 函数。
 >

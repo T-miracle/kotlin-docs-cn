@@ -10,6 +10,7 @@ fun main() {
     val a = 2
     val b = 3
 
+    //sampleStart
     var max = a
     if (a < b) max = b
 
@@ -27,12 +28,12 @@ fun main() {
     val maxLimit = 1
     val maxOrLimit = if (maxLimit > a) maxLimit else if (a > b) a else b
 
+    //sampleEnd
     println("max is $max")
     println("maxOrLimit is $maxOrLimit")
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="if-else-if-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYY4YC8GATJdbQxgEasMAZkpduYngCdsOAB6CcEjHiQZCzADz9SueWz6iq1APTGMAdTwAXABYYY9AM4wlKtcwB82skuq6FSgC%2B9k4wPkbc%2FvpBhtwYphgAgo72sgAOkjCOjngQaEpRyqrqGF58pMwOzvyx3AkAmhAoGGA4mAyOEBgo1QAGVWEqvcqYMOmZ2blojvBKdIy6ADJ4WNaCAIxzvLoA8pLLq1aCboRLK2teODpyB2sDRe6l3pWhNfkRShkEVvRE5CD%2BPApAAkun%2BxE%2Bkm%2Bv0I%2F12%2B3ORyBGFBcj2tys4MogRAABoQFYcJIAOYwKwABXoOCsSAgkiwCBAACscHQ8eAIFg0nh6DBJAA1Pk5PKM9YAOgAnGL2AAGECBIA)
 
 `if` 表达式的分支可以是代码块。在这种情况下，代码块的最后一个表达式是该块的值：
 
@@ -199,16 +200,17 @@ for (item: Int in ints) {
 
 ```kotlin
 fun main() {
+//sampleStart
     for (i in 1..3) {
         println(i)
     }
     for (i in 6 downTo 0 step 2) {
         println(i)
     }
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGSEAThoXhgRgIwB0XAzKRUy1hABwYEALgBsieYtVoBfBTXpMWbTADYMUCAHc0AFQgYADBgDOEmCIwAmASuEYxkmS3lCayqmkUgADQgEjgMAOYwEgAKUjgSalgIIABWOABuOEHgEFgieFIwDABqRZZ4EGjJ3ACcXPZmIIpAA%3D)
 
 `for` 循环遍历区间或数组会被编译为基于索引的循环，而不会创建迭代器对象。
 
@@ -217,26 +219,28 @@ fun main() {
 ```kotlin
 fun main() {
     val array = arrayOf("a", "b", "c")
+//sampleStart
     for (i in array.indices) {
         println(array[i])
     }
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6aAbjgDYY4BOjOAnhgLwPNsDyShciBxCANBiEAjMRPBDilShmUYkERhkJ4MBbi1YA6AlDxgYAZ1IVMK2wAdGBAC60iTfQG08AXQU3lAL6KaAEgoiBOTADmME4ACrQ4TmqMWAggAFY4NGHgEFh2eLQwjABqJeZ4EGjpAIwGAJwGAEwADCABQA%3D)
 
 或者，你可以使用 `withIndex` 库函数：
 
 ```kotlin
 fun main() {
     val array = arrayOf("a", "b", "c")
+//sampleStart
     for ((index, value) in array.withIndex()) {
         println("the element at $index is $value")
     }
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYY4BOzOAnhgLxOscDySQuRA4RAGgwiARhKngRxSpWrUkEZhkKECsAB6S69FDFIFebdgDoA7ngAuACwCSafSVIUqq1QAdmBPb0RCJOMBgw9DBYMGj2TPEAJLowehh4AM4YiUYmiiqqAL7KaIUg4iD2LADmMPYACvQ49urMWAggAFY4dOXgEFi%2BeFHMAGowzBl4EGgdAIxWAJxWAEwADCCFQA%3D)
 
 ## While 循环 {id=while循环}
 

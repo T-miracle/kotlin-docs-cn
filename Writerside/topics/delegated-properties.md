@@ -91,8 +91,6 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBuBDANgAjSgXgTwDV0BXGeDAZQBcAnASwDsBzDAIzy1w%2BAB0GMBGAA70GVNAwAUPcBAC2Q4lRhQAhDICUfQRhkAJGGjQQZfAL58%2BAM2L85KRpI0Ze%2FQSMbip2fETSktNwEPMQlJH0ISGECzEAAaECoUGiYYKgAFbCorCBo5BBAAKxRUeNkFOjQYGgJqgGc6CAYCgCYAOgAGTpAzIA?_gl=1*11yt7fq*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.151672125.547518147.1716942854-239646288.1706355474)
-
 默认情况下，延迟属性的计算是 **同步** 的：值只会在一个线程中计算，但所有线程都会看到相同的值。
 如果不需要对初始化委托进行同步以允许多个线程同时执行它，可以将 `LazyThreadSafetyMode.PUBLICATION` 作为参数传递给 `lazy()`。
 
@@ -121,8 +119,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true"}
-
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWBbADhATgFwAQGsJsAbJAOwDo1MI0YckYBnCgERmJgHMBDbZgDpkhYYjyZNcAVSb1cwIbiW4Abj0y4yPFDHi4AytkzkuuAEYBPXO069%2BLCGdmY1ZzgAoBIADxkIm7RgAPi8ASnlFZSjqWgAaXAhiKHiyGAB3XABaELIo6OMyEjJPEAASRKgsoNxS1LSwyKUAXyEW4TIAMwBXXJQecndwhVzlNWJcLudcAF5pZ0HGiecKLR0Z3C8OpEwmbC9FyfoVwPWvWUgyKH2yJpBYkGx1LhhsAAUxbA6sFAQQACseGo7uAIOgkJxMAA1ehMJAQMi%2FABMFAADKiQE0gA%3D%3D?_gl=1*1wv6u43*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.189559343.547518147.1716942854-239646288.1706355474)
 
 如果你想拦截赋值并进行 *否决*，请使用 [`vetoable()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.properties/-delegates/vetoable.html) 而不是 `observable()`。
 传递给 `vetoable` 的处理程序将在对新属性值进行赋值之前被调用。
@@ -167,8 +163,6 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.4"}
 
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAWQJ4GFUNNgAdAO0yoDcUAnTcmAdwDkUBbGeTASXIAumALyYADBSqYAAgBEYABzowwKATCgAKUiACqaGJgDkTNpxhHMAS3Jp1KKDoA0mAEqLUYGAHUrAgBbaIKbsXDoAlOGSNPSYEEhQodx8gpgARriYAVZo8PAh5hQAvhQAZgCulBwoNprhJNGYtEiYHAREWKJ4hOhodY0A9AOYrBACVqVWquMQ5DxG8YnmPPwCljmYsEoqahoAdIPD%2BoYmLEnrtvaOlFRtPRh7i0kimAAsAEyNSjYCSOSadw6ewKXHqQzen3IRRAThAAnoAHMYAIAAqoASlCB0DgIEAAKxQtBh4AgHAUViQMDoADUqWgrLNce89mIWSAikA%3D%3D%3D?_gl=1*1wv6u43*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.189559343.547518147.1716942854-239646288.1706355474)
-
 ## 将属性存储在映射中
 
 一个常见的用例是将属性值存储在映射中。
@@ -204,13 +198,13 @@ fun main() {
         "name" to "John Doe",
         "age"  to 25
     ))
+//sampleStart
     println(user.name) // 输出 "John Doe"
     println(user.age)  // 输出 25
+//sampleEnd
 }
 ```
 {kotlin-runnable="true"}
-
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAVTTATgBQBuKSmAtigA7yYCyNAPAMoAu%2BAlgHYDmANJgCC3AJ4B%2BAHwBKTMAA63TMsyly3FBRh12XPpgBGoyjUUrVZTCl7bMASW5tzh41WqKAvosUAzAK5KVDyEsgpKKmqYfnj4mAC8ODGEbgDyPoRmzsryIBpaOZhsEJg5AFIQABZKACIQMDn8mVk51vUgykWYAEwArE2Y0tLe4crUemxI3ITRBAB0eTCyAPRLmAAK41hllTV1Of1jPBNTM%2FizrbKYK%2Bub3X3cniD8IGwo%2BDZsa6hsPhD4FAgQAArFCkJ7gCAUaicJAEABqBDQnAg3EBXVmAAZMSAPEA%3D%3D%3D?_gl=1*17aknjd*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNzAzMjQ1OS42LjEuMTcxNzAzMjQ2MC41OS4wLjA.&_ga=2.75183510.547518147.1716942854-239646288.1706355474)
 
 如果你使用可变的 `MutableMap` 而不是只读的 `Map`，这对于 `var` 属性也是适用的：
 

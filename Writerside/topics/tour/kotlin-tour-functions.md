@@ -23,7 +23,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-function-demo"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgBYwDa4gAoBKDYAHUw2oCcYAXFGzABxoEs17c1DyQAEngIAaDAHcINXFACE%2FYpQC%2BlSqkwBbAIacSZStWo58RRVWoB6CxiEmxk6XOUgRIelpoBzBgAVcW%2BiQpDQQQACstADctF3AIDRZ2XBgaADUUgGd2CDRQgEYAOgBOAryABhAlIA%3D%3D?_ga=2.216501526.1684546783.1699700997-2060274793.1694940376&_gl=1*1lhz8qx*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 在 Kotlin 中：
 * 函数参数写在括号 `()` 内。
@@ -53,7 +52,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgM4oLYAoAPeDASTQBcAaDATxPIoEoHKNgAdTDHgJxgopemQhgDUdLgF8uXVJlwBDAJZp8Tdlx48ADr1UUANmpwEAjDQBMTJlu0B6exgDM0kFRAVFvAOYCACoaKFEgQvLgIIABWigBuiu7gELg6yoYwvABqGVjKEGiRZgB0AJxFZgAMIFJAA%3D%3D?_ga=2.214682007.1684546783.1699700997-2060274793.1694940376&_gl=1*p26qel*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 > 我们在我们的[编码规范](coding-conventions.md#函数名称)中建议以小写字母开头，
 > 并使用驼峰命名法，不使用下划线来命名函数。
@@ -82,7 +80,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-named-arguments-function"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgA4CcCWaALgLIwDOZAhgOYwDqehAFgAo4xJ4AeAFALbkqteBgDKhfGmoAabO05cR4ydQCUGYAB1MGXbgKEANmh6aQAbQAkuDtwC6GSwIo0YZ1doC%2B27akx9KAh51LR1dAHpwjABVMnIMNEoBKAxKHGoUASIyDAB3RiYMMlzKLCwYFKw0pJhCGBwMCBxYHG1dPUkSQVcGZjZbXhsFDABeDDMAGQhqM1lnIRhR8ZAACRhDQwh3NvbIjHMp6gc1ja20TxBpEEI02kIWQ0pCJCa%2BBBAAK0oAN0pL8AgfCweEM9QAavUyHgIGh3gBGAB0AE4EXCAAwgTxAA%3D%3D%3D?_ga=2.214682007.1684546783.1699700997-2060274793.1694940376&_gl=1*p26qel*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 ## 默认参数值
 
@@ -108,7 +105,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-default-param-function"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgA4CcCWaALgLIwDOZAhgOYwDqehAFgAo4xJ4AeAFALbkqteBgDKhfGmoAabO05cR4ydQwBeDAB0QASTRII2gJQZgmzBku4ChADZoe2gNoASXB24BdDC4EUaMMbmAL7m5qiYfJQEPCZmFpYA9IkYAGLoYIR4EJhglLa2MFAYAO6MTBgARhDM2JQ4lAKEMDhk5pZWkiSCAQzMbB682gASMAWGILLaADIQ1MZaCRjJGE6z1N6j4%2B0dO0kp6WiZ2bn5hcU5tgCepeUYfkIwdQ1NLXtyNqT%2BtH2s8tyOEBbWwTEwdcHvFZOPQGTZjEHvd7WIhfR6%2FAYKHjuBTqLQgdbaWQPAK4kbw0GQlJrOZw7ZoYKTECEeq0QgsWyUQgGHB8BAgABWlAAbpRGZA%2BFg8IUcAA1FpkE58gCMADoAJwqpUABhAwSAA%3D?_ga=2.214682007.1684546783.1699700997-2060274793.1694940376&_gl=1*p26qel*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 > 你可以跳过具有默认值的特定参数，而不是省略它们全部。
 > 然而，在跳过第一个参数之后，你必须为所有后续的参数命名。
@@ -134,7 +130,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-unit-function"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgA4CcCWaALgLIwDOZAhgOYwAUAtuVbfBgMqH5rUCUGwADqYMo3AUIAbNI2Y0YvYaNEB6FRgAGOGIRQ5MAVTR5CGjBBybtu%2FWbxlzWQnghpKk4QF9hw1JgaUBHT8QiJi3CRytHSCIAASMJKSELGKYRhqGAlJKWieIAA0IISUOLSEAAqSlIRIFgwIIABWlABulIXgEAxYeJIwOABqA2QuaI0AjAB0AJxTEwAMIJ5AA%3D?_ga=2.208562706.1684546783.1699700997-2060274793.1694940376&_gl=1*hbdkhj*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 ## 单表达式函数
 
@@ -151,7 +146,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function-before"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgM4oLYAoAPeDASTQBcAaDATxPIoEoHKNgAdTDHgJxgopemQhgDUdLgF8uXVJlwBDAJZp8Tdlx48ADr1UUANmpwEAjDQBMTJlu0B6exgDM0kFRAVFvAOYCACoaKFEgQvLgIIABWigBuiu7gELg6yoYwvABqGVjKEGiRZgB0AJxFZgAMIFJAA%3D%3D?_ga=2.208562706.1684546783.1699700997-2060274793.1694940376&_gl=1*hbdkhj*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 你可以移除花括号 `{}` 并使用赋值运算符 `=` 声明函数体。由于 Kotlin 的类型推断，你还可以省略返回类型。`sum()` 函数然后变成一行：
 
@@ -164,7 +158,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function-after"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgM4oLYAoAPeDASTQBcAaDATxPIoEoMBeDQjAajoB01%2BqTLgCGASzT4WwfhjkYADgCcJFADaScBAIw0ATEyaz5AehMYAzPwC%2BIKiAoilAcxgUACmpEUkEJbgQQACsRADcRO3AIXAUxNRglADUErDEINEDtADoATiztAAYQayA%3D?_ga=2.208562706.1684546783.1699700997-2060274793.1694940376&_gl=1*hbdkhj*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 > 只有当你的函数没有函数体 (`{}`) 时才可以省略返回类型。除非你的函数返回类型是 `Unit`。
 > 
@@ -192,7 +185,6 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-functions-exercise-1"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWBbADhATgFwAQGsJsAbJAOwDoUBDbACwoAUBJAHTPYDMBXM3MJJjDEYAQUwxqACgCUuYO1xLcAehW4A6piTYYuAJ4RumftD10YE9gF8uvXDXKz5i5Wm1kSZKQKEjxklIATDIyNiAANCDY1JgA5jDYjMS0nFgoCCAAVtQAbtSR4BDoSCKYAGqWAM5IEGSZAIwUAJwUDQAMINZAA%3D%3D?_ga=2.208562706.1684546783.1699700997-2060274793.1694940376&_gl=1*hbdkhj*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 |---|---|
 ```kotlin
@@ -223,7 +215,6 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-functions-exercise-2"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWBbADhATgFwAQGsJsAbJAOwDoUBDbACwoAUBJAHTPYHpPcB1TJNhi4AnhACumXJFi46MTDHbsAZuLK4a5ABQBKXMHa5juNALIky2sEkxhiMAIKLq2gEy7d7AL4gANCDY1JgA5jDYjMS0KlgoCCAAVtQAbtT%2B4BDoSA6YAGoKAM5IEGTxAIwUAJwUZQAMIN5AA%3D%3D%3D?_ga=2.157115963.1684546783.1699700997-2060274793.1694940376&_gl=1*14jvb15*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 |---|---|
 ```kotlin
@@ -257,7 +248,6 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-functions-exercise-3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgJZoC4wCcA3AQwBsBJNAZRkjSgGcAKACwhQMfgytwBoMAWxwp83XnkGM6EBhL4BKDAF4AOpgxbmbDlwwAqDADYADMoDUw0eOVGzGKzPpMNG1JiEkczZcA1aWgAOBDi4ZGjMYYSklDSy8swAjIIATKaCSQCsiooBgSFhEVF4MeRUtC4sGRgpGKk5eZrBoXjF0cTl8VXMqYI15k2BGIVtkR2xFQlMzDVJA7n5LUXjpZ1xlXIzdXOLaAC%2BIPwguCQEAOYwuAAKZCS4SBAEQgggAFYkpEfgEEJBWGRCAA1QiMLByV5JAB0AE4ofMQPsgA?_ga=2.157115963.1684546783.1699700997-2060274793.1694940376&_gl=1*14jvb15*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 |---|---|
 ```kotlin
@@ -290,7 +280,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-function-before"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAhQB2zATmAIYDOMAygC74CWaA5gBQnV33wZW0MCUHXbDMAA6mDOPwxKKfJhbd6AOhx5CpGIx6iAvqNSYAtkTqaho8eOzdKAGzSMVBYmQENGwkAAsYNmxA88WmLiAPQhGAASAKIAMjEA8jogADQglET49FIACjZElEgQ%2BAYIIABWRABuRCngEAbYNDYEAGoEJDQQaKUAjIoAnIo9AAwg2kA?_ga=2.157115963.1684546783.1699700997-2060274793.1694940376&_gl=1*14jvb15*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 也可以写成一个 Lambda 表达式：
 
@@ -301,7 +290,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-function-after"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1ADgE4EAuANkcBgM6MNoDm8GAMrcCvDAFoAfJxF8AdCho0YdMDg4wSGAL6FyIABYxmzCPuLFK1agHobGABIBRADIuA8pW0gANCEY4dLwwjAAKzDiMSBB0WAggAFY4AG44vuAQWDR4zCoAaioceBBo8QCMcgCccmUADCDaQA%3D%3D%3D?_ga=2.157115963.1684546783.1699700997-2060274793.1694940376&_gl=1*14jvb15*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 Lambda 表达式可能一开始看起来有点难理解，所以让我们来分解它。Lambda 表达式是在花括号 `{}` 内编写的。
 
@@ -339,7 +327,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-variable"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYYoAOzMATgMI4DOMAygBd2BAOYYAvGQw9hY%2BBiEi04gLQA%2BGXJUA6Fm3ZheMEhgC%2BlatWbLB9Ivo7c%2BSsYXIgAFjHr0IH4mJLKwB6EIwACQBRABkYgHlKMxAAGhBBHHZRGEEABXocQSQIdiwEEAArHDpU8AgsZjx6DgA1Dh48CDRygEYdAE4dHoAGEDMgA%3D%3D?_ga=2.245261701.1684546783.1699700997-2060274793.1694940376&_gl=1*1wacgub*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 ### 传递给另一个函数 {id=传递给另一个函数}
 
@@ -357,7 +344,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-filter"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYZopYBGMATgM4YBeDEzy8ALgHkkhAIwAaDAFoATAoDMCxQBYFAVk0A2YrTqMWABwi88YvPRj8hbTj14A6JHiZieZDAA8lAD4AjBCABgwAXxMGZlYYAHMcW3tHVnYuPg8vH24%2FQMUQwIAeDEiYqmpzbgIxJiJLa1SHYyqMAHoOjABteQwNDF0AXViMGrqGwjQklLtWsa7elU0dJQNR9sookDkQMRxuRJgxAAUmFKQIbiwEEAArHEZd8Agscy8eADVXPAg0O4yNwATjcMnCICiQA%3D%3D%3D?_ga=2.245261701.1684546783.1699700997-2060274793.1694940376&_gl=1*1wacgub*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 `.filter()` 函数接受一个 Lambda 表达式作为谓词：
 * `{ x -> x > 0 }` 获取列表的每个元素，仅返回正数。
@@ -372,6 +358,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+    //sampleStart
     val numbers = listOf(1, -2, 3, -4, 5, -6)
     val doubled = numbers.map { x -> x * 2 }
     val tripled = numbers.map { x -> x * 3 }
@@ -379,10 +366,10 @@ fun main() {
     // [2, -4, 6, -8, 10, -12]
     println(tripled)
     // [3, -6, 9, -12, 15, -18]
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-map"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11AbjgDYZopYBGMATgM4YBeDEzy8ALgHkkhAIwAaDAFoATAoDMCxQBYFAVk0A2YrTqMWUCCg5MYUQa3Zc%2BAOlwAHMhgAeSgHzeMACoMZQwAXxMGZgwxbjw3GzshNk4eXlccD2AAxX8fYLVwyIw3OLQxJiILK0TjKmoAegaMAG1VJR0MA00ADgUZAAZNGWUAXWLSggqiWPja4qbWjSVujABOYfaZfSUZHvH6jEowkDkQMRxuAHMYMQAFJhwxJAhuLAQQACscRlPwCCwbjwNm4ADU0ngIGgPjJnGtnIMQGEgA%3D?_ga=2.245261701.1684546783.1699700997-2060274793.1694940376&_gl=1*1wacgub*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 `.map()` 函数接受一个 Lambda 表达式作为转换函数：
 * `{ x -> x * 2 }` 获取列表的每个元素，返回该元素乘以 2 的结果。
@@ -414,7 +401,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-function-type"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBuBDANgAgK4AccwCcBhFAZxgGUAXAgSwDsBzeDACmrqYEoMBaAPgwcGjDAF4MwDKRoi%2BgmZ0YA6XPgJgyMVjwC%2BAHXqGAZlnoYAtigY7JhjA4w5OVNPVZrCJcsKat9IAAWMGhoEAFcXPaOAPQxGAASAKIAMikA8oa6IAA0IFQoBIwwVAAKaChUxhAEFgggAFYoqLngEBY4tGiEAGqEpLQQ9PUAjMoAnMojAAwgukA?_ga=2.220170649.1684546783.1699700997-2060274793.1694940376&_gl=1*4xplvo*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 如果你的 Lambda 表达式没有参数，那么括号 `()` 将保持为空。例如：`() -> Unit`
 
@@ -451,7 +437,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-return-from-function"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgC4QMo0jSgGcAKLASwFsZ4NcsAnCtAcwEo7SBJNLdjAFoAfBl5YMAXgwB3ABYxM5ajAHAAOpgzb1IORBSNdQ0cAwA3AIYAbFDBMWbdjACoMANgAMrj94C%2Bmto6IFQsKFgwxiIYZla29tFxzm5eGAFawcQEEERRpo7xDkn26UEYMNZZDrFOCaLFaZrpmqiYVJYspGqBQXHYKsS8ALJhEcRSGNYUxFgA8kikAEwANBgAjJ6rawCsW%2Bw92n2haItZYBM4%2BIQkpLrH4ZEg%2BxkF2BBYNgAqKrxXOSQXAbDUYwYgAOnaAAdSMdTgR2GDiCgqF0DhhIcw%2BNY0LcQJ93jZ%2BjQMNMMAASHAfazfGi%2FbJEcZnYi6Z5lAD0bIw%2BKpRPspLW7gAHN4mU0QMsQB9GKwYFgAArWSxYJAQRhUBAgABWlis4vAECokIo1hgjAAaqbiBQchq1mCAJxgjYgPxAA?_ga=2.220170649.1684546783.1699700997-2060274793.1694940376&_gl=1*4xplvo*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 ### 单独调用 {id=单独调用}
 
@@ -459,12 +444,13 @@ Lambda 表达式可以通过在花括号 `{}` 后添加括号 `()` 并在括号�
 
 ```kotlin
 fun main() {
+    //sampleStart
     println({ string: String -> string.uppercase() }("hello"))
     // HELLO
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-standalone"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11ADgE4EAuANkcBgM4vNoBzeBgDKfAgIwBaAHw9xggHQp69GIzA5uMEhgC%2BhciAAWMNmwhHixWnQD0djAAkAogBk3AeVs00ekAA0ICw4jAIwLAAKbDgsSBCMWAggAFY4AG44geAQWPR4bOoAaurceBBoyQCMigCcilUADCB6QA%3D%3D?_ga=2.220170649.1684546783.1699700997-2060274793.1694940376&_gl=1*4xplvo*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 ### 尾随 Lambda {id="尾随-Lambda"}
 
@@ -476,16 +462,17 @@ fun main() {
 
 ```kotlin
 fun main() {
+    //sampleStart
     // 初始值为零。
     // 该操作将初始值与列表中的每个项目相加。
     println(listOf(1, 2, 3).fold(0, { x, item -> x + item })) // 6
 
     // 或者，以尾随 lambda 的形式
     println(listOf(1, 2, 3).fold(0) { x, item -> x + item })  // 6
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-trailing-lambda"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1l11A9PRgCoAWMGBeALnjgDYYAbgJQc8AZwwAvGACcIAOgy06jFuwwQADvJy8ImCSixTumrrwHDRHAO49WGGEPkBPTtxhZOmcx35JbgwwExR%2BfTxXfjdFVWptOQJufiJAiW4AeSRCAEYAGgwAJkKAZmJFJAh%2BKEIABkLgDAAPQp5vDABaAD4WjABqTw6AX2JSdQA2SniMdQBBfi85NEjotza%2FTSq5HwgkDBwMbjl8QLQAcwwIrAAjKBwZxOTUwnSsnILisoqqmvrSJqtIY%2BHp9QbtHyjBhMKZUGhoYYgfIgbg4OTnGDcAAKEW42ywCBAACscCIkeAIFhtHh%2BPIAGryCR4QyE3KKACcilydRAwyAA%3D%3D?_ga=2.220170649.1684546783.1699700997-2060274793.1694940376&_gl=1*4xplvo*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 有关 Lambda 表达式的更多信息，请参见[Lambda 表达式和匿名函数](lambdas.md#lambda-expressions-and-anonymous-functions)。
 
@@ -510,7 +497,6 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambdas-exercise-1"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYY5gAueEaAzhgLwb15OLAPJJC5EGxb0YEgDQYJATxg4ATvMUgcKFgAsIGkMUrVaDDAAc1MJHgAevLXpYtLneAHpPMeziyWMgB0kFieAEYQEADWALQESBASpmZ0jHhQTgCsKeaMKGr03HzeGADqangsMBhKEAUYkLAYejA2uWbU1gTSRAVFJmgAviBykuoA5jAsAAr0OCyJalgIIABWOHSj4BABeDJqAGptnOxoqwCMQQCcQRcADCBDQA?_ga=2.250048134.1684546783.1699700997-2060274793.1694940376&_gl=1*wq2wgu*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 |---|---|
 ```kotlin
@@ -540,7 +526,6 @@ fun main() {
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambdas-exercise-2"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgE4wA4wEMAXAOQAo14MBJNIgGgwLCIEsJKMyBKDAWgB8GAKppWRXsAA6mDHID08jAHUs4mBgCeEFFgyRYGABYwcMgL4yZqTAFsCrNDwzTZCpavVadegxpNmaOYg9CBEBFgA5jBEAAoANsRIEFi2CCAAVgQAbgQh4BC2uKzxpgBqpgDO7GjpAIwAdACcDXUADCDmQA?_ga=2.250048134.1684546783.1699700997-2060274793.1694940376&_gl=1*wq2wgu*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc5MjE1My4xOS4wLjE2OTk3OTIxNTMuNjAuMC4w)
 
 |---|---|
 ```kotlin

@@ -55,18 +55,18 @@ val inferredType = 1 // 类型为 Int，并且具有默认的 getter
 下面是一个自定义 getter 的示例：
 
 ```kotlin
+//sampleStart
 class Rectangle(val width: Int, val height: Int) {
     val area: Int // 属性类型是可选的，因为它可以从 getter 的返回类型中推断出来
         get() = this.width * this.height
 }
-
+//sampleEnd
 fun main() {
     val rectangle = Rectangle(3, 4)
     println("Width=${rectangle.width}, height=${rectangle.height}, area=${rectangle.area}")
 }
 ```
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7MAbAhgZ2wAgCUYwAXTFAc3RgAoA3TdPAdwEsoSALePASRRIAaPAyacYrCpxI9%2BJAJR5gqPKpGM8mAE4xMsgXgD0hvAActEUzC0kAnnjtW8rfJZKsIKDdlZoYzkjwwcjwAI39fADNrHSg8SIsAWwdxPAoYEhJrAHJ8HRIAVy0UB1srFTVK9JIaRQBeFJcAOjYOTjwAKkbsJvFJaVQAX1RUSIKSxMxfWqUK1VE8HVJyKn8GomXKahoAZmEAFnk5sy1fEnQUGiQQAHV2LjqAEmAlsi2YFvvOQeE%2BqRIni9iG9Vr0JP8fpodJhAa8VtQmtpdMMQEcUIMQIIQGQtNUAApYEiRCBaRIIEAAK0wDEx4AgiVMrGoWgAatYfJ5yQBGJoATiaACYAAwgQZAA%3D%3D%3D?_gl=1*k3cnp1*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMTYxOTI2My41OS4xLjE3MDE2MTk5MDEuNjAuMC4w&_ga=2.58855081.562108859.1701591821-2060274793.1694940376)
 
 如果可以从 getter 推断出来，可以省略属性类型：
 

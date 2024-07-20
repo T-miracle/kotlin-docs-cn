@@ -18,6 +18,7 @@ Kotlin 可以通过 **对象表达式** 和 **对象声明** 来处理这种情�
 
 ```kotlin
 fun main() {
+//sampleStart
     val helloWorld = object {
         val hello = "Hello"
         val world = "World"
@@ -26,11 +27,11 @@ fun main() {
     }
 
     print(helloWorld)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true"}
 
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGAbjgDYYAWMjjEA6hAE6NQMAXgwQARgCsYYAC5lqtRQ2ZsOEYRnIgAEu05aFimsowB3PgI1ae%2FKAcxGaAeiejJ0uTAAeAB14wAZwC8CDQAjG8ZGDRBAEE0AE8AGgwA9QADCDoYXl48WHSMPHD%2FAEcUPH9BUIx0mQgAZRk8tABzEnTDIyycvNgMVEx6ppb20hEtABJVTgxJ81t7RQBfSi6%2FAhlCGe4LKGI1tGWQJJAZHF5WmBkABUYcGSQ%2BLAQQCRwGE%2FAILB88RhyADUcsFQq8AEwAOgADDCQMsgA%3D%3D%3D?_gl=1*valhh1*_ga*MjM5NjQ2Mjg4LjE3MDYzNTU0NzQ.*_ga_9J976DJZ68*MTcxNjk0Mjg1NC4yLjEuMTcxNjk0NDgyNy4wLjAuMA..&_ga=2.83524882.547518147.1716942854-239646288.1706355474)
 
 ### 继承匿名对象的超类型
 

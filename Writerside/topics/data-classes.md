@@ -59,6 +59,7 @@ data class Person(val name: String) {
     var age: Int = 0
 }
 fun main() {
+//sampleStart
     val person1 = Person("John")
     val person2 = Person("John")
     person1.age = 10
@@ -72,10 +73,10 @@ fun main() {
   
     println("person2 with age ${person2.age}: ${person2}")
     // person2 with age 20: Person(name=John)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIoEMAuyAEYA2yDOeGACjAE54QB2AFAG7LYaXIC2M8GAyqqQJaUBzAJQZgAHUoYpGeqQzIB7DAElKqDAF4MABgkBfCQDMArpJbJ%2B1EeMoTpMhhgAOZCpQCMm4q6rUxIACkIAAtbECE7aXpGF3IqACYvEjiafyDQ%2FwjJaVi3dwA6BRgvd11sqVyEwsUveLLIir41bFSQSo9NLXb4jgASYHbPDS6fSniDcIaMAHpp51GhkZSejB5jGEippybUFr82hYwAd15UYPka%2FsHqmD0%2BgYWJrPtZ%2BZTPE7OL4tKOZLdqMw2Bp0pRnhgtjs9v5usdTucihgrqN4jc7kiHssnlNXrDPgianU%2FqNAawYCCQmCJPoQAAaEDoUiKVBEXCoQwQUgsBAgABWyHodPAEBYTl42DIADVXLwqDyCgBOfLxdwgPRAA%3D?_gl=1*1opwbua*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjcyMTEyOS43OS4xLjE3MDI3MjExMzEuNTguMC4w&_ga=2.124451650.93130446.1702718762-2060274793.1694940376)
 
 ## 复制
 

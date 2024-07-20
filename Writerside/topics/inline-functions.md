@@ -61,19 +61,18 @@ inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) { ... }
 fun ordinaryFunction(block: () -> Unit) {
     println("hi!")
 }
-
+//sampleStart
 fun foo() {
     ordinaryFunction {
         return // ERROR: 无法让 `foo` 返回这里
     }
 }
-
+//sampleEnd
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true" validate="false"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAggJygSzQENsBPAMXTABc8I0AKAIwBsIwBreDegSgwFoAfBgCqaPFT7AAOpgzyADtgJVmDaSAAWeAIQaesgL6zZqTEggReGGXPk58RUhTTVamW%2FK9fsMKimxMAHogjABRACUIgHkIrjBCNDQIKgwAW0J2GAwAAwsIHIxff0CMTRhfWW9jNBrTdHTCAmtPL3zeIxAAGhAqYgBzPwAFZkIqC2w0hBAAK0IAN0Ju8Ag0hTxmCoA1CoBnd2mAJgA6AAYzkEMgA?_gl=1*e7sulx*_ga*MTE1NjIyMzg3NC4xNzIwNDg0ODI0*_ga_9J976DJZ68*MTcyMDQ4NDgyNC4xLjEuMTcyMDQ4NDgzNi4wLjAuMA..)
 
 但是，如果传递给 lambda 的函数是内联的，`return` 也可以被内联。因此，这是允许的：
 
@@ -81,19 +80,18 @@ fun main() {
 inline fun inlined(block: () -> Unit) {
     println("hi!")
 }
-
+//sampleStart
 fun foo() {
     inlined {
         return // OK：lambda 是内联的
     }
 }
-
+//sampleEnd
 fun main() {
     foo()
 }
 ```
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWA7ANqmACAZgVxS1QxRigAoAjNCMAa3i3IEosBaAPiwFUUkAXVsAA6hLOIAOAJ1T80KcsJAALJAEIlzUQF9Ro%2FIRwQILLCLHjimKGdHj79qTH54phAPTusAeQDSjfmVsNABDAFtKKBCiAGcidGs7e10UFP0CLDCQ1FNzByMTLVSQABoQfhCpAHNnAAVQ%2FiMpMIQQACsQgDcQ0vAIMIkkNBgpADURmKQIFFaAJgA6AAYlkG0gA%3D%3D%3D?_gl=1*e7sulx*_ga*MTE1NjIyMzg3NC4xNzIwNDg0ODI0*_ga_9J976DJZ68*MTcyMDQ4NDgyNC4xLjEuMTcyMDQ4NDgzNi4wLjAuMA..)
 
 这种返回（位于 lambda 中，但退出包围它的函数）称为**非局部**返回。这种结构通常出现在内联函数常常包含的循环中：
 

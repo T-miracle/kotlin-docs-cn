@@ -389,6 +389,7 @@ fun handleStrings(list: MutableList<String>) {
 例如，在类型检查 `arg is T` 中，如果 `arg` 本身是泛型类型的实例，其类型实参仍然会被擦除。
 
 ```kotlin
+//sampleStart
 inline fun <reified A, reified B> Pair<*, *>.asPairOf(): Pair<A, B>? {
     if (first !is A || second !is B) return null
     return first as A to second as B
@@ -401,6 +402,9 @@ val stringToSomething = somePair.asPairOf<String, Any>()
 val stringToInt = somePair.asPairOf<String, Int>()
 val stringToList = somePair.asPairOf<String, List<*>>()
 val stringToStringList = somePair.asPairOf<String, List<String>>() // 编译通过但破坏了类型安全！
+// 展开示例以获取更多详细信息
+
+//sampleEnd
 
 fun main() {
     println("stringToSomething = " + stringToSomething)
@@ -411,7 +415,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIA6A7AligNhmACAZgK4q4A8ATjGvmjFLgIIA0ul1t9AQgHy4AKAQzTlSAKhajuAOgEBnQcIDy%2BABQBKePyEjmuHgH5cwVLlO5quFTXKyALrgCEaWY1wAfN7lkxIKek5dONVYYW0JyEhRCTEwTM0owiIJhO1w5V1sILx8IPzTA1ABfVFQANwFMLwgAWxgFck160gYUAE99Fhb23gBeXCQQNFsYatkB3EzcbDtlFQBGFgAmFgBmNRKUMoqvW3IMAHMAFQgAZRrQgAsD3D7Zc%2FqZeW1lUhPdg8627nUtyrs9lBHCAASRQ9lu920j3qLzeAP2LFBtm%2B6xQ5T%2B70BxwAMs5wVVag85DD8K9MQjcLi7GJuCjfjt4cc4Qcqfi7oSocTnqTmYCWKyyfDaepcAB6UW4ADCNQADmhMDAXAAjQj2JWUAQAaxctlaMrwsgE%2BFCrQcqHFuAAogAPGUCPK2C4GgTVGUKggQci4aqevCwWxCTBjTYh1BEEjVIQoEXGEhmGUA2yYaMDf4HJnnR3XPrjADUDPTp0zV0BqLMuATGCTKZAaaxILBN36IFw%2BbrQKRZfjieTKlT5JxeKbeYL9dZXdMlbBvf7jNO5NZw5bbYH8%2Fh47ipnFU%2BrKnbTIXeP0Um8vigx%2FwnstAjAFxjQykCsBjsKwQthyuLgA7vLKo7yBAX5SpgciyJKci2DaYAwDKthoLk%2BRTEOQwjC4AiULgKAQPYvL7EUIBMCAAbkPsoR8CBtiXuQ1QICAABWAjlAR4CyvKMDkAAauxsjwSgtFzFIACcUiLHMICFEAA%3D?_gl=1*p79cvt*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjk1NzA0Ni44My4xLjE3MDI5NTcxMjYuNTkuMC4w&_ga=2.17713721.1268011611.1702957046-2060274793.1694940376)
 
 ### 未经检查的强制类型转换 {id=未经检查的强制类型转换}
 

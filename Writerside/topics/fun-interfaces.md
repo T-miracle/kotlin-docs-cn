@@ -66,7 +66,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.4"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgJZoC4wCckBDMGDASTwAUCYosxj8NgAdTDDVTUsgB1wAKLPEp4AlGIBCECABsYxNBwC%2BHDgDdi87AGcAoppiYAvONy16jZuWDZcGAKQYATBlPmADBnUq0PBgAtsQ4QhKsHFwY%2FAQ4uPJoQmwgFHoYAOwYMMZoAPwYALQYACTAWIa5AHR8MIJCGRLqIBJqIAA0ILjEBADmMJbyzEgQBEEIIABWxNod4BBB%2FFiKBABqhHpYEGgTAIxVAJxVrl4gqkA%3D?_gl=1*1i8ckie*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjI1MzkxNy42Mi4xLjE3MDIyNTQ2NDAuNTguMC4w&_ga=2.190076526.491535196.1702253918-2060274793.1694940376)
 
 也可以使用[Java 接口的 SAM 转换](java-interop.md#sam-conversions)。
 

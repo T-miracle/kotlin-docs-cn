@@ -107,8 +107,6 @@ fun main() {
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-hello-world-exercise"}
 
-[打开训练场 >>>](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6mG1AbjgDYZo5YwYC8G5IAsjgE4BPbpWq0GGHAHM2nAEwAGUWID0KjAHV%2BeAC5tBEFPwyRYGABYx%2BMSgF8QAGhA6BMnQAV6OHUgj8sCCAAVjh0juAQWAAOePRWAGpWAM54EGiBAIwAdACcWRkKILZAA%3D%3D?_gl=1*yfb5ph*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTY5OTc3NDM0OC4xNi4xLjE2OTk3NzYyMzYuNTUuMC4w&_ga=2.242598530.1684546783.1699700997-2060274793.1694940376)
-
 |---|---|
 ```kotlin
 fun main() {

@@ -55,7 +55,6 @@ fun main() {
 ```
 
 {kotlin-runnable="true"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIoEMAuyAEYA2yDOeGAChAJYB2qAFAG7LYYAe8GAkpQDQZ0MCeL7VAEoAOuTEQADjABOaCDIwAzAK7liZSgDo1yGbwCyFFXipCMAXg0VqAWkZdbvUePI8MkzakvXKVAIwADFwATIEuYqrqALbIFGYYwGIYKZIyNtjkVLaeNuYYAPQFHumUhCIgJDZUjBa2QVy8dWGiIGIAviAcIOgyAOYwqES4qEoK0QggAFbIdF3gENGSpNiyAGqyeKQQ5JMhWoEHIO1AA?_gl=1*mb3tl*_gcl_au*MjA4MDk2OTM1NS4xNzIwNjg2OTgy*_ga*MTE1NjIyMzg3NC4xNzIwNDg0ODI0*_ga_9J976DJZ68*MTcyMDY4Njk4NS4yLjEuMTcyMDY4NzAwMi40My4wLjA.)
 
 ### 增量和减量操作符 {id=increments-and-decrements}
 

@@ -49,6 +49,7 @@ enum class ProtocolState {
 import java.util.function.BinaryOperator
 import java.util.function.IntBinaryOperator
 
+//sampleStart
 enum class IntArithmetics : BinaryOperator<Int>, IntBinaryOperator {
     PLUS {
         override fun apply(t: Int, u: Int): Int = t + u
@@ -59,6 +60,7 @@ enum class IntArithmetics : BinaryOperator<Int>, IntBinaryOperator {
     
     override fun applyAsInt(t: Int, u: Int) = apply(t, u)
 }
+//sampleEnd
 
 fun main() {
     val a = 13
@@ -70,7 +72,6 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcICWBbADhATgFwAQCsBDAN0IDoBXbJAGzIDMKA7MaiJsgISScMwE8A8mhiZC2LAB0mqDDgIlyVWg2ask7MgEkm2brwHDR4qU2nSYTCilxgahAM4PcO7AEFMSbAAsUMamDO8Lj6fEIiYhKYADyuAHwANC66oYYRJpi4wNK4ubgACgAyAKoAylk5eVUQxKKesLiMTLiEaGg0%2FAAU2MGuSRS9ugCUg3gAvLh4ANS4FJW5AL4J87gAKloAsgCi5dnNVXk1dUgNTS1tHd2j%2FaMjyeOTuABUsysLANwrK0eY9TCNzHO7X4bgcriu9xu9yGuAmrWB3X6Q2kC3MZiYZxQhB4nRheyqpBoLVhuAAjABmFaE3AAIxJ5NJK3oWFwnXouB49w8Xl8%2FiQgTIlmwnhgDjxKyqaE8uhoTE6khAABJ6J1FYQkoqaTCJorgPQyPDLuraUNUSBkftFiiQAkQNg%2BABzfz5ezYZmYFAIEBEUg28AQdC0UQANVEDg0TC9pLIAE4yAAmeMgBZAA%3D%3D?_gl=1*1qdqpk*_ga*NTY1OTE4MDk4LjE3MDYzNDk2NTA.*_ga_9J976DJZ68*MTcwNjM0OTY1MC4xLjEuMTcwNjM0OTk3NC4wLjAuMA..&_ga=2.113754119.1688572274.1706349650-565918098.1706349650)
 
 所有枚举类默认都实现了 [Comparable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-comparable/index.html) 接口。
 枚举类中的常量按照自然顺序定义。有关详细信息，请参阅 [排序](collection-ordering.md)。
@@ -91,11 +92,10 @@ enum class RGB { RED, GREEN, BLUE }
 
 fun main() {
     for (color in RGB.values()) println(color.toString()) // 打印 RED, GREEN, BLUE
-    println("The first color is: ${RGB.valueOf("RED")}") // 打印 "The first color is: RED"
+    println("第一种颜色是: ${RGB.valueOf("RED")}") // 打印 "第一种颜色是: RED"
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="rgb-enums-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIYDsCuBbABGANgQwGcDMAlAcQCFNhSBRAEQBpMyTbaA5ZigGQFVamAL4AdZGIBmqZJnR4AlsgAUASmpjMmzBIgAnTEsg49mRaUoA6FABdd8mATUAHO8ms5lRvResQAyraKAOaqagD0YZguitbEbEwsbJzc%2FLQaWtFuHkoiIAAqABYw2vK6BNbYEMb68gTwmAAkwOQUFgBueDioMADyEjkg8bkqoiDhkZmxmLmFxRKl5ZXVpnV09LliQiCMINZ4ukEw1gAK%2BNY6uugIIABWeB3b4BDoTvI4MLoAah8E8hDI1wAjBYAJwWABM4JAQiAA?_gl=1*1r6bvpl*_ga*NTY1OTE4MDk4LjE3MDYzNDk2NTA.*_ga_9J976DJZ68*MTcwNjM0OTY1MC4xLjEuMTcwNjM0OTk3NC4wLjAuMA..&_ga=2.21802811.1688572274.1706349650-565918098.1706349650)
 
 `valueOf()` 方法如果指定的名称与类中定义的任何枚举常量不匹配，则会抛出 `IllegalArgumentException`。
 
@@ -118,12 +118,13 @@ fun main() {
 enum class RGB { RED, GREEN, BLUE }
 
 fun main() {
+    //sampleStart
     println(RGB.RED.name) // 打印 RED
     println(RGB.RED.ordinal) // 打印 0
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="rgb-enums-properties-kotlin"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIYDsCuBbABGANgQwGcDMAlAcQCFNhSBRAEQBpMyTbaA5ZigGQFVamAL4AdZGIBmqZJnR4AlsgAUASmpjMmzBq0AHAE6KALjmXkKAOjb0LyPOhhqtAemeYDx4tZ2aPyE2aUVgwWEPpQing4aq7uhv7EAAw%2B2shCIIwgRnj6AOYwRgAK%2BEYSYegIIABWeABueBngEOi68jgw%2BgBqHQTyEMiVAIwWAJwWAEzjIEJAA%3D%3D%3D?_gl=1*11lwcr7*_ga*NTY1OTE4MDk4LjE3MDYzNDk2NTA.*_ga_9J976DJZ68*MTcwNjM0OTY1MC4xLjEuMTcwNjM0OTk3NC4wLjAuMA..&_ga=2.85452697.1688572274.1706349650-565918098.1706349650)
 
 可以使用 [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) 和 [`enumValueOf<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-value-of.html) 函数以一种通用的方式访问枚举类中的常量：
 

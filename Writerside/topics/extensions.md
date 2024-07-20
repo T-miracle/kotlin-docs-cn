@@ -48,6 +48,7 @@ fun <T> MutableList<T>.swap(index1: Int, index2: Int) {
 
 ```kotlin
 fun main() {
+//sampleStart
     open class Shape
     class Rectangle: Shape()
     
@@ -59,10 +60,10 @@ fun main() {
     }
     
     printClassName(Rectangle())
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGEADjJmADY4DO7GAygBY6NqtVhy4AlGGAAuONAHMWMeD36MSQmhoypMfATAB0cmFIByOLDBIYAvBnIg9gkFp0YJ02QsPGzFq6R2Dh4y8ooOWq7oGPQATgRSAMJsnOaWhOzKTjCkFJi0BXEJLETsRiZpAcRaAL6R%2BTRFaEkp7JWEIV6KJNVUaDUgADQgMrG%2BAApsUkgQsVgIIABWOABuOEPgEFj0eIqxAGowsex4EGgLAIwGAJwGAEwADCA1QA%3D%3D%3D?_gl=1*1j74nc5*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjUzOTIuNTUuMC4w&_ga=2.167288056.791462809.1702344662-2060274793.1694940376)
 
 这个例子会打印出 **Shape**，因为被调用的扩展函数仅取决于参数 `s` 的声明类型，即 `Shape` 类。
 
@@ -70,6 +71,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     class Example {
         fun printFunctionType() { println("Class method") }
     }
@@ -77,10 +79,10 @@ fun main() {
     fun Example.printFunctionType() { println("Extension function") }
     
     Example().printFunctionType()
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGYANjgM5MYCiAHjlgA70xlqtYakw8ATgQAuAMXRgpeCGgAqATx4wSZDBOn0i5EAGFGLbDCkALaEdIBfITUeZaTjKPZde%2FAHR60WXlFZXVNbWBdSUCDQiNOKRg0JiVMUQVUuwwXYXdObj4tYn9ooLQM0I0iykp7EAAaECkccQBzSwAFRikkCHEsBBAAKxwANxwG8AhePH5xADUYcRTlQYBGXwBOXwAmAAYQeyA%3D%3D%3D?_gl=1*6owo4o*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjUzOTIuNTUuMC4w&_ga=2.167221624.791462809.1702344662-2060274793.1694940376)
 
 这段代码会打印出 **Class method**。
 
@@ -88,6 +90,7 @@ fun main() {
 
 ```kotlin
 fun main() {
+//sampleStart
     class Example {
         fun printFunctionType() { println("Class method") }
     }
@@ -95,10 +98,10 @@ fun main() {
     fun Example.printFunctionType(i: Int) { println("Extension function #$i") }
     
     Example().printFunctionType(1)
+//sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIBmBXAdgAgLYEMCWaAFAJQbAA6alGNGYANjgM5MYCiAHjlgA70xlqtYakw8ATgQAuAMXRgpeCGgAqATx4wSZDBOn0i5EAGFGLbDCkALaEdIBfITUeZaTjKPZde%2FAHR60WXlFZXVNQjx4DABJQNJgXUlAg0IjTikYNCYlTFEFHIwAYgASPDsMF2F3Tm4%2BLWJ%2FJKC0fNCNLQBGYkpKexAAGhApHHEAc0sABUYpJAhxLAQQACscADccAfAIXjx%2BcQA1GHFs5UWO3wBOXwAmAAYQeyA%3D%3D%3D?_gl=1*6owo4o*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjUzOTIuNTUuMC4w&_ga=2.167221624.791462809.1702344662-2060274793.1694940376)
 
 ## 可空接收者 {id=可空接收者}
 
@@ -154,7 +157,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBAWQJ4GFUNNgAdAO0ys0gFsAHFcgSwkogCMArGMAFxKYAvlQD0ozAHdmSJJg4waKWTCiZSIfBAZNW5DRSEUKAMwCulPIXRoAdFp0s2t%2BgCdm5Pg8ZPyACgBKQTcPPiR%2FDTofPQ0go31yc0paFA9AkgpqHAIiOxDPb102QMMQABoQPhRXAHMYPgAFVD4TCFdaBBAuFAA3FHLwbXoZGFcANVG0PU6ARlsATlsAJgAGECEgA?_gl=1*1c6msaa*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjYwMDcuNjAuMC4w&_ga=2.167743992.791462809.1702344662-2060274793.1694940376)
 
 ## 扩展的作用域
 
@@ -218,7 +220,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBc4A2BDAzmgBACQmgLgBQBuKSmAFnvgHYoC2M8mAyvgE4CWNA5gJSZgAHRqYxmAGYBXUQAcuNfLgJ1GhAcEzzuRKioYwBAXxEmaIsKgyYAwhBo0YYfJ3skylas2X4ANJlJyWQh2fGYASUUNEXFJGS0FfAAFEKINBJ1CYNDjERjxaVEfADptRTsHJxd7NgUedUF82LEypWpVGAaxAHpuzDAyJCwS1p8O9Sbm1sIhBFm%2BSdjWlNCuzF7%2BwawKx2dXGlLElbTJs0nC%2FvtdtMbRZp6AKmLnh%2B7F8T18Q50dqv3a7j1AQ9PoDJBDTD4CgwTAwAAe%2BBgNDQ%2BziND29lOpjyNAu9BQ3AawjuYl%2BGJohB8MxAAGsIPgkMVuPN%2FAAWVkAZj4xUglWcExJ626VNmdIZTPMIG5rTJ1RoAN4XQ2MHY7BC%2FihMPhiORqMK5MwnCwMhQpE4qAARkgYRApPgUbBbFc%2FpiaEYQL4QPgUOweDBkqh8BIQvQECAAFamlAe8AQeiyc0qgBqKpR9jDAEZigBOYoAJgADCAjEA%3D%3D%3D?_gl=1*1kjmd5q*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjYwMDcuNjAuMC4w&_ga=2.175011300.791462809.1702344662-2060274793.1694940376)
 
 在分发接收者和扩展接收者的成员之间发生名称冲突时，扩展接收者具有优先权。
 要引用分发接收者的成员，您可以使用[限定的 `this` 语法](this-expressions.md#qualified-this)。
@@ -271,7 +272,6 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-[**打开训练场>>>**](https://play.kotlinlang.org/editor/v1/N4Igxg9gJgpiBcIIAcYDsAEYA2BDAzvhgEIEwbAYC%2BAOmnTgUQCIwBOAlgG4xQbwkyACgCUFanTop0WPIUH4YAYVzZs7CnQzaM0zADMArplKKAdMk5oALgDFjYaxwhoAkmn0RRmzDr%2BWOG2w0IRoQU3IYAA9rdHxnAwcnFwxAhWVVdTYwkS0dWnpfbT0MI0xWTh4oCys7JIT3T29gPL9tAKCQsIruXgxo2LR4lLLHBNSTMhU1dhzWiUK%2FMqxMoQAjAQixFqK2tZrAurQxl0avMW0AekuVtQxrAAtImLjx0eTF%2FLoChjkWdl6UGmWU2U0y7Ga8wgPDYnFgpWM6QONnsxw%2BZ0hu38tWCoXCZH6LyGb3qKTSPSqwNmIFyux%2Bu2h7Dh5GWFN4yKOJzcHnOPjaOg61lx3QBVUJg2GiTR43Jot4VOyNPmBXpywAtrhApi%2FBEFaIzGBVhFRBcMNcMGEIuLXiNSZg0rrwYr5mygU79Ya1EJjSILubLQSBjapVyJhhXQqwhgALQYKAcfDIXDWMAPDBsGBgGC9NipIgZ%2FAQbBirgcNjWQyZACeLrlbpmbA9q1dJquNwDimtxNt0rJ5TrkZAMa7kvTmezMLzY8Lxb6%2BGsyY4nuwNbQVBAABoQAu2ABzGDWAAKeGsnjYaoQIAAVrguLhN%2BAIGrkBwsgA1diSy8ARjMAE4zAAJgABhAKggA%3D%3D?_gl=1*wnmasl*_ga*MjA2MDI3NDc5My4xNjk0OTQwMzc2*_ga_9J976DJZ68*MTcwMjU2NTM4Ny43Ni4xLjE3MDI1NjYwMDcuNjAuMC4w&_ga=2.204510678.791462809.1702344662-2060274793.1694940376)
 
 ## 关于可见性的注意事项
 
