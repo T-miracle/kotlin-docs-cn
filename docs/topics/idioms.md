@@ -125,7 +125,23 @@ object Resource {
 }
 ```
 
-## 实例化抽象类
+## 使用内联值类实现类型安全的值 {id=use-inline-value-classes-for-type-safe-values}
+
+```kotlin
+@JvmInline
+value class EmployeeId(private val id: String)
+
+@JvmInline
+value class CustomerId(private val id: String)
+```
+
+如果你不小心混淆了 `EmployeeId` 和 `CustomerId`，将会触发编译错误。
+
+> `@JvmInline` 注解仅用于 JVM 后端。
+>
+{style="note"}
+
+## 实例化抽象类 {id=instantiate-an-abstract-class}
 
 ```kotlin
 abstract class MyAbstractClass {

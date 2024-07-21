@@ -3,6 +3,7 @@
 <buildprofiles>
     <variables>
         <header-logo>logo.svg</header-logo>
+        <custom-favicons>logo.svg</custom-favicons>
         <!--启用Github编辑-->
         <enable-browser-edits>true</enable-browser-edits>
         <browser-edits-url>https://github.com/T-miracle/kotlin-docs-cn/edit/main/Writerside/</browser-edits-url>
@@ -18,13 +19,19 @@
         <web-community-path>Kotlin Community:https://kotlinlang.org/community/</web-community-path>
         <download-page/>
         <relative-url-to-absolute-prefix>https://github.com/Kotlin/kotlinx.coroutines/blob/master/</relative-url-to-absolute-prefix>
-        <feedback-support>https://kotl.in/issue</feedback-support>
-        <feedback-url>https://data.services.jetbrains.com/feedback</feedback-url>
-        <webmaster>doc-feedback@kotlinlang.org</webmaster>
-        <sideblocks>true</sideblocks>
-        <!--<config-algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</config-algolia-api-key>
-        <config-algolia-id>7961PKYRXV</config-algolia-id>
-        <config-algolia-index>prod_KOTLINLANG_WEBHELP</config-algolia-index>-->
+        <help-app-version>3</help-app-version>
+        <config-productid>help/kotlin-reference</config-productid>
+        <config-disqus-id>jetbrains</config-disqus-id>
+        <config-disqus-show>true</config-disqus-show>
+        <config-feedback-enabled>true</config-feedback-enabled>
+        <config-feedback-widget>true</config-feedback-widget>
+        <config-feedback-support>https://kotl.in/issue</config-feedback-support>
+        <config-feedback-url>https://forms-service.jetbrains.com/feedback</config-feedback-url>
+        <config-webmaster>doc-feedback@kotlinlang.org</config-webmaster>
+        <config-sideblocks>true</config-sideblocks>
+        <!--<config-algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</config-algolia-api-key>-->
+        <!--<config-algolia-id>7961PKYRXV</config-algolia-id>-->
+        <!--<config-algolia-index>prod_KOTLINLANG_WEBHELP</config-algolia-index>&ndash;&gt;-->
         <noindex-content status="deprecated">false</noindex-content>
         <noindex-content status="eap">false</noindex-content>
         <noindex-content status="release">false</noindex-content>
@@ -34,11 +41,7 @@
         <analytics-head-script-file>google-analytics-code.html</analytics-head-script-file>
         <analytics-body-html-file>google-analytics-noscript.html</analytics-body-html-file>
     </variables>
-    <build-profile product="kotlin">
-        <variables>
-            <noindex-content>false</noindex-content>
-        </variables>
-    </build-profile>
+    <build-profile product="kr"/>
 
     <footer>
         <link href="https://github.com/JetBrains/kotlin">Kotlin 源码</link>

@@ -142,7 +142,7 @@ val House.number = 1 // 错误：扩展属性不允许使用初始值设定项
 
 ## 伴生对象扩展
 
-如果一个类定义了[伴生对象](object-declarations.md#伴生对象)，你还可以为伴生对象定义扩展函数和属性。
+如果一个类定义了[伴生对象](object-declarations.md#companion-objects)，你还可以为伴生对象定义扩展函数和属性。
 与伴生对象的常规成员一样，它们可以只使用类名作为限定符来调用：
 
 ```kotlin

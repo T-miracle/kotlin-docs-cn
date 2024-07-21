@@ -1,6 +1,6 @@
 [//]: # (title: 条件和循环)
 
-## If 表达式 {id=if表达式}
+## If 表达式 {id=if-expression}
 
 在 Kotlin 中，`if` 是一个表达式：它返回一个值。
 因此，Kotlin 没有三目运算符 (`condition ? then : else`)，因为普通的 `if` 在这个角色中已经表现得很好了。
@@ -49,7 +49,7 @@ val max = if (a > b) {
 
 如果你将 `if` 用作表达式，例如用于 返回它的值 或 赋值给变量，`else` 分支是必需的。
 
-## When 表达式 {id=when表达式}
+## When 表达式 {id=when-expression}
 
 `when` 定义了一个带有多个分支的条件表达式。它类似于 C 语言中的 `switch` 语句。
 它的简单形式如下：
@@ -190,7 +190,7 @@ for (item: Int in ints) {
 
 如上所述，`for` 循环迭代任何提供迭代器的对象。这意味着：
 
-* 它有一个成员或扩展函数 `iterator()` 返回 `Iterator<>`：
+* 具有一个成员或扩展函数 `iterator()`，它返回一个 `Iterator<>`，该迭代器：
   * 有一个成员或扩展函数 `next()`
   * 有一个成员或扩展函数 `hasNext()` 返回 `Boolean`。
 

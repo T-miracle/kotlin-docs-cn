@@ -56,7 +56,7 @@ if (x is String && x.length > 0) {
 }
 ```
 
-智能转换同样适用于[`when` 表达式](control-flow.md#when表达式)和[`while` 循环](control-flow.md#while循环)：
+智能转换同样适用于[`when` 表达式](control-flow.md#when-expression)和[`while` 循环](control-flow.md#while循环)：
 
 ```kotlin
 when (x) {

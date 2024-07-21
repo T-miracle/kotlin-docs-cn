@@ -54,6 +54,16 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
         <th>构建亮点</th>
     </tr>
     <tr>
+        <td><strong>1.9.23</strong>
+            <p>发布于： <strong>2024 年 3 月 7 日</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.23" target="_blank">在 GitHub 上发布</a></p>
+        </td>
+        <td>
+            <p>Kotlin 1.9.20、1.9.21 和 1.9.22 的错误修复版本。</p>
+            <p>了解有关 Kotlin 1.9.20 的更多信息： <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 的新增功能</a>.</p>
+        </td>
+    </tr>
+    <tr>
         <td><strong>1.9.22</strong>
             <p>发布于： <strong>2023 年 12 月 21 日</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.22" target="_blank">在 GitHub 上发布</a></p>

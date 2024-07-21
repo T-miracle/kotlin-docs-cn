@@ -304,7 +304,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-if-expression"}
 
-查看 [`if`-表达式](control-flow.md#if表达式)。
+查看 [`if`-表达式](control-flow.md#if-expression)。
 
 ## for 循环
 
@@ -378,7 +378,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-when-expression"}
 
-请参阅 [when 表达式](control-flow.md#when表达式)。
+请参阅 [when 表达式](control-flow.md#when-expression)。
 
 ## Ranges（区间）
 

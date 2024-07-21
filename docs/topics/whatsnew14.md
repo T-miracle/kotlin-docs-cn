@@ -111,7 +111,7 @@ with the value `strict` or `warning`.
 
 ### Mixing named and positional arguments
 
-In Kotlin 1.3, when you called a function with [named arguments](functions.md#具名参数), you had to place all the
+In Kotlin 1.3, when you called a function with [named arguments](functions.md#named-arguments), you had to place all the
 arguments without names (positional arguments) before the first named argument. For example, you could call `f(1, y = 2)`, 
 but you couldn't call `f(x = 1, 2)`.
 

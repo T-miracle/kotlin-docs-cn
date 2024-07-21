@@ -24,7 +24,7 @@
 
 ## Kotlin 子系统路线图
 
-要查看我们正在进行的最大的项目，请访问 [YouTrack board](https://youtrack.jetbrains.com/agiles/153-1251/current) 或 [路线图详细信息](#路线图详细信息) 表。
+要查看我们正在进行的最大的项目，请访问 [YouTrack board](https://youtrack.jetbrains.com/agiles/153-1251/current) 或 [路线图详细信息](#roadmap-details) 表。
 
 如果您对路线图或其中的项目有任何问题或反馈，请随时在 [YouTrack tickets](https://youtrack.jetbrains.com/issues?q=project:%20KT,%20KTIJ%20tag:%20%7BRoadmap%20Item%7D%20%23Unresolved%20) 或 Kotlin Slack 的 [#kotlin-roadmap](https://kotlinlang.slack.com/archives/C01AAJSG3V4) 频道中发布（[请求邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)）。
 
@@ -32,7 +32,7 @@
 
 请访问我们的问题跟踪器 YouTrack 中的 [路线图面板](https://youtrack.jetbrains.com/agiles/153-1251/current) ![YouTrack](youtrack-logo.png){width=30}{type="joined"}
 
-### Roadmap details
+### Roadmap details {id=roadmap-details}
 
 <table>
     <tr>
@@ -98,8 +98,8 @@
             </list>
             <p>Ktor 和 Exposed 的路线图：</p>
             <list>
-                <li><a href="https://blog.jetbrains.com/ktor/2022/12/16/ktor-2023-roadmap/" target="_blank">Ktor 框架路线图</a></li>
-                <li><a href="https://blog.jetbrains.com/kotlin/2023/08/exposed-moving-forward/" target="_blank">Exposed 库路线图</a></li>
+                <li><a href="https://blog.jetbrains.com/kotlin/2024/03/the-ktor-roadmap-for-2024/" target="_blank">Ktor framework roadmap</a></li>
+                <li><a href="https://blog.jetbrains.com/kotlin/2023/08/exposed-moving-forward/" target="_blank">Exposed library roadmap</a></li>
             </list>
          </td>
     </tr>
@@ -111,7 +111,7 @@
 > 
 {style="note"}
 
-## What's changed since July 2023
+## 自 2023 年 7 月以来发生了什么变化
 
 ### 已完成的项目
 

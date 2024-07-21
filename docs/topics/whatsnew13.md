@@ -146,7 +146,7 @@ fun Request.getBody() =
 ```
 
 While it was already possible to extract this variable just before `when` , `val` in `when` has its scope properly restricted
-to the body of `when`, and so preventing namespace pollution. [See the full documentation on `when` here](control-flow.md#when表达式).
+to the body of `when`, and so preventing namespace pollution. [See the full documentation on `when` here](control-flow.md#when-expression).
 
 ## @JvmStatic and @JvmField in companions of interfaces
 

@@ -12,28 +12,28 @@ The following tokens are always interpreted as keywords and cannot be used as id
  * `class` declares a [class](classes.md).
  * `continue` [proceeds to the next step of the nearest enclosing loop](returns.md).
  * `do` begins a [do/while loop](control-flow.md#while循环) (a loop with a postcondition).
- * `else` defines the branch of an [if expression](control-flow.md#if表达式) that is executed when the condition is false.
+ * `else` defines the branch of an [if expression](control-flow.md#if-expression) that is executed when the condition is false.
  * `false` specifies the 'false' value of the [Boolean type](booleans.md).
  * `for` begins a [for loop](control-flow.md#for循环).
  * `fun` declares a [function](functions.md).
- * `if` begins an [if expression](control-flow.md#if表达式).
+ * `if` begins an [if expression](control-flow.md#if-expression).
  * `in`
      - specifies the object being iterated in a [for loop](control-flow.md#for循环).
      - is used as an infix operator to check that a value belongs to [a range](ranges.md),
        a collection, or another entity that [defines a 'contains' method](operator-overloading.md#in-operator).
-     - is used in [when expressions](control-flow.md#when表达式) for the same purpose.
-     - marks a type parameter as [contravariant](generics.md#声明处型变).
+     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
+     - marks a type parameter as [contravariant](generics.md#declaration-site-variance).
  * `!in`
      - is used as an operator to check that a value does NOT belong to [a range](ranges.md),
        a collection, or another entity that [defines a 'contains' method](operator-overloading.md#in-operator).
-     - is used in [when expressions](control-flow.md#when表达式) for the same purpose.
+     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
  * `interface` declares an [interface](interfaces.md).
  * `is`
      - checks that [a value has a certain type](typecasts.md#是或不是操作符).
-     - is used in [when expressions](control-flow.md#when表达式) for the same purpose.
+     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
  * `!is`
      - checks that [a value does NOT have a certain type](typecasts.md#是或不是操作符).
-     - is used in [when expressions](control-flow.md#when表达式) for the same purpose.
+     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
  * `null` is a constant representing an object reference that doesn't point to any object.
  * `object` declares [a class and its instance at the same time](object-declarations.md).
  * `package` specifies the [package for the current file](packages.md).
@@ -51,7 +51,7 @@ The following tokens are always interpreted as keywords and cannot be used as id
  * `typeof` is reserved for future use.
  * `val` declares a read-only [property](properties.md) or [local variable](basic-syntax.md#变量).
  * `var` declares a mutable [property](properties.md) or [local variable](basic-syntax.md#变量).
- * `when` begins a [when expression](control-flow.md#when表达式) (executes one of the given branches).
+ * `when` begins a [when expression](control-flow.md#when-expression) (executes one of the given branches).
  * `while` begins a [while loop](control-flow.md#while循环) (a loop with a precondition).
 
 ## Soft keywords
@@ -89,10 +89,10 @@ as identifiers in other contexts:
 The following tokens act as keywords in modifier lists of declarations, and they can be used as identifiers
 in other contexts:
 
- * `abstract` marks a class or member as [abstract](classes.md#抽象类).
+ * `abstract` marks a class or member as [abstract](classes.md#abstract-classes).
  * `actual` denotes a platform-specific implementation in [multiplatform projects](multiplatform.md).
  * `annotation` declares an [annotation class](annotations.md).
- * `companion` declares a [companion object](object-declarations.md#伴生对象).
+ * `companion` declares a [companion object](object-declarations.md#companion-objects).
  * `const` marks a property as a [compile-time constant](properties.md#编译时常量).
  * `crossinline` forbids [non-local returns in a lambda passed to an inline function](inline-functions.md#non-local-returns).
  * `data` instructs the compiler to [generate canonical members for a class](data-classes.md).
@@ -108,7 +108,7 @@ in other contexts:
  * `noinline` turns off [inlining of a lambda passed to an inline function](inline-functions.md#noinline).
  * `open` allows [subclassing a class or overriding a member](classes.md#继承).
  * `operator` marks a function as [overloading an operator or implementing a convention](operator-overloading.md).
- * `out` marks a type parameter as [covariant](generics.md#声明处型变).
+ * `out` marks a type parameter as [covariant](generics.md#declaration-site-variance).
  * `override` marks a member as an [override of a superclass member](inheritance.md#重写方法).
  * `private` marks a declaration as [visible in the current class or file](visibility-modifiers.md).
  * `protected` marks a declaration as [visible in the current class and its subclasses](visibility-modifiers.md).
@@ -135,7 +135,7 @@ Kotlin supports the following operators and special symbols:
      - `*` is also used to [pass an array to a vararg parameter](functions.md#可变参数数量varargs).
  * `=`
      - assignment operator.
-     - is used to specify [default values for parameters](functions.md#默认参数).
+     - is used to specify [default values for parameters](functions.md#default-arguments).
  * `+=`, `-=`, `*=`, `/=`, `%=` - [augmented assignment operators](operator-overloading.md#augmented-assignments).
  * `++`, `--` - [increment and decrement operators](operator-overloading.md#increments-and-decrements).
  * `&&`, `||`, `!` - logical 'and', 'or', 'not' operators (for bitwise operations, use the corresponding [infix functions](numbers.md#数字的运算) instead).
@@ -153,7 +153,7 @@ Kotlin supports the following operators and special symbols:
  * `->`
      - separates the parameters and body of a [lambda expression](lambdas.md#lambda-expression-syntax).
      - separates the parameters and return type declaration in a [function type](lambdas.md#function-types).
-     - separates the condition and body of a [when expression](control-flow.md#when表达式) branch.
+     - separates the condition and body of a [when expression](control-flow.md#when-expression) branch.
  * `@`
      - introduces an [annotation](annotations.md#usage).
      - introduces or references a [loop label](returns.md).

@@ -276,7 +276,7 @@ fun main() {
 ```
 {kotlin-runnable="true" id="data-objects-sealed-hierarchies"}
 
-### 伴生对象 {id=伴生对象}
+### 伴生对象 {id=companion-objects}
 
 类内部的对象声明可以使用 `companion` 关键字标记：
 

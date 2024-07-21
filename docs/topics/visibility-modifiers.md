@@ -104,6 +104,8 @@ class C private constructor(a: Int) { ... }
 默认情况下，所有构造函数都是公开的 (`public`)。
 这实际上意味着它们可以在类可见的任何地方被访问到（这也就是说，`internal` 类的构造函数只有在同一模块内才能被看到）。
 
+对于密封类（sealed classes），构造函数默认是 `protected` 的。有关更多信息，请参见 [密封类](sealed-classes.md#constructors)。
+
 ### 局部声明 {id=局部声明}
 
 局部变量、函数和类不能具有可见性修饰符。

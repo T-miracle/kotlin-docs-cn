@@ -39,7 +39,7 @@ fun powerOf(
 ) { /*...*/ }
 ```
 
-### 默认参数 {id=默认参数}
+### 默认参数 {id=default-arguments}
 
 函数参数可以有默认值，当跳过相应的实参时，将使用默认值。这减少了重载的数量：
 
@@ -65,7 +65,7 @@ class B : A() {
 }
 ```
 
-如果默认参数出现在没有默认值的参数之前，只有通过[具名参数](#具名参数)调用函数时才能使用默认值：
+如果默认参数出现在没有默认值的参数之前，只有通过[具名参数](#named-arguments)调用函数时才能使用默认值：
 
 ```kotlin
 fun foo(
@@ -90,7 +90,7 @@ foo(qux = { println("hello") }) // 使用默认值 bar = 0 和 baz = 1
 foo { println("hello") }        // 使用默认值 bar = 0 和 baz = 1
 ```
 
-### 具名参数 {id=具名参数}
+### 具名参数 {id=named-arguments}
 
 调用函数时，可以给一个或多个参数命名。当一个函数有很多参数且难以将值与参数关联时，这尤其有用，特别是当参数是布尔值或 `null` 值时。
 
@@ -229,7 +229,7 @@ val list = asList(-1, 0, *a.toTypedArray(), 4)
 
 * 必须是成员函数或[扩展函数](extensions.md)。
 * 必须只有一个参数。
-* 该参数不能[接受可变数量的参数](#可变参数数量varargs)且不能有[默认值](#默认参数)。
+* 该参数不能[接受可变数量的参数](#可变参数数量varargs)且不能有[默认值](#default-arguments)。
 
 ```kotlin
 infix fun Int.shl(x: Int): Int { ... }

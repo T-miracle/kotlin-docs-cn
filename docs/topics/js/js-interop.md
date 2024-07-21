@@ -72,7 +72,7 @@ MyClass.sharedMember = function() { /* implementation */ };
 MyClass.prototype.ownMember = function() { /* implementation */ };
 ```
 
-There is no such syntax in Kotlin. However, in Kotlin we have [`companion`](object-declarations.md#伴生对象)
+There is no such syntax in Kotlin. However, in Kotlin we have [`companion`](object-declarations.md#companion-objects)
 objects. Kotlin treats companion objects of `external` classes in a special way: instead of expecting an object, it
 assumes members of companion objects to be members of the class itself. `MyClass` from the example above can be described
 as follows:

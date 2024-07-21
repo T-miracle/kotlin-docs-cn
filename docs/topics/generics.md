@@ -116,7 +116,7 @@ He then proposes the following mnemonic: _PECS_ stands for _Producer-Extends, Co
 >
 {style="note"}
 
-### 声明处型变 {id=声明处型变}
+### 声明处型变 {id=declaration-site-variance}
 
 假设有一个泛型接口 `Source<T>`，该接口没有任何以 `T` 为参数的方法，只有返回 `T` 类型值的方法：
 
@@ -189,9 +189,9 @@ fun demo(x: Comparable<Number>) {
 
 **[存在主义](https://en.wikipedia.org/wiki/Existentialism) 转换：消费者逆变，生产者协变\!** :-)
 
-## 类型投影 {id=类型投影}
+## 类型投影 {id=type-projections}
 
-### 使用处型变：类型投影 {id=使用处型变-类型投影}
+### 使用处型变：类型投影 {id=use-site-variance-type-projections}
 
 将类型形参 `T` 声明为 `out` 并在使用处避免子类型问题非常容易，但有些类实际上**不能**仅限于返回 `T`！一个很好的例子是 `Array`：
 
