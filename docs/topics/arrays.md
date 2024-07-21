@@ -306,11 +306,11 @@ fun main() {
 
 #### 转换为 Map
 
-要将数组转换为 `map`，请使用 [`.toMap()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/to-map.html) 函数。
+要将数组转换为 `Map`，请使用 [`.toMap()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/to-map.html) 函数。
 
-只有 [`Pair<K,V>`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/) 类型的数组才能转换为 `map`。
-`Pair` 实例的第一个值成为键，第二个值成为值。此示例使用 [中缀表示法](functions.md#infix-notation)
-调用 [`to`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/to.html) 函数来创建 `Pair` 的元组：
+只有 [`Pair<K,V>`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-pair/) 数组可以转换为 `Map`。
+`Pair` 实例的第一个值成为键，第二个值成为值。
+这个示例使用 [中缀表示法](functions.md#infix-notation) 调用 [`to`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/to.html) 函数来创建 `Pair` 元组：
 
 ```kotlin
 fun main() {
@@ -351,7 +351,7 @@ fun main() {
 ```kotlin
 fun main() {
 //sampleStart
-    // 创建一个大小为 5 的 Int 数组，并初始化为 0
+    // 创建大小为 5 的 Int 数组，并将值初始化为零
     val exampleArray = IntArray(5)
     println(exampleArray.joinToString())
     // 0, 0, 0, 0, 0

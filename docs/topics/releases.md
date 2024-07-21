@@ -92,7 +92,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
             <p>包含 Beta 版 Kotlin K2 编译器和稳定 Kotlin 多平台的功能版本。</p>
             <p>了解更多信息：</p>
             <list>
-                <li><a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 的新增功能</a>,</li>
+                <li><a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 的新增功能</a></li>
             </list>
         </td>
     </tr>

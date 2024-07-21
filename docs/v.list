@@ -4,17 +4,17 @@
 
 <vars>
 
-    <var name="commitId" value="17693b140149e44f29e7fb088135a07b083bb3d9" type="string"/>
+    <var name="commitId" value="9f6f6c3cc0409262e50d8b72019ae7498ad2e8db" type="string"/>
 
     <var name="kotlinVersion" value="1.9.23" type="string"/>
 
-    <var name="kotlinEapVersion" value="2.0.0-Beta5" type="string"/>
+    <var name="kotlinEapVersion" value="2.0.0-RC1" type="string"/>
 
     <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v1.9.23" type="string"/>
 
     <var name="kotlinReleaseDate" value="March 7, 2024" type="string"/>
 
-    <var name="kotlinEapReleaseDate" value="March 20, 2024" type="string"/>
+    <var name="kotlinEapReleaseDate" value="April 9, 2024" type="string"/>
 
     <var name="coroutinesVersion" value="1.7.3" type="string"/>
 

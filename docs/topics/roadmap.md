@@ -11,7 +11,7 @@
     </tr>
 </table>
 
-欢迎来到 Kotlin 路线图！一窥 Kotlin 团队的优先事项。
+Welcome to the Kotlin roadmap! Get a sneak peek into the priorities of the JetBrains Team.
 
 ## 主要优先事项
 

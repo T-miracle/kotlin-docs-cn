@@ -100,7 +100,7 @@ class Unrelated(o: Outer) {
 class C private constructor(a: Int) { ... }
 ```
 
-在这里，构造函数是私有的。
+在这里，构造函数是`私有`的。
 默认情况下，所有构造函数都是公开的 (`public`)。
 这实际上意味着它们可以在类可见的任何地方被访问到（这也就是说，`internal` 类的构造函数只有在同一模块内才能被看到）。
 
@@ -119,4 +119,3 @@ class C private constructor(a: Int) { ... }
 * Maven 项目。
 * Gradle 的源代码集（但 `test` 源代码集只能访问 `main` 的内部声明）。
 * 使用 `<kotlinc>` Ant 任务的文件集。
-

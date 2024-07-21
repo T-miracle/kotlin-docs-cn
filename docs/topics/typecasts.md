@@ -73,7 +73,7 @@ when (x) {
 智能转换可以在以下情况下使用：
 
 <table header-style="none">
-        <tr>
+    <tr>
         <td>
             <code>val</code> 局部变量
         </td>
@@ -81,7 +81,7 @@ when (x) {
             始终可以，除了 <a href='delegated-properties.md'>局部委托属性</a>。
         </td>
     </tr>
-        <tr>
+    <tr>
         <td>
             <code>val</code> 属性
         </td>
@@ -91,7 +91,7 @@ when (x) {
             内执行的，那么智能转换不能用于<code>open</code>属性或具有自定义 getter 的属性。
         </td>
     </tr>
-        <tr>
+    <tr>
         <td>
             <code>var</code> 局部变量
         </td>
@@ -99,7 +99,7 @@ when (x) {
             如果变量在检查和使用之间没有被修改，在修改它的 lambda 中没有被捕获，并且不是局部委托属性。
         </td>
     </tr>
-        <tr>
+    <tr>
         <td>
             <code>var</code> 属性
         </td>

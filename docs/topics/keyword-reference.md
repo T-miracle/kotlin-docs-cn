@@ -49,8 +49,8 @@ The following tokens are always interpreted as keywords and cannot be used as id
  * `try` [begins an exception-handling block](exceptions.md).
  * `typealias` declares a [type alias](type-aliases.md).
  * `typeof` is reserved for future use.
- * `val` declares a read-only [property](properties.md) or [local variable](basic-syntax.md#变量).
- * `var` declares a mutable [property](properties.md) or [local variable](basic-syntax.md#变量).
+ * `val` declares a read-only [property](properties.md) or [local variable](basic-syntax.md#variables).
+ * `var` declares a mutable [property](properties.md) or [local variable](basic-syntax.md#variables).
  * `when` begins a [when expression](control-flow.md#when-expression) (executes one of the given branches).
  * `while` begins a [while loop](control-flow.md#while循环) (a loop with a precondition).
 

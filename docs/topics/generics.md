@@ -1,10 +1,6 @@
 [//]: # (title: 泛型：in、out、where)
 
-> **注意：**
-> 
-> 此页面尚未校对完善，可能存在部分语法歧义，请酌情理解阅读
-> 
-{style="warning"}
+[//]: # (TODO 校验)
 
 在 Kotlin 中，类可以具有类型形参，就像在 Java 中一样：
 
@@ -32,31 +28,31 @@ Java类型系统中最棘手的部分之一是通配符类型（参见[Java泛�
 而Kotlin则没有这种类型。相反，Kotlin 拥有声明处型变和类型投影。
 
 
-### Variance and wildcards in Java
+### 型变与 Java 中的通配符 {id=variance-and-wildcards-in-java}
 
-Let's think about why Java needs these mysterious wildcards. First, generic types in Java are _invariant_,
-meaning that `List<String>` is _not_ a subtype of `List<Object>`. If `List` were not _invariant_, it would
-have been no better than Java's arrays, as the following code would have compiled but caused an exception at runtime:
+让我们思考一下为什么 Java 需要这些神秘的通配符。
+首先，Java 中的泛型类型是**不可变**的，意思是 `List<String>` **不是** `List<Object>` 的子类型。
+如果 `List` 不是**不可变**的，它就不会比 Java 的数组更有优势，因为下面的代码会编译成功但在运行时导致异常：
 
 ```java
 // Java
 List<String> strs = new ArrayList<String>();
 
-// Java reports a type mismatch here at compile-time.
+// Java 在编译时报告类型不匹配。
 List<Object> objs = strs;
 
-// What if it didn't?
-// We would be able to put an Integer into a list of Strings.
+// 如果没有这种限制会怎样？
+// 我们将能够把一个 Integer 放入一个 String 列表中。
 objs.add(1);
 
-// And then at runtime, Java would throw
-// a ClassCastException: Integer cannot be cast to String
+// 然后在运行时，Java 会抛出
+// ClassCastException: Integer cannot be cast to String
 String s = strs.get(0); 
 ```
 
-Java prohibits such things to guarantee runtime safety. But this has implications. For example,
-consider the `addAll()` method from the `Collection` interface. What's the signature of this method? Intuitively,
-you'd write it this way:
+Java 禁止这种情况以保证运行时的安全性。 但这也带来了影响。
+例如，考虑 `Collection` 接口中的 `addAll()` 方法。
+这个方法的签名是什么？根据直觉，你会这样写：
 
 ```java
 // Java
@@ -99,13 +95,13 @@ interface Collection<E> ... {
 后者被称为**逆变性（contravariance）**。在 `List<? super String>` 上，你只能调用那些接受 `String` 作为参数的方法（比如 `add(String)` 或 `set(int, String)`）。
 如果你调用返回类型是 `T` 的 `List<T>` 中的某些方法，你将得到的结果不是 `String`，而是 `Object`。
 
-Joshua Bloch, in his book [Effective Java, 3rd Edition](http://www.oracle.com/technetwork/java/effectivejava-136174.html), explains the problem well
-(Item 31: "Use bounded wildcards to increase API flexibility"). He gives the name _Producers_ to objects you only
-_read from_ and _Consumers_ to those you only _write to_. He recommends:
+Joshua Bloch 在他的书 [Effective Java, 3rd Edition](http://www.oracle.com/technetwork/java/effectivejava-136174.html)
+中很好地解释了这个问题（第31条：“使用有界通配符来增加 API 的灵活性”）。
+他把只**读取**的对象称为**生产者**，而把只**写入**的对象称为**消费者**。他建议：
 
->"For maximum flexibility, use wildcard types on input parameters that represent producers or consumers."
+>"为了最大限度的灵活性，对代表生产者或消费者的输入参数使用通配符类型。"
 
-He then proposes the following mnemonic: _PECS_ stands for _Producer-Extends, Consumer-Super._
+然后他提出了以下助记符：**PECS** 代表 **Producer-Extends, Consumer-Super（生产者用 Extends, 消费者用 Super）**。
 
 > 如果你使用生产者对象，例如 [`List<? extends Foo>`，则不能在该对象上调用 `add()` 或 `set()` 方法](why-producer-cant-use-set-and-add-function.md)。
 > 然而，这并不表示它是**不可变的**：

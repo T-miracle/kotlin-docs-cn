@@ -204,15 +204,13 @@ fun main() {
     println(MyDataObject) // MyDataObject
 }
 ```
+`data object` 的 `equals()` 函数确保所有 `data object` 类型的对象都被视为相等。
+通常情况下，运行时只有一个 `data object` 实例（因为 `data object` 是单例的）。
+但在一些特殊情况下（比如使用平台反射 `java.lang.reflect` 或某些 JVM 序列化库创建了另一个同类型的对象），
+`equals()` 函数也会确保这些对象被视为相等。
 
-The `equals()` function for a `data object` ensures that all objects that have the type of your `data object` are considered equal.
-In most cases, you will only have a single instance of your data object at runtime (after all, a `data object` declares a singleton).
-However, in the edge case where another object of the same type is generated at runtime (for example, by using platform 
-reflection with `java.lang.reflect` or a JVM serialization library that uses this API under the hood), this ensures that 
-the objects are treated as being equal.
-
-> Make sure that you only compare `data objects` structurally (using the `==` operator) and never by reference (using the `===` operator).
-> This helps you to avoid pitfalls when more than one instance of a data object exists at runtime.
+> 确保你只通过**结构性比较** `data object`（使用 `==` 运算符），而不是通过**引用比较**（使用 `===` 运算符）。
+> 这有助于避免在运行时存在多个 `data object` 实例时的陷阱。
 >
 {style="warning"}
 
@@ -242,26 +240,23 @@ fun createInstanceViaReflection(): MySingleton {
 }
 ```
 
-The generated `hashCode()` function has behavior that is consistent with the `equals()` function, so that all runtime 
-instances of a `data object` have the same hash code.
+生成的 `hashCode()` 函数的行为与 `equals()` 函数一致，因此所有运行时实例的 `data object` 都具有相同的哈希码。
 
 #### 数据对象和数据类之间的区别
 
-While `data object` and `data class` declarations are often used together and have some similarities, there are some 
-functions that are not generated for a `data object`:
+虽然 `data object` 和 `data class` 声明经常一起使用并且有一些相似之处，但有一些函数不会为 `data object` 生成：
 
-* No `copy()` function. Because a `data object` declaration is intended to be used as singleton objects, no `copy()` 
-  function is generated. The singleton pattern restricts the instantiation of a class to a single instance, which would 
-  be violated by allowing copies of the instance to be created.
-* No `componentN()` function. Unlike a `data class`, a `data object` does not have any data properties. 
-  Since attempting to destructure such an object without data properties would not make sense, no `componentN()` functions are generated.
+* 没有 `copy()` 函数。由于 `data object` 声明旨在用作单例对象，因此不会生成 `copy()` 函数。
+  单例模式限制了类的实例化只能有一个实例，允许创建实例的副本将违反这一原则。
+* 没有 `componentN()` 函数。与 `data class` 不同，`data object` 没有任何数据属性。
+  由于试图解构一个没有数据属性的对象是没有意义的，因此不会生成 `componentN()` 函数。
 
 #### 使用数据对象处理密封层次结构
 
-Data object declarations are particularly useful for sealed hierarchies like 
-[sealed classes or sealed interfaces](sealed-classes.md), since they allow you to maintain symmetry with any data classes 
-you may have defined alongside the object. In this example, declaring `EndOfFile` as a `data object` instead of a plain `object` 
-means that it will get the `toString()` function without the need to override it manually:
+`data object` 声明对于封闭层次结构
+（如 [sealed classes 或 sealed interfaces](sealed-classes.md)）
+特别有用，因为它们允许你与可能定义在对象旁边的任何数据类保持对称。
+在这个例子中，将 `EndOfFile` 声明为 `data object` 而不是普通的 `object` 意味着它将获得 `toString()` 函数，而不需要手动重写它：
 
 ```kotlin
 sealed interface ReadResult
@@ -270,8 +265,8 @@ data class Text(val text: String) : ReadResult
 data object EndOfFile : ReadResult
 
 fun main() {
-  println(Number(7)) // Number(number=7)
-  println(EndOfFile) // EndOfFile
+    println(Number(7)) // Number(number=7)
+    println(EndOfFile) // EndOfFile
 }
 ```
 {kotlin-runnable="true" id="data-objects-sealed-hierarchies"}

@@ -124,6 +124,28 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 </tab>
 
+<tab id="data-analysis" title="数据分析">
+
+从构建数据管道到将机器学习模型投入生产，Kotlin 是处理数据并充分利用数据的绝佳选择。
+
+1. **在 IDE 中无缝创建和编辑笔记本：**
+
+  * [开始使用 Kotlin Notebook](get-started-with-kotlin-notebooks.md)。
+
+2. **探索和实验您的数据：**
+
+  * [DataFrame](https://kotlin.github.io/dataframe/overview.html) – 一个用于数据分析和操作的库。
+  * [Kandy](https://kotlin.github.io/kandy/welcome.html) – 一个用于数据可视化的绘图工具。
+
+3. **获取 Kotlin 数据分析的最新更新：**
+
+  * ![Slack](slack.svg){width=25}{type="joined"} Slack： [获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) 并加入 [#datascience](https://kotlinlang.slack.com/archives/C4W52CFEZ) 频道。
+  * ![Twitter](twitter.svg){width=25}{type="joined"} Twitter：关注 [KotlinForData](http://twitter.com/KotlinForData)。
+
+4. **关注 Kotlin** on ![Twitter](twitter.svg){width=25}{type="joined"} [Twitter](https://twitter.com/kotlin), ![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/), 和 ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
+
+</tab>
+
 </tabs>
 
 ## 是否有任何遗漏的内容吗？

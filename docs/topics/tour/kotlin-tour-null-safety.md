@@ -39,7 +39,7 @@ fun main() {
     // nullable 具有可为 null 的 String 类型
     var nullable: String? = "You can keep a null here"
 
-    // 这是可行的  
+    // 这是可行的
     nullable = null
 
     // 默认情况下，不接受空值
@@ -87,8 +87,9 @@ fun main() {
 
 ## 使用安全调用
 
-为了安全地访问可能包含 `null` 值的对象的属性，可以使用安全调用运算符 `?.`。
-安全调用运算符在对象的属性为 `null` 时返回 `null`。这在你想要避免 `null` 值触发代码错误的情况下非常有用。
+要安全地访问可能包含 `null` 值的对象的属性，可以使用安全调用操作符 `?.`。
+安全调用操作符在对象或其访问的属性为 `null` 时返回 `null`。
+这对于避免 `null` 值触发代码中的错误非常有用。
 
 在下面的例子中，`lengthString()` 函数使用安全调用来返回字符串的长度或 `null`：
 
@@ -168,8 +169,8 @@ fun employeeById(id: Int) = when(id) {
 }
 
 fun salaryById(id: Int) = // 在这里写下你的代码
-    
-fun main() { 
+
+fun main() {
     println((1..5).sumOf { id -> salaryById(id) })
 }
 ```
@@ -190,7 +191,7 @@ fun employeeById(id: Int) = when(id) {
 fun salaryById(id: Int) = employeeById(id)?.salary ?: 0
 
 fun main() {
- println((1..5).sumOf { id -> salaryById(id) })
+    println((1..5).sumOf { id -> salaryById(id) })
 }
 ```
 {collapsible="true" collapsed-title="Example solution" id="kotlin-tour-null-safety-solution"}
