@@ -16,8 +16,8 @@ Clone 本项目到本地，直接运行打开即可
 
 ## 如何使用 `WriterSide`
 
-请参阅 [官方文档](https://www.jetbrains.com/help/writerside/discover-writerside.html)
+请参阅 [WriterSide 官方文档](https://www.jetbrains.com/help/writerside/discover-writerside.html)
 
 ## 当前同步官方提交记录
 
-非Fork分支，当前使用修订提交ID：b381b5ffe054ab61b2b0932f9326b9e81a6f1866
+非Fork分支，当前更新至修订号可以在 [v.list](./docs/v.list) 文件中的 `commitId` 属性查看
