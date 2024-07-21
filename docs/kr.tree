@@ -229,8 +229,9 @@
         </toc-element>
         <toc-element toc-title="WebAssembly (Wasm)">
             <toc-element topic="wasm-get-started.md"/>
-            <toc-element topic="wasm-libraries.md" toc-title="添加对 Kotlin 库的依赖项"/>
+            <toc-element topic="wasm-libraries.md" toc-title="添加对 Kotlin 库的依赖项" hidden="true"/>
             <toc-element topic="wasm-js-interop.md"/>
+            <toc-element topic="wasm-troubleshooting.md"/>
         </toc-element>
 
         <toc-element toc-title="JavaScript">

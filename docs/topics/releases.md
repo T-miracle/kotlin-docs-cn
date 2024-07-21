@@ -15,6 +15,11 @@
 
 ## 升级到新版本 {id=升级到新版本}
 
+> 从 IntelliJ IDEA 2023.3 和 Android Studio Iguana (2023.2.1) Canary 15 开始，Kotlin 插件会自动更新。  
+> 你只需要在项目中更新 Kotlin 版本即可。
+>
+{style="note"}
+
 IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当您接受建议时，它会自动将 Kotlin 插件更新到新版本。
 您可以在 **工具** | **Kotlin** | **配置 Kotlin 插件更新** 中检查 Kotlin 版本。
 

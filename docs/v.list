@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vars
-  SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
+          SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
 
 <vars>
 
-    <var name="commitId" value="c09c065df705fea6fd445b6cc7de97a37f5ba685" type="string"/>
+    <var name="commitId" value="6096d62f6176e4e3bab75f75111d8243ccdfdbee" type="string"/>
 
     <var name="kotlinVersion" value="1.9.21" type="string"/>
 
@@ -46,12 +46,14 @@
 
     <var name="sqlDelightVersion" value="2.0.0" type="string"/>
 
-    <var name="kspSupportedKotlinVersion" value="1.9.20" type="string"/>
+    <var name="kspSupportedKotlinVersion" value="1.9.21" type="string"/>
 
-    <var name="kspVersion" value="1.0.14" type="string"/>
+    <var name="kspVersion" value="1.0.15" type="string"/>
 
     <var name="ktorVersion" value="2.3.5" type="string"/>
 
     <var name="dateTimeVersion" value="0.4.0" type="string"/>
+
+    <var name="foojayResolver" value="0.5.0" type="string"/>
 
 </vars>

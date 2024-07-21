@@ -187,7 +187,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile.class).configu
 
 To avoid JVM target incompatibility, [configure a toolchain](#gradle-java-toolchains-support) or align JVM versions manually.
 
-#### What can go wrong if not checking targets compatibility {collapsible="true"}
+#### What can go wrong if targets are incompatible {initial-collapse-state="collapsed"}
 
 There are two ways of manually setting JVM targets for Kotlin and Java source sets:
 * The implicit way via [setting up a Java toolchain](#gradle-java-toolchains-support).
@@ -345,7 +345,7 @@ This type of plugin manages which repositories to download a toolchain from. As 
 
 ```kotlin
 plugins {
-  id("org.gradle.toolchains.foojay-resolver-convention") version("0.5.0")
+  id("org.gradle.toolchains.foojay-resolver-convention") version("%foojayResolver%")
 }
 ```
 
@@ -354,7 +354,7 @@ plugins {
 
 ```groovy
 plugins {
-  id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
+  id 'org.gradle.toolchains.foojay-resolver-convention' version '%foojayResolver%'
 }
 ```
 
@@ -513,7 +513,7 @@ tasks.named("compileJava", JavaCompile.class) {
 Learn more about:
 * [Building modules for the Java Module System](https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_modular)
 * [Building applications using the Java Module System](https://docs.gradle.org/current/userguide/application_plugin.html#sec:application_modular)
-* [What "module" means in Kotlin](visibility-modifiers.md#模块)
+* [What "module" means in Kotlin](visibility-modifiers.md#modules)
 
 ### Other details
 
@@ -601,7 +601,7 @@ plugins {
 ### Kotlin and Java sources for JavaScript
 
 This plugin only works for Kotlin files, so it is recommended that you keep Kotlin and Java files separate (if the
-project contains Java files). If you don't store them separately, specify the source folder in the `sourceSets` block:
+project contains Java files). If you don't store them separately, specify the source folder in the `sourceSets{}` block:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -665,7 +665,7 @@ project.plugins.withType(KotlinBasePlugin.class) {
 ## Configure dependencies
 
 To add a dependency on a library, set the dependency of the required [type](#dependency-types) (for example, `implementation`) in the
-`dependencies` block of the source sets DSL.
+`dependencies{}` block of the source sets DSL.
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -774,7 +774,7 @@ file:
 kotlin.stdlib.jdk.variants.version.alignment=false
 ```
 
-##### Other ways to align versions {collapsible="true"}
+##### Other ways to align versions {initial-collapse-state="collapsed"}
 
 * If you have issues with version alignment, you can align all versions via the Kotlin [BOM](https://docs.gradle.org/current/userguide/platforms.html#sub:bom_import). 
   Declare a platform dependency on `kotlin-bom` in your build script:
@@ -1149,6 +1149,68 @@ dependencies {
 
 </tab>
 </tabs>
+
+## Declare repositories
+
+You can declare a publicly-available repository to use its open source dependencies. In the `repositories{}` block, set 
+the name of the repository:
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+repositories {
+    mavenCentral()
+}
+```
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```kotlin
+repositories {
+    mavenCentral()
+}
+```
+</tab>
+</tabs>
+
+Popular repositories are [Maven Central](https://central.sonatype.com/) and [Google's Maven repository](https://maven.google.com/web/index.html).
+
+> If you also work with Maven projects, we recommend avoiding adding `mavenLocal()` as a repository because you
+> may experience problems when switching between Gradle and Maven projects. If you must add the `mavenLocal()` repository,
+> add it as the last repository in your `repositories{}` block. For more information, see
+> [The case for mavenLocal()](https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:case-for-maven-local).
+> 
+{type="warning"}
+
+If you need to declare the same repositories in more than one subproject, declare the repositories centrally in the
+`dependencyResolutionManagement{}` block in your `settings.gradle(.kts)` file:
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+```
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```kotlin
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+```
+</tab>
+</tabs>
+
+Any declared repositories in subprojects override repositories declared centrally. For more information on how to control
+this behavior and what options are available, see [Gradle's documentation](https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:centralized-repository-declaration).
 
 ## What's next?
 

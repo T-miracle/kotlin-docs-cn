@@ -20,12 +20,15 @@ You can also find a short overview of the updates in this video:
 
 The Kotlin plugins that support 1.9.20 are available for:
 
-| IDE            | Supported versions                      |
-|----------------|-----------------------------------------|
-| IntelliJ IDEA  | 2023.1.x, 2023.2.x                      |
-| Android Studio | Hedgehog (2023.1.1)*, Iguana (2023.2.1) |
+| IDE            | Supported versions                     |
+|----------------|----------------------------------------|
+| IntelliJ IDEA  | 2023.1.x, 2023.2.x, 2023.x             |
+| Android Studio | Hedgehog (2023.1.1), Iguana (2023.2.1) |
 
-\* The Kotlin 1.9.20 plugin will be included with Android Studio Hedgehog (231) and Iguana (232) in their upcoming releases.
+> Starting from IntelliJ IDEA 2023.3.x and Android Studio Iguana (2023.2.1) Canary 15, the Kotlin plugin is automatically
+> included and updated. All you need to do is update the Kotlin version in your projects.
+>
+{style="note"}
 
 ## New Kotlin K2 compiler updates
 
@@ -699,12 +702,14 @@ machine, libraries delivered with Xcode 15 will be visible but not accessible.
 
 ## Kotlin/Wasm
 
+In 1.9.20, Kotlin Wasm reached the [Alpha level](components-stability.md) of stability.
+
 * [Compatibility with Wasm GC phase 4 and final opcodes](#compatibility-with-wasm-gc-phase-4-and-final-opcodes)
 * [New `wasm-wasi` target, and the renaming of the `wasm` target to `wasm-js`](#new-wasm-wasi-target-and-the-renaming-of-the-wasm-target-to-wasm-js)
 * [Support for the WASI API in standard library](#support-for-the-wasi-api-in-the-standard-library)
 * [Kotlin/Wasm API improvements](#kotlin-wasm-api-improvements)
 
-> Kotlin Wasm is [Experimental](components-stability.md).
+> Kotlin Wasm is [Alpha](components-stability.md).
 > It is subject to change at any time. Use it only for evaluation purposes.
 >
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
@@ -717,7 +722,7 @@ Wasm GC moves to the final phase and it requires updates of opcodes – constant
 Kotlin 1.9.20 supports the latest opcodes, so we strongly recommend that you update your Wasm projects to the latest version of Kotlin.
 We also recommend using the latest versions of browsers with the Wasm environment:
 * Version 119 or newer for Chrome and Chromium–based browsers.
-* Version 119 or newer for Firefox. Note that in Firefox 119, you need to [turn on Wasm GC manually](wasm-get-started.md#troubleshooting).
+* Version 119 or newer for Firefox. Note that in Firefox 119, you need to [turn on Wasm GC manually](wasm-troubleshooting.md).
 
 ### New `wasm-wasi` target, and the renaming of the `wasm` target to `wasm-js`
 

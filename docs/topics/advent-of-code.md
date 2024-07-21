@@ -4,6 +4,7 @@
 every day from December 1 to December 25. With the permission of [Eric Wastl](http://was.tl/), creator of Advent of Code,
 we'll show how to solve these puzzles using the idiomatic Kotlin style:
 
+* [Advent of Code 2023](https://www.youtube.com/playlist?list=PLlFc5cFwUnmzk0wvYW4aTl57F2VNkFisU)
 * [](#advent-of-code-2022)
 * [](#advent-of-code-2021)
 * [](#advent-of-code-2020)
@@ -145,7 +146,8 @@ Use queues, `ArrayDeque`, function references, and the `tailrec` modifier to sol
 ## Advent of Code 2021
 
 > Read our [blog post about Advent of Code 2021](https://blog.jetbrains.com/kotlin/2021/11/advent-of-code-2021-in-kotlin/)
-
+> 
+{style="tip"}
 
 ### Day 1: Sonar sweep
 
@@ -228,7 +230,7 @@ or watch the video:
 
 ### Day 4: Passport processing
 
-Apply the [`when`](control-flow.md#when表达式) expression and explore different ways of how to validate the input:
+Apply the [`when`](control-flow.md#when-expression) expression and explore different ways of how to validate the input:
 utility functions, working with ranges, checking set membership, and matching a particular regular expression.
 
 * Read the puzzle description on [Advent of Code](https://adventofcode.com/2020/day/4)

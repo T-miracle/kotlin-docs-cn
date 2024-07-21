@@ -1,61 +1,74 @@
 [//]: # (title: Kotlin Wasm)
 
-> Kotlin Wasm 是 [实验性的](components-stability.md)。
-> 它可能随时更改。仅用于评估目的。
+> Kotlin Wasm 是 [Alpha](components-stability.md)。  
+> 它可能随时发生变化。
+> 你可以在生产前的场景中使用它。
+> 我们欢迎你在 [YouTrack](https://kotl.in/issue) 上给我们反馈。
 >
-> 我们希望您在 [YouTrack](https://kotl.in/issue) 上提供反馈。
->
-{style="warning"}
-
-[WebAssembly (Wasm)](https://webassembly.org) 是一种基于堆栈的虚拟机的二进制指令格式。
-这种格式是独立于平台的，因为它在自己的虚拟机上运行。
-Wasm 旨在快速和安全，并且可以编译来自各种编程语言的代码，包括 Kotlin。
-
-Kotlin/Wasm 是 Kotlin 的一个新的编译目标。您可以在 Kotlin Multiplatform 项目中使用它。
-通过 Kotlin/Wasm，您可以创建在支持 WebAssembly 并符合 Kotlin 要求的不同环境和设备上运行的应用程序。
-
-> 通过这个 [YouTube 播放列表](https://kotl.in/wasm-pl) 了解更多关于 Kotlin/Wasm 的信息。
+> [加入 Kotlin/Wasm 社区](https://slack-chats.kotlinlang.org/c/webassembly)。
 >
 {style="note"}
 
-## 浏览器支持
+Kotlin 有能力构建应用程序，并且使用 Compose Multiplatform 和 Kotlin/Wasm，可以在你的 Web 项目中重用移动和桌面用户界面（UI）。
 
-要在浏览器中运行使用 Kotlin/Wasm 构建的应用程序，您需要一个支持新的 [垃圾回收功能](https://github.com/WebAssembly/gc) 的版本。
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 是基于 Kotlin 和
+[Jetpack Compose](https://developer.android.com/jetpack/compose) 的声明式框架，允许你一次性实现 UI，并在你所有的目标平台上共享。
+特别是对于 Web 平台，Compose Multiplatform 使用 Kotlin/Wasm 作为其编译目标。
 
-[在《开始使用 Kotlin/Wasm》中了解更多](wasm-get-started.md#故障排除)。
+[探索我们基于 Compose Multiplatform 和 Kotlin/Wasm 构建的应用程序的在线演示](https://zal.im/wasm/jetsnack/)
 
-## 互操作性
+![Kotlin/Wasm demo](wasm-demo.png){width=700}
 
-Kotlin/Wasm 允许您在 Kotlin 中同时使用 JavaScript 代码和浏览器 API，以及在 JavaScript 中使用 Kotlin 代码。
-
-[了解有关 Kotlin Wasm 与 JavaScript 互操作性的更多信息](wasm-js-interop.md)。
-
-## 用于 Web 的 Compose Multiplatform
-
-> Web 支持是 [实验性的](components-stability.md) 并且可能随时更改。仅用于评估目的。
-> 我们将感谢您在公共 Slack 频道 [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web) 中提供反馈。
-> 如果遇到任何问题，请在 [GitHub](https://github.com/JetBrains/compose-multiplatform/issues) 上报告。
+> 要在浏览器中运行使用 Kotlin/Wasm 构建的应用程序，你需要支持新的垃圾回收和异常处理提案的浏览器版本。  
+> 要检查支持状态，请查看 [WebAssembly 路线图](https://webassembly.org/roadmap/)。
 >
-{style="warning"}
+{style="tip"}
 
-用于 Web 的 Compose Multiplatform 基于新的 Kotlin/Wasm 目标。
-您可以创建一个 Kotlin 多平台 项目，并尝试在 Web 上共享您的移动或桌面 UI。
-使用 用于 Web 的 Compose Multiplatform，您可以在浏览器中运行您的代码，享受 WebAssembly 的所有优势。
+[WebAssembly (Wasm)](https://webassembly.org/) 是一种用于基于栈的虚拟机的二进制指令格式。  
+这种格式是平台无关的，因为它在自己的虚拟机上运行。
+Wasm 为 Kotlin 和其他语言提供了一个在 Web 上运行的编译目标。
 
-## 如何开始
+Kotlin/Wasm 将你的 Kotlin 代码编译成 Wasm 格式。
+使用 Kotlin/Wasm，你可以创建在不同环境和设备上运行的应用程序，这些环境和设备支持 Wasm 并符合 Kotlin 的要求。
 
-* [在 IntelliJ IDEA 中开始使用 Kotlin/Wasm](wasm-get-started.md)
-* 查看 [带有 Kotlin/Wasm 示例的 GitHub 存储库](https://github.com/Kotlin/kotlin-wasm-examples)
+你想亲自试试吗？
 
-## 库支持
+<a href="wasm-get-started.md"><img src="wasm-get-started-button.svg" width="700" style="block" alt="Kotlin/Wasm 入门"/></a>
 
-您可以直接在 Kotlin/Wasm 中使用 Kotlin 标准库（`stdlib`）和测试库（[`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/)）。
-这些库的版本与 `kotlin-multiplatform` 插件的版本相同。
+## Kotlin/Wasm 性能
 
-Kotlin/Wasm 对其他 Kotlin 库有实验性的支持。[阅读更多关于如何在您的项目中启用它们](wasm-libraries.md)。
+虽然 Kotlin/Wasm 仍处于 Alpha 阶段，但在 Kotlin/Wasm 上运行的 Compose Multiplatform 已经显示出令人鼓舞的性能特性。
+你可以看到其执行速度超过了 JS，并且接近 JVM：
 
-## 反馈
+![Kotlin/Wasm 性能](wasm-performance-compose.png){width=700}
 
-* 直接在 Kotlin Slack 中向开发者提供反馈 – [获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)
-  并加入 [#webassembly](https://kotlinlang.slack.com/archives/CDFP59223) 频道。
-* 如果您在使用 Kotlin/Wasm 中遇到任何问题，请在 [此 YouTrack 问题](https://youtrack.jetbrains.com/issue/KT-56492) 中报告。
+我们定期在 Kotlin/Wasm 上运行基准测试，这些结果来自我们在最新版本的 Google Chrome 中的测试。
+
+## 浏览器 API 支持
+
+Kotlin/Wasm 标准库提供了浏览器 API（包括 DOM API）的声明。
+通过这些声明，你可以直接使用 Kotlin API 来访问和利用各种浏览器功能。
+例如，在你的 Kotlin/Wasm 应用程序中，你可以使用 DOM 元素的操作或 fetch API，而无需从头定义这些声明。
+要了解更多信息，请参阅我们的 [Kotlin/Wasm 浏览器示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/browser-example)。
+
+浏览器 API 支持的声明是使用 JavaScript 的 [互操作能力](wasm-js-interop.md) 定义的。
+你也可以使用相同的能力来定义你自己的声明。
+此外，Kotlin/Wasm 和 JavaScript 的互操作性允许你从 JavaScript 使用 Kotlin 代码。
+有关更多信息，请参阅 [在 JavaScript 中使用 Kotlin 代码](wasm-js-interop.md#use-kotlin-code-in-javascript)。
+
+## 留下反馈 {id=leave-feedback}
+
+### Kotlin/Wasm 反馈 {id=kotlin-wasm-feedback}
+
+* ![Slack](slack.svg){width=25}{type="joined"} Slack：在我们的 [#webassembly](https://kotlinlang.slack.com/archives/CDFP59223) 频道直接向开发者提供反馈。[获取 Slack 邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)。
+* 在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492) 上报告任何问题。
+
+### Compose Multiplatform 反馈 {id=compose-multiplatform-feedback}
+
+* ![Slack](slack.svg){width=25}{type="joined"} Slack：在 [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web) 公开频道中提供反馈。
+* [在 GitHub 上报告任何问题](https://github.com/JetBrains/compose-multiplatform/issues)。
+
+## 了解更多 {id=learn-more}
+
+* 在这个 [YouTube 播放列表](https://kotl.in/wasm-pl) 中了解更多关于 Kotlin/Wasm 的信息。
+* 在我们的 GitHub 仓库中探索 [Kotlin/Wasm 示例](https://github.com/Kotlin/kotlin-wasm-examples)。

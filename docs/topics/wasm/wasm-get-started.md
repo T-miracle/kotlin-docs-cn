@@ -1,30 +1,41 @@
 [//]: # (title: 在 IntelliJ IDEA 中开始使用 Kotlin/Wasm)
 
-> Kotlin/Wasm 是一个[实验性](components-stability.md)功能。它可能随时被删除或更改。它仅在[Kotlin 1.8.20](releases.md)及更高版本中可用。
+> Kotlin/Wasm 是一个 [Alpha](components-stability.md) 功能。它可能随时更改。
 >
-{style="warning"}
+{style="note"}
 
-本教程演示了如何在 IntelliJ IDEA 中使用 Kotlin/Wasm 应用程序。
+本教程演示了如何在 IntelliJ IDEA 中使用 Kotlin/Wasm 运行一个
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 应用，并生成在
+[GitHub pages](https://pages.github.com/) 上发布为网站的工件。
 
-## 开始之前
+## 在开始之前 {id=before-you-start}
 
-1. 下载并安装最新版本的[IntelliJ IDEA](https://www.jetbrains.com/idea/)。
-2. 通过在 IntelliJ IDEA 中选择 **File** | **New** | **Project from Version Control** 来克隆[Kotlin/Wasm 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main)仓库。
+1. 下载并安装最新版本的 [IntelliJ IDEA](https://www.jetbrains.com/idea/)。
+2. 在 IntelliJ IDEA 中选择 **File** | **New** | **Project from Version Control** 克隆 [Kotlin/Wasm examples](https://github.com/Kotlin/kotlin-wasm-examples/tree/main) 仓库。
 
-   您也可以通过命令行克隆它：
+   你也可以从命令行克隆它：
 
    ```bash
    git clone git@github.com:Kotlin/kotlin-wasm-examples.git
    ```
 
-## 运行应用程序
+> 或者，你可以使用我们的实验性 [web wizard](https://kmp.jetbrains.com/) 下载一个示例项目。
+>
+{style="note"}
 
-1. 打开 **Gradle** 工具窗口：**View** | **Tool Windows** | **Gradle**。
-2. 在 **kotlin-wasm-browser-example** | **Tasks** | **kotlin browser** 中，选择并运行 **wasmJsBrowserRun** 任务。
+## 运行应用程序 {id=run-the-application}
+
+1. 通过选择 **View** | **Tool Windows** | **Gradle** 打开 **Gradle** 工具窗口。
+
+   > 你需要至少 Java 11 作为你的 Gradle JVM，才能成功加载示例。
+   >
+   {style="note"}
+
+2. 在 **compose-example** | **Tasks** | **kotlin browser** 中，选择并运行 **wasmJsBrowserRun** 任务。
 
    ![运行 Gradle 任务](wasm-gradle-task-window.png){width=650}
 
-   或者，您可以在项目目录中的终端中运行以下命令：
+   或者，你可以在 `compose-example` 目录下的终端中运行以下命令：
 
    ```bash
    ./gradlew wasmJsBrowserRun -t
@@ -33,101 +44,53 @@
 3. 应用程序启动后，在浏览器中打开以下 URL：
 
    ```bash
-   http://localhost:8080/
+   http://localhost:8081/
    ```
 
-   您应该看到 "Hello, World!" 文本：
+   你会看到一个 "Hello World!" 按钮。点击它：
 
-   ![运行 Kotlin/Wasm 应用程序](wasm-app-run.png){width=650}
+   ![点击 hello world](wasm-composeapp-browser-hello.png){width=650}
 
-### 故障排除 {id=故障排除}
+   你会看到 Compose Multiplatform 的 logo：
 
-尽管大多数浏览器都支持 WebAssembly，但您需要更新浏览器的设置。
+   ![浏览器中的 Compose 应用](wasm-composeapp-browser.png){width=650}
 
-要运行 Kotlin/Wasm 项目，您需要更新目标环境的设置：
+## 生成工件 {id=generate-artifacts}
 
-<tabs>
-<tab title="Chrome">
+在 **compose-example** | **Tasks** | **kotlin browser** 中，选择并运行 **wasmJsBrowserDistribution** 任务。
 
-* 对于版本 109：
+![运行 Gradle 任务](wasm-gradle-task-window-compose.png){width=650}
 
-  使用 `--js-flags=--experimental-wasm-gc` 命令行参数运行应用程序。
+或者，你可以在 `compose-example` 目录下的终端中运行以下命令：
 
-* 对于版本 110 或更高版本：
+```bash
+./gradlew wasmJsBrowserDistribution
+```
+应用程序任务完成后，你可以在 `composeApp/build/dist/wasmJs/productionExecutable` 文件夹中找到生成的工件：
 
-    1. 在浏览器中转到 `chrome://flags/#enable-webassembly-garbage-collection`。
-    2. 启用 **WebAssembly Garbage Collection**。
-    3. 重新启动浏览器。
+![工件目录](wasm-composeapp-directory.png){width=600}
 
-</tab>
-<tab title="Firefox">
+## 在 GitHub pages 上发布 {id=publish-on-github-pages}
 
-对于版本 109 或更高版本：
+1. 将 `productionExecutable` 目录中的所有内容复制到你想要创建网站的仓库中。
+2. 按照 GitHub 的 [创建你的网站](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site#creating-your-site) 的说明操作。
 
-1. 在浏览器中转到 `about:config`。
-2. 启用 `javascript.options.wasm_function_references` 和 `javascript.options.wasm_gc` 选项。
-3. 重新启动浏览器。
+   > 在你将更改推送到 GitHub 后，你的网站更改可能需要最多 10 分钟才能发布。
+   >
+   {style="note"}
 
-</tab>
-<tab title="Edge">
+3. 在浏览器中，导航到你的 GitHub pages 域名。
 
-对于版本 109 或更高版本：
+   ![导航到 GitHub pages](wasm-composeapp-github-hello.png){width=650}
 
-使用 `--js-flags=--experimental-wasm-gc` 命令行参数运行应用程序。
+   恭喜！你已将你的工件发布在 GitHub pages 上。
 
-</tab>
-</tabs>
+## 下一步是什么？ {id=whats-next}
 
-## 更新您的应用程序
+* [加入 Kotlin/Wasm 社区](https://slack-chats.kotlinlang.org/c/webassembly)
 
-1. 打开 `Simple.kt` 并更新代码：
-
-   ```kotlin
-   import kotlinx.browser.document
-   import kotlinx.browser.window
-   import kotlinx.dom.appendElement
-   import kotlinx.dom.appendText
-   
-   fun main() {
-       document.body?.appendText("Hello, ${greet()}!")
-   
-       document.body?.appendElement("button") {
-           this.textContent = "Click me, I'm a button!"
-           addEventListener("click") {
-               window.setTimeout({
-                   window.alert("👋")
-                   null
-               }, 1000)
-           }
-       }
-   }
-   
-   fun greet() = "world"
-   ```
-
-   此代码向文档添加了一个按钮和一个动作。
-
-2. 再次运行应用程序。一旦应用程序启动，打开浏览器中的以下 URL：
-
-   ```text
-   http://localhost:8080
-   ```
-
-   您应该在按钮中看到 "Hello, World" 文本：
-
-   ![在浏览器中运行 Kotlin/Wasm 应用程序](wasm-updated-app-run.png){width=650}
-
-3. 单击按钮以查看警报消息：
-
-   ![警报操作](wasm-button-click.png){width=650}
-
-现在，您可以使用在浏览器中运行的 Kotlin/Wasm 代码了！
-
-## 下一步是什么？
-
-尝试从 `kotlin-wasm-examples` 仓库中尝试其他 Kotlin/Wasm 示例：
-
-* [Compose 图像查看器](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-imageviewer)
-* [Jetsnack 应用程序](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-jetsnack)
-* [Node.js 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/nodejs-example)
-* [WASI 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/wasi-example)
+* 尝试来自 `kotlin-wasm-examples` 仓库的其他 Kotlin/Wasm 示例：
+  * [Compose 图片查看器](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-imageviewer)
+  * [Jetsnack 应用](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-jetsnack)
+  * [Node.js 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/nodejs-example)
+  * [WASI 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/wasi-example)
