@@ -36,7 +36,7 @@
 
 * 您可以使用相等运算符 (`==`) 检查集合是否在结构上相等。
 * 但是对于数组，您不能使用该运算符。
-* 相反，您必须使用一个特殊的函数，您可以在 [比较数组](#比较数组) 中详细了解。
+* 相反，您必须使用一个特殊的函数，您可以在 [比较数组](#compare-arrays) 中详细了解。
 
 有关集合的更多信息，请参阅 [集合概述](collections-overview.md)。
 
@@ -195,7 +195,7 @@ fun printAllStrings(vararg strings: String) {
 
 有关更多信息，请参阅 [可变数量的参数（varargs）](functions.md#可变参数数量varargs)。
 
-### 比较数组 {id=比较数组}
+### 比较数组 {id=compare-arrays}
 
 要比较两个数组是否具有相同顺序的相同元素，请使用
 [`.contentEquals()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/content-equals.html) 和

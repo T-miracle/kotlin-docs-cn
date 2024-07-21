@@ -1,14 +1,14 @@
 [//]: # (title: 类)
 
-<p>
-    <img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-    <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
-    <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合</a><br />
-    <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
-    <img src="icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数</a><br />
-    <img src="icon-6.svg" width="20" alt="Sixth step" /> <strong>类</strong><br />
-    <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a>
-</p>
+<tldr>
+    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
+        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
+        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合</a><br />
+        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
+        <img src="icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数</a><br />
+        <img src="icon-6.svg" width="20" alt="Sixth step" /> <strong>类</strong><br />
+        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
+</tldr>
 
 Kotlin 支持面向对象编程，使用类和对象。
 对象对于在程序中存储数据非常有用。
@@ -73,7 +73,7 @@ fun main() {
 * `id` 和 `email` 是属性。
 * 使用默认构造函数，使用 `id` 和 `email` 创建了 `contact`。
 
-Kotlin 类可以有许多构造函数，包括你自己定义的构造函数。要了解如何声明多个构造函数的更多信息，请参见[构造函数](classes.md#构造函数)。
+Kotlin 类可以有许多构造函数，包括你自己定义的构造函数。要了解如何声明多个构造函数的更多信息，请参见[构造函数](classes.md#constructors)。
 
 ## 访问属性
 

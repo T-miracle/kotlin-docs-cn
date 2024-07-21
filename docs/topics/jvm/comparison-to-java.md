@@ -1,5 +1,12 @@
 [//]: # (title: Comparison to Java)
 
+> The current comparison between Kotlin and Java was made before the release of Java 21. 
+> This page is outdated, but an update is planned and will be available soon. 
+> 
+> Use this [YouTrack issue](https://youtrack.jetbrains.com/issue/KT-62083/) to track the progress.
+>
+{type="warning"}
+
 ## Some Java issues addressed in Kotlin
 
 Kotlin fixes a series of issues that Java suffers from:
@@ -17,7 +24,7 @@ Kotlin fixes a series of issues that Java suffers from:
 * [Primitive types](basic-types.md) that are not classes. The byte-code uses primitives where possible, but they are not
     explicitly available.
 * [Static members](classes.md) are replaced with [companion objects](object-declarations.md#伴生对象),
-    [top-level functions](functions.md), [extension functions](extensions.md#扩展函数), or [@JvmStatic](java-to-kotlin-interop.md#static-methods).
+    [top-level functions](functions.md), [extension functions](extensions.md#extension-functions), or [@JvmStatic](java-to-kotlin-interop.md#static-methods).
 * [Wildcard-types](generics.md) are replaced with [declaration-site variance](generics.md#声明处型变) and
     [type projections](generics.md#类型投影).
 * [Ternary-operator `a ? b : c`](control-flow.md#if表达式) is replaced with [if expression](control-flow.md#if表达式). 

@@ -37,7 +37,7 @@
     <toc-element toc-title="Kotlin 的新特性">
         <toc-element topic="whatsnew1920.md" toc-title="Kotlin 1.9.20" accepts-web-file-names="whatsnew.html"/>
         <toc-element topic="whatsnew19.md" toc-title="Kotlin 1.9.0"/>
-        <toc-element topic="whatsnew-eap.md" toc-title="Kotlin 2.0.0-Beta1"/>
+        <toc-element topic="whatsnew-eap.md" toc-title="Kotlin 2.0.0-Beta4"/>
         <toc-element toc-title="早期版本">
             <toc-element topic="whatsnew1820.md" toc-title="Kotlin 1.8.20"/>
             <toc-element topic="whatsnew18.md" toc-title="Kotlin 1.8.0"/>
@@ -129,7 +129,8 @@
 
     <toc-element toc-title="多平台开发">
         <toc-element topic="multiplatform-get-started.md" accepts-web-file-names="building-mpp-with-gradle.html,intro-to-kotlin-mpp.html,mpp-intro.html,mpp-get-started.html,multiplatform-tutorials.html"/>
-        <toc-element topic="multiplatform-discover-project.md" accepts-web-file-names="mpp-discover-project.html" toc-title="了解项目结构"/>
+        <toc-element topic="multiplatform-discover-project.md" accepts-web-file-names="mpp-discover-project.html" toc-title="了解基本项目结构"/>
+        <toc-element topic="multiplatform-advanced-project-structure.md" toc-title="Explore advanced project structure"/>
         <toc-element topic="multiplatform-set-up-targets.md" toc-title="Set up targets" accepts-web-file-names="mpp-set-up-targets.html"/>
         <toc-element toc-title="Share code">
             <toc-element topic="multiplatform-share-on-platforms.md" accepts-web-file-names="mpp-share-on-platforms.html"/>
@@ -420,9 +421,12 @@
             <toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.md"/>
             <toc-element toc-title="The six best cross-platform app development frameworks" topic="cross-platform-frameworks.md"/>
         </toc-element>
-        <toc-element toc-title="Google Summer of Code with Kotlin 2023" topic="gsoc-2023.md"/>
-        <toc-element topic="security.md"/>
-        <toc-element topic="kotlin-pdf.md"/>
+        <toc-element toc-title="Google Summer of Code">
+            <toc-element toc-title="Google Summer of Code with Kotlin 2024" id="gsoc-2024.md"/>
+            <toc-element toc-title="Google Summer of Code with Kotlin 2023" id="gsoc-2023.md"/>
+        </toc-element>
+        <toc-element id="security.md"/>
+        <toc-element id="kotlin-pdf.md"/>
         <toc-element toc-title="Community">
             <toc-element topic="contribute.md"/>
             <toc-element topic="kug-guidelines.md" accepts-web-file-names="kug-branding.html"/>

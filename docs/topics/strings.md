@@ -1,7 +1,12 @@
 [//]: # (title: 字符串（Strings）)
 
 Kotlin 中的字符串由类型 [`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/) 表示。
-一般而言，字符串值是双引号 (`"`) 中的字符序列：
+
+> 在 JVM 上，`String` 类型的对象使用 UTF-16 编码，每个字符大约占用 2 字节。
+>
+{style="note"}
+
+通常，字符串值是双引号（`"`）中的字符序列：
 
 ```kotlin
 val str = "abcd 123"
@@ -149,28 +154,40 @@ ${'$'}_9.99
 
 要按照您的特定要求格式化字符串，请使用 [`String.format()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/format.html) 函数。
 
-`String.format()` 函数接受一个格式字符串和一个或多个参数。格式字符串包含一个占位符 (`%`) 用于每个剩余的参数，后面跟着
-[格式说明符](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html#summary)。
-格式说明符是相应参数的格式化指令。
-在输出中，每个参数都填充其在定义格式中的对应占位符：
+`String.format()` 函数接受一个格式化字符串和一个或多个参数。
+格式化字符串包含一个占位符（由 `%` 表示）用于指定参数，后面跟着格式说明符。
+格式说明符是对相应参数的格式化指令，包括标志、宽度、精度和转换类型。格式说明符共同决定了输出的格式。
+常见的格式说明符包括 ` %d ` 用于整数，` %f ` 用于浮点数，和 ` %s ` 用于字符串。
+你还可以使用 `argument_index$` 语法在格式化字符串中以不同的格式多次引用相同的参数。
+
+> 要详细了解格式说明符及其完整列表，请参见 [Java 的 Formatter 文档](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html#summary)。
+>
+{type="note"}
+
+让我们来看一个例子：
 
 ```kotlin
 fun main() { 
 //sampleStart
-    // 格式化为添加零并使长度为七
+    // 格式化一个整数，添加前导零以达到七个字符的长度
     val integerNumber = String.format("%07d", 31416)
     println(integerNumber)
     // 0031416
 
-    // 格式化为四位小数和符号
+    // 格式化一个浮点数，以 + 符号显示，并保留四位小数
     val floatNumber = String.format("%+.4f", 3.141592)
     println(floatNumber)
     // +3.1416
 
-    // 格式化为两个占位符的大写
+    // 格式化两个字符串为大写，每个占用一个占位符
     val helloString = String.format("%S %S", "hello", "world")
     println(helloString)
     // HELLO WORLD
+    
+    // 格式化一个负数以括号括起来，然后使用 `argument_index$` 以不同的格式（没有括号）重复相同的数字
+    val negativeNumberInParentheses = String.format("%(d means %1\$d", -31416)
+    println(negativeNumberInParentheses)
+    //(31416) means -31416
 //sampleEnd    
 }
 ```

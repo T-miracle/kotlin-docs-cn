@@ -2,12 +2,12 @@
 
 <table>
     <tr>
-        <td><strong>上次修改时间</strong></td>
-        <td><strong>2023 年 7 月</strong></td>
+        <td><strong>Last modified on</strong></td>
+        <td><strong>December 2023</strong></td>
     </tr>
     <tr>
-        <td><strong>下次更新</strong></td>
-        <td><strong>2023 年 12 月</strong></td>
+        <td><strong>Next update</strong></td>
+        <td><strong>June 2024</strong></td>
     </tr>
 </table>
 
@@ -17,10 +17,10 @@
 
 这个路线图的目标是给您一个大致的概念。以下是我们关注的最重要的项目列表：
 
-* **K2 编译器**：优化为速度、并行性和统一性的 Kotlin 编译器的重写。这也将让我们引入许多期待已久的语言特性。
-* **基于 K2 的 IntelliJ 插件**：更快的代码完成、高亮和搜索，以及更稳定的代码分析。
-* **Kotlin Multiplatform**：通过提高工具链的稳定性和文档，确保兼容性保证，将这项技术推广到稳定状态。
-* **库作者的体验**：一套文档和工具，帮助设置、开发和发布 Kotlin 库。
+* **K2 compiler**: a rewrite of the Kotlin compiler optimized for speed, parallelism, and unification. It will also allow us to introduce many highly-anticipated language features.
+* **K2-based IntelliJ plugin**: faster code completion, highlighting, and search, together with more stable code analysis.
+* **Kotlin Multiplatform**: streamline build setup and enhance the iOS development experience.
+* **Experience of library authors**: a set of documentation and tools helping to set up, develop, and publish Kotlin libraries.
 
 ## Kotlin 子系统路线图
 
@@ -32,9 +32,7 @@
 
 请访问我们的问题跟踪器 YouTrack 中的 [路线图面板](https://youtrack.jetbrains.com/agiles/153-1251/current) ![YouTrack](youtrack-logo.png){width=30}{type="joined"}
 
-![Roadmap board in YouTrack](roadmap-board.png){width=700}
-
-### 路线图详细信息 {id=路线图详细信息}
+### Roadmap details
 
 <table>
     <tr>
@@ -51,10 +49,11 @@
         <td><strong>Compiler</strong></td>
         <td>
             <list>
-                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-60255" target="_blank">将 K2 编译器升级到稳定版</a></li>
-                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-60276" target="_blank">支持在Android上调试内联函数</a></li>
-                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-60277" target="_blank">将 Kotlin/Wasm 提升到 Alpha</a></li>
-                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-60278" target="_blank">使 Kotlin/Wasm 适用于独立的 Wasm VM</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64568" target="_blank">Kotlin/Wasm: Switch wasm-wasi target of libraries to WASI Preview 2</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64569" target="_blank">Kotlin/Wasm: Support Component Model</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-60255" target="_blank">Promote K2 compiler to Stable</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-60276" target="_blank">Support debugging inline functions on Android</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-60278" target="_blank">Make Kotlin/Wasm suitable for standalone Wasm VMs</a></li>
             </list>
         </td>
     </tr>
@@ -62,23 +61,28 @@
         <td><strong>多平台</strong></td>
         <td>
             <list>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-55513">将 Kotlin 多平台移动版提升至稳定版</a></li> 
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-55512">提高新的 Kotlin/Native 内存管理器的稳健性和性能，并弃用旧的</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-52600" target="_blank">稳定 klib：使库作者更容易实现二进制兼容性</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-42297" target="_blank">改进将 Kotlin 代码导出到 Objective-C</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-42294" target="_blank">改进 Kotlin/Native 编译时间</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64570" target="_blank">Unify inline semantics between all Kotlin targets</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64571" target="_blank">Support SwiftPM for Kotlin Multiplatform users</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64572" target="_blank">Swift export: Design and implement support for Kotlin classes and interfaces</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-55512">Improve the new Kotlin/Native memory manager's robustness and performance, and deprecate the old one</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-52600" target="_blank">Stabilize klib: Make binary compatibility easier for library authors</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-42294" target="_blank">Improve Kotlin/Native compilation time</a></li>
             </list>
+            <p><a href="https://blog.jetbrains.com/kotlin/2023/11/kotlin-multiplatform-development-roadmap-for-2024/" target="_blank">Kotlin Multiplatform development roadmap for 2024</a></p>
          </td>
     </tr>
     <tr>
         <td><strong>工具链</strong></td>
         <td>
             <list>
-                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-60279">改进 Kotlin 构建报告</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KTIJ-23988">首次公开发布基于 K2 的 IntelliJ 插件</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KTIJ-23989">提高当前IDE插件的性能和代码分析稳定性</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-55515">在 Gradle DSL 中公开稳定的编译器参数</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-49511" target="_blank">使用 <code>.gradle.kts</code> 改进 Kotlin 脚本编写和体验</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64575" target="_blank">Support Gradle project isolation</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64577" target="_blank">Improve integration of Kotlin/Native toolchain into Gradle</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KTNB-506" target="_blank">Kotlin Notebook: Light Notebooks and improved experience exploring data from HTTP endpoints</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-60279">Improve Kotlin build reports</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KTIJ-23988">First public release of K2-based IntelliJ plugin</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KTIJ-23989">Improve performance and code analysis stability of the current IDE plugin</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-55515">Expose stable compiler arguments in Gradle DSL</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-49511" target="_blank">Improve Kotlin scripting and experience with <code>.gradle.kts</code></a></li>
             </list>
          </td>
     </tr>
@@ -86,10 +90,11 @@
         <td><strong>库生态系统</strong></td>
         <td>
             <list>
-                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-60280" target="_blank">提供初始一系列的 `<code>kotlinx-io</code>` 发布。</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-48011" target="_blank">将 `<code>kotlinx-metadata-jvm</code>` 发布为稳定版。</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-49527" target="_blank">将 `<code>kotlinx-kover</code>` 升级为稳定版。</a></li>
-                <li><a href="https://youtrack.jetbrains.com/issue/KT-48998" target="_blank">将 Dokka 发布为稳定版。</a></li>
+                <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64578" target="_blank">Promote <code>kotlinx-datetime</code> to Beta</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-60280" target="_blank">Provide initial series of <code>kotlinx-io</code> releases</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-48011" target="_blank">Release <code>kotlinx-metadata-jvm</code> as Stable</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-49527" target="_blank">Promote <code>kotlinx-kover</code> to Beta</a></li>
+                <li><a href="https://youtrack.jetbrains.com/issue/KT-48998" target="_blank">Release Dokka as Stable</a></li>
             </list>
             <p>Ktor 和 Exposed 的路线图：</p>
             <list>
@@ -106,45 +111,34 @@
 > 
 {style="note"}
 
-## 自 2022 年 12 月以来的变更
+## What's changed since July 2023
 
 ### 已完成的项目
 
 我们已经**完成**了上一个路线图中的以下项目：
 
-* ✅ 语言: [引入 `until` 操作符的特殊语法](https://youtrack.jetbrains.com/issue/KT-15613)
-* ✅ 语言: [为 `Enum.values()` 提供现代且高性能的替代方案](https://youtrack.jetbrains.com/issue/KT-48872)
-* ✅ 语言: [设计和实现对象上的 `toString`、`equals` 和 `hashCode` 的解决方案（数据对象）](https://youtrack.jetbrains.com/issue/KT-4107)
-* ✅ 编译器: [发布 K2 Beta](https://youtrack.jetbrains.com/issue/KT-52604)
-* ✅ 编译器: [解决与 JVM 上内联类相关的问题](https://youtrack.jetbrains.com/issue/KT-49514)
-* ✅ 编译器: [实现 Kotlin/Wasm 编译器后端的实验版本](https://youtrack.jetbrains.com/issue/KT-46773)
-* ✅ 工具: [提供更好的 Kotlin Daemon 使用体验](https://youtrack.jetbrains.com/issue/KT-49532)
-* ✅ 工具: [改进 Gradle 增量编译的性能](https://youtrack.jetbrains.com/issue/KT-42309)
-* ✅ 工具: [发布 Kotlin Notebooks IJ IDEA 插件的实验版本](https://youtrack.jetbrains.com/issue/KTIJ-23990)
-* ✅ 库生态系统: [发布 `kotlinx-coroutines` 1.7](https://youtrack.jetbrains.com/issue/KT-49529)
-* ✅ 库生态系统: [改进 `kotlinx-datetime` 库](https://youtrack.jetbrains.com/issue/KT-42315)
-* ✅ 库生态系统: [继续开发和稳定化标准库](https://youtrack.jetbrains.com/issue/KT-52601)
+* ✅ Compiler: [Promote Kotlin/Wasm to Alpha](https://youtrack.jetbrains.com/issue/KT-60277)
+* ✅ Multiplatform: [Promote Kotlin Multiplatform to Stable](https://youtrack.jetbrains.com/issue/KT-55513)
 
 ### 新项目
 
 我们已经**添加**了以下项目到路线图中：
 
-* 🆕 编译器: [发布 Kotlin 2.0](https://youtrack.jetbrains.com/issue/KT-60255)
-* 🆕 编译器: [支持在 Android 上调试内联函数](https://youtrack.jetbrains.com/issue/KT-60276)
-* 🆕 编译器: [将 Kotlin/Wasm 升级为 Alpha 版](https://youtrack.jetbrains.com/issue/KT-60277)
-* 🆕 编译器: [使 Kotlin/Wasm 适用于独立的 Wasm VM（不包含 JavaScript 支持）](https://youtrack.jetbrains.com/issue/KT-60278)
-* 🆕 工具: [改进 Kotlin 构建报告](https://youtrack.jetbrains.com/issue/KT-60279)
-* 🆕 库生态系统: [提供初始一系列的 `kotlinx-io` 发布](https://youtrack.jetbrains.com/issue/KT-60280)
+* 🆕 Compiler: [Kotlin/Wasm: Switch wasm-wasi target of libraries to WASI Preview 2](https://youtrack.jetbrains.com/issue/KT-64568)
+* 🆕 Compiler: [Kotlin/Wasm: Support Component Model](https://youtrack.jetbrains.com/issue/KT-64569)
+* 🆕 Multiplatform: [Unify inline semantics between all Kotlin targets](https://youtrack.jetbrains.com/issue/KT-64570)
+* 🆕 Multiplatform: [Support SwiftPM for Kotlin Multiplatform users](https://youtrack.jetbrains.com/issue/KT-64571)
+* 🆕 Multiplatform: [Swift export: Design and implement support for Kotlin classes and interfaces](https://youtrack.jetbrains.com/issue/KT-64572)
+* 🆕 Tooling: [Support Gradle project isolation](https://youtrack.jetbrains.com/issue/KT-64575)
+* 🆕 Tooling: [Improve integration of Kotlin/Native toolchain into Gradle](https://youtrack.jetbrains.com/issue/KT-64577)
+* 🆕 Tooling: [Kotlin Notebook: Light Notebooks and improved experience exploring data from HTTP endpoints](https://youtrack.jetbrains.com/issue/KTNB-506)
+* 🆕 Library ecosystem [Promote kotlinx-datetime to Beta](https://youtrack.jetbrains.com/issue/KT-64578)
 
 ### 移除的项目
 
-我们已经**移除**了路线图中的以下项目：
+We've **removed** the following item from the roadmap:
 
-* ❌ 语言: [支持非局部 `break` 和 `continue`](https://youtrack.jetbrains.com/issue/KT-1436)
-* ❌ 编译器: [稳定 JVM 特定的实验性特性](https://youtrack.jetbrains.com/issue/KT-46770)
-* ❌ 库生态系统: [稳定和文档化 `atomicfu`](https://youtrack.jetbrains.com/issue/KT-46786)
-* ❌ 库生态系统: [改进 KDoc 体验](https://youtrack.jetbrains.com/issue/KT-55073)
-* ❌ 库生态系统: [为库作者提供 Kotlin API 指南](https://youtrack.jetbrains.com/issue/KT-55077)
+* ❌ Multiplatform: [Improve exporting Kotlin code to Objective-C](https://youtrack.jetbrains.com/issue/KT-42297)
 
 > 有些项目从路线图中移除，但并未完全取消。在某些情况下，我们已将以前的路线图项目与当前的项目合并。
 >

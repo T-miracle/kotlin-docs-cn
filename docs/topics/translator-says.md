@@ -26,7 +26,8 @@ Clone 本项目到本地，直接运行打开即可
 
 - 翻译时替换（官方文档中的一些写法请替换为 Writerside 的用法，不然显示样式会不一致）
 
-  |                   官方文档                   |        Writerside        |
-  |:----------------------------------------:|:------------------------:|
-  |              `{type="..."}`              |     `{style="..."}`      |
-  |  `{initial-collapse-state="collapsed"}`  |  `{collapsible="true"}`  |
+  |                  官方文档                  |       Writerside       |
+  |:--------------------------------------:|:----------------------:|
+  |             `{type="..."}`             |    `{style="..."}`     |
+  | `{initial-collapse-state="collapsed"}` | `{collapsible="true"}` |
+  |    `<microformat>...</microformat>`    |   `<tldr>...</tldr>`   |

@@ -14,7 +14,7 @@ class Person { /*...*/ }
 class Empty
 ```
 
-## 构造函数 {id=构造函数}
+## 构造函数 {id=constructors}
 
 在 Kotlin 中，类有一个**主构造函数**，可能还有一个或多个**次构造函数**。
 主构造函数在类头中声明，他跟在类名和可选类型参数之后。
@@ -98,7 +98,7 @@ class Customer public @Inject constructor(name: String) { /*...*/ }
 
 了解更多关于[可见性修饰符](visibility-modifiers.md#构造函数)的信息。
 
-### 次构造函数 {id=次构造函数}
+### 次构造函数 {id=secondary-constructors}
 
 一个类还可以声明**次构造函数**，以 `constructor` 为前缀：
 
@@ -188,7 +188,7 @@ val customer = Customer("Joe Smith")
 
 类可以包含：
 
-* [构造函数和初始化块](classes.md#构造函数)
+* [构造函数和初始化块](classes.md#constructors)
 * [函数](functions.md)
 * [属性](properties.md)
 * [嵌套类和内部类](nested-classes.md)

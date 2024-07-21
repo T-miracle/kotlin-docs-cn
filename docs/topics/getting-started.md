@@ -65,23 +65,23 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
    * ![Slack](slack.svg){width=25}{type="joined"} Slack：[获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)，加入 [#getting-started](https://kotlinlang.slack.com/archives/C0B8MA7FA)、[#server](https://kotlinlang.slack.com/archives/C0B8RC352)、[#spring](https://kotlinlang.slack.com/archives/C0B8ZTWE4) 或 [#ktor](https://kotlinlang.slack.com/archives/C0A974TJ9) 频道。
    * ![StackOverflow](stackoverflow.svg){width=25}{type="joined"} StackOverflow：订阅 ["kotlin"](https://stackoverflow.com/questions/tagged/kotlin)、["spring-kotlin"](https://stackoverflow.com/questions/tagged/spring-kotlin) 或 ["ktor"](https://stackoverflow.com/questions/tagged/ktor) 标签。
 
-5. **关注 Kotlin** 在 ![Twitter](twitter.svg){width=25}{type="joined"} [Twitter](https://twitter.com/kotlin), ![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/), 和 ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，并且不要错过任何重要的生态系统更新。
+5. **关注 Kotlin** 在 ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)、![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/) 和 ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
 
 如果您遇到任何困难或问题，请向我们的 [问题跟踪器](https://youtrack.jetbrains.com/issues/KT) 报告问题。
 
 </tab>
 
-<tab id="cross-platform-mobile" title="跨平台移动应用程序">
+<tab id="cross-platform-mobile" title="跨平台应用">
 
-在这里，您将学习如何使用 [Kotlin 多平台](https://kotlinlang.org/lp/multiplatform/) 开发和改进您的跨平台移动应用程序。
+在这里，你将学习如何使用 [Kotlin Multiplatform](https://kotlinlang.org/lp/multiplatform/) 开发和改进你的跨平台应用程序。
 
 1. **[设置您的环境以进行跨平台开发](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html).**
 
 2. **创建您的第一个 iOS 和 Android 应用程序：**
 
-   * 要从头开始，请使用项目向导 [创建一个基本的跨平台移动应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)。
-   * 如果您已有现有的 Android 应用程序，并希望使其跨平台，请完成 [使您的 Android 应用程序在 iOS 上运行](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html) 教程。
-   * 如果您喜欢真实的例子，请克隆并玩弄现有项目，例如 [使用 Ktor 和 SQLdelight 创建多平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html) 教程中的网络和数据存储项目或任何 [示例项目](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)。
+  * 要从头开始，[使用项目向导创建一个基本的跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)。
+  * 如果你有一个现有的 Android 应用程序并希望将其变成跨平台应用程序，请完成 [使你的 Android 应用程序在 iOS 上运行](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html) 教程。
+  * 如果你更喜欢实际的例子，可以克隆并玩转一个现有项目，例如 [使用 Ktor 和 SQLdelight 创建跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html) 教程中的网络和数据存储项目或任何 [示例项目](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)。
 
 3. **使用广泛的多平台库**，只需在共享模块中实现所需的业务逻辑一次。了解更多关于[添加依赖项](multiplatform-add-dependencies.md)的信息。
 
@@ -108,7 +108,7 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
    * ![Slack](slack.svg){width=25}{type="joined"} Slack：[获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)，加入 [#getting-started](https://kotlinlang.slack.com/archives/C0B8MA7FA) 和 [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) 频道。
    * ![StackOverflow](stackoverflow.svg){width=25}{type="joined"} StackOverflow：订阅 ["kotlin-multiplatform" 标签](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)。
 
-6. **关注 Kotlin** 在 ![Twitter](twitter.svg){width=25}{type="joined"} [Twitter](https://twitter.com/kotlin), ![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/), 和 ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，并且不要错过任何重要的生态系统更新。
+6. **关注 Kotlin** 在 ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)、![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/) 和 ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
 
 如果您遇到任何困难或问题，请向我们的 [问题跟踪器](https://youtrack.jetbrains.com/issues/KT) 报告问题。
 
@@ -120,46 +120,7 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 * 如果您是 Android 新手，并希望学习使用 Kotlin 创建应用程序，请查看 [这个 Udacity 课程](https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012)。
 
-关注 Kotlin 在 ![Twitter](twitter.svg){width=25}{type="joined"} [Twitter](https://twitter.com/kotlin)、![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/) 和 ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
-
-</tab>
-
-<tab id="multiplatform-library" title="多平台库">
-
-多平台编程支持是 Kotlin 的关键优势之一。它减少了在不同平台编写和维护相同代码所需的时间，同时保留了本地编程的灵活性和优势。
-
-在这里，您将学习如何开发和发布一个多平台库：
-
-1. **发布多平台库：**
-
-   * 请参阅[发布多平台库](multiplatform-publish-lib.md) 了解更多信息。
-
-2. **在您的应用程序中使用库：**
-
-   * [Ktor](https://ktor.io/docs/)
-   * [Serialization（序列化）](serialization.md)
-   * [Coroutines（协程）](coroutines-overview.md)
-   * [DateTime](https://github.com/Kotlin/kotlinx-datetime#readme)
-
-   > 了解更多关于[添加库依赖项](multiplatform-add-dependencies.md)的信息。
-   > 您还可以在[社区驱动的列表](https://libs.kmp.icerock.dev/)中找到多平台库。
-   >
-   {style="tip"}
-
-3. **了解有关 Kotlin 多平台编程的更多信息：**
-
-   * [Kotlin 多平台简介](multiplatform-get-started.md)。
-   * [Kotlin 多平台支持的平台](multiplatform-dsl-reference.md#targets)。
-   * [Kotlin 多平台编程的优势](multiplatform.md)。
-
-4. **加入 Kotlin 多平台社区:**
-
-   * ![Slack](slack.svg){width=25}{type="joined"} Slack：[获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)，加入 [#getting-started](https://kotlinlang.slack.com/archives/C0B8MA7FA) 和 [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) 频道。
-   * ![StackOverflow](stackoverflow.svg){width=25}{type="joined"} StackOverflow：订阅 ["kotlin-multiplatform" 标签](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)。
-
-5. **关注 Kotlin** 在 ![Twitter](twitter.svg){width=25}{type="joined"} [Twitter](https://twitter.com/kotlin)、![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/) 和 ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
-
-如果您遇到任何困难或问题，请向我们的 [问题跟踪器](https://youtrack.jetbrains.com/issues/KT) 报告问题。
+关注 Kotlin 在 ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)、![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/) 和 ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
 
 </tab>
 

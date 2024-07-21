@@ -1,13 +1,14 @@
 [//]: # (title: 集合)
 
-<p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-    <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
-    <img src="icon-3.svg" width="20" alt="Third step" /> <strong>集合</strong><br />
-    <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
-    <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数</a><br />
-    <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类</a><br />
-    <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a>
-</p>
+<tldr>
+    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
+        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
+        <img src="icon-3.svg" width="20" alt="Third step" /> <strong>集合</strong><br />
+        <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
+        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
+</tldr>
 
 在编程时，能够将数据分组到结构中以供以后处理是很有用的。Kotlin 提供了用于这个目的的集合。
 
@@ -86,7 +87,7 @@ fun main() {
 > [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和 [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html)
 > 函数是**扩展**函数的示例。要在对象上调用扩展函数，请在对象后写函数名，并加上一个点 `.`
 >
-> 有关扩展函数的更多信息，请参阅 [扩展函数](extensions.md#扩展函数)。
+> 有关扩展函数的更多信息，请参阅 [扩展函数](extensions.md#extension-functions)。
 > 对于本教程，您只需要知道如何调用它们。 
 > 
 {style="note"}

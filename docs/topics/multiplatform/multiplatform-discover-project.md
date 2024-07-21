@@ -240,7 +240,7 @@ look like this:
 
 ![Intermediate source sets](intermediate-source-sets-diagram.svg){width=700}
 
-Here, the gray blocks at the bottom are platform-specific source sets. Target labels are omitted for clarity.
+Here, the multicolored blocks at the bottom are platform-specific source sets. Target labels are omitted for clarity.
 
 The `appleMain` block is an intermediate source set created by Kotlin for sharing code compiled to Apple-specific
 targets. The `appleMain` source set compiles to only Apple targets. Therefore, Kotlin allows using Apple-specific APIs
@@ -312,6 +312,5 @@ tutorial](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-
 ## What's next?
 
 * [Learn more about declaring and using predefined source sets in Gradle scripts](multiplatform-hierarchy.md)
+* [Explore advanced concepts of the multiplatform project structure](multiplatform-advanced-project-structure.md)
 * [Learn how to configure compilations](multiplatform-configure-compilations.md)
-
-<!-- Learn how to create custom intermediate source sets and work with low-level abstractions of the Gradle build process, such as tasks, configurations, and outputs. -->

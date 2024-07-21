@@ -65,7 +65,7 @@ Create a new Spring Boot project with Kotlin by using the Project Wizard in Inte
    * There are packages and classes under the `main/kotlin` folder that belong to the application.
    * The entry point to the application is the `main()` method of the `DemoApplication.kt` file.
 
-## Explore the project Gradle build file {collapsible="true"}
+## Explore the project Gradle build file {initial-collapse-state="collapsed"}
 
 Open the `build.gradle.kts` file: it is the Gradle Kotlin build script, which contains a list of the dependencies required for the application.
 
@@ -163,7 +163,7 @@ fun main(args: Array<String>) {
       <p>It is declared as a <a href="functions.md#function-scope">top-level function</a> outside the <code>DemoApplication</code> class. The <code>main()</code> function invokes the Spring's <code>runApplication(*args)</code> function to start the application with the Spring Framework.</p>
    </def>
    <def title="Variable arguments – args: Array&lt;String&gt;">
-      <p>If you check the declaration of the <code>runApplication()</code> function, you will see that the parameter of the function is marked with <a href="functions.md#可变参数数量varargs"><code>vararg</code> modifier</a>: <code>vararg args: String</code>.
+      <p>If you check the declaration of the <code>runApplication()</code> function, you will see that the parameter of the function is marked with <a href="functions.md#variable-number-of-arguments-varargs"><code>vararg</code> modifier</a>: <code>vararg args: String</code>.
         This means that you can pass a variable number of String arguments to the function.
       </p>
    </def>
@@ -285,16 +285,3 @@ The Spring application is now ready to run:
 In the next part of the tutorial you'll learn about Kotlin data classes and how you can use them in your application.
 
 **[Proceed to the next chapter](jvm-spring-boot-add-data-class.md)**
-
-### Get the Kotlin language map
-
-Get your personal language map to help you navigate Kotlin features and track your progress in studying the language.
-We will also send you language tips and useful materials on using Kotlin with Spring.
-
-<a href="https://info.jetbrains.com/kotlin-tips.html">
-   <img src="get-kotlin-language-map.png" width="700" alt="Get the Kotlin language map"/>
-</a>
-
-> You will need to share your email address on the next page to receive the materials.
->
-{style="note"}

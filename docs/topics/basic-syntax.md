@@ -463,7 +463,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-iterate-collection"}
 
-使用 `in` 运算符检查集合是否包含一个对象。
+使用 `in` 操作符检查集合是否包含一个对象：
 
 ```kotlin
 fun main() {
@@ -478,7 +478,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-collection-in"}
 
-使用 lambda 表达式来过滤和映射集合：
+使用 [lambda 表达式](lambdas.md) 来过滤和映射集合：
 
 ```kotlin
 fun main() {

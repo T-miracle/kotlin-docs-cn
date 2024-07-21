@@ -140,7 +140,7 @@ when (x) {
 ```
 
 另一种选择是检查一个值是否 是（`is`） 或 不是（`!is`） 特定类型。请注意，
-由于[智能转换](typecasts.md#智能转换)，你可以访问该类型的方法和属性而无需进行额外的检查。
+由于[智能转换](typecasts.md#smart-casts)，你可以访问该类型的方法和属性而无需进行额外的检查。
 
 ```kotlin
 fun hasPrefix(x: Any) = when(x) {

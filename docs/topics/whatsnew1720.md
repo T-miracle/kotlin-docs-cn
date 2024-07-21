@@ -614,7 +614,7 @@ kotlin {
 
 ## Standard library
 
-Kotlin 1.7.20 offers new [extension functions](extensions.md#扩展函数) for the `java.nio.file.Path` class, which allows you to walk through a file tree:
+Kotlin 1.7.20 offers new [extension functions](extensions.md#extension-functions) for the `java.nio.file.Path` class, which allows you to walk through a file tree:
 
 * `walk()` lazily traverses the file tree rooted at the specified path.
 * `fileVisitor()` makes it possible to create a `FileVisitor` separately. `FileVisitor` defines actions on directories

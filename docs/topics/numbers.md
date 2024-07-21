@@ -108,7 +108,7 @@ val bytes = 0b11010010_01101001_10010100_10010010
 > 详细了解 [无符号整数类型的字面常量](unsigned-integer-types.md)。
 
 
-## JVM 平台上的数字表示 {id=JVM平台上的数字表示}
+## JVM 平台上的数字表示 {id=numbers-representation-on-the-jvm}
 
 在 JVM 平台上，数字被存储为原始类型：`int`、`double` 等。
 特例是当你创建可空的数字引用，如 `Int?` 或使用泛型时。
@@ -273,7 +273,7 @@ val x = (1 shl 2) and 0x000FF000
 * `xor(bits)` – 按位 **异或**
 * `inv()` – 按位求反
 
-### 浮点数的比较 {id=浮点数的比较}
+### 浮点数的比较 {id=floating-point-numbers-comparison}
 
 本节讨论的浮点数上的操作有：
 
@@ -281,7 +281,7 @@ val x = (1 shl 2) and 0x000FF000
 * 比较运算符：`a < b`、`a > b`、`a <= b`、`a >= b`
 * 区间的创建和检查：`a..b`、`x in a..b`、`x !in a..b`
 
-当操作数 `a` 和 `b` 在静态上已知为 `Float` 或 `Double` 或它们的可空对应类型（类型被声明、推断或是 [智能转换](typecasts.md#智能转换) 的结果）时，
+当操作数 `a` 和 `b` 在静态上已知为 `Float` 或 `Double` 或它们的可空对应类型（类型被声明、推断或是 [智能转换](typecasts.md#smart-casts) 的结果）时，
 这些数字和它们形成的区间的操作遵循 [IEEE 754 浮点运算标准](https://en.wikipedia.org/wiki/IEEE_754)。
 
 然而，为了支持泛型场景并提供总体排序，对于 **非** 静态类型为浮点数的情况，行为是不同的。

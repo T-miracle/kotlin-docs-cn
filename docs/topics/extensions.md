@@ -8,7 +8,7 @@ Kotlin 提供了一种扩展类或接口功能的能力，而无需继承自该�
 这个机制被称为 **扩展函数（extension function）**。
 还有 **扩展属性（extension properties）** 允许你为现有类定义新属性。
 
-## 扩展函数 {id=扩展函数}
+## 扩展函数 {id=extension-functions}
 
 要声明扩展函数，请在其名称前加上**接收者类型（receiver type）**，该类型指的是被扩展的类型。
 以下示例向 `MutableList<Int>` 添加了一个名为 `swap` 的函数：

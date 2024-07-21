@@ -10,32 +10,34 @@
 
 ## 在开始之前 {id=before-you-start}
 
-1. 下载并安装最新版本的 [IntelliJ IDEA](https://www.jetbrains.com/idea/)。
-2. 在 IntelliJ IDEA 中选择 **File** | **New** | **Project from Version Control** 克隆 [Kotlin/Wasm examples](https://github.com/Kotlin/kotlin-wasm-examples/tree/main) 仓库。
+Create a project using the Kotlin Multiplatform wizard:
 
-   你也可以从命令行克隆它：
+1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com/#newProject).
+2. On the **New Project** tab, change the project name to "WasmDemo" and the project ID to "wasm.project.demo".
+3. Select the **Web** option.
+4. Click the **Download** button and unpack the resulting archive.
 
-   ```bash
-   git clone git@github.com:Kotlin/kotlin-wasm-examples.git
-   ```
+![Kotlin Multiplatform wizard](wasm-compose-wizard.png){width=600}
 
-> 或者，你可以使用我们的实验性 [web wizard](https://kmp.jetbrains.com/) 下载一个示例项目。
->
-{style="note"}
+## Open the project in IntelliJ IDEA
+
+1. Download and install the latest version of [IntelliJ IDEA](https://www.jetbrains.com/idea/).
+2. On the Welcome screen of IntelliJ IDEA, click **Open** or select **File | Open** in the menu bar.
+3. Navigate to the unpacked "WasmDemo" folder and click **Open**.
 
 ## 运行应用程序 {id=run-the-application}
 
-1. 通过选择 **View** | **Tool Windows** | **Gradle** 打开 **Gradle** 工具窗口。
+1. In IntelliJ IDEA, open the **Gradle** tool window by selecting **View** | **Tool Windows** | **Gradle**.
 
-   > 你需要至少 Java 11 作为你的 Gradle JVM，才能成功加载示例。
+   > You need at least Java 11 as your Gradle JVM for the tasks to load successfully.
    >
    {style="note"}
 
-2. 在 **compose-example** | **Tasks** | **kotlin browser** 中，选择并运行 **wasmJsBrowserRun** 任务。
+2. In **composeApp** | **Tasks** | **kotlin browser**, select and run the **wasmJsBrowserRun** task.
 
-   ![运行 Gradle 任务](wasm-gradle-task-window.png){width=650}
+   ![Run the Gradle task](wasm-gradle-task-window.png){width=600}
 
-   或者，你可以在 `compose-example` 目录下的终端中运行以下命令：
+   Alternatively, you can run the following command in the terminal from the `composeApp` directory:
 
    ```bash
    ./gradlew wasmJsBrowserRun -t
@@ -44,29 +46,36 @@
 3. 应用程序启动后，在浏览器中打开以下 URL：
 
    ```bash
-   http://localhost:8081/
+   http://localhost:8080/
    ```
 
-   你会看到一个 "Hello World!" 按钮。点击它：
+   >The port number can vary because the 8080 port may be unavailable. You can find the actual port number printed
+   > in the Gradle build console.
+   >
+   {type="tip"}
 
-   ![点击 hello world](wasm-composeapp-browser-hello.png){width=650}
+   You can see a "Click me!" button. Click it:
 
-   你会看到 Compose Multiplatform 的 logo：
+   ![Click me](wasm-composeapp-browser-clickme.png){width=650}
+
+   Now you can see the Compose Multiplatform logo:
 
    ![浏览器中的 Compose 应用](wasm-composeapp-browser.png){width=650}
 
 ## 生成工件 {id=generate-artifacts}
 
-在 **compose-example** | **Tasks** | **kotlin browser** 中，选择并运行 **wasmJsBrowserDistribution** 任务。
+In **composeApp** | **Tasks** | **kotlin browser**, select and run the **wasmJsBrowserDistribution** task.
 
-![运行 Gradle 任务](wasm-gradle-task-window-compose.png){width=650}
+![Run the Gradle task](wasm-gradle-task-window-compose.png){width=600}
 
-或者，你可以在 `compose-example` 目录下的终端中运行以下命令：
+Alternatively, you can run the following command in the terminal from the `composeApp` directory:
 
 ```bash
 ./gradlew wasmJsBrowserDistribution
 ```
-应用程序任务完成后，你可以在 `composeApp/build/dist/wasmJs/productionExecutable` 文件夹中找到生成的工件：
+
+Once the application task completes, you can find the generated artifacts in the `composeApp/build/dist/wasmJs/productionExecutable`
+folder:
 
 ![工件目录](wasm-composeapp-directory.png){width=600}
 
@@ -81,16 +90,20 @@
 
 3. 在浏览器中，导航到你的 GitHub pages 域名。
 
-   ![导航到 GitHub pages](wasm-composeapp-github-hello.png){width=650}
+   ![Navigate to GitHub pages](wasm-composeapp-github-clickme.png){width=650}
 
    恭喜！你已将你的工件发布在 GitHub pages 上。
 
 ## 下一步是什么？ {id=whats-next}
 
-* [加入 Kotlin/Wasm 社区](https://slack-chats.kotlinlang.org/c/webassembly)
+加入 Kotlin/Wasm 社区，加入 Kotlin Slack：
 
-* 尝试来自 `kotlin-wasm-examples` 仓库的其他 Kotlin/Wasm 示例：
-  * [Compose 图片查看器](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-imageviewer)
-  * [Jetsnack 应用](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-jetsnack)
-  * [Node.js 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/nodejs-example)
-  * [WASI 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/wasi-example)
+<a href="https://slack-chats.kotlinlang.org/c/webassembly"><img src="join-slack-channel.svg" width="700" style="block" alt="加入 Kotlin/Wasm 社区"/></a>
+
+Try the Kotlin/Wasm examples from the `kotlin-wasm-examples` repository:
+
+* [Compose image viewer](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-imageviewer)
+* [Jetsnack application](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-jetsnack)
+* [Node.js example](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/nodejs-example)
+* [WASI example](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/wasi-example)
+* [Compose example](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-example)

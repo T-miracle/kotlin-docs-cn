@@ -1,8 +1,8 @@
 [//]: # (title: 数据类)
 
-在 Kotlin 中，数据类的主要目的是用于保存数据。
-数据类会自动生成额外的成员函数，使得你可以将实例输出为可读的格式、比较实例、复制实例等等。
-要声明数据类，你可以使用 `data` 关键字标记：
+Kotlin 中的数据类主要用于保存数据。
+对于每个数据类，编译器会自动生成额外的成员函数，这些函数允许你将实例打印为可读输出、比较实例、复制实例等。
+数据类使用 `data` 标记：
 
 ```kotlin
 data class User(val name: String, val age: Int)
@@ -10,10 +10,10 @@ data class User(val name: String, val age: Int)
 
 编译器会自动根据主构造函数中声明的属性生成以下成员：
 
-* `.equals()` 和 `.hashCode()` 方法，用于比较对象是否相等。
-* `.toString()` 方法，生成类似于 `"User(name=John, age=42)"` 的字符串表示。
-* [`.componentN()` 函数](destructuring-declarations.md)，与属性声明的顺序一一对应。
-* `.copy()` 方法，用于创建对象的副本（详见下文）。
+* `.equals()`/`.hashCode()` 对。
+* 形式为 `"User(name=John, age=42)"` 的 `.toString()`。
+* [`.componentN()` 函数](destructuring-declarations.md)，对应于属性的声明顺序。
+* `.copy()` 函数（见下文）。
 
 为了确保生成的代码一致并且具有有意义的行为，数据类必须符合以下规定：
 
@@ -23,22 +23,23 @@ data class User(val name: String, val age: Int)
 
 此外，关于数据类成员的生成，遵循以下继承规则：
 
-* 如果在数据类体内有明确实现 `.equals()`、`.hashCode()` 或 `.toString()`，或者在超类中有 `final` 实现，系统将不会自动生成这些函数，而是沿用已有的实现。
+* 如果在数据类体内有明确实现 `.equals()`、`.hashCode()` 或 `.toString()`，或者在超类中有`final` 实现，系统将不会自动生成这些函数，而是沿用已有的实现。
 * 如果超类型具有 `open` 且返回兼容类型的 `.componentN()` 函数，那么将为数据类生成相应的函数，并覆盖超类型的函数。
   如果由于不兼容的签名或它们是最终实现而无法覆盖超类型的函数，则会报告错误。
 * 请勿为 `.componentN()` 和 `.copy()` 函数提供显式实现，这是不允许的。
 
 数据类可以扩展其他类（参见[密封类](sealed-classes.md)以获取示例）。
 
-> 在JVM上，如果生成的类需要有一个无参构造函数，就必须为属性指定默认值（参见[构造函数](classes.md#构造函数)）。
+> 在 JVM 上，如果生成的类需要一个无参构造函数，必须指定属性的默认值（参见 [构造函数](classes.md#constructors)）：
+> 
+> 
+> ```kotlin
+> data class User(val name: String = "", val age: Int = 0)
+> ```
 >
 {style="note"}
 
-```kotlin
-data class User(val name: String = "", val age: Int = 0)
-```
-
-## 在类体中声明的属性
+## 在类体中声明的属性 {id=properties-declared-in-the-class-body}
 
 编译器只利用主构造函数内定义的属性来自动生成函数。若要排除某个属性不纳入生成的实现中，请将其声明在类体内：
 
@@ -48,11 +49,11 @@ data class Person(val name: String) {
 }
 ```
 
-在这个例子中，只有 `name` 属性会在 `.toString()`、`.equals()`、`.hashCode()` 和 `.copy()` 的实现中被使用，同时只有一个组件函数 `.component1()`。
-
-相反，`age` 属性不能在 `.toString()`、`.equals()`、`.hashCode()` 和 `.copy()` 的实现中使用，因为它在类体内被声明。
-
-如果两个 `Person` 对象具有不同的年龄但相同的 `name`，它们将被视为相等。这是因为 `.equals()` 函数只检查 `name` 属性的相等性。例如：
+在下面的示例中，只有 `name` 属性在 `.toString()`、`.equals()`、`.hashCode()`
+和 `.copy()` 实现中被默认使用，并且只有一个组件函数 `.component1()`。
+`age` 属性是在类体内部声明的，因此被排除在外。
+因此，两个 `Person` 对象如果 `name` 相同但 `age` 值不同，它们会被认为是相等的，因为 `.equals()`
+只评估来自主构造函数的属性：
 
 ```kotlin
 data class Person(val name: String) {
@@ -80,7 +81,8 @@ fun main() {
 
 ## 复制
 
-使用 `.copy()` 函数可以复制一个对象，并允许你改变**一些**属性，同时保持其余属性不变。对于上述的 `User` 类，该函数的实现如下：
+使用 `.copy()` 函数复制一个对象，允许你在保持其余属性不变的情况下修改**部分**属性。
+上面 `User` 类的此函数实现如下：
 
 ```kotlin
 fun copy(name: String = this.name, age: Int = this.age) = User(name, age)
@@ -106,5 +108,5 @@ println("$name, $age years of age")
 
 ## 标准数据类
 
-标准库提供了 `Pair` 和 `Triple` 类。然而，在大多数情况下，命名的数据类是更好的设计选择，因为它们通过为属性提供有意义的名称使代码更易读。
-
+标准库提供了 `Pair` 和 `Triple` 类。
+然而，在大多数情况下，命名的数据类是更好的设计选择，因为它们通过为属性提供有意义的名称，使代码更易读。

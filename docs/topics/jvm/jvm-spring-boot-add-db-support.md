@@ -1,10 +1,10 @@
 [//]: # (title: Add database support for Spring Boot project)
 [//]: # (description: Add a database support for Sprint Boot project written in Kotlin using JDBC template.)
 
-<microformat>
+<tldr>
     <p>This is the third part of the <strong>Getting started with Spring Boot and Kotlin</strong> tutorial. Before proceeding, make sure you've completed previous steps:</p><br/>
     <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot.md">Create a Spring Boot project with Kotlin</a><br/><img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class.md">Add a data class to the Spring Boot project</a><br/><img src="icon-3.svg" width="20" alt="Third step"/> <strong>Add database support for Spring Boot project</strong><br/><img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Use Spring Data CrudRepository for database access</p>
-</microformat>
+</tldr>
 
 In this part of the tutorial, you'll add and configure a database to your project using JDBC. In JVM applications, you use JDBC to interact with databases.
 For convenience, the Spring Framework provides the `JdbcTemplate` class that simplifies the use of JDBC and helps to avoid common errors.
@@ -217,7 +217,7 @@ You should use an HTTP client to work with previously created endpoints. In Inte
 
    ![Execute GET requests](execute-get-requests.png)
 
-### Alternative way to execute requests {collapsible="true"}
+### Alternative way to execute requests {initial-collapse-state="collapsed"}
 
 You can also use any other HTTP client or the cURL command-line tool. For example, run the following commands in
 the terminal to get the same result:
@@ -262,9 +262,10 @@ Extend the functionality of the application to retrieve the individual messages 
     }
     ```
    
-    > The `.query()` function that is used to fetch the message by its id is a [Kotlin extension function](extensions.md#扩展函数) provided by the Spring Framework and requires an additional import as in the code above.
+    > The `.query()` function that is used to fetch the message by its id is a [Kotlin extension function](extensions.md#extension-functions)
+    > provided by the Spring Framework. It requires an additional import `import org.springframework.jdbc.core.query` as demonstrated in the code above.
     >
-    {style="note"}
+    {type="warning"}
 
 2. Add the new `index(...)` function with the `id` parameter to the `MessageController` class:
 
@@ -360,7 +361,7 @@ class MessageService(val db: JdbcTemplate) {
     }
 }
 ```
-{collapsible="true"}
+{initial-collapse-state="collapsed"}
 
 ## Run the application
 
@@ -386,7 +387,7 @@ The Spring application is ready to run:
     
     > Put your message id instead of the mentioned above.
     >
-    {style="note"}
+    {type="note"}
 
 5. Execute the GET request and see the result in the **Run** tool window:
 
@@ -397,16 +398,3 @@ The Spring application is ready to run:
 The final step shows you how to use more popular connection to database using Spring Data. 
 
 **[Proceed to the next chapter](jvm-spring-boot-using-crudrepository.md)**
-
-### Get the Kotlin language map 
-
-Get your personal language map to help you navigate Kotlin features and track your progress in studying the language.
-We will also send you language tips and useful materials on using Kotlin with Spring.
-
-<a href="https://info.jetbrains.com/kotlin-tips.html">
-   <img src="get-kotlin-language-map.png" width="700" alt="Get the Kotlin language map"/>
-</a>
-
-> You will need to share your email address on the next page to receive the materials.
->
-{style="note"}
