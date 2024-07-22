@@ -53,7 +53,23 @@ println("Name $name")
 
 了解 [Java 和 Kotlin 字符串连接](java-to-kotlin-idioms-strings.md#concatenate-strings) 之间的区别。
 
-## 实例检查
+## Read standard input safely
+
+```kotlin
+// Reads a string and returns null if the input can't be converted into an integer. For example: Hi there!
+val wrongInt = readln().toIntOrNull()
+println(wrongInt)
+// null
+
+// Reads a string that can be converted into an integer and returns an integer. For example: 13
+val correctInt = readln().toIntOrNull()
+println(correctInt)
+// 13
+```
+
+For more information, see [Read standard input.](read-standard-input.md)
+
+## 实例检查 {id=instance-checks}
 
 ```kotlin
 when (x) {

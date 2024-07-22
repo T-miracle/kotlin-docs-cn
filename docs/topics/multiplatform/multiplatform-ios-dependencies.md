@@ -58,7 +58,8 @@ have some other strong reason to do so.
     * [From a custom Podspec repository](native-cocoapods-libraries.md#from-a-custom-podspec-repository)
     * [With custom cinterop options](native-cocoapods-libraries.md#with-custom-cinterop-options)
 
-3. Re-import the project.
+3. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
+   to re-import the project.
 
 To use the dependency in your Kotlin code, import the package `cocoapods.<library-name>`. For the example above, it's:
 
@@ -114,8 +115,8 @@ and [frameworks](#add-a-framework-without-cocoapods), but the idea remains the s
         iosX64() {
             compilations.getByName("main") {
                 val DateTools by cinterops.creating {
-                    // Path to .def file
-                    defFile("src/nativeInterop/cinterop/DateTools.def")
+                    // Path to the .def file
+                    definitionFile.set(project.file("src/nativeInterop/cinterop/DateTools.def"))
 
                     // Directories for header search (an analogue of the -I<path> compiler option)
                     includeDirs("include/this/directory", "path/to/another/directory")
@@ -140,8 +141,8 @@ and [frameworks](#add-a-framework-without-cocoapods), but the idea remains the s
             compilations.main {
                 cinterops {
                     DateTools {
-                        // Path to .def file
-                        defFile("src/nativeInterop/cinterop/DateTools.def")
+                        // Path to the .def file
+                        definitionFile = project.file("src/nativeInterop/cinterop/DateTools.def")
 
                         // Directories for header search (an analogue of the -I<path> compiler option)
                         includeDirs("include/this/directory", "path/to/another/directory")
@@ -206,8 +207,8 @@ import DateTools.*
         iosX64() {
             compilations.getByName("main") {
                 val DateTools by cinterops.creating {
-                    // Path to .def file
-                    defFile("src/nativeInterop/cinterop/DateTools.def")
+                    // Path to the .def file
+                    definitionFile.set(project.file("src/nativeInterop/cinterop/DateTools.def"))
 
                     compilerOpts("-framework", "MyFramework", "-F/path/to/framework/")
                 }
@@ -231,8 +232,8 @@ import DateTools.*
             compilations.main {
                 cinterops {
                     DateTools {
-                        // Path to .def file
-                        defFile("src/nativeInterop/cinterop/MyFramework.def")
+                        // Path to the .def file
+                        definitionFile = project.file("src/nativeInterop/cinterop/MyFramework.def")
 
                         compilerOpts("-framework", "MyFramework", "-F/path/to/framework/")
                     }

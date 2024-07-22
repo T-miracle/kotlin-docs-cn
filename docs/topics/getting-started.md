@@ -12,11 +12,11 @@ Kotlin 是一种现代、已经成熟的编程语言，旨在让开发人员更�
 Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) 和 [Android Studio](https://developer.android.com/studio) 发布版中。
 请下载并安装其中一个 IDE，开始使用 Kotlin。
 
-## 使用 Kotlin 创建强大的应用程序 {id="使用Kotlin创建强大的应用程序"}
+## 选择您的 Kotlin 用例 {id=choose-your-kotlin-use-case}
  
 <tabs>
 
-<tab id="backend" title="后端应用程序">
+<tab id="backend" title="后端">
 
 以下是您可以在开发 Kotlin 服务器端应用程序时迈出的第一步。
 
@@ -71,7 +71,7 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 </tab>
 
-<tab id="cross-platform-mobile" title="跨平台应用">
+<tab id="cross-platform-mobile" title="跨平台">
 
 在这里，你将学习如何使用 [Kotlin Multiplatform](https://kotlinlang.org/lp/multiplatform/) 开发和改进你的跨平台应用程序。
 
@@ -114,11 +114,9 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 </tab>
 
-<tab id="android" title="安卓应用程序">
+<tab id="android" title="Android">
 
-* 如果您想开始使用 Kotlin 进行 Android 开发，请阅读 [Google 的关于在 Android 上入门 Kotlin 的推荐](https://developer.android.com/kotlin/get-started)。
-
-* 如果您是 Android 新手，并希望学习使用 Kotlin 创建应用程序，请查看 [这个 Udacity 课程](https://www.udacity.com/course/developing-android-apps-with-kotlin--ud9012)。
+要开始在 Android 开发中使用 Kotlin，请阅读 [Google 关于在 Android 上开始使用 Kotlin 的推荐](https://developer.android.com/kotlin/get-started)。
 
 关注 Kotlin 在 ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)、![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/) 和 ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
 

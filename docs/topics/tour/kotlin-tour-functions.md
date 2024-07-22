@@ -271,8 +271,8 @@ Kotlin 允许你通过使用 Lambda 表达式编写更加简洁的函数代码�
 例如，以下的 `uppercaseString()` 函数：
 
 ```kotlin
-fun uppercaseString(string: String): String {
-    return string.uppercase()
+fun uppercaseString(text: String): String {
+    return text.uppercase()
 }
 fun main() {
     println(uppercaseString("hello"))
@@ -285,7 +285,7 @@ fun main() {
 
 ```kotlin
 fun main() {
-    println({ string: String -> string.uppercase() }("hello"))
+    println({ text: String -> text.uppercase() }("hello"))
     // HELLO
 }
 ```
@@ -297,10 +297,10 @@ Lambda 表达式可能一开始看起来有点难理解，所以让我们来分�
 * 参数，后跟 `->`。
 * `->` 后面是函数体。
 
-在上一个例子中：
-* `string` 是一个函数参数。
-* `string` 的类型是 `String`。
-* 函数返回调用 `string` 上的 [`.uppercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html) 函数的结果。
+在前面的例子中：
+* `text` 是一个函数参数。
+* `text` 的类型是 `String`。
+* 该函数返回在 `text` 上调用的 [`.uppercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html) 函数的结果。
 
 > 如果你声明一个没有参数的 Lambda，那么就不需要使用 `->`。例如：
 > ```kotlin
@@ -321,7 +321,7 @@ Lambda 表达式可以以多种方式使用。你可以：
 
 ```kotlin
 fun main() {
-    val upperCaseString = { string: String -> string.uppercase() }
+    val upperCaseString = { text: String -> text.uppercase() }
     println(upperCaseString("hello"))
     // HELLO
 }
@@ -393,7 +393,7 @@ Kotlin 的类型推断可以从参数类型中推断出函数的类型。
 如果为 `upperCaseString()` 定义了一个函数类型，Lambda 表达式的样子如下：
 
 ```kotlin
-val upperCaseString: (String) -> String = { string -> string.uppercase() }
+val upperCaseString: (String) -> String = { text -> text.uppercase() }
 
 fun main() {
     println(upperCaseString("hello"))
@@ -445,7 +445,7 @@ Lambda 表达式可以通过在花括号 `{}` 后添加括号 `()` 并在括号�
 ```kotlin
 fun main() {
     //sampleStart
-    println({ string: String -> string.uppercase() }("hello"))
+    println({ text: String -> text.uppercase() }("hello"))
     // HELLO
     //sampleEnd
 }

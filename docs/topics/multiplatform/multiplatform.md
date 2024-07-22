@@ -22,8 +22,8 @@ Kotlin 多平台 技术旨在简化跨平台项目的开发。
 
 ![Sharing different levels and UI](multiplatform-compose.svg){width=600}
 
-查看 [开始使用 Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform-ios-android-template/#readme) 教程，
-创建一个自己的移动应用程序，其中的 UI 在两个平台之间共享。
+查看 [创建一个 Compose Multiplatform 应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-getting-started.html)
+教程，来创建你自己的移动应用，并在两个平台之间共享 UI。
 
 ### 多平台库
 

@@ -1,52 +1,91 @@
 [//]: # (title:  Kotlin 发布)
 
-我们发布不同类型的版本：
+Since Kotlin 2.0.0, we ship the following types of releases:
 
-* **功能发布**（1.**x**）引入了语言的重大变化。
-* **增量发布**（1.**x**.**y**）在功能发布之间发布，包括工具更新、性能改进和错误修复。
-* **错误修复发布**（1.**x**.**yz**）包含增量发布的错误修复。
+* _Language releases_ (2._x_._0_) that bring major changes in the language and include tooling updates. Released once in 6 months.
+* _Tooling releases_ (2._x_._20_) that are shipped between language releases and include updates in the tooling,
+    performance improvements, and bug fixes.
+    Released in 3 months after corresponding _language release_.
+* _Bug fix releases_ (2._x_._yz_) that include bug fixes for _tooling releases_. There is no exact release schedule for these releases.
 
-例如，对于功能发布 1.3，我们有多个增量发布，包括 1.3.10、1.3.20 和 1.3.70。
-对于 1.3.70，我们有两个错误修复发布 – 1.3.71 和 1.3.72。
-
-对于每个增量和功能发布，我们还发布了几个预览（**EAP**）版本供您在正式发布之前尝试新功能。详细信息请参阅 [Early Access Preview](eap.md)。
-
-了解更多关于 [Kotlin 发布的类型和兼容性](kotlin-evolution.md#feature-releases-and-incremental-releases)。
-
-## 升级到新版本 {id=升级到新版本}
-
-> 从 IntelliJ IDEA 2023.3 和 Android Studio Iguana (2023.2.1) Canary 15 开始，Kotlin 插件会自动更新。  
-> 你只需要在项目中更新 Kotlin 版本即可。
+<!-- TODO: uncomment with 2.1.0 release
+> For example, for the feature release 1.8.0, we had only one tooling release 1.8.20,
+> and several bugfix releases including 1.8.21, 1.8.22.
 >
-{style="note"}
+{type="tip"}
+-->
 
-IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当您接受建议时，它会自动将 Kotlin 插件更新到新版本。
-您可以在 **工具** | **Kotlin** | **配置 Kotlin 插件更新** 中检查 Kotlin 版本。
+For each language and tooling release, we also ship several preview (_EAP_) versions for you to try
+new features before they are released. See [Early Access Preview](eap.md) for details.
+
+## Update to a new release
+
+To upgrade your project to a new release, you need to update your build script file.
+For example, to update to Kotlin %kotlinVersion%, change the version of the Kotlin Gradle plugin in your
+`build.gradle(.kts)` file:
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+plugins {
+    // Replace `<...>` with the plugin name appropriate for your target environment
+    kotlin("<...>") version "%kotlinVersion%"
+    // For example, if your target environment is JVM:
+    // kotlin("jvm") version "%kotlinVersion%"
+    // If you target is Kotlin Multiplatform
+    // kotlin("multiplatform") version "%kotlinVersion%"
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+plugins {
+    // Replace `<...>` with the plugin name appropriate for your target environment
+    id 'org.jetbrains.kotlin.<...>' version '%kotlinVersion%'
+    // For example, if your target environment is JVM: 
+    // id 'org.jetbrains.kotlin.jvm' version '%kotlinVersion%'
+    // If you target is Kotlin Multiplatform
+    // id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
+}
+```
+
+</tab>
+</tabs>
 
 如果您有使用较早版本 Kotlin 创建的项目，请在项目中更改 Kotlin 版本，并在需要时更新 kotlinx 库。
 
-如果您正在迁移到新的功能发布版本，Kotlin 插件的迁移工具将帮助您完成迁移。
+If you are migrating to the new language release, Kotlin plugin's migration tools will help you with the migration.
 
 ## IDE 支持 {id=ide-support}
 
-对于语言的最新版本，以下版本的 IntelliJ IDEA 和 Android Studio 提供 IDE 支持：
+Even with the release of the K2 compiler, IntelliJ IDEA and Android Studio still use the previous compiler by default 
+for code analysis, code completion, highlighting, and other IDE-related features.
 
-* IntelliJ IDEA:
-  * 最新稳定版
-  * 上一个稳定版
-  * [早期访问](https://www.jetbrains.com/resources/eap/) 版本
-* Android Studio:
-  * [最新发布](https://developer.android.com/studio) 版本
-  * [早期访问](https://developer.android.com/studio/preview) 版本
+Starting from 2024.1, IntelliJ IDEA can use the new K2 compiler to analyze your code with its K2 Kotlin mode.
+To enable it, go to **Settings** | **Languages & Frameworks** | **Kotlin** and select the **Enable K2 Kotlin Mode** option.
 
-> 在 [IntelliJ IDEA 新功能页面](https://www.jetbrains.com/idea/whatsnew/) 的 **Kotlin** 部分了解有关最新 Kotlin 相关更新的更多信息。
+> The K2 Kotlin mode is in Alpha. The performance and stability of code highlighting and code completion have been significantly improved,
+> but not all IDE features are supported yet.
+>
+{type="warning"}
 
+After enabling K2 mode, you may notice differences in IDE analysis due to changes in compiler behavior.
+Learn how the new K2 compiler differs from the previous one in the [migration guide](k2-compiler-migration-guide.md).
 
-## 发布详情 {id=release-details}
+## Kotlin release compatibility
 
-以下表格列出了最新 Kotlin 发布的详细信息。
+Learn more about [types of Kotlin releases and their compatibility](kotlin-evolution.md#language-and-tooling-releases)
 
-您还可以使用 [Kotlin 预览版本](eap.md#build-details)。
+## Release details
+
+The following table lists details of the latest Kotlin releases:
+
+> You can also use [preview versions of Kotlin](eap.md#build-details).
+> 
+{type="tip"}
 
 <table>
     <tr>
@@ -54,8 +93,38 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
         <th>构建亮点</th>
     </tr>
     <tr>
+        <td><strong>2.0.0</strong>
+            <p>Released: <strong>May 21, 2024</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.0" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A language release with the Stable Kotlin K2 compiler.</p>
+            <p>Learn more about Kotlin 2.0.0 in <a href="whatsnew20.md" target="_blank">What's new in Kotlin 2.0.0</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>1.9.25</strong>
+            <p>Released: <strong>July 19, 2024</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.25" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A bug fix release for Kotlin 1.9.20, 1.9.21, 1.9.22, 1.9.23, and 1.9.24</p>
+            <p>Learn more about Kotlin 1.9.20 in <a href="whatsnew1920.md" target="_blank">What's new in Kotlin 1.9.20</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>1.9.24</strong>
+            <p>发布于： <strong>2024.5.7</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.24" target="_blank">在 GitHub 上发布</a></p>
+        </td>
+        <td>
+            <p>Kotlin 1.9.20、1.9.21、1.9.22 和 1.9.23 的错误修复版本。</p>
+            <p>了解有关 Kotlin 1.9.20 的更多信息： <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 的新增功能</a>.</p>
+        </td>
+    </tr>
+    <tr>
         <td><strong>1.9.23</strong>
-            <p>发布于： <strong>2024 年 3 月 7 日</strong></p>
+            <p>发布于： <strong>2024.3.7</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.23" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -65,7 +134,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.9.22</strong>
-            <p>发布于： <strong>2023 年 12 月 21 日</strong></p>
+            <p>发布于： <strong>2023.12.21</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.22" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -85,7 +154,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
   </tr>
     <tr>
         <td><strong>1.9.20</strong>
-            <p>发布于: <strong>2023 年 11 月 1 日</strong></p>
+            <p>发布于: <strong>2023.11.1</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.20" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -98,7 +167,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.9.10</strong>
-            <p>发布于: <strong>2023 年 8 月 23 日</strong></p>
+            <p>发布于: <strong>2023.8.23</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.10" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -109,12 +178,15 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.9.0</strong>
-            <p>发布于: <strong>2023 年 7 月 6 日</strong></p>
+            <p>发布于: <strong>2023.7.6</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.0" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
-            <p>一个功能发布，包括 Kotlin K2 编译器的更新、新的枚举类值函数、开放区间的新操作符、Kotlin Multiplatform 中 Gradle 配置缓存的预览、Kotlin 多平台 中 Android 目标支持的更改，以及 Kotlin/Native 中自定义内存分配器的预览。</p>
-            <p>了解更多信息：</p>
+            <p>A feature release with Kotlin K2 compiler updates, new enum class values function,
+                new operator for open-ended ranges, preview of Gradle configuration cache in Kotlin Multiplatform, 
+                changes to Android target support in Kotlin Multiplatform, preview of custom memory allocator in Kotlin/Native.
+            </p>
+            <p>Learn more in:</p>
             <list>
                 <li><a href="whatsnew19.md" target="_blank">Kotlin 1.9.0 的新增功能</a></li>
                 <li><a href="https://www.youtube.com/embed/fvwTZc-dxsM" target="_blank">Kotlin YouTube 视频中的新增功能</a></li>
@@ -123,7 +195,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.8.22</strong>
-            <p>发布于: <strong>2023 年 6 月 8 日</strong></p>
+            <p>发布于: <strong>2023.6.8</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.22" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -133,7 +205,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.8.21</strong>
-            <p>发布于: <strong>2023 年 4 月 25 日</strong></p>
+            <p>发布于: <strong>2023.4.25</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.21" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -144,12 +216,14 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.8.20</strong>
-            <p>发布于: <strong>2023 年 4 月 3 日</strong></p>
+            <p>发布于: <strong>2023.4.3</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.20" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
-            <p>一个功能发布，包括 Kotlin K2 编译器的更新、在 stdlib 中添加 AutoCloseable 接口和 Base64 编码、默认启用的新 JVM 增量编译，以及新的 Kotlin/Wasm 编译器后端。</p>
-            <p>了解更多信息：</p>
+            <p>A feature release with Kotlin K2 compiler updates, AutoCloseable interface and Base64 encoding in stdlib,
+                new JVM incremental compilation enabled by default, new Kotlin/Wasm compiler backend.
+            </p>
+            <p>Learn more in:</p>
             <list>
                 <li><a href="whatsnew1820.md" target="_blank">Kotlin 1.8.20 的新增功能</a></li>
                 <li><a href="https://youtu.be/R1JpkpPzyBU" target="_blank">Kotlin YouTube 视频中的新增功能</a></li>
@@ -158,7 +232,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.8.10</strong>
-            <p>发布于: <strong>2023 年 2 月 2 日</strong></p>
+            <p>发布于: <strong>2023.2.2</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.10" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -169,7 +243,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.8.0</strong>
-            <p>发布于: <strong>2022 年 12 月 28 日</strong></p>
+            <p>发布于: <strong>2022.12.28</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.0" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -183,7 +257,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.7.21</strong>
-            <p>发布于: <strong>2022 年 11 月 9 日</strong></p>
+            <p>发布于: <strong>2022.11.9</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.21" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -194,12 +268,14 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.7.20</strong>
-            <p>发布于: <strong>2022 年 9 月 29 日</strong></p>
+            <p>发布于: <strong>2022.9.29</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.20" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
-          <p>一个增量发布，包括新的语言特性、在 Kotlin K2 编译器中对多个编译器插件的支持，默认启用的新的 Kotlin/Native 内存管理器，以及对 Gradle 7.1 的支持。</p>
-            <p>了解更多信息：</p>
+            <p>An incremental release with new language features, the support for several compiler plugins in the Kotlin K2 compiler,
+                the new Kotlin/Native memory manager enabled by default, and the support for Gradle 7.1.
+            </p>
+            <p>Learn more in:</p>
             <list>
                 <li><a href="whatsnew1720.md" target="_blank">Kotlin 1.7.20 的新增功能</a></li>
                 <li><a href="https://youtu.be/OG9npowJgE8" target="_blank">Kotlin YouTube 视频中的新增功能</a></li>
@@ -210,7 +286,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.7.10</strong>
-            <p>发布于: <strong>2022 年 7 月 7 日</strong></p>
+            <p>发布于: <strong>2022.7.7</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.10" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -221,7 +297,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.7.0</strong>
-            <p>发布于: <strong>2022 年 6 月 9 日</strong></p>
+            <p>发布于: <strong>2022.6.9</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.0" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -236,7 +312,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.6.21</strong>
-            <p>发布于: <strong>2022 年 4 月 20 日</strong></p>
+            <p>发布于: <strong>2022.4.20</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.21" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -246,7 +322,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.6.20</strong>
-            <p>发布于: <strong>2022 年 4 月 4 日</strong></p>
+            <p>发布于: <strong>2022.4.4</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.20" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -264,7 +340,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.6.10</strong>
-            <p>发布于: <strong>2021 年 12 月 14 日</strong></p>
+            <p>发布于: <strong>2021.12.14</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.10" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -274,7 +350,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.6.0</strong>
-            <p>发布于: <strong>2021 年 11 月 16 日</strong></p>
+            <p>发布于: <strong>2021.11.16</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.0" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -289,7 +365,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.5.32</strong>
-            <p>发布于: <strong>2021 年 11 月 29 日</strong></p>
+            <p>发布于: <strong>2021.11.29</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.32" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -299,7 +375,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.5.31</strong>
-            <p>发布于: <strong>2021 年 9 月 20 日</strong></p>
+            <p>发布于: <strong>2021.9.20</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.31" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -309,7 +385,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.5.30</strong>
-            <p>发布于: <strong>2021 年 8 月 23 日</strong></p>
+            <p>发布于: <strong>2021.8.23</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.30" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -331,7 +407,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.5.21</strong>
-            <p>发布于: <strong>2021 年 7 月 13 日</strong></p>
+            <p>发布于: <strong>2021.7.13</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.21" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -341,7 +417,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.5.20</strong>
-            <p>发布于: <strong>2021 年 6 月 24 日</strong></p>
+            <p>发布于: <strong>2021.6.24</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.20" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -362,7 +438,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.5.10</strong>
-            <p>发布于: <strong>2021 年 5 月 24 日</strong></p>
+            <p>发布于: <strong>2021.5.24</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.10" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -372,7 +448,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.5.0</strong>
-            <p>发布于: <strong>2021 年 5 月 5 日</strong></p>
+            <p>发布于: <strong>2021.5.5</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.0" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -387,7 +463,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.4.32</strong>
-            <p>发布于: <strong>2021 年 3 月 22 日</strong></p>
+            <p>发布于: <strong>2021.3.22</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.32" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -397,7 +473,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.4.31</strong>
-            <p>发布于: <strong>2021 年 2 月 25 日</strong></p>
+            <p>发布于: <strong>2021.2.25</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.31" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -407,7 +483,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.4.30</strong>
-            <p>发布于: <strong>2021 年 2 月 3 日</strong></p>
+            <p>发布于: <strong>2021.2.3</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.30" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -427,7 +503,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.4.21</strong>
-            <p>发布于: <strong>2020 年 12 月 7 日</strong></p>
+            <p>发布于: <strong>2020.12.7</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.21" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -437,7 +513,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.4.20</strong>
-            <p>发布于: <strong>2020 年 11 月 23 日</strong></p>
+            <p>发布于: <strong>2020.11.23</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.20" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -456,7 +532,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.4.10</strong>
-            <p>发布于: <strong>2020 年 9 月 7 日</strong></p>
+            <p>发布于: <strong>2020.9.7</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.10" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -466,7 +542,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.4.0</strong>
-            <p> 发布于: <strong>2020 年 8 月 17 日</strong></p>
+            <p> 发布于: <strong>2020.8.17</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.0" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>
@@ -482,7 +558,7 @@ IntelliJ IDEA 和 Android Studio 在新版本发布后建议进行更新。当�
     </tr>
     <tr>
         <td><strong>1.3.72</strong>
-            <p> 发布于: <strong>2020 年 4 月 15 日</strong></p>
+            <p> 发布于: <strong>2020.4.15</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.3.72" target="_blank">在 GitHub 上发布</a></p>
         </td>
         <td>

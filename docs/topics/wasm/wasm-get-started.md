@@ -2,11 +2,13 @@
 
 > Kotlin/Wasm 目前处于 [Alpha](components-stability.md) 阶段，可能随时发生变化。
 >
+> [加入 Kotlin/Wasm 社区。](https://slack-chats.kotlinlang.org/c/webassembly)
+>
 {style="note"}
 
-本教程演示了如何在 IntelliJ IDEA 中使用 Kotlin/Wasm 运行一个
-[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 应用，并生成在
-[GitHub pages](https://pages.github.com/) 上发布为网站的工件。
+本教程演示了如何在 IntelliJ IDEA 中使用 [Kotlin/Wasm](wasm-overview.md) 运行
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 应用，并生成工件以在
+[GitHub pages](https://pages.github.com/) 上发布为站点。
 
 ## 在开始之前 {id=before-you-start}
 

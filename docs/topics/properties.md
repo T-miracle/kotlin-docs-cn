@@ -159,7 +159,7 @@ public val table: Map<String, Int>
 
 ## 编译时常量 {id=编译时常量}
 
-如果只读属性的值在编译时已知，可以使用 `const` 修饰符将其标记为 **编译时常量**。这样的属性需要满足以下要求：
+如果一个只读属性的值在编译时已知，请使用 `const` 修饰符将其标记为**编译时常量**。这样的属性需要满足以下要求：
 
 * 必须是顶层属性，或者是 [`object` 声明](object-declarations.md#object-declarations-overview) 的成员或 **[伴生对象](object-declarations.md#companion-objects)** 的成员。
 * 必须用 `String` 类型或原始类型的值进行初始化。

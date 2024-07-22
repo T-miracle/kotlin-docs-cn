@@ -62,7 +62,7 @@ e.p = "NEW"
 NEW has been assigned to 'p' in Example@33a17727.
 ```
 
-关于委托对象的要求规范可以在[下面](#property-delegate-requirements)找到。
+关于委托对象的要求规范可以在[下方](#property-delegate-requirements)找到。
 
 你可以在函数或代码块中声明一个委托属性；它不必是类的成员。
 你可以在[此处](#local-delegated-properties)找到一个示例。
@@ -307,8 +307,8 @@ var readWriteResource: Resource by resourceDelegate()
 
 在底层，Kotlin编译器为某些类型的委托属性生成辅助属性，然后委托给它们。
 
-> 为了优化目的，编译器[_在几种情况下不生成辅助属性_](#optimized-cases-for-delegated-properties)。
-> 通过[委托给另一个属性的示例](#translation-rules-when-delegating-to-another-property)来了解这种优化。
+> 为了优化，编译器[在几种情况下**不会**生成辅助属性](#optimized-cases-for-delegated-properties)。
+> 通过 [委托给另一个属性](#translation-rules-when-delegating-to-another-property)的示例了解更多优化信息。
 >
 {style="note"}
 

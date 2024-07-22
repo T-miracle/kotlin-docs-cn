@@ -1090,4 +1090,4 @@ Kotlin 提供了一组函数，用于在给定对象的上下文中执行一块�
 * 始终明确指定函数返回类型和属性类型（以避免在实现更改时意外更改返回类型）
 * 为所有公共成员提供[KDoc](kotlin-doc.md)注释，除了不需要任何新文档的覆盖（以支持为库生成文档）
 
-在[库创建者指南](https://kotlinlang.org/docs/jvm-api-guidelines-introduction.html)中了解有关在为库编写 API 时考虑的最佳实践和想法。
+了解更多关于编写库 API 时的最佳实践和需要考虑的想法，请参阅 [库作者指南](api-guidelines-introduction.md)。

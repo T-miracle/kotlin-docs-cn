@@ -820,8 +820,9 @@ React 拥有丰富的生态系统，提供了许多预制的组件，您可以�
    }
    ```
 
-   正如您所见，可以通过在构建文件的 `dependencies` 块中使用 `npm()` 函数来将 npm 依赖项添加到 Kotlin/JS 项目中。
-   然后，Gradle 插件会负责为您下载和安装这些依赖项。为此，它使用自己捆绑的安装了 [`yarn`](https://yarnpkg.com/) 包管理器。
+   正如您所见，npm 依赖项可以通过在构建文件的 `dependencies` 块中使用 `npm()` 函数添加到 Kotlin/JS 项目中。
+   然后，Gradle 插件会为你下载和安装这些依赖项。
+   为此，它使用自己的捆绑安装的 [`yarn`](https://yarnpkg.com/) 包管理器。
 
 2. 要在 React 应用程序内部使用 JavaScript 包，必须告诉 Kotlin 编译器要期望什么，为此需要提供[外部声明](js-interop.md)。
 

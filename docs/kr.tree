@@ -4,7 +4,7 @@
 
 <instance-profile
         id="kr"
-        name="Kotlin 中文文档"
+        name="&nbsp;"
         start-page="home.topic"
         status="release">
 
@@ -35,10 +35,11 @@
     </toc-element>
 
     <toc-element toc-title="Kotlin 的新增功能">
-        <toc-element topic="whatsnew1920.md" toc-title="Kotlin 1.9.20" accepts-web-file-names="whatsnew.html"/>
-        <toc-element topic="whatsnew19.md" toc-title="Kotlin 1.9.0"/>
-        <toc-element topic="whatsnew-eap.md" toc-title="Kotlin 2.0.0-RC1"/>
+        <toc-element topic="whatsnew20.md" toc-title="Kotlin 2.0.0" accepts-web-file-names="whatsnew.html"/>
+        <toc-element topic="whatsnew-eap.md" toc-title="Kotlin 2.0.0-Beta2"/>
         <toc-element toc-title="早期版本">
+            <toc-element topic="whatsnew1920.md" toc-title="Kotlin 1.9.20"/>
+            <toc-element topic="whatsnew19.md" toc-title="Kotlin 1.9.0"/>
             <toc-element topic="whatsnew1820.md" toc-title="Kotlin 1.8.20"/>
             <toc-element topic="whatsnew18.md" toc-title="Kotlin 1.8.0"/>
             <toc-element topic="whatsnew1720.md" toc-title="Kotlin 1.7.20"/>
@@ -97,7 +98,7 @@
             <toc-element topic="visibility-modifiers.md"/>
             <toc-element topic="extensions.md"/>
             <toc-element topic="data-classes.md"/>
-            <toc-element topic="sealed-classes.md" toc-title="Sealed classes and interfaces"/>
+            <toc-element topic="sealed-classes.md" toc-title="密封类和接口"/>
             <toc-element topic="generics.md"/>
             <toc-element topic="nested-classes.md"/>
             <toc-element topic="enum-classes.md"/>
@@ -128,7 +129,7 @@
     </toc-element>
 
     <toc-element toc-title="多平台开发">
-        <toc-element topic="multiplatform-get-started.md" accepts-web-file-names="building-mpp-with-gradle.html,intro-to-kotlin-mpp.html,mpp-intro.html,mpp-get-started.html,multiplatform-tutorials.html"/>
+        <toc-element topic="multiplatform-get-started.md" accepts-web-file-names="building-mpp-with-gradle.html,intro-to-kotlin-mpp.html,mpp-intro.html,mpp-get-started.html,multiplatform-tutorials.html" toc-title="Introduction"/>
         <toc-element topic="multiplatform-discover-project.md" accepts-web-file-names="mpp-discover-project.html" toc-title="了解基本项目结构"/>
         <toc-element topic="multiplatform-advanced-project-structure.md" toc-title="Explore advanced project structure"/>
         <toc-element topic="multiplatform-set-up-targets.md" toc-title="Set up targets" accepts-web-file-names="mpp-set-up-targets.html"/>
@@ -139,7 +140,7 @@
         </toc-element>
         <toc-element toc-title="添加依赖项">
             <toc-element topic="multiplatform-add-dependencies.md" toc-title="On multiplatform libraries" accepts-web-file-names="mpp-add-dependencies.html"/>
-            <toc-element topic="multiplatform-mobile-android-dependencies.md" toc-title="For Android target platforms"/>
+            <toc-element topic="multiplatform-android-dependencies.md" toc-title="For Android target platforms"/>
             <toc-element topic="multiplatform-ios-dependencies.md" toc-title="For iOS target platforms"/>
         </toc-element>
         <toc-element toc-title="编译工件">
@@ -148,7 +149,6 @@
             <toc-element topic="multiplatform-build-native-binaries.md" accepts-web-file-names="mpp-build-native-binaries.html"/>
         </toc-element>
         <toc-element topic="multiplatform-publish-lib.md" accepts-web-file-names="mpp-publish-lib.html" toc-title="Publish libraries"/>
-        <toc-element topic="multiplatform-introduce-your-team.md"/>
         <toc-element toc-title="Reference">
             <toc-element topic="multiplatform-dsl-reference.md" accepts-web-file-names="mpp-dsl-reference.html,mpp-supported-platforms.html,multiplatform-supported-platforms.html"/>
             <toc-element topic="multiplatform-android-layout.md"/>
@@ -202,9 +202,7 @@
                 <toc-element toc-title="Strings" topic="java-to-kotlin-idioms-strings.md"/>
                 <toc-element toc-title="Collections" topic="java-to-kotlin-collections-guide.md"/>
                 <toc-element toc-title="Nullability" topic="java-to-kotlin-nullability-guide.md"/>
-            </toc-element>
-            <toc-element toc-title="库创建者指南">
-              <include from="kl" target="api-guidelines" origin="api-guidelines"/>
+                <toc-element toc-title="标准输入" topic="standard-input.md"/>
             </toc-element>
         </toc-element>
 
@@ -243,6 +241,7 @@
             <toc-element topic="native-ios-symbolication.md"/>
             <toc-element toc-title="Reference and tips">
                 <toc-element topic="native-target-support.md" toc-title="Target support"/>
+                <toc-element topic="apple-privacy-manifest.md" toc-title="App Store privacy manifests"/>
                 <toc-element topic="native-improving-compilation-time.md" toc-title="Improving compilation times"/>
                 <toc-element topic="native-binary-licenses.md" toc-title="License files"/>
                 <toc-element topic="native-faq.md"/>
@@ -286,6 +285,7 @@
     </toc-element>
 
     <toc-element toc-title="Standard library">
+
         <toc-element toc-title="Collections">
             <toc-element topic="collections-overview.md" toc-title="Overview"/>
             <toc-element topic="constructing-collections.md"/>
@@ -306,6 +306,7 @@
             <toc-element topic="set-operations.md" toc-title="Set-specific operations"/>
             <toc-element topic="map-operations.md" toc-title="Map-specific operations"/>
         </toc-element>
+        <toc-element topic="read-standard-input.md" toc-title="读取标准输入"/>
         <toc-element topic="opt-in-requirements.md"/>
         <toc-element topic="scope-functions.md"/>
         <toc-element topic="time-measurement.md"/>
@@ -356,7 +357,8 @@
         <toc-element toc-title="Dokka">
         </toc-element>
         <toc-element toc-title="IDE for Kotlin development" topic="kotlin-ide.md" accepts-web-file-names="getting-started-eclipse.html,eclipse.html"/>
-        <toc-element toc-title="Migrate to Kotlin code style with IntelliJ IDEA" topic="code-style-migration-guide.md"/>
+        <toc-element toc-title="Migrate to Kotlin code style with IntelliJ IDEA"  topic="code-style-migration-guide.md"/>
+        <toc-element toc-title="Kotlin Notebook"  topic="kotlin-notebook-overview.md"/>
         <toc-element topic="run-code-snippets.md" accepts-web-file-names="quick-run.html"/>
         <toc-element topic="kotlin-and-ci.md" toc-title="TeamCity"/>
         <toc-element topic="kotlin-doc.md" toc-title="KDoc"/>
@@ -365,6 +367,7 @@
 
     <toc-element toc-title="Compiler and plugins">
         <toc-element toc-title="Compiler">
+            <toc-element toc-title="K2 compiler migration guide" topic="k2-compiler-migration-guide.md" accepts-web-file-names="k2-compiler-guide.html"/>
             <toc-element toc-title="Command-line compiler" topic="command-line.md"/>
             <toc-element toc-title="Compiler options" topic="compiler-reference.md"/>
         </toc-element>
@@ -374,6 +377,7 @@
             <toc-element topic="sam-with-receiver-plugin.md" toc-title="SAM with receiver"/>
             <toc-element topic="kapt.md" toc-title="kapt"/>
             <toc-element topic="lombok.md" toc-title="Lombok"/>
+            <toc-element topic="power-assert.md" toc-title="Power-assert"/>
         </toc-element>
         <toc-element toc-title="Kotlin Symbol Processing API">
             <toc-element topic="ksp-overview.md" toc-title="KSP overview"/>
@@ -400,8 +404,11 @@
         <toc-element topic="books.md"/>
         <toc-element topic="advent-of-code.md" toc-title="Advent of Code puzzles"/>
         <toc-element toc-title="Learn in IDE (JetBrains Academy)">
-            <toc-element topic="edu-tools-learner.md" toc-title="Learn Kotlin"/>
-            <toc-element topic="edu-tools-educator.md" toc-title="Teach Kotlin"/>
+            <toc-element id="edu-tools-learner.md" toc-title="Learn Kotlin"/>
+            <toc-element id="edu-tools-educator.md" toc-title="Teach Kotlin"/>
+        </toc-element>
+        <toc-element toc-title="库作者指南">
+            <include from="kl" target="api-guidelines" origin="api-guidelines"/>
         </toc-element>
     </toc-element>
 
@@ -418,6 +425,7 @@
             <toc-element topic="components-stability.md"/>
             <toc-element topic="components-stability-pre-1.4.md"/>
             <toc-element toc-title="Compatibility">
+                <toc-element topic="compatibility-guide-20.md"/>
                 <toc-element topic="compatibility-guide-19.md"/>
                 <toc-element topic="compatibility-guide-18.md"/>
                 <toc-element topic="compatibility-guide-1720.md"/>
@@ -435,11 +443,6 @@
             <toc-element toc-title="Submitting incompatible changes" href="https://kotlinfoundation.org/submitting-incompatible-changes/"/>
             <toc-element toc-title="Brand usage" href="https://kotlinfoundation.org/guidelines/"/>
             <toc-element toc-title="Kotlin Foundation FAQ" href="https://kotlinfoundation.org/faq/"/>
-        </toc-element>
-        <toc-element toc-title="Journal">
-            <toc-element toc-title="Cross-platform mobile development" topic="cross-platform-mobile-development.md"/>
-            <toc-element toc-title="Native and cross-platform mobile development" topic="native-and-cross-platform.md"/>
-            <toc-element toc-title="The six best cross-platform app development frameworks" topic="cross-platform-frameworks.md"/>
         </toc-element>
         <toc-element toc-title="Google Summer of Code">
             <toc-element toc-title="Google Summer of Code with Kotlin 2024" topic="gsoc-2024.md"/>

@@ -78,7 +78,7 @@ fun describeString(maybeString: String?): String {
 }
 
 fun main() {
-    var nullString: String? = null
+    val nullString: String? = null
     println(describeString(nullString))
     // Empty or null string
 }
@@ -97,7 +97,7 @@ fun main() {
 fun lengthString(maybeString: String?): Int? = maybeString?.length
 
 fun main() { 
-    var nullString: String? = null
+    val nullString: String? = null
     println(lengthString(nullString))
     // null
 }
@@ -120,7 +120,7 @@ fun main() {
 
 ```kotlin
 fun main() {
-    var nullString: String? = null
+    val nullString: String? = null
     println(nullString?.uppercase())
     // null
 }
@@ -139,7 +139,7 @@ fun main() {
 
 ```kotlin
 fun main() {
-    var nullString: String? = null
+    val nullString: String? = null
     println(nullString?.length ?: 0)
     // 0
 }

@@ -163,9 +163,9 @@ data class User(val name: String, val id: Int)
 data class User(val name: String, val id: Int)
 
 fun main() {
+    //sampleStart
     val user = User("Alex", 1)
     
-    //sampleStart
     // 自动使用 toString() 函数，以便输出易于阅读
     println(user)            
     // User(name=Alex, id=1)

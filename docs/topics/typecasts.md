@@ -1,7 +1,7 @@
 [//]: # (title: 类型检查和强制转换)
 
-在 Kotlin 中，当您需要在运行时检查对象的类型时，你可以执行类型检查。
-类型转换将对象转换为不同的类型。
+In Kotlin, you can perform type checks to check the type of an object at runtime. Type casts enable you to convert objects to a 
+different type.
 
 > 要了解关于 **泛型** 类型检查和转换（例如 `List<T>`、`Map<K,V>`）的具体信息，请参阅
 > [泛型类型检查和转换](generics.md#泛型类型检查和转换)。
@@ -10,7 +10,7 @@
 
 ## `is` 和 `!is` 操作符 {id=是或不是操作符}
 
-使用 `is` 操作符或其否定形式 `!is` 进行运行时检查，来确定对象是否符合给定的类型：
+To perform a runtime check that identifies whether an object conforms to a given type, use the `is` operator or its negated form `!is`:
 
 ```kotlin
 if (obj is String) {
@@ -26,7 +26,9 @@ if (obj !is String) { // 和 !(obj is String) 一样
 
 ## 智能转换 {id=smart-casts}
 
-在大多数情况下，你不需要在 Kotlin 中使用显式的转换操作符，因为编译器会追踪`is`检查和[显式转换](#不安全强制转换运算符)（对于不可变值）并在必要时自动插入（安全）转换：
+In most cases, you don't need to use explicit cast operators because the compiler automatically casts objects for you.
+This is called smart-casting. The compiler tracks the type checks and [explicit casts](#unsafe-cast-operator) for immutable
+values and inserts implicit (safe) casts automatically when necessary:
 
 ```kotlin
 fun demo(x: Any) {
@@ -36,7 +38,7 @@ fun demo(x: Any) {
 }
 ```
 
-假如编译器足够智能，能够理解如果进行反向检查后能够安全返回，那么转换就是安全的：
+The compiler is even smart enough to know that a cast is safe if a negative check leads to a return:
 
 ```kotlin
 if (x !is String) return
@@ -44,7 +46,56 @@ if (x !is String) return
 print(x.length) // x 会自动转换为 String
 ```
 
-或者如果它位于 `&&` 或 `||` 的右侧，并且左侧有适当的检查（正常或否定）：
+### Control flow
+
+Smart casts work not only for `if` conditional expressions but also for [`when` expressions](control-flow.md#when-expression)
+and [`while` loops](control-flow.md#while-loops):
+
+```kotlin
+when (x) {
+    is Int -> print(x + 1)
+    is String -> print(x.length + 1)
+    is IntArray -> print(x.sum())
+}
+```
+
+If you declare a variable of `Boolean` type before using it in your `if`, `when`, or `while` condition, then any
+information collected by the compiler about the variable will be accessible in the corresponding block for
+smart-casting.
+
+This can be useful when you want to do things like extract boolean conditions into variables. Then, you can give the
+variable a meaningful name, which will improve your code readability and make it possible to reuse the variable later
+in your code. For example:
+
+```kotlin
+class Cat {
+    fun purr() {
+        println("Purr purr")
+    }
+}
+
+fun petAnimal(animal: Any) {
+    val isCat = animal is Cat
+    if (isCat) {
+        // The compiler can access information about
+        // isCat, so it knows that animal was smart-cast
+        // to the type Cat.
+        // Therefore, the purr() function can be called.
+        animal.purr()
+    }
+}
+
+fun main(){
+    val kitty = Cat()
+    petAnimal(kitty)
+    // Purr purr
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-smart-casts-local-variables" validate="false"}
+
+### Logical operators
+
+The compiler can perform smart casts on the right-hand side of `&&` or `||` operators if there is a type check (regular or negative) on the left-hand side:
 
 ```kotlin
 // 在 `||` 的右侧，x 会自动转换为 String
@@ -56,15 +107,110 @@ if (x is String && x.length > 0) {
 }
 ```
 
-智能转换同样适用于[`when` 表达式](control-flow.md#when-expression)和[`while` 循环](control-flow.md#while循环)：
+If you combine type checks for objects with an `or` operator (`||`), a smart cast is made to their closest common supertype:
 
 ```kotlin
-when (x) {
-    is Int -> print(x + 1)
-    is String -> print(x.length + 1)
-    is IntArray -> print(x.sum())
+interface Status {
+    fun signal() {}
+}
+
+interface Ok : Status
+interface Postponed : Status
+interface Declined : Status
+
+fun signalCheck(signalStatus: Any) {
+    if (signalStatus is Postponed || signalStatus is Declined) {
+        // signalStatus is smart-cast to a common supertype Status
+        signalStatus.signal()
+    }
 }
 ```
+
+> The common supertype is an **approximation** of a [union type](https://en.wikipedia.org/wiki/Union_type). Union types
+> are [not currently supported in Kotlin](https://youtrack.jetbrains.com/issue/KT-13108/Denotable-union-and-intersection-types).
+>
+{type="note"}
+
+### Inline functions
+
+The compiler can smart-cast variables captured within lambda functions that are passed to [inline functions](inline-functions.md).
+
+Inline functions are treated as having an implicit [`callsInPlace`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.contracts/-contract-builder/calls-in-place.html)
+contract. This means that any lambda functions passed to an inline function are called in place. Since lambda functions
+are called in place, the compiler knows that a lambda function can't leak references to any variables contained within
+its function body.
+
+The compiler uses this knowledge, along with other analyses to decide whether it's safe to smart-cast any of the
+captured variables. For example:
+
+```kotlin
+interface Processor {
+    fun process()
+}
+
+inline fun inlineAction(f: () -> Unit) = f()
+
+fun nextProcessor(): Processor? = null
+
+fun runProcessor(): Processor? {
+    var processor: Processor? = null
+    inlineAction {
+        // The compiler knows that processor is a local variable and inlineAction()
+        // is an inline function, so references to processor can't be leaked.
+        // Therefore, it's safe to smart-cast processor.
+      
+        // If processor isn't null, processor is smart-cast
+        if (processor != null) {
+            // The compiler knows that processor isn't null, so no safe call 
+            // is needed
+            processor.process()
+        }
+
+        processor = nextProcessor()
+    }
+
+    return processor
+}
+```
+
+### Exception handling
+
+Smart cast information is passed on to `catch` and `finally` blocks. This change makes your code safer
+as the compiler tracks whether your object has a nullable type. For example:
+
+```kotlin
+//sampleStart
+fun testString() {
+    var stringInput: String? = null
+    // stringInput is smart-cast to String type
+    stringInput = ""
+    try {
+        // The compiler knows that stringInput isn't null
+        println(stringInput.length)
+        // 0
+
+        // The compiler rejects previous smart cast information for 
+        // stringInput. Now stringInput has the String? type.
+        stringInput = null
+
+        // Trigger an exception
+        if (2 > 1) throw Exception()
+        stringInput = ""
+    } catch (exception: Exception) {
+        // The compiler knows stringInput can be null
+        // so stringInput stays nullable.
+        println(stringInput?.length)
+        // null
+    }
+}
+//sampleEnd
+fun main() {
+    testString()
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-smart-casts-exception-handling"}
+
+### Smart cast prerequisites
 
 > 注意，智能转换仅在编译器能够保证变量在检查和使用之间不会改变时起作用。
 >
@@ -111,16 +257,17 @@ when (x) {
 
 ## "不安全" 强制转换运算符 {id=不安全强制转换运算符}
 
-通常，如果转换不可能，强制转换运算符会抛出异常。因此，它被称为 **unsafe**（**不安全**）的。
-在 Kotlin 中，通过中缀运算符 `as` 进行不安全转换。
+To explicitly cast an object to a non-nullable type, use the *unsafe* cast operator `as`:
 
 ```kotlin
 val x: String = y as String
 ```
 
-请注意，`null` 不能被转换为 `String`，因为这个类型不是[可空的](null-safety.md)。
-如果 `y` 为 null，上述代码会抛出异常。
-为了使这样的代码对于空值是正确的，请在转换的右侧使用可空类型：
+If the cast isn't possible, the compiler throws an exception. This is why it's called _unsafe_.
+
+In the previous example, if `y` is `null`, the code above also throws an exception. This is because `null` can't be cast
+to `String`, as `String` isn't [nullable](null-safety.md). To make the example work for possible null values, use a nullable
+type on the right-hand side of the cast:
 
 ```kotlin
 val x: String? = y as String?

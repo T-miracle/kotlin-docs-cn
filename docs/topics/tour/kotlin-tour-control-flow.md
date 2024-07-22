@@ -45,7 +45,8 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-if"}
 
-在 Kotlin 中没有三元运算符`condition ? then : else`。相反，`if`可以用作表达式。当将`if`用作表达式时，不需要使用花括号`{}`：
+Kotlin 中没有三元运算符 `condition ? then : else`。相反，`if` 可以作为表达式使用。
+如果每个操作只有一行代码，花括号 `{}` 是可以忽略的：
 
 ```kotlin
 fun main() {
@@ -393,7 +394,7 @@ fun main() {
                 number % 15 == 0 -> "fizzbuzz"
                 number % 3 == 0 -> "fizz"
                 number % 5 == 0 -> "buzz"
-                else -> number.toString()
+                else -> "$number"
             }
         )
     }

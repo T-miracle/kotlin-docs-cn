@@ -116,25 +116,12 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="rgb-enums-properties-kotlin"}
 
-您可以使用 [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) 和
-[`enumValueOf<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-value-of.html)
-函数，以泛型方式访问枚举类中的常量：
-
-```kotlin
-enum class RGB { RED, GREEN, BLUE }
-
-inline fun <reified T : Enum<T>> printAllValues() {
-    println(enumValues<T>().joinToString { it.name })
-}
-
-printAllValues<RGB>() // 打印 RED, GREEN, BLUE
-```
-
-> 有关内联函数和具象化类型参数的更多信息，请参阅 [内联函数](inline-functions.md)。
->
-> {style="tip"}
-
-在 Kotlin 1.9.20 中，引入了 `enumEntries<T>()` 函数作为 [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) 函数的未来替代。
+你可以使用 [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html)
+和 [`enumValueOf<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-value-of.html)
+函数，以泛型的方式访问枚举类中的常量。在 Kotlin 2.0.0 中，引入了
+[`enumEntries<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.enums/enum-entries.html) 函数，作为
+[`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) 函数的替代。
+`enumEntries<T>()` 函数返回给定枚举类型 `T` 的所有枚举条目的列表。
 
 `enumValues<T>()` 函数仍然受支持，但我们建议您使用 `enumEntries<T>()` 函数，因为它的性能影响较小。
 每次调用 `enumValues<T>()` 时都会创建一个新的数组，而每次调用 `enumEntries<T>()` 时都会返回相同的列表，这效率更高。
@@ -144,7 +131,6 @@ printAllValues<RGB>() // 打印 RED, GREEN, BLUE
 ```kotlin
 enum class RGB { RED, GREEN, BLUE }
 
-@OptIn(ExperimentalStdlibApi::class)
 inline fun <reified T : Enum<T>> printAllValues() {
     println(enumEntries<T>().joinToString { it.name })
 }
@@ -152,8 +138,6 @@ inline fun <reified T : Enum<T>> printAllValues() {
 printAllValues<RGB>() 
 // RED, GREEN, BLUE
 ```
-
-> `enumEntries<T>()` 函数是实验性的。要使用它，请使用 `@OptIn(ExperimentalStdlibApi)`，并
-> [将语言版本设置为至少 1.9](gradle-compiler-options.md#attributes-common-to-jvm-and-js)。
+> 欲了解更多关于内联函数和具体化类型参数的信息，请参阅 [内联函数](inline-functions.md)。
 >
-> {style="warning"}
+> {style="tip"}
