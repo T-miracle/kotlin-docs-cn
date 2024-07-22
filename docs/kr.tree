@@ -9,7 +9,7 @@
         status="release">
 
     <toc-element topic="translator-says.md"/>
-    <toc-element topic="home.topic" toc-title="首页"/>
+    <toc-element topic="home.topic"/>
 
     <toc-element topic="getting-started.md"/>
 
@@ -404,8 +404,8 @@
         <toc-element topic="books.md"/>
         <toc-element topic="advent-of-code.md" toc-title="代码谜题的出现"/>
         <toc-element toc-title="在 IDE 中学习（JetBrains Academy）">
-            <toc-element id="edu-tools-learner.md" toc-title="学习 Kotlin"/>
-            <toc-element id="edu-tools-educator.md" toc-title="传授 Kotlin"/>
+            <toc-element topic="edu-tools-learner.md" toc-title="学习 Kotlin"/>
+            <toc-element topic="edu-tools-educator.md" toc-title="传授 Kotlin"/>
         </toc-element>
         <toc-element toc-title="库作者指南">
             <include from="kl" target="api-guidelines" origin="api-guidelines"/>
