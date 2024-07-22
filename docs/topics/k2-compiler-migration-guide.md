@@ -565,7 +565,7 @@ For more information on what is possible with build reports, see [Build reports]
 > performance and stability of code highlighting and code completion have been improved, but not all IDE features are 
 > supported yet.
 >
-{type="warning"}
+{style="warning"}
 
 By default, both IntelliJ IDEA and Android Studio 2024.1 use the previous compiler for code analysis, code completion,
 highlighting, and other IDE-related features. This is to ensure performance and stability while we work on integrating 
@@ -583,7 +583,7 @@ Learn more about the K2 Kotlin mode in our [blog](https://blog.jetbrains.com/ide
 > Until then, you can continue to use the previous compiler for code analysis, and you won't encounter any code highlighting
 > issues due to unrecognized language features.
 >
-{type="note"}
+{style="note"}
 
 It's important to note that regardless of which compiler you use for code analysis in your IDE, the compiler used
 by your build system is **independent** and configured separately in your build script. If you [upgrade your Kotlin version
@@ -1047,7 +1047,7 @@ For more information, see the [corresponding issue in YouTrack](https://youtrack
 > They are almost stable, but you may need to perform migration steps in the future.
 > We'll do our best to minimize any further changes for you to make.
 >
-{type="warning"}
+{style="warning"}
 
 **What's changed?**
 
@@ -1325,7 +1325,7 @@ In addition, the Kotlin K2 compiler supports:
 > Custom compiler plugins use the plugin API, which is [Experimental](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained).
 > As a result, the API may change at any time, so we can't guarantee backward compatibility.
 >
-{type="warning"}
+{style="warning"}
 
 The upgrade process has two paths depending on the type of custom plugin you have.
 
@@ -1342,7 +1342,7 @@ an introduction to the new API, see [FIR Plugin API](https://github.com/JetBrain
 > If you have questions about upgrading your custom compiler plugin, join our [#compiler](https://kotlinlang.slack.com/archives/C7L3JB43G)
 > Slack channel, and we will do our best to help you.
 >
-{type="note"}
+{style="note"}
 
 ## Share your feedback on the new K2 compiler
 

@@ -1,39 +1,37 @@
 [//]: # (title:  Kotlin 发布)
 
-Since Kotlin 2.0.0, we ship the following types of releases:
+自 Kotlin 2.0.0 以来，我们发布以下类型的版本：
 
-* _Language releases_ (2._x_._0_) that bring major changes in the language and include tooling updates. Released once in 6 months.
-* _Tooling releases_ (2._x_._20_) that are shipped between language releases and include updates in the tooling,
-    performance improvements, and bug fixes.
-    Released in 3 months after corresponding _language release_.
-* _Bug fix releases_ (2._x_._yz_) that include bug fixes for _tooling releases_. There is no exact release schedule for these releases.
+* **语言版本**（2._x_._0_）：带来语言的重大变更，并包含工具更新。每 6 个月发布一次。
+* **工具版本**（2._x_._20_）：在语言版本之间发布，包含工具更新、性能改进和错误修复。对应的**语言版本**发布 3 个月后发布。
+* **错误修复版本**（2._x_._yz_）：包含**工具版本**的错误修复。这些版本没有确切的发布时间表。
 
 <!-- TODO: uncomment with 2.1.0 release
 > For example, for the feature release 1.8.0, we had only one tooling release 1.8.20,
 > and several bugfix releases including 1.8.21, 1.8.22.
 >
-{type="tip"}
+{style="tip"}
 -->
 
-For each language and tooling release, we also ship several preview (_EAP_) versions for you to try
-new features before they are released. See [Early Access Preview](eap.md) for details.
+对于每个语言版本和工具版本，我们还会发布多个预览版（**EAP**），以便你在新功能发布前进行试用。
+详情请参见 [早期访问预览](eap.md)。
 
-## Update to a new release
+## 更新到新版本 {id=update-to-a-new-release}
 
-To upgrade your project to a new release, you need to update your build script file.
-For example, to update to Kotlin %kotlinVersion%, change the version of the Kotlin Gradle plugin in your
-`build.gradle(.kts)` file:
+要将项目更新到新版本，需要更新你的构建脚本文件。
+例如，要更新到 Kotlin %kotlinVersion%，请更改 `build.gradle(.kts)` 文件中
+Kotlin Gradle 插件的版本：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 plugins {
-    // Replace `<...>` with the plugin name appropriate for your target environment
+    // 将 `<...>` 替换为适合你目标环境的插件名称
     kotlin("<...>") version "%kotlinVersion%"
-    // For example, if your target environment is JVM:
+    // 例如，如果你的目标环境是 JVM：
     // kotlin("jvm") version "%kotlinVersion%"
-    // If you target is Kotlin Multiplatform
+    // 如果目标是 Kotlin 多平台
     // kotlin("multiplatform") version "%kotlinVersion%"
 }
 ```
@@ -43,11 +41,11 @@ plugins {
 
 ```groovy
 plugins {
-    // Replace `<...>` with the plugin name appropriate for your target environment
+    // 将 `<...>` 替换为适合你目标环境的插件名称
     id 'org.jetbrains.kotlin.<...>' version '%kotlinVersion%'
-    // For example, if your target environment is JVM: 
+    // 例如，如果你的目标环境是 JVM： 
     // id 'org.jetbrains.kotlin.jvm' version '%kotlinVersion%'
-    // If you target is Kotlin Multiplatform
+    // 如果目标是 Kotlin 多平台
     // id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
 }
 ```
@@ -57,35 +55,34 @@ plugins {
 
 如果您有使用较早版本 Kotlin 创建的项目，请在项目中更改 Kotlin 版本，并在需要时更新 kotlinx 库。
 
-If you are migrating to the new language release, Kotlin plugin's migration tools will help you with the migration.
+如果你正在迁移到新的语言版本，Kotlin 插件的迁移工具将帮助你完成迁移。
 
 ## IDE 支持 {id=ide-support}
 
-Even with the release of the K2 compiler, IntelliJ IDEA and Android Studio still use the previous compiler by default 
-for code analysis, code completion, highlighting, and other IDE-related features.
+即使在 K2 编译器发布之后，IntelliJ IDEA 和 Android Studio 仍默认使用以前的编译器进行代码分析、代码完成、高亮显示和其他 IDE 相关功能。
 
-Starting from 2024.1, IntelliJ IDEA can use the new K2 compiler to analyze your code with its K2 Kotlin mode.
-To enable it, go to **Settings** | **Languages & Frameworks** | **Kotlin** and select the **Enable K2 Kotlin Mode** option.
+从 2024.1 版本开始，IntelliJ IDEA 可以使用新的 K2 编译器，通过其 K2 Kotlin 模式来分析你的代码。
+要启用它，请前往 **Settings** | **Languages & Frameworks** | **Kotlin**，并选择 **Enable K2 Kotlin Mode** 选项。
 
-> The K2 Kotlin mode is in Alpha. The performance and stability of code highlighting and code completion have been significantly improved,
-> but not all IDE features are supported yet.
+> K2 Kotlin 模式处于 Alpha 版本。
+> 代码高亮和代码完成的性能和稳定性有了显著提升，但并非所有 IDE 功能都已支持。
 >
-{type="warning"}
+{style="warning"}
 
-After enabling K2 mode, you may notice differences in IDE analysis due to changes in compiler behavior.
-Learn how the new K2 compiler differs from the previous one in the [migration guide](k2-compiler-migration-guide.md).
+启用 K2 模式后，由于编译器行为的变化，你可能会注意到 IDE 分析中的差异。
+有关新的 K2 编译器与以前编译器的不同之处，请参见 [迁移指南](k2-compiler-migration-guide.md)。
 
-## Kotlin release compatibility
+## Kotlin 版本兼容性 {id=kotlin-release-compatibility}
 
-Learn more about [types of Kotlin releases and their compatibility](kotlin-evolution.md#language-and-tooling-releases)
+了解更多关于 [Kotlin 版本类型及其兼容性](kotlin-evolution.md#language-and-tooling-releases) 的信息。
 
-## Release details
+## 发布详情 {id=release-details}
 
-The following table lists details of the latest Kotlin releases:
+以下表格列出了最新 Kotlin 版本的详细信息：
 
-> You can also use [preview versions of Kotlin](eap.md#build-details).
+> 你还可以使用 [Kotlin 的预览版本](eap.md#build-details)。
 > 
-{type="tip"}
+{style="tip"}
 
 <table>
     <tr>
@@ -94,28 +91,28 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>2.0.0</strong>
-            <p>Released: <strong>May 21, 2024</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.0" target="_blank">Release on GitHub</a></p>
+            <p>发布日期： <strong>2024.5.21</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>A language release with the Stable Kotlin K2 compiler.</p>
-            <p>Learn more about Kotlin 2.0.0 in <a href="whatsnew20.md" target="_blank">What's new in Kotlin 2.0.0</a>.</p>
+            <p>一个包含稳定的 Kotlin K2 编译器的语言版本。</p>
+            <p>在 <a href="whatsnew20.md" target="_blank">Kotlin 2.0.0 新特性</a> 中了解更多关于 Kotlin 2.0.0 的信息。</p>
         </td>
     </tr>
     <tr>
         <td><strong>1.9.25</strong>
-            <p>Released: <strong>July 19, 2024</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.25" target="_blank">Release on GitHub</a></p>
+            <p>发布日期： <strong>2024.7.19</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.25" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>A bug fix release for Kotlin 1.9.20, 1.9.21, 1.9.22, 1.9.23, and 1.9.24</p>
-            <p>Learn more about Kotlin 1.9.20 in <a href="whatsnew1920.md" target="_blank">What's new in Kotlin 1.9.20</a>.</p>
+            <p>针对 Kotlin 1.9.20、1.9.21、1.9.22、1.9.23 和 1.9.24 的错误修复版本。</p>
+            <p>在 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。</p>
         </td>
     </tr>
     <tr>
         <td><strong>1.9.24</strong>
-            <p>发布于： <strong>2024.5.7</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.24" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期： <strong>2024.5.7</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.24" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.9.20、1.9.21、1.9.22 和 1.9.23 的错误修复版本。</p>
@@ -124,8 +121,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.9.23</strong>
-            <p>发布于： <strong>2024.3.7</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.23" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期： <strong>2024.3.7</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.23" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.9.20、1.9.21 和 1.9.22 的错误修复版本。</p>
@@ -134,8 +131,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.9.22</strong>
-            <p>发布于： <strong>2023.12.21</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.22" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期： <strong>2023.12.21</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.22" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.9.20 和 1.9.21 的错误修复版本。</p>
@@ -144,7 +141,7 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
       <td><strong>1.9.21</strong>
-          <p>发布于： <strong>2023年11月23日</strong></p>
+          <p>发布日期： <strong>2023年11月23日</strong></p>
           <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.21" target="_blank">GitHub 上的发布</a></p>
       </td>
       <td>
@@ -154,8 +151,8 @@ The following table lists details of the latest Kotlin releases:
   </tr>
     <tr>
         <td><strong>1.9.20</strong>
-            <p>发布于: <strong>2023.11.1</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.20" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2023.11.1</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>包含 Beta 版 Kotlin K2 编译器和稳定 Kotlin 多平台的功能版本。</p>
@@ -167,8 +164,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.9.10</strong>
-            <p>发布于: <strong>2023.8.23</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.10" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2023.8.23</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.10" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.9.0 的错误修复版本。</p>
@@ -178,13 +175,13 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.9.0</strong>
-            <p>发布于: <strong>2023.7.6</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.0" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2023.7.6</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>A feature release with Kotlin K2 compiler updates, new enum class values function,
-                new operator for open-ended ranges, preview of Gradle configuration cache in Kotlin Multiplatform, 
-                changes to Android target support in Kotlin Multiplatform, preview of custom memory allocator in Kotlin/Native.
+            <p>一个功能版本，包括 Kotlin K2 编译器更新、新的枚举类值函数、新的用于开放区间的运算符、
+                Kotlin 多平台中 Gradle 配置缓存的预览、Kotlin 多平台中 Android 目标支持的变更，
+                以及 Kotlin/Native 中自定义内存分配器的预览。
             </p>
             <p>Learn more in:</p>
             <list>
@@ -195,8 +192,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.8.22</strong>
-            <p>发布于: <strong>2023.6.8</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.22" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2023.6.8</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.22" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.8.20 的错误修复版本。</p>
@@ -205,8 +202,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.8.21</strong>
-            <p>发布于: <strong>2023.4.25</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.21" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2023.4.25</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.21" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.8.20 的错误修复版本。</p>
@@ -216,12 +213,12 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.8.20</strong>
-            <p>发布于: <strong>2023.4.3</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.20" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2023.4.3</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>A feature release with Kotlin K2 compiler updates, AutoCloseable interface and Base64 encoding in stdlib,
-                new JVM incremental compilation enabled by default, new Kotlin/Wasm compiler backend.
+            <p>一个功能版本，包括 Kotlin K2 编译器更新、`AutoCloseable` 接口和标准库中的
+                Base64 编码、新的默认启用的 JVM 增量编译，以及新的 Kotlin/Wasm 编译器后端。
             </p>
             <p>Learn more in:</p>
             <list>
@@ -232,8 +229,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.8.10</strong>
-            <p>发布于: <strong>2023.2.2</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.10" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2023.2.2</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.10" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.8.0 的错误修复版本。</p>
@@ -243,8 +240,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.8.0</strong>
-            <p>发布于: <strong>2022.12.28</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.0" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2022.12.28</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.8.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>一个功能发布，包括改进的 kotlin-reflect 性能、JVM 上新的递归复制或删除目录内容的实验性函数，以及改进的 Objective-C/Swift 互操作性。</p>
@@ -257,8 +254,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.7.21</strong>
-            <p>发布于: <strong>2022.11.9</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.21" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2022.11.9</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.21" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.7.20 的错误修复版本。</p>
@@ -268,12 +265,12 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.7.20</strong>
-            <p>发布于: <strong>2022.9.29</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.20" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2022.9.29</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>An incremental release with new language features, the support for several compiler plugins in the Kotlin K2 compiler,
-                the new Kotlin/Native memory manager enabled by default, and the support for Gradle 7.1.
+            <p>一个增量版本，包含新的语言特性、Kotlin K2 编译器对多个编译器插件的支持、新的默认启用的
+                Kotlin/Native 内存管理器，以及对 Gradle 7.1 的支持。
             </p>
             <p>Learn more in:</p>
             <list>
@@ -286,8 +283,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.7.10</strong>
-            <p>发布于: <strong>2022.7.7</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.10" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2022.7.7</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.10" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.7.0 的错误修复版本。</p>
@@ -297,8 +294,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.7.0</strong>
-            <p>发布于: <strong>2022.6.9</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.0" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2022.6.9</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.7.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>一个功能发布，包括 JVM 上的 Kotlin K2 编译器的 Alpha 版本、稳定的语言特性、性能改进以及稳定实验性 API 等进化性变化。</p>
@@ -312,8 +309,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.6.21</strong>
-            <p>发布于: <strong>2022.4.20</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.21" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2022.4.20</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.21" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.6.20 的错误修复版本。</p>
@@ -322,8 +319,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.6.20</strong>
-            <p>发布于: <strong>2022.4.4</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.20" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2022.4.4</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>具有各种改进的增量版本，例如：</p>
@@ -340,8 +337,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.6.10</strong>
-            <p>发布于: <strong>2021.12.14</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.10" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.12.14</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.10" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.6.0 的错误修复版本。</p>
@@ -350,8 +347,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.6.0</strong>
-            <p>发布于: <strong>2021.11.16</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.0" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.11.16</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.6.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>一个功能发布，包括新的语言特性、性能改进以及稳定实验性 API 等进化性变化。</p>
@@ -365,8 +362,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.5.32</strong>
-            <p>发布于: <strong>2021.11.29</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.32" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.11.29</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.32" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.5.31 的错误修复版本。</p>
@@ -375,8 +372,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.5.31</strong>
-            <p>发布于: <strong>2021.9.20</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.31" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.9.20</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.31" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.5.30 的错误修复版本。</p>
@@ -385,8 +382,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.5.30</strong>
-            <p>发布于: <strong>2021.8.23</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.30" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.8.23</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.30" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>具有各种改进的增量版本，例如：</p>
@@ -407,8 +404,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.5.21</strong>
-            <p>发布于: <strong>2021.7.13</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.21" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.7.13</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.21" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.5.20 的错误修复版本。</p>
@@ -417,8 +414,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.5.20</strong>
-            <p>发布于: <strong>2021.6.24</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.20" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.6.24</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>具有各种改进的增量版本，例如：</p>
@@ -438,8 +435,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.5.10</strong>
-            <p>发布于: <strong>2021.5.24</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.10" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.5.24</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.10" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.5.0 的错误修复版本。</p>
@@ -448,8 +445,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.5.0</strong>
-            <p>发布于: <strong>2021.5.5</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.0" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.5.5</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.5.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>一个功能发布，包括新的语言特性、性能改进以及稳定实验性 API 等进化性变化。</p>
@@ -463,8 +460,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.4.32</strong>
-            <p>发布于: <strong>2021.3.22</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.32" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.3.22</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.32" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.4.30 的错误修复版本。</p>
@@ -473,8 +470,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.4.31</strong>
-            <p>发布于: <strong>2021.2.25</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.31" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.2.25</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.31" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.4.30 的错误修复版本</p>
@@ -483,8 +480,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.4.30</strong>
-            <p>发布于: <strong>2021.2.3</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.30" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2021.2.3</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.30" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>具有各种改进的增量版本，例如：</p>
@@ -503,8 +500,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.4.21</strong>
-            <p>发布于: <strong>2020.12.7</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.21" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2020.12.7</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.21" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.4.20 的错误修复版本</p>
@@ -513,8 +510,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.4.20</strong>
-            <p>发布于: <strong>2020.11.23</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.20" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2020.11.23</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>具有各种改进的增量版本，例如：</p>
@@ -532,8 +529,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.4.10</strong>
-            <p>发布于: <strong>2020.9.7</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.10" target="_blank">在 GitHub 上发布</a></p>
+            <p>发布日期: <strong>2020.9.7</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.10" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.4.0 的错误修复版本。</p>
@@ -542,8 +539,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.4.0</strong>
-            <p> 发布于: <strong>2020.8.17</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.0" target="_blank">在 GitHub 上发布</a></p>
+            <p> 发布日期: <strong>2020.8.17</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.4.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>该功能版本包含许多功能和改进，主要关注质量和性能。</p>
@@ -558,8 +555,8 @@ The following table lists details of the latest Kotlin releases:
     </tr>
     <tr>
         <td><strong>1.3.72</strong>
-            <p> 发布于: <strong>2020.4.15</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.3.72" target="_blank">在 GitHub 上发布</a></p>
+            <p> 发布日期: <strong>2020.4.15</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.3.72" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
             <p>Kotlin 1.3.70 的错误修复版本。</p>

@@ -91,7 +91,7 @@ kotlin {
 > and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
 > your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 ## Configure compilations for one target
 
@@ -160,7 +160,7 @@ kotlin {
 > and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
 > your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 
 ## Configure one compilation

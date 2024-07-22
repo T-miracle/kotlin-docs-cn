@@ -190,7 +190,7 @@ External interfaces have some restrictions:
 
 ### Casts
 
-In addition to the ["unsafe" cast operator](typecasts.md#不安全强制转换运算符) `as`, which throws a `ClassCastException`
+In addition to the ["unsafe" cast operator](typecasts.md#unsafe-cast-operator) `as`, which throws a `ClassCastException`
 in case a cast is not possible, Kotlin/JS also provides [`unsafeCast<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/unsafe-cast.html). When using `unsafeCast`,
 _no type checking is done at all_ during runtime. For example, consider the following two methods:
 
@@ -247,4 +247,4 @@ fun main() {
 
 > For more information about equality in Kotlin, see the [Equality](equality.md) documentation.
 > 
-{type="tip"}
+{style="tip"}

@@ -22,7 +22,7 @@ Before you create your first Kotlin Notebook, you need to set up an environment.
    > Alternatively, you can download the [Kotlin Notebook plugin](https://plugins.jetbrains.com/plugin/16340-kotlin-notebook)
    > and install it manually.
    >
-   {type="note"}
+   {style="note"}
 
 4. Click **OK** to apply the changes and restart your IDE if prompted.
 

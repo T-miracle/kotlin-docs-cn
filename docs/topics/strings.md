@@ -156,7 +156,7 @@ ${'$'}_9.99
 
 > `String.format()` 函数的字符串格式化仅在 Kotlin/JVM 中可用。
 >
-{type="note"}
+{style="note"}
 
 要按照您的特定要求格式化字符串，请使用 [`String.format()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/format.html) 函数。
 
@@ -168,7 +168,7 @@ ${'$'}_9.99
 
 > 要详细了解格式说明符及其完整列表，请参见 [Java 的 Formatter 文档](https://docs.oracle.com/javase/8/docs/api/java/util/Formatter.html#summary)。
 >
-{type="note"}
+{style="note"}
 
 让我们来看一个例子：
 

@@ -90,7 +90,7 @@ To set up the publishing of an XCFramework:
    >
    > You can then find the resulting framework in the `composeApp/build/XCFrameworks/release/Shared.xcframework` folder.
    >
-   {type="tip"}
+   {style="tip"}
 
 ### Prepare the XCFramework and the Swift package manifest
 

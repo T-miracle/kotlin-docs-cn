@@ -24,7 +24,7 @@ The `bin` directory contains the scripts needed to compile and run Kotlin on Win
 
 > If you want to use the Kotlin command-line compiler on Windows, we recommend installing it manually.
 > 
-{type="note"}
+{style="note"}
 
 ### SDKMAN!
 

@@ -180,7 +180,7 @@ Of course, you can use both `kotlin-allopen` and `kotlin-spring` in the same pro
 > If you generate the project template by the [start.spring.io](https://start.spring.io/#!language=kotlin)
 > service, the `kotlin-spring` plugin will be enabled by default.
 >
-{type="note"}
+{style="note"}
 
 ## Command-line compiler
 

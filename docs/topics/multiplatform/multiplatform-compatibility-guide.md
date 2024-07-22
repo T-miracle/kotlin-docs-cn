@@ -846,7 +846,7 @@ and prepare this functionality for the upcoming Kotlin 2.0 release. From now on:
     > The casting to `objcnames.protocols.ForwardDeclaredProtocolProtocol` is only allowed from the corresponding real class.
     > Otherwise, you'll get an error.
     >
-    {type="note"}
+    {style="note"}
 
 **When do the changes take effect?**
 

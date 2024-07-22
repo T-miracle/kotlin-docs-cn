@@ -68,27 +68,26 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-println"}
 
-## Read from the standard input
+## 从标准输入读取 {id=read-from-the-standard-input}
 
-The `readln()` function reads from the standard input. This function reads the entire line the user enters as a string.
+`readln()` 函数从标准输入读取。这个函数将用户输入的整行读取为字符串。
 
-You can use the `println()`, `readln()`, and `print()` functions together to print messages requesting 
-and showing user input:
+你可以一起使用 `println()`、`readln()` 和 `print()` 函数来打印请求和显示用户输入的消息：
 
 ```kotlin
-// Prints a message to request input
+// 打印请求输入的消息
 println("Enter any word: ")
 
-// Reads and stores the user input. For example: Happiness
+// 读取并存储用户输入。例如：Happiness
 val yourWord = readln()
 
-// Prints a message with the input
+// 打印包含输入的消息
 print("You entered the word: ")
 print(yourWord)
 // You entered the word: Happiness
 ```
 
-For more information, see [Read standard input](read-standard-input.md).
+有关更多信息，请参见 [读取标准输入](read-standard-input.md)。
 
 ## 函数 {id=function}
 
@@ -411,7 +410,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-while-loop"}
 
-请参阅 [while 循环](control-flow.md#while循环)。
+请参阅 [while 循环](control-flow.md#while-loops)。
 
 ## when 表达式
 

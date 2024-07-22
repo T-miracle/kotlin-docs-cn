@@ -2,7 +2,7 @@
 
 > Kotlin/Wasm is [Alpha](components-stability.md). It may be changed at any time.
 >
-{type="note"}
+{style="note"}
 
 This tutorial demonstrates how to use your browser to debug your [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)
 application built with Kotlin/Wasm.
@@ -16,7 +16,7 @@ Create a project using the Kotlin Multiplatform wizard:
 
    > These are the name and ID of the project directory. You can also leave them as they are.
    >
-   {type="tip"}
+   {style="tip"}
 
 3. Select the **Web** option. Make sure that no other options are selected.
 4. Click the **Download** button and unpack the resulting archive.
@@ -35,7 +35,7 @@ Create a project using the Kotlin Multiplatform wizard:
 
    > You need at least Java 11 as your Gradle JVM for the tasks to load successfully.
    >
-   {type="note"}
+   {style="note"}
 
 2. In **composeApp** | **Tasks** | **kotlin browser**, select and run the **wasmJsBrowserRun** task.
 
@@ -56,7 +56,7 @@ Create a project using the Kotlin Multiplatform wizard:
    > The port number can vary because the 8080 port may be unavailable. You can find the actual port number printed
    > in the Gradle build console.
    >
-   {type="tip"}
+   {style="tip"}
 
    You see a "Click me!" button. Click it:
 
@@ -72,7 +72,7 @@ Create a project using the Kotlin Multiplatform wizard:
 > [IntelliJ IDEA](https://youtrack.jetbrains.com/issue/KT-64683/Kotlin-Wasm-debugging-in-IntelliJ-IDEA) and 
 > [Fleet](https://youtrack.jetbrains.com/issue/KT-64684). 
 >
-{type="note"}
+{style="note"}
 
 You can debug this Compose Multiplatform application
 in your browser out of the box, without additional configurations. 
@@ -132,14 +132,14 @@ kotlin {
 > Currently, you can't debug library sources.
 > [We will support this in the future](https://youtrack.jetbrains.com/issue/KT-64685).
 >
-{type="note"}
+{style="note"}
 
 ### Debug your Kotlin/Wasm application
 
 > This tutorial uses the Chrome browser, but you should be able to follow these steps with other browsers. For more information,
 > see [Browser versions](wasm-troubleshooting.md#browser-versions).
 > 
-{type="tip"}
+{style="tip"}
 
 1. In the browser window of the application, right-click and select the **Inspect** action to access developer tools.
    Alternatively, you can use the **F12** shortcut or select **View** | **Developer** | **Developer Tools**.

@@ -9,7 +9,7 @@ The tutorial is applicable to both IntelliJ IDEA Community Edition and the Ultim
 > [install Xcode Command Line Tools](https://developer.apple.com/download/). For more information,
 > see [Set up an environment](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html).
 > 
-{type="note"}
+{style="note"}
 
 ## Before you start
 

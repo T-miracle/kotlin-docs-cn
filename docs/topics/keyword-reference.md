@@ -5,13 +5,13 @@
 The following tokens are always interpreted as keywords and cannot be used as identifiers:
 
  * `as`
-     - is used for [type casts](typecasts.md#不安全强制转换运算符).
+     - is used for [type casts](typecasts.md#unsafe-cast-operator).
      - specifies an [alias for an import](packages.md#导入)
  * `as?` is used for [safe type casts](typecasts.md#安全可空强制转换运算符).
  * `break` [terminates the execution of a loop](returns.md).
  * `class` declares a [class](classes.md).
  * `continue` [proceeds to the next step of the nearest enclosing loop](returns.md).
- * `do` begins a [do/while loop](control-flow.md#while循环) (a loop with a postcondition).
+ * `do` begins a [do/while loop](control-flow.md#while-loops) (a loop with a postcondition).
  * `else` defines the branch of an [if expression](control-flow.md#if-expression) that is executed when the condition is false.
  * `false` specifies the 'false' value of the [Boolean type](booleans.md).
  * `for` begins a [for loop](control-flow.md#for循环).
@@ -52,7 +52,7 @@ The following tokens are always interpreted as keywords and cannot be used as id
  * `val` declares a read-only [property](properties.md) or [local variable](basic-syntax.md#variables).
  * `var` declares a mutable [property](properties.md) or [local variable](basic-syntax.md#variables).
  * `when` begins a [when expression](control-flow.md#when-expression) (executes one of the given branches).
- * `while` begins a [while loop](control-flow.md#while循环) (a loop with a precondition).
+ * `while` begins a [while loop](control-flow.md#while-loops) (a loop with a precondition).
 
 ## Soft keywords
 

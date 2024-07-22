@@ -48,7 +48,7 @@ Inside `kotlin {}`, you can write the following blocks:
 > and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
 > your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 ## Targets
 
@@ -147,7 +147,7 @@ In any target block, you can use the following declarations:
 > and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
 > your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 ### JVM targets
 
@@ -826,7 +826,7 @@ kotlin {
 > and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
 > your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{type="warning"}
+{style="warning"}
 
 
 ## Dependencies

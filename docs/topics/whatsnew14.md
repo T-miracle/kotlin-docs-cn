@@ -1501,7 +1501,7 @@ If, for some reason, you need artifacts that depend on the unshaded `kotlin-comp
 `-unshaded` suffix, such as `kotlin-scripting-jsr223-unshaded`. Note that this renaming affects only the scripting artifacts
 that are supposed to be used directly; names of other artifacts remain unchanged.
 
-## Migrating to Kotlin 1.4.0
+## Migrating to Kotlin 1.4.0 {id=migrating-to-kotlin-1-4-0}
 
 The Kotlin plugin's migration tools help you migrate your projects from earlier versions of Kotlin to 1.4.0.
 

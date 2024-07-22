@@ -34,7 +34,7 @@ To get started, first download and install the latest version of [IntelliJ IDEA]
     > You can also enable the **Generate code with onboarding tips** option to add some additional useful comments to your
     > sample code.
     >
-    {type="tip"}
+    {style="tip"}
 
 8. Click **Create**.
 

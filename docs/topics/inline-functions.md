@@ -202,7 +202,7 @@ inline var bar: Bar
 ## 公共 API 内联函数的限制 {id=restrictions-for-public-api-inline-functions}
 
 当一个内联函数是 `public` 或 `protected`，但不是 `private` 或 `internal`
-声明的一部分时，它被视为一个[模块](visibility-modifiers.md#模块)的公共 API。
+声明的一部分时，它被视为一个[模块](visibility-modifiers.md#modules)的公共 API。
 它可以在其他模块中被调用，并且在这些调用点内联。
 
 这带来了某些二进制不兼容的风险，当声明内联函数的模块发生变化而调用模块没有重新编译时，可能会引发不兼容问题。

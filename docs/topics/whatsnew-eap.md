@@ -135,7 +135,7 @@ we recommend that you:
 
 > Your subproject must **not** be a multiplatform project, and you must only use it to set up a dependency on your multiplatform project.
 >
-{type="warning"}
+{style="warning"}
 
 For example, you have a multiplatform project called `my-main-project` and you want 
 to use the [Application](https://docs.gradle.org/current/userguide/application_plugin.html) Gradle plugin to run a JVM application.

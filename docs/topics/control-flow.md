@@ -242,7 +242,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-## While 循环 {id=while循环}
+## While 循环 {id=while-loops}
 
 `while` 和 `do-while` 循环在其条件满足的情况下持续执行其主体。
 它们之间的区别在于条件检查的时间：

@@ -77,7 +77,7 @@ in the `.kotlin` directory.
 
 > You may want to add the `.kotlin` directory to your project's `.gitignore` file.
 >
-{type="warning"}
+{style="warning"}
 
 There are properties you can add to the `gradle.properties` file of your project to configure this behavior:
 
@@ -1204,7 +1204,7 @@ Popular repositories are [Maven Central](https://central.sonatype.com/) and [Goo
 > add it as the last repository in your `repositories{}` block. For more information, see
 > [The case for mavenLocal()](https://docs.gradle.org/current/userguide/declaring_repositories.html#sec:case-for-maven-local).
 > 
-{type="warning"}
+{style="warning"}
 
 If you need to declare the same repositories in more than one subproject, declare the repositories centrally in the
 `dependencyResolutionManagement{}` block in your `settings.gradle(.kts)` file:

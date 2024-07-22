@@ -36,7 +36,7 @@ Kotlin modules can be used in Swift/Objective-C code if compiled into a framewor
 
 > The `@HiddenFromObjC` annotation is [Experimental](components-stability.md#stability-levels-explained) and requires [opt-in](opt-in-requirements.md).
 >
-{type="warning"}
+{style="warning"}
 
 To make your Kotlin code more Objective-C/Swift-friendly, you can hide a Kotlin declaration from Objective-C and Swift
 with `@HiddenFromObjC`. The annotation disables a function or property export to Objective-C.
@@ -51,7 +51,7 @@ but still keep it visible from other Kotlin modules.
 
 > The `@ShouldRefineInSwift` annotation is [Experimental](components-stability.md#stability-levels-explained) and requires [opt-in](opt-in-requirements.md).
 >
-{type="warning"}
+{style="warning"}
 
 `@ShouldRefineInSwift` helps to replace a Kotlin declaration with a wrapper written in Swift. The annotation marks a
 function or property as `swift_private` in the generated Objective-C API. Such declarations get the `__` prefix,
@@ -67,7 +67,7 @@ the Xcode autocomplete.
 
 > The `@ObjCName` annotation is [Experimental](components-stability.md#stability-levels-explained) and requires [opt-in](opt-in-requirements.md).
 >
-{type="warning"}
+{style="warning"}
 
 To avoid renaming Kotlin declarations, use the `@ObjCName` annotation. It instructs the Kotlin compiler to use the
 custom Objective-C and Swift name for the annotated class, interface, or another Kotlin entity:
@@ -155,7 +155,7 @@ Known limitations:
 > Opt-in is required (see the details below), and you should use it only for evaluation purposes.
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-38600).
 >
-{type="warning"}
+{style="warning"}
 
 * Dependency documentation is not exported unless it is compiled with `-Xexport-kdoc` itself. The feature is Experimental,
   so libraries compiled with this option might be incompatible with other compiler versions.

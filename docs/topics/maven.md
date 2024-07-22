@@ -52,7 +52,7 @@ specify the ID and URL of each repository in the `<repositories>` element:
 > If you declare `mavenLocal()` as a repository in a Gradle project, you may experience problems when switching 
 > between Gradle and Maven projects. For more information, see [Declare repositories](gradle-configure-project.md#declare-repositories).
 >
-{type="note"}
+{style="note"}
 
 ## Set dependencies
 

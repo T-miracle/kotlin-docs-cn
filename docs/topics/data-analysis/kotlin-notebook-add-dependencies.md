@@ -14,7 +14,7 @@ is necessary to unlock advanced features.
 
 > The Kotlin standard library can be used out of the box, so you don't have to import it.
 > 
-{type="note"}
+{style="note"}
 
 You can load any library from the Maven repository by specifying its coordinates using Gradle-style
 syntax in any code cell. 
@@ -59,7 +59,7 @@ To add these libraries:
     > Make sure to run the code cell with the `%use libraryName` line before you run any other code cells that rely on the 
     > library.
     >
-    {type="note"}
+    {style="note"}
 
 4. To import data from a CSV file using the Kotlin DataFrame library, use the `.read()` function in a new code cell:
 
@@ -74,7 +74,7 @@ To add these libraries:
     > You can download this example CSV from the [Kotlin DataFrame examples GitHub repository](https://github.com/Kotlin/dataframe/blob/master/examples/notebooks/netflix/netflix_titles.csv).
     > Add it to your project directory.
     > 
-    {type="tip"}
+    {style="tip"}
 
     ![Using DataFrame to display data](add-dataframe-dependency.png){width=700}
 
