@@ -129,50 +129,50 @@
     </toc-element>
 
     <toc-element toc-title="多平台开发">
-        <toc-element topic="multiplatform-get-started.md" accepts-web-file-names="building-mpp-with-gradle.html,intro-to-kotlin-mpp.html,mpp-intro.html,mpp-get-started.html,multiplatform-tutorials.html" toc-title="Introduction"/>
+        <toc-element topic="multiplatform-get-started.md" accepts-web-file-names="building-mpp-with-gradle.html,intro-to-kotlin-mpp.html,mpp-intro.html,mpp-get-started.html,multiplatform-tutorials.html" toc-title="引言"/>
         <toc-element topic="multiplatform-discover-project.md" accepts-web-file-names="mpp-discover-project.html" toc-title="了解基本项目结构"/>
-        <toc-element topic="multiplatform-advanced-project-structure.md" toc-title="Explore advanced project structure"/>
-        <toc-element topic="multiplatform-set-up-targets.md" toc-title="Set up targets" accepts-web-file-names="mpp-set-up-targets.html"/>
-        <toc-element toc-title="Share code">
+        <toc-element topic="multiplatform-advanced-project-structure.md" toc-title="探索先进的项目结构"/>
+        <toc-element topic="multiplatform-set-up-targets.md" toc-title="设定目标" accepts-web-file-names="mpp-set-up-targets.html"/>
+        <toc-element toc-title="共享代码">
             <toc-element topic="multiplatform-share-on-platforms.md" accepts-web-file-names="mpp-share-on-platforms.html"/>
             <toc-element topic="multiplatform-expect-actual.md"/>
             <toc-element topic="multiplatform-hierarchy.md" accepts-web-file-names="migrating-multiplatform-project-to-14.html"/>
         </toc-element>
         <toc-element toc-title="添加依赖项">
-            <toc-element topic="multiplatform-add-dependencies.md" toc-title="On multiplatform libraries" accepts-web-file-names="mpp-add-dependencies.html"/>
-            <toc-element topic="multiplatform-android-dependencies.md" toc-title="For Android target platforms"/>
-            <toc-element topic="multiplatform-ios-dependencies.md" toc-title="For iOS target platforms"/>
+            <toc-element topic="multiplatform-add-dependencies.md" toc-title="在多平台库上" accepts-web-file-names="mpp-add-dependencies.html"/>
+            <toc-element topic="multiplatform-android-dependencies.md" toc-title="对于 Android 目标平台"/>
+            <toc-element topic="multiplatform-ios-dependencies.md" toc-title="对于 iOS 目标平台"/>
         </toc-element>
         <toc-element toc-title="编译工件">
             <toc-element topic="multiplatform-configure-compilations.md" accepts-web-file-names="mpp-configure-compilations.html"/>
-            <toc-element toc-title="[Experimental DSL] Build final native binaries" topic="multiplatform-native-artifacts.md" hidden="true"/>
+            <toc-element toc-title="[实验性 DSL] 构建最终的本地二进制文件" topic="multiplatform-native-artifacts.md" hidden="true"/>
             <toc-element topic="multiplatform-build-native-binaries.md" accepts-web-file-names="mpp-build-native-binaries.html"/>
         </toc-element>
-        <toc-element topic="multiplatform-publish-lib.md" accepts-web-file-names="mpp-publish-lib.html" toc-title="Publish libraries"/>
-        <toc-element toc-title="Reference">
+        <toc-element topic="multiplatform-publish-lib.md" accepts-web-file-names="mpp-publish-lib.html" toc-title="发布库"/>
+        <toc-element toc-title="参考">
             <toc-element topic="multiplatform-dsl-reference.md" accepts-web-file-names="mpp-dsl-reference.html,mpp-supported-platforms.html,multiplatform-supported-platforms.html"/>
             <toc-element topic="multiplatform-android-layout.md"/>
-            <toc-element topic="multiplatform-compatibility-guide.md" toc-title="Compatibility guide"/>
+            <toc-element topic="multiplatform-compatibility-guide.md" toc-title="兼容性指南"/>
             <toc-element topic="multiplatform-plugin-releases.md"/>
         </toc-element>
     </toc-element>
 
-    <toc-element toc-title="Data analysis">
-        <toc-element toc-title="Get started with Kotlin Notebook">
-            <toc-element topic="get-started-with-kotlin-notebooks.md" toc-title="Introduction to Kotlin Notebook"/>
-            <toc-element topic="kotlin-notebook-set-up-env.md" toc-title="1. Set up an environment"/>
-            <toc-element topic="kotlin-notebook-create.md" toc-title="2. Create your first Kotlin Notebook"/>
-            <toc-element topic="kotlin-notebook-add-dependencies.md" toc-title="3. Add dependencies to a Kotlin Notebook"/>
-            <toc-element topic="kotlin-notebook-share.md" toc-title="4. Share a Kotlin Notebook"/>
+    <toc-element toc-title="数据分析">
+        <toc-element toc-title="开始使用 Kotlin Notebook">
+            <toc-element topic="get-started-with-kotlin-notebooks.md" toc-title="Kotlin Notebook 简介"/>
+            <toc-element topic="kotlin-notebook-set-up-env.md" toc-title="1. 设置环境"/>
+            <toc-element topic="kotlin-notebook-create.md" toc-title="2. 创建您的第一个 Kotlin Notebook"/>
+            <toc-element topic="kotlin-notebook-add-dependencies.md" toc-title="3. 将依赖项添加到 Kotlin Notebook"/>
+            <toc-element topic="kotlin-notebook-share.md" toc-title="4. 分享 Kotlin Notebook"/>
         </toc-element>
-        <toc-element topic="data-analysis-notebooks-output-formats.md" toc-title="Output formats in Kotlin notebooks"/>
-        <toc-element toc-title="Working with data sources">
-            <toc-element topic="data-analysis-work-with-data-sources.md" toc-title="Retrieve data from files"/>
-            <toc-element topic="data-analysis-work-with-api.md" toc-title="Retrieve data from web sources and APIs"/>
-            <toc-element topic="data-analysis-connect-to-db.md" toc-title="Connect and retrieve data from databases"/>
+        <toc-element topic="data-analysis-notebooks-output-formats.md" toc-title="Kotlin Notebook 中的输出格式"/>
+        <toc-element toc-title="与数据源一起工作">
+            <toc-element topic="data-analysis-work-with-data-sources.md" toc-title="从文件中检索数据"/>
+            <toc-element topic="data-analysis-work-with-api.md" toc-title="从网络源和 API 中检索数据"/>
+            <toc-element topic="data-analysis-connect-to-db.md" toc-title="连接并从数据库中检索数据"/>
         </toc-element>
-        <toc-element topic="data-analysis-visualization.md" toc-title="Data visualization in Kotlin Notebook"/>
-        <toc-element topic="data-analysis-libraries.md" toc-title="Libraries for data analysis"/>
+        <toc-element topic="data-analysis-visualization.md" toc-title="在 Kotlin Notebook 中进行数据可视化"/>
+        <toc-element topic="data-analysis-libraries.md" toc-title="用于数据分析的库"/>
 
     </toc-element>
 
@@ -183,25 +183,25 @@
             <toc-element topic="java-interop.md"/>
             <toc-element topic="java-to-kotlin-interop.md"/>
             <toc-element toc-title="Spring">
-                <toc-element toc-title="Create a RESTful web service with a database using Spring Boot">
-                    <toc-element topic="jvm-get-started-spring-boot.md" toc-title="Get started with Spring Boot and Kotlin" accepts-web-file-names="jvm-spring-boot-restful.html,spring-boot-restful.html,spring-boot-restful-db.html,jvm-spring-boot-restful-db.html"/>
-                    <toc-element topic="jvm-create-project-with-spring-boot.md" toc-title="Create a Spring Boot project"/>
-                    <toc-element topic="jvm-spring-boot-add-data-class.md" toc-title="Upgrade your project with data classes"/>
-                    <toc-element topic="jvm-spring-boot-add-db-support.md" toc-title="Add database support for Spring Boot project"/>
-                    <toc-element topic="jvm-spring-boot-using-crudrepository.md" toc-title="Use Spring Data CrudRepository"/>
+                <toc-element toc-title="使用 Spring Boot 创建一个带有数据库的 RESTful Web 服务">
+                    <toc-element topic="jvm-get-started-spring-boot.md" toc-title="开始使用 Spring Boot 和 Kotlin" accepts-web-file-names="jvm-spring-boot-restful.html,spring-boot-restful.html,spring-boot-restful-db.html,jvm-spring-boot-restful-db.html"/>
+                    <toc-element topic="jvm-create-project-with-spring-boot.md" toc-title="创建一个 Spring Boot 项目"/>
+                    <toc-element topic="jvm-spring-boot-add-data-class.md" toc-title="使用数据类升级你的项目"/>
+                    <toc-element topic="jvm-spring-boot-add-db-support.md" toc-title="为 Spring Boot 项目添加数据库支持"/>
+                    <toc-element topic="jvm-spring-boot-using-crudrepository.md" toc-title="使用 Spring Data 的 CrudRepository"/>
                 </toc-element>
                 <!-- <toc-element topic="jvm-spring-boot-restful.md" accepts-web-file-names="spring-boot-restful.html,spring-boot-restful-db.html,jvm-spring-boot-restful-db.html,jvm-get-started-spring-boot.html,jvm-create-project-with-spring-boot.html,jvm-spring-boot-add-data-class.html,jvm-spring-boot-add-db-support.html,jvm-spring-boot-using-crudrepository.html"/>-->
-                <toc-element toc-title="Spring Framework Documentation for Kotlin" href="https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#languages"/>
-                <toc-element toc-title="Build a web application with Spring Boot and Kotlin – tutorial" href="https://spring.io/guides/tutorials/spring-boot-kotlin/"/>
-                <toc-element toc-title="Create a chat application with Kotlin Coroutines and RSocket – tutorial" href="https://spring.io/guides/tutorials/spring-webflux-kotlin-rsocket/"/>
+                <toc-element toc-title="Spring 框架的 Kotlin 文档" href="https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#languages"/>
+                <toc-element toc-title="使用 Spring Boot 和 Kotlin 构建 Web 应用程序 – 教程" href="https://spring.io/guides/tutorials/spring-boot-kotlin/"/>
+                <toc-element toc-title="使用 Kotlin 协程和 RSocket 创建聊天应用程序 – 教程" href="https://spring.io/guides/tutorials/spring-webflux-kotlin-rsocket/"/>
             </toc-element>
             <toc-element topic="jvm-test-using-junit.md"/>
             <toc-element topic="mixing-java-kotlin-intellij.md"/>
             <toc-element topic="jvm-records.md"/>
-            <toc-element toc-title="Java to Kotlin migration guides">
-                <toc-element toc-title="Strings" topic="java-to-kotlin-idioms-strings.md"/>
-                <toc-element toc-title="Collections" topic="java-to-kotlin-collections-guide.md"/>
-                <toc-element toc-title="Nullability" topic="java-to-kotlin-nullability-guide.md"/>
+            <toc-element toc-title="Java 到 Kotlin 的迁移指南">
+                <toc-element toc-title="字符串" topic="java-to-kotlin-idioms-strings.md"/>
+                <toc-element toc-title="集合" topic="java-to-kotlin-collections-guide.md"/>
+                <toc-element toc-title="可空性" topic="java-to-kotlin-nullability-guide.md"/>
                 <toc-element toc-title="标准输入" topic="standard-input.md"/>
             </toc-element>
         </toc-element>
@@ -210,7 +210,7 @@
             <toc-element topic="native-get-started.md" accepts-web-file-names="basic-kotlin-native-app.html,kotlin-native-with-clion.html,targeting-multiple-platforms.html"/>
             <toc-element topic="native-gradle.md"/>
             <toc-element topic="native-command-line-compiler.md"/>
-            <toc-element toc-title="C interop">
+            <toc-element toc-title="C 互操作">
                 <toc-element topic="native-c-interop.md"/>
                 <toc-element topic="mapping-primitive-data-types-from-c.md"/>
                 <toc-element topic="mapping-struct-union-types-from-c.md"/>
@@ -218,11 +218,11 @@
                 <toc-element topic="mapping-strings-from-c.md"/>
                 <toc-element topic="native-app-with-c-and-libcurl.md" accepts-web-file-names="curl.html"/>
             </toc-element>
-            <toc-element toc-title="Objective-C interop">
+            <toc-element toc-title="Objective-C 互操作">
                 <toc-element topic="native-objc-interop.md"/>
                 <toc-element topic="apple-framework.md"/>
             </toc-element>
-            <toc-element toc-title="CocoaPods integration">
+            <toc-element toc-title="CocoaPods 集成">
                 <toc-element topic="native-cocoapods.md"/>
                 <toc-element topic="native-cocoapods-libraries.md"/>
                 <toc-element topic="native-cocoapods-xcode.md"/>
@@ -232,18 +232,18 @@
             <toc-element topic="native-libraries.md"/>
             <toc-element topic="native-platform-libs.md"/>
             <toc-element topic="native-dynamic-libraries.md"/>
-            <toc-element toc-title="Memory manager">
+            <toc-element toc-title="内存管理器">
                 <toc-element topic="native-memory-manager.md"/>
                 <toc-element topic="native-ios-integration.md"/>
-                <toc-element topic="native-migration-guide.md" toc-title="Migration guide"/>
+                <toc-element topic="native-migration-guide.md" toc-title="迁移指南"/>
             </toc-element>
             <toc-element topic="native-debugging.md"/>
             <toc-element topic="native-ios-symbolication.md"/>
-            <toc-element toc-title="Reference and tips">
-                <toc-element topic="native-target-support.md" toc-title="Target support"/>
-                <toc-element topic="apple-privacy-manifest.md" toc-title="App Store privacy manifests"/>
-                <toc-element topic="native-improving-compilation-time.md" toc-title="Improving compilation times"/>
-                <toc-element topic="native-binary-licenses.md" toc-title="License files"/>
+            <toc-element toc-title="参考和提示">
+                <toc-element topic="native-target-support.md" toc-title="目标支持"/>
+                <toc-element topic="apple-privacy-manifest.md" toc-title="App Store 隐私清单"/>
+                <toc-element topic="native-improving-compilation-time.md" toc-title="缩短编译时间"/>
+                <toc-element topic="native-binary-licenses.md" toc-title="许可文件"/>
                 <toc-element topic="native-faq.md"/>
             </toc-element>
         </toc-element>
@@ -263,10 +263,10 @@
             <toc-element topic="js-running-tests.md" accepts-web-file-names="running-tests.html"/>
             <toc-element topic="javascript-dce.md"/>
             <!-- The following page is used in the Mari link service. If you wish to change it here, change the link there too -->
-            <toc-element toc-title="IR compiler" topic="js-ir-compiler.md"/>
+            <toc-element toc-title="IR 编译器" topic="js-ir-compiler.md"/>
             <toc-element topic="js-ir-migration.md"/>
 
-            <toc-element toc-title="Kotlin for the JS platform">
+            <toc-element toc-title="用于 JS 平台的 Kotlin">
                 <toc-element topic="browser-api-dom.md"/>
                 <toc-element topic="js-interop.md" accepts-web-file-names="calling-javascript-from-kotlin.html"/>
                 <toc-element topic="dynamic-type.md"/>
@@ -279,15 +279,15 @@
             <toc-element topic="js-react.md" hidden="true"/>
         </toc-element>
 
-        <toc-element toc-title="Scripting">
+        <toc-element toc-title="脚本">
             <toc-element topic="custom-script-deps-tutorial.md"/>
         </toc-element>
     </toc-element>
 
-    <toc-element toc-title="Standard library">
+    <toc-element toc-title="标准库">
 
-        <toc-element toc-title="Collections">
-            <toc-element topic="collections-overview.md" toc-title="Overview"/>
+        <toc-element toc-title="集合">
+            <toc-element topic="collections-overview.md" toc-title="概述"/>
             <toc-element topic="constructing-collections.md"/>
             <toc-element topic="iterators.md"/>
             <toc-element topic="ranges.md"/>
@@ -296,15 +296,15 @@
             <toc-element topic="collection-transformations.md" toc-title="转换"/>
             <toc-element topic="collection-filtering.md" toc-title="过滤器"/>
             <toc-element topic="collection-plus-minus.md" toc-title="加号和减号运算符"/>
-            <toc-element topic="collection-grouping.md" toc-title="Group elements"/>
-            <toc-element topic="collection-parts.md" toc-title="Retrieve collection parts"/>
-            <toc-element topic="collection-elements.md" toc-title="Retrieve single elements"/>
+            <toc-element topic="collection-grouping.md" toc-title="组元素"/>
+            <toc-element topic="collection-parts.md" toc-title="检索集合部分"/>
+            <toc-element topic="collection-elements.md" toc-title="检索单个元素"/>
             <toc-element topic="collection-ordering.md"/>
-            <toc-element topic="collection-aggregate.md" toc-title="Aggregate operations"/>
-            <toc-element topic="collection-write.md" toc-title="Write operations"/>
-            <toc-element topic="list-operations.md" toc-title="List-specific operations"/>
-            <toc-element topic="set-operations.md" toc-title="Set-specific operations"/>
-            <toc-element topic="map-operations.md" toc-title="Map-specific operations"/>
+            <toc-element topic="collection-aggregate.md" toc-title="聚合操作"/>
+            <toc-element topic="collection-write.md" toc-title="写入操作"/>
+            <toc-element topic="list-operations.md" toc-title="列表特定（List-specific）操作"/>
+            <toc-element topic="set-operations.md" toc-title="集合特定（Set-specific）操作"/>
+            <toc-element topic="map-operations.md" toc-title="映射特定（Map-specific）操作"/>
         </toc-element>
         <toc-element topic="read-standard-input.md" toc-title="读取标准输入"/>
         <toc-element topic="opt-in-requirements.md"/>
@@ -312,52 +312,52 @@
         <toc-element topic="time-measurement.md"/>
     </toc-element>
 
-    <toc-element toc-title="Official libraries">
-        <toc-element toc-title="Coroutines (kotlinx.coroutines)">
+    <toc-element toc-title="官方库">
+        <toc-element toc-title="协程（kotlinx.coroutines）">
             <toc-element topic="coroutines-guide.md"/>
             <toc-element topic="coroutines-basics.md"/>
             <toc-element topic="coroutines-and-channels.md"/>
         </toc-element>
-        <toc-element toc-title="Serialization (kotlinx.serialization)" topic="serialization.md"/>
-        <toc-element toc-title="Lincheck (kotlinx.lincheck)">
+        <toc-element toc-title="序列化（kotlinx.serialization）" topic="serialization.md"/>
+        <toc-element toc-title="Lincheck（kotlinx.lincheck）">
             <include from="kl" target="lincheck" origin="lincheck"/>
         </toc-element>
         <toc-element toc-title="Ktor" href="https://ktor.io/"/>
     </toc-element>
 
-    <toc-element toc-title="API reference">
-        <toc-element toc-title="Standard library (stdlib)" href="https://kotlinlang.org/api/latest/jvm/stdlib/"/>
-        <toc-element toc-title="Test library (kotlin.test)" href="https://kotlinlang.org/api/latest/kotlin.test/"/>
-        <toc-element toc-title="Coroutines (kotlinx.coroutines)" href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/"/>
-        <toc-element toc-title="Serialization (kotlinx.serialization)" href="https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/"/>
-        <toc-element toc-title="Date and time (kotlinx-datetime)" href="https://kotlinlang.org/api/kotlinx-datetime/"/>
-        <toc-element toc-title="JVM Metadata (kotlinx-metadata-jvm)" href="https://kotlinlang.org/api/kotlinx-metadata-jvm/"/>
+    <toc-element toc-title="API参考">
+        <toc-element toc-title="标准库（stdlib）" href="https://kotlinlang.org/api/latest/jvm/stdlib/"/>
+        <toc-element toc-title="测试库（kotlin.test）" href="https://kotlinlang.org/api/latest/kotlin.test/"/>
+        <toc-element toc-title="协程（kotlinx.coroutines）" href="https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/"/>
+        <toc-element toc-title="序列化（kotlinx.serialization）" href="https://kotlinlang.org/api/kotlinx.serialization/kotlinx-serialization-core/"/>
+        <toc-element toc-title="日期和时间（kotlinx-datetime）" href="https://kotlinlang.org/api/kotlinx-datetime/"/>
+        <toc-element toc-title="JVM 元数据（kotlinx-metadata-jvm）" href="https://kotlinlang.org/api/kotlinx-metadata-jvm/"/>
         <toc-element toc-title="Ktor" href="https://api.ktor.io/"/>
     </toc-element>
 
-    <toc-element toc-title="Language reference">
+    <toc-element toc-title="语言参考">
         <toc-element topic="keyword-reference.md"/>
         <toc-element toc-title="Grammar" href="https://kotlinlang.org/docs/reference/grammar.html"/>
-        <toc-element href="https://kotlinlang.org/spec/" toc-title="Language specification"/>
+        <toc-element href="https://kotlinlang.org/spec/" toc-title="语言规范"/>
     </toc-element>
 
-    <toc-element toc-title="Tools">
-        <toc-element toc-title="Build tools">
+    <toc-element toc-title="工具">
+        <toc-element toc-title="构建工具">
             <toc-element toc-title="Gradle">
-                <toc-element topic="gradle.md" accepts-web-file-names="using-gradle.html" toc-title="Overview"/>
-                <toc-element topic="get-started-with-jvm-gradle-project.md" toc-title="Get started with Gradle – tutorial"/>
-                <toc-element topic="gradle-configure-project.md" toc-title="Configure a Gradle project"/>
-                <toc-element topic="gradle-compiler-options.md" toc-title="Compiler options in KGP"/>
-                <toc-element topic="gradle-compilation-and-caches.md" toc-title="Compilation and caches in KGP"/>
-                <toc-element topic="gradle-plugin-variants.md" toc-title="Support for Gradle plugin variants"/>
+                <toc-element topic="gradle.md" accepts-web-file-names="using-gradle.html" toc-title="概述"/>
+                <toc-element topic="get-started-with-jvm-gradle-project.md" toc-title="Gradle 入门 – 教程"/>
+                <toc-element topic="gradle-configure-project.md" toc-title="配置 Gradle 项目"/>
+                <toc-element topic="gradle-compiler-options.md" toc-title="KGP 中的编译器选项"/>
+                <toc-element topic="gradle-compilation-and-caches.md" toc-title="KGP 中的编译和缓存"/>
+                <toc-element topic="gradle-plugin-variants.md" toc-title="对 Gradle 插件变体的支持"/>
             </toc-element>
             <toc-element topic="maven.md" accepts-web-file-names="using-maven.html"/>
             <toc-element topic="ant.md" accepts-web-file-names="using-ant.html"/>
         </toc-element>
         <toc-element toc-title="Dokka">
         </toc-element>
-        <toc-element toc-title="IDE for Kotlin development" topic="kotlin-ide.md" accepts-web-file-names="getting-started-eclipse.html,eclipse.html"/>
-        <toc-element toc-title="Migrate to Kotlin code style with IntelliJ IDEA"  topic="code-style-migration-guide.md"/>
+        <toc-element toc-title="Kotlin 开发的 IDE" topic="kotlin-ide.md" accepts-web-file-names="getting-started-eclipse.html,eclipse.html"/>
+        <toc-element toc-title="使用 IntelliJ IDEA 迁移到 Kotlin 代码风格"  topic="code-style-migration-guide.md"/>
         <toc-element toc-title="Kotlin Notebook"  topic="kotlin-notebook-overview.md"/>
         <toc-element topic="run-code-snippets.md" accepts-web-file-names="quick-run.html"/>
         <toc-element topic="kotlin-and-ci.md" toc-title="TeamCity"/>
@@ -365,66 +365,66 @@
         <toc-element topic="kotlin-osgi.md" toc-title="OSGi"/>
     </toc-element>
 
-    <toc-element toc-title="Compiler and plugins">
-        <toc-element toc-title="Compiler">
-            <toc-element toc-title="K2 compiler migration guide" topic="k2-compiler-migration-guide.md" accepts-web-file-names="k2-compiler-guide.html"/>
-            <toc-element toc-title="Command-line compiler" topic="command-line.md"/>
-            <toc-element toc-title="Compiler options" topic="compiler-reference.md"/>
+    <toc-element toc-title="编译器和插件">
+        <toc-element toc-title="编译器">
+            <toc-element toc-title="K2 编译器迁移指南" topic="k2-compiler-migration-guide.md" accepts-web-file-names="k2-compiler-guide.html"/>
+            <toc-element toc-title="命令行编译器" topic="command-line.md"/>
+            <toc-element toc-title="编译器选项" topic="compiler-reference.md"/>
         </toc-element>
-        <toc-element toc-title="Compiler plugins">
+        <toc-element toc-title="编译器插件">
             <toc-element topic="all-open-plugin.md" toc-title="All-open"/>
             <toc-element topic="no-arg-plugin.md" toc-title="No-arg"/>
-            <toc-element topic="sam-with-receiver-plugin.md" toc-title="SAM with receiver"/>
+            <toc-element topic="sam-with-receiver-plugin.md" toc-title="带接收者的 SAM"/>
             <toc-element topic="kapt.md" toc-title="kapt"/>
             <toc-element topic="lombok.md" toc-title="Lombok"/>
             <toc-element topic="power-assert.md" toc-title="Power-assert"/>
         </toc-element>
-        <toc-element toc-title="Kotlin Symbol Processing API">
-            <toc-element topic="ksp-overview.md" toc-title="KSP overview"/>
-            <toc-element topic="ksp-quickstart.md" toc-title="Quickstart"/>
-            <toc-element topic="ksp-why-ksp.md" toc-title="Why KSP"/>
-            <toc-element topic="ksp-examples.md" toc-title="Examples"/>
-            <toc-element topic="ksp-additional-details.md" toc-title="How KSP models Kotlin code"/>
-            <toc-element topic="ksp-reference.md" toc-title="Reference for Java annotation processor authors"/>
-            <toc-element topic="ksp-incremental.md" toc-title="Incremental processing"/>
-            <toc-element topic="ksp-multi-round.md" toc-title="Multiple round processing"/>
-            <toc-element topic="ksp-multiplatform.md" toc-title="KSP with Kotlin Multiplatform"/>
-            <toc-element topic="ksp-command-line.md" toc-title="Running KSP from command line"/>
-            <toc-element topic="ksp-faq.md" toc-title="FAQ"/>
+        <toc-element toc-title="Kotlin 符号处理 API">
+            <toc-element topic="ksp-overview.md" toc-title="KSP 概述"/>
+            <toc-element topic="ksp-quickstart.md" toc-title="快速开始"/>
+            <toc-element topic="ksp-why-ksp.md" toc-title="为什么选择 KSP"/>
+            <toc-element topic="ksp-examples.md" toc-title="示例"/>
+            <toc-element topic="ksp-additional-details.md" toc-title="KSP 如何建模 Kotlin 代码"/>
+            <toc-element topic="ksp-reference.md" toc-title="Java 注解处理器作者参考"/>
+            <toc-element topic="ksp-incremental.md" toc-title="增量处理"/>
+            <toc-element topic="ksp-multi-round.md" toc-title="多轮处理"/>
+            <toc-element topic="ksp-multiplatform.md" toc-title="KSP 与 Kotlin 多平台"/>
+            <toc-element topic="ksp-command-line.md" toc-title="从命令行运行 KSP"/>
+            <toc-element topic="ksp-faq.md" toc-title="常见问题解答"/>
         </toc-element>
     </toc-element>
 
-    <toc-element toc-title="Learning materials">
-        <toc-element topic="learning-materials-overview.md" toc-title="Overview"/>
-        <toc-element href="https://play.kotlinlang.org/byExample/overview" toc-title="Kotlin by example"/>
+    <toc-element toc-title="学习资料">
+        <toc-element topic="learning-materials-overview.md" toc-title="概述"/>
+        <toc-element href="https://play.kotlinlang.org/byExample/overview" toc-title="Kotlin 示例教程"/>
         <toc-element topic="koans.md"/>
-        <toc-element href="https://hyperskill.org/tracks?category=4&amp;utm_source=jbkotlin_hs&amp;utm_medium=referral&amp;utm_campaign=kotlinlang-docs&amp;utm_content=button_1&amp;utm_term=22.03.23" toc-title="Kotlin Core track"/>
+        <toc-element href="https://hyperskill.org/tracks?category=4&amp;utm_source=jbkotlin_hs&amp;utm_medium=referral&amp;utm_campaign=kotlinlang-docs&amp;utm_content=button_1&amp;utm_term=22.03.23" toc-title="Kotlin 核心课程"/>
         <toc-element topic="kotlin-hands-on.md" toc-title="Kotlin 实践"/>
         <toc-element topic="kotlin-tips.md"/>
         <toc-element topic="books.md"/>
-        <toc-element topic="advent-of-code.md" toc-title="Advent of Code puzzles"/>
-        <toc-element toc-title="Learn in IDE (JetBrains Academy)">
-            <toc-element id="edu-tools-learner.md" toc-title="Learn Kotlin"/>
-            <toc-element id="edu-tools-educator.md" toc-title="Teach Kotlin"/>
+        <toc-element topic="advent-of-code.md" toc-title="代码谜题的出现"/>
+        <toc-element toc-title="在 IDE 中学习（JetBrains Academy）">
+            <toc-element id="edu-tools-learner.md" toc-title="学习 Kotlin"/>
+            <toc-element id="edu-tools-educator.md" toc-title="传授 Kotlin"/>
         </toc-element>
         <toc-element toc-title="库作者指南">
             <include from="kl" target="api-guidelines" origin="api-guidelines"/>
         </toc-element>
     </toc-element>
 
-    <toc-element toc-title="Early access preview (EAP)">
-        <toc-element toc-title="Participate" topic="eap.md"/>
-        <toc-element toc-title="Install the Kotlin EAP Plugin" topic="install-eap-plugin.md"/>
+    <toc-element toc-title="早期访问预览（EAP）">
+        <toc-element toc-title="参与" topic="eap.md"/>
+        <toc-element toc-title="安装 Kotlin EAP 插件" topic="install-eap-plugin.md"/>
         <toc-element topic="configure-build-for-eap.md"/>
     </toc-element>
 
-    <toc-element toc-title="Other resources">
+    <toc-element toc-title="其他资源">
         <toc-element topic="faq.md"/>
-        <toc-element toc-title="Kotlin evolution">
-            <toc-element toc-title="Evolution principles" topic="kotlin-evolution.md"/>
+        <toc-element toc-title="Kotlin 发展历程">
+            <toc-element toc-title="发展原则" topic="kotlin-evolution.md"/>
             <toc-element topic="components-stability.md"/>
             <toc-element topic="components-stability-pre-1.4.md"/>
-            <toc-element toc-title="Compatibility">
+            <toc-element toc-title="兼容性">
                 <toc-element topic="compatibility-guide-20.md"/>
                 <toc-element topic="compatibility-guide-19.md"/>
                 <toc-element topic="compatibility-guide-18.md"/>
@@ -437,26 +437,26 @@
                 <toc-element topic="compatibility-modes.md"/>
             </toc-element>
         </toc-element>
-        <toc-element toc-title="Kotlin Foundation">
-            <toc-element toc-title="Kotlin Foundation" href="https://kotlinfoundation.org/"/>
-            <toc-element toc-title="Language Committee guidelines" href="https://kotlinfoundation.org/language-committee-guidelines/"/>
-            <toc-element toc-title="Submitting incompatible changes" href="https://kotlinfoundation.org/submitting-incompatible-changes/"/>
-            <toc-element toc-title="Brand usage" href="https://kotlinfoundation.org/guidelines/"/>
-            <toc-element toc-title="Kotlin Foundation FAQ" href="https://kotlinfoundation.org/faq/"/>
+        <toc-element toc-title="Kotlin 基金会">
+            <toc-element toc-title="Kotlin 基金会" href="https://kotlinfoundation.org/"/>
+            <toc-element toc-title="语言委员会指南" href="https://kotlinfoundation.org/language-committee-guidelines/"/>
+            <toc-element toc-title="提交不兼容的更改" href="https://kotlinfoundation.org/submitting-incompatible-changes/"/>
+            <toc-element toc-title="品牌使用" href="https://kotlinfoundation.org/guidelines/"/>
+            <toc-element toc-title="Kotlin 基金会常见问题解答" href="https://kotlinfoundation.org/faq/"/>
         </toc-element>
-        <toc-element toc-title="Google Summer of Code">
-            <toc-element toc-title="Google Summer of Code with Kotlin 2024" topic="gsoc-2024.md"/>
-            <toc-element toc-title="Google Summer of Code with Kotlin 2023" topic="gsoc-2023.md"/>
+        <toc-element toc-title="谷歌代码之夏">
+            <toc-element toc-title="Google 2024 年 Kotlin 代码之夏" topic="gsoc-2024.md"/>
+            <toc-element toc-title="Google 2023 年 Kotlin 代码之夏" topic="gsoc-2023.md"/>
         </toc-element>
         <toc-element topic="security.md"/>
         <toc-element topic="kotlin-pdf.md"/>
-        <toc-element toc-title="Community">
+        <toc-element toc-title="社区">
             <toc-element topic="contribute.md"/>
             <toc-element topic="kug-guidelines.md" accepts-web-file-names="kug-branding.html"/>
             <toc-element topic="kotlin-night-guidelines.md" accepts-web-file-names="kotlin-nights-branding.html"/>
         </toc-element>
         <toc-element topic="kotlin-brand-assets.md" accepts-web-file-names="kotlin-logo.html"/>
-        <toc-element toc-title="Press kit" href="https://kotlinlang.org/assets/kotlin-media-kit.pdf"/>
+        <toc-element toc-title="新闻资料包" href="https://kotlinlang.org/assets/kotlin-media-kit.pdf"/>
         <toc-element topic="test-page.md" hidden="true"/>
     </toc-element>
 
