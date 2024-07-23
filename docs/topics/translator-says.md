@@ -18,7 +18,7 @@ Clone 本项目到本地，直接运行打开即可
 
 请参阅 [官方文档](https://www.jetbrains.com/help/writerside/discover-writerside.html)
 
-## 当前同步官方提交记录
+## 当前同步官方提交记录 {id=current-commit-id}
 
 非Fork分支，本文档的内容来自四个不同的仓库源
 
