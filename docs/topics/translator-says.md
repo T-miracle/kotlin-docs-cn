@@ -20,7 +20,14 @@ Clone 本项目到本地，直接运行打开即可
 
 ## 当前同步官方提交记录
 
-非Fork分支，当前使用修订提交ID：%commitId%
+非Fork分支，本文档的内容来自四个不同的仓库源
+
+| 仓库                                                                       | 分支       | 当前提交版本号                   | 备注           |
+|--------------------------------------------------------------------------|----------|---------------------------|--------------|
+| [`kotlin-web-site`](https://github.com/JetBrains/kotlin-web-site.git)    | `master` | `%commitId%`              | 主仓库          |
+| [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines.git) | `master` | `%coroutinesCommitId%`    | 协程（kc）       |
+| [`lincheck`](https://github.com/JetBrains/lincheck.git)                  | `master` | `%lincheckCommitId%`      | lincheck（kl） |
+| [`api-guidelines`](https://github.com/Kotlin/api-guidelines.git)         | `main`   | `%apiGuidelinesCommitId%` | 库作者指南        |
 
 ## 翻译注意事项
 

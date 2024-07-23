@@ -98,7 +98,7 @@
             <toc-element topic="visibility-modifiers.md"/>
             <toc-element topic="extensions.md"/>
             <toc-element topic="data-classes.md"/>
-            <toc-element topic="sealed-classes.md" toc-title="密封类和接口"/>
+            <toc-element topic="sealed-classes.md"/>
             <toc-element topic="generics.md"/>
             <toc-element topic="nested-classes.md"/>
             <toc-element topic="enum-classes.md"/>
@@ -314,13 +314,11 @@
 
     <toc-element toc-title="官方库">
         <toc-element toc-title="协程（kotlinx.coroutines）">
-            <toc-element topic="coroutines-guide.md"/>
-            <toc-element topic="coroutines-basics.md"/>
-            <toc-element topic="coroutines-and-channels.md"/>
+          <include from="kc" element-id="coroutines"/>
         </toc-element>
         <toc-element toc-title="序列化（kotlinx.serialization）" topic="serialization.md"/>
         <toc-element toc-title="Lincheck（kotlinx.lincheck）">
-            <include from="kl" target="lincheck" origin="lincheck"/>
+            <include from="kl" element-id="lincheck"/>
         </toc-element>
         <toc-element toc-title="Ktor" href="https://ktor.io/"/>
     </toc-element>
@@ -408,7 +406,7 @@
             <toc-element topic="edu-tools-educator.md" toc-title="传授 Kotlin"/>
         </toc-element>
         <toc-element toc-title="库作者指南">
-            <include from="kl" target="api-guidelines" origin="api-guidelines"/>
+            <include from="api-guidelines" element-id="api-guidelines"/>
         </toc-element>
     </toc-element>
 

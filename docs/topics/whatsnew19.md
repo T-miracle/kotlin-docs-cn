@@ -17,7 +17,7 @@ The Kotlin 1.9.0 release is out and the K2 compiler for the JVM is now in **Beta
 
 You can also find a short overview of the updates in this video:
 
-<video href="fvwTZc-dxsM" title="What's new in Kotlin 1.9.0"/>
+<video src="https://youtu.be/fvwTZc-dxsM" title="What's new in Kotlin 1.9.0"/>
 
 ## IDE support
 

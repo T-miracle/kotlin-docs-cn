@@ -12,7 +12,7 @@ In this tutorial, you will:
 You can download and explore the [completed project](https://github.com/kotlin-hands-on/spring-time-in-kotlin-episode1)
 or watch a video of this tutorial:
 
-<video width="560" height="315" href="gf-kjD2ZmZk" title="Spring Time in Kotlin. Getting Started"/>
+<video width="560" height="315" src="https://youtu.be/gf-kjD2ZmZk" title="Spring Time in Kotlin. Getting Started"/>
 
 ## Before you start
 

@@ -188,7 +188,7 @@ fun foo(node: Node): String? {
 }
 ```
 
-## `!!` 操作符 {id=the-!!-operator}
+## `!!` 操作符 {id=the-operator}
 
 第三种选择是为 NPE 爱好者准备的：非空断言操作符（`!!`）将任何值转换为非空类型，如果值为 `null`，则抛出异常。
 你可以写 `b!!`，这将返回 `b` 的非空值（例如，我们的示例中的 `String`），或者如果 `b` 为 `null` 则抛出 NPE：

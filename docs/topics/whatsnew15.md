@@ -33,7 +33,7 @@ data class User(val name: String, val age: Int)
 
 [Learn more about using JVM records in Kotlin](jvm-records.md).
 
-<video href="iyEWXyuuseU" title="Support for JVM Records in Kotlin 1.5.0"/>
+<video src="https://youtu.be/iyEWXyuuseU" title="Support for JVM Records in Kotlin 1.5.0"/>
 
 ### Sealed interfaces
 
@@ -64,7 +64,7 @@ class FilledRectangle: Polygon, Fillable
 
 [Learn more about sealed interfaces](sealed-classes.md).
 
-<video href="d_Mor21W_60" title="Sealed Interfaces and Sealed Classes Improvements"/>
+<video src="https://youtu.be/d_Mor21W_60" title="Sealed Interfaces and Sealed Classes Improvements"/>
 
 ### Package-wide sealed class hierarchies
 
@@ -100,7 +100,7 @@ The `inline` modifier is now deprecated with a warning.
 
 [Learn more about inline classes](inline-classes.md).
 
-<video href="LpqvtgibbsQ" title="From Inline to Value Classes"/>
+<video src="https://youtu.be/LpqvtgibbsQ" title="From Inline to Value Classes"/>
 
 ## Kotlin/JVM
 
@@ -334,7 +334,7 @@ The standard library has received a range of changes and improvements, from stab
 
 You can learn more about the standard library changes in [this blog post](https://blog.jetbrains.com/kotlin/2021/04/kotlin-1-5-0-rc-released).
 
-<video href="MyTkiT2I6-8" title="New Standard Library Features"/>
+<video src="https://youtu.be/MyTkiT2I6-8" title="New Standard Library Features"/>
 
 ### Stable unsigned integer types
 
@@ -754,7 +754,7 @@ are disabled and the `-Xcoroutines=experimental` flag is no longer supported.
 Learn more in the [changelog](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.5.0-RC) and the
 [`kotlinx.coroutines` 1.5.0 release blog post](https://blog.jetbrains.com/kotlin/2021/05/kotlin-coroutines-1-5-0-released/).
 
-<video href="EVLnWOcR0is" title="kotlinx.coroutines 1.5.0"/>
+<video src="https://youtu.be/EVLnWOcR0is" title="kotlinx.coroutines 1.5.0"/>
 
 ### Serialization 1.2.1
 
@@ -767,7 +767,7 @@ Learn more in the [changelog](https://github.com/Kotlin/kotlinx.coroutines/relea
 Learn more in the [changelog](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.2.1) and the
 [`kotlinx.serialization` 1.2.1 release blog post](https://blog.jetbrains.com/kotlin/2021/05/kotlinx-serialization-1-2-released/).
 
-<video href="698I_AH8h6s" title="kotlinx.serialization 1.2.1"/>
+<video src="https://youtu.be/698I_AH8h6s" title="kotlinx.serialization 1.2.1"/>
 
 ### dateTime 0.2.0
 

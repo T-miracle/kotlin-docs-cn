@@ -292,6 +292,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.*
 ## Gradle improvements
 
 ### Gradle support for versions 8.6–8.8
+{id=gradle-support-for-versions-8-6-8-8}
 
 Kotlin %kotlinEapVersion% is fully compatible with Gradle 6.8.3 through 8.6. 
 Gradle 8.7 and 8.8 are also supported, with only one exception: if you use the Kotlin Multiplatform Gradle plugin, 

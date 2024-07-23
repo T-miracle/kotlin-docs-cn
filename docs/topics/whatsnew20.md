@@ -1,4 +1,4 @@
-[//]: # (title: What's new in Kotlin 2.0.0)
+[//]: # (title: Kotlin 2.0.0 新特性)
 
 _[Released: May 21, 2024](releases.md#release-details)_
 
@@ -20,7 +20,7 @@ some other highlights:
 Kotlin 2.0 is a huge milestone for the JetBrains team. This release was the center of KotlinConf 2024. Check out the opening
 keynote, where we announced exciting updates and addressed the recent work on the Kotlin language:
 
-<video href="Ar73Axsz2YA" title="KotlinConf'24 - Keynote"/>
+<video src="https://youtu.be/Ar73Axsz2YA" title="KotlinConf'24 - Keynote"/>
 
 ## IDE support
 
@@ -54,7 +54,7 @@ the K2 compiler performs and find instructions on how to collect performance ben
 You can also watch this talk from KotlinConf 2024, where Michail Zarečenskij, the lead language designer, discusses the
 feature evolution in Kotlin and the K2 compiler:
 
-<video href="tAGJ5zJXJ7w" title="Kotlin Language Features in 2.0 and Beyond"/>
+<video src="https://youtu.be/tAGJ5zJXJ7w" title="Kotlin Language Features in 2.0 and Beyond"/>
 
 ### Current K2 compiler limitations
 
@@ -772,6 +772,7 @@ With `debug` as its default value, the log level is consistent with other Gradle
 debugging information, including all compiler arguments.
 
 ### Explicitly added standard library and platform dependencies to Kotlin/Native
+{id=explicitly-added-standard-library-and-platform-dependencies-to-kotlin-native}
 
 Previously, the Kotlin/Native compiler resolved standard library and platform dependencies implicitly, which caused
 inconsistencies in the way the Kotlin Gradle plugin worked across Kotlin targets.
@@ -854,6 +855,7 @@ a return or parameter type and consume external declarations that return or cons
 For more information on Kotlin/Wasm interoperability with JavaScript, see the [documentation](wasm-js-interop.md#use-javascript-code-in-kotlin).
 
 ### Generation of TypeScript declaration files in Kotlin/Wasm
+{id=generation-of-typescript-declaration-files-in-kotlin-wasm}
 
 > Generating TypeScript declaration files in Kotlin/Wasm is [Experimental](components-stability.md#stability-levels-explained).
 > It may be dropped or changed at any time.
@@ -992,6 +994,7 @@ kotlin {
 ```
 
 ### Per-file compilation for Kotlin/JS projects
+{id=per-file-compilation-for-kotlin-js-projects}
 
 Kotlin 2.0.0 introduces a new granularity option for the Kotlin/JS project output. You can now set up a per-file
 compilation that generates one JavaScript file for each Kotlin file. It helps to significantly optimize the size of the
@@ -1204,6 +1207,7 @@ So, starting with Kotlin 2.0.0, we've implemented the following changes:
 * The `distribution` task now has the `Copy` type and targets the `dist` folder.
 
 ### Discontinuing legacy Kotlin/JS JAR artifacts
+{id=discontinuing-legacy-kotlin-js-jar-artifacts}
 
 Starting with Kotlin 2.0.0, the Kotlin distribution no longer contains legacy Kotlin/JS artifacts with the `.jar`
 extension. Legacy artifacts were used in the unsupported old Kotlin/JS compiler and unnecessary for the IR compiler, which
@@ -1316,6 +1320,7 @@ kotlin.publishJvmEnvironmentAttribute=false
 ```
 
 ### Improved Gradle dependency handling for CInteropProcess in Kotlin/Native
+{id=improved-gradle-dependency-handling-for-cinteropprocess-in-kotlin-native}
 
 In this release, we enhanced the handling of the `defFile` property to ensure better Gradle task dependency management
 in Kotlin/Native projects.
@@ -1478,6 +1483,7 @@ The new Gradle properties you can configure are:
 Add these properties to the `gradle.properties` file in your projects for them to take effect.
 
 ### Kotlin/Native compiler downloaded when needed
+{id=kotlin-native-compiler-downloaded-when-needed}
 
 Before Kotlin 2.0.0, if you had a [Kotlin/Native target](native-target-support.md) configured in the Gradle build script of your multiplatform
 project, Gradle would always download the Kotlin/Native compiler in the [configuration phase](https://docs.gradle.org/current/userguide/build_lifecycle.html#sec:configuration).
@@ -1772,6 +1778,7 @@ fun writeBooksTo(writer: XMLWriter) {
 ```
 
 ### Common protected property AbstractMutableList.modCount
+{id=common-protected-property-abstractmutablelist-modcount}
 
 In this release, the [`modCount`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-abstract-mutable-list/mod-count.html)
 `protected`property of the `AbstractMutableList` interface becomes common. Previously, the `modCount` property was
@@ -1784,6 +1791,7 @@ change the collection size or alter the list in a way that may cause iterations 
 You can use the `modCount` property to register and detect concurrent modifications when implementing a custom list.
 
 ### Common protected function AbstractMutableList.removeRange
+{id=common-protected-function-abstractmutablelist-removerange}
 
 In this release, the [`removeRange()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-abstract-mutable-list/remove-range.html)
 `protected`function of the `AbstractMutableList` interface becomes common. Previously, it was available on each platform
@@ -1794,6 +1802,7 @@ The function removes elements from this list following the specified range. By o
 advantage of the custom implementations and improve the performance of the list operation.
 
 ### Common String.toCharArray(destination) function
+{id=common-string-tochararray-destination-function}
 
 This release introduces a common [`String.toCharArray(destination)`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-char-array.html)
 function. Previously, it was only available on the JVM.

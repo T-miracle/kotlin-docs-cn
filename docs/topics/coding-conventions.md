@@ -1082,7 +1082,7 @@ fun main() {
 Kotlin 提供了一组函数，用于在给定对象的上下文中执行一块代码：`let`、`run`、`with`、`apply` 和 `also`。
 关于在特定情况下选择正确的作用域函数的指导，请参考[作用域函数](scope-functions.md)。
 
-## 库的编码约定
+## 库的编码约定 {id=coding-conventions-for-libraries}
 
 在编写库时，建议遵循一组额外的规则，以确保 API 的稳定性：
 

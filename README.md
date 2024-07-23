@@ -18,6 +18,6 @@ Clone 本项目到本地，直接运行打开即可
 
 请参阅 [WriterSide 官方文档](https://www.jetbrains.com/help/writerside/discover-writerside.html)
 
-## 当前同步官方提交记录
+## 当前同步官方提交修订记录
 
-非Fork分支，当前更新至修订号可以在 [v.list](./docs/v.list) 文件中的 `commitId` 属性查看
+非Fork分支，[点击查看当前修订号](./docs/topics/translator-says.md#当前同步官方提交记录)

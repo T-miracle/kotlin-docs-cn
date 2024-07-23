@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+  SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="api-guidelines"
+                 name="API guidelines"
+                 start-page="api-guidelines-introduction.md">
+
+    <snippet id="api-guidelines">
+        <toc-element topic="api-guidelines-introduction.md" toc-title="引言" accepts-web-file-names="jvm-api-guidelines-introduction.html"/>
+        <toc-element toc-title="Minimizing mental complexity">
+            <toc-element topic="api-guidelines-minimizing-mental-complexity.md" toc-title="概述"/>
+            <toc-element topic="api-guidelines-simplicity.md"/>
+            <toc-element topic="api-guidelines-readability.md" toc-title="可读性" accepts-web-file-names="jvm-api-guidelines-readability.html"/>
+            <toc-element topic="api-guidelines-consistency.md"/>
+            <toc-element topic="api-guidelines-predictability.md" toc-title="可预测性" accepts-web-file-names="jvm-api-guidelines-predictability.html"/>
+            <toc-element topic="api-guidelines-debuggability.md" toc-title="可调试性" accepts-web-file-names="jvm-api-guidelines-debuggability.html"/>
+            <toc-element topic="api-guidelines-testability.md"/>
+        </toc-element>
+        <toc-element topic="api-guidelines-backward-compatibility.md" toc-title="Backward compatibility" accepts-web-file-names="jvm-api-guidelines-backward-compatibility.html"/>
+        <toc-element topic="api-guidelines-informative-documentation.md" toc-title="Informative documentation"/>
+    </snippet>
+</instance-profile>
