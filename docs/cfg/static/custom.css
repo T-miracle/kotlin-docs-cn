@@ -31,3 +31,11 @@ h1.article__h1, h2.article__h2, h3.article__h3, h4.article__h4, h5.article__h5, 
   font-size: .85em;
   color: #bfbfc0;
 }
+
+/* 斜体样式 */
+html .article .emphasis {
+    color: #19191c;
+    color: var(--wh-color-text-heading);
+    font-weight: 600;
+    font-style: normal;
+}

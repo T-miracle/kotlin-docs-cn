@@ -46,7 +46,6 @@
   <footer>
     <link href="https://github.com/JetBrains/kotlin">Kotlin 源码</link>
     <link href="https://twitter.com/kotlin">Twitter</link>
-    <link href="https://blog.namichong.com/">译者站点</link>
-    <link href="https://github.com/JetBrains/kotlin-web-site">目前修订号：%commitId%</link>
+    <link href="https://blog.namichong.com/translation-docs/">更多翻译文档</link>
   </footer>
 </buildprofiles>
