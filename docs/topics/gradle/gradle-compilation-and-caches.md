@@ -183,6 +183,7 @@ org.gradle.jvmargs=-Xmx1500m -Xms500m
 ```
 
 #### kotlin.daemon.jvm.options system property
+{id=kotlin-daemon-jvm-options-system-property}
 
 If the Gradle daemon's JVM arguments have the `kotlin.daemon.jvm.options` system property – use it in the `gradle.properties` file:
 
@@ -205,6 +206,7 @@ When passing arguments, follow these rules:
 {style="warning"}
 
 #### kotlin.daemon.jvmargs property
+{id=kotlin-daemon-jvmargs-property}
 
 You can add the `kotlin.daemon.jvmargs` property in the `gradle.properties` file:
 

@@ -204,6 +204,7 @@ Kotlin reflection now supports both Kotlin's and Java's repeatable annotations v
 Learn more about Kotlin repeatable annotations in [this KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/repeatable-annotations.md).
 
 ### Optimize delegated properties which call get/set on the given KProperty instance
+{id=optimize-delegated-properties-which-call-get-set-on-the-given-kproperty-instance}
 
 We optimized the generated JVM bytecode by omitting the `$delegate` field and generating immediate access to the referenced property.
 

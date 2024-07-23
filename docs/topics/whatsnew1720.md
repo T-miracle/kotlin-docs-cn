@@ -446,6 +446,7 @@ the `Info.plist` file:
 * [Customizing the Info.plist file](#customizing-the-info-plist-file)
 
 ### The new Kotlin/Native memory manager enabled by default
+{id=the-new-kotlin-native-memory-manager-enabled-by-default}
 
 This release brings further stability and performance improvements to the new memory manager, allowing us to promote the
 new memory manager to [Beta](components-stability.md).
@@ -513,7 +514,7 @@ This is a significant change to our ecosystem. We would appreciate your feedback
 
 Try the new memory manager on your projects and [share feedback in our issue tracker, YouTrack](https://youtrack.jetbrains.com/issue/KT-48525).
 
-### Customizing the Info.plist file
+### Customizing the Info.plist file {id=customizing-the-info-plist-file}
 
 When producing a framework, the Kotlin/Native compiler generates the information property list file, `Info.plist`.
 Previously, it was cumbersome to customize its contents. With Kotlin 1.7.20, you can directly set the following properties:

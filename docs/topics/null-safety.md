@@ -220,4 +220,4 @@ val intList: List<Int> = nullableList.filterNotNull()
 ## 接下来做什么？ {id=whats-next}
 
 * 学习如何[在 Java 和 Kotlin 中处理空值](java-to-kotlin-nullability-guide.md)。
-* 了解[绝对非空类型的泛型](generics.md#绝对非空类型)。
+* 了解[绝对非空类型的泛型](generics.md#definitely-non-nullable-types)。

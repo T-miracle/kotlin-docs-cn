@@ -53,7 +53,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function"}
 
-> 我们在我们的[编码规范](coding-conventions.md#函数名称)中建议以小写字母开头，
+> 我们在我们的[编码规范](coding-conventions.md#function-names)中建议以小写字母开头，
 > 并使用驼峰命名法，不使用下划线来命名函数。
 > 
 {style="note"}

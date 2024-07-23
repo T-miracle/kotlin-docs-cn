@@ -425,7 +425,7 @@ and these files will be compiled together with the main sources.
 
 Note that kapt does not support multiple rounds for the generated Kotlin files.
 
-## AP/Javac options encoding
+## AP/Javac options encoding {id=ap-javac-options-encoding}
 
 `apoptions` and `javacArguments` CLI options accept an encoded map of options.  
 Here is how you can encode options by yourself:

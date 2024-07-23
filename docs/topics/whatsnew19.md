@@ -330,6 +330,7 @@ kotlin.native.binary.objcDisposeOnMain=false
 Don't hesitate to report such cases to [our issue tracker](https://kotl.in/issue).
 
 ### No object initialization when accessing constant values in Kotlin/Native
+{id=no-object-initialization-when-accessing-constant-values-in-kotlin-native}
 
 Starting with Kotlin 1.9.0, the Kotlin/Native backend doesn't initialize objects when accessing `const val` fields:
 
@@ -355,6 +356,7 @@ initialized in this case. You can also expect some performance improvements in y
 this change.
 
 ### Ability to configure standalone mode for iOS simulator tests in Kotlin/Native
+{id=ability-to-configure-standalone-mode-for-ios-simulator-tests-in-kotlin-native}
 
 By default, when running iOS simulator tests for Kotlin/Native, the `--standalone` flag is used to avoid manual simulator
 booting and shutdown. In 1.9.0, you can now configure whether this flag is used in a Gradle task via the `standalone` 
@@ -379,6 +381,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeSimu
 {type = "warning"}
 
 ### Library linkage in Kotlin/Native
+{id=library-linkage-in-kotlin-native}
 
 Starting with Kotlin 1.9.0, the Kotlin/Native compiler treats linkage issues in Kotlin libraries the same way as Kotlin/JVM.
 You might face such issues if the author of one third-party Kotlin library makes an incompatible change in experimental 
@@ -612,6 +615,7 @@ support for ES2015:
 {style="note"}
 
 ### Removal of the old Kotlin/JS compiler
+{id=removal-of-the-old-kotlin-js-compiler}
 
 In Kotlin 1.8.0, we [announced](whatsnew18.md#stable-js-ir-compiler-backend) that the IR-based backend became [Stable](components-stability.md).
 Since then, not specifying the compiler has become an error, and using the old compiler leads to warnings.
@@ -619,6 +623,7 @@ Since then, not specifying the compiler has become an error, and using the old c
 In Kotlin 1.9.0, using the old backend results in an error. Please migrate to the IR compiler by following our [migration guide](js-ir-migration.md).
 
 ### Deprecation of the Kotlin/JS Gradle plugin
+{id=deprecation-of-the-kotlin-js-gradle-plugin}
 
 Starting with Kotlin 1.9.0, the `kotlin-js` Gradle plugin is
 deprecated. We encourage you to use the `kotlin-multiplatform` Gradle plugin with the `js()` target instead.
@@ -693,6 +698,7 @@ For example, `productionExecutable` was in `build/distributions`. In Kotlin 1.9.
 {style="warning"}
 
 ### Extract org.w3c declarations from stdlib-js
+{id=extract-org-w3c-declarations-from-stdlib-js}
 
 Since Kotlin 1.9.0, the `stdlib-js` no longer includes `org.w3c` declarations. Instead, these declarations have been 
 moved to a separate Gradle dependency. When you add the Kotlin Multiplatform Gradle plugin to your `build.gradle.kts` file,
@@ -727,6 +733,7 @@ The Kotlin Gradle plugin now provides new properties for opt-ins and the compile
 * To enable progressive mode, use `progressiveMode.set(true)`.
 
 ### Project-level compiler options for Kotlin/JVM
+{id=project-level-compiler-options-for-kotlin-jvm}
 
 Starting with Kotlin 1.9.0, a new `compilerOptions` block is available inside the `kotlin` configuration block:
 
@@ -756,6 +763,7 @@ android {
 * The configuration inside the `tasks.withType<KotlinJvmCompile>().configureEach {}` (or `tasks.named<KotlinJvmCompile>("compileKotlin") { }`) overrides both `kotlin.compilerOptions` and `android.kotlinOptions`.
 
 ### Compiler option for Kotlin/Native module name
+{id=compiler-option-for-kotlin-native-module-name}
 
 The Kotlin/Native [`module-name`](compiler-reference.md#module-name-name-native) compiler option is now easily available
 in the Kotlin Gradle plugin.
@@ -1008,6 +1016,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-whats-new-time-passednow"}
 
 ### The Kotlin/Native standard library's journey towards stabilization
+{id=the-kotlin-native-standard-library-s-journey-towards-stabilization}
 
 As our standard library for Kotlin/Native continues to grow, we decided that it was time for a complete review to ensure
 that it meets our high standards. As part of this, we carefully reviewed **every** existing public signature. For each 

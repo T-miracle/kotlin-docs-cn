@@ -598,6 +598,7 @@ For Kotlin/JS projects targeting Node.js, the plugin automatically downloads and
 host. You can also use an existing Node.js instance if you have it.
 
 ### Use pre-installed Node.js
+{id=use-pre-installed-node-js}
 
 If Node.js is already installed on the host where you build Kotlin/JS projects, you can configure the Kotlin Multiplatform Gradle
 plugin to use it instead of installing its own Node.js instance.
@@ -870,7 +871,7 @@ js {
 
 Note that this does not affect the webpacked output in `build/dist`.
 
-## package.json customization
+## package.json customization {id=package-json-customization}
 
 The `package.json` file holds the metadata of a JavaScript package. Popular package registries such as npm require all 
 published packages to have such a file. They use it to track and manage package publications.  

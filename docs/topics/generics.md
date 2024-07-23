@@ -321,7 +321,7 @@ fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>
 
 传递的类型必须同时满足 **where** 子句的所有条件。在上面的例子中，`T` 类型必须同时实现 **CharSequence** 和 **Comparable**。
 
-## 绝对非空类型 {id=绝对非空类型}
+## 绝对非空类型 {id=definitely-non-nullable-types}
 
 为了更容易与泛型 Java 类和接口进行交互，Kotlin 支持将泛型类型形参声明为**绝对非空类型**。
 

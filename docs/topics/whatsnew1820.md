@@ -390,7 +390,7 @@ the default in Kotlin 1.9.0.
 
 Learn more about the development of Kotlin inline classes in [this KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/inline-classes.md).
 
-## New Kotlin/Wasm target
+## New Kotlin/Wasm target {id=new-kotlin-wasm-target}
 
 Kotlin/Wasm (Kotlin WebAssembly) goes [Experimental](components-stability.md#stability-levels-explained) in this
 release. The Kotlin team finds [WebAssembly](https://webassembly.org/) to be a promising technology and wants to find
@@ -415,7 +415,7 @@ IDE support will be added in future releases.
 
 [Learn more about Kotlin/Wasm in this YouTube video](https://www.youtube.com/watch?v=-pqz9sKXatw).
 
-### How to enable Kotlin/Wasm
+### How to enable Kotlin/Wasm {id=how-to-enable-kotlin-wasm}
 
 To enable and test Kotlin/Wasm, update your `build.gradle.kts` file:
 
@@ -589,7 +589,7 @@ Kotlin 1.8.20 includes changes to supported Kotlin/Native targets, interoperabil
 * [Reimplementation of compiler cache management in the compiler](#reimplementation-of-compiler-cache-management-in-the-compiler)
 * [Deprecation of `useLibraries()` in Cocoapods Gradle plugin](#deprecation-of-uselibraries-in-cocoapods-gradle-plugin)
   
-### Update for Kotlin/Native targets
+### Update for Kotlin/Native targets {id=update-for-kotlin-native-targets}
   
 The Kotlin team decided to revisit the list of targets supported by Kotlin/Native, split them into tiers,
 and deprecate some of them starting with Kotlin 1.8.20. See the [Kotlin/Native target support](native-target-support.md)
@@ -1081,6 +1081,7 @@ Time metrics:
 ```
 
 ### Lazy Kotlin/JVM tasks creation for all Gradle versions
+{id=lazy-kotlin-jvm-tasks-creation-for-all-gradle-versions}
 
 For projects with the `org.jetbrains.kotlin.gradle.jvm` plugin on Gradle 7.3+, the Kotlin Gradle plugin no longer
 creates and configures the task `compileKotlin` eagerly. On lower Gradle versions, it simply registers all the tasks and
@@ -1220,7 +1221,7 @@ result to a provided `Appendable` type object.
 In Kotlin/JVM, we've also added the extension functions `encodingWith()` and `decodingWith()` to enable you to perform
 Base64 encoding and decoding with input and output streams.
 
-### Support for @Volatile in Kotlin/Native
+### Support for @Volatile in Kotlin/Native {id=support-for-volatile-in-kotlin-native}
 
 > `@Volatile` in Kotlin/Native is [Experimental](components-stability.md#stability-levels-explained).
 > It may be dropped or changed at any time. Opt-in is required (see details below).
@@ -1274,6 +1275,7 @@ tasks
 </tabs>
 
 ### Bug fix for stack overflow when using regex in Kotlin/Native
+{id=bug-fix-for-stack-overflow-when-using-regex-in-kotlin-native}
 
 In previous versions of Kotlin, a crash could occur if your regex input contained a large number of characters,
 even when the regex pattern was very simple. In 1.8.20, this issue has been resolved.

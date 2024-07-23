@@ -956,6 +956,7 @@ Please leave your feedback
 in [this YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-51132/KAPT-Support-reporting-the-number-of-generated-files-by-each-ann).
 
 ### Deprecation of the kotlin.compiler.execution.strategy system property
+{id=deprecation-of-the-kotlin-compiler-execution-strategy-system-property}
 
 Kotlin 1.6.20
 introduced [new properties for defining a Kotlin compiler execution strategy](whatsnew1620.md#properties-for-defining-kotlin-compiler-execution-strategy).

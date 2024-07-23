@@ -159,6 +159,7 @@ If you need to use the old backend in Kotlin 1.5.0, you can add the following li
  ```
 
 ### New default JVM target: 1.8
+{id=new-default-jvm-target-1-8}
 
 The default target version for Kotlin/JVM compilations is now `1.8`. The `1.6` target is deprecated.
 

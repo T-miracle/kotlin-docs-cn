@@ -672,6 +672,7 @@ distribution (like Foundation, UIKit, and POSIX). All third-party Pod libraries 
 default. You no longer need to specify a separate Gradle property to support them.
 
 ### Support for Kotlin/Native compilation caches in Compose Multiplatform projects
+{id=support-for-kotlin-native-compilation-caches-in-compose-multiplatform-projects}
 
 This release resolves a compatibility issue with the Compose Multiplatform compiler plugin, which mostly affected
 Compose Multiplatform projects for iOS.
@@ -832,6 +833,7 @@ Alternatively, you can use the `-Xkonan-data-dir` compiler option to configure y
 the `cinterop` and  `konanc` tools.
 
 ### New build report metrics for Kotlin/Native tasks
+{id=new-build-report-metrics-for-kotlin-native-tasks}
 
 In Kotlin 1.9.20, Gradle build reports now include metrics for Kotlin/Native tasks. Here is an example of a build report
 containing these metrics:
@@ -932,6 +934,7 @@ To try this feature, opt in with `@OptIn(ExperimentalStdlibApi)` and use languag
 the latest version of the Kotlin Gradle plugin, you don't need to specify the language version to test the feature.
 
 ### The Kotlin/Native standard library becomes Stable
+{id=#the-kotlin-native-standard-library-becomes-stable}
 
 In Kotlin 1.9.0, we [explained](whatsnew19.md#the-kotlin-native-standard-library-s-journey-towards-stabilization) the 
 actions we've taken to bring the Kotlin/Native standard library closer to our goal of stabilization. In Kotlin 1.9.20, 
@@ -965,6 +968,7 @@ designed specifically to be consistent with Java's atomic arrays so that in the 
 For more information on all of the changes in Kotlin 1.9.20, see our [YouTrack ticket](https://youtrack.jetbrains.com/issue/KT-61028/Behavioural-changes-to-the-Native-stdlib-API).
 
 ### Improved performance of HashMap operations in Kotlin/JS
+{id=improved-performance-of-hashmap-operations-in-kotlin-js}
 
 Kotlin 1.9.20 improves the performance of `HashMap` operations and reduces their memory footprint in Kotlin/JS. Internally,
 Kotlin/JS has changed its internal implementation to open addressing. This means that you should see performance improvements when you:

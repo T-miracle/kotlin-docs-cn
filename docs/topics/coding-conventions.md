@@ -125,7 +125,7 @@ open class DeclarationProcessor { /*...*/ }
 object EmptyDeclarationProcessor : DeclarationProcessor() { /*...*/ }
 ```
 
-### 函数名称 {id=函数名称}
+### 函数名称 {id=function-names}
  
 函数、属性和局部变量的名称以小写字母开头，使用驼峰式大小写且不带下划线：
 

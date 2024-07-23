@@ -16,6 +16,9 @@
   <!--当前 api-guidelines 仓库版本号-->
   <var name="apiGuidelinesCommitId" value="e7fd19a8154bcbca06f3faf98391ffbf36777043" type="string"/>
 
+  <!--当前 dokka 仓库版本号-->
+  <var name="dokkaCommitId" value="f1ea0c921a2df8c36a8f9fc1572b9cec52e8a553" type="string"/>
+
   <var name="kotlinVersion" value="2.0.0" type="string"/>
 
   <var name="kotlinEapVersion" value="2.0.20-Beta2" type="string"/>

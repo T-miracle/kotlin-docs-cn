@@ -87,7 +87,7 @@ the CocoaPods Gradle plugin:
 * [Improved Objective-C/Swift interoperability](#improved-objective-c-swift-interoperability)
 * [Dynamic frameworks by default in the CocoaPods Gradle plugin](#dynamic-frameworks-by-default-in-the-cocoapods-gradle-plugin)
 
-### Support for Xcode 14.1
+### Support for Xcode 14.1 {id=support-for-xcode-14-1}
 
 The Kotlin/Native compiler now supports the latest stable Xcode version, 14.1. The compatibility improvements include
 the following changes:
@@ -97,6 +97,7 @@ the following changes:
 * Platform libraries were updated to reflect the changes to Objective-C frameworks for Apple targets.
 
 ### Improved Objective-C/Swift interoperability
+{id=improved-objective-c-swift-interoperability}
 
 To make Kotlin more interoperable with Objective-C and Swift, three new annotations were added:
 
@@ -308,6 +309,7 @@ Incremental compilation is enabled by default along with the stable JS IR compil
 If you still use the old compiler, switch your project to the new backend with the help of our [migration guide](js-ir-migration.md).
 
 ### New settings for reporting that yarn.lock has been updated
+{id=new-settings-for-reporting-that-yarn-lock-has-been-updated}
 
 If you use the `yarn` package manager, there are three new special Gradle settings that could notify you if the `yarn.lock`
 file has been updated. You can use these settings when you want to be notified if `yarn.lock` has been changed silently
