@@ -21,4 +21,4 @@
 
 准备好出发？
 
-[ ![](start-kotlin-tour.svg){style=inline width=700 height=80} ](kotlin-tour-hello-world.md)
+<a href="kotlin-tour-hello-world.md"><img src="start-kotlin-tour.svg" width="700" height="80" style="block" alt=""/></a>

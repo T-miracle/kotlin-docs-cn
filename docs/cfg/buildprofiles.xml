@@ -42,6 +42,7 @@
     <analytics-body-html-file>google-analytics-noscript.html</analytics-body-html-file>
   </variables>
   <build-profile product="kr"/>
+  <sitemap priority="0.8" change-frequency="daily"/>
 
   <footer>
     <link href="https://github.com/JetBrains/kotlin">Kotlin 源码</link>

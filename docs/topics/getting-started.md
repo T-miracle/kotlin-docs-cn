@@ -5,7 +5,7 @@ Kotlin 是一种现代、已经成熟的编程语言，旨在让开发人员更�
 
 要开始学习，为何不参加我们的 Kotlin 之旅呢？这个旅程涵盖了 Kotlin 编程语言的基础知识。
 
-[ ![](start-kotlin-tour.svg){style=inline width=700 height=80} ](kotlin-tour-welcome.md)
+<a href="kotlin-tour-welcome.md"><img src="start-kotlin-tour.svg" width="700" height="80" style="block" alt=""/></a>
 
 ## 安装 Kotlin {id="安装Kotlin"}
 
