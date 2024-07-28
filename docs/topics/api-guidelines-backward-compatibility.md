@@ -25,7 +25,7 @@ Any software that was compiled against the previous version of the library shoul
 
 > Learn more about binary compatibility in the [Binary compatibility validator's README](https://github.com/Kotlin/binary-compatibility-validator?tab=readme-ov-file#what-makes-an-incompatible-change-to-the-public-binary-api) or from the [Evolving Java-based APIs](https://github.com/eclipse-platform/eclipse.platform/blob/master/docs/Evolving-Java-based-APIs-2.md) document.
 >
-{type="tip"}
+{style="tip"}
 
 **Source compatibility** means that a new version of a library can replace a previous one without modifying any of the
 source code that uses the library. However, the outputs from compiling this client code may no longer

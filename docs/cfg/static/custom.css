@@ -22,7 +22,7 @@ h1.article__h1, h2.article__h2, h3.article__h3, h4.article__h4, h5.article__h5, 
 
 /* 头部链接文字 */
 .wh-header__product-name {
-  margin-right: 0;
+  display: none;
 }
 
 /* 头部版本号 */

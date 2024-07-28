@@ -10,6 +10,9 @@
   <!--当前 协程 仓库版本号-->
   <var name="coroutinesCommitId" value="c1ba5af8c5d10a3d2f923f89b98f6ab1b394e24d" type="string"/>
 
+  <!--协程 远程仓库前缀-->
+  <var name="coroutinesRemotePrefix" value="https://github.com/Kotlin/kotlinx.coroutines/blob/master" type="string"/>
+
   <!--当前 lincheck 仓库版本号-->
   <var name="lincheckCommitId" value="f1c24bd39c21307bb5441ed6253fc7295e08b84b" type="string"/>
 

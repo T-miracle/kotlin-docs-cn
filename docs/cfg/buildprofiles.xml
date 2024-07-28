@@ -18,14 +18,13 @@
     <!--<kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>-->
     <!--首页地址-->
     <product-web-url>https://blog.namichong.com/translation-docs/kotlin-docs/</product-web-url>
+    <generate-sitemap-url-prefix>https://blog.namichong.com/translation-docs/kotlin-docs/</generate-sitemap-url-prefix>
     <generate-only-default-anchors>true</generate-only-default-anchors>
     <web-root>https://blog.namichong.com/translation-docs/kotlin-docs/</web-root>
     <og-image>https://kotlinlang.org/assets/images/open-graph/docs.png</og-image>
     <og-twitter>@kotlin</og-twitter>
     <web-community-path>Kotlin Community:https://kotlinlang.org/community/</web-community-path>
     <download-page/>
-    <relative-url-to-absolute-prefix>https://github.com/Kotlin/kotlinx.coroutines/blob/master/
-    </relative-url-to-absolute-prefix>
     <config-feedback-support>https://kotl.in/issue</config-feedback-support>
     <config-feedback-url>https://forms-service.jetbrains.com/feedback</config-feedback-url>
     <config-webmaster>doc-feedback@kotlinlang.org</config-webmaster>
@@ -41,12 +40,13 @@
     <analytics-head-script-file>google-analytics-code.html</analytics-head-script-file>
     <analytics-body-html-file>google-analytics-noscript.html</analytics-body-html-file>
   </variables>
-  <build-profile product="kr"/>
+  <build-profile product="kr" version="2.0.0"/>
   <sitemap priority="0.8" change-frequency="daily"/>
 
   <footer>
     <link href="https://github.com/JetBrains/kotlin">Kotlin 源码</link>
     <link href="https://twitter.com/kotlin">Twitter</link>
     <link href="https://blog.namichong.com/translation-docs/">更多翻译文档</link>
+    <icp>桂ICP备2022008261号-1</icp>
   </footer>
 </buildprofiles>

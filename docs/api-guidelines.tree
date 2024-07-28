@@ -4,7 +4,7 @@
 
 <instance-profile id="api-guidelines"
                  name="API guidelines"
-                 start-page="api-guidelines-introduction.md">
+                 start-page="api-guidelines-introduction.md" is-library="true">
 
     <snippet id="api-guidelines">
         <toc-element topic="api-guidelines-introduction.md" toc-title="引言" accepts-web-file-names="jvm-api-guidelines-introduction.html"/>

@@ -270,7 +270,7 @@ as well as at the end.
 > * Get the [full code of these examples](https://github.com/Kotlin/kotlinx-lincheck/blob/guide/src/jvm/test/org/jetbrains/kotlinx/lincheck/test/guide/CounterTest.kt)
 > * See more [test examples](https://github.com/Kotlin/kotlinx-lincheck/blob/guide/src/jvm/test/org/jetbrains/kotlinx/lincheck/test/guide/StackTest.kt)
 >
-{type="note"}
+{style="note"}
 
 ## Next step
 

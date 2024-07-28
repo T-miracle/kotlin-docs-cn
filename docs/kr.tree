@@ -4,7 +4,7 @@
 
 <instance-profile
         id="kr"
-        name="&nbsp;"
+        name="Kotlin 中文文档"
         start-page="home.topic"
         status="release">
 
