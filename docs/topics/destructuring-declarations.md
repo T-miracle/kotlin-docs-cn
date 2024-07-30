@@ -1,84 +1,83 @@
-[//]: # (title: Destructuring declarations)
+[//]: # (title: 解构声明)
 
-Sometimes it is convenient to *destructure* an object into a number of variables, for example:
+有时，将对象 *解构* 成多个变量能更方便我们的使用，例如：
 
 ```kotlin
 val (name, age) = person 
 ```
 
-This syntax is called a *destructuring declaration*. A destructuring declaration creates multiple variables at once.
-You have declared two new variables: `name` and `age`, and can use them independently:
+这种语法称为 *解构声明*。解构声明一次能创建多个变量。
+现在你已经声明了两个新变量：`name` 和 `age`，并且可以独立使用它们：
 
- ```kotlin
+```kotlin
 println(name)
 println(age)
 ```
 
-A destructuring declaration is compiled down to the following code:
+解构声明会被编译成以下代码：
 
 ```kotlin
 val name = person.component1()
 val age = person.component2()
 ```
 
-The `component1()` and `component2()` functions are another example of the *principle of conventions* widely used in Kotlin 
-(see operators like `+` and `*`, `for`-loops as an example). 
-Anything can be on the right-hand side of a destructuring declaration, as long as the required number of component 
-functions can be called on it. And, of course, there can be `component3()` and `component4()` and so on.
+`component1()` 和 `component2()` 函数是 *约定原则* 的另一个例子，在 Kotlin 中广泛使用
+（参见像 `+` 和 `*` 的操作符，`for` 循环也是一个例子）。
+只要能在右侧调用所需数量的组件函数，任何东西都可以放在解构声明的右侧。
+当然，还可以有 `component3()` 和 `component4()` 等等。
 
-> The `componentN()` functions need to be marked with the `operator` keyword to allow using them in a destructuring 
->declaration.
+> `componentN()` 函数需要用 `operator` 关键字标记，以便在解构声明中使用。
 >
 {style="note"}
 
-Destructuring declarations also work in `for`-loops:
+解构声明同样适用于 `for` 循环：
 
 ```kotlin
 for ((a, b) in collection) { ... }
 ```
 
-Variables `a` and `b` get the values returned by `component1()` and `component2()` called on elements of the collection. 
+变量 `a` 和 `b` 获取集合元素调用 `component1()` 和 `component2()` 返回的值。
 
-## Example: returning two values from a function
- 
-Assume that you need to return two things from a function - for example, a result object and a status of some sort.
-A compact way of doing this in Kotlin is to declare a [data class](data-classes.md) and return its instance:
+## 示例：从函数返回两个值 {id=example-returning-two-values-from-a-function}
+
+假设你需要从函数返回两样东西——例如，一个结果对象和某种状态。
+在 Kotlin 中，一种简洁的方法是声明一个 [数据类](data-classes.md) 并返回它的实例：
 
 ```kotlin
 data class Result(val result: Int, val status: Status)
 fun function(...): Result {
-    // computations
+    // 计算
     
     return Result(result, status)
 }
 
-// Now, to use this function:
+// 现在，使用这个函数：
 val (result, status) = function(...)
 ```
 
-Since data classes automatically declare `componentN()` functions, destructuring declarations work here.
+由于数据类自动声明了 `componentN()` 函数，解构声明在这里有效。
 
-> You could also use the standard class `Pair` and have `function()` return `Pair<Int, Status>`, 
-> but it's often better to have your data named properly.
+> 你也可以使用标准类 `Pair` 并让 `function()` 返回 `Pair<Int, Status>`，
+> 但通常更好的是将你的数据正确命名。
 >
 {style="note"}
 
-## Example: destructuring declarations and maps
+## 示例：解构声明和映射 {id=example-destructuring-declarations-and-maps}
 
-Probably the nicest way to traverse a map is this:
+遍历映射可能最好的方式是这样：
 
 ```kotlin
 for ((key, value) in map) {
-   // do something with the key and the value
+   // 对键和值进行处理
 }
 ```
 
-To make this work, you should 
+要实现这一点，你应该
 
-* Present the map as a sequence of values by providing an `iterator()` function.
-* Present each of the elements as a pair by providing functions `component1()` and `component2()`.
-  
-And indeed, the standard library provides such extensions:
+* 通过提供 `iterator()` 函数将映射表示为一系列值。
+* 通过提供 `component1()` 和 `component2()` 函数将每个元素表示为一个对。
+
+事实上，标准库提供了这样的扩展：
 
 ```kotlin
 operator fun <K, V> Map<K, V>.iterator(): Iterator<Map.Entry<K, V>> = entrySet().iterator()
@@ -86,45 +85,44 @@ operator fun <K, V> Map.Entry<K, V>.component1() = getKey()
 operator fun <K, V> Map.Entry<K, V>.component2() = getValue()
 ```
 
-So you can freely use destructuring declarations in `for`-loops with maps (as well as collections of data class instances or similar).
+因此，你可以在 `for` 循环中自由地使用解构声明处理映射（以及数据类实例的集合或类似的情况）。
 
-## Underscore for unused variables
+## 下划线用于未使用的变量 {id=underscore-for-unused-variables}
 
-If you don't need a variable in the destructuring declaration, you can place an underscore instead of its name:
+如果在解构声明中不需要某个变量，可以用下划线代替其名称：
 
 ```kotlin
 val (_, status) = getResult()
 ```
 
-The `componentN()` operator functions are not called for the components that are skipped in this way.
+对于以这种方式跳过的组件，不会调用 `componentN()` 操作符函数。
 
-## Destructuring in lambdas
+## 解构在 lambda 中 {id=destructuring-in-lambdas}
 
-You can use the destructuring declarations syntax for lambda parameters.
-If a lambda has a parameter of the `Pair` type (or `Map.Entry`, or any other type that has the appropriate `componentN` 
-functions), you can introduce several new parameters instead of one by putting them in parentheses:   
+你可以对 lambda 参数使用解构声明语法。
+如果 lambda 有一个 `Pair` 类型的参数（或 `Map.Entry`，或任何其他具有适当 `componentN` 函数的类型），你可以通过将它们放在括号中引入几个新参数，而不是一个：
 
 ```kotlin
 map.mapValues { entry -> "${entry.value}!" }
 map.mapValues { (key, value) -> "$value!" }
 ```
 
-Note the difference between declaring two parameters and declaring a destructuring pair instead of a parameter:  
+注意声明两个参数和声明一个解构对作为参数的区别：
 
 ```kotlin
-{ a -> ... } // one parameter
-{ a, b -> ... } // two parameters
-{ (a, b) -> ... } // a destructured pair
-{ (a, b), c -> ... } // a destructured pair and another parameter
+{ a -> ... } // 一个参数
+{ a, b -> ... } // 两个参数
+{ (a, b) -> ... } // 一个解构对
+{ (a, b), c -> ... } // 一个解构对和另一个参数
 ```
 
-If a component of the destructured parameter is unused, you can replace it with the underscore to avoid inventing its name:
+如果解构参数的某个组件未使用，你可以用下划线代替它的名称以避免命名：
 
 ```kotlin
 map.mapValues { (_, value) -> "$value!" }
 ```
 
-You can specify the type for the whole destructured parameter or for a specific component separately:
+你可以为整个解构参数或特定组件分别指定类型：
 
 ```kotlin
 map.mapValues { (_, value): Map.Entry<Int, String> -> "$value!" }

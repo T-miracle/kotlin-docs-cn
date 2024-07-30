@@ -18,6 +18,7 @@
     <!--<kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>-->
     <!--首页地址-->
     <product-web-url>https://blog.namichong.com/translation-docs/kotlin-docs/</product-web-url>
+    <!--站点地图生成前缀-->
     <generate-sitemap-url-prefix>https://blog.namichong.com/translation-docs/kotlin-docs/</generate-sitemap-url-prefix>
     <generate-only-default-anchors>true</generate-only-default-anchors>
     <web-root>https://blog.namichong.com/translation-docs/kotlin-docs/</web-root>
