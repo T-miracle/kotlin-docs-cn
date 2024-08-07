@@ -145,9 +145,9 @@ sealed class IOError(): Error
 open class CustomError(): Error
 ```
 
-### 多平台项目中的继承 {id=inheritance-in-multiplatform-projects}
+### 跨平台项目中的继承 {id=inheritance-in-multiplatform-projects}
 
-在 [多平台项目](multiplatform-get-started.md) 中，还有一个继承限制：密封类的直接子类必须位于同一个
+在 [跨平台项目](multiplatform-get-started.md) 中，还有一个继承限制：密封类的直接子类必须位于同一个
 [源代码集](multiplatform-discover-project.md#source-sets) 中。
 这适用于没有 [expected 和 actual 修饰符](multiplatform-expect-actual.md) 的密封类。
 
@@ -155,7 +155,7 @@ open class CustomError(): Error
 实现，`expect` 和 `actual` 版本都可以在它们的源代码集中有子类。
 此外，如果使用层次结构，你可以在 `expect` 和 `actual` 声明之间的任何源代码集中创建子类。
 
-[了解更多关于多平台项目的层次结构](multiplatform-hierarchy.md)。
+[了解更多关于跨平台项目的层次结构](multiplatform-hierarchy.md)。
 
 ## 使用密封类与 when 表达式 {id=use-sealed-classes-with-when-expression}
 
@@ -194,7 +194,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.5"}
 
-> 在多平台项目中，如果你在公共代码中有一个带有 `when` 表达式的密封类作为
+> 在跨平台项目中，如果你在公共代码中有一个带有 `when` 表达式的密封类作为
 > [expected 声明](multiplatform-expect-actual.md)，你仍然需要一个 `else` 分支。  
 > 这是因为 `actual` 平台实现的子类可能扩展了在公共代码中未知的密封类。
 >

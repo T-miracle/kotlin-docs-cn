@@ -31,7 +31,7 @@ plugins {
     kotlin("<...>") version "%kotlinVersion%"
     // 例如，如果你的目标环境是 JVM：
     // kotlin("jvm") version "%kotlinVersion%"
-    // 如果目标是 Kotlin 多平台
+    // 如果目标是 Kotlin 跨平台
     // kotlin("multiplatform") version "%kotlinVersion%"
 }
 ```
@@ -45,7 +45,7 @@ plugins {
     id 'org.jetbrains.kotlin.<...>' version '%kotlinVersion%'
     // 例如，如果你的目标环境是 JVM： 
     // id 'org.jetbrains.kotlin.jvm' version '%kotlinVersion%'
-    // 如果目标是 Kotlin 多平台
+    // 如果目标是 Kotlin 跨平台
     // id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
 }
 ```
@@ -155,7 +155,7 @@ plugins {
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>包含 Beta 版 Kotlin K2 编译器和稳定 Kotlin 多平台的功能版本。</p>
+            <p>包含 Beta 版 Kotlin K2 编译器和稳定 Kotlin 跨平台的功能版本。</p>
             <p>了解更多信息：</p>
             <list>
                 <li><a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 的新增功能</a></li>
@@ -180,7 +180,7 @@ plugins {
         </td>
         <td>
             <p>一个功能版本，包括 Kotlin K2 编译器更新、新的枚举类值函数、新的用于开放区间的运算符、
-                Kotlin 多平台中 Gradle 配置缓存的预览、Kotlin 多平台中 Android 目标支持的变更，
+                Kotlin 跨平台中 Gradle 配置缓存的预览、Kotlin 跨平台中 Android 目标支持的变更，
                 以及 Kotlin/Native 中自定义内存分配器的预览。
             </p>
             <p>Learn more in:</p>
@@ -328,7 +328,7 @@ plugins {
                 <li>上下文接收器的原型</li>
                 <li>对功能接口构造函数的可调用引用</li>
                 <li>Kotlin/Native：新内存管理器的性能改进</li>
-                <li>多平台：默认分层项目结构</li>
+                <li>跨平台：默认分层项目结构</li>
                 <li>Kotlin/JS：IR 编译器改进</li>
                 <li>Gradle：编译器执行策略</li>
             </list>
@@ -517,7 +517,7 @@ plugins {
             <p>具有各种改进的增量版本，例如：</p>
             <list>
                 <li>支持新的 JVM 功能，例如通过 <code>invokedynamic</code> 进行字符串连接</li>
-                <li>改进了 Kotlin 多平台移动项目的性能和异常处理</li>
+                <li>改进了 Kotlin 跨平台移动项目的性能和异常处理</li>
                 <li>JDK 路径扩展：<code>Path("dir") / "file.txt"</code></li>
             </list>
             <p>了解更多信息：</p>

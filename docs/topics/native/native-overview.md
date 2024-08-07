@@ -46,9 +46,9 @@ POSIX、gzip、OpenGL、Metal、Foundation 等许多热门库和 Apple 框架都
 ## 在平台之间共享代码
 
 [Kotlin Multiplatform](multiplatform.md) 有助于在多个平台之间共享通用代码，包括 Android、iOS、JVM、
-Web 和本地。多平台库提供了通用 Kotlin 代码所需的 API，并允许在一个地方编写项目的共享部分。
+Web 和本地。跨平台库提供了通用 Kotlin 代码所需的 API，并允许在一个地方编写项目的共享部分。
 
-您可以使用 [开始使用 Kotlin 多平台](multiplatform-get-started.md) 教程
+您可以使用 [开始使用 Kotlin 跨平台](multiplatform-get-started.md) 教程
 创建应用程序并在 iOS 和 Android 之间共享业务逻辑。要在 iOS、Android、桌面和 Web 之间共享 UI，
 可以尝试使用 [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)，
 这是基于 Kotlin 和 [Jetpack Compose](https://developer.android.com/jetpack/compose) 的 JetBrains 声明式 UI 框架。
@@ -59,7 +59,7 @@ Web 和本地。多平台库提供了通用 Kotlin 代码所需的 API，并允�
 
 推荐的文档：
 
-* [开始使用 Kotlin 多平台](multiplatform-get-started.md)
+* [开始使用 Kotlin 跨平台](multiplatform-get-started.md)
 * [与 C 互操作性](native-c-interop.md)
 * [与 Swift/Objective-C 互操作性](native-objc-interop.md)
 

@@ -17,7 +17,7 @@ Kotlin/JS 提供将您的 Kotlin 代码、Kotlin 标准库和任何兼容的依�
 > 
 {style="note"}
 
-通过从 Kotlin 代码生成 TypeScript 声明文件 (`d.ts`)，IR 编译器使得创建“混合”应用程序更加容易，这些应用程序将 TypeScript 和 Kotlin 代码结合在一起，并利用 Kotlin 多平台 实现代码共享功能。
+通过从 Kotlin 代码生成 TypeScript 声明文件 (`d.ts`)，IR 编译器使得创建“混合”应用程序更加容易，这些应用程序将 TypeScript 和 Kotlin 代码结合在一起，并利用 Kotlin 跨平台 实现代码共享功能。
 
 要了解有关 Kotlin/JS IR 编译器中可用功能的更多信息，以及如何在项目中尝试它，请访问 [Kotlin/JS IR 编译器文档页面](js-ir-compiler.md) 和 [迁移指南](js-ir-migration.md)。
 
@@ -28,7 +28,7 @@ Kotlin/JS 提供将您的 Kotlin 代码、Kotlin 标准库和任何兼容的依�
 ### KVision
 
 _KVision_ 是一款面向对象的 Web 框架，可以在 Kotlin/JS 中编写具有即用型组件的应用程序，这些组件可以作为应用程序用户界面的构建块使用。
-您可以使用响应式和命令式编程模型来构建前端，使用连接器与 Ktor、Spring Boot 和其他框架集成到您的服务器端应用程序，并使用 [Kotlin 多平台](multiplatform.md) 共享代码。
+您可以使用响应式和命令式编程模型来构建前端，使用连接器与 Ktor、Spring Boot 和其他框架集成到您的服务器端应用程序，并使用 [Kotlin 跨平台](multiplatform.md) 共享代码。
 
 [访问 KVision 网站](https://kvision.io) 获取文档、教程和示例。
 
@@ -39,7 +39,7 @@ _KVision_ 是一款面向对象的 Web 框架，可以在 Kotlin/JS 中编写具
 
 _fritz2_ 是一个用于构建响应式 Web 用户界面的独立框架。
 它提供了自己的类型安全 DSL 用于构建和呈现 HTML 元素，并利用 Kotlin 的协程和流来表达组件及其数据绑定。
-还提供开箱即用的状态管理、验证、路由等功能，并与 Kotlin 多平台 项目集成。
+还提供开箱即用的状态管理、验证、路由等功能，并与 Kotlin 跨平台 项目集成。
 
 [访问 fritz2 网站](https://www.fritz2.dev) 获取文档、教程和示例。
 

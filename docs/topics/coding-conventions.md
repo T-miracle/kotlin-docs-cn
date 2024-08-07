@@ -42,9 +42,9 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 文件名应描述文件中代码的功能。因此，应避免在文件名中使用无意义的词汇，如 `Util`。
 
-#### 多平台项目
+#### 跨平台项目
 
-在多平台项目中，具有平台特定源代码集中顶级声明的文件应具有与源代码集名称相关联的后缀。例如：
+在跨平台项目中，具有平台特定源代码集中顶级声明的文件应具有与源代码集名称相关联的后缀。例如：
 
 * **jvm**Main/kotlin/Platform.**jvm**.kt
 * **android**Main/kotlin/Platform.**android**.kt
@@ -54,7 +54,7 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 ##### 技术细节 {collapsible="true"}
 
-由于 JVM 的限制，我们建议在多平台项目中遵循这种文件命名方案：不允许顶级成员（函数、属性）。
+由于 JVM 的限制，我们建议在跨平台项目中遵循这种文件命名方案：不允许顶级成员（函数、属性）。
 
 为了解决这个问题，Kotlin JVM 编译器会创建包含顶级成员声明的包装类（所谓的“文件门面（file facades）”）。文件门面的内部名称<tooltip term="派生">派生</tooltip>自文件名。
 

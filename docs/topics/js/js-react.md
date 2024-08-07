@@ -20,7 +20,7 @@
 
 1. 下载并安装最新版本的 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/index.html)。
 2. 克隆 [项目模板](https://github.com/kotlin-hands-on/web-app-react-kotlin-js-gradle) 并在 IntelliJ IDEA 中打开。
-   模板包括一个基本的 Kotlin 多平台 Gradle 项目，具有所有必需的配置和依赖项。
+   模板包括一个基本的 Kotlin 跨平台 Gradle 项目，具有所有必需的配置和依赖项。
 
     * `build.gradle.kts` 文件中的依赖项和任务：
 
@@ -79,7 +79,7 @@
 
 ### 运行开发服务器
 
-默认情况下，Kotlin 多平台 Gradle 插件带有对内嵌的 `webpack-dev-server` 的支持，允许您在 IDE 中运行应用程序，而无需手动设置任何服务器。
+默认情况下，Kotlin 跨平台 Gradle 插件带有对内嵌的 `webpack-dev-server` 的支持，允许您在 IDE 中运行应用程序，而无需手动设置任何服务器。
 
 为了测试程序在浏览器中成功运行，通过在 IntelliJ IDEA 内的 Gradle 工具窗口中调用
 `run` 或 `browserDevelopmentRun` 任务（在 `other` 或 `kotlin browser` 目录中可用）来启动开发服务器：

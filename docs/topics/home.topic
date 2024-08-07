@@ -23,10 +23,10 @@
       <a href="command-line.md" summary="下载并安装 Kotlin 编译器">命令行编译器</a>
     </primary>
     <secondary>
-      <title>Kotlin 多平台</title>
-      <a href="https://www.jetbrains.com/kotlin-multiplatform/" summary="了解 Kotlin 多平台如何帮助你在应用程序之间共享代码">为什么选择 Kotlin 多平台</a>
-      <a href="https://kmp.jetbrains.com/" summary="快速创建并下载多平台项目模板">Kotlin 多平台向导</a>
-      <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html" summary="创建一个同时适用于 Android 和 iOS 的移动应用程序">开始使用 Kotlin 多平台</a>
+      <title>Kotlin 跨平台</title>
+      <a href="https://www.jetbrains.com/kotlin-multiplatform/" summary="了解 Kotlin 跨平台如何帮助你在应用程序之间共享代码">为什么选择 Kotlin 跨平台</a>
+      <a href="https://kmp.jetbrains.com/" summary="快速创建并下载跨平台项目模板">Kotlin 跨平台向导</a>
+      <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html" summary="创建一个同时适用于 Android 和 iOS 的移动应用程序">开始使用 Kotlin 跨平台</a>
       <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-getting-started.html" summary="使用 Compose Multiplatform 实现跨移动、桌面和 Web 的统一用户界面">开始使用 Compose Multiplatform</a>
     </secondary>
     <misc>

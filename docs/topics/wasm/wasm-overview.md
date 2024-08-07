@@ -33,8 +33,8 @@ Kotlin/Wasm 将你的 Kotlin 代码编译成 Wasm 格式。
 使用 Kotlin/Wasm，你可以创建在支持 Wasm 和符合 Kotlin 要求的不同环境和设备上运行的应用程序。
 
 此外，你可以轻松使用最流行的 Kotlin 库在 Kotlin/Wasm 中使用。
-像其他 Kotlin 和多平台项目一样，你可以在构建脚本中包含依赖声明。
-更多信息，请参见 [在多平台库上添加依赖](multiplatform-add-dependencies.md)。
+像其他 Kotlin 和跨平台项目一样，你可以在构建脚本中包含依赖声明。
+更多信息，请参见 [在跨平台库上添加依赖](multiplatform-add-dependencies.md)。
 
 你想自己尝试一下吗？
 

@@ -58,7 +58,7 @@ Welcome to the Kotlin roadmap! Get a sneak peek into the priorities of the JetBr
         </td>
     </tr>
     <tr>
-        <td><strong>多平台</strong></td>
+        <td><strong>跨平台</strong></td>
         <td>
             <list>
                 <li>🆕 <a href="https://youtrack.jetbrains.com/issue/KT-64570" target="_blank">Unify inline semantics between all Kotlin targets</a></li>

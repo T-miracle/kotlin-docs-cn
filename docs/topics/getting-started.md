@@ -83,7 +83,7 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
   * 如果你有一个现有的 Android 应用程序并希望将其变成跨平台应用程序，请完成 [使你的 Android 应用程序在 iOS 上运行](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html) 教程。
   * 如果你更喜欢实际的例子，可以克隆并玩转一个现有项目，例如 [使用 Ktor 和 SQLdelight 创建跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html) 教程中的网络和数据存储项目或任何 [示例项目](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)。
 
-3. **使用广泛的多平台库**，只需在共享模块中实现所需的业务逻辑一次。了解更多关于[添加依赖项](multiplatform-add-dependencies.md)的信息。
+3. **使用广泛的跨平台库**，只需在共享模块中实现所需的业务逻辑一次。了解更多关于[添加依赖项](multiplatform-add-dependencies.md)的信息。
 
    | 库             | 详情                                                                                                                                                         |
    |---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------| 
@@ -93,17 +93,17 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
    | DateTime      | [文档](https://github.com/Kotlin/kotlinx-datetime#readme)                                                                                                    |
    | SQLDelight    | 第三方库。 [文档](https://cashapp.github.io/sqldelight/)                                                                                                          |
    
-   > 您还可以在[社区驱动的列表](https://libs.kmp.icerock.dev/)中找到多平台库。
+   > 您还可以在[社区驱动的列表](https://libs.kmp.icerock.dev/)中找到跨平台库。
    > 
    {style="tip"}
 
-4. **了解有关 Kotlin 多平台的更多信息：**
+4. **了解有关 Kotlin 跨平台的更多信息：**
    * 了解更多关于 [Kotlin Multiplatform](multiplatform-get-started.md)。
    * 浏览 [示例项目](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)。
-   * [发布一个多平台库](multiplatform-publish-lib.md)。
+   * [发布一个跨平台库](multiplatform-publish-lib.md)。
    * 了解 Kotlin Multiplatform 在 [Netflix](https://netflixtechblog.com/netflix-android-and-ios-studio-apps-kotlin-multiplatform-d6d4d8d25d23)、[VMware](https://kotlinlang.org/lp/multiplatform/case-studies/vmware/)、[Yandex](https://kotlinlang.org/lp/multiplatform/case-studies/yandex/) 和 [许多其他公司](https://kotlinlang.org/lp/multiplatform/case-studies/) 中的使用情况。
 
-5. **加入 Kotlin 多平台社区：**
+5. **加入 Kotlin 跨平台社区：**
 
    * ![Slack](slack.svg){width=25}{type="joined"} Slack：[获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)，加入 [#getting-started](https://kotlinlang.slack.com/archives/C0B8MA7FA) 和 [#multiplatform](https://kotlinlang.slack.com/archives/C3PQML5NU) 频道。
    * ![StackOverflow](stackoverflow.svg){width=25}{type="joined"} StackOverflow：订阅 ["kotlin-multiplatform" 标签](https://stackoverflow.com/questions/tagged/kotlin-multiplatform)。
