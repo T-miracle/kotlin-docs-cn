@@ -1,21 +1,19 @@
-[//]: # (title: The basics of Kotlin Multiplatform project structure)
+[//]: # (title: Kotlin 跨平台项目结构基础)
 
-With Kotlin Multiplatform, you can share code among different platforms. This article explains the constraints
-of the shared code, how to distinguish between shared and platform-specific parts of your code,
-and how to specify the platforms on which this shared code works.
+使用 Kotlin 跨平台 ，你可以在不同平台之间共享代码。
+这篇文章解释了 共享代码 的约束，如何区分 共享 和 平台特定 的代码部分，以及如何指定 共享代码 所适用的平台。
 
-You'll also learn the core concepts of Kotlin Multiplatform project setup, such as common code, targets,
-platform-specific and intermediate source sets, and test integration. That will help you set up
-your multiplatform projects in the future.
+你还将学习 Kotlin 跨平台 项目设置的核心概念，例如 公共代码 、目标平台 、平台特定 和 中间 源代码集，以及 测试集成。
+这将帮助你在未来设置 跨平台 项目。
 
-The model presented here is simplified compared to the one used by Kotlin. However, this basic model should be adequate
-for the majority of cases.
+这里展示的模型相比于 Kotlin 使用的模型进行了简化。
+然而，这个基础模型对于大多数情况应该是足够的。
 
-## Common code
+## 公共代码 {id=common-code}
 
-_Common code_ is the Kotlin code shared among different platforms.
+_公共代码_ 是在不同平台之间共享的 Kotlin 代码。
 
-Consider the simple "Hello, World" example:
+思考一下下面的简单 "Hello, World" 示例：
 
 ```kotlin
 fun greeting() {
@@ -23,294 +21,286 @@ fun greeting() {
 }
 ```
 
-Kotlin code shared among platforms is typically located in the `commonMain` directory. The location of code files is
-important, as it affects the list of platforms to which this code is compiled.
+在平台之间共享的 Kotlin 代码通常位于 `commonMain` 目录中。
+代码文件的位置很重要，因为它会影响这段代码编译到哪些平台。
 
-The Kotlin compiler gets the source code as input and produces a set of platform-specific binaries as a result. When
-compiling multiplatform projects, it can produce multiple binaries from the same code. For example, the compiler can
-produce JVM `.class` files and native executable files from the same Kotlin file:
+Kotlin 编译器将源代码作为输入，并生成一组平台特定的二进制文件作为结果。
+在编译跨平台项目时，它可以从相同的代码生成多个二进制文件。
+例如，编译器可以从同一个 Kotlin 文件生成 JVM 的 `.class` 文件和本地可执行文件：
 
-![Common code](common-code-diagram.svg){width=700}
+![公共代码](common-code-diagram.svg){width=700}
 
-Not every piece of Kotlin code can be compiled to all platforms. The Kotlin compiler prevents you from using
-platform-specific functions or classes in your common code since this code can't be compiled to a different platform.
+并不是所有的 Kotlin 代码都可以编译到所有平台。
+Kotlin 编译器会阻止你在公共代码中使用特定于平台的函数或类，因为这些代码不能编译到其他平台。
 
-For instance, you can't use the `java.io.File` dependency from the common code. It's a part of the JDK,
-while common code is also compiled to native code, where the JDK classes are not available:
+例如，你不能在公共代码中使用 `java.io.File` 依赖项。
+它是 JDK 的一部分，而公共代码也会被编译为本地代码，在本地代码中没有 JDK 类可用：
 
-![Unresolved Java reference](unresolved-java-reference.png){width=500}
+![未解析的 Java 引用](unresolved-java-reference.png){width=500}
 
-In common code, you can use Kotlin Multiplatform libraries. These libraries provide a common API that can be implemented
-differently on different platforms. In this case, platform-specific APIs serve as extra parts, and trying to use such an
-API in common code results in an error.
+在公共代码中，你可以使用 Kotlin 跨平台库。
+这些库提供了一个公共 API，可以在不同平台上以不同方式实现。
+在这种情况下，特定于平台的 API 作为额外部分存在，尝试在公共代码中使用这些 API 会导致错误。
 
-For example, `kotlinx.coroutines` is a Kotlin Multiplatform library that supports all targets, but it also has a
-platform-specific part that converts `kotlinx.coroutines` concurrent primitives to JDK concurrent primitives,
-like `fun CoroutinesDispatcher.asExecutor(): Executor`. This additional part of the API isn't available in `commonMain`.
+例如，`kotlinx.coroutines` 是一个支持所有目标平台的 Kotlin 跨平台库，但它也有一个特定于平台的部分，将 `kotlinx.coroutines`
+的并发原语转换为 JDK 的并发原语，比如 `fun CoroutinesDispatcher.asExecutor(): Executor`。
+这个 API 的附加部分在 `commonMain` 中不可用。
 
-## Targets
+## 目标 {id=targets}
 
-Targets define the platforms to which Kotlin compiles the common code. These could be, for example, the JVM, JS,
-Android, iOS, or Linux. The previous example compiled the common code to the JVM and native targets.
+目标 定义了 Kotlin 编译公共代码的各个平台。这些平台可以是 JVM、JS、Android、iOS 或 Linux。
+例如，前面的示例将公共代码编译到了 JVM 和本地目标。
 
-A _Kotlin target_ is an identifier that describes a compilation target. It defines the format of the produced
-binaries, available language constructions, and allowed dependencies.
+_Kotlin 目标_ 是描述编译目标的标识符。
+它定义了生成的二进制文件的格式、可用的语言构造以及允许的依赖项。
 
-> Targets can also be referred to as platforms. See the
-> full [list of supported targets](multiplatform-dsl-reference.md#targets).
+> 目标也可以称为平台。请参阅完整的 [支持的目标列表](multiplatform-dsl-reference.md#targets)。
 >
 > {style="note"}
 
-You should first _declare_ a target to instruct Kotlin to compile code for that specific target. In Gradle, you declare
-targets using predefined DSL calls inside the `kotlin {}` block:
+你应该首先在 Kotlin 中 _声明_ 一个目标，以指示编译代码到特定的目标平台。
+在 Gradle 中，你可以在 `kotlin {}` 块中使用预定义的 DSL 调用来声明目标：
 
 ```kotlin
 kotlin {
-    jvm() // Declares a JVM target
-    iosArm64() // Declares a target that corresponds to 64-bit iPhones
+    jvm() // 声明一个 JVM 目标
+    iosArm64() // 声明一个对应于 64 位 iPhone 的目标
 }
 ```
 
-This way, each multiplatform project defines a set of supported targets. See
-the [Hierarchical project structure](multiplatform-hierarchy.md) section to learn more about declaring targets in your
-build scripts.
+通过这个方式，每个跨平台项目就定义了一组支持的目标。
+有关在构建脚本中声明目标的更多信息，请参阅 [分层项目结构](multiplatform-hierarchy.md) 部分。
 
-With the `jvm` and `iosArm64` targets declared, the common code in `commonMain` will be compiled to these targets:
+声明了 `jvm` 和 `iosArm64` 目标后，`commonMain` 中的公共代码将被编译到这些目标：
 
-![Targets](target-diagram.svg){width=700}
+![目标](target-diagram.svg){width=700}
 
-To understand which code is going to be compiled to a specific target, you can think of a target as a label attached
-to Kotlin source files. Kotlin uses these labels to determine how to compile your code, which binaries to produce, and
-which language constructions and dependencies are allowed in that code.
+要理解哪些代码会被编译到特定目标，你可以将目标视为附加在 Kotlin 源文件上的标签。
+Kotlin 使用这些标签来确定如何编译你的代码、生成哪些二进制文件以及代码中允许使用哪些语言构造和依赖项。
 
-If you want to compile the `greeting.kt` file to `.js` as well, you only need to declare the JS target. The code
-in `commonMain` then receives an additional `js` label, corresponding to the JS target, which instructs Kotlin to
-produce `.js` files:
+如果你还想将 `greeting.kt` 文件编译成 `.js` 文件，你只需声明 JS 目标。
+然后，`commonMain` 中的代码将获得一个额外的 `js` 标签，对应于 JS 目标，这将指示 Kotlin 生成 `.js` 文件：
 
-![Target labels](target-labels-diagram.svg){width=700}
+![目标标签](target-labels-diagram.svg){width=700}
 
-That's how the Kotlin compiler works with the common code compiled to all the declared targets.
-See [Source sets](#source-sets) to learn how to write platform-specific code.
+这就是 Kotlin 编译器如何处理 编译到所有声明目标的公共代码 的方式。
+请参阅 [源代码集](#source-sets) 了解如何编写特定于平台的代码。
 
-## Source sets
+## 源代码集 {id=source-sets}
 
-A _Kotlin source set_ is a set of source files with its own targets, dependencies, and compiler options. It's the main
-way to share code in multiplatform projects.
+_Kotlin 源代码集_ 是一组源文件，具有自己的目标、依赖项和编译选项。
+这是跨平台项目中共享代码的主要方式。
 
-Each source set in a multiplatform project:
+在跨平台项目中，每个源代码集：
 
-* Has a name that is unique for a given project.
-* Contains a set of source files and resources, usually stored in the directory with the name of the source set.
-* Specifies a set of targets to which the code in this source set compiles. These targets impact which language
-  constructions and dependencies are available in this source set.
-* Defines its own dependencies and the compiler options.
+* 有一个在给定项目中唯一的名称。
+* 包含一组源文件和资源，通常存储在以源代码集名称命名的目录中。
+* 指定一组目标，将该源代码集中的代码编译到这些目标中。这些目标会影响该源代码集中可用的语言构造和依赖项。
+* 定义自己的依赖项和编译选项。
 
-Kotlin provides a bunch of predefined source sets. One of them is `commonMain`, which is present in all multiplatform
-projects and compiles to all declared targets.
+Kotlin 提供了一些预定义的源代码集。
+其中之一是 `commonMain`，它在所有跨平台项目中存在，并编译到所有声明的目标。
 
-You interact with source sets as directories inside `src` in Kotlin Multiplatform projects.
-For example, a project with the `commonMain`, `iosMain`, and `jvmMain` source sets has the following structure:
+在 Kotlin 跨平台项目中，你可以通过 `src` 目录中的目录来操作源代码集。
+例如，一个包含 `commonMain`、`iosMain` 和 `jvmMain` 源代码集的项目具有以下结构：
 
-![Shared sources](src-directory-diagram.png){width=350}
+![共享源代码](src-directory-diagram.png){width=350}
 
-In Gradle scripts, you access source sets by name inside the `kotlin.sourceSets {}` block:
+在 Gradle 脚本中，你可以在 `kotlin.sourceSets {}` 块中通过名称访问源代码集：
 
 ```kotlin
 kotlin {
-    // Targets declaration:
+    // 目标声明：
     // …
 
-    // Source set declaration:
+    // 源代码集声明：
     sourceSets {
         commonMain {
-            // configure the commonMain source set
+            // 配置 commonMain 源代码集
         }
     }
 }
 ```
 
-Aside from `commonMain`, other source sets can be either platform-specific or intermediate.
+除了 `commonMain`，其他源代码集可以是平台特定的或中间的。
 
-### Platform-specific source sets
+### 平台特定源代码集 {id=platform-specific-source-sets}
 
-While having only common code is convenient, it's not always possible. Code in `commonMain` compiles to all declared
-targets, and Kotlin doesn't allow you to use any platform-specific APIs there.
+虽然使用公共代码很方便，但并不总是可行。
+`commonMain` 中的代码会编译到所有声明的目标，但 Kotlin 不允许在其中使用任何平台特定的 API。
 
-In a multiplatform project with native and JS targets, the following code in `commonMain` doesn't compile:
+在一个具有本地和 JS 目标的跨平台项目中，`commonMain` 中的以下代码不能编译：
 
 ```kotlin
 // commonMain/kotlin/common.kt
-// Doesn't compile in common code
+// 在公共代码中不能编译
 fun greeting() {
     java.io.File("greeting.txt").writeText("Hello, Multiplatform!")
 }
 ```
 
-As a solution, Kotlin creates platform-specific source sets, also referred to as platform source sets. Each target has a
-corresponding platform source set that compiles for only that target. For example, a `jvm` target has the
-corresponding `jvmMain` source set that compiles to only the JVM. Kotlin allows using platform-specific dependencies in
-these source sets, for instance, JDK in `jvmMain`:
+作为解决方案，Kotlin 创建了平台特定的源代码集，也称为平台源代码集。
+每个目标都有一个对应的平台源代码集，只为该目标进行编译。
+例如，`jvm` 目标有一个对应的 `jvmMain` 源代码集，只编译到 JVM。
+Kotlin 允许在这些源代码集中使用特定于平台的依赖项，例如在 `jvmMain` 中使用 JDK：
 
 ```kotlin
 // jvmMain/kotlin/jvm.kt
-// You can use Java dependencies in the `jvmMain` source set
+// 你可以在 `jvmMain` 源代码集中使用 Java 依赖项
 fun jvmGreeting() {
     java.io.File("greeting.txt").writeText("Hello, Multiplatform!")
 }
 ```
 
-### Compilation to a specific target
+### 编译到特定目标 {id=compilation-to-a-specific-target}
 
-Compilation to a specific target works with multiple source sets. When Kotlin compiles a multiplatform project to a
-specific target, it collects all source sets labeled with this target and produces binaries from them.
+编译到特定目标涉及多个源代码集。
+当 Kotlin 将跨平台项目编译到特定目标时，它会收集所有标记为该目标的源代码集，并从中生成二进制文件。
 
-Consider an example with `jvm`, `iosArm64`, and `js` targets. Kotlin creates the `commonMain` source set for common code
-and the corresponding `jvmMain`, `iosArm64Main`, and `jsMain` source sets for specific targets:
+考虑一个包含 `jvm`、`iosArm64` 和 `js` 目标的示例。
+Kotlin 为公共代码创建 `commonMain` 源代码集，并为特定目标创建相应的 `jvmMain`、`iosArm64Main` 和 `jsMain` 源代码集：
 
-![Compilation to a specific target](specific-target-diagram.svg){width=700}
+![编译到特定目标](specific-target-diagram.svg){width=700}
 
-During compilation to the JVM, Kotlin selects all source sets labeled with "JVM", namely, `jvmMain` and `commonMain`. It
-then compiles them together to the JVM class files:
+在编译到 JVM 时，Kotlin 选择所有标记为 "JVM" 的源代码集，即 `jvmMain` 和 `commonMain`。
+然后，它将这些源代码集一起编译为 JVM 类文件：
 
-![Compilation to JVM](compilation-jvm-diagram.svg){width=700}
+![编译到 JVM](compilation-jvm-diagram.svg){width=700}
 
-Because Kotlin compiles `commonMain` and `jvmMain` together, the resulting binaries contain declarations from
-both `commonMain` and `jvmMain`.
+由于 Kotlin 将 `commonMain` 和 `jvmMain` 一起编译，生成的二进制文件包含来自 `commonMain` 和 `jvmMain` 的声明。
 
-When working with multiplatform projects, remember:
+在处理跨平台项目时，请记住：
 
-* If you want Kotlin to compile your code to a specific platform, declare a corresponding target.
-* To choose a directory or source file to store the code, first decide among which targets you want to share your code:
+* 如果你希望 Kotlin 将代码编译到特定平台，请声明相应的目标。
+* 要选择存储代码的目录或源文件，首先确定你希望在哪些目标之间共享代码：
 
-    * If the code is shared among all targets, it should be declared in `commonMain`.
-    * If the code is used for only one target, it should be defined in a platform-specific source set for that target (for
-      example, `jvmMain` for the JVM).
-* Code written in platform-specific source sets can access declarations from the common source set. For example, the
-  code in `jvmMain` can use code from `commonMain`. However, the opposite isn't true: `commonMain` can't use code
-  from `jvmMain`.
-* Code written in platform-specific source sets can use the corresponding platform dependencies. For example, the code
-  in `jvmMain` can use Java-only libraries, like [Guava](https://github.com/google/guava)
-  or [Spring](https://spring.io/).
+  * 如果代码在所有目标之间共享，它应该在 `commonMain` 中声明。
+  * 如果代码仅用于一个目标，它应该在该目标的特定平台源代码集中定义
+    （例如，JVM 的 `jvmMain`）。
+* 在特定平台源代码集中编写的代码可以访问公共源代码集中的声明。
+  例如，`jvmMain` 中的代码可以使用 `commonMain` 中的代码。
+  然而，反之则不行：`commonMain` 不能使用 `jvmMain` 中的代码。
+* 在特定平台源代码集中编写的代码可以使用对应的平台依赖项。
+  例如，`jvmMain` 中的代码可以使用仅限 Java 的库，如
+  [Guava](https://github.com/google/guava) 或 [Spring](https://spring.io/)。
 
-### Intermediate source sets
+### 中间源代码集 {id=intermediate-source-sets}
 
-Simple multiplatform projects usually have only common and platform-specific code.
-The `commonMain` source set represents the common code shared among all declared targets. Platform-specific
-source sets, like `jvmMain`, represent platform-specific code compiled only to the respective target.
+简单的跨平台项目通常只有公共代码和特定于平台的代码。
+`commonMain` 源代码集表示在所有声明的目标之间共享的公共代码。
+特定于平台的源代码集，如 `jvmMain`，表示仅编译到相应目标的特定于平台的代码。
 
-In practice, you often need more granular code sharing.
+在实践中，你通常需要更细粒度的代码共享。
 
-Consider an example where you need to target all modern Apple devices and Android devices:
+考虑一个示例，你需要支持所有现代的 Apple 设备和 Android 设备：
 
 ```kotlin
 kotlin {
     android()
-    iosArm64()   // 64-bit iPhone devices
-    macosArm64() // Modern Apple Silicon-based Macs
-    watchosX64() // Modern 64-bit Apple Watch devices
-    tvosArm64()  // Modern Apple TV devices  
+    iosArm64()   // 64 位 iPhone 设备
+    macosArm64() // 现代 Apple Silicon 版 Mac
+    watchosX64() // 现代 64 位 Apple Watch 设备
+    tvosArm64()  // 现代 Apple TV 设备  
 }
 ```
 
-And you need a source set to add a function that generates a UUID for all Apple devices:
+你需要一个源代码集来添加一个为所有 Apple 设备生成 UUID 的函数：
 
 ```kotlin
 import platform.Foundation.NSUUID
 
 fun randomUuidString(): String {
-    // You want to access Apple-specific APIs
+    // 你需要访问 Apple 特定的 API
     return NSUUID().UUIDString()
 }
 ```
 
-You can't add this function to `commonMain`. `commonMain` is compiled to all declared targets, including Android,
-but `platform.Foundation.NSUUID` is an Apple-specific API that's not available on Android. Kotlin shows an error if you
-try to reference `NSUUID` in `commonMain`.
+你不能将这个函数添加到 `commonMain` 中。`commonMain` 会编译到所有声明的目标，包括 Android，但
+`platform.Foundation.NSUUID` 是一个特定于 Apple 的 API，在 Android 上不可用。
+如果你尝试在 `commonMain` 中引用 `NSUUID`，Kotlin 会显示错误。
 
-You could copy and paste this code to each Apple-specific source
-set: `iosArm64Main`, `macosArm64Main`, `watchosX64Main`, and `tvosArm64Main`. But this approach is not recommended
-because duplicating code like this is prone to errors.
+你可以将这段代码复制并粘贴到每个特定于 Apple 的源代码集中：
+`iosArm64Main`、`macosArm64Main`、`watchosX64Main` 和 `tvosArm64Main`。
+但这种方法不推荐，因为代码重复容易出错。
 
-To solve this issue, you can use _intermediate source sets_. An intermediate source set is a Kotlin source set that
-compiles to some, but not all of the targets in the project. You can also see intermediate source sets referred to as
-hierarchical source sets or simply hierarchies.
+为了解决这个问题，你可以使用 _中间源代码集_。
+中间源代码集是一个 Kotlin 源代码集，它编译到项目中的部分目标，但不是全部目标。
+你也可以将中间源代码集称为分层源代码集或简单的层级。
 
-Kotlin creates some intermediate source sets by default. In this specific case, the resulting project structure will
-look like this:
+Kotlin 默认创建一些中间源代码集。
+在这个特定的案例中，生成的项目结构将如下所示：
 
-![Intermediate source sets](intermediate-source-sets-diagram.svg){width=700}
+![中间源代码集](intermediate-source-sets-diagram.svg){width=700}
 
-Here, the multicolored blocks at the bottom are platform-specific source sets. Target labels are omitted for clarity.
+这里，底部的多彩块是特定于平台的源代码集。为了清晰起见，目标标签已被省略。
 
-The `appleMain` block is an intermediate source set created by Kotlin for sharing code compiled to Apple-specific
-targets. The `appleMain` source set compiles to only Apple targets. Therefore, Kotlin allows using Apple-specific APIs
-in `appleMain`, and you can add the `randomUUID()` function here.
+`appleMain` 块是 Kotlin 为共享编译到 Apple 特定目标的代码而创建的中间源代码集。
+`appleMain` 源代码集仅编译到 Apple 目标。
+因此，Kotlin 允许在 `appleMain` 中使用 Apple 特定的 API，你可以在这里添加 `randomUUID()` 函数。
 
-> See [Hierarchical project structure](multiplatform-hierarchy.md) to find
-> all intermediate source sets that Kotlin creates and sets up by default and learn what you should do
-> if Kotlin doesn't provide the intermediate source set you need by default.
+> 请参阅 [分层项目结构](multiplatform-hierarchy.md) 以查找
+> Kotlin 默认创建并设置的所有中间源代码集，并了解如果
+> Kotlin 默认不提供你需要的中间源代码集，你应该怎么做。
 >
 {style="tip"}
 
-During compilation to a specific target, Kotlin gets all of the source sets, including intermediate source sets, labeled
-with this target. Therefore, all the code written in the `commonMain`, `appleMain`, and `iosArm64Main` source sets is
-combined during compilation to the `iosArm64` platform target:
+在编译到特定目标时，Kotlin 会获取所有标记为该目标的源代码集，包括中间源代码集。
+因此，在编译到 `iosArm64` 平台目标时，`commonMain`、`appleMain` 和 `iosArm64Main` 源代码集中的所有代码都会被合并：
 
-![Native executables](native-executables-diagram.svg){width=700}
+![本地可执行文件](native-executables-diagram.svg){width=700}
 
-> It's okay if some source sets don't have sources. For example, in iOS development, there's usually no need to provide
-> code that is specific for iOS devices but not for iOS simulators. `iosArm64Main` is therefore rarely used.
+> 如果某些源代码集中没有源文件，这是可以的。
+> 例如，在 iOS 开发中，通常不需要提供仅针对 iOS 设备但不针对 iOS 模拟器的代码。因此，`iosArm64Main` 很少使用。
 >
 {style="tip"}
 
-#### Apple device and simulator targets {collapsible="true"}
+#### Apple 设备和模拟器目标 {id=apple-device-and-simulator-targets} {collapsible="true"}
 
-When you use Kotlin Multiplatform to develop iOS mobile applications, you usually work with the `iosMain` source set.
-While you might think it's a platform-specific source set for the `ios` target, there is no single `ios` target. Most
-mobile projects need at least two targets:
+当你使用 Kotlin Multiplatform 开发 iOS 移动应用程序时，通常使用 `iosMain` 源代码集。
+虽然你可能认为这是 `ios` 目标的特定平台源代码集，但实际上没有单一的 `ios` 目标。
+大多数移动项目至少需要两个目标：
 
-* **Device target** is used to generate binaries that can be executed on iOS devices. There's currently only one
-  device target for iOS: `iosArm64`.
-* **Simulator target** is used to generate binaries for the iOS simulator launched on your machine. If you have an Apple
-  silicon Mac computer, choose `iosSimulatorArm64` as a simulator target. Use `iosX64` if you have an Intel-based Mac
-  computer.
+* **设备目标** 用于生成可以在 iOS 设备上执行的二进制文件。
+  目前 iOS 只有一个设备目标：`iosArm64`。
+* **模拟器目标** 用于生成在你的机器上启动的 iOS 模拟器的二进制文件。
+  如果你有一台 Apple silicon Mac 电脑，选择 `iosSimulatorArm64` 作为模拟器目标。
+  如果你有一台基于 Intel 的 Mac 电脑，使用 `iosX64`。
 
-If you declare only the `iosArm64` device target, you won't be able to run and debug your application and tests on your
-local machine.
+如果你只声明 `iosArm64` 设备目标，你将无法在本地机器上运行和调试你的应用程序和测试。
 
-Platform-specific source sets like `iosArm64Main`, `iosSimulatorArm64Main`, and `iosX64Main` are usually empty, as
-Kotlin code for iOS devices and simulators is normally the same. You can use only the `iosMain` intermediate source
-set to share code among all of them.
+像 `iosArm64Main`、`iosSimulatorArm64Main` 和 `iosX64Main`
+这样的特定平台源代码集通常是空的，因为 iOS 设备和模拟器的 Kotlin 代码通常是相同的。
+你可以只使用 `iosMain` 中间源代码集来在它们之间共享代码。
 
-The same applies to other non-Mac Apple targets. For example, if you have the `tvosArm64` device target for Apple TV and
-the `tvosSimulatorArm64` and `tvosX64` simulator targets for Apple TV simulators on Apple silicon and Intel-based
-devices, respectively, you can use the `tvosMain` intermediate source set for all of them.
+同样适用于其他非 Mac 的 Apple 目标。
+例如，如果你有 Apple TV 的 `tvosArm64` 设备目标，以及在 Apple silicon 和基于 Intel 设备上的
+Apple TV 模拟器的 `tvosSimulatorArm64` 和 `tvosX64` 模拟器目标，你可以使用 `tvosMain` 中间源代码集来处理所有这些目标。
 
-## Integration with tests
+### 测试集成 {id=integration-with-tests}
 
-Real-life projects also require tests alongside the main production code. This is why all source sets created by
-default have the `Main` and `Test` prefixes. `Main` contains production code, while `Test` contains tests for this code.
-The connection between them is established automatically, and tests can use the API provided by the `Main` code without
-additional configuration.
+实际项目中，除了主要的生产代码外，还需要测试。
+这就是为什么默认创建的所有源代码集都具有 `Main` 和 `Test` 前缀。
+`Main` 包含生产代码，而 `Test` 包含针对此代码的测试。
+它们之间的连接会自动建立，测试可以使用 `Main` 代码提供的 API，无需额外配置。
 
-The `Test` counterparts are also source sets similar to `Main`. For example, `commonTest` is a counterpart
-for `commonMain` and compiles to all of the declared targets, allowing you to write common tests. Platform-specific test
-source sets, such as `jvmTest`, are used to write platform-specific tests, for example, JVM-specific tests or tests that
-need JVM APIs.
+`Test` 对应的源代码集与 `Main` 类似。
+例如，`commonTest` 是 `commonMain` 的对应项，编译到所有声明的目标，允许编写通用测试。
+特定于平台的测试源代码集，如 `jvmTest`，用于编写特定于平台的测试，例如特定于 JVM 或需要
+JVM API 的测试。
 
-Besides having a source set to write your common test, you also need a multiplatform testing framework. Kotlin
-provides a default [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) library that comes with
-the `@kotlin.Test` annotation and various assertion methods like `assertEquals` and `assertTrue`.
+除了拥有用于编写通用测试的源代码集外，你还需要一个跨平台测试框架。
+Kotlin 提供了默认的 [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) 库，其中包含
+`@kotlin.Test` 注解和各种断言方法，如 `assertEquals` 和 `assertTrue`。
 
-You can write platform-specific tests like regular tests for each platform in their respective source sets. Like with
-the main code, you can have platform-specific dependencies for each source set, such as `JUnit` for JVM and `XCTest` for
-iOS. To run tests for a particular target, use the `<targetName>Test` task.
+你可以像在各自的源代码集中编写主代码一样，编写特定于平台的测试。
+对于每个源代码集，你可以有特定于平台的依赖，例如 JVM 的 `JUnit` 和 iOS 的 `XCTest`。
+要运行特定目标的测试，请使用 `<targetName>Test` 任务。
 
-Learn how to create and run multiplatform tests in the [Test your multiplatform app
-tutorial](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-run-tests.html).
+了解如何创建和运行多平台应用程序的测试，可以参考
+[Test your multiplatform app tutorial](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-run-tests.html)。
 
-## What's next?
+## 接下来做什么？
 
-* [Learn more about declaring and using predefined source sets in Gradle scripts](multiplatform-hierarchy.md)
-* [Explore advanced concepts of the multiplatform project structure](multiplatform-advanced-project-structure.md)
-* [Learn how to configure compilations](multiplatform-configure-compilations.md)
+* [了解在 Gradle 脚本中声明和使用预定义源代码集的更多信息](multiplatform-hierarchy.md)
+* [探索多平台项目结构的高级概念](multiplatform-advanced-project-structure.md)
+* [学习如何配置编译](multiplatform-configure-compilations.md)
