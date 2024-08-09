@@ -1,30 +1,35 @@
-[//]: # (title: 控制流)
+[//]: # (title: Control flow)
 
-<tldr>
+<microformat>
     <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
-        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合</a><br />
-        <img src="icon-4.svg" width="20" alt="Fourth step" /> <strong>控制流</strong><br />
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
-</tldr>
+        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
+        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
+        <img src="icon-4.svg" width="20" alt="Fourth step" /> <strong>Control flow</strong><br />
+        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">Classes</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety</a></p>
+</microformat>
 
-与其他编程语言一样，Kotlin 能够根据代码是否评估为真来做出决策。
-这样的代码片段被称为**条件表达式**。
-Kotlin 还能够创建和迭代循环。
+Like other programming languages, Kotlin is capable of making decisions based on whether a piece of code is evaluated to
+be true. Such pieces of code are called **conditional expressions**. Kotlin is also able to create and iterate
+through loops.
 
-## 条件表达式
+## Conditional expressions
 
-Kotlin提供了`if`和`when`用于检查条件表达式。
+Kotlin provides `if` and `when` for checking conditional expressions. 
 
-> 如果你必须在`if`和`when`之间选择，我们建议使用`when`，因为它能够产生更健壮和安全的程序。
+> If you have to choose between `if` and `when`, we recommend using `when` because it:
 > 
-{style="note"}
+> * Makes your code easier to read.
+> * Makes it easier to add another branch.
+> * Leads to fewer mistakes in your code.
+> 
+{type="note"}
 
 ### If
 
-要使用`if`，在括号`()`内添加条件表达式，如果结果为真，则在花括号`{}`内添加要执行的操作：
+To use `if`, add the conditional expression within parentheses `()` and the action to take if the result is true within 
+curly braces `{}`:
 
 ```kotlin
 fun main() {
@@ -45,16 +50,16 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-if"}
 
-Kotlin 中没有三元运算符 `condition ? then : else`。相反，`if` 可以作为表达式使用。
-如果每个操作只有一行代码，花括号 `{}` 是可以忽略的：
+There is no ternary operator `condition ? then : else` in Kotlin. Instead, `if` can be used as an expression. If there is
+only one line of code per action, the curly braces `{}` are optional:
 
 ```kotlin
-fun main() {
+fun main() { 
 //sampleStart
     val a = 1
     val b = 2
 
-    println(if (a > b) a else b) // 返回值: 2
+    println(if (a > b) a else b) // Returns a value: 2
 //sampleEnd
 }
 ```
@@ -62,12 +67,18 @@ fun main() {
 
 ### When
 
-当有多个分支的条件表达式时，请使用`when`。
-`when`既可以用作语句，也可以用作表达式。
+Use `when` when you have a conditional expression with multiple branches.
 
-以下是将`when`用作语句的示例：
-* 将条件表达式放在括号`()`内，将要执行的操作放在花括号`{}`内。
-* 在每个分支中使用`->`将每个条件与每个操作分开。
+To use `when`:
+
+* Place the value you want to evaluate within parentheses `()`.
+* Place the branches within curly braces `{}`.
+* Use `->` in each branch to separate each check from the action to take if the check is successful.
+
+`when` can be used either as a statement or as an expression. A **statement** doesn't return anything but performs actions
+instead.
+
+Here is an example of using `when` as a statement:
 
 ```kotlin
 fun main() {
@@ -75,11 +86,11 @@ fun main() {
     val obj = "Hello"
 
     when (obj) {
-        // 检查 obj 是否等于“1”
+        // Checks whether obj equals to "1"
         "1" -> println("One")
-        // 检查 obj 是否等于“Hello”
+        // Checks whether obj equals to "Hello"
         "Hello" -> println("Greeting")
-        // 默认声明
+        // Default statement
         else -> println("Unknown")     
     }
     // Greeting
@@ -88,12 +99,15 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-when-statement"}
 
-> 请注意，所有分支条件将按顺序检查，直到满足其中一个条件为止。
-> 因此，只有第一个合适的分支会被执行。
+> Note that all branch conditions are checked sequentially until one of them is satisfied. So only the first suitable 
+> branch is executed.
 >
-{style="note"}
+{type="note"}
 
-以下是将`when`用作表达式的示例。`when`的语法立即赋给一个变量：
+An **expression** returns a value that can be used later in your code.
+
+Here is an example of using `when` as an expression. The `when` expression is assigned immediately to a variable which is
+later used with the `println()` function:
 
 ```kotlin
 fun main() {
@@ -101,11 +115,11 @@ fun main() {
     val obj = "Hello"    
     
     val result = when (obj) {
-        // 如果 obj 等于“1”，则将结果设置为“One”
+        // If obj equals "1", sets result to "one"
         "1" -> "One"
-        // 如果 obj 等于“Hello”，则将结果设置为“Greeting”
+        // If obj equals "Hello", sets result to "Greeting"
         "Hello" -> "Greeting"
-        // 如果不满足先前的条件，则将结果设置为“Unknown”
+        // Sets result to "Unknown" if no previous condition is satisfied
         else -> "Unknown"
     }
     println(result)
@@ -115,57 +129,168 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-when-expression"}
 
-如果`when`被用作表达式，`else`分支是强制的，除非编译器可以检测到所有可能的情况都被分支条件覆盖。
+The examples of `when` that you've seen so far both had a subject: `obj`. But `when` can also be used without a subject.
 
-前面的示例展示了`when`用于匹配变量的用法。当你需要检查一系列布尔表达式时，`when`也很有用：
+This example uses a `when` expression **without** a subject to check a chain of Boolean expressions:
 
 ```kotlin
 fun main() {
-//sampleStart
-    val temp = 18
+    val trafficLightState = "Red" // This can be "Green", "Yellow", or "Red"
 
-    val description = when {
-        // 如果 temp < 0 为真，则将描述设置为“非常冷”
-        temp < 0 -> "非常冷"
-        // 如果 temp < 10 为 true，则将描述设置为“有点冷”
-        temp < 10 -> "有点冷"
-        // 如果 temp < 20 为 true，则将描述设置为“暖和”
-        temp < 20 -> "暖和"
-        // 如果先前条件不满足，则将描述设置为“热”
-        else -> "热"             
+    val trafficAction = when {
+        trafficLightState == "Green" -> "Go"
+        trafficLightState == "Yellow" -> "Slow down"
+        trafficLightState == "Red" -> "Stop"
+        else -> "Malfunction"
     }
-    println(description)
-    // 暖和
-//sampleEnd
+
+    println(trafficAction)
+    // Stop
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-when-expression-boolean"}
 
-## Ranges（区间）
+However, you can have the same code but with `trafficLightState` as the subject:
 
-在讨论循环之前，了解如何构造循环迭代的区间是很有用的。
+```kotlin
+fun main() {
+    val trafficLightState = "Red" // This can be "Green", "Yellow", or "Red"
 
-在 Kotlin 中创建区间的最常见方法是使用`..`运算符。例如，`1..4`相当于`1, 2, 3, 4`。
+    val trafficAction = when (trafficLightState) {
+        "Green" -> "Go"
+        "Yellow" -> "Slow down"
+        "Red" -> "Stop"
+        else -> "Malfunction"
+    }
 
-要声明不包括结束值的区间，请使用`..<`运算符。例如，`1..<4`相当于`1, 2, 3`。
+    println(trafficAction)  
+    // Stop
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-when-expression-boolean-subject"}
 
-要声明以相反顺序的区间，请使用`downTo`。例如，`4 downTo 1`相当于`4, 3, 2, 1`。
+Using `when` with a subject makes your code easier to read and maintain. When you use a subject with a `when` expression, 
+it also helps Kotlin check that all possible cases are covered. Otherwise, if you don't use a subject with a 
+`when` expression, you need to provide an else branch.
 
-要声明以非1的步长递增的区间，请使用`step`和您想要的递增值。例如，`1..5 step 2`相当于`1, 3, 5`。
+## Ranges
 
-您也可以对`Char`区间执行相同的操作：
-* `'a'..'d'`相当于`'a', 'b', 'c', 'd'`
-* `'z' downTo 's' step 2`相当于`'z', 'x', 'v', 't'`
+Before talking about loops, it's useful to know how to construct ranges for loops to iterate over.
 
-## Loops （循环）
+The most common way to create a range in Kotlin is to use the `..` operator. For example, `1..4` is equivalent to `1, 2, 3, 4`.
 
-编程中两种最常见的循环结构是`for`和`while`。使用`for`来迭代一系列的值并执行某个操作。使用`while`来持续执行某个操作，直到满足特定条件。
+To declare a range that doesn't include the end value, use the `..<` operator. For example, `1..<4` is equivalent to `1, 2, 3`.
+
+To declare a range in reverse order, use `downTo.` For example, `4 downTo 1` is equivalent to `4, 3, 2, 1`.
+
+To declare a range that increments in a step that isn't 1, use `step` and your desired increment value.
+For example, `1..5 step 2` is equivalent to `1, 3, 5`.
+
+You can also do the same with `Char` ranges:
+
+* `'a'..'d'` is equivalent to `'a', 'b', 'c', 'd'`
+* `'z' downTo 's' step 2` is equivalent to `'z', 'x', 'v', 't'`
+
+## Conditional expressions and ranges practice
+
+### Exercise 1 {initial-collapse-state="collapsed" id="conditional-expressions-exercise-1"}
+
+Create a simple game where you win if throwing two dice results in the same number. Use `if` to print `You win :)`
+if the dice match or `You lose :(` otherwise.
+
+> In this exercise, you import a package so that you can use the `Random.nextInt()` function to give you a random `Int`.
+> For more information about importing packages, see [Packages and imports](packages.md).
+>
+{type = "tip"}
+
+<deflist collapsible="true">
+    <def title="Hint">
+        Use the <a href="operator-overloading.md#equality-and-inequality-operators">equality operator</a> (<code>==</code>) to compare the dice results. 
+    </def>
+</deflist>
+
+|---|---|
+```kotlin
+import kotlin.random.Random
+
+fun main() {
+    val firstResult = Random.nextInt(6)
+    val secondResult = Random.nextInt(6)
+    // Write your code here
+}
+```
+{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-conditional-exercise-1"}
+
+|---|---|
+```kotlin
+import kotlin.random.Random
+
+fun main() {
+    val firstResult = Random.nextInt(6)
+    val secondResult = Random.nextInt(6)
+    if (firstResult == secondResult)
+        println("You win :)")
+    else
+        println("You lose :(")
+}
+```
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-control-flow-conditional-solution-1"}
+
+### Exercise 2 {initial-collapse-state="collapsed" id="conditional-expressions-exercise-2"}
+
+Using a `when` expression, update the following program so that when you input the names of GameBoy buttons, the actions
+are printed as output.
+
+| **Button** | **Action**             |
+|------------|------------------------|
+| A          | Yes                    |
+| B          | No                     |
+| X          | Menu                   |
+| Y          | Nothing                |
+| Other      | There is no such button |
+
+|---|---|
+```kotlin
+fun main() {
+    val button = "A"
+
+    println(
+        // Write your code here
+    )
+}
+```
+{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-conditional-exercise-2"}
+
+|---|---|
+```kotlin
+fun main() {
+    val button = "A"
+    
+    println(
+        when (button) {
+            "A" -> "Yes"
+            "B" -> "No"
+            "X" -> "Menu"
+            "Y" -> "Nothing"
+            else -> "There is no such button"
+        }
+    )
+}
+```
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-control-flow-conditional-solution-2"}
+
+## Loops
+
+The two most common loop structures in programming are `for` and `while`. Use `for` to iterate over a range of 
+values and perform an action. Use `while` to continue an action until a particular condition is satisfied.
 
 ### For
 
-利用你对区间的新认识，你可以创建一个`for`循环，迭代从1到5的数字，并在每次迭代时打印该数字。
+Using your new knowledge of ranges, you can create a `for` loop that iterates over numbers 1 to 5 and prints the number 
+each time.
 
-将迭代器和区间放在括号`()`内，使用关键字`in`。在花括号`{}`内添加你想要完成的操作：
+Place the iterator and range within parentheses `()` with keyword `in`. Add the action you want to complete within curly
+braces `{}`:
 
 ```kotlin
 fun main() {
@@ -180,7 +305,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-for-loop"}
 
-集合也可以通过循环进行迭代：
+Collections can also be iterated over by loops:
 
 ```kotlin
 fun main() { 
@@ -200,17 +325,20 @@ fun main() {
 
 ### While
 
-`while`可以以两种方式使用：
-* 在条件表达式为真时执行代码块。 (`while`)
-* 先执行代码块，然后检查条件表达式。 (`do-while`)
+`while` can be used in two ways:
 
-在第一种用法中 (`while`)：
-* 在括号 `()` 中声明你的 while 循环继续的条件表达式。
-* 在花括号 `{}` 中添加你想要完成的操作。
+  * To execute a code block while a conditional expression is true. (`while`)
+  * To execute the code block first and then check the conditional expression. (`do-while`)
 
-> 以下示例使用 [递增运算符](operator-overloading.md#increments-and-decrements) `++` 来增加 `cakesEaten` 变量的值。
+In the first use case (`while`):
+
+* Declare the conditional expression for your while loop to continue within parentheses `()`. 
+* Add the action you want to complete within curly braces `{}`.
+
+> The following examples use the [increment operator](operator-overloading.md#increments-and-decrements) `++` to
+> increment the value of the `cakesEaten` variable.
 >
-{style="note"}
+{type="tip"}
 
 ```kotlin
 fun main() {
@@ -228,9 +356,10 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-while-loop"}
 
-在第二种用法中 (`do-while`)：
-* 在括号 `()` 中声明你的 while 循环继续的条件表达式。
-* 使用关键字 `do` 在花括号 `{}` 中定义你想要完成的操作。
+In the second use case (`do-while`):
+
+* Declare the conditional expression for your while loop to continue within parentheses `()`.
+* Define the action you want to complete within curly braces `{}` with the keyword `do`.
 
 ```kotlin
 fun main() {
@@ -256,65 +385,24 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-while-do-loop"}
 
-有关条件表达式和循环的更多信息和示例，请参阅[条件和循环](control-flow.md)。
+For more information and examples of conditional expressions and loops, see [Conditions and loops](control-flow.md).
 
-现在你已经了解了 Kotlin 控制流的基础知识，是时候学习如何编写你自己的[函数](kotlin-tour-functions.md)了。
+Now that you know the fundamentals of Kotlin control flow, it's time to learn how to write your own [functions](kotlin-tour-functions.md).
 
-## 实践
+## Loops practice
 
-### 练习 1 {collapsible="true"}
+### Exercise 1 {initial-collapse-state="collapsed" id="loops-exercise-1"}
 
-使用`when`表达式，更新以下程序，以便在输入 GameBoy 按钮的名称时，将相应的操作打印到输出。
+You have a program that counts pizza slices until there’s a whole pizza with 8 slices. Refactor this program in two ways:
 
-| **按钮** | **行为**                  |
-|--------|-------------------------|
-| A      | Yes                     |
-| B      | No                      |
-| X      | Menu                    |
-| Y      | Nothing                 |
-| Other  | There is no such button |
-
-|---|---|
-```kotlin
-fun main() {
-    val button = "A"
-
-    println(
-        // 在这里写下你的代码
-    )
-}
-```
-{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-exercise-1"}
-
-|---|---|
-```kotlin
-fun main() {
-    val button = "A"
-    
-    println(
-        when (button) {
-            "A" -> "Yes"
-            "B" -> "No"
-            "X" -> "Menu"
-            "Y" -> "Nothing"
-            else -> "There is no such button"
-        }
-    )
-}
-```
-{collapsible="true" collapsed-title="Example solution"}
-
-### 练习 2 {collapsible="true"}
-
-你有一个程序，它计算披萨片数，直到有一个有8片的整个披萨。以两种方式重构此程序：
-* 使用`while`循环。
-* 使用`do-while`循环。
+* Use a `while` loop.
+* Use a `do-while` loop.
 
 |---|---|
 ```kotlin
 fun main() {
     var pizzaSlices = 0
-    // 开始重构
+    // Start refactoring here
     pizzaSlices++
     println("There's only $pizzaSlices slice/s of pizza :(")
     pizzaSlices++
@@ -330,11 +418,11 @@ fun main() {
     pizzaSlices++
     println("There's only $pizzaSlices slice/s of pizza :(")
     pizzaSlices++
-    // 结束重构
+    // End refactoring here
     println("There are $pizzaSlices slices of pizza. Hooray! We have a whole pizza! :D")
 }
 ```
-{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-exercise-2"}
+{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-loops-exercise-1"}
 
 |---|---|
 ```kotlin
@@ -348,7 +436,7 @@ fun main() {
     println("There are $pizzaSlices slices of pizza. Hooray! We have a whole pizza! :D")
 }
 ```
-{collapsible="true" collapsed-title="Example solution 1"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution 1" id="kotlin-tour-control-flow-loops-exercise-1-solution-1"}
 
 |---|---|
 ```kotlin
@@ -363,27 +451,35 @@ fun main() {
 }
 
 ```
-{collapsible="true" collapsed-title="Example solution 2"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution 2" id="kotlin-tour-control-flow-loops-exercise-1-solution-2"}
 
-### 练习 3 {collapsible="true"}
+### Exercise 2 {initial-collapse-state="collapsed" id="loops-exercise-2"}
 
-编写一个模拟[Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz)游戏的程序。
-你的任务是逐步打印从1到100的数字，将任何可以被三整除的数字替换为单词"fizz"，将任何可以被五整除的数字替换为单词"buzz"。
-任何同时被3和5整除的数字必须替换为单词"fizzbuzz"。
+Write a program that simulates the [Fizz buzz](https://en.wikipedia.org/wiki/Fizz_buzz) game. Your task is to print 
+numbers from 1 to 100 incrementally, replacing any number divisible by three with the word "fizz", and any number 
+divisible by five with the word "buzz". Any number divisible by both 3 and 5 must be replaced with the word "fizzbuzz".
 
 <deflist collapsible="true">
-    <def title="提示">
-        使用<code>for</code>循环来计数数字，使用<code>when</code>表达式来决定在每一步打印什么。
+    <def title="Hint 1">
+        Use a <code>for</code> loop to count numbers and a <code>when</code> expression to decide what to print at each
+        step. 
+    </def>
+</deflist>
+
+<deflist collapsible="true">
+    <def title="Hint 2">
+        Use the modulo operator (<code>%</code>) to return the remainder of a number being divided. Use the <a href="operator-overloading.md#equality-and-inequality-operators">equality operator</a> 
+        (<code>==</code>) to check if the remainder equals zero.
     </def>
 </deflist>
 
 |---|---|
 ```kotlin
 fun main() {
-    // 在这里写下你的代码
+    // Write your code here
 }
 ```
-{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-exercise-3"}
+{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-loops-exercise-2"}
 
 |---|---|
 ```kotlin
@@ -400,16 +496,16 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="Example solution"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-control-flow-loops-solution-2"}
 
-### 练习 4 {collapsible="true"}
+### Exercise 3 {initial-collapse-state="collapsed" id="loops-exercise-3"}
 
-你有一个单词列表。使用`for`和`if`，只打印以字母`l`开头的单词。
+You have a list of words. Use `for` and `if` to print only the words that start with the letter `l`.
 
 <deflist collapsible="true">
-    <def title="提示">
-        使用 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/starts-with.html"><code>.startsWith()</code></a> 函数来处理
-        <code>String</code> 类型。
+    <def title="Hint">
+        Use the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/starts-with.html"> <code>.startsWith()</code>
+        </a> function for <code>String</code> type. 
     </def>
 </deflist>
 
@@ -417,10 +513,10 @@ fun main() {
 ```kotlin
 fun main() {
     val words = listOf("dinosaur", "limousine", "magazine", "language")
-    // 在这里写下你的代码
+    // Write your code here
 }
 ```
-{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-exercise-4"}
+{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-control-flow-loops-exercise-3"}
 
 |---|---|
 ```kotlin
@@ -432,8 +528,8 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="Example solution"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-control-flow-loops-solution-3"}
 
-## 下一步
+## Next step
 
-[函数](kotlin-tour-functions.md)
+[Functions](kotlin-tour-functions.md)

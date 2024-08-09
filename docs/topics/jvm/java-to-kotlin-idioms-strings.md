@@ -31,7 +31,7 @@ fun main() {
 {kotlin-runnable="true" id="concatenate-strings-kotlin"}
 
 You can interpolate the value of a complicated expression by surrounding it with curly braces, like in `${name.length}`.
-See [string templates](strings.md#字符串模板) for more information.
+See [string templates](strings.md#string-templates) for more information.
 
 ## Build a string
 

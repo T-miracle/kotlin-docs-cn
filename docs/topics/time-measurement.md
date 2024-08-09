@@ -238,7 +238,7 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-time-duration-components"}
 
 In this example, the lambda expression has `hours` and `minutes` as function parameters with underscores (`_`) for the 
-unused `seconds` and `nanoseconds` parameters. The expression returns a concatenated string using [string templates](strings.md#字符串模板) 
+unused `seconds` and `nanoseconds` parameters. The expression returns a concatenated string using [string templates](strings.md#string-templates) 
 to get the desired output format of `hours` and `minutes`.
 
 ## Measure time

@@ -14,13 +14,13 @@
     <toc-element topic="getting-started.md"/>
 
     <toc-element toc-title="进行 Kotlin 之旅" topic="kotlin-tour-welcome.md">
-        <toc-element topic="kotlin-tour-hello-world.md"/>
-        <toc-element topic="kotlin-tour-basic-types.md"/>
-        <toc-element topic="kotlin-tour-collections.md"/>
-        <toc-element topic="kotlin-tour-control-flow.md"/>
-        <toc-element topic="kotlin-tour-functions.md"/>
-        <toc-element topic="kotlin-tour-classes.md"/>
-        <toc-element topic="kotlin-tour-null-safety.md"/>
+        <toc-element topic="kotlin-tour-hello-world.md" hidden="true"/>
+        <toc-element topic="kotlin-tour-basic-types.md" hidden="true"/>
+        <toc-element topic="kotlin-tour-collections.md" hidden="true"/>
+        <toc-element topic="kotlin-tour-control-flow.md" hidden="true"/>
+        <toc-element topic="kotlin-tour-functions.md" hidden="true"/>
+        <toc-element topic="kotlin-tour-classes.md" hidden="true"/>
+        <toc-element topic="kotlin-tour-null-safety.md" hidden="true"/>
     </toc-element>
 
     <toc-element toc-title="Kotlin 概述">

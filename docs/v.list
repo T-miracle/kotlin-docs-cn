@@ -5,7 +5,7 @@
 <vars>
 
   <!--当前主仓库版本号-->
-  <var name="commitId" value="d2b6eaa09161f0b2fed2450ecb3e1e16c3528ed4" type="string"/>
+  <var name="commitId" value="22e7331670d5a9db0bc1fe63244d9938b7715dc0" type="string"/>
 
   <!--当前 协程 仓库版本号-->
   <var name="coroutinesCommitId" value="c1ba5af8c5d10a3d2f923f89b98f6ab1b394e24d" type="string"/>

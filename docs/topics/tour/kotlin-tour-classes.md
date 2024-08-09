@@ -1,63 +1,66 @@
-[//]: # (title: 类)
+[//]: # (title: Classes)
 
-<tldr>
+<microformat>
     <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
-        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合</a><br />
-        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
-        <img src="icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数</a><br />
-        <img src="icon-6.svg" width="20" alt="Sixth step" /> <strong>类</strong><br />
-        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
-</tldr>
+        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
+        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
+        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow</a><br />
+        <img src="icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions</a><br />
+        <img src="icon-6.svg" width="20" alt="Sixth step" /> <strong>Classes</strong><br />
+        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety</a></p>
+</microformat>
 
-Kotlin 支持面向对象编程，使用类和对象。
-对象对于在程序中存储数据非常有用。
-类允许你声明对象的一组特征。
-当你从一个类创建对象时，你可以节省时间和精力，因为你不必每次都声明这些特征。
+Kotlin supports object-oriented programming with classes and objects. Objects are useful for storing data in your program.
+Classes allow you to declare a set of characteristics for an object. When you create objects from a class, you can save
+time and effort because you don't have to declare these characteristics every time.
 
-要声明一个类，使用 `class` 关键字： 
+To declare a class, use the `class` keyword: 
 
 ```kotlin
 class Customer
 ```
 
-## 属性
+## Properties
 
-类的对象的特征可以在属性中声明。你可以为一个类声明属性：
-* 在类名后的括号 `()` 中。
+Characteristics of a class's object can be declared in properties. You can declare properties for a class:
+
+* Within parentheses `()` after the class name.
 ```kotlin
 class Contact(val id: Int, var email: String)
 ```
-* 在由花括号 `{}` 定义的类体中。
+
+* Within the class body defined by curly braces `{}`.
 ```kotlin
 class Contact(val id: Int, var email: String) {
     val category: String = ""
 }
 ```
 
-我们建议，除非在创建类的实例后需要更改它们，否则将属性声明为只读 (`val`)。
+We recommend that you declare properties as read-only (`val`) unless they need to be changed after an instance of the class
+is created.
 
-你可以在括号内声明没有 `val` 或 `var` 的属性，但是这些属性在实例创建后是不可访问的。
+You can declare properties without `val` or `var` within parentheses but these properties are not accessible after an 
+instance has been created.
 
-> * 括号 `()` 中包含的内容称为**类头**。
-> * 在声明类属性时，你可以使用 [尾随逗号](coding-conventions.md#尾随逗号)。
+> * The content contained within parentheses `()` is called the **class header**.
+> * You can use a [trailing comma](coding-conventions.md#trailing-commas) when declaring class properties.
 >
-{style="note"}
+{type="note"}
 
-就像函数参数一样，类属性可以有默认值：
+Just like with function parameters, class properties can have default values:
 ```kotlin
 class Contact(val id: Int, var email: String = "example@gmail.com") {
     val category: String = "work"
 }
 ```
 
-## 创建实例
+## Create instance
 
-要从类创建对象，你使用一个**构造函数**声明一个类的**实例**。
+To create an object from a class, you declare a class **instance** using a **constructor**.
 
-默认情况下，Kotlin 会自动创建一个构造函数，该构造函数使用在类头中声明的参数。
+By default, Kotlin automatically creates a constructor with the parameters declared in the class header.
 
-例如：
+For example:
 ```kotlin
 class Contact(val id: Int, var email: String)
 
@@ -67,17 +70,19 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-class-create-instance"}
 
-在这个例子中：
-* `Contact` 是一个类。
-* `contact` 是 `Contact` 类的一个实例。
-* `id` 和 `email` 是属性。
-* 使用默认构造函数，使用 `id` 和 `email` 创建了 `contact`。
+In the example:
 
-Kotlin 类可以有许多构造函数，包括你自己定义的构造函数。要了解如何声明多个构造函数的更多信息，请参见[构造函数](classes.md#constructors)。
+* `Contact` is a class.
+* `contact` is an instance of the `Contact` class.
+* `id` and `email` are properties.
+* `id` and `email` are used with the default constructor to create `contact`.
 
-## 访问属性
+Kotlin classes can have many constructors, including ones that you define yourself. To learn more about how to declare 
+multiple constructors, see [Constructors](classes.md#constructors).
 
-要访问实例的属性，请在实例名称后写上属性名称，用句点 `.` 连接：
+## Access properties
+
+To access a property of an instance, write the name of the property after the instance name appended with a period `.`:
 
 ```kotlin
 class Contact(val id: Int, var email: String)
@@ -85,33 +90,35 @@ class Contact(val id: Int, var email: String)
 fun main() {
     val contact = Contact(1, "mary@gmail.com")
     
-    // 打印属性的值: email
+    // Prints the value of the property: email
     println(contact.email)           
     // mary@gmail.com
 
-    // 更新属性的值: email
+    // Updates the value of the property: email
     contact.email = "jane@gmail.com"
     
-    // 打印属性的新值: email
+    // Prints the new value of the property: email
     println(contact.email)           
     // jane@gmail.com
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-access-property"}
 
-> 要将属性的值作为字符串的一部分连接起来，你可以使用字符串模板（`$`）。
-> 例如：
+> To concatenate the value of a property as part of a string, you can use string templates (`$`).
+> For example:
 > ```kotlin
 > println("Their email address is: ${contact.email}")
 > ```
 >
-{style="tip"}
+{type="tip"}
 
-## 成员函数
+## Member functions
 
-除了将属性声明为对象特征的一部分之外，你还可以使用成员函数定义对象的行为。
+In addition to declaring properties as part of an object's characteristics, you can also define an object's behavior 
+with member functions.
 
-在 Kotlin 中，成员函数必须在类体内声明。要在实例上调用成员函数，请在实例名称后写上函数名称，用句点 `.` 连接。例如：
+In Kotlin, member functions must be declared within the class body. To call a member function on an instance, write the 
+function name after the instance name appended with a period `.`. For example:
 
 ```kotlin
 class Contact(val id: Int, var email: String) {
@@ -122,42 +129,44 @@ class Contact(val id: Int, var email: String) {
 
 fun main() {
     val contact = Contact(1, "mary@gmail.com")
-    // 调用成员函数 printId()
+    // Calls member function printId()
     contact.printId()           
     // 1
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-member-function"}
 
-## 数据类
+## Data classes
 
-Kotlin 有**数据类**，对于存储数据非常有用。
-数据类具有与普通类相同的功能，但它们自动带有额外的成员函数。
-这些成员函数允许你轻松地将实例打印为可读输出，比较类的实例，复制实例等。
-由于这些函数是自动可用的，你不必为每个类编写相同的样板代码。
+Kotlin has **data classes** which are particularly useful for storing data. Data classes have the same functionality as 
+classes, but they come automatically with additional member functions. These member functions allow you to easily print 
+the instance to readable output, compare instances of a class, copy instances, and more. As these functions are
+automatically available, you don't have to spend time writing the same boilerplate code for each of your classes.
 
-要声明一个数据类，使用关键字 `data`：
+To declare a data class, use the keyword `data`:
+
 ```kotlin
 data class User(val name: String, val id: Int)
 ```
 
-数据类最有用的预定义成员函数是：
+The most useful predefined member functions of data classes are:
 
-| **函数**              | **描述**                          |
-|---------------------|---------------------------------|
-| `.toString()`       | 打印类实例及其属性的可读字符串。                |
-| `.equals()` or `==` | 比较类的实例。                         |
-| `.copy()`           | 通过复制另一个类实例来创建一个类实例，可能具有一些不同的属性。 |
+| **Function**        | **Description**                                                                                                |
+|---------------------|----------------------------------------------------------------------------------------------------------------|
+| `.toString()`       | Prints a readable string of the class instance and its properties.                                             |
+| `.equals()` or `==` | Compares instances of a class.                                                                                 |
+| `.copy()`           | Creates a class instance by copying another, potentially with some different properties.                       |
 
-有关如何使用每个函数的示例，请参阅以下部分：
-* [打印为字符串](#打印为字符串)
-* [比较实例](#比较实例)
-* [复制实例](#复制实例)
+See the following sections for examples of how to use each function:
 
-### 打印为字符串 {id=打印为字符串}
+* [Print as string](#print-as-string)
+* [Compare instances](#compare-instances)
+* [Copy instance](#copy-instance)
 
-要打印一个类实例的可读字符串，你可以显式调用 `.toString()` 函数，
-或使用自动为你调用 `.toString()` 的打印函数（`println()` 和 `print()`）：
+### Print as string
+
+To print a readable string of a class instance, you can explicitly call the `.toString()` function, or use print functions 
+(`println()` and `print()`) which automatically call `.toString()` for you:
 
 ```kotlin
 data class User(val name: String, val id: Int)
@@ -166,7 +175,7 @@ fun main() {
     //sampleStart
     val user = User("Alex", 1)
     
-    // 自动使用 toString() 函数，以便输出易于阅读
+    // Automatically uses toString() function so that output is easy to read
     println(user)            
     // User(name=Alex, id=1)
     //sampleEnd
@@ -174,11 +183,11 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-data-classes-print-string"}
 
-这在调试或创建日志时特别有用。
+This is particularly useful when debugging or creating logs.
 
-### 比较实例 {id=比较实例}
+### Compare instances
 
-要比较数据类实例，使用相等运算符 `==`：
+To compare data class instances, use the equality operator `==`:
 
 ```kotlin
 data class User(val name: String, val id: Int)
@@ -189,11 +198,11 @@ fun main() {
     val secondUser = User("Alex", 1)
     val thirdUser = User("Max", 2)
 
-    // 将用户与第二个用户进行比较
+    // Compares user to second user
     println("user == secondUser: ${user == secondUser}") 
     // user == secondUser: true
     
-    // 将用户与第三个用户进行比较
+    // Compares user to third user
     println("user == thirdUser: ${user == thirdUser}")   
     // user == thirdUser: false
     //sampleEnd
@@ -201,13 +210,14 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-data-classes-compare-instances"}
 
-### 复制实例 {id=复制实例}
+### Copy instance
 
-要创建数据类实例的精确副本，请在实例上调用 `.copy()` 函数。
+To create an exact copy of a data class instance, call the `.copy()` function on the instance.
 
-要创建数据类实例的副本**并**更改某些属性，请在实例上调用 `.copy()` 函数**并**将替换值作为函数参数添加。
+To create a copy of a data class instance **and** change some properties, call the `.copy()` function on the instance 
+**and** add replacement values for properties as function parameters.
 
-例如：
+For example:
 
 ```kotlin
 data class User(val name: String, val id: Int)
@@ -218,15 +228,15 @@ fun main() {
     val secondUser = User("Alex", 1)
     val thirdUser = User("Max", 2)
 
-    // 创建用户的精确副本
+    // Creates an exact copy of user
     println(user.copy())       
     // User(name=Alex, id=1)
 
-    // 创建名为“Max”的用户副本
+    // Creates a copy of user with name: "Max"
     println(user.copy("Max"))  
     // User(name=Max, id=1)
 
-    // 创建 id 为 3 的用户的副本
+    // Creates a copy of user with id: 3
     println(user.copy(id = 3)) 
     // User(name=Alex, id=3)
     //sampleEnd
@@ -234,23 +244,24 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-data-classes-copy-instance"}
 
-创建实例的副本比修改原始实例更安全，因为依赖于原始实例的任何代码都不会受到副本及其操作的影响。
+Creating a copy of an instance is safer than modifying the original instance because any code that relies on the
+original instance isn't affected by the copy and what you do with it.
 
-有关数据类的更多信息，请参见[数据类](data-classes.md)。
+For more information about data classes, see [Data classes](data-classes.md).
 
-本教程的最后一章是关于 Kotlin 的[空值安全](kotlin-tour-null-safety.md)。
+The last chapter of this tour is about Kotlin's [null safety](kotlin-tour-null-safety.md).
 
-## 练习
+## Practice
 
-### 练习 1 {collapsible="true"}
+### Exercise 1 {initial-collapse-state="collapsed"}
 
-定义一个数据类 `Employee`，包含两个属性：一个用于姓名，另一个用于薪水。
-确保薪水属性是可变的，否则你在年底将无法获得薪水提升！
-主函数演示了如何使用这个数据类。
+Define a data class `Employee` with two properties: one for a name, and another for a salary. Make sure that the property
+for salary is mutable, otherwise you won’t get a salary boost at the end of the year! The main function demonstrates how
+you can use this data class.
 
 |---|---|
 ```kotlin
-// 在这里写下你的代码
+// Write your code here
 
 fun main() {
     val emp = Employee("Mary", 20)
@@ -272,24 +283,67 @@ fun main() {
     println(emp)
 }
 ```
-{collapsible="true" collapsed-title="Example solution"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-classes-solution-1"}
 
-### 练习 2 {collapsible="true"}
+### Exercise 2 {initial-collapse-state="collapsed"}
 
-为了测试你的代码，你需要一个能够创建随机员工的生成器。
-定义一个类，其中包含一个固定的潜在姓名列表（在类体内），并由最小和最大薪水配置（在类头部）。
-再次强调，主函数演示了如何使用这个类。
+Declare the additional data classes that are needed for this code to compile.
 
-<deflist collapsible="true" id="kotlin-tour-classes-exercise-2-hint-1">
-    <def title="提示">
-        列表具有一个名为 `<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/random.html"><code>.random()</code></a>` 的扩展函数，
-        该函数返回列表中的一个随机项。
+|---|---|
+```kotlin
+data class Person(val name: Name, val address: Address, val ownsAPet: Boolean = true)
+// Write your code here
+// data class Name(...)
+
+fun main() {
+    val person = Person(
+        Name("John", "Smith"),
+        Address("123 Fake Street", City("Springfield", "US")),
+        ownsAPet = false
+    )
+}
+```
+{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-classes-exercise-2"}
+
+|---|---|
+```kotlin
+data class Person(val name: Name, val address: Address, val ownsAPet: Boolean = true)
+data class Name(val first: String, val last: String)
+data class Address(val street: String, val city: City)
+data class City(val name: String, val countryCode: String)
+
+fun main() {
+    val person = Person(
+        Name("John", "Smith"),
+        Address("123 Fake Street", City("Springfield", "US")),
+        ownsAPet = false
+    )
+}
+```
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-classes-solution-2"}
+
+### Exercise 3 {initial-collapse-state="collapsed"}
+
+To test your code, you need a generator that can create random employees. Define a `RandomEmployeeGenerator` class with 
+a fixed list of potential names (inside the class body). Configure the class with a minimum and maximum salary (inside 
+the class header). In the class body, define the `generateEmployee()` function. Once again, the main function demonstrates
+how you can use this class.
+
+> In this exercise, you import a package so that you can use the `Random.nextInt()` function.
+> For more information about importing packages, see [Packages and imports](packages.md).
+>
+{type = "tip"}
+
+<deflist collapsible="true" id="kotlin-tour-classes-exercise-3-hint-1">
+    <def title="Hint 1">
+        Lists have an extension function called <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/random.html"><code>.random()</code></a>
+        that returns a random item within a list.
     </def>
 </deflist>
 
-<deflist collapsible="true" id="kotlin-tour-classes-exercise-2-hint-2">
-    <def title="提示">
-        <code>Random.nextInt(from = ..., until = ...)</code> 给你一个在指定区间内的随机 <code>Int</code> 数字。
+<deflist collapsible="true" id="kotlin-tour-classes-exercise-3-hint-2">
+    <def title="Hint 2">
+        <code>Random.nextInt(from = ..., until = ...)</code> gives you a random <code>Int</code> number within specified limits.
     </def>
 </deflist>
 
@@ -299,7 +353,7 @@ import kotlin.random.Random
 
 data class Employee(val name: String, var salary: Int)
 
-// 在这里写下你的代码
+// Write your code here
 
 fun main() {
     val empGen = RandomEmployeeGenerator(10, 30)
@@ -311,7 +365,7 @@ fun main() {
     println(empGen.generateEmployee())
 }
 ```
-{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-classes-exercise-2"}
+{validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-classes-exercise-3"}
 
 |---|---|
 ```kotlin
@@ -336,8 +390,8 @@ fun main() {
     println(empGen.generateEmployee())
 }
 ```
-{collapsible="true" collapsed-title="Example solution"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-classes-solution-3"}
 
-## 下一步
+## Next step
 
-[空值安全](kotlin-tour-null-safety.md)
+[Null safety](kotlin-tour-null-safety.md)

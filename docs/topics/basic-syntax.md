@@ -328,7 +328,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-string-templates"}
 
-查看 [字符串模板](strings.md#字符串模板) 以获取详细信息。
+查看 [字符串模板](strings.md#string-templates) 以获取详细信息。
 
 ## 条件表达式
 

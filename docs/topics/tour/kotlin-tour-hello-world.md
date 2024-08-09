@@ -20,21 +20,27 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="hello-world-kotlin"}
 
-在 Kotlin 中：
-* 使用 `fun` 声明函数
-* `main()` 函数是程序的起点
-* 函数体写在花括号 `{}` 中
-* [`println()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) 和 [`print()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/print.html) 函数将它们的参数打印到标准输出
+In Kotlin:
 
-> 函数将在后面的章节中详细讨论。在此之前，所有的示例都使用 `main()` 函数。
-> 
-{style="note"}
+* `fun` is used to declare a function
+* The `main()` function is where your program starts from
+* The body of a function is written within curly braces `{}`
+* [`println()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) and [`print()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/print.html) functions print their arguments to standard output
+
+A function is a set of instructions that performs a specific task. Once you create a function, you can use it whenever 
+you need to perform that task, without having to write the instructions all over again. Functions are discussed in more
+detail in a couple of chapters. Until then, all examples use the `main()` function.
 
 ## 变量
 
-所有的程序都需要能够存储数据，而变量正是帮助你实现这一目标的工具。在 Kotlin 中，你可以声明：
-* 使用 `val` 关键字声明只读变量
-* 使用 `var` 关键字声明可变变量
+All programs need to be able to store data, and variables help you to do just that. In Kotlin, you can declare:
+
+* Read-only variables with `val`
+* Mutable variables with `var`
+
+> You can't change a read-only variable once you have given it a value.
+> 
+{type ="note"}
 
 要赋值，使用赋值运算符 `=`。
 

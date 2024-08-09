@@ -161,7 +161,7 @@ Kotlin supports the following operators and special symbols:
      - references a ['this' expression from an outer scope](this-expressions.md#qualified-this).
      - references an [outer superclass](inheritance.md#调用超类实现).
  * `;` separates multiple statements on the same line.
- * `$` references a variable or expression in a [string template](strings.md#字符串模板).
+ * `$` references a variable or expression in a [string template](strings.md#string-templates).
  * `_`
      - substitutes an unused parameter in a [lambda expression](lambdas.md#underscore-for-unused-variables).
      - substitutes an unused parameter in a [destructuring declaration](destructuring-declarations.md#underscore-for-unused-variables).

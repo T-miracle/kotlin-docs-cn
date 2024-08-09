@@ -78,7 +78,7 @@ class Person(val firstName: String, val lastName: String, var age: Int)
 class Person(val firstName: String, val lastName: String, var isEmployed: Boolean = true)
 ```
 
-在声明类属性时，你可以使用[尾随逗号](coding-conventions.md#尾随逗号)：
+在声明类属性时，你可以使用[尾随逗号](coding-conventions.md#trailing-commas)：
 
 ```kotlin
 class Person(

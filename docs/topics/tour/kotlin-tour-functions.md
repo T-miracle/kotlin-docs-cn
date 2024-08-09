@@ -1,16 +1,16 @@
-[//]: # (title: 函数)
+[//]: # (title: Functions)
 
-<tldr>
+<microformat>
     <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
-        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合</a><br />
-        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
-        <img src="icon-5.svg" width="20" alt="Fifth step" /> <strong>函数</strong><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
-</tldr>
+        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
+        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
+        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow</a><br />
+        <img src="icon-5.svg" width="20" alt="Fifth step" /> <strong>Functions</strong><br />
+        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">Classes</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety</a></p>
+</microformat>
 
-在 Kotlin 中，你可以使用`fun`关键字声明自己的函数。
+You can declare your own functions in Kotlin using the `fun` keyword.
 
 ```kotlin
 fun hello() {
@@ -24,22 +24,25 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-function-demo"}
 
-在 Kotlin 中：
-* 函数参数写在括号 `()` 内。
-* 每个参数都必须有一个类型，多个参数之间用逗号 `,` 分隔。
-* 返回类型写在函数的括号 `()` 后面，用冒号 `:` 分隔。
-* 函数体写在花括号 `{}` 内。
-* 使用 `return` 关键字来退出或从函数中返回值。
+In Kotlin:
 
-> 如果一个函数不返回有用的内容，返回类型和 `return` 关键字可以省略。了解更多信息，请参阅[无返回值的函数](#无返回值的函数)。
+* Function parameters are written within parentheses `()`.
+* Each parameter must have a type, and multiple parameters must be separated by commas `,`.
+* The return type is written after the function's parentheses `()`, separated by a colon `:`.
+* The body of a function is written within curly braces `{}`.
+* The `return` keyword is used to exit or return something from a function.
+
+> If a function doesn't return anything useful, the return type and `return` keyword can be omitted. Learn more about
+> this in [Functions without return](#functions-without-return).
 >
-{style="note"}
+{type="note"}
 
-在以下示例中：
-* `x` 和 `y` 是函数参数。
-* `x` 和 `y` 的类型是 `Int`。
-* 函数的返回类型是 `Int`。
-* 当调用函数时，该函数返回 `x` 和 `y` 的和。
+In the following example:
+
+* `x` and `y` are function parameters.
+* `x` and `y` have type `Int`.
+* The function's return type is `Int`.
+* The function returns a sum of `x` and `y` when called.
 
 ```kotlin
 fun sum(x: Int, y: Int): Int {
@@ -53,20 +56,21 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function"}
 
-> 我们在我们的[编码规范](coding-conventions.md#function-names)中建议以小写字母开头，
-> 并使用驼峰命名法，不使用下划线来命名函数。
+> We recommend in our [coding conventions](coding-conventions.md#function-names) that you name functions starting with 
+> a lowercase letter and use camel case with no underscores.
 > 
-{style="note"}
+{type="note"}
 
-## 命名参数
+## Named arguments
 
-为了简洁的代码，在调用函数时，你并不需要包含参数名。
-然而，包含参数名能够使你的代码更易读。这被称为使用**命名参数**。
-如果你包含参数名，那么你可以以任意顺序编写这些参数。
+For concise code, when calling your function, you don't have to include parameter names. However, including parameter names
+does make your code easier to read. This is called using **named arguments**. If you do include parameter names, then 
+you can write the parameters in any order.
 
-> 在以下示例中，[字符串模板](strings.md#字符串模板)（`$`）被用于访问参数的值，
-> 将它们转换为 `String` 类型，然后将它们连接成一个字符串以便打印。
-
+> In the following example, [string templates](strings.md#string-templates) (`$`) are used to access
+> the parameter values, convert them to `String` type, and then concatenate them into a string for printing.
+> 
+{type="tip"}
 
 ```kotlin
 fun printMessageWithPrefix(message: String, prefix: String) {
@@ -74,17 +78,17 @@ fun printMessageWithPrefix(message: String, prefix: String) {
 }
 
 fun main() {
-    // 使用带有交换参数顺序的命名参数
+    // Uses named arguments with swapped parameter order
     printMessageWithPrefix(prefix = "Log", message = "Hello")
     // [Log] Hello
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-named-arguments-function"}
 
-## 默认参数值
+## Default parameter values
 
-你可以为函数参数定义默认值。任何具有默认值的参数在调用函数时都可以省略。
-要声明默认值，请在类型之后使用赋值运算符 `=`：
+You can define default values for your function parameters. Any parameter with a default value can be omitted when
+calling your function. To declare a default value, use the assignment operator `=` after the type:
 
 ```kotlin
 fun printMessageWithPrefix(message: String, prefix: String = "Info") {
@@ -92,11 +96,11 @@ fun printMessageWithPrefix(message: String, prefix: String = "Info") {
 }
 
 fun main() {
-    // 使用两个参数调用的函数
+    // Function called with both parameters
     printMessageWithPrefix("Hello", "Log") 
     // [Log] Hello
     
-    // 仅使用消息参数调用的函数
+    // Function called only with message parameter
     printMessageWithPrefix("Hello")        
     // [Info] Hello
     
@@ -106,22 +110,21 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-default-param-function"}
 
-> 你可以跳过具有默认值的特定参数，而不是省略它们全部。
-> 然而，在跳过第一个参数之后，你必须为所有后续的参数命名。
+> You can skip specific parameters with default values, rather than omitting them all. However, after the 
+> first skipped parameter, you must name all subsequent parameters.
 >
-{style="note"}
+{type="note"}
 
-## 无返回值的函数 {id=无返回值的函数}
+## Functions without return
 
-如果你的函数不返回有用的值，那么它的返回类型是 `Unit`。
-`Unit` 是一个只有一个值的类型 - `Unit`。
-你不必在函数体中显式声明返回 `Unit`。
-这意味着你不必使用 `return` 关键字或声明返回类型：
+If your function doesn't return a useful value then its return type is `Unit`. `Unit` is a type with only one value – 
+`Unit`. You don't have to declare that `Unit` is returned explicitly in your function body. This means that you don't 
+have to use the `return` keyword or declare a return type:
 
 ```kotlin
 fun printMessage(message: String) {
     println(message)
-    // `return Unit` 或 `return` 是可选的
+    // `return Unit` or `return` is optional
 }
 
 fun main() {
@@ -131,9 +134,9 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-unit-function"}
 
-## 单表达式函数
+## Single-expression functions
 
-为了使你的代码更加简洁，你可以使用单表达式函数。例如，`sum()` 函数可以被缩短为：
+To make your code more concise, you can use single-expression functions. For example, the `sum()` function can be shortened:
 
 ```kotlin
 fun sum(x: Int, y: Int): Int {
@@ -147,7 +150,8 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function-before"}
 
-你可以移除花括号 `{}` 并使用赋值运算符 `=` 声明函数体。由于 Kotlin 的类型推断，你还可以省略返回类型。`sum()` 函数然后变成一行：
+You can remove the curly braces `{}` and declare the function body using the assignment operator `=`. When you use the 
+assignment operator `=`, Kotlin uses type inference, so you can also omit the return type. The `sum()` function then becomes one line:
 
 ```kotlin
 fun sum(x: Int, y: Int) = x + y
@@ -159,26 +163,70 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-simple-function-after"}
 
-> 只有当你的函数没有函数体 (`{}`) 时才可以省略返回类型。除非你的函数返回类型是 `Unit`。
+However, if you want your code to be quickly understood by other developers, it's a good idea to explicitly define the 
+return type even when using the assignment operator `=`.
+
+> If you use `{}` curly braces to declare your function body, you must declare the return type unless it is the `Unit` type.
 > 
-{style="note"}
+{type="note"}
 
-### 函数练习
+## Early returns in functions
 
-### 练习 1 {collapsible="true" id="functions-exercise-1"}
+To stop the code in your function from being processed further than a certain point, use the `return` keyword. This example
+uses `if` to return from a function early if the conditional expression is found to be true:
 
-编写一个名为 `circleArea` 的函数，它以整数格式的圆的半径作为参数，并输出该圆的面积。
+```kotlin
+// A list of registered usernames
+val registeredUsernames = mutableListOf("john_doe", "jane_smith")
 
-> 在此练习中，你需要导入一个包，以便通过 `PI` 访问圆周率的值。有关导入包的更多信息，请参见[包和导入](packages.md)。
+// A list of registered emails
+val registeredEmails = mutableListOf("john@example.com", "jane@example.com")
+
+fun registerUser(username: String, email: String): String {
+    // Early return if the username is already taken
+    if (username in registeredUsernames) {
+        return "Username already taken. Please choose a different username."
+    }
+
+    // Early return if the email is already registered
+    if (email in registeredEmails) {
+        return "Email already registered. Please use a different email."
+    }
+
+    // Proceed with the registration if the username and email are not taken
+    registeredUsernames.add(username)
+    registeredEmails.add(email)
+
+    return "User registered successfully: $username"
+}
+
+fun main() {
+    println(registerUser("john_doe", "newjohn@example.com"))
+    // Username already taken. Please choose a different username.
+    println(registerUser("new_user", "newuser@example.com"))
+    // User registered successfully: new_user
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-function-early-return"}
+
+## Functions practice
+
+### Exercise 1 {initial-collapse-state="collapsed" id="functions-exercise-1"}
+
+Write a function called `circleArea` that takes the radius of a circle in integer format as a parameter and outputs the
+area of that circle.
+
+> In this exercise, you import a package so that you can access the value of pi via `PI`. For more information about
+> importing packages, see [Packages and imports](packages.md).
 >
-{type = "note"}
+{type = "tip"}
 
 |---|---|
 ```kotlin
 import kotlin.math.PI
 
 fun circleArea() {
-    // 在这里写下你的代码
+    // Write your code here
 }
 fun main() {
     println(circleArea(2))
@@ -198,17 +246,17 @@ fun main() {
     println(circleArea(2)) // 12.566370614359172
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-functions-solution-1"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-functions-solution-1"}
 
-### 练习 2 {collapsible="true" id="functions-exercise-2"}
+### Exercise 2 {initial-collapse-state="collapsed" id="functions-exercise-2"}
 
-将上一个练习中的 `circleArea` 函数改写为单表达式函数。
+Rewrite the `circleArea` function from the previous exercise as a single-expression function.
 
 |---|---|
 ```kotlin
 import kotlin.math.PI
 
-// 在这里写下你的代码
+// Write your code here
 
 fun main() {
     println(circleArea(2))
@@ -226,13 +274,13 @@ fun main() {
     println(circleArea(2)) // 12.566370614359172
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-functions-solution-2"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-functions-solution-2"}
 
-### 练习 3 {collapsible="true" id="functions-exercise-3"}
+### Exercise 3 {initial-collapse-state="collapsed" id="functions-exercise-3"}
 
-你有一个函数，将以小时、分钟和秒表示的时间间隔转换为秒数。
-在大多数情况下，你只需要传递一个或两个函数参数，而其余的参数都等于 0。
-通过使用默认参数值和命名参数来改进函数和调用它的代码，以使代码更易读。
+You have a function that translates a time interval given in hours, minutes, and seconds into seconds. In most cases,
+you need to pass only one or two function parameters while the rest are equal to 0. Improve the function and the code that
+calls it by using default parameter values and named arguments so that the code is easier to read.
 
 |---|---|
 ```kotlin
@@ -262,13 +310,13 @@ fun main() {
     println(intervalInSeconds(hours = 1, seconds = 1))
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-functions-solution-3"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-functions-solution-3"}
 
-## Lambda 表达式
+## Lambda expressions
 
-Kotlin 允许你通过使用 Lambda 表达式编写更加简洁的函数代码。
+Kotlin allows you to write even more concise code for functions by using lambda expressions.
 
-例如，以下的 `uppercaseString()` 函数：
+For example, the following `uppercaseString()` function:
 
 ```kotlin
 fun uppercaseString(text: String): String {
@@ -281,43 +329,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-function-before"}
 
-也可以写成一个 Lambda 表达式：
-
-```kotlin
-fun main() {
-    println({ text: String -> text.uppercase() }("hello"))
-    // HELLO
-}
-```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-function-after"}
-
-Lambda 表达式可能一开始看起来有点难理解，所以让我们来分解它。Lambda 表达式是在花括号 `{}` 内编写的。
-
-在 Lambda 表达式中，你需要编写：
-* 参数，后跟 `->`。
-* `->` 后面是函数体。
-
-在前面的例子中：
-* `text` 是一个函数参数。
-* `text` 的类型是 `String`。
-* 该函数返回在 `text` 上调用的 [`.uppercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html) 函数的结果。
-
-> 如果你声明一个没有参数的 Lambda，那么就不需要使用 `->`。例如：
-> ```kotlin
-> { println("Log message") }
-> ```
->
-{style="note"}
-
-Lambda 表达式可以以多种方式使用。你可以：
-* [将 Lambda 分配给一个变量，然后稍后调用它](#分配给变量)
-* [将 Lambda 表达式作为参数传递给另一个函数](#传递给另一个函数)
-* [从函数中返回 Lambda 表达式](#从函数返回)
-* [单独调用一个 Lambda 表达式](#单独调用)
-
-### 分配给变量 {id="分配给变量"}
-
-要将 Lambda 表达式分配给变量，使用赋值运算符 `=`：
+Can also be written as a lambda expression:
 
 ```kotlin
 fun main() {
@@ -328,40 +340,97 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-variable"}
 
-### 传递给另一个函数 {id=传递给另一个函数}
+Lambda expressions can be hard to understand at first glance so let's break it down. Lambda expressions are written 
+within curly braces `{}`.
 
-在将 Lambda 表达式作为参数传递给函数时非常有用的一个例子是在集合上使用 [`.filter()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/filter.html) 函数：
+Within the lambda expression, you write:
+
+* The parameters followed by an `->`.
+* The function body after the `->`.
+
+In the previous example:
+
+* `text` is a function parameter.
+* `text` has type `String`.
+* The function returns the result of the [`.uppercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html)
+function called on `text`.
+* The entire lambda expression is assigned to the `upperCaseString` variable with the assignment operator `=`.
+* The lambda expression is called by using the variable `upperCaseString` like a function and the string `"hello"` as a parameter.
+* The `println()` function prints the result.
+
+> If you declare a lambda without parameters, then there is no need to use `->`. For example:
+> ```kotlin
+> { println("Log message") }
+> ```
+>
+{type="note"}
+
+Lambda expressions can be used in a number of ways. You can:
+
+* [Pass a lambda expression as a parameter to another function](#pass-to-another-function)
+* [Return a lambda expression from a function](#return-from-a-function)
+* [Invoke a lambda expression on its own](#invoke-separately)
+
+### Pass to another function
+
+A great example of when it is useful to pass a lambda expression to a function, is using the [`.filter()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/filter.html)
+function on collections:
 
 ```kotlin
 fun main() {
+    //sampleStart
     val numbers = listOf(1, -2, 3, -4, 5, -6)
-    val positives = numbers.filter { x -> x > 0 }
-    val negatives = numbers.filter { x -> x < 0 }
+    
+    
+    val positives = numbers.filter ({ x -> x > 0 })
+    
+    val isNegative = { x: Int -> x < 0 }
+    val negatives = numbers.filter(isNegative)
+    
     println(positives)
     // [1, 3, 5]
     println(negatives)
     // [-2, -4, -6]
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-filter"}
 
-`.filter()` 函数接受一个 Lambda 表达式作为谓词：
-* `{ x -> x > 0 }` 获取列表的每个元素，仅返回正数。
-* `{ x -> x < 0 }` 获取列表的每个元素，仅返回负数。
+The `.filter()` function accepts a lambda expression as a predicate:
 
-> 如果 Lambda 表达式是唯一的函数参数，你可以省略函数括号 `()`。
-> 这是一个 [尾随 Lambda](#尾随-Lambda) 的例子，将在本章末尾更详细地讨论。
+* `{ x -> x > 0 }` takes each element of the list and returns only those that are positive.
+* `{ x -> x < 0 }` takes each element of the list and returns only those that are negative.
+
+This example demonstrates two ways of passing a lambda expression to a function:
+
+* For positive numbers, the example adds the lambda expression directly in the `.filter()` function.
+* For negative numbers, the example assigns the lambda expression to the `isNegative` variable. Then
+the `isNegative` variable is used as a function parameter in the `.filter()` function. In this case, you have to specify
+the type of function parameters (`x`) in the lambda expression.
+
+> If a lambda expression is the only function parameter, you can drop the function parentheses `()`:
+> 
+> ```kotlin
+> val positives = numbers.filter { x -> x > 0 }
+> ```
+> 
+> This is an example of a [trailing lambda](#trailing-lambdas), which is discussed in more detail at the end of this
+> chapter.
 >
 {type = "note"}
 
-另一个很好的例子是使用 [`.map()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/map.html) 函数来转换集合中的项：
+Another good example, is using the [`.map()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/map.html) 
+function to transform items in a collection:
 
 ```kotlin
 fun main() {
     //sampleStart
     val numbers = listOf(1, -2, 3, -4, 5, -6)
     val doubled = numbers.map { x -> x * 2 }
-    val tripled = numbers.map { x -> x * 3 }
+    
+    val isTripled = { x: Int -> x * 3 }
+    val tripled = numbers.map(isTripled)
+    
     println(doubled)
     // [2, -4, 6, -8, 10, -12]
     println(tripled)
@@ -371,26 +440,29 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-map"}
 
-`.map()` 函数接受一个 Lambda 表达式作为转换函数：
-* `{ x -> x * 2 }` 获取列表的每个元素，返回该元素乘以 2 的结果。
-* `{ x -> x * 3 }` 获取列表的每个元素，返回该元素乘以 3 的结果。
+The `.map()` function accepts a lambda expression as a transform function:
 
-### 函数类型
+* `{ x -> x * 2 }` takes each element of the list and returns that element multiplied by 2.
+* `{ x -> x * 3 }` takes each element of the list and returns that element multiplied by 3.
 
-在你能够从函数中返回 Lambda 表达式之前，你首先需要了解**函数类型**。
+### Function types
 
-你已经学到了关于基本类型的知识，但函数本身也有一种类型。
-Kotlin 的类型推断可以从参数类型中推断出函数的类型。
-但有时你可能需要显式指定函数类型。
-编译器需要函数类型，以便知道对于该函数什么是允许的，什么是不允许的。
+Before you can return a lambda expression from a function, you first need to understand **function
+types**.
 
-函数类型的语法为：
-* 每个参数的类型写在括号 `()` 内，用逗号 `,` 分隔。
-* 返回类型写在 `->` 后面。
+You have already learned about basic types but functions themselves also have a type. Kotlin's type inference 
+can infer a function's type from the parameter type. But there may be times when you need to explicitly
+specify the function type. The compiler needs the function type so that it knows what is and isn't 
+allowed for that function.
 
-例如：`(String) -> String` 或 `(Int, Int) -> Int`。
+The syntax for a function type has:
 
-如果为 `upperCaseString()` 定义了一个函数类型，Lambda 表达式的样子如下：
+* Each parameter's type written within parentheses `()` and separated by commas `,`.
+* The return type written after `->`.
+
+For example: `(String) -> String` or `(Int, Int) -> Int`.
+
+This is what a lambda expression looks like if a function type for `upperCaseString()` is defined:
 
 ```kotlin
 val upperCaseString: (String) -> String = { text -> text.uppercase() }
@@ -402,23 +474,26 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-function-type"}
 
-如果你的 Lambda 表达式没有参数，那么括号 `()` 将保持为空。例如：`() -> Unit`
+If your lambda expression has no parameters then the parentheses `()` are left empty. For example: `() -> Unit`
 
-> 你必须在 Lambda 表达式或函数类型中声明参数和返回类型。否则，编译器将无法知道你的 Lambda 表达式的类型。
->
-> 例如，以下的写法是错误的：
->
+> You must declare parameter and return types either in the lambda expression or as a function type. Otherwise, the
+> compiler won't be able to know what type your lambda expression is.
+> 
+> For example, the following won't work:
+> 
 > `val upperCaseString = { str -> str.uppercase() }`
 >
-{style="note"}
+{type="note"}
 
-### 从函数返回 {id=从函数返回}
+### Return from a function
 
-Lambda 表达式可以从函数中返回。为了让编译器理解 Lambda 表达式返回的类型，你必须声明一个函数类型。
+Lambda expressions can be returned from a function. So that the compiler understands what type the lambda
+expression returned is, you must declare a function type.
 
-在以下示例中，`toSeconds()` 函数具有函数类型 `(Int) -> Int`，因为它始终返回一个 Lambda 表达式，该表达式接受一个类型为 `Int` 的参数并返回一个 `Int` 值。
+In the following example, the `toSeconds()` function has function type `(Int) -> Int` because it always returns a lambda
+expression that takes a parameter of type `Int` and returns an `Int` value.
 
-此示例使用 `when` 表达式来确定在调用 `toSeconds()` 时返回哪个 Lambda 表达式：
+This example uses a `when` expression to determine which lambda expression is returned when `toSeconds()` is called:
 
 ```kotlin
 fun toSeconds(time: String): (Int) -> Int = when (time) {
@@ -438,9 +513,10 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-return-from-function"}
 
-### 单独调用 {id=单独调用}
+### Invoke separately
 
-Lambda 表达式可以通过在花括号 `{}` 后添加括号 `()` 并在括号内包含任何参数来单独调用：
+Lambda expressions can be invoked on their own by adding parentheses `()` after the curly braces `{}` and including
+any parameters within the parentheses:
 
 ```kotlin
 fun main() {
@@ -452,39 +528,40 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-standalone"}
 
-### 尾随 Lambda {id="尾随-Lambda"}
+### Trailing lambdas
 
-正如你已经看到的，如果 Lambda 表达式是唯一的函数参数，你可以省略函数括号 `()`。
-如果 Lambda 表达式作为函数的最后一个参数传递，那么该表达式可以写在函数括号 `()` 外部。
-在这两种情况下，这种语法被称为**尾随 Lambda**。
+As you have already seen, if a lambda expression is the only function parameter, you can drop the function parentheses `()`.
+If a lambda expression is passed as the last parameter of a function, then the expression can be written outside the
+function parentheses `()`. In both cases, this syntax is called a **trailing lambda**.
 
-例如，[`.fold()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/fold.html) 函数接受一个初始值和一个操作：
+For example, the [`.fold()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/fold.html) function accepts an 
+initial value and an operation:
 
 ```kotlin
 fun main() {
     //sampleStart
-    // 初始值为零。
-    // 该操作将初始值与列表中的每个项目相加。
+    // The initial value is zero. 
+    // The operation sums the initial value with every item in the list cumulatively.
     println(listOf(1, 2, 3).fold(0, { x, item -> x + item })) // 6
 
-    // 或者，以尾随 lambda 的形式
+    // Alternatively, in the form of a trailing lambda
     println(listOf(1, 2, 3).fold(0) { x, item -> x + item })  // 6
     //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-trailing-lambda"}
 
-有关 Lambda 表达式的更多信息，请参见[Lambda 表达式和匿名函数](lambdas.md#lambda-expressions-and-anonymous-functions)。
+For more information on lambda expressions, see [Lambda expressions and anonymous functions](lambdas.md#lambda-expressions-and-anonymous-functions).
 
-我们接下来要学习的是 Kotlin 中的[类](kotlin-tour-classes.md)。
+The next step in our tour is to learn about [classes](kotlin-tour-classes.md) in Kotlin.
 
-## Lambda 表达式练习 {id=Lambda-表达式练习}
+## Lambda expressions practice
 
-### 练习 1 {collapsible="true" id="lambdas-exercise-1"}
+### Exercise 1 {initial-collapse-state="collapsed" id="lambdas-exercise-1"}
 
-你有一个 Web 服务支持的操作列表，所有请求的公共前缀，以及特定资源的 ID。
-要请求在 ID 为 5 的资源上执行 `title` 操作，
-你需要创建以下 URL：`https://example.com/book-info/5/title`。使用 Lambda 表达式从操作列表创建 URL 列表。
+You have a list of actions supported by a web service, a common prefix for all requests, and an ID of a particular resource.
+To request an action `title` over the resource with ID: 5, you need to create the following URL: `https://example.com/book-info/5/title`.
+Use a lambda expression to create a list of URLs from the list of actions.
 
 |---|---|
 ```kotlin
@@ -492,7 +569,7 @@ fun main() {
     val actions = listOf("title", "year", "author")
     val prefix = "https://example.com/book-info"
     val id = 5
-    val urls = // 在这里写下你的代码
+    val urls = // Write your code here
     println(urls)
 }
 ```
@@ -508,21 +585,21 @@ fun main() {
     println(urls)
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-lambdas-solution-1"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-lambdas-solution-1"}
 
-### 练习 2 {collapsible="true" id="lambdas-exercise-2"}
+### Exercise 2 {initial-collapse-state="collapsed" id="lambdas-exercise-2"}
 
-编写一个函数，该函数接受一个 `Int` 值和一个操作（一个类型为 `() -> Unit` 的函数），然后重复执行给定次数的操作。
-然后使用这个函数来打印 "Hello" 5 次。
+Write a function that takes an `Int` value and an action (a function with type `() -> Unit`) which then repeats the 
+action the given number of times. Then use this function to print “Hello” 5 times.
 
 |---|---|
 ```kotlin
 fun repeatN(n: Int, action: () -> Unit) {
-    // 在这里写下你的代码
+    // Write your code here
 }
 
 fun main() {
-    // 在这里写下你的代码
+    // Write your code here
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambdas-exercise-2"}
@@ -541,8 +618,8 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-lambdas-solution-2"}
+{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-lambdas-solution-2"}
 
-## 下一步
+## Next step
 
-[类](kotlin-tour-classes.md)
+[Classes](kotlin-tour-classes.md)
