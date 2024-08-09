@@ -462,7 +462,7 @@ For more information, see the issue in [YouTrack](https://youtrack.jetbrains.com
 > We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-61861/Gradle-Kotlin-compilations-depend-on-packed-artifacts). 
 > Opt-in is required (see details below).
 >
-{type="warning"}
+{style="warning"}
 
 In Kotlin %kotlinEapVersion%, we introduce a new approach that changes the way the outputs of Kotlin/JVM compilations, 
 such as JAR files, are shared between projects. 
