@@ -168,7 +168,7 @@ class DontCreateMe private constructor() { /*...*/ }
 >
 {style="note"}
 
-## 创建类的实例 {id=创建类的实例}
+## 创建类的实例 {id=creating-instances-of-classes}
 
 要创建一个类的实例，像调用普通函数一样调用其构造函数。你可以将创建的实例分配给一个 [变量](basic-syntax.md#variables)：
 
