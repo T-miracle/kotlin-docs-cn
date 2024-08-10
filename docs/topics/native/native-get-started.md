@@ -96,7 +96,7 @@ performs an incremental build of the project.
        //...
    }
    ```
-   {initial-collapse-state="collapsed" collapsed-title="runTask?.standardInput = System.`in`"}
+   {collapsible="true" collapsed-title="runTask?.standardInput = System.`in`"}
 
 4. Eliminate the whitespaces and count the letters:
    * Use the [`replace()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/replace.html) function to remove the empty spaces in the name.

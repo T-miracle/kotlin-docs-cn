@@ -144,7 +144,7 @@ powerAssert {
     functions = listOf("kotlin.assert", "kotlin.test.assertEquals", "kotlin.test.assertTrue", "kotlin.test.assertNull", "kotlin.require", "org.example.AssertScope.assert")
 }
 ```
-{initial-collapse-state="collapsed"}
+{collapsible="true"}
 
 ### Assert function
 

@@ -217,7 +217,7 @@ You should use an HTTP client to work with previously created endpoints. In Inte
 
    ![Execute GET requests](execute-get-requests.png)
 
-### Alternative way to execute requests {initial-collapse-state="collapsed"}
+### Alternative way to execute requests {collapsible="true"}
 
 You can also use any other HTTP client or the cURL command-line tool. For example, run the following commands in
 the terminal to get the same result:
@@ -361,7 +361,7 @@ class MessageService(val db: JdbcTemplate) {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{collapsible="true"}
 
 ## Run the application
 

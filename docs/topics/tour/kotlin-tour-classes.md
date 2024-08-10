@@ -1,14 +1,14 @@
-[//]: # (title: Classes)
+[//]: # (title: 类)
 
-<microformat>
-    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
-        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
-        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow</a><br />
-        <img src="icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions</a><br />
-        <img src="icon-6.svg" width="20" alt="Sixth step" /> <strong>Classes</strong><br />
-        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety</a></p>
-</microformat>
+<tldr>
+    <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
+        <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
+        <img src="icon-3-done.svg" width="20" alt="第三步" /> <a href="kotlin-tour-collections.md">集合</a><br />
+        <img src="icon-4-done.svg" width="20" alt="第四步" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
+        <img src="icon-5-done.svg" width="20" alt="第五步" /> <a href="kotlin-tour-functions.md">函数</a><br />
+        <img src="icon-6.svg" width="20" alt="第六步" /> <strong>类</strong><br />
+        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
+</tldr>
 
 Kotlin supports object-oriented programming with classes and objects. Objects are useful for storing data in your program.
 Classes allow you to declare a set of characteristics for an object. When you create objects from a class, you can save
@@ -253,7 +253,7 @@ The last chapter of this tour is about Kotlin's [null safety](kotlin-tour-null-s
 
 ## Practice
 
-### Exercise 1 {initial-collapse-state="collapsed"}
+### Exercise 1 {collapsible="true"}
 
 Define a data class `Employee` with two properties: one for a name, and another for a salary. Make sure that the property
 for salary is mutable, otherwise you won’t get a salary boost at the end of the year! The main function demonstrates how
@@ -283,9 +283,9 @@ fun main() {
     println(emp)
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-classes-solution-1"}
+{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-classes-solution-1"}
 
-### Exercise 2 {initial-collapse-state="collapsed"}
+### Exercise 2 {collapsible="true"}
 
 Declare the additional data classes that are needed for this code to compile.
 
@@ -320,9 +320,9 @@ fun main() {
     )
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-classes-solution-2"}
+{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-classes-solution-2"}
 
-### Exercise 3 {initial-collapse-state="collapsed"}
+### Exercise 3 {collapsible="true"}
 
 To test your code, you need a generator that can create random employees. Define a `RandomEmployeeGenerator` class with 
 a fixed list of potential names (inside the class body). Configure the class with a minimum and maximum salary (inside 
@@ -390,7 +390,7 @@ fun main() {
     println(empGen.generateEmployee())
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-classes-solution-3"}
+{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-classes-solution-3"}
 
 ## Next step
 

@@ -48,7 +48,7 @@ class CounterTest {
 }
 ```
 
-### How stress testing works {initial-collapse-state="collapsed"}
+### How stress testing works {collapsible="true"}
 
 At first, Lincheck generates a set of concurrent scenarios using the operations marked with `@Operation`. Then it launches
 native threads, synchronizing them at the beginning to guarantee that operations start simultaneously. Finally, Lincheck
@@ -93,7 +93,7 @@ class CounterTest {
 }
 ```
 
-### How model checking works {initial-collapse-state="collapsed"}
+### How model checking works {collapsible="true"}
 
 Most bugs in complicated concurrent algorithms can be reproduced with classic interleavings, switching the execution from
 one thread to another. Besides, model checkers for weak memory models are very complicated, 

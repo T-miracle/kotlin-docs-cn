@@ -74,7 +74,7 @@ the `gradle.properties` file:
 kotlin.compiler.preciseCompilationResultsBackup=true
 ```
 
-#### Example of using precise backup at JetBrains {initial-collapse-state="collapsed"}
+#### Example of using precise backup at JetBrains {collapsible="true"}
 
 In the following charts, you can see examples of using precise backup compared to full backup:
 
@@ -98,7 +98,7 @@ different results. The factors affecting performance include but are not limited
 * Which modules are affected by the changes and how big these modules are.
 * Whether the changes are ABI or non-ABI.
 
-#### Evaluating optimizations with build reports {initial-collapse-state="collapsed"}
+#### Evaluating optimizations with build reports {collapsible="true"}
 
 To estimate the impact of the optimization on your computer for your project and your scenarios, you can use 
 [Kotlin build reports](#build-reports). Enable reports in text file format by adding the following property 

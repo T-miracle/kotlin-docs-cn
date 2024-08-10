@@ -80,7 +80,7 @@ in your browser out of the box, without additional configurations.
 However, for other projects, you may need to configure additional settings in your Gradle 
 build file. For more information about how to configure your browser for debugging, expand the next section.
 
-### Configure your browser for debugging {initial-collapse-state="collapsed"}
+### Configure your browser for debugging {collapsible="true"}
 
 By default, browsers can't access some of the project's sources necessary for debugging. To provide access, you can configure the Webpack DevServer
 to serve these sources. In the `ComposeApp` directory, add the following code snippets to your `build.gradle.kts` file.
@@ -127,7 +127,7 @@ kotlin {
     }
 }
 ```
-{initial-collapse-state="collapsed"}
+{collapsible="true"}
 
 > Currently, you can't debug library sources.
 > [We will support this in the future](https://youtrack.jetbrains.com/issue/KT-64685).

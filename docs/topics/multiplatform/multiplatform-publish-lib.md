@@ -57,7 +57,7 @@ To avoid any issues during publication:
   
   Maven Central, for example, explicitly forbids duplicate publications and fails the process. <!-- TBD: add the actual error -->
   
-### If you use Kotlin 1.7.0 or earlier {initial-collapse-state="collapsed"}
+### If you use Kotlin 1.7.0 or earlier {collapsible="true"}
 
 Before 1.7.20, the Kotlin/Native compiler didn't support all cross-compilation options. If you use earlier versions, you may need
 to publish multiplatform projects from multiple hosts: a Windows host to compile a Windows target, a Linux host to compile a Linux target, and so on.

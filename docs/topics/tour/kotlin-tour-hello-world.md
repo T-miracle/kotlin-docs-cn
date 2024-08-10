@@ -1,13 +1,13 @@
 [//]: # (title: Hello world)
 
 <tldr>
-    <p><img src="icon-1.svg" width="20" alt="First step" /> <strong>Hello world</strong><br />
-        <img src="icon-2-todo.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
-        <img src="icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">集合</a><br />
-        <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">函数</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">类</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
+    <p><img src="icon-1.svg" width="20" alt="第一步" /> <strong>Hello world</strong><br />
+        <img src="icon-2-todo.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
+        <img src="icon-3-todo.svg" width="20" alt="第三步" /> <a href="kotlin-tour-collections.md">集合</a><br />
+        <img src="icon-4-todo.svg" width="20" alt="第四步" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
+        <img src="icon-5-todo.svg" width="20" alt="第五步" /> <a href="kotlin-tour-functions.md">函数</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="第六步" /> <a href="kotlin-tour-classes.md">类</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
 </tldr>
 
 这是一个打印“Hello, world!”的简单程序：
@@ -20,27 +20,27 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="hello-world-kotlin"}
 
-In Kotlin:
+在 Kotlin 中：
 
-* `fun` is used to declare a function
-* The `main()` function is where your program starts from
-* The body of a function is written within curly braces `{}`
-* [`println()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) and [`print()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/print.html) functions print their arguments to standard output
+* `fun` 用于声明一个函数
+* `main()` 函数是程序的入口
+* 函数的主体写在花括号 `{}` 内
+* [`println()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) 和 [`print()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/print.html) 函数将它们的参数输出到标准输出
 
-A function is a set of instructions that performs a specific task. Once you create a function, you can use it whenever 
-you need to perform that task, without having to write the instructions all over again. Functions are discussed in more
-detail in a couple of chapters. Until then, all examples use the `main()` function.
+函数是一组执行特定任务的指令。
+一旦创建了一个函数，你可以在需要执行该任务时使用它，而不必再次编写这些指令。
+函数将在后续章节中详细讨论。在此之前，所有示例都使用 `main()` 函数。
 
 ## 变量
 
-All programs need to be able to store data, and variables help you to do just that. In Kotlin, you can declare:
+所有程序都需要能够存储数据，而变量可以帮助你做到这一点。在 Kotlin 中，你可以声明：
 
-* Read-only variables with `val`
-* Mutable variables with `var`
+* 使用 `val` 声明只读变量
+* 使用 `var` 声明可变变量
 
-> You can't change a read-only variable once you have given it a value.
+> 一旦为只读变量赋值后，就无法更改它。
 > 
-{type ="note"}
+{style ="note"}
 
 要赋值，使用赋值运算符 `=`。
 

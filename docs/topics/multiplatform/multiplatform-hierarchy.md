@@ -235,7 +235,7 @@ However, you still can do one of the following:
 >
 {style="tip"}
 
-#### See the full hierarchy template {initial-collapse-state="collapsed"}
+#### See the full hierarchy template {collapsible="true"}
 
 When you declare the targets to which your project compiles,
 the plugin picks the shared source sets based on the specified targets from the template and creates them in your project.

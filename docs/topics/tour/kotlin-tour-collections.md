@@ -1,50 +1,50 @@
-[//]: # (title: Collections)
+[//]: # (title: 集合)
 
-<microformat>
-    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
-        <img src="icon-3.svg" width="20" alt="Third step" /> <strong>Collections</strong><br />
-        <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow</a><br />
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">Classes</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety</a></p>
-</microformat>
+<tldr>
+    <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
+        <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
+        <img src="icon-3.svg" width="20" alt="第三步" /> <strong>集合</strong><br />
+        <img src="icon-4-todo.svg" width="20" alt="第四步" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
+        <img src="icon-5-todo.svg" width="20" alt="第五步" /> <a href="kotlin-tour-functions.md">函数</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="第六步" /> <a href="kotlin-tour-classes.md">类</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
+</tldr>
 
-When programming, it is useful to be able to group data into structures for later processing. Kotlin provides collections
-for exactly this purpose.
+在编程中，将数据分组到结构中以便后续处理是非常有用的。
+Kotlin 为此提供了专门的集合类型。
 
-Kotlin has the following collections for grouping items:
+Kotlin 提供了以下几种集合来分组元素：
 
-| **Collection type** | **Description**                                                         |
-|---------------------|-------------------------------------------------------------------------|
-| Lists               | Ordered collections of items                                            |
-| Sets                | Unique unordered collections of items                                   |
-| Maps                | Sets of key-value pairs where keys are unique and map to only one value |
+| **集合类型** | **描述**                     |
+|----------|----------------------------|
+| 列表       | 有序的元素集合                    |
+| 集合       | 唯一的无序元素集合                  |
+| 映射       | 键值对集合，其中键是唯一的，并且每个键只映射到一个值 |
 
-Each collection type can be mutable or read only.
+每种集合类型可以是可变的或只读的。
 
-## List
+## 列表 {id=list}
 
-Lists store items in the order that they are added, and allow for duplicate items. 
+列表按添加的顺序存储元素，并允许重复的元素。
 
-To create a read-only list ([`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/)), use the 
-[`listOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/list-of.html) function.
+要创建只读列表 ([`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/))，使用
+[`listOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/list-of.html) 函数。
 
-To create a mutable list ([`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list.html)),
-use the [`mutableListOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-list-of.html) function.
+要创建可变列表 ([`MutableList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list.html))，使用
+[`mutableListOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-list-of.html) 函数。
 
-When creating lists, Kotlin can infer the type of items stored. To declare the type explicitly, add the type
-within angled brackets `<>` after the list declaration:
+在创建列表时，Kotlin 可以推断存储元素的类型。
+要显式声明类型，请在列表声明后添加尖括号 `<>` 中的类型：
 
 ```kotlin
 fun main() { 
 //sampleStart
-    // Read only list
+    // 只读列表
     val readOnlyShapes = listOf("triangle", "square", "circle")
     println(readOnlyShapes)
     // [triangle, square, circle]
     
-    // Mutable list with explicit type declaration
+    // 带有显式类型声明的可变列表
     val shapes: MutableList<String> = mutableListOf("triangle", "square", "circle")
     println(shapes)
     // [triangle, square, circle]
@@ -53,67 +53,66 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lists-declaration"}
 
-> To prevent unwanted modifications, you can create a read-only view of a mutable list by assigning it to a `List`:
+> 为了防止不必要的修改，您可以通过将可变列表赋值给 `List` 来创建一个只读视图：
 > 
 > ```kotlin
 >     val shapes: MutableList<String> = mutableListOf("triangle", "square", "circle")
 >     val shapesLocked: List<String> = shapes
 > ```
-> This is also called **casting**.
+> 这也称为 **类型转换**。
 > 
-{type="tip"}
+{style="tip"}
 
-Lists are ordered so to access an item in a list, use the [indexed access operator](operator-overloading.md#indexed-access-operator) `[]`:
+列表是有序的，因此要访问列表中的项，请使用 [索引访问操作符](operator-overloading.md#indexed-access-operator) `[]`：
 
 ```kotlin
 fun main() { 
 //sampleStart
     val readOnlyShapes = listOf("triangle", "square", "circle")
-    println("The first item in the list is: ${readOnlyShapes[0]}")
-    // The first item in the list is: triangle
+    println("列表中的第一个元素是: ${readOnlyShapes[0]}")
+    // 列表中的第一个元素是: triangle
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-access"}
 
-To get the first or last item in a list, use [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html)
-and [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html) functions respectively:
+要获取列表中的第一个或最后一个元素，分别使用 [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和
+[`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html) 函数：
 
 ```kotlin
 fun main() { 
 //sampleStart
     val readOnlyShapes = listOf("triangle", "square", "circle")
-    println("The first item in the list is: ${readOnlyShapes.first()}")
-    // The first item in the list is: triangle
+    println("列表中的第一个元素是: ${readOnlyShapes.first()}")
+    // 列表中的第一个元素是: triangle
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-first"}
 
-> [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) and [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html)
-> functions are examples of **extension** functions. To call an extension function on an object, write the function name 
-> after the object appended with a period `.` 
+> [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和 [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html)
+> 函数是 **扩展** 函数的示例。
+> 要在对象上调用扩展函数，在对象后面写上函数名称并附加一个点 `.`。
 > 
-> For more information about extension functions, see [Extension functions](extensions.md#extension-functions).
-> For the purposes of this tour, you only need to know how to call them. 
+> 有关扩展函数的更多信息，请参见 [扩展函数](extensions.md#extension-functions)。
+> 在本教程中，您只需了解如何调用它们。
 > 
-{type="note"}
+{style="note"}
 
-To get the number of items in a list, use the [`.count()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/count.html)
-function:
+要获取列表中元素的数量，使用 [`.count()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/count.html) 函数：
 
 ```kotlin
 fun main() { 
 //sampleStart
     val readOnlyShapes = listOf("triangle", "square", "circle")
-    println("This list has ${readOnlyShapes.count()} items")
-    // This list has 3 items
+    println("该列表有 ${readOnlyShapes.count()} 项")
+    // 该列表有 3 项
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-count"}
 
-To check that an item is in a list, use the [`in` operator](operator-overloading.md#in-operator):
+要检查某项是否在列表中，使用 [`in` 操作符](operator-overloading.md#in-operator)：
 
 ```kotlin
 fun main() {
@@ -126,19 +125,20 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-in"}
 
-To add or remove items from a mutable list, use [`.add()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/add.html)
-and [`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) functions respectively:
+要向可变列表中添加或移除元素，分别使用
+[`.add()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-list/add.html) 和
+[`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) 函数：
 
 ```kotlin
 fun main() { 
 //sampleStart
     val shapes: MutableList<String> = mutableListOf("triangle", "square", "circle")
-    // Add "pentagon" to the list
+    // 将 "pentagon" 添加到列表中
     shapes.add("pentagon") 
     println(shapes)  
     // [triangle, square, circle, pentagon]
 
-    // Remove the first "pentagon" from the list
+    // 从列表中移除第一个 "pentagon"
     shapes.remove("pentagon") 
     println(shapes)  
     // [triangle, square, circle]
@@ -147,25 +147,25 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-list-add-remove"}
 
-## Set
+## 集合 {id=set}
 
-Whereas lists are ordered and allow duplicate items, sets are **unordered** and only store **unique** items.
+与列表有序且允许重复元素不同，集合是 **无序的** 并且只存储 **唯一** 元素。
 
-To create a read-only set ([`Set`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/)), use the 
-[`setOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/set-of.html) function.
+要创建只读集合 ([`Set`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/))，使用
+[`setOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/set-of.html) 函数。
 
-To create a mutable set ([`MutableSet`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/)),
-use the [`mutableSetOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-set-of.html) function.
+要创建可变集合 ([`MutableSet`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/))，使用
+[`mutableSetOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-set-of.html) 函数。
 
-When creating sets, Kotlin can infer the type of items stored. To declare the type explicitly, add the type
-within angled brackets `<>` after the set declaration:
+在创建集合时，Kotlin 可以推断存储元素的类型。
+要显式声明类型，请在集合声明后添加尖括号 `<>` 中的类型：
 
 ```kotlin
 fun main() {
 //sampleStart
-    // Read-only set
+    // 只读集合
     val readOnlyFruit = setOf("apple", "banana", "cherry", "cherry")
-    // Mutable set with explicit type declaration
+    // 带有显式类型声明的可变集合
     val fruit: MutableSet<String> = mutableSetOf("apple", "banana", "cherry", "cherry")
     
     println(readOnlyFruit)
@@ -175,36 +175,35 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-sets-declaration"}
 
-You can see in the previous example that because sets only contain unique elements, the duplicate `"cherry"` item is dropped.
+你可以在前面的示例中看到，由于集合只包含唯一的元素，重复的 `"cherry"` 项被丢弃了。
 
-> To prevent unwanted modifications, you can create a read-only view of a mutable set by assigning it to a `Set`:
-> 
+> 为了防止不必要的修改，你可以通过将可变集合赋值给 `Set` 来创建一个只读视图：
+>
 > ```kotlin
 >     val fruit: MutableSet<String> = mutableSetOf("apple", "banana", "cherry", "cherry")
 >     val fruitLocked: Set<String> = fruit
 > ```
 >
-{type="tip"}
+{style="tip"}
 
-> As sets are **unordered**, you can't access an item at a particular index.
+> 由于集合是 **无序的**，你无法按特定索引访问某个元素。
 > 
-{type="note"}
+{style="note"}
 
-To get the number of items in a set, use the [`.count()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/count.html)
-function:
+要获取集合中的元素数量，使用 [`.count()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/count.html) 函数：
 
 ```kotlin
 fun main() { 
 //sampleStart
     val readOnlyFruit = setOf("apple", "banana", "cherry", "cherry")
-    println("This set has ${readOnlyFruit.count()} items")
-    // This set has 3 items
+    println("该集合有 ${readOnlyFruit.count()} 项")
+    // 该集合有 3 项
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-set-count"}
 
-To check that an item is in a set, use the [`in` operator](operator-overloading.md#in-operator):
+要检查某项是否在集合中，使用 [`in` 操作符](operator-overloading.md#in-operator)：
 
 ```kotlin
 fun main() {
@@ -217,56 +216,56 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-set-in"}
 
-To add or remove items from a mutable set, use [`.add()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/add.html)
-and [`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) functions respectively:
+要向可变集合中添加或移除元素，分别使用
+[`.add()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-set/add.html) 和
+[`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) 函数：
 
 ```kotlin
 fun main() { 
 //sampleStart
     val fruit: MutableSet<String> = mutableSetOf("apple", "banana", "cherry", "cherry")
-    fruit.add("dragonfruit")    // Add "dragonfruit" to the set
+    fruit.add("dragonfruit")    // 将 "dragonfruit" 添加到集合中
     println(fruit)              // [apple, banana, cherry, dragonfruit]
     
-    fruit.remove("dragonfruit") // Remove "dragonfruit" from the set
+    fruit.remove("dragonfruit") // 从集合中移除 "dragonfruit"
     println(fruit)              // [apple, banana, cherry]
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-set-add-remove"}
 
-## Map
+## 映射 {id=map}
 
-Maps store items as key-value pairs. You access the value by referencing the key. You can imagine a map like a food menu.
-You can find the price (value), by finding the food (key) you want to eat. Maps are useful if you want to look up a value
-without using a numbered index, like in a list.
+映射将元素存储为键值对。通过引用键来访问值。
+你可以把映射想象成一个菜单。你可以通过找到你想吃的食物（键）来查找价格（值）。
+如果你想在不使用数字索引的情况下查找值，映射是很有用的，例如在列表中。
 
-> * Every key in a map must be unique so that Kotlin can understand which value you want to get. 
-> * You can have duplicate values in a map.
+> * 映射中的每个键必须是唯一的，以便 Kotlin 能够理解你想要获取哪个值。
+> * 映射中可以有重复的值。
 >
-{type="note"}
+{style="note"}
 
-To create a read-only map ([`Map`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/)), use the 
-[`mapOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/map-of.html) function.
+要创建只读映射 ([`Map`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/))，使用
+[`mapOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/map-of.html) 函数。
 
-To create a mutable map ([`MutableMap`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/)),
-use the [`mutableMapOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-map-of.html) function.
+要创建可变映射 ([`MutableMap`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-mutable-map/))，使用
+[`mutableMapOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-map-of.html) 函数。
 
-When creating maps, Kotlin can infer the type of items stored. To declare the type explicitly, add the types
-of the keys and values within angled brackets `<>` after the map declaration. For example: `MutableMap<String, Int>`.
-The keys have type `String` and the values have type `Int`.
+在创建映射时，Kotlin 可以推断存储元素的类型。
+要显式声明类型，请在映射声明后添加键和值的类型，在尖括号 `<>` 中，例如：`MutableMap<String, Int>`。
+其中键的类型为 `String`，值的类型为 `Int`。
 
-The easiest way to create maps is to use [`to`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/to.html) between each 
-key and its related value:
+创建映射的最简单方法是使用 [`to`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/to.html) 来连接每个键及其相关值：
 
 ```kotlin
 fun main() {
 //sampleStart
-    // Read-only map
+    // 只读映射
     val readOnlyJuiceMenu = mapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
     println(readOnlyJuiceMenu)
     // {apple=100, kiwi=190, orange=100}
 
-    // Mutable map with explicit type declaration
+    // 带有显式类型声明的可变映射
     val juiceMenu: MutableMap<String, Int> = mutableMapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
     println(juiceMenu)
     // {apple=100, kiwi=190, orange=100}
@@ -275,55 +274,54 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-maps-declaration"}
 
-> To prevent unwanted modifications, you can create a read-only view of a mutable map by assigning it to a `Map`:
-> 
+> 为了防止不必要的修改，你可以通过将可变映射赋值给 `Map` 来创建一个只读视图：
+>
 > ```kotlin
 >     val juiceMenu: MutableMap<String, Int> = mutableMapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
 >     val juiceMenuLocked: Map<String, Int> = juiceMenu
 > ```
 >
-{type="tip"}
+{style="tip"}
 
-To access a value in a map, use the [indexed access operator](operator-overloading.md#indexed-access-operator) `[]` with
-its key:
+要访问映射中的值，使用带有键的 [索引访问操作符](operator-overloading.md#indexed-access-operator) `[]`：
 
 ```kotlin
 fun main() {
 //sampleStart
-    // Read-only map
+    // 只读映射
     val readOnlyJuiceMenu = mapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
-    println("The value of apple juice is: ${readOnlyJuiceMenu["apple"]}")
-    // The value of apple juice is: 100
+    println("苹果汁的价格是: ${readOnlyJuiceMenu["apple"]}")
+    // 苹果汁的价格是: 100
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-access"}
 
-> If you try to access a key-value pair with a key that doesn't exist in a map, you see a `null` value:
+> 如果你尝试使用一个不存在的键访问键值对，你将看到一个 `null` 值：
 >
 > ```kotlin
 > fun main() {
 > //sampleStart
->     // Read-only map
+>     // 只读映射
 >     val readOnlyJuiceMenu = mapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
->     println("The value of pineapple juice is: ${readOnlyJuiceMenu["pineapple"]}")
->     // The value of pineapple juice is: null
+>     println("菠萝汁的价格是: ${readOnlyJuiceMenu["pineapple"]}")
+>     // 菠萝汁的价格是: null
 > //sampleEnd
 > }
 > ```
 > {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-no-key" validate="false"}
 > 
-> This tour explains null values later in the [Null safety](kotlin-tour-null-safety.md) chapter.
+> 本教程将在 [空值安全](kotlin-tour-null-safety.md) 章节中解释空值。
 > 
-{type="note"}
+{style="note"}
 
-You can also use the [indexed access operator](operator-overloading.md#indexed-access-operator) `[]` to add items to a mutable map:
+你也可以使用 [索引访问操作符](operator-overloading.md#indexed-access-operator) `[]` 来向可变映射中添加元素：
 
 ```kotlin
 fun main() {
 //sampleStart
     val juiceMenu: MutableMap<String, Int> = mutableMapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
-    juiceMenu["coconut"] = 150 // Add key "coconut" with value 150 to the map
+    juiceMenu["coconut"] = 150 // 将键 "coconut" 和值 150 添加到映射中
     println(juiceMenu)
     // {apple=100, kiwi=190, orange=100, coconut=150}
 //sampleEnd
@@ -331,14 +329,13 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-add-item"}
 
-To remove items from a mutable map, use the [`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) 
-function:
+要从可变映射中移除元素，使用 [`.remove()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/remove.html) 函数：
 
 ```kotlin
 fun main() {
 //sampleStart
     val juiceMenu: MutableMap<String, Int> = mutableMapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
-    juiceMenu.remove("orange")    // Remove key "orange" from the map
+    juiceMenu.remove("orange")    // 从映射中移除键 "orange"
     println(juiceMenu)
     // {apple=100, kiwi=190}
 //sampleEnd
@@ -346,23 +343,21 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-put-remove"}
 
-To get the number of items in a map, use the [`.count()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/count.html)
-function:
+要获取映射中的元素数量，使用 [`.count()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/count.html) 函数：
 
 ```kotlin
 fun main() {
 //sampleStart
-    // Read-only map
+    // 只读映射
     val readOnlyJuiceMenu = mapOf("apple" to 100, "kiwi" to 190, "orange" to 100)
-    println("This map has ${readOnlyJuiceMenu.count()} key-value pairs")
-    // This map has 3 key-value pairs
+    println("这个映射有 ${readOnlyJuiceMenu.count()} 个键值对")
+    // 这个映射有 3 个键值对
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-count"}
 
-To check if a specific key is already included in a map, use the [`.containsKey()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/contains-key.html)
-function:
+要检查映射中是否包含特定的键，使用 [`.containsKey()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/contains-key.html) 函数：
 
 ```kotlin
 fun main() {
@@ -375,8 +370,8 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-contains-keys"}
 
-To obtain a collection of the keys or values of a map, use the [`keys`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/keys.html)
-and [`values`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/values.html) properties respectively:
+要获取映射的键集合或值集合，分别使用 [`keys`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/keys.html)
+和 [`values`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/values.html) 属性：
 
 ```kotlin
 fun main() {
@@ -391,16 +386,16 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-keys-values"}
 
-> [`keys`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/keys.html) and [`values`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/values.html)
-> are examples of **properties** of an object. To access the property of an object, write the property name
-> after the object appended with a period `.`
+> [`keys`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/keys.html) 和
+> [`values`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-map/values.html) 是对象的 **属性** 示例。
+> 要访问对象的属性，在对象后面写属性名称，属性名称前加点 `.`。
 >
-> Properties are discussed in more detail in the [Classes](kotlin-tour-classes.md) chapter.
-> At this point in the tour, you only need to know how to access them.
+> 属性在 [类](kotlin-tour-classes.md) 章节中有更详细的讨论。
+> 在本教程的这一阶段，你只需知道如何访问它们即可。
 >
-{type="note"}
+{style="note"}
 
-To check that a key or value is in a map, use the [`in` operator](operator-overloading.md#in-operator):
+要检查映射中是否存在某个键或值，使用 [`in` 操作符](operator-overloading.md#in-operator)：
 
 ```kotlin
 fun main() {
@@ -409,7 +404,7 @@ fun main() {
     println("orange" in readOnlyJuiceMenu.keys)
     // true
     
-    // Alternatively, you don't need to use the keys property
+    // 另外，你不需要使用 keys 属性
     println("orange" in readOnlyJuiceMenu)
     // true
     
@@ -420,24 +415,22 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-map-in"}
 
-For more information on what you can do with collections, see [Collections](collections-overview.md).
+有关集合的更多信息，请参阅 [集合](collections-overview.md)。
 
-Now that you know about basic types and how to manage collections, it's time to explore the [control flow](kotlin-tour-control-flow.md)
-that you can use in your programs.
+现在你了解了基本类型和如何管理集合，接下来可以探索在程序中使用的 [控制流](kotlin-tour-control-flow.md)。
 
-## Practice
+## 练习 {id=practice}
 
-### Exercise 1 {initial-collapse-state="collapsed"}
+### 练习 1 {id=exercise-1 collapsible="true"}
 
-You have a list of “green” numbers and a list of “red” numbers. Complete the code to print how many numbers there
-are in total.
+你有一个 “green” 数字列表和一个 “red” 数字列表。 完成代码以打印总共有多少个数字。
 
 |---|---|
 ```kotlin
 fun main() {
     val greenNumbers = listOf(1, 4, 23)
     val redNumbers = listOf(17, 2)
-    // Write your code here
+    // 在这里写下你的代码
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-collections-exercise-1"}
@@ -451,28 +444,27 @@ fun main() {
     println(totalCount)
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-collections-solution-1"}
+{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-1"}
 
-### Exercise 2 {initial-collapse-state="collapsed"}
+### 练习 2 {id=exercise-2 collapsible="true"}
 
-You have a set of protocols supported by your server. A user requests to use a particular protocol. Complete the program
-to check whether the requested protocol is supported or not (`isSupported` must be a Boolean value).
+你有一组由服务器支持的协议。用户请求使用某个特定协议。
+完成程序以检查所请求的协议是否受支持（`isSupported` 必须是一个布尔值）。
 
 |---|---|
 ```kotlin
 fun main() {
     val SUPPORTED = setOf("HTTP", "HTTPS", "FTP")
     val requested = "smtp"
-    val isSupported = // Write your code here 
+    val isSupported = // 在这里写下你的代码
     println("Support for $requested: $isSupported")
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-collections-exercise-2"}
 
 <deflist collapsible="true" id="kotlin-tour-collections-exercise-2-hint">
-    <def title="Hint">
-        Make sure that you check the requested protocol in upper case. You can use the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html"><code>.uppercase()</code></a>
-function to help you with this.
+    <def title="提示">
+        确保你以大写形式检查请求的协议。你可以使用 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html"><code>.uppercase()</code></a> 函数来帮助你完成这个任务。
     </def>
 </deflist>
 
@@ -485,19 +477,19 @@ fun main() {
     println("Support for $requested: $isSupported")
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-collections-solution-2"}
+{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-2"}
 
-### Exercise 3 {initial-collapse-state="collapsed"}
+### 练习 3 {id=exercise-3 collapsible="true"}
 
-Define a map that relates integer numbers from 1 to 3 to their corresponding spelling. Use this map to spell the given 
-number.
+定义一个将 1 到 3 的整数与它们对应的拼写关联的映射。
+使用这个映射来拼写给定的数字。
 
 |---|---|
 ```kotlin
 fun main() {
-    val number2word = // Write your code here
+    val number2word = // 在这里写下你的代码
     val n = 2
-    println("$n is spelt as '${<Write your code here >}'")
+    println("$n is spelt as '${<在这里写下你的代码>}'")
 }
 ```
 {validate="false" kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-collections-exercise-3"}
@@ -510,8 +502,8 @@ fun main() {
     println("$n is spelt as '${number2word[n]}'")
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-collections-solution-3"}
+{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-3"}
 
-## Next step
+## 下一步
 
-[Control flow](kotlin-tour-control-flow.md)
+[控制流](kotlin-tour-control-flow.md)

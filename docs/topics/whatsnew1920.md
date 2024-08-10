@@ -540,7 +540,7 @@ introduced intermediate sources manually with  `dependsOn()` calls. To solve thi
 
   We're currently working on an API for creating your own hierarchy templates to simplify the setup process in such cases.
 
-#### See the full hierarchy template {initial-collapse-state="collapsed"}
+#### See the full hierarchy template {collapsible="true"}
 
 When you declare the targets to which your project compiles,
 the plugin picks the shared source sets from the template accordingly and creates them in your project.

@@ -18,7 +18,7 @@ To make your framework consumable, you'll need to upload two files:
   Choose the option that is easiest to integrate into your workflow.
 * The `Package.swift` file describing the package. You'll need to push it to a separate Git repository.
 
-#### Project configuration options {initial-collapse-state="collapsed"}
+#### Project configuration options {collapsible="true"}
 
 In this tutorial, you'll store your XCFramework as a binary in your preferred file storage, and the `Package.swift` file
 in a separate Git repository.

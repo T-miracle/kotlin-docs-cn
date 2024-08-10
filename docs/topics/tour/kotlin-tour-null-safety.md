@@ -1,14 +1,14 @@
-[//]: # (title: Null safety)
+[//]: # (title: 空值安全)
 
-<microformat>
-    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-basic-types.md">Basic types</a><br />
-        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
-        <img src="icon-4-done.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow</a><br />
-        <img src="icon-5-done.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions</a><br />
-        <img src="icon-6-done.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">Classes</a><br />
-        <img src="icon-7.svg" width="20" alt="Final step" /> <strong>Null safety</strong><br /></p>
-</microformat>
+<tldr>
+    <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
+        <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
+        <img src="icon-3-done.svg" width="20" alt="第三步" /> <a href="kotlin-tour-collections.md">集合</a><br />
+        <img src="icon-4-done.svg" width="20" alt="第四步" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
+        <img src="icon-5-done.svg" width="20" alt="第五步" /> <a href="kotlin-tour-functions.md">函数</a><br />
+        <img src="icon-6.svg" width="20" alt="第六步" /> <strong>类</strong><br />
+        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空安全</a></p>
+</tldr>
 
 In Kotlin, it's possible to have a `null` value. Kotlin uses `null` values when something is missing or not yet set.
 You've already seen an example of Kotlin returning a `null` value in the [Collections](kotlin-tour-collections.md#kotlin-tour-map-no-key)
@@ -156,7 +156,7 @@ For more information about null safety in Kotlin, see [Null safety](null-safety.
 
 ## Practice
 
-### Exercise {initial-collapse-state="collapsed"}
+### Exercise {collapsible="true"}
 
 You have the `employeeById` function that gives you access to a database of employees of a company. Unfortunately, this 
 function returns a value of the `Employee?` type, so the result can be `null`. Your goal is to write a function that 
@@ -200,7 +200,7 @@ fun main() {
     println((1..5).sumOf { id -> salaryById(id) })
 }
 ```
-{initial-collapse-state="collapsed" collapsed-title="Example solution" id="kotlin-tour-null-safety-solution"}
+{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-null-safety-solution"}
 
 ## What's next?
 

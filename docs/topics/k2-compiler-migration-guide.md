@@ -1115,7 +1115,7 @@ For more information, see the corresponding issue in [YouTrack](https://youtrack
 These subject areas list changes that are unlikely to affect your code but provide links to the relevant YouTrack issues
 for further reading. Changes listed with an asterisk (*) next to the Issue ID are explained at the beginning of the section.
 
-#### Type inference {initial-collapse-state="collapsed"}
+#### Type inference {collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                      |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -1136,7 +1136,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-65750](https://youtrack.jetbrains.com/issue/KT-65750) | Increment and plus operators that change return type must affect smart casts                               |
 | [KT-65349](https://youtrack.jetbrains.com/issue/KT-65349) | [LC] K2: specifying variable types explicitly breaks bound smart casts in some cases that worked in K1     |
 
-#### Generics {initial-collapse-state="collapsed"}
+#### Generics {collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                                 |
 |------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1154,7 +1154,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-64966](https://youtrack.jetbrains.com/issue/KT-64966)  | Forbid generic delegating constructor calls with wrong type for generic parameter                                                                     |
 | [KT-65712](https://youtrack.jetbrains.com/issue/KT-65712)  | Report missing upper bound violation when upper bound is captured type                                                                                |
 
-#### Resolution {initial-collapse-state="collapsed"}
+#### Resolution {collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                                                                        |
 |------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1170,7 +1170,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-64431](https://youtrack.jetbrains.com/issue/KT-64431)  | K2: forbid using typealiases as qualifier in imports                                                                                                                                         |
 | [KT-56520](https://youtrack.jetbrains.com/issue/KT-56520)  | K1/K2: incorrect work of resolve tower for type references with ambiguity at lower level                                                                                                     |
 
-#### Visibility {initial-collapse-state="collapsed"}
+#### Visibility {collapsible="true"}
 
 | Issue ID                                                    | Title                                                                                                                          |
 |-------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
@@ -1185,7 +1185,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-65004](https://youtrack.jetbrains.com/issue/KT-65004)   | K1: Setter of var, which overrides protected val, is generates as public                                                       |
 | [KT-64972](https://youtrack.jetbrains.com/issue/KT-64972)   | Forbid overriding by private members in link-time for Kotlin/Native                                                            |
 
-#### Annotations {initial-collapse-state="collapsed"}
+#### Annotations {collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                  |
 |-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
@@ -1199,7 +1199,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-63389](https://youtrack.jetbrains.com/issue/KT-63389) | K2: \`WRONG_ANNOTATION_TARGET\` is reported on incompatible annotations of a type wrapped into \`()?\` |
 | [KT-63388](https://youtrack.jetbrains.com/issue/KT-63388) | K2: \`WRONG_ANNOTATION_TARGET\` is reported on catch parameter type's annotations                      |
 
-#### Null safety {initial-collapse-state="collapsed"}
+#### Null safety {collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                   |
 |------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -1210,7 +1210,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-62998](https://youtrack.jetbrains.com/issue/KT-62998)  | Forbid assignment of a nullable to a not-null Java field as a selector of unsafe assignment                             |
 | [KT-63209](https://youtrack.jetbrains.com/issue/KT-63209)  | Report missing errors for error-level nullable arguments of warning-level Java types                                    |
 
-#### Java interoperability {initial-collapse-state="collapsed"}
+#### Java interoperability {collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                      |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -1220,7 +1220,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-66220](https://youtrack.jetbrains.com/issue/KT-66220) | Passing java vararg method to inline function leads to array of arrays in runtime instead of just an array |
 | [KT-66204](https://youtrack.jetbrains.com/issue/KT-66204) | Allow to override internal members in K-J-K hierarchy                                                      |
 
-#### Properties {initial-collapse-state="collapsed"}
+#### Properties {collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                         |
 |------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1230,7 +1230,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-57290](https://youtrack.jetbrains.com/issue/KT-57290)  | Deprecate smart cast on base class property from invisible derived class if base class is from another module                                 |
 | [KT-62661](https://youtrack.jetbrains.com/issue/KT-62661)  | K2: Missed OPT_IN_USAGE_ERROR for data class properties                                                                                       |
 
-#### Control flow {initial-collapse-state="collapsed"}
+#### Control flow {collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                      |
 |-----------------------------------------------------------|--------------------------------------------------------------------------------------------|
@@ -1239,7 +1239,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-42995](https://youtrack.jetbrains.com/issue/KT-42995) | False negative "VAL_REASSIGNMENT" in try/catch block with initialization in scope function |
 | [KT-65724](https://youtrack.jetbrains.com/issue/KT-65724) | Propagate data flow information from try block to catch and finally blocks                 |
 
-#### Enum classes {initial-collapse-state="collapsed"}
+#### Enum classes {collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                        |
 |-----------------------------------------------------------|----------------------------------------------------------------------------------------------|
@@ -1248,7 +1248,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-52802](https://youtrack.jetbrains.com/issue/KT-52802) | Report ambiguity resolving between property/field and enum entry                             |
 | [KT-47310](https://youtrack.jetbrains.com/issue/KT-47310) | Change qualifier resolution behavior when companion property is preferred against enum entry |
 
-#### Functional (SAM) interfaces {initial-collapse-state="collapsed"}
+#### Functional (SAM) interfaces {collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                           |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
@@ -1256,14 +1256,14 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-57014](https://youtrack.jetbrains.com/issue/KT-57014) | Prohibit returning values with incorrect nullability from lambda for SAM constructor of JDK function interfaces |
 | [KT-64342](https://youtrack.jetbrains.com/issue/KT-64342) | SAM conversion of parameter types of callable references leads to CCE                                           |
 
-#### Companion object {initial-collapse-state="collapsed"}
+#### Companion object {collapsible="true"}
 
 | Issue ID                                                  | Title                                                                    |
 |-----------------------------------------------------------|--------------------------------------------------------------------------|
 | [KT-54316](https://youtrack.jetbrains.com/issue/KT-54316) | Out-of-call reference to companion object's member has invalid signature |
 | [KT-47313](https://youtrack.jetbrains.com/issue/KT-47313) | Change (V)::foo reference resolution when V has a companion              |
 
-#### Miscellaneous {initial-collapse-state="collapsed"}
+#### Miscellaneous {collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                      |
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|

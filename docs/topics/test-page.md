@@ -56,7 +56,7 @@ plugins {
 
 ## Sections
 
-### Collapsed section {initial-collapse-state="collapsed"}
+### Collapsed section {collapsible="true"}
 
 Some text here and a codeblock:
 
@@ -112,7 +112,7 @@ class MessageController {
     fun index(@RequestParam("name") name: String) = "Hello, $name!"
 }
 ```
-{initial-collapse-state="collapsed"}
+{collapsible="true"}
 
 ### Runnable codeblock
 
