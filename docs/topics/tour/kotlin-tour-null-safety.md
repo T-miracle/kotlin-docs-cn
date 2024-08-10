@@ -7,71 +7,70 @@
         <img src="icon-4-done.svg" width="20" alt="第四步" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
         <img src="icon-5-done.svg" width="20" alt="第五步" /> <a href="kotlin-tour-functions.md">函数</a><br />
         <img src="icon-6.svg" width="20" alt="第六步" /> <strong>类</strong><br />
-        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空安全</a></p>
+        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
 </tldr>
 
-In Kotlin, it's possible to have a `null` value. Kotlin uses `null` values when something is missing or not yet set.
-You've already seen an example of Kotlin returning a `null` value in the [Collections](kotlin-tour-collections.md#kotlin-tour-map-no-key)
-chapter when you tried to access a key-value pair with a key that doesn't exist in the map. Although it's useful to use
-`null` values in this way, you might run into problems if your code isn't prepared to handle them. 
+在 Kotlin 中，`null` 值是有可能出现的。当某些东西缺失或尚未设置时，Kotlin 就会使用 `null` 值。
+你已经在 [集合](kotlin-tour-collections.md#kotlin-tour-map-no-key)
+章节中看到过 Kotlin 返回 `null`值的例子，当你尝试访问一个在映射中不存在的键值对时。
+虽然以这种方式使用 `null` 值很有用，但如果你的代码没有准备好处理这些值，你可能会遇到问题。
 
-To help prevent issues with `null` values in your programs, Kotlin has null safety in place. Null safety detects
-potential problems with `null` values at compile time, rather than at run time.
+为了帮助防止程序中出现 `null` 值问题，Kotlin 提供了 `null` 安全性。
+`null` 安全性在编译时检测潜在的 `null` 值问题，而不是在运行时。
 
-Null safety is a combination of features that allow you to:
+`null` 安全性是一组功能的组合，它允许你：
 
-* Explicitly declare when `null` values are allowed in your program.
-* Check for `null` values.
-* Use safe calls to properties or functions that may contain `null` values.
-* Declare actions to take if `null` values are detected.
+* 明确声明在程序中何时允许 `null` 值。
+* 检查 `null` 值。
+* 使用安全调用来访问可能包含 `null` 值的属性或方法。
+* 声明在检测到 `null` 值时要采取的操作。
 
-## Nullable types
+## 可空类型 {id=nullable-types}
 
-Kotlin supports nullable types which allows the possibility for the declared type to have `null` values. By default, a type
-is **not** allowed to accept `null` values. Nullable types are declared by explicitly adding `?` after the type declaration.
+Kotlin 支持可空类型，这允许声明的类型具有 `null` 值。
+默认情况下，类型 **不** 允许接受 `null` 值。可空类型通过在类型声明后显式添加 `?` 来声明。
 
-For example:
+例如：
 
 ```kotlin
 fun main() {
-    // neverNull has String type
+    // neverNull 具有 String 类型
     var neverNull: String = "This can't be null"
 
-    // Throws a compiler error
+    // 会抛出编译错误
     neverNull = null
 
-    // nullable has nullable String type
+    // nullable 具有可空 String 类型
     var nullable: String? = "You can keep a null here"
 
-    // This is OK
+    // 这没问题
     nullable = null
 
-    // By default, null values aren't accepted
+    // 默认情况下，null 值是不被接受的
     var inferredNonNull = "The compiler assumes non-nullable"
 
-    // Throws a compiler error
+    // 会抛出编译错误
     inferredNonNull = null
 
-    // notNull doesn't accept null values
+    // notNull 不接受 null 值
     fun strLength(notNull: String): Int {                 
         return notNull.length
     }
 
     println(strLength(neverNull)) // 18
-    println(strLength(nullable))  // Throws a compiler error
+    println(strLength(nullable))  // 会抛出编译错误
 }
 ```
-{kotlin-runnable="true" validate="false" kotlin-min-compiler-version="1.3" id="kotlin-tour-nullable-type"}
 
-> `length` is a property of the [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/) class that 
-> contains the number of characters within a string.
+> `length` 是 [String](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/)
+> 类的一个属性，表示字符串中字符的数量。
 >
-{type="tip"}
+{style="tip"}
 
-## Check for null values
+## 检查 `null` 值 {id=check-for-null-values}
 
-You can check for the presence of `null` values within conditional expressions. In the following example, the `describeString()`
-function has an `if` statement that checks whether `maybeString` is **not** `null` and if its `length` is greater than zero:
+你可以在条件表达式中检查 `null` 值的存在。在下面的例子中，`describeString()`
+函数有一个 `if` 语句，它检查 `maybeString` 是否 **不** 为 `null` 并且其 `length` 是否大于零：
 
 ```kotlin
 fun describeString(maybeString: String?): String {
@@ -88,15 +87,14 @@ fun main() {
     // Empty or null string
 }
 ```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-check-nulls"}
 
-## Use safe calls
+## 使用安全调用 {id=use-safe-calls}
 
-To safely access properties of an object that might contain a `null` value, use the safe call operator `?.`. The safe call
-operator returns `null` if either the object or one of its accessed properties is `null`. This is useful if you want to avoid the presence of `null`
-values triggering errors in your code.
+要安全地访问可能包含 `null` 值的对象的属性，可以使用安全调用操作符 `?.`。
+安全调用操作符会在对象或其访问的属性为 `null` 时返回 `null`。
+这在你想避免 `null` 值在代码中触发错误时非常有用。
 
-In the following example, the `lengthString()` function uses a safe call to return either the length of the string or `null`:
+在下面的例子中，`lengthString()` 函数使用安全调用来返回字符串的长度或 `null`：
 
 ```kotlin
 fun lengthString(maybeString: String?): Int? = maybeString?.length
@@ -107,22 +105,21 @@ fun main() {
     // null
 }
 ```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-safe-call-property"}
 
-> Safe calls can be chained so that if any property of an object contains a `null` value, then `null` is returned without 
-> an error being thrown. For example:
+> 安全调用可以链式使用，以便如果对象的任何属性包含 `null` 值，则返回 `null` 而不会抛出错误。
+> 例如：
 > 
 > ```kotlin
 >   person.company?.address?.country
 > ```
 >
-{type="tip"}
+{style="tip"}
 
-The safe call operator can also be used to safely call an extension or member function. In this case, a null check is 
-performed before the function is called. If the check detects a `null` value, then the call is skipped and `null` is returned.
+安全调用操作符也可以用来安全地调用扩展函数或成员函数。
+在这种情况下，会在调用函数之前执行 `null` 检查。如果检查发现 `null` 值，则跳过调用并返回 `null`。
 
-In the following example, `nullString` is `null` so the invocation of [`.uppercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html)
-is skipped and `null` is returned:
+在下面的例子中，`nullString` 为 `null`，因此调用 [`.uppercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/uppercase.html)
+被跳过，返回 `null`：
 
 ```kotlin
 fun main() {
@@ -133,15 +130,14 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-safe-call-function"}
 
-## Use Elvis operator
+## 使用 Elvis 操作符 {id=use-elvis-operator}
 
-You can provide a default value to return if a `null` value is detected by using the **Elvis operator** `?:`.
+你可以使用 **Elvis 操作符** `?:` 提供一个默认值，当检测到 `null` 值时返回该默认值。
 
-Write on the left-hand side of the Elvis operator what should be checked for a `null` value.
-Write on the right-hand side of the Elvis operator what should be returned if a `null` value is detected.
+在 Elvis 操作符的左侧写出要检查的 `null` 值，在右侧写出检测到 `null` 值时应返回的默认值。
 
-In the following example, `nullString` is `null` so the safe call to access the `length` property returns a `null` value.
-As a result, the Elvis operator returns `0`:
+在下面的例子中，`nullString` 为 `null`，因此安全调用访问 `length` 属性返回 `null` 值。
+结果，Elvis 操作符返回 `0`：
 
 ```kotlin
 fun main() {
@@ -150,17 +146,16 @@ fun main() {
     // 0
 }
 ```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-elvis-operator"}
 
-For more information about null safety in Kotlin, see [Null safety](null-safety.md).
+有关 Kotlin 中 `null` 安全性的更多信息，请参见 [空值安全](null-safety.md)。
 
-## Practice
+## 实践 {id=practice}
 
-### Exercise {collapsible="true"}
+### 练习 {collapsible="true"}
 
-You have the `employeeById` function that gives you access to a database of employees of a company. Unfortunately, this 
-function returns a value of the `Employee?` type, so the result can be `null`. Your goal is to write a function that 
-returns the salary of an employee when their `id` is provided, or `0` if the employee is missing from the database.
+你有一个 `employeeById` 函数，它可以访问公司员工的数据库。
+不幸的是，这个函数返回 `Employee?` 类型的值，因此结果可能是 `null`。
+你的目标是编写一个函数，当提供员工的 `id` 时返回该员工的薪水，如果数据库中缺少该员工，则返回 `0`。
 
 |---|---|
 ```kotlin
@@ -174,7 +169,7 @@ fun employeeById(id: Int) = when(id) {
     else -> null
 }
 
-fun salaryById(id: Int) = // Write your code here
+fun salaryById(id: Int) = // 在这里写下你的代码
 
 fun main() {
     println((1..5).sumOf { id -> salaryById(id) })
@@ -200,11 +195,11 @@ fun main() {
     println((1..5).sumOf { id -> salaryById(id) })
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-null-safety-solution"}
+{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-null-safety-solution"}
 
-## What's next?
+## 下一步是什么？
 
-Congratulations! Now that you have completed the Kotlin tour, check out our tutorials for popular Kotlin applications:
+恭喜！现在你已经完成了 Kotlin 之旅，之后请查看我们有关 Kotlin 常用应用的教程：
 
-* [Create a backend application](jvm-create-project-with-spring-boot.md)
-* [Create a cross-platform application for Android and iOS](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html)
+* [创建后台应用程序](jvm-create-project-with-spring-boot.md)
+* [为 Android 和 iOS 创建跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html)

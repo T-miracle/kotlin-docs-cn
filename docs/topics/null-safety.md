@@ -1,4 +1,4 @@
-[//]: # (title: 空安全)
+[//]: # (title: 空值安全)
 
 ## 可空类型与非空类型 {id=nullable-types-and-non-nullable-types}
 
