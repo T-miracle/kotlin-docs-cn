@@ -34,7 +34,7 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 >
 {style="note"}
 
-### 源文件命名 {id=源文件命名}
+### 源文件命名 {id=source-file-names}
 
 如果一个 Kotlin 文件包含一个单一的类或接口（可能带有相关的顶级声明），其名称应与类的名称相同，附加 `.kt` 扩展名。这适用于所有类型的类和接口。
 如果一个文件包含多个类或仅包含顶级声明，请选择一个描述文件内容的名称，并相应地命名文件。
