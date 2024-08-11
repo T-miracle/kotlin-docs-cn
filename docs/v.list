@@ -5,7 +5,7 @@
 <vars>
 
   <!--当前主仓库版本号-->
-  <var name="commitId" value="22e7331670d5a9db0bc1fe63244d9938b7715dc0" type="string"/>
+  <var name="commitId" value="eae90f55a0d81f1f54e32a185fbef2888bed53d6" type="string"/>
 
   <!--当前 协程 仓库版本号-->
   <var name="coroutinesCommitId" value="c1ba5af8c5d10a3d2f923f89b98f6ab1b394e24d" type="string"/>
@@ -22,13 +22,13 @@
   <!--当前 dokka 仓库版本号-->
   <var name="dokkaCommitId" value="f1ea0c921a2df8c36a8f9fc1572b9cec52e8a553" type="string"/>
 
-  <var name="kotlinVersion" value="2.0.0" type="string"/>
+  <var name="kotlinVersion" value="2.0.10" type="string"/>
 
   <var name="kotlinEapVersion" value="2.0.20-RC" type="string"/>
 
-  <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.0.0" type="string"/>
+  <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.0.10" type="string"/>
 
-  <var name="kotlinReleaseDate" value="May 21, 2024" type="string"/>
+  <var name="kotlinReleaseDate" value="August 6, 2024" type="string"/>
 
   <var name="kotlinEapReleaseDate" value="July 30, 2024" type="string"/>
 

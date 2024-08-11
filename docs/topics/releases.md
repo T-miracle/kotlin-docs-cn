@@ -61,11 +61,11 @@ plugins {
 
 即使在 K2 编译器发布之后，IntelliJ IDEA 和 Android Studio 仍默认使用以前的编译器进行代码分析、代码完成、高亮显示和其他 IDE 相关功能。
 
-从 2024.1 版本开始，IntelliJ IDEA 可以使用新的 K2 编译器，通过其 K2 Kotlin 模式来分析你的代码。
-要启用它，请前往 **Settings** | **Languages & Frameworks** | **Kotlin**，并选择 **Enable K2 Kotlin Mode** 选项。
+从 2024.1 开始，IntelliJ IDEA 可以使用新的 K2 编译器来分析你的代码，通过其 K2 模式进行分析。
+要启用它，请前往 **Settings** | **Languages & Frameworks** | **Kotlin**，然后选择 **Enable K2 Kotlin Mode** 选项。
 
-> K2 Kotlin 模式处于 Alpha 版本。
-> 代码高亮和代码完成的性能和稳定性有了显著提升，但并非所有 IDE 功能都已支持。
+> K2 模式从 2024.2 开始处于 Beta 阶段。
+> 我们正在致力于提高稳定性和代码分析，但并非所有 IDE 功能都已支持。
 >
 {style="warning"}
 
@@ -90,6 +90,16 @@ plugins {
         <th>构建亮点</th>
     </tr>
     <tr>
+        <td><strong>2.0.10</strong>
+            <p>Released: <strong>August 6, 2024</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.10" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A bug fix release for Kotlin 2.0.0.</p>
+            <p>Learn more about Kotlin 2.0.0 in <a href="whatsnew20.md" target="_blank">What's new in Kotlin 2.0.0</a>.</p>
+        </td>
+    </tr>
+    <tr>
         <td><strong>2.0.0</strong>
             <p>发布日期： <strong>2024.5.21</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.0" target="_blank">GitHub 上的发布</a></p>
@@ -105,8 +115,8 @@ plugins {
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v1.9.25" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>针对 Kotlin 1.9.20、1.9.21、1.9.22、1.9.23 和 1.9.24 的错误修复版本。</p>
-            <p>在 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 新特性</a> 中了解更多关于 Kotlin 1.9.20 的信息。</p>
+            <p>Kotlin 1.9.20、1.9.21、1.9.22、1.9.23 和 1.9.24 的错误修复版本。</p>
+            <p>了解有关 Kotlin 1.9.20 的更多信息，请参阅 <a href="whatsnew1920.md" target="_blank">Kotlin 1.9.20 的新增功能</a>.</p>
         </td>
     </tr>
     <tr>
