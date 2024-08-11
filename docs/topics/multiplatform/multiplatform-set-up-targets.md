@@ -1,34 +1,33 @@
-[//]: # (title: Set up targets for Kotlin Multiplatform)
+[//]: # (title: 设置 Kotlin 跨平台的目标)
 
-You can add targets when creating a project with the [project wizard](https://kmp.jetbrains.com/). If you need to add a target 
-later, you can do this manually using target presets for [supported platforms](multiplatform-dsl-reference.md#targets).
+你可以在使用 [项目向导](https://kmp.jetbrains.com/) 创建项目时添加目标。
+如果需要稍后添加目标，可以手动为 [支持的平台](multiplatform-dsl-reference.md#targets) 添加目标预设。
 
-Learn more about [additional settings for targets](multiplatform-dsl-reference.md#common-target-configuration).
+了解更多关于 [目标的附加设置](multiplatform-dsl-reference.md#common-target-configuration)。
 
 ```kotlin
 kotlin {
-    jvm() // Create a JVM target with the default name 'jvm'
+    jvm() // 使用默认名称 'jvm' 创建一个 JVM 目标
         
     linuxX64() {
-        /* Specify additional settings for the 'linux' target here */
+        /* 在这里为 'linux' 目标指定附加设置 */
     }
 }
 ```
 
-Each target can have one or more [compilations](multiplatform-configure-compilations.md). In addition to default compilations for
-test and production purposes, you can [create custom compilations](multiplatform-configure-compilations.md#create-a-custom-compilation).
+每个目标可以包含一个或多个 [编译](multiplatform-configure-compilations.md)。
+除了用于测试和生产的默认编译，你还可以 [创建自定义编译](multiplatform-configure-compilations.md#create-a-custom-compilation)。
 
-## Distinguish several targets for one platform
+## 区分同一平台的多个目标 {id=distinguish-several-targets-for-one-platform}
 
-You can have several targets for one platform in a multiplatform library. For example, these targets can provide the same 
-API but use different libraries during runtime, such as testing frameworks and logging solutions. Dependencies on such 
-a multiplatform library may fail to resolve because it isn't clear which target to choose.
+在跨平台库中，你可以为一个平台设置多个目标。
+例如，这些目标可以提供相同的 API，但在运行时使用不同的库，如测试框架和日志解决方案。
+由于无法明确选择哪个目标，依赖于这样的跨平台库可能会导致无法解析。
 
-To solve this, mark the targets on both the library author and consumer sides with a custom attribute, which Gradle uses 
-during dependency resolution.
+为了解决这个问题，库作者和消费者需要在目标上标记自定义属性，Gradle 会在依赖解析时使用这些属性。
  
-For example, consider a testing library that supports both JUnit and TestNG in the two targets. The library author needs 
-to add an attribute to both targets as follows:
+例如，假设有一个支持 JUnit 和 TestNG 的测试库。
+库作者需要为两个目标添加如下属性：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -65,4 +64,4 @@ kotlin {
 </tab>
 </tabs>
 
-The consumer has to add the attribute to a single target where the ambiguity arises.
+消费者需要在发生歧义的单个目标中添加该属性。
