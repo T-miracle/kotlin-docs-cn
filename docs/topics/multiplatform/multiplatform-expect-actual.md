@@ -1,70 +1,62 @@
-[//]: # (title: Expected and actual declarations)
+[//]: # (title: 预期声明和实际声明)
 
-Expected and actual declarations allow you to access platform-specific APIs from Kotlin Multiplatform modules.
-You can provide platform-agnostic APIs in the common code.
+预期声明和实际声明允许你从 Kotlin 跨平台模块访问平台特定的 API。你可以在通用代码中提供与平台无关的 API。
 
-> This article describes the language mechanism of expected and actual declarations. For general recommendations on
-> different ways to use platform-specific APIs, see [Use platform-specific APIs](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html).
+> 本文描述了预期声明和实际声明的语言机制。关于使用平台特定 API 的一般建议，请参阅
+> [使用平台特定 API](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html)。
 >
 {style="tip"}
 
-## Rules for expected and actual declarations
+## 预期声明和实际声明的规则 {id="rules-for-expected-and-actual-declarations"}
 
-To define expected and actual declarations, follow these rules:
+要定义预期声明和实际声明，请遵循以下规则：
 
-1. In the common source set, declare a standard Kotlin construct. This can be a function, property, class, interface,
-   enumeration, or annotation.
-2. Mark this construct with the `expect` keyword. This is your _expected declaration_. These declarations can be used in the
-   common code, but shouldn't include any implementation. Instead, the platform-specific code provides this implementation.
-3. In each platform-specific source set, declare the same construct in the same package and mark it with the `actual`
-   keyword. This is your _actual declaration_, which typically contains an implementation using platform-specific libraries.
+1. 在通用源代码集中，声明一个标准的 Kotlin 构造。
+   这可以是一个函数、属性、类、接口、枚举或注解。
+2. 使用 `expect` 关键字标记这个构造。这是你的 _预期声明_。
+   这些声明可以在通用代码中使用，但不应包含任何实现。相应的实现由平台特定代码提供。
+3. 在每个平台特定的源代码集中，在相同的包中声明相同的构造，并使用 `actual` 关键字标记它。
+   这是你的 _实际声明_，通常包含使用平台特定库的实现。
 
-During compilation for a specific target, the compiler tries to match each _actual_ declaration it finds with the
-corresponding _expected_ declaration in the common code. The compiler ensures that:
+在为特定目标进行编译时，编译器会尝试将找到的每个 _实际_ 声明与通用代码中的对应 _预期_ 声明匹配。编译器会确保：
 
-* Every expected declaration in the common source set has a matching actual declaration in every platform-specific
-  source set.
-* Expected declarations don't contain any implementation.
-* Every actual declaration shares the same package as the corresponding expected declaration, such as `org.mygroup.myapp.MyType`.
+* 通用源代码集中的每个预期声明在每个平台特定的源代码集中都有一个匹配的实际声明。
+* 预期声明不包含任何实现。
+* 每个实际声明与对应的预期声明共享相同的包名，例如 `org.mygroup.myapp.MyType`。
 
-While generating the resulting code for different platforms, the Kotlin compiler merges the expected and actual
-declarations that correspond to each other. It generates one declaration with its actual implementation for each platform.
-Every use of the expected declaration in the common code calls the correct actual declaration in the
-resulting platform code.
+在为不同平台生成最终代码时，Kotlin 编译器会合并相互对应的预期声明和实际声明。
+它为每个平台生成一个具有实际实现的声明。
+在通用代码中对预期声明的每次使用都会在生成的目标平台代码中调用正确的实际声明。
 
-You can declare actual declarations when you use intermediate source sets shared between different target platforms.
-Consider, for example, `iosMain` as an intermediate source set shared between the `iosX64Main`, `iosArm64Main`,
-and `iosSimulatorArm64Main`platform source sets. Only `iosMain` typically contains the actual declarations and not the
-platform source sets. The Kotlin compiler will then use these actual declarations to produce the resulting code for the
-corresponding platforms.
+当你使用在不同目标平台之间共享的中间源代码集时，可以声明实际声明。
+例如，`iosMain` 作为 `iosX64Main`、`iosArm64Main` 和 `iosSimulatorArm64Main` 平台源代码集之间共享的中间源代码集。
+通常只有 `iosMain` 包含实际声明，而不是平台源代码集。
+Kotlin 编译器随后会使用这些实际声明来生成对应平台的最终代码。
 
-The IDE assists with common issues, including:
+IDE 会帮助你解决常见问题，包括：
 
-* Missing declarations
-* Expected declarations that contain implementations
-* Mismatched declaration signatures
-* Declarations in different packages
+* 缺少声明
+* 包含实现的预期声明
+* 声明签名不匹配
+* 不同包中的声明
 
-You can also use the IDE to navigate from expected to actual declarations. Select the gutter icon to view actual
-declarations or use [shortcuts](https://www.jetbrains.com/help/idea/navigating-through-the-source-code.html#go_to_implementation).
+你还可以使用 IDE 从预期声明导航到实际声明。选择行号区域的图标查看实际声明，或使用
+[快捷键](https://www.jetbrains.com/help/idea/navigating-through-the-source-code.html#go_to_implementation)。
 
-![IDE navigation from expected to actual declarations](expect-actual-gutter.png){width=500}
+![IDE 从预期声明导航到实际声明](expect-actual-gutter.png){width=500}
 
-## Different approaches for using expected and actual declarations
+## 使用预期和实际声明的不同方法 {id="different-approaches-for-using-expected-and-actual-declarations"}
 
-Let's explore the different options of using the expect/actual mechanism to solve the problem of accessing
-platform APIs while still providing a way to work with them in the common code.
+让我们探讨使用 `expect/actual` 机制解决访问平台 API 问题的不同选择，同时仍然提供在通用代码中处理这些 API 的方法。
 
-Consider a Kotlin Multiplatform project where you need to implement the `Identity` type, which should contain the user's
-login name and the current process ID. The project has the `commonMain`, `jvmMain`, and `nativeMain` source sets to make
-the application work on the JVM and in native environments like iOS.
+假设你有一个 Kotlin 跨平台项目，需要实现 `Identity` 类型，该类型应包含用户的登录名和当前进程 ID。
+该项目有 `commonMain`、`jvmMain` 和 `nativeMain` 源代码集，以便让应用程序在 JVM 和像 iOS 这样的原生环境中运行。
 
-### Expected and actual functions
+### 预期函数和实际函数 {id="expected-and-actual-functions"}
 
-You can define an `Identity` type and a factory function `buildIdentity()`, which is declared in the common source set
-and implemented differently in platform source sets:
+你可以定义一个 `Identity` 类型和一个工厂函数 `buildIdentity()`，它在通用源代码集中声明，并在平台源代码集中有不同的实现：
 
-1. In `commonMain`, declare a simple type and expect a factory function:
+1. 在 `commonMain` 中，声明一个简单的类型并预期一个工厂函数：
 
    ```kotlin
    package identity
@@ -74,7 +66,7 @@ and implemented differently in platform source sets:
    expect fun buildIdentity(): Identity
    ```
 
-2. In the `jvmMain` source set, implement a solution using standard Java libraries:
+2. 在 `jvmMain` 源代码集中，使用标准 Java 库实现解决方案：
 
    ```kotlin
    package identity
@@ -88,8 +80,7 @@ and implemented differently in platform source sets:
    )
    ```
 
-3. In the `nativeMain` source set, implement a solution with [POSIX](https://en.wikipedia.org/wiki/POSIX) using native
-   dependencies:
+3. 在 `nativeMain` 源代码集中，使用 [POSIX](https://en.wikipedia.org/wiki/POSIX) 和原生依赖项实现解决方案：
 
    ```kotlin
    package identity
@@ -104,24 +95,22 @@ and implemented differently in platform source sets:
    )
    ```
 
-  Here, platform functions return platform-specific `Identity` instances.
+   此处，平台函数返回平台特定的 `Identity` 实例。
 
-> Starting with Kotlin 1.9.0, using `getlogin()` and `getpid()` functions requires the `@OptIn` annotation.
+> 从 Kotlin 1.9.0 开始，使用 `getlogin()` 和 `getpid()` 函数需要使用 `@OptIn` 注解。
 >
 {style="note"}
 
-### Interfaces with expected and actual functions
+### 带有预期函数和实际函数的接口 {id="interfaces-with-expected-and-actual-functions"}
 
-If the factory function becomes too large, consider using a common `Identity` interface and implementing it differently on
-different platforms.
+如果工厂函数变得过于庞大，可以考虑使用一个通用的 `Identity` 接口，并在不同平台上以不同方式实现它。
 
-A `buildIdentity()` factory function should return `Identity`, but this time, it's an object implementing the
-common interface:
+一个 `buildIdentity()` 工厂函数应该返回 `Identity`，但这次它是一个实现了通用接口的对象：
 
-1. In `commonMain`, define the `Identity` interface and the `buildIdentity()` factory function:
+1. 在 `commonMain` 中，定义 `Identity` 接口和 `buildIdentity()` 工厂函数：
 
    ```kotlin
-   // In the commonMain source set:
+   // 在 commonMain 源代码集中：
    expect fun buildIdentity(): Identity
    
    interface Identity {
@@ -130,10 +119,10 @@ common interface:
    }
    ```
 
-2. Create platform-specific implementations of the interface without additional use of expected and actual declarations:
+2. 在平台特定的源代码集中创建接口的实现，无需额外使用预期声明和实际声明：
 
    ```kotlin
-   // In the jvmMain source set:
+   // 在 jvmMain 源代码集中：
    actual fun buildIdentity(): Identity = JVMIdentity()
 
    class JVMIdentity(
@@ -143,7 +132,7 @@ common interface:
    ```
 
    ```kotlin
-   // In the nativeMain source set:
+   // 在 nativeMain 源代码集中：
    actual fun buildIdentity(): Identity = NativeIdentity()
   
    class NativeIdentity(
@@ -152,17 +141,16 @@ common interface:
    ) : Identity
    ```
 
-These platform functions return platform-specific `Identity` instances, which are implemented as `JVMIdentity`
-and `NativeIdentity` platform types.
+这些平台函数返回平台特定的 `Identity` 实例，分别实现为 `JVMIdentity` 和 `NativeIdentity` 平台类型。
 
-#### Expected and actual properties
+#### 预期属性和实际属性 {id="expected-and-actual-properties"}
 
-You can modify the previous example and expect a `val` property to store an `Identity`.
+你可以修改之前的示例，预期一个 `val` 属性来存储 `Identity`。
 
-Mark this property as `expect val` and then actualize it in the platform source sets:
+将该属性标记为 `expect val`，然后在平台源代码集中进行实际化：
 
 ```kotlin
-//In commonMain source set:
+// 在 commonMain 源代码集中：
 expect val identity: Identity
 
 interface Identity {
@@ -172,7 +160,7 @@ interface Identity {
 ```
 
 ```kotlin
-//In jvmMain source set:
+// 在 jvmMain 源代码集中：
 actual val identity: Identity = JVMIdentity()
 
 class JVMIdentity(
@@ -182,7 +170,7 @@ class JVMIdentity(
 ```
 
 ```kotlin
-//In nativeMain source set:
+// 在 nativeMain 源代码集中：
 actual val identity: Identity = NativeIdentity()
 
 class NativeIdentity(
@@ -191,13 +179,12 @@ class NativeIdentity(
 ) : Identity
 ```
 
-#### Expected and actual objects
+#### 预期对象和实际对象 {id="expected-and-actual-objects"}
 
-When `IdentityBuilder` is expected to be a singleton on each platform, you can define it as an expected object and let the
-platforms actualize it:
+当 `IdentityBuilder` 预期在每个平台上都是一个单例时，你可以将其定义为预期对象，并让各个平台进行实际化：
 
 ```kotlin
-// In the commonMain source set:
+// 在 commonMain 源代码集中：
 expect object IdentityBuilder {
     fun build(): Identity
 }
@@ -209,7 +196,7 @@ class Identity(
 ```
 
 ```kotlin
-// In the jvmMain source set:
+// 在 jvmMain 源代码集中：
 actual object IdentityBuilder {
     actual fun build() = Identity(
         System.getProperty("user.name") ?: "none",
@@ -219,7 +206,7 @@ actual object IdentityBuilder {
 ```
 
 ```kotlin
-// In the nativeMain source set:
+// 在 nativeMain 源代码集中：
 actual object IdentityBuilder {
     actual fun build() = Identity(
         getlogin()?.toKString() ?: "None",
@@ -228,38 +215,35 @@ actual object IdentityBuilder {
 }
 ```
 
-#### Recommendations on dependency injection
+#### 关于依赖注入的建议 {id="recommendations-on-dependency-injection"}
 
-To create a loosely coupled architecture, many Kotlin projects adopt the dependency injection (DI) framework. The DI
-framework allows injecting dependencies into components based on the current environment.
+为了创建松耦合的架构，许多 Kotlin 项目采用了依赖注入（DI）框架。
+DI 框架允许根据当前环境将依赖项注入到组件中。
 
-For example, you might inject different dependencies in testing and in production or when deploying to the cloud
-compared to hosting locally. As long as a dependency is expressed through an interface, any number of different
-implementations can be injected, either at compile time or at runtime.
+例如，你可能在测试环境和生产环境中注入不同的依赖，或者在云端部署时与本地托管时注入不同的依赖。
+只要依赖项通过接口表达，就可以在编译时或运行时注入任意数量的不同实现。
 
-The same principle applies when the dependencies are platform-specific. In the common code, a component can express its
-dependencies using regular [Kotlin interfaces](interfaces.md). The DI framework can then be configured to inject a
-platform-specific implementation, for example, from the JVM or an iOS module.
+当依赖项是平台特定的时，相同的原则适用。在通用代码中，组件可以使用常规的 [Kotlin 接口](interfaces.md) 表达其依赖项。
+然后，DI 框架可以配置为注入平台特定的实现，例如来自 JVM 或 iOS 模块的实现。
 
-This means that expected and actual declarations are only needed in the configuration of the DI
-framework. See [Use platform-specific APIs](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html#dependency-injection-framework) for examples.
+这意味着预期声明和实际声明仅在 DI 框架的配置中需要。有关示例，请参阅
+[使用平台特定 API](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html#dependency-injection-framework)。
 
-With this approach, you can adopt Kotlin Multiplatform simply by using interfaces and factory functions. If you already
-use the DI framework to manage dependencies in your project, we recommend using the same approach for managing
-platform dependencies.
+使用这种方法，你可以通过使用接口和工厂函数来简单地使用 Kotlin 跨平台。
+如果你已经在项目中使用 DI 框架来管理依赖，建议使用相同的方法来管理平台依赖。
 
-### Expected and actual classes
+### 预期类和实际类 {id="expected-and-actual-classes"}
 
-> Expected and actual classes are in [Beta](components-stability.md).
-> They are almost stable, but migration steps may be required in the future.
-> We'll do our best to minimize any further changes for you to make.
+> 预期类和实际类目前处于 [Beta](components-stability.md) 阶段。
+> 它们几乎稳定，但未来可能需要迁移步骤。
+> 我们会尽力将进一步的更改降到最低。
 >
 {style="warning"}
 
-You can use expected and actual classes to implement the same solution:
+你可以使用预期和实际类来实现相同的解决方案：
 
 ```kotlin
-// In the commonMain source set:
+// 在 commonMain 源代码集中：
 expect class Identity() {
     val userName: String
     val processID: Int
@@ -267,7 +251,7 @@ expect class Identity() {
 ```
 
 ```kotlin
-// In the jvmMain source set:
+// 在 jvmMain 源代码集中：
 actual class Identity {
     actual val userName: String = System.getProperty("user.name") ?: "None"
     actual val processID: Long = ProcessHandle.current().pid()
@@ -275,37 +259,37 @@ actual class Identity {
 ```
 
 ```kotlin
-// In the nativeMain source set:
+// 在 nativeMain 源代码集中：
 actual class Identity {
     actual val userName: String = getlogin()?.toKString() ?: "None"
     actual val processID: Long = getpid().toLong()
 }
 ```
 
-You might have already seen this approach in demonstration materials. However, using classes in simple cases where
-interfaces would be sufficient is _not recommended_.
+你可能已经在演示材料中看到过这种方法。
+然而，在简单的情况下，**不推荐** 使用类代替接口。
 
-With interfaces, you don't limit your design to one implementation per target platform. Also, it's much easier to
-substitute a fake implementation in tests or provide multiple implementations on a single platform.
+使用接口时，你不会将设计限制为每个目标平台一个实现。
+此外，在测试中用假实现代替真实实现或者在单个平台上提供多个实现也要容易得多。
 
-As a general rule, rely on standard language constructs wherever possible instead of using expected and actual declarations.
+作为一般规则，尽可能依赖标准语言构造，而不是使用预期声明和实际声明。
 
-If you do decide to use expected and actual classes, the Kotlin compiler will warn you about the Beta status
-of the feature. To suppress this warning, add the following compiler option to your Gradle build file:
+如果你决定使用预期和实际类，Kotlin 编译器会警告你该功能处于 Beta 状态。
+要抑制此警告，请在你的 Gradle 构建文件中添加以下编译器选项：
 
 ```kotlin
 kotlin {
     compilerOptions {
-        // Common compiler options applied to all Kotlin source sets
+        // 应用于所有 Kotlin 源代码集的通用编译器选项
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 }
 ```
 
-#### Inheritance from platform classes
+#### 从平台类继承 {id=inheritance-from-platform-classes}
 
-There are special cases when using the `expect` keyword with classes may be the best approach. Let's say that
-the `Identity` type already exists on the JVM:
+使用 `expect` 关键字与类一起可能是最佳方法。
+在 JVM 上，假设 `Identity` 类型已经存在：
 
 ```kotlin
 open class Identity {
@@ -314,10 +298,9 @@ open class Identity {
 }
 ```
 
-To fit it in the existing codebase and frameworks, your implementation of the `Identity` type can inherit from this type
-and reuse its functionality:
+为了适配现有的代码库和框架，你的 `Identity` 类型实现可以继承自这个类型并重用它的功能：
 
-1. To solve this problem, declare a class in `commonMain` using the `expect` keyword:
+1. 为了解决这个问题，在 `commonMain` 中声明一个使用 `expect` 关键字的类：
 
    ```kotlin
    expect class CommonIdentity() {
@@ -326,7 +309,7 @@ and reuse its functionality:
    }
    ```
 
-2. In `nativeMain`, provide an actual declaration that implements the functionality:
+2. 在 `nativeMain` 中，提供一个实际声明以实现功能：
 
    ```kotlin
    actual class CommonIdentity {
@@ -335,7 +318,7 @@ and reuse its functionality:
    }
    ```
 
-3. In `jvmMain`, provide an actual declaration that inherits from the platform-specific base class:
+3. 在 `jvmMain` 中，提供一个实际声明，继承自平台特定的基类：
 
    ```kotlin
    actual class CommonIdentity : Identity() {
@@ -344,19 +327,18 @@ and reuse its functionality:
    }
    ```
 
-Here, the `CommonIdentity` type is compatible with your own design while taking advantage of the existing type on the JVM.
+在这里，`CommonIdentity` 类型与自己的设计兼容，同时利用了 JVM 上现有的类型。
 
-#### Application in frameworks
+#### 框架中的应用 {id=application-in-frameworks}
 
-As  a framework author, you can also find expected and actual declarations useful for your framework.
+作为框架作者，你也可以发现 `expect` 和 `actual` 声明对你的框架很有用。
 
-If the example above is part of a framework, the user has to derive a type from `CommonIdentity` to provide
-a display name.
+如果上面的示例是框架的一部分，用户需要从 `CommonIdentity` 派生一个类型以提供显示名称。
 
-In this case, the expected declaration is abstract and declares an abstract method:
+在这种情况下，预期声明是抽象的，并声明一个抽象方法：
 
 ```kotlin
-// In commonMain of the framework codebase:
+// 在框架代码库的 commonMain 中：
 expect abstract class CommonIdentity() {
     val userName: String
     val processID: Long
@@ -364,10 +346,10 @@ expect abstract class CommonIdentity() {
 }
 ```
 
-Similarly, actual implementations are abstract and declare the `displayName` method:
+类似地，实际实现是抽象的，并声明 `displayName` 方法：
 
 ```kotlin
-// In nativeMain of the framework codebase:
+// 在框架代码库的 nativeMain 中：
 actual abstract class CommonIdentity {
     actual val userName = getlogin()?.toKString() ?: "None"
     actual val processID = getpid().toLong()
@@ -376,7 +358,7 @@ actual abstract class CommonIdentity {
 ```
 
 ```kotlin
-// In jvmMain of the framework codebase:
+// 在框架代码库的 jvmMain 中：
 actual abstract class CommonIdentity : Identity() {
     actual val userName = login
     actual val processID = pid
@@ -384,32 +366,29 @@ actual abstract class CommonIdentity : Identity() {
 }
 ```
 
-The framework users need to write common code that inherits from the expected declaration and implement the missing
-method themselves:
+框架用户需要编写从预期声明继承的通用代码，并自行实现缺失的方法：
 
 ```kotlin
-// In commonMain of the users' codebase:
+// 在用户代码库的 commonMain 中：
 class MyCommonIdentity : CommonIdentity() {
     override val displayName = "Admin"
 }
 ```
 
-<!-- A similar scheme works in any library that provides a common `ViewModel` for Android or iOS development. Such a library
-typically provides an expected `CommonViewModel` class whose actual Android counterpart extends the `ViewModel` class
-from the Android framework. See [Use platform-specific APIs](multiplatform-connect-to-apis.md#adapting-to-an-existing-hierarchy-using-expected-actual-classes)
-for a detailed description of this example. -->
+<!-- 类似的方案适用于任何为 Android 或 iOS 开发提供通用 `ViewModel` 的库。
+这样的库通常提供一个预期的 `CommonViewModel` 类，其实际的 Android 对应类扩展了 Android 框架中的 `ViewModel` 类。
+有关此示例的详细描述，请参见
+[使用平台特定 API](multiplatform-connect-to-apis.md#adapting-to-an-existing-hierarchy-using-expected-actual-classes)。 -->
 
-## Advanced use cases
+## 高级用例 {id=advanced-use-cases}
 
-There are a number of special cases regarding expected and actual declarations.
+关于预期声明和实际声明，有一些特殊的情况。
 
-### Using type aliases to satisfy actual declarations
+### 使用类型别名满足实际声明 {id=using-type-aliases-to-satisfy-actual-declarations}
 
-The implementation of an actual declaration does not have to be written from scratch. It can be an existing type, such
-as a class provided by a third-party library.
+实际声明的实现不必从头编写。它可以是现有的类型，例如第三方库提供的类。
 
-You can use this type as long as it meets all the requirements associated with the expected declaration. For example,
-consider these two expected declarations:
+只要满足所有与预期声明相关的要求，你可以使用这些类型。例如，考虑这两个预期声明：
 
 ```kotlin
 expect enum class Month {
@@ -424,38 +403,35 @@ expect class MyDate {
 }
 ```
 
-Within a JVM module, the `java.time.Month` enum can be used to implement the first expected declaration and
-the `java.time.LocalDate` class to implement the second. However, there's no way to add the `actual` keyword directly to
-these types.
+在 JVM 模块中，可以使用 `java.time.Month` 枚举来实现第一个预期声明，使用 `java.time.LocalDate` 类来实现第二个。
+然而，不能直接将 `actual` 关键字添加到这些类型。
 
-Instead, you can use [type aliases](type-aliases.md) to connect the expected declarations and the platform-specific
-types:
+相反，你可以使用 [类型别名](type-aliases.md) 将预期声明与平台特定类型连接起来：
 
 ```kotlin
 actual typealias Month = java.time.Month
 actual typealias MyDate = java.time.LocalDate
 ```
 
-In this case, define the `typealias` declaration in the same package as the expected declaration and create the
-referred class elsewhere.
+在这种情况下，将 `typealias` 声明定义在与预期声明相同的包中，并在其他地方创建所引用的类。
 
-> Since the `LocalDate` type uses the `Month` enum, you need to declare both of them as expected classes in the common code.
+> 由于 `LocalDate` 类型使用了 `Month` 枚举，你需要在公共代码中将它们都声明为预期类。
 >
 {style="note"}
 
-<!-- See [Using platform-specific APIs](multiplatform-connect-to-apis.md#actualizing-an-interface-or-a-class-with-an-existing-platform-class-using-typealiases)
-for an Android-specific example of this pattern. -->
+<!-- 请参见
+[使用平台特定 API](multiplatform-connect-to-apis.md#actualizing-an-interface-or-a-class-with-an-existing-platform-class-using-typealiases)。 -->
 
-### Expanded visibility in actual declarations
+### 扩展实际声明的可见性 {id=expanded-visibility-in-actual-declarations}
 
-You can make actual implementations more visible than the corresponding expected declaration. This is useful if you
-don't want to expose your API as public for common clients.
+你可以使实际实现比对应的预期声明具有更高的可见性。
+如果你不想将你的 API 公开给公共客户端，这会很有用。
 
-Currently, the Kotlin compiler issues an error in the case of visibility changes. You can suppress this error by
-applying `@Suppress("ACTUAL_WITHOUT_EXPECT")` to the actual type alias declaration. Starting with Kotlin 2.0,
-this limitation will not apply.
+目前，Kotlin 编译器会在可见性更改的情况下发出错误。
+你可以通过将 `@Suppress("ACTUAL_WITHOUT_EXPECT")` 应用于实际类型别名声明来抑制这个错误。
+从 Kotlin 2.0 开始，这个限制将不再适用。
 
-For example, if you declare the following expected declaration in the common source set:
+例如，如果你在公共源代码集中声明以下预期声明：
 
 ```kotlin
 internal expect class Messenger {
@@ -463,48 +439,47 @@ internal expect class Messenger {
 }
 ```
 
-You can use the following actual implementation in a platform-specific source set as well:
+你也可以在平台特定的源代码集中使用以下实际实现：
 
 ```kotlin
 @Suppress("ACTUAL_WITHOUT_EXPECT")
 public actual typealias Messenger = MyMessenger
 ```
 
-Here, an internal expected class has an actual implementation with an existing public `MyMessenger` using type aliases.
+在这里，一个内部的预期类通过类型别名有一个现有的公共 `MyMessenger` 实现。
 
-### Additional enumeration entries on actualization
+### 实现时的附加枚举条目 {id=additional-enumeration-entries-on-actualization}
 
-When an enumeration is declared with `expect` in the common source set, each platform module should have a
-corresponding `actual` declaration. These declarations must contain the same enum constants, but they can also have
-additional constants.
+当在公共源代码集中使用 `expect` 声明一个枚举时，每个平台模块应该有一个对应的 `actual` 声明。
+这些声明必须包含相同的枚举常量，但也可以包含额外的常量。
 
-This is useful when you actualize an expected enum with an existing platform enum. For example, consider the
-following enumeration in the common source set:
+这在用现有的平台枚举实现预期枚举时很有用。
+例如，考虑以下在公共源代码集中声明的枚举：
 
 ```kotlin
-// In the commonMain source set:
+// 在 commonMain 源代码集中：
 expect enum class Department { IT, HR, Sales }
 ```
 
-When you provide an actual declaration for `Department` in platform source sets, you can add extra constants:
+当你在平台源代码集中提供 `Department` 的实际声明时，你可以添加额外的常量：
 
 ```kotlin
-// In the jvmMain source set:
+// 在 jvmMain 源代码集中：
 actual enum class Department { IT, HR, Sales, Legal }
 ```
 
 ```kotlin
-// In the nativeMain source set:
+// 在 nativeMain 源代码集中：
 actual enum class Department { IT, HR, Sales, Marketing }
 ```
 
-However, in this case, these extra constants in the platform source sets won't match with those in the common code.
-Therefore, the compiler requires you to handle all additional cases.
+然而，在这种情况下，平台源代码集中额外的常量将与公共代码中的常量不匹配。
+因此，编译器要求你处理所有额外的情况。
 
-The function that implements the `when` construction on `Department` requires an `else` clause:
+实现 `Department` 上的 `when` 结构的函数需要一个 `else` 子句：
 
 ```kotlin
-// An else clause is required:
+// 需要 else 子句：
 fun matchOnDepartment(dept: Department) {
     when (dept) {
         Department.IT -> println("The IT Department")
@@ -515,12 +490,12 @@ fun matchOnDepartment(dept: Department) {
 }
 ```
 
-<!-- If you'd like to forbid adding new constants in the actual enum, please vote for this issue [TODO]. -->
+<!-- 如果你希望禁止在实际枚举中添加新常量，请为这个问题投票 [TODO]。 -->
 
-### Expected annotation classes
+### 预期的注解类 {id=expected-annotation-classes}
 
-Expected and actual declarations can be used with annotations. For example, you can declare an `@XmlSerializable`
-annotation, which must have a corresponding actual declaration in each platform source set:
+预期声明和实际声明可以与注解一起使用。例如，你可以声明一个 `@XmlSerializable`
+注解，它必须在每个平台源代码集中有一个对应的实际声明：
 
 ```kotlin
 @Target(AnnotationTarget.CLASS)
@@ -531,8 +506,8 @@ expect annotation class XmlSerializable()
 class Person(val name: String, val age: Int)
 ```
 
-It might be helpful to reuse existing types on a particular platform. For example, on the JVM, you can define your
-annotation using the existing type from the [JAXB specification](https://javaee.github.io/jaxb-v2/):
+在特定平台上重用现有类型可能会很有帮助。
+例如，在 JVM 上，你可以使用 [JAXB 规范](https://javaee.github.io/jaxb-v2/) 中的现有类型来定义你的注解：
 
 ```kotlin
 import javax.xml.bind.annotation.XmlRootElement
@@ -540,14 +515,14 @@ import javax.xml.bind.annotation.XmlRootElement
 actual typealias XmlSerializable = XmlRootElement
 ```
 
-There is an additional consideration when using `expect` with annotation classes. Annotations are used to attach
-metadata to code and do not appear as types in signatures. It's not essential for an expected annotation to have an
-actual class on a platform where it's never required.
+在使用 `expect` 与注解类时，还需要考虑一个额外的因素。
+注解用于将元数据附加到代码上，并不作为类型出现在签名中。
+对于那些从未需要的注解，预期注解在某个平台上不必有一个实际类。
 
-You only need to provide an `actual` declaration on platforms where the annotation is used. This
-behavior isn't enabled by default, and it requires the type to be marked with [`OptionalExpectation`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-optional-expectation/).
+你只需要在注解被使用的平台上提供 `actual` 声明。
+此行为默认不启用，需要将类型标记为 [`OptionalExpectation`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-optional-expectation/)。
 
-Take the `@XmlSerializable` annotation declared above and add `OptionalExpectation`:
+对上述 `@XmlSerializable` 注解进行修改，添加 `OptionalExpectation`：
 
 ```kotlin
 @OptIn(ExperimentalMultiplatform::class)
@@ -557,9 +532,8 @@ Take the `@XmlSerializable` annotation declared above and add `OptionalExpectati
 expect annotation class XmlSerializable()
 ```
 
-If an actual declaration is missing on a platform where it's not required, the compiler won't generate an
-error.
+如果在某个平台上缺少实际声明且该平台不需要它，编译器不会生成错误。
 
-## What's next?
+## 接下来做什么？ {id=whats-next}
 
-For general recommendations on different ways to use platform-specific APIs, see [Use platform-specific APIs](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html).
+有关不同方式使用平台特定 API 的一般建议，请参见 [使用平台特定 API](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-connect-to-apis.html)。
