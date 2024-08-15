@@ -1,31 +1,28 @@
-[//]: # (title: Hierarchical project structure)
+[//]: # (title: 分层项目结构)
 
-Kotlin Multiplatform projects support hierarchical source set structures.
-This means you can arrange a hierarchy of intermediate source sets for sharing the common code among some, but not all,
-[supported targets](multiplatform-dsl-reference.md#targets). Using intermediate source sets helps you to:
+Kotlin 跨平台项目支持分层的源代码集结构。  
+这意味着你可以安排一个中间源代码集的层级结构，以便在部分（但不是全部）
+[支持的目标](multiplatform-dsl-reference.md#targets) 之间共享通用代码。使用中间源代码集有助于你：
 
-* Provide a specific API for some targets. For example, a library can add native-specific APIs in an
-  intermediate source set for Kotlin/Native targets but not for Kotlin/JVM ones.
-* Consume a specific API for some targets. For example, you can benefit from a rich API that the Kotlin Multiplatform
-  library provides for some targets that form an intermediate source set.
-* Use platform-dependent libraries in your project. For example, you can access iOS-specific dependencies from
-  the intermediate iOS source set.
+* 为某些目标提供特定的 API。例如，一个库可以在中间源代码集中为 Kotlin/Native 目标添加原生特定的 API，而不为 Kotlin/JVM 添加这些 API。
+* 为某些目标使用特定的 API。例如，你可以从 Kotlin 跨平台库为某些组成中间源代码集的目标提供的丰富 API 中受益。
+* 在项目中使用平台相关的库。例如，你可以从中间 iOS源代码集访问 iOS 特定的依赖项。
 
-The Kotlin toolchain ensures that each source set has access only to the API that is available for all targets to which
-that source set compiles. This prevents cases like using a Windows-specific API and then compiling it to macOS,
-resulting in linkage errors or undefined behavior at runtime.
+Kotlin 工具链确保每个源代码集只能访问该源代码集编译的所有目标都可用的 API。  
+这可以防止出现像使用 Windows 特定的 API 然后将其编译为 macOS，
+导致链接错误或运行时的未定义行为的情况。
 
-The recommended way to set up the source set hierarchy is to use the [default hierarchy template](#default-hierarchy-template).
-The template covers the most popular cases. If you have a more advanced project, you can [configure it manually](#manual-configuration).
-This is a more low-level approach: it's more flexible but requires more effort and knowledge.
+设置源代码集层级的推荐方法是使用 [默认层级模板](#default-hierarchy-template)。  
+该模板涵盖了最常见的情况。如果你有一个更高级的项目，你可以 [手动配置](#manual-configuration)。  
+这种方法更底层：它更灵活，但需要更多的努力和知识。
 
-## Default hierarchy template
+## 默认层级模板 {id=default-hierarchy-template}
 
-Starting with Kotlin 1.9.20, the Kotlin Gradle plugin has a built-in default [hierarchy template](#see-the-full-hierarchy-template).
-It contains predefined intermediate source sets for some popular use cases.
-The plugin sets up those source sets automatically based on the targets specified in your project.
+从 Kotlin 1.9.20 开始，Kotlin Gradle 插件内置了默认的 [层级模板](#see-the-full-hierarchy-template)。  
+它为一些常见的使用场景预定义了中间源代码集。
+插件会根据你项目中指定的目标自动设置这些源代码集。
 
-Consider the following example:
+考虑以下示例：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -52,20 +49,19 @@ kotlin {
 </tab>
 </tabs>
 
-When you declare the targets `androidTarget`, `iosArm64`, and `iosSimulatorArm64` in your code, the Kotlin Gradle plugin finds
-suitable shared source sets from the template and creates them for you. The resulting hierarchy looks like this:
+当你在代码中声明 `androidTarget`、`iosArm64` 和 `iosSimulatorArm64` 这些目标时，Kotlin Gradle
+插件会从模板中找到合适的共享源代码集并为你创建它们。最终的层级结构如下所示：
 
-![An example of using the default hierarchy template](default-hierarchy-example.svg){thumbnail="true" width="350" thumbnail-same-file="true"}
+![使用默认层级模板的示例](default-hierarchy-example.svg){thumbnail="true" width="350" thumbnail-same-file="true"}
 
-Green source sets are actually created and present in the project, while gray ones from the default template are
-ignored. The Kotlin Gradle plugin hasn't created the `watchos` source set, for example, because there
-are no watchOS targets in the project.
+绿色的源代码集是实际创建并存在于项目中的，而灰色的则来自默认模板，但被忽略了。
+例如，Kotlin Gradle 插件没有创建 `watchos`源代码集，因为项目中没有 watchOS 目标。
 
-If you add a watchOS target, like `watchosArm64`, the `watchos` source set is created, and the code
-from the `apple`, `native`, and `common` source sets is compiled to `watchosArm64` as well.
+如果你添加了一个 watchOS 目标，例如 `watchosArm64`，那么 `watchos`源代码集会被创建，`apple`、`native`
+和 `common`源代码集中的代码也会被编译到 `watchosArm64`。
 
-The Kotlin Gradle plugin creates type-safe accessors for all of the source sets from the default hierarchy template,
-so you can reference them without `by getting` or `by creating` constructions compared to the [manual configuration](#manual-configuration):
+Kotlin Gradle 插件为默认层级模板中的所有源代码集创建了类型安全的访问器，因此你可以直接引用它们，而不需要像
+[手动配置](#manual-configuration) 中那样使用 `by getting` 或 `by creating` 的结构：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -106,18 +102,17 @@ kotlin {
 </tab>
 </tabs>
 
-> In this example, the `apple` and `native` source sets compile only to the `iosArm64` and `iosSimulatorArm64` targets.
-> Despite their names, they have access to the full iOS API.
-> This can be counter-intuitive for source sets like `native`, as you might expect that only APIs available on all
-> native targets are accessible in this source set. This behavior may change in the future.
+> 在这个示例中，`apple` 和 `native`源代码集仅编译到 `iosArm64` 和 `iosSimulatorArm64` 目标。  
+> 尽管它们的名称可能让人误解，但它们实际上可以访问完整的 iOS API。  
+> 这对于像 `native` 这样的源代码集可能会让人感到困惑，因为你可能会期望此源代码集仅能访问所有原生目标上可用的 API。
+> 未来这种行为可能会发生变化。
 >
 {style="note"}
 
-### Additional configuration
+### 额外配置 {id=additional-configuration}
 
-You might need to make adjustments to the default hierarchy template. If you have previously introduced intermediate sources
-[manually](#manual-configuration) with `dependsOn` calls, it cancels the use of the default
-hierarchy template and leads to this warning:
+你可能需要对默认的层级模板进行调整。
+如果你之前通过 `dependsOn` 调用 [手动](#manual-configuration) 引入了中间源代码集，这会取消默认层级模板的使用，并导致出现以下警告：
 
 ```none
 The Default Kotlin Hierarchy Template was not applied to '<project-name>':
@@ -131,28 +126,28 @@ to your gradle.properties
 Learn more about hierarchy templates: https://kotl.in/hierarchy-template
 ```
 
-To solve this issue, configure your project by doing one of the following:
+要解决这个问题，可以通过以下几种方式来配置你的项目：
 
-* [Replace your manual configuration with the default hierarchy template](#replacing-a-manual-configuration)
-* [Create additional source sets in the default hierarchy template](#creating-additional-source-sets)
-* [Modify the source sets created by the default hierarchy template](#modifying-source-sets)
+* [用默认层级模板替换你的手动配置](#replacing-a-manual-configuration)
+* [在默认层级模板中创建额外的源代码集](#creating-additional-source-sets)
+* [修改默认层级模板创建的源代码集](#modifying-source-sets)
 
-#### Replacing a manual configuration
+#### 替换手动配置 {id=replacing-a-manual-configuration}
 
-**Case**. All of your intermediate source sets are currently covered by the default hierarchy template.
+**问题场景**：你所有的中间源代码集目前都由默认层级模板覆盖。
 
-**Solution**. Remove all manual `dependsOn()` calls and source sets with `by creating` constructions.
-To check the list of all default source sets, see the [full hierarchy template](#see-the-full-hierarchy-template).
+**解决方案**：移除所有手动的 `dependsOn()` 调用和通过 `by creating` 构造的源代码集。  
+要查看所有默认源代码集的列表，请参见 [完整的层级模板](#see-the-full-hierarchy-template)。
 
-#### Creating additional source sets
+#### 创建额外的源代码集 {id=creating-additional-source-sets}
 
-**Case**. You want to add source sets that the default hierarchy template doesn't provide yet,
-for example, one between a macOS and a JVM target.
+**问题场景**：你想添加默认层级模板尚未提供的源代码集，
+例如，在 macOS 和 JVM 目标之间添加一个源代码集。
 
-**Solution**:
+**解决方案**：
 
-1. Reapply the template by explicitly calling `applyDefaultHierarchyTemplate()`.
-2. Configure additional source sets [manually](#manual-configuration) using `dependsOn()`:
+1. 通过显式调用 `applyDefaultHierarchyTemplate()` 重新应用模板。
+2. 使用 `dependsOn()` [手动](#manual-configuration) 配置额外的源代码集：
 
     <tabs group="build-script">
     <tab title="Kotlin" group-key="kotlin">
@@ -164,11 +159,11 @@ for example, one between a macOS and a JVM target.
         iosArm64()
         iosSimulatorArm64()
     
-        // Apply the default hierarchy again. It'll create, for example, the iosMain source set:
+        // 再次应用默认层级模板。例如，它会创建 iosMain源代码集：
         applyDefaultHierarchyTemplate()
     
         sourceSets {
-            // Create an additional jvmAndMacos source set:
+            // 创建一个额外的 jvmAndMacos源代码集：
             val jvmAndMacos by creating {
                 dependsOn(commonMain.get())
             }
@@ -189,11 +184,11 @@ for example, one between a macOS and a JVM target.
         iosArm64()
         iosSimulatorArm64()
     
-        // Apply the default hierarchy again. It'll create, for example, the iosMain source set:
+        // 再次应用默认层级模板。例如，它会创建 iosMain源代码集：
         applyDefaultHierarchyTemplate()
     
         sourceSets {
-            // Create an additional jvmAndMacos source set:
+            // 创建一个额外的 jvmAndMacos源代码集：
             jvmAndMacos {
                 dependsOn(commonMain.get())
             }
@@ -210,53 +205,51 @@ for example, one between a macOS and a JVM target.
     </tab>
     </tabs>
 
-#### Modifying source sets
+#### 修改源代码集 {id=modifying-source-sets}
 
-**Case**. You already have the source sets with the exact same names as those generated by the template, but shared among
-different sets of targets in your project. For example, a `nativeMain` source set is shared only among the desktop-specific
-targets: `linuxX64`, `mingwX64`, and `macosX64`.
+**问题场景**：您已经拥有与模板生成的源代码集完全相同的名称，但这些源代码集在项目中的不同目标集之间共享。
+例如，一个 `nativeMain` 源代码集仅在特定于桌面的目标之间共享：
+`linuxX64`、`mingwX64` 和 `macosX64`。
 
-**Solution**. There's currently no way to modify the default `dependsOn` relations among the template's source sets.
-It's also important that the implementation and the meaning of source sets, for example,
-`nativeMain`, are the same in all projects.
+**解决方案**：目前没有办法修改模板的源代码集之间的默认 `dependsOn` 关系。
+源代码集的实现和含义，例如
+`nativeMain`，在所有项目中必须保持一致。
 
-However, you still can do one of the following:
+但是，您仍然可以执行以下操作之一：
 
-* Find different source sets for your purposes, either in the default hierarchy template or ones that have been manually created.
-* Opt out of the template completely by adding `kotlin.mpp.applyDefaultHierarchyTemplate=false`
-  to your `gradle.properties` file and manually configure all source sets.
+* 查找适用于您的目的的不同源代码集，可能是在默认层级模板中或手动创建的源代码集中。
+* 完全放弃模板，通过在 `gradle.properties` 文件中添加 `kotlin.mpp.applyDefaultHierarchyTemplate=false` 并手动配置所有源代码集。
 
-> We're currently working on an API to create your own hierarchy templates. This will be useful for projects
-> whose hierarchy configurations differ significantly from the default template.
+> 我们正在开发一个 API，用于创建您自己的层级模板。
+> 这对于层级配置与默认模板有显著差异的项目非常有用。
 >
-> This API is not ready yet, but if you're eager to try it,
-> look into the `applyHierarchyTemplate {}` block and the declaration of `KotlinHierarchyTemplate.default` as an example.
-> Keep in mind that this API is still in development. It might not be tested and can change in further releases.
->
-{style="tip"}
-
-#### See the full hierarchy template {collapsible="true"}
-
-When you declare the targets to which your project compiles,
-the plugin picks the shared source sets based on the specified targets from the template and creates them in your project.
-
-![Default hierarchy template](full-template-hierarchy.svg)
-
-> This example only shows the production part of the project, omitting the `Main` suffix
-> (for example, using `common` instead of `commonMain`). However, everything is the same for `*Test` sources as well.
+> 该 API 尚未准备好，但如果您急于尝试，
+> 请查看 `applyHierarchyTemplate {}` 块和 `KotlinHierarchyTemplate.default` 的声明作为示例。
+> 请注意，该 API 仍在开发中，可能尚未经过测试，并可能在未来的版本中发生变化。
 >
 {style="tip"}
 
-## Manual configuration
+#### 查看完整的层级模板 {id=see-the-full-hierarchy-template}
 
-You can manually introduce an intermediate source in the source set structure.
-It will hold the shared code for several targets.
+当您声明项目编译的目标时，插件根据模板中指定的目标选择共享源代码集，并在您的项目中创建这些源代码集。
 
-For example, here’s what to do if you want to share code among native Linux,
-Windows, and macOS targets (`linuxX64`, `mingwX64`, and `macosX64`):
+![默认层级模板](full-template-hierarchy.svg)
 
-1. Add the intermediate source set `desktopMain`, which holds the shared logic for these targets.
-2. Specify the source set hierarchy using the `dependsOn` relation.
+> 该示例仅显示了项目的生产部分，省略了 `Main` 后缀
+> （例如，使用 `common` 代替 `commonMain`）。但是，`*Test` 源代码集的情况也是一样的。
+>
+{style="tip"}
+
+## 手动配置 {id=manual-configuration}
+
+您可以手动在源代码集结构中引入一个中间源代码集。
+它将保存多个目标的共享代码。
+
+例如，如果您想在本地 Linux、Windows 和 macOS 目标
+(`linuxX64`、`mingwX64` 和 `macosX64`) 之间共享代码，可以按以下步骤操作：
+
+1. 添加中间源代码集 `desktopMain`，该源代码集保存这些目标的共享逻辑。
+2. 使用 `dependsOn` 关系指定源代码集的层级结构。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -308,24 +301,24 @@ kotlin {
 </tab>
 </tabs>
 
-The resulting hierarchical structure will look like this:
+结果层级结构如下所示：
 
-![Manually configured hierarchical structure](manual-hierarchical-structure.png)
+![手动配置的层级结构](manual-hierarchical-structure.png)
 
-You can have a shared source set for the following combinations of targets:
+您可以为以下目标组合共享源代码集：
 
-* JVM or Android + JS + Native
-* JVM or Android + Native
+* JVM 或 Android + JS + Native
+* JVM 或 Android + Native
 * JS + Native
-* JVM or Android + JS
+* JVM 或 Android + JS
 * Native
 
-Kotlin doesn't currently support sharing a source set for these combinations:
+Kotlin 目前不支持为以下组合共享源代码集：
 
-* Several JVM targets
-* JVM + Android targets
-* Several JS targets
+* 多个 JVM 目标
+* JVM + Android 目标
+* 多个 JS 目标
 
-If you need to access platform-specific APIs from a shared native source set, IntelliJ IDEA will help you detect common
-declarations that you can use in the shared native code.
-For other cases, use the Kotlin mechanism of [expected and actual declarations](multiplatform-expect-actual.md).
+如果您需要从共享的本地源代码集中访问平台特定的 API，IntelliJ IDEA
+将帮助您检测可以在共享的本地代码中使用的公共声明。
+对于其他情况，请使用 Kotlin 的 [预期声明和实际声明](multiplatform-expect-actual.md) 机制。
