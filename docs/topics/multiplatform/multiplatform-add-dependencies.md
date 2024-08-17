@@ -1,11 +1,11 @@
-[//]: # (title: Adding dependencies on multiplatform libraries)
+[//]: # (title: 添加对跨平台库的依赖)
 
-Every program requires a set of libraries to operate successfully. A Kotlin Multiplatform project can depend on
-multiplatform libraries that work for all target platforms, platform-specific libraries, and other multiplatform projects.
+每个程序都需要一组库才能成功运行。
+一个 Kotlin 跨平台项目可以依赖于适用于所有目标平台的多平台库、特定平台的库以及其他多平台项目。
 
-To add a dependency on a library, update your `build.gradle(.kts)` file in the directory of your project containing shared code. Set a
-dependency of the required [type](gradle-configure-project.md#dependency-types) (for example, `implementation`) in the [`dependencies {}`](multiplatform-dsl-reference.md#dependencies)
-block: 
+要添加对库的依赖，请更新项目中包含共享代码的目录下的 `build.gradle(.kts)` 文件。
+在 [`dependencies {}`](multiplatform-dsl-reference.md#dependencies) 块中，设置所需的依赖
+[类型](gradle-configure-project.md#dependency-types)（例如，`implementation`）：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -14,7 +14,7 @@ block:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("com.example:my-library:1.0") // library shared for all source sets
+            implementation("com.example:my-library:1.0") // 共享给所有源代码集的库
         }
     }
 }
@@ -28,7 +28,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation 'com.example:my-library:1.0'
+                implementation 'com.example:my-library:1.0' // 共享给所有源代码集的库
             }
         }
     }
@@ -38,25 +38,25 @@ kotlin {
 </tab>
 </tabs>
 
-Alternatively, you can [set dependencies at the top level](gradle-configure-project.md#set-dependencies-at-top-level).
+或者，你可以 [在顶层设置依赖](gradle-configure-project.md#set-dependencies-at-top-level)。
 
-## Dependency on a Kotlin library
+## 对 Kotlin 库的依赖 {id=dependency-on-a-kotlin-library}
 
-### Standard library
+### 标准库 {id=standard-library}
 
-A dependency on a standard library (`stdlib`) in each source set is added automatically. The version of the standard
-library is the same as the version of the `kotlin-multiplatform` plugin.
+每个源代码集中的标准库（`stdlib`）依赖都会自动添加。
+标准库的版本与 `kotlin-multiplatform` 插件的版本相同。
 
-For platform-specific source sets, the corresponding platform-specific variant of the library is used, while a common
-standard library is added to the rest. The Kotlin Gradle plugin will select the appropriate JVM standard library
-depending on the `compilerOptions.jvmTarget` [compiler option](gradle-compiler-options.md) of your Gradle build script.
+对于特定平台的源代码集，将使用相应平台的库变体，而其余部分将添加通用标准库。
+Kotlin Gradle 插件将根据 Gradle 构建脚本中的
+`compilerOptions.jvmTarget` [编译器选项](gradle-compiler-options.md) 选择适当的 JVM 标准库。
 
-Learn how to [change the default behavior](gradle-configure-project.md#dependency-on-the-standard-library).
+了解如何 [更改默认行为](gradle-configure-project.md#dependency-on-the-standard-library)。
 
-### Test libraries
+### 测试库 {id=test-libraries}
 
-For multiplatform tests, the [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API is available. When you
-create a multiplatform project, you can add test dependencies to all the source sets by using a single dependency in `commonTest`:
+对于跨平台测试，可以使用 [`kotlin.test`](https://kotlinlang.org/api/latest/kotlin.test/) API。
+当你创建一个跨平台项目时，可以在 `commonTest` 中使用单一依赖来为所有源代码集添加测试依赖：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -65,7 +65,7 @@ create a multiplatform project, you can add test dependencies to all the source 
 kotlin {
     sourceSets {
         commonTest.dependencies {
-            implementation(kotlin("test")) // Brings all the platform dependencies automatically
+            implementation(kotlin("test")) // 自动引入所有平台依赖
         }
     }
 }
@@ -79,7 +79,7 @@ kotlin {
     sourceSets {
         commonTest {
             dependencies {
-                implementation kotlin("test") // Brings all the platform dependencies automatically
+                implementation kotlin("test") // 自动引入所有平台依赖
             }
         }
     }
@@ -89,10 +89,10 @@ kotlin {
 </tab>
 </tabs>
 
-### kotlinx libraries
+### kotlinx 库 {id=kotlinx-libraries}
 
-If you use a multiplatform library and need to [depend on the shared code](#library-shared-for-all-source-sets), set the
-dependency only once in the shared source set. Use the library base artifact name, such as `kotlinx-coroutines-core`.
+如果你使用多平台库并且需要 [依赖共享代码](#library-shared-for-all-source-sets)，只需在共享源代码集中设置一次依赖。
+使用库的基础构件名称，例如 `kotlinx-coroutines-core`。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -125,9 +125,9 @@ kotlin {
 </tab>
 </tabs>
 
-If you use a kotlinx library and need a [platform-specific dependency](#library-used-in-specific-source-sets), you can
-use platform-specific variants of libraries with suffixes such as `-jvm` or `-js`, for
-example, `kotlinx-coroutines-core-jvm`.
+如果你使用 kotlinx 库并且需要 [特定平台依赖](#library-used-in-specific-source-sets)，
+可以使用带有后缀如 `-jvm` 或 `-js` 的平台特定库变体，
+例如 `kotlinx-coroutines-core-jvm`。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -160,20 +160,20 @@ kotlin {
 </tab>
 </tabs>
 
-## Dependency on Kotlin Multiplatform libraries
+## 对 Kotlin 跨平台库的依赖 {id=dependency-on-kotlin-multiplatform-libraries}
 
-You can add dependencies on libraries that have adopted Kotlin Multiplatform technology, such
-as [SQLDelight](https://github.com/cashapp/sqldelight). The authors of these libraries usually provide guides for adding
-their dependencies to your project.
+你可以添加对已经采用 Kotlin 跨平台技术的库的依赖，例如
+[SQLDelight](https://github.com/cashapp/sqldelight)。
+这些库的作者通常会提供将其依赖项添加到项目中的指南。
 
-Check out this [community-maintained list of Kotlin Multiplatform libraries](https://libs.kmp.icerock.dev/).
+查看这个 [社区维护的 Kotlin 跨平台库列表](https://libs.kmp.icerock.dev/)。
 
-### Library shared for all source sets
+### 共享给所有源代码集的库 {id=library-shared-for-all-source-sets}
 
-If you want to use a library from all source sets, you can add it only to the common source set. The Kotlin
-Multiplatform Mobile plugin will automatically add the corresponding parts to any other source sets.
+如果你想在所有源代码集中使用某个库，可以仅将其添加到通用源代码集中。
+Kotlin 跨平台移动插件将自动将相应部分添加到其他源代码集中。
 
-> You cannot set dependencies on platform-specific libraries in the common source set.
+> 你不能在通用源代码集中设置对特定平台库的依赖。
 >
 {style="warning"}
 
@@ -187,7 +187,7 @@ kotlin {
             implementation("io.ktor:ktor-client-core:%ktorVersion%")
         }
         androidMain.dependencies {
-            // dependency to a platform part of ktor-client will be added automatically
+            // ktor-client 的平台部分依赖将被自动添加
         }
     }
 }
@@ -206,7 +206,7 @@ kotlin {
         }
         androidMain {
             dependencies {
-                // dependency to platform part of ktor-client will be added automatically
+                // ktor-client 的平台部分依赖将被自动添加
             }
         }
     }
@@ -216,12 +216,14 @@ kotlin {
 </tab>
 </tabs>
 
-### Library used in specific source sets
+### 用于特定源代码集的库 {id=library-used-in-specific-source-sets}
 
-If you want to use a multiplatform library just for specific source sets, you can add it exclusively to them. The
-specified library declarations will then be available only in those source sets.
+如果你只想在特定的源代码集中使用某个多平台库，可以将其专门添加到这些源代码集中。
+指定的库声明将仅在这些源代码集中可用。
 
-> Use a common library name in such cases, not a platform-specific one. Like with SQLDelight in the example below, use `native-driver`, not `native-driver-iosx64`. Find the exact name in the library's documentation.
+> 在这种情况下请使用通用库名称，而不是特定于平台的名称。
+> 就像下面的 SQLDelight 示例一样，使用 `native-driver`，而不是 `native-driver-iosx64`。
+> 请在库的文档中找到确切的名称。
 >
 {style="note"}
 
@@ -232,14 +234,14 @@ specified library declarations will then be available only in those source sets.
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            // kotlinx.coroutines will be available in all source sets
+            // kotlinx.coroutines 将在所有源代码集中可用
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
         }
         androidMain.dependencies {
 
         }
         iosMain.dependencies {
-            // SQLDelight will be available only in the iOS source set, but not in Android or common
+            // SQLDelight 将仅在 iOS 源代码集中可用，而在 Android 或通用源代码集中不可用
             implementation("com.squareup.sqldelight:native-driver:%sqlDelightVersion%")
         }
     }
@@ -254,7 +256,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                // kotlinx.coroutines will be available in all source sets
+                // kotlinx.coroutines 将在所有源代码集中可用
                 implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%'
             }
         }
@@ -263,7 +265,7 @@ kotlin {
         }
         iosMain {
             dependencies {
-                // SQLDelight will be available only in the iOS source set, but not in Android or common
+                // SQLDelight 将仅在 iOS 源代码集中可用，而在 Android 或通用源代码集中不可用
                 implementation 'com.squareup.sqldelight:native-driver:%sqlDelightVersion%'
             }
         }
@@ -274,11 +276,11 @@ kotlin {
 </tab>
 </tabs>
 
-## Dependency on another multiplatform project
+## 对另一个多平台项目的依赖 {id=dependency-on-another-multiplatform-project}
 
-You can connect one multiplatform project to another as a dependency. To do this, simply add a project dependency to the
-source set that needs it. If you want to use a dependency in all source sets, add it to the common one. In this case,
-other source sets will get their versions automatically.
+你可以将一个多平台项目作为依赖连接到另一个项目。为此，只需将项目依赖添加到需要它的源代码集中。
+如果你想在所有源代码集中使用该依赖，请将其添加到通用源代码集中。
+在这种情况下，其他源代码集将自动获取它们的版本。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -290,7 +292,7 @@ kotlin {
             implementation(project(":some-other-multiplatform-module"))
         }
         androidMain.dependencies {
-            // platform part of :some-other-multiplatform-module will be added automatically
+            // :some-other-multiplatform-module 的平台部分将被自动添加
         }
     }
 }
@@ -309,7 +311,7 @@ kotlin {
         }
         androidMain {
             dependencies {
-                // platform part of :some-other-multiplatform-module will be added automatically
+                // :some-other-multiplatform-module 的平台部分将被自动添加
             }
         }
     }
@@ -319,9 +321,9 @@ kotlin {
 </tab>
 </tabs>
 
-## What's next?
+## 接下来做什么？ {id=whats-next}
 
-Check out other resources on adding dependencies in multiplatform projects and learn more about:
+查看有关在多平台项目中添加依赖的其他资源，并了解更多内容：
 
-* [Adding Android dependencies](multiplatform-android-dependencies.md)
-* [Adding iOS dependencies](multiplatform-ios-dependencies.md)
+* [添加 Android 依赖](multiplatform-android-dependencies.md)
+* [添加 iOS 依赖](multiplatform-ios-dependencies.md)
