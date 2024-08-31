@@ -143,7 +143,7 @@
             <toc-element topic="multiplatform-android-dependencies.md" toc-title="对于 Android 目标平台"/>
             <toc-element topic="multiplatform-ios-dependencies.md" toc-title="对于 iOS 目标平台"/>
         </toc-element>
-        <toc-element toc-title="编译工件">
+        <toc-element toc-title="编译构件(artifact)">
             <toc-element topic="multiplatform-configure-compilations.md" accepts-web-file-names="mpp-configure-compilations.html"/>
             <toc-element toc-title="[实验性 DSL] 构建最终的本地二进制文件" topic="multiplatform-native-artifacts.md" hidden="true"/>
             <toc-element topic="multiplatform-build-native-binaries.md" accepts-web-file-names="mpp-build-native-binaries.html"/>

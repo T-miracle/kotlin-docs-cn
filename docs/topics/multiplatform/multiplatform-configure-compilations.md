@@ -1,30 +1,27 @@
-[//]: # (title: Configure compilations)
+[//]: # (title: 配置编译)
 
-Kotlin multiplatform projects use compilations for producing artifacts. Each target can have one or more compilations, 
-for example, for production and test purposes.
+Kotlin 跨平台项目使用编译来生成构件。每个目标可以有一个或多个编译，例如用于生产和测试目的。
 
-For each target, default compilations include:
+对于每个目标，默认的编译包括：
 
-* `main` and `test` compilations for JVM, JS, and Native targets.
-* A [compilation](#compilation-for-android) per [Android build variant](https://developer.android.com/studio/build/build-variants), for Android targets.
+* JVM、JS 和原生目标的 `main` 和 `test` 编译。
+* 针对 Android 目标的每个 [Android 构建变体](https://developer.android.com/studio/build/build-variants) 的[编译](#compilation-for-android)。
 
-![Compilations](compilations.png)
+![编译](compilations.png)
 
-If you need to compile something other than production code and unit tests, for example, integration or performance tests, 
-you can [create a custom compilation](#create-a-custom-compilation).
+如果你需要编译生产代码和单元测试之外的内容，例如集成测试或性能测试，你可以[创建一个自定义编译](#create-a-custom-compilation)。
 
-You can configure how artifacts are produced in:
+你可以在以下位置配置如何生成构件：
 
-* [All compilations](#configure-all-compilations) in your project at once.
-* [Compilations for one target](#configure-compilations-for-one-target) since one target can have multiple compilations.
-* [A specific compilation](#configure-one-compilation).
+* [项目中的所有编译](#configure-all-compilations)。
+* [单个目标的编译](#configure-compilations-for-one-target)，因为一个目标可以有多个编译。
+* [特定的编译](#configure-one-compilation)。
 
-See the [list of compilation parameters](multiplatform-dsl-reference.md#compilation-parameters) and [compiler options](gradle-compiler-options.md) 
-available for all or specific targets.
+查看可用于所有或特定目标的 [编译参数列表](multiplatform-dsl-reference.md#compilation-parameters) 和 [编译器选项](gradle-compiler-options.md)。
 
-## Configure all compilations
+## 配置所有编译 {id=configure-all-compilations}
 
-This example configures a compiler option that is common across all targets:
+以下示例配置了一个对所有目标通用的编译器选项：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -59,7 +56,7 @@ kotlin {
 </tab>
 </tabs>
 
-Alternatively, you can use the `compilerOptions {}` [top-level block](multiplatform-dsl-reference.md#top-level-blocks):
+或者，你可以使用 `compilerOptions {}` [顶级块](multiplatform-dsl-reference.md#top-level-blocks)：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -87,13 +84,13 @@ kotlin {
 </tab>
 </tabs>
 
-> The support for `compilerOptions {}` as a top-level block is [Experimental](components-stability.md#stability-levels-explained)
-> and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
-> your feedback on it in [YouTrack](https://kotl.in/issue).
+> 将 `compilerOptions {}` 作为顶级块的支持是[实验性](components-stability.md#stability-levels-explained)的，需要进行选择加入。
+> 它可能会随时被删除或更改。仅将其用于评估目的。
+> 我们非常感谢您在 [YouTrack](https://kotl.in/issue) 上提供的反馈。
 >
 {style="warning"}
 
-## Configure compilations for one target
+## 为单个目标配置编译 {id=configure-compilations-for-one-target}
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -124,7 +121,7 @@ kotlin {
 </tab>
 </tabs>
 
-Alternatively, you can use the `compilerOptions {}` block at target level:
+或者，你可以在目标级别使用 `compilerOptions {}` 块：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -156,14 +153,13 @@ kotlin {
 </tab>
 </tabs>
 
-> The support for the `compilerOptions {}` block at target level is [Experimental](components-stability.md#stability-levels-explained)
-> and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
-> your feedback on it in [YouTrack](https://kotl.in/issue).
+> 在目标级别支持 `compilerOptions {}` 块是[实验性](components-stability.md#stability-levels-explained)的，
+> 需要选择加入。它可能会随时被删除或更改。
+> 仅将其用于评估目的。我们非常感谢您在 [YouTrack](https://kotl.in/issue) 上提供的反馈。
 >
 {style="warning"}
 
-
-## Configure one compilation
+## 配置一个编译 {id=configure-one-compilation}
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -198,16 +194,14 @@ kotlin {
 </tab>
 </tabs>
 
-## Create a custom compilation
+## 创建自定义编译 {id=create-a-custom-compilation}
 
-If you need to compile something other than production code and unit tests, for example, integration or performance tests, 
-create a custom compilation.
+如果你需要编译生产代码和单元测试之外的内容，例如集成测试或性能测试，可以创建一个自定义编译。
  
-For example, to create a custom compilation for integration tests of the `jvm()` target, add a new item to the `compilations` 
-collection. 
+例如，为 `jvm()` 目标的集成测试创建一个自定义编译，可以向 `compilations` 集合中添加一个新项。
  
-> For custom compilations, you need to set up all dependencies manually. The default source set of a custom compilation 
-> does not depend on the `commonMain` and the `commonTest` source sets.
+> 对于自定义编译，你需要手动设置所有依赖关系。
+> 自定义编译的默认源代码集不依赖于 `commonMain` 和 `commonTest` 源代码集。
 >
 {style="note"}
 
@@ -223,20 +217,19 @@ kotlin {
             val integrationTest by compilations.creating {
                 defaultSourceSet {
                     dependencies {
-                        // Compile against the main compilation's compile classpath and outputs:
+                        // 依赖于 main 编译的编译类路径和输出进行编译：
                         implementation(main.compileDependencyFiles + main.output.classesDirs)
                         implementation(kotlin("test-junit"))
                         /* ... */
                     }
                 }
                 
-                // Create a test task to run the tests produced by this compilation:
+                // 创建一个测试任务来运行此编译产生的测试：
                 tasks.register<Test>("integrationTest") {
-                    // Run the tests with the classpath containing the compile dependencies (including 'main'),
-                    // runtime dependencies, and the outputs of this compilation:
+                    // 使用包含编译依赖项（包括 'main'）、运行时依赖项和此编译输出的类路径运行测试：
                     classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
                     
-                    // Run only the tests from this compilation's outputs:
+                    // 仅运行此编译输出的测试：
                     testClassesDirs = output.classesDirs
                 }
             }
@@ -255,20 +248,19 @@ kotlin {
             defaultSourceSet {
                 dependencies {
                     def main = compilations.main
-                    // Compile against the main compilation's compile classpath and outputs:
+                    // 依赖于 main 编译的编译类路径和输出进行编译：
                     implementation(main.compileDependencyFiles + main.output.classesDirs)
                     implementation kotlin('test-junit')
                     /* ... */
                 }
             }
            
-            // Create a test task to run the tests produced by this compilation:
+            // 创建一个测试任务来运行此编译产生的测试：
             tasks.register('jvmIntegrationTest', Test) {
-                // Run the tests with the classpath containing the compile dependencies (including 'main'),
-                // runtime dependencies, and the outputs of this compilation:
+                // 使用包含编译依赖项（包括 'main'）、运行时依赖项和此编译输出的类路径运行测试：
                 classpath = compileDependencyFiles + runtimeDependencyFiles + output.allOutputs
                 
-                // Run only the tests from this compilation's outputs:
+                // 仅运行此编译输出的测试：
                 testClassesDirs = output.classesDirs
             }
         }
@@ -279,15 +271,14 @@ kotlin {
 </tab>
 </tabs>
 
-You also need to create a custom compilation in other cases, for example, if you want to combine compilations for different 
-JVM versions in your final artifact, or you have already set up source sets in Gradle and want to migrate to a multiplatform project.
+你还需要在其他情况下创建自定义编译，例如，如果你想将不同
+JVM 版本的编译合并到最终构件中，或者你已经在 Gradle 中设置了源代码集并想迁移到跨平台项目。
 
-## Use Java sources in JVM compilations
+## 在 JVM 编译中使用 Java 源代码 {id=use-java-sources-in-jvm-compilations}
 
-When creating a project with the [project wizard](https://kmp.jetbrains.com/), Java sources are included in the compilations of
-the JVM target.
+在使用 [项目向导](https://kmp.jetbrains.com/) 创建项目时，Java 源代码会包含在 JVM 目标的编译中。
 
-In the build script, the following section applies the Gradle `java` plugin and configures the target to cooperate with it:
+在构建脚本中，以下部分应用了 Gradle 的 `java` 插件，并配置了目标以配合它：
 
 ```kotlin
 kotlin {
@@ -297,62 +288,61 @@ kotlin {
 }
 ```
 
-The Java source files are placed in the child directories of the Kotlin source roots. For example, the paths are:
+Java 源文件被放置在 Kotlin 源根目录的子目录中。例如，路径如下：
 
-![Java source files](java-source-paths.png){width=200}
+![Java 源文件](java-source-paths.png){width=200}
 
-The common source sets cannot include Java sources.
+公共源代码集不能包含 Java 源代码。
 
-Due to current limitations, the Kotlin plugin replaces some tasks configured by the Java plugin:
+由于当前的限制，Kotlin 插件会替代 Java 插件配置的一些任务：
 
-* The target's JAR task instead of `jar` (for example, `jvmJar`).
-* The target's test task instead of `test` (for example, `jvmTest`).
-* The resources are processed by the equivalent tasks of the compilations instead of `*ProcessResources` tasks.
+* 目标的 JAR 任务，而不是 `jar`（例如，`jvmJar`）。
+* 目标的测试任务，而不是 `test`（例如，`jvmTest`）。
+* 资源由编译的等效任务处理，而不是 `*ProcessResources` 任务。
 
-The publication of this target is handled by the Kotlin plugin and doesn't require steps that are specific for the Java plugin.
+此目标的发布由 Kotlin 插件处理，不需要 Java 插件特有的步骤。
 
-## Configure interop with native languages
+## 配置与本地语言的互操作性 {id=configure-interop-with-native-languages}
 
-Kotlin provides [interoperability with native languages](native-c-interop.md) and DSL to configure this for a specific 
-compilation.
+Kotlin 提供了与[本地语言的互操作性](native-c-interop.md)和用于特定编译的 DSL 配置。
 
-| Native language | Supported platforms | Comments |
-|-----------------|---------------------|----------|
-| C | All platforms, except for WebAssembly | |
-| Objective-C | Apple platforms (macOS, iOS, watchOS, tvOS) | |
-| Swift via Objective-C | Apple platforms (macOS, iOS, watchOS, tvOS) | Kotlin can use only Swift declarations marked with the `@objc` attribute. |
+| 本地语言                   | 支持的平台                            | 备注                                   |
+|------------------------|----------------------------------|--------------------------------------|
+| C                      | 所有平台，WebAssembly 除外              |                                      |
+| Objective-C            | Apple 平台（macOS、iOS、watchOS、tvOS） |                                      |
+| 通过 Objective-C 的 Swift | Apple 平台（macOS、iOS、watchOS、tvOS） | Kotlin 只能使用标记为 `@objc` 属性的 Swift 声明。 |
 
-A compilation can interact with several native libraries. Configure interoperability in the `cinterops` block of the 
-compilation with [available parameters](multiplatform-dsl-reference.md#cinterops).
+一个编译可以与多个本地库交互。在编译的 `cinterops` 块中配置互操作性，并使用
+[可用参数](multiplatform-dsl-reference.md#cinterops)。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 kotlin {
-    linuxX64 { // Replace with a target you need.
+    linuxX64 { // 替换为你需要的目标。
         compilations.getByName("main") {
             val myInterop by cinterops.creating {
-                // Def-file describing the native API.
-                // The default path is src/nativeInterop/cinterop/<interop-name>.def
+                // 描述本地 API 的 def 文件。
+                // 默认路径是 src/nativeInterop/cinterop/<interop-name>.def
                 definitionFile.set(project.file("def-file.def"))
                 
-                // Package to place the Kotlin API generated.
+                // 放置生成的 Kotlin API 的包名。
                 packageName("org.sample")
                 
-                // Options to be passed to compiler by cinterop tool.
+                // 传递给编译器的选项，通过 cinterop 工具。
                 compilerOpts("-Ipath/to/headers")
               
-                // Directories to look for headers.
+                // 查找头文件的目录。
                 includeDirs.apply {
-                    // Directories for header search (an equivalent of the -I<path> compiler option).
+                    // 头文件搜索目录（相当于 -I<path> 编译器选项）。
                     allHeaders("path1", "path2")
                     
-                    // Additional directories to search headers listed in the 'headerFilter' def-file option.
-                    // -headerFilterAdditionalSearchPrefix command line option equivalent.
+                    // 额外的目录，搜索 'headerFilter' def 文件选项中列出的头文件。
+                    // -headerFilterAdditionalSearchPrefix 命令行选项的等效项。
                     headerFilterOnly("path1", "path2")
                 }
-                // A shortcut for includeDirs.allHeaders.
+                // includeDirs.allHeaders 的快捷方式。
                 includeDirs("include/directory", "another/directory")
             }
             
@@ -367,28 +357,28 @@ kotlin {
 
 ```groovy
 kotlin {
-    linuxX64 { // Replace with a target you need.
+    linuxX64 { // 替换为你需要的目标。
         compilations.main {
             cinterops {
                 myInterop {
-                    // Def-file describing the native API.
-                    // The default path is src/nativeInterop/cinterop/<interop-name>.def
+                    // 描述本地 API 的 def 文件。
+                    // 默认路径是 src/nativeInterop/cinterop/<interop-name>.def
                     definitionFile = project.file("def-file.def")
                     
-                    // Package to place the Kotlin API generated.
+                    // 放置生成的 Kotlin API 的包名。
                     packageName 'org.sample'
                     
-                    // Options to be passed to compiler by cinterop tool.
+                    // 传递给编译器的选项，通过 cinterop 工具。
                     compilerOpts '-Ipath/to/headers'
                     
-                    // Directories for header search (an eqivalent of the -I<path> compiler option).
+                    // 查找头文件的目录（相当于 -I<path> 编译器选项）。
                     includeDirs.allHeaders("path1", "path2")
                     
-                    // Additional directories to search headers listed in the 'headerFilter' def-file option.
-                    // -headerFilterAdditionalSearchPrefix command line option equivalent.
+                    // 额外的目录，搜索 'headerFilter' def 文件选项中列出的头文件。
+                    // -headerFilterAdditionalSearchPrefix 命令行选项的等效项。
                     includeDirs.headerFilterOnly("path1", "path2")
                     
-                    // A shortcut for includeDirs.allHeaders.
+                    // includeDirs.allHeaders 的快捷方式。
                     includeDirs("include/directory", "another/directory")
                 }
                 
@@ -402,22 +392,21 @@ kotlin {
 </tab>
 </tabs>
 
-## Compilation for Android 
+## Android 编译 {id=compilation-for-android}
  
-The compilations created for an Android target by default are tied to [Android build variants](https://developer.android.com/studio/build/build-variants): 
-for each build variant, a Kotlin compilation is created under the same name.
+默认情况下，为 Android 目标创建的编译与 [Android 构建变体](https://developer.android.com/studio/build/build-variants) 相关联：
+每个构建变体下会创建一个相同名称的 Kotlin 编译。
 
-Then, for each [Android source set](https://developer.android.com/studio/build/build-variants#sourcesets) compiled for 
-each of the variants, a Kotlin source set is created under that source set name prepended by the target name, like the 
-Kotlin source set `androidDebug` for an Android source set `debug` and the Kotlin target named `android`. These Kotlin 
-source sets are added to the variants' compilations accordingly.
+然后，对于为每个变体编译的每个 [Android 源代码集](https://developer.android.com/studio/build/build-variants#sourcesets)，
+会创建一个以目标名称为前缀的 Kotlin 源代码集，例如 Android 源代码集 `debug` 的
+Kotlin 源代码集 `androidDebug` 和名为 `android` 的 Kotlin 目标。
+这些 Kotlin 源代码集会被相应地添加到变体的编译中。
 
-The default source set `commonMain` is added to each production (application or library) variant's compilation. 
-The `commonTest` source set is similarly added to the compilations of unit test and instrumented test variants.
+默认源代码集 `commonMain` 会被添加到每个生产（应用程序或库）变体的编译中。
+`commonTest` 源代码集同样被添加到单元测试和仪器测试变体的编译中。
 
-Annotation processing with [`kapt`](kapt.md) is also supported, but due to current limitations it requires that the Android target 
-is created before the `kapt` dependencies are configured, which needs to be done in a top-level `dependencies {}` block rather 
-than within Kotlin source set dependencies.
+`kapt` 注解处理也得到支持，但由于当前的限制，它要求在配置 `kapt` 依赖项之前先创建 Android 目标，
+这需要在顶层的 `dependencies {}` 块中完成，而不是在 Kotlin 源代码集依赖项中完成。
 
 ```kotlin
 kotlin {
@@ -429,26 +418,23 @@ dependencies {
 }
 ```
 
-## Compilation of the source set hierarchy 
+## 源代码集层级的编译 {id=compilation-of-the-source-set-hierarchy}
 
-Kotlin can build a [source set hierarchy](multiplatform-share-on-platforms.md#share-code-on-similar-platforms) with the `dependsOn` relation.
+Kotlin 可以使用 `dependsOn` 关系构建一个 [源代码集层级](multiplatform-share-on-platforms.md#share-code-on-similar-platforms)。
 
-![Source set hierarchy](jvm-js-main.png){width=400}
+![源代码集层级](jvm-js-main.png){width=400}
 
-If the source set `jvmMain` depends on a source set `commonMain` then:
+如果源代码集 `jvmMain` 依赖于源代码集 `commonMain`，则：
 
-* Whenever `jvmMain` is compiled for a certain target, `commonMain` takes part in that compilation as well and is also 
-compiled into the same target binary form, such as JVM class files.
-* Sources of `jvmMain` 'see' the declarations of `commonMain`, including internal declarations, and also see the 
-[dependencies](multiplatform-add-dependencies.md) of `commonMain`, even those specified as `implementation` dependencies.
-* `jvmMain` can contain platform-specific implementations for the [expected declarations](multiplatform-expect-actual.md) 
-of `commonMain`.
-* The resources of `commonMain` are always processed and copied along with the resources of `jvmMain`.
-* The [language settings](multiplatform-dsl-reference.md#language-settings) of `jvmMain` and `commonMain` should be consistent.
+* 每当 `jvmMain` 为某个特定目标编译时，`commonMain` 也参与该编译，并且也被编译成相同目标的二进制形式，例如 JVM 类文件。
+* `jvmMain` 的源代码可以访问 `commonMain` 的声明，包括内部声明，还可以访问 `commonMain` 的
+[依赖项](multiplatform-add-dependencies.md)，即使是指定为 `implementation` 依赖项的。
+* `jvmMain` 可以包含针对 `commonMain` 的 [预期声明](multiplatform-expect-actual.md) 的平台特定实现。
+* `commonMain` 的资源总是会与 `jvmMain` 的资源一起处理和复制。
+* `jvmMain` 和 `commonMain` 的 [语言设置](multiplatform-dsl-reference.md#language-settings) 应该保持一致。
 
-Language settings are checked for consistency in the following ways:
-* `jvmMain` should set a `languageVersion` that is greater than or equal to that of `commonMain`.
-* `jvmMain` should enable all unstable language features that `commonMain` enables (there's no such requirement for 
-bugfix features).
-* `jvmMain` should use all experimental annotations that `commonMain` uses.
-* `apiVersion`, bugfix language features, and `progressiveMode` can be set arbitrarily.
+语言设置的一致性检查方式包括：
+* `jvmMain` 的 `languageVersion` 应该大于或等于 `commonMain` 的 `languageVersion`。
+* `jvmMain` 应该启用所有 `commonMain` 启用的非稳定语言特性（对于 bugfix 的特性没有这种要求）。
+* `jvmMain` 应该使用 `commonMain` 使用的所有实验性注解。
+* `apiVersion`、bugfix 的语言特性和 `progressiveMode` 可以任意设置。

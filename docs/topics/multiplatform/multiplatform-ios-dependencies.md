@@ -11,7 +11,7 @@ Multiplatform 项目中作为一组预构建的库提供。它们不需要任何
 
 与 CocoaPods 依赖管理器的集成也受支持，但存在相同的限制——你不能使用纯 Swift pods。
 
-我们推荐 [使用 CocoaPods](#with-cocoapods) 来处理 Kotlin Multiplatform 项目中的 iOS 依赖项。
+我们推荐 [使用 CocoaPods](#with-cocoapods) 来处理 Kotlin 跨平台项目中的 iOS 依赖项。
 只有在你希望专门调整互操作过程或有其他强烈原因时，才 [手动管理依赖项](#without-cocoapods)。
 
 ### 使用 CocoaPods {id=with-cocoapods}
