@@ -1,8 +1,9 @@
-[//]: # (title: Publishing multiplatform libraries)
+[//]: # (title: 发布跨平台库)
 
-You can publish a multiplatform library to a local Maven repository with the [`maven-publish` Gradle plugin](https://docs.gradle.org/current/userguide/publishing_maven.html). 
-In the `shared/build.gradle.kts` file, specify the group, version, and the [repositories](https://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven:repositories) where the library
-should be published. The plugin creates publications automatically.
+你可以使用 [`maven-publish` Gradle 插件](https://docs.gradle.org/current/userguide/publishing_maven.html)
+将一个跨平台库发布到本地 Maven 仓库。在 `shared/build.gradle.kts` 文件中，指定库的 group、version，以及要发布到的
+[repositories（仓库）](https://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven:repositories)。
+该插件会自动创建发布内容。
 
 ```kotlin
 plugins {
@@ -22,49 +23,50 @@ publishing {
 }
 ```
 
-> You can also publish a multiplatform library to a GitHub repository. For more information, see GitHub's documentation on [GitHub packages](https://docs.github.com/en/packages).
+> 你还可以将一个跨平台库发布到 GitHub 仓库。
+> 更多信息请参见 GitHub 关于 [GitHub packages（GitHub 软件包）](https://docs.github.com/en/packages) 的文档。
 >
 {style="tip"}
 
-## Structure of publications
+## 发布结构 {id=structure-of-publications}
 
-When used with `maven-publish`, the Kotlin plugin automatically creates publications for each target that can be built on the current host, except for the Android target, 
-which needs an [additional step to configure publishing](#publish-an-android-library).
+在使用 `maven-publish` 时，Kotlin 插件会为每个可以在当前主机上构建的目标自动创建发布内容，但 Android 目标除外，
+因为它需要[额外的步骤来配置发布](#publish-an-android-library)。
 
-Publications of a multiplatform library include an additional _root_ publication `kotlinMultiplatform` that stands for the 
-whole library and is automatically resolved to the appropriate platform-specific artifacts when added as a dependency to the common source set. 
-Learn more about [adding dependencies](multiplatform-add-dependencies.md).
+跨平台库的发布内容中包含一个额外的 _根（root）_ 发布 `kotlinMultiplatform`，
+代表整个库，并在被添加为公共源代码集的依赖项时自动解析为适当的特定平台构件。
+了解更多关于[添加依赖项](multiplatform-add-dependencies.md)。
 
-This `kotlinMultiplatform` publication includes metadata artifacts and references the other publications as its variants.
+这个 `kotlinMultiplatform` 发布包括元数据构件，并将其他发布作为其变体引用。
 
-> Some repositories, such as Maven Central, require that the root module contains a JAR artifact without a classifier, for example `kotlinMultiplatform-1.0.jar`.  
-> The Kotlin Multiplatform plugin automatically produces the required artifact with the embedded metadata artifacts.  
-> This means you don't have to customize your build by adding an empty artifact to the root module of your library to meet the repository's requirements.
+> 一些仓库（例如 Maven Central）要求根模块包含一个不带分类符的 JAR 构件，例如 `kotlinMultiplatform-1.0.jar`。  
+> Kotlin 跨平台插件会自动生成包含嵌入式元数据构件的所需构件。  
+> 这意味着你不需要通过向库的根模块添加空构件来定制你的构建以满足仓库的要求。
 >
 {style="note"}
 
-The `kotlinMultiplatform` publication may also need the sources and documentation artifacts if that is required by the repository. In that case, 
-add those artifacts by using [`artifact(...)`](https://docs.gradle.org/current/javadoc/org/gradle/api/publish/maven/MavenPublication.html#artifact-java.lang.Object-) 
-in the publication's scope.
+`kotlinMultiplatform` 发布可能还需要源代码和文档构件，如果仓库有这样的要求。
+在这种情况下，可以在发布范围内使用 [`artifact(...)`](https://docs.gradle.org/current/javadoc/org/gradle/api/publish/maven/MavenPublication.html#artifact-java.lang.Object-)
+添加这些构件。
 
-## Host requirements
+## 主机要求 {id=host-requirements}
 
-Except for Apple platform targets, Kotlin/Native supports cross-compilation, allowing any host to produce needed artifacts.
+除了 Apple 平台目标外，Kotlin/Native 支持交叉编译，允许任何主机生成所需的构件。
 
-To avoid any issues during publication:
-* Publish only from an Apple host when your project targets Apple operating systems.
-* Publish all artifacts from one host only to avoid duplicating publications in the repository.
+为了避免发布过程中的任何问题：
+* 当你的项目目标是 Apple 操作系统时，仅从 Apple 主机进行发布。
+* 仅从一个主机发布所有构件，以避免在仓库中出现重复发布。
   
-  Maven Central, for example, explicitly forbids duplicate publications and fails the process. <!-- TBD: add the actual error -->
-  
-### If you use Kotlin 1.7.0 or earlier {collapsible="true"}
+  例如，Maven Central 明确禁止重复发布，并会导致发布过程失败。 <!-- TBD: 添加实际错误信息 -->
 
-Before 1.7.20, the Kotlin/Native compiler didn't support all cross-compilation options. If you use earlier versions, you may need
-to publish multiplatform projects from multiple hosts: a Windows host to compile a Windows target, a Linux host to compile a Linux target, and so on.
-This can result in duplicate publications of modules that are cross-compiled. The most straightforward way to avoid this is to upgrade to a later
-version of Kotlin and publish from a single host as described above.
+### 如果你使用 Kotlin 1.7.0 或更早版本 {id=if-you-use-kotlin-170-or-earlier collapsible="true"}
 
-If upgrading is not an option, assign a main host for each target and check for it in the `shared/build.gradle(.kts)` file:
+在 1.7.20 之前，Kotlin/Native 编译器不支持所有交叉编译选项。
+如果你使用更早的版本，你可能需要从多个主机发布跨平台项目：
+例如，从 Windows 主机编译 Windows 目标，从 Linux 主机编译 Linux 目标，依此类推。
+这可能会导致模块的重复发布。避免这种情况的最简单方法是升级到更新版本的 Kotlin，并按照上述方式从单一主机发布。
+
+如果无法升级，为每个目标指定一个主要主机，并在 `shared/build.gradle(.kts)` 文件中检查它：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -120,12 +122,12 @@ kotlin {
 </tab>
 </tabs>
 
-## Publish an Android library
+## 发布一个 Android 库 {id=publish-an-android-library}
 
-To publish an Android library, you need to provide additional configuration.
+要发布一个 Android 库，你需要提供额外的配置。
 
-By default, no artifacts of an Android library are published. To publish artifacts produced by a set of [Android variants](https://developer.android.com/studio/build/build-variants), 
-specify the variant names in the Android target block in the `shared/build.gradle.kts` file:
+默认情况下，不会发布 Android 库的任何构件。要发布由一组 [Android 变体](https://developer.android.com/studio/build/build-variants)
+生成的构件，请在 `shared/build.gradle.kts` 文件中的 Android 目标块中指定变体名称：
 
 ```kotlin
 kotlin {
@@ -136,23 +138,20 @@ kotlin {
 
 ```
 
-The example works for Android libraries without [product flavors](https://developer.android.com/studio/build/build-variants#product-flavors). 
-For a library with product flavors, the variant names also contain the flavors, like `fooBarDebug` or `fooBarRelease`.
+这个示例适用于没有 [产品变种](https://developer.android.com/studio/build/build-variants#product-flavors) 的 Android 库。
+对于带有产品变种的库，变体名称还会包含这些风味，比如 `fooBarDebug` 或 `fooBarRelease`。
 
-The default publishing setup is as follows:
-* If the published variants have the same build type (for example, all of them are `release` or`debug`),
-  they will be compatible with any consumer build type.
-* If the published variants have different build types, then only the release variants will be compatible
-  with consumer build types that are not among the published variants. All other variants (such as `debug`)
-  will only match the same build type on the consumer side, unless the consumer project specifies the
-  [matching fallbacks](https://developer.android.com/reference/tools/gradle-api/4.2/com/android/build/api/dsl/BuildType).
+默认的发布设置如下：
+* 如果发布的变体具有相同的构建类型（例如，全部为 `release` 或 `debug`），它们将与任何消费者构建类型兼容。
+* 如果发布的变体具有不同的构建类型，则只有 `release` 变体与未包含在发布变体中的消费者构建类型兼容。
+  所有其他变体（如 `debug`）将只匹配消费者端的相同构建类型，除非消费者项目指定了
+  [匹配回退](https://developer.android.com/reference/tools/gradle-api/4.2/com/android/build/api/dsl/BuildType)。
 
-If you want to make every published Android variant compatible with only the same build type used by the library consumer,
-set this Gradle property: `kotlin.android.buildTypeAttribute.keep=true`.
+如果希望每个已发布的 Android 变体仅与使用相同构建类型的库消费者兼容，
+请设置此 Gradle 属性：`kotlin.android.buildTypeAttribute.keep=true`。
 
-You can also publish variants grouped by the product flavor, so that the outputs of the different build types are placed 
-in a single module, with the build type becoming a classifier for the artifacts (the release build type is still published 
-with no classifier). This mode is disabled by default and can be enabled as follows in the `shared/build.gradle.kts` file:
+你还可以按产品变种分组发布变体，使得不同构建类型的输出放在一个模块中，并且构建类型成为构件的分类符
+（`release` 构建类型仍然以无分类符发布）。此模式默认情况下是禁用的，可以在 `shared/build.gradle.kts` 文件中启用，如下所示：
 
 ```kotlin
 kotlin {
@@ -162,17 +161,16 @@ kotlin {
 }
 ```
 
-> It is not recommended that you publish variants grouped by the product flavor in case they have different dependencies, 
-> as those will be merged into one dependency list.
+> 不建议发布按产品变种分组的变体，特别是在它们有不同依赖的情况下，因为这些依赖会被合并到一个依赖列表中。
 >
 {style="note"}
 
-## Disable sources publication
+## 禁用源代码发布 {id=disable-sources-publication}
 
-By default, the Kotlin Multiplatform Gradle plugin publishes sources for all the specified targets. However,
-you can configure and disable sources publication with the `withSourcesJar()` API in the `shared/build.gradle.kts` file:
+默认情况下，Kotlin Multiplatform Gradle 插件会为所有指定的目标发布源代码。
+然而，你可以在 `shared/build.gradle.kts` 文件中使用 `withSourcesJar()` API 配置并禁用源代码发布：
 
-* To disable sources publication for all the targets:
+* 要禁用所有目标的源代码发布：
 
   ```kotlin
   kotlin {
@@ -183,11 +181,11 @@ you can configure and disable sources publication with the `withSourcesJar()` AP
   }
   ```
 
-* To disable sources publication only for the specified target:
+* 要仅禁用指定目标的源代码发布：
 
   ```kotlin
   kotlin {
-       // Disable sources publication only for JVM:
+       // 仅禁用 JVM 的源代码发布：
       jvm {
           withSourcesJar(publish = false)
       }
@@ -195,11 +193,11 @@ you can configure and disable sources publication with the `withSourcesJar()` AP
   }
   ```
 
-* To disable sources publication for all targets except for the specified target:
+* 要禁用所有目标的源代码发布，除了指定目标：
 
   ```kotlin
   kotlin {
-      // Disable sources publication for all targets except for JVM:
+      // 禁用所有目标的源代码发布，除了 JVM：
       withSourcesJar(publish = false)
   
       jvm {
@@ -209,14 +207,14 @@ you can configure and disable sources publication with the `withSourcesJar()` AP
   }
   ```
 
-## Disable JVM environment attribute publication
+## 禁用 JVM 环境属性发布 {id=disable-jvm-environment-attribute-publication}
 
-Starting with Kotlin 2.0.0, the Gradle attribute [`org.gradle.jvm.environment`](https://docs.gradle.org/current/userguide/variant_attributes.html#sub:jvm_default_attributes)
-is automatically published with all Kotlin variants to help distinguish between JVM and Android variants of Kotlin Multiplatform
-libraries. The attribute indicates which library variant is suited for which JVM environment, and Gradle uses this information to help with 
-dependency resolution in your projects. The target environment can be "android", "standard-jvm", or "no-jvm".
+从 Kotlin 2.0.0 开始，Gradle 属性 [`org.gradle.jvm.environment`](https://docs.gradle.org/current/userguide/variant_attributes.html#sub:jvm_default_attributes)
+会自动与所有 Kotlin 变体一起发布，以帮助区分 Kotlin Multiplatform 库的 JVM 和 Android 变体。
+该属性指示哪个库变体适用于哪个 JVM 环境，Gradle 使用此信息来帮助你的项目进行依赖解析。
+目标环境可以是 "android"、"standard-jvm" 或 "no-jvm"。
 
-You can disable the publication of this attribute by adding the following Gradle property to your `gradle.properties` file:
+你可以通过在 `gradle.properties` 文件中添加以下 Gradle 属性来禁用该属性的发布：
 
 ```none
 kotlin.publishJvmEnvironmentAttribute=false
