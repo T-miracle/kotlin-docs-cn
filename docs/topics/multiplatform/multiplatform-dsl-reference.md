@@ -1,14 +1,14 @@
-[//]: # (title: Multiplatform Gradle DSL reference)
+[//]: # (title: 跨平台 Gradle DSL 参考)
 
-The Kotlin Multiplatform Gradle plugin is a tool for creating [Kotlin Multiplatform](multiplatform.md) projects.
-Here we provide a reference of its contents; use it as a reminder when writing Gradle build scripts
-for Kotlin Multiplatform projects. Learn the [concepts of Kotlin Multiplatform projects, how to create and configure them](multiplatform-get-started.md).
+Kotlin 跨平台 Gradle 插件是用于创建 [Kotlin 跨平台](multiplatform.md) 项目的工具。
+这里提供了其内容的参考；在编写 Kotlin 跨平台项目的 Gradle 构建脚本时，请将其作为提醒。
+了解 [Kotlin 跨平台项目的概念、如何创建和配置它们](multiplatform-get-started.md)。
 
-## Id and version
+## ID 和版本 {id=id-and-version}
 
-The fully qualified name of the Kotlin Multiplatform Gradle plugin is `org.jetbrains.kotlin.multiplatform`. 
-If you use the Kotlin Gradle DSL, you can apply the plugin with `kotlin("multiplatform")`.
-The plugin versions match the Kotlin release versions. The most recent version is %kotlinVersion%.
+Kotlin 跨平台 Gradle 插件的完全限定名是 `org.jetbrains.kotlin.multiplatform`。
+如果使用 Kotlin Gradle DSL，可以通过 `kotlin("multiplatform")` 应用该插件。
+插件版本与 Kotlin 版本相匹配。 最新版本为 %kotlinVersion%。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -31,41 +31,40 @@ plugins {
 </tab>
 </tabs>
 
-## Top-level blocks
+## 顶级块 {id=top-level-blocks}
 
-`kotlin {}` is the top-level block for multiplatform project configuration in the Gradle build script.
-Inside `kotlin {}`, you can write the following blocks:
+`kotlin {}` 是 Gradle 构建脚本中用于跨平台项目配置的顶级块。
+在 `kotlin {}` 中，可以编写以下块：
 
-| **Block**         | **Description**                                                                                                                                                                                                                 |
-|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| _\<targetName\>_  | Declares a particular target of a project. The names of available targets are listed in the [Targets](#targets) section.                                                                                                        |
-| `targets`         | All targets of the project.                                                                                                                                                                                                     |
-| `presets`         | All predefined targets. Use this for [configuring multiple predefined targets](#targets) at once.                                                                                                                               |
-| `sourceSets`      | Configures predefined and declares custom [source sets](#source-sets) of the project.                                                                                                                                           |
-| `compilerOptions` | Extension-level common [compiler options](gradle-compiler-options.md) that are used as defaults for all targets and shared source sets. To use it, add the following opt-in: `@OptIn(ExperimentalKotlinGradlePluginApi::class)` |
+| **块**             | **描述**                                                                                                                            |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------| 
+| _\<targetName\>_  | 声明项目的特定目标。 可用目标的名称列在 [目标](#targets) 部分。                                                                                           |
+| `targets`         | 项目的所有目标。                                                                                                                          |
+| `presets`         | 所有预定义目标。 用于一次 [配置多个预定义目标](#targets)。                                                                                              |
+| `sourceSets`      | 配置预定义并声明项目的自定义 [源代码集](#source-sets)。                                                                                              |
+| `compilerOptions` | 扩展级别的通用 [编译器选项](gradle-compiler-options.md)，作为所有目标和共享源代码集的默认值。 要使用它，请添加以下选择加入：`@OptIn(ExperimentalKotlinGradlePluginApi::class)`。 |
 
-> The support for `compilerOptions {}` as a top-level block is [Experimental](components-stability.md#stability-levels-explained)
-> and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
-> your feedback on it in [YouTrack](https://kotl.in/issue).
+> `compilerOptions {}` 作为顶级块的支持是 [实验性](components-stability.md#stability-levels-explained)，并需要选择加入。
+> 它可能随时被删除或更改。仅用于评估目的。
+> 我们希望您在 [YouTrack](https://kotl.in/issue) 上提供反馈。
 >
 {style="warning"}
 
-## Targets
+## 目标 {id=targets}
 
-_Target_ is a part of the build responsible for compiling, testing, and packaging a piece of software aimed at
-one of the supported platforms. Kotlin provides target presets for each platform. See how to [use a target preset](multiplatform-set-up-targets.md).
+_目标_ 是构建的一部分，负责编译、测试和打包针对支持平台的软件。
+Kotlin 为每个平台提供目标预设。请查看如何 [使用目标预设](multiplatform-set-up-targets.md)。
 
-Each target can have one or more [compilations](#compilations). In addition to default compilations for
-test and production purposes, you can [create custom compilations](multiplatform-configure-compilations.md#create-a-custom-compilation).
+每个目标可以有一个或多个 [编译](#compilations)。 除了用于测试和生产目的的默认编译外，还可以
+[创建自定义编译](multiplatform-configure-compilations.md#create-a-custom-compilation)。
 
-The targets of a multiplatform project are described in the corresponding blocks inside `kotlin {}`, for example, `jvm`, `android`, `iosArm64`.
-The complete list of available targets is the following:
+跨平台项目的目标在 `kotlin {}` 内的相应块中描述，例如 `jvm`、`android`、`iosArm64`。 可用目标的完整列表如下：
 
 <table>
     <tr>
-        <th>Target platform</th>
-        <th>Target preset</th>
-        <th>Comments</th>
+        <th>目标平台</th>
+        <th>目标预设</th>
+        <th>备注</th>
     </tr>
     <tr>
         <td>Kotlin/JVM</td>
@@ -75,42 +74,42 @@ The complete list of available targets is the following:
     <tr>
         <td rowspan="2">Kotlin/Wasm</td>
         <td><code>wasmJs</code></td>
-        <td>Use it if you plan to run your projects in the JavaScript runtime.</td>
+        <td>如果计划在 JavaScript 运行时运行项目，请使用此选项。</td>
     </tr>
     <tr>
         <td><code>wasmWasi</code></td>
-        <td>Use it if you need support for the <a href="https://github.com/WebAssembly/WASI">WASI</a> system interface.</td>
+        <td>如果需要支持 <a href="https://github.com/WebAssembly/WASI">WASI</a> 系统接口，请使用此选项。</td>
     </tr>
     <tr>
         <td>Kotlin/JS</td>
         <td><code>js</code></td>
         <td>
-            <p>Select the execution environment:</p>
+            <p>选择执行环境：</p>
             <list>
-                <li><code>browser {}</code> for applications running in the browser.</li>
-                <li><code>nodejs {}</code> for applications running on Node.js.</li>
+                <li><code>browser {}</code> 用于在浏览器中运行的应用。</li>
+                <li><code>nodejs {}</code> 用于在 Node.js 上运行的应用。</li>
             </list>
-            <p>Learn more in <a href="js-project-setup.md#execution-environments">Setting up a Kotlin/JS project</a>.</p>
+            <p>更多信息请参见 <a href="js-project-setup.md#execution-environments">设置 Kotlin/JS 项目</a>。</p>
         </td>
     </tr>
     <tr>
         <td>Kotlin/Native</td>
         <td></td>
         <td>
-            <p>Learn about currently supported targets for the macOS, Linux, and Windows hosts in <a href="native-target-support.md">Kotlin/Native target support</a>.</p>
+            <p>了解 macOS、Linux 和 Windows 主机当前支持的目标，请参见 <a href="native-target-support.md">Kotlin/Native 目标支持</a>。</p>
         </td>
     </tr>
     <tr>
-        <td>Android applications and libraries</td>
+        <td>Android 应用和库</td>
         <td><code>android</code></td>
         <td>
-            <p>Manually apply an Android Gradle plugin: <code>com.android.application</code> or <code>com.android.library</code>.</p>
-            <p>You can only create one Android target per Gradle subproject.</p>
+            <p>手动应用 Android Gradle 插件： <code>com.android.application</code> 或 <code>com.android.library</code>。</p>
+            <p>每个 Gradle 子项目只能创建一个 Android 目标。</p>
         </td>
     </tr>
 </table>
 
-> A target that is not supported by the current host is ignored during building and, therefore, not published.
+> 不被当前主机支持的目标在构建期间会被忽略，因此不会被发布。
 >
 {style="note"}
 
@@ -123,44 +122,44 @@ kotlin {
 }
 ```
 
-The configuration of a target can include two parts:
+目标的配置可以包括两个部分：
 
-* [Common configuration](#common-target-configuration) available for all targets.
-* Target-specific configuration.
+* 所有目标均可用的 [通用配置](#common-target-configuration)。
+* 目标特定配置。
 
-Each target can have one or more [compilations](#compilations).
+每个目标可以有一个或多个 [编译](#compilations)。
 
-### Common target configuration
+### 通用目标配置 {id=common-target-configuration}
 
-In any target block, you can use the following declarations:
+在任何目标块中，可以使用以下声明：
 
-| **Name**            | **Description**                                                                                                                                                                                                                                                                                 | 
-|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `attributes`        | Attributes used for [disambiguating targets](multiplatform-set-up-targets.md#distinguish-several-targets-for-one-platform) for a single platform.                                                                                                                                               |
-| `preset`            | The preset that the target has been created from, if any.                                                                                                                                                                                                                                       |
-| `platformType`      | Designates the Kotlin platform of this target. Available values: `jvm`, `androidJvm`, `js`, `wasm`, `native`, `common`.                                                                                                                                                                         |
-| `artifactsTaskName` | The name of the task that builds the resulting artifacts of this target.                                                                                                                                                                                                                        |
-| `components`        | The components used to setup Gradle publications.                                                                                                                                                                                                                                               |
-| `compilerOptions`   | The [compiler options](gradle-compiler-options.md) used for the target. This declaration overrides any `compilerOptions {}` configured at [top level](multiplatform-dsl-reference.md#top-level-blocks). To use it, add the following opt-in: `@OptIn(ExperimentalKotlinGradlePluginApi::class)` |
+| **名称**              | **描述**                                                                                                                                                                                                   | 
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| `attributes`        | 用于 [区分同一平台的多个目标](multiplatform-set-up-targets.md#distinguish-several-targets-for-one-platform) 的属性。                                                                                                      |
+| `preset`            | 目标创建时使用的预设（如果有）。                                                                                                                                                                                         |
+| `platformType`      | 指定该目标的 Kotlin 平台。 可用值：`jvm`、`androidJvm`、`js`、`wasm`、`native`、`common`。                                                                                                                                  |
+| `artifactsTaskName` | 生成该目标结果工件的任务名称。                                                                                                                                                                                          |
+| `components`        | 用于设置 Gradle 发布的组件。                                                                                                                                                                                       |
+| `compilerOptions`   | 用于该目标的 [编译器选项](gradle-compiler-options.md)。 此声明将覆盖在 [顶级](multiplatform-dsl-reference.md#top-level-blocks) 配置的任何 `compilerOptions {}`。 要使用它，请添加以下选择加入：`@OptIn(ExperimentalKotlinGradlePluginApi::class)`。 |
 
-> The support for `compilerOptions {}` as a common target configuration is [Experimental](components-stability.md#stability-levels-explained)
-> and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
-> your feedback on it in [YouTrack](https://kotl.in/issue).
+> 将 `compilerOptions {}` 作为通用目标配置的支持是 [实验性](components-stability.md#stability-levels-explained)，并需要选择加入。
+> 它可能随时被删除或更改。仅用于评估目的。
+> 我们希望您在 [YouTrack](https://kotl.in/issue) 上提供反馈。
 >
 {style="warning"}
 
-### JVM targets
+### JVM 目标 {id=jvm-targets}
 
-In addition to [common target configuration](#common-target-configuration), `jvm` targets have a specific function:
+除了 [通用目标配置](#common-target-configuration) 之外，`jvm` 目标具有特定功能函数：
 
-| **Name**     | **Description**                                           | 
-|--------------|-----------------------------------------------------------|
-| `withJava()` | Includes Java sources into the JVM target's compilations. |
+| **名称**        | **描述**                                                    | 
+|------------------|------------------------------------------------------------| 
+| `withJava()`     | 将 Java 源文件包含到 JVM 目标的编译中。                   |
 
-Use this function for projects that contain both Java and Kotlin source files. Note that the default source directories for Java sources
-don't follow the Java plugin's defaults. Instead, they are derived from the Kotlin source sets. For example, if the JVM target
-has the default name `jvm`, the paths are `src/jvmMain/java` (for production Java sources) and `src/jvmTest/java` for test Java sources.
-Learn more about [Java sources in JVM compilations](multiplatform-configure-compilations.md#use-java-sources-in-jvm-compilations).
+对于包含 Java 和 Kotlin 源文件的项目，请使用此功能。请注意，Java 源文件的默认源目录不遵循 Java 插件的默认设置。
+相反，它们源自 Kotlin 源代码集。例如，如果 JVM 目标的默认名称为 `jvm`，则路径为 `src/jvmMain/java`（用于生产 Java 源文件）和
+`src/jvmTest/java`（用于测试 Java 源文件）。
+了解有关 [JVM 编译中的 Java 源文件](multiplatform-configure-compilations.md#use-java-sources-in-jvm-compilations) 的更多信息。
 
 ```kotlin
 kotlin {
@@ -170,21 +169,20 @@ kotlin {
 }
 ```
 
-### Web targets
+### Web 目标 {id=web-targets}
 
-The `js {}` block describes the configuration of Kotlin/JS targets, and the `wasmJs {}` block describes the configuration of
-Kotlin/Wasm targets interoperable with JavaScript. They can contain one of two blocks depending on the target execution
-environment:
+`js {}` 块描述 Kotlin/JS 目标的配置，`wasmJs {}` 块描述与 JavaScript 互操作的 Kotlin/Wasm 目标的配置。
+根据目标执行环境，它们可以包含以下两个块之一：
 
-| **Name**              | **Description**                      | 
-|-----------------------|--------------------------------------|
-| [`browser`](#browser) | Configuration of the browser target. |
-| [`nodejs`](#node-js)  | Configuration of the Node.js target. |
+| **名称**                | **描述**         | 
+|-----------------------|----------------| 
+| [`browser`](#browser) | 浏览器目标的配置。      |
+| [`nodejs`](#node-js)  | Node.js 目标的配置。 |
 
-Learn more about [configuring Kotlin/JS projects](js-project-setup.md).
+了解有关 [配置 Kotlin/JS 项目](js-project-setup.md) 的更多信息。
 
-A separate `wasmWasi {}` block describes the configuration of Kotlin/Wasm targets that support the WASI system interface.
-Here, only the [`nodejs`](#node-js) execution environment is available:
+单独的 `wasmWasi {}` 块描述支持 WASI 系统接口的 Kotlin/Wasm 目标的配置。
+在这里，仅可用 [`nodejs`](#node-js) 执行环境：
 
 ```kotlin
 kotlin {
@@ -195,21 +193,21 @@ kotlin {
 }
 ```
 
-All the web targets, `js`, `wasmJs`, and `wasmWasi`, also support the `binaries.executable()` call. It explicitly
-instructs the Kotlin compiler to emit executable files. For more information, see [Execution environments](js-project-setup.md#execution-environments)
-in the Kotlin/JS documentation.
+所有 Web 目标 `js`、`wasmJs` 和 `wasmWasi` 也支持 `binaries.executable()` 调用。
+这明确指示 Kotlin 编译器生成可执行文件。
+有关更多信息，请参见 Kotlin/JS 文档中的 [执行环境](js-project-setup.md#execution-environments)。
 
-#### Browser
+#### 浏览器 {id=browser}
 
-`browser {}` can contain the following configuration blocks:
+`browser {}` 可以包含以下配置块：
 
-| **Name**       | **Description**                                                            | 
-|----------------|----------------------------------------------------------------------------|
-| `testRuns`     | Configuration of test execution.                                           |
-| `runTask`      | Configuration of project running.                                          |
-| `webpackTask`  | Configuration of project bundling with [Webpack](https://webpack.js.org/). |
-| `dceTask`      | Configuration of [Dead Code Elimination](javascript-dce.md).               |
-| `distribution` | Path to output files.                                                      |
+| **名称**         | **描述**                                           | 
+|----------------|--------------------------------------------------| 
+| `testRuns`     | 测试执行的配置。                                         |
+| `runTask`      | 项目运行的配置。                                         |
+| `webpackTask`  | 使用 [Webpack](https://webpack.js.org/) 进行项目打包的配置。 |
+| `dceTask`      | [死代码消除](javascript-dce.md) 的配置。                  |
+| `distribution` | 输出文件的路径。                                         |
 
 ```kotlin
 kotlin {
@@ -228,12 +226,12 @@ kotlin {
 
 #### Node.js {id=node-js}
 
-`nodejs {}` can contain configurations of test and run tasks:
+`nodejs {}` 可以包含测试和运行任务的配置：
 
-| **Name**   | **Description**                   | 
-|------------|-----------------------------------|
-| `testRuns` | Configuration of test execution.  |
-| `runTask`  | Configuration of project running. |
+| **名称**     | **描述**   | 
+|------------|----------| 
+| `testRuns` | 测试执行的配置。 |
+| `runTask`  | 项目运行的配置。 |
 
 ```kotlin
 kotlin {
@@ -244,51 +242,51 @@ kotlin {
 }
 ```
 
-### Native targets
+### 本地目标 {id=native-targets}
 
-For native targets, the following specific blocks are available:
+对于本地目标，提供以下特定块：
 
-| **Name**    | **Description**                                          | 
-|-------------|----------------------------------------------------------|
-| `binaries`  | Configuration of [binaries](#binaries) to produce.       |
-| `cinterops` | Configuration of [interop with C libraries](#cinterops). |
+| **名称**      | **描述**                         | 
+|-------------|--------------------------------| 
+| `binaries`  | 要生成的 [二进制文件](#binaries) 的配置。   |
+| `cinterops` | 与 C 库的 [互操作性](#cinterops) 的配置。 |
 
-#### Binaries
+#### 二进制文件 {id=binaries}
 
-There are the following kinds of binaries:
+以下是二进制文件的类型：
 
-| **Name**     | **Description**        | 
-|--------------|------------------------|
-| `executable` | Product executable.    |
-| `test`       | Test executable.       |
-| `sharedLib`  | Shared library.        |
-| `staticLib`  | Static library.        |
-| `framework`  | Objective-C framework. |
+| **名称**       | **描述**          | 
+|--------------|-----------------| 
+| `executable` | 产品可执行文件。        |
+| `test`       | 测试可执行文件。        |
+| `sharedLib`  | 共享库。            |
+| `staticLib`  | 静态库。            |
+| `framework`  | Objective-C 框架。 |
 
 ```kotlin
 kotlin {
-    linuxX64 { // Use your target instead.
+    linuxX64 { // 请使用您的目标。
         binaries {
             executable {
-                // Binary configuration.
+                // 二进制文件配置。
             }
         }
     }
 }
 ```
 
-For binary configuration, the following parameters are available:
+对于二进制文件配置，提供以下参数：
 
-| **Name**      | **Description**                                                                                                                                                   | 
-|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `compilation` | The compilation from which the binary is built. By default, `test` binaries are based on the `test` compilation while other binaries - on the `main` compilation. |
-| `linkerOpts`  | Options passed to a system linker during binary building.                                                                                                         |
-| `baseName`    | Custom base name for the output file. The final file name will be formed by adding system-dependent prefix and postfix to this base name.                         |
-| `entryPoint`  | The entry point function for executable binaries. By default, it's `main()` in the root package.                                                                  |
-| `outputFile`  | Access to the output file.                                                                                                                                        |
-| `linkTask`    | Access to the link task.                                                                                                                                          |
-| `runTask`     | Access to the run task for executable binaries. For targets other than `linuxX64`, `macosX64`, or `mingwX64` the value is `null`.                                 |
-| `isStatic`    | For Objective-C frameworks. Includes a static library instead of a dynamic one.                                                                                   |
+| **名称**        | **描述**                                                                  | 
+|---------------|-------------------------------------------------------------------------| 
+| `compilation` | 生成二进制文件的编译。默认情况下，`test` 二进制文件基于 `test` 编译，而其他二进制文件基于 `main` 编译。         |
+| `linkerOpts`  | 在构建二进制文件时传递给系统链接器的选项。                                                   |
+| `baseName`    | 输出文件的自定义基本名称。最终文件名将通过在此基本名称前后添加系统相关的前缀和后缀形成。                            |
+| `entryPoint`  | 可执行二进制文件的入口点函数。默认情况下，它是根包中的 `main()`。                                   |
+| `outputFile`  | 访问输出文件。                                                                 |
+| `linkTask`    | 访问链接任务。                                                                 |
+| `runTask`     | 访问可执行二进制文件的运行任务。对于 `linuxX64`、`macosX64` 或 `mingwX64` 之外的目标，此值为 `null`。 |
+| `isStatic`    | 对于 Objective-C 框架，包含静态库而不是动态库。                                          |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -296,31 +294,31 @@ For binary configuration, the following parameters are available:
 ```kotlin
 binaries {
     executable("my_executable", listOf(RELEASE)) {
-        // Build a binary on the basis of the test compilation.
+        // 基于测试编译构建二进制文件。
         compilation = compilations["test"]
 
-        // Custom command line options for the linker.
+        // 链接器的自定义命令行选项。
         linkerOpts = mutableListOf("-L/lib/search/path", "-L/another/search/path", "-lmylib")
 
-        // Base name for the output file.
+        // 输出文件的基本名称。
         baseName = "foo"
 
-        // Custom entry point function.
+        // 自定义入口点函数。
         entryPoint = "org.example.main"
 
-        // Accessing the output file.
-        println("Executable path: ${outputFile.absolutePath}")
+        // 访问输出文件。
+        println("可执行文件路径: ${outputFile.absolutePath}")
 
-        // Accessing the link task.
+        // 访问链接任务。
         linkTask.dependsOn(additionalPreprocessingTask)
 
-        // Accessing the run task.
-        // Note that the runTask is null for non-host platforms.
+        // 访问运行任务。
+        // 注意，非主机平台的 runTask 为 null。
         runTask?.dependsOn(prepareForRun)
     }
 
-    framework("my_framework" listOf(RELEASE)) {
-        // Include a static library instead of a dynamic one into the framework.
+    framework("my_framework", listOf(RELEASE)) {
+        // 在框架中包含静态库而不是动态库。
         isStatic = true
     }
 }
@@ -332,31 +330,31 @@ binaries {
 ```groovy
 binaries {
     executable('my_executable', [RELEASE]) {
-        // Build a binary on the basis of the test compilation.
+        // 基于测试编译构建二进制文件。
         compilation = compilations.test
 
-        // Custom command line options for the linker.
+        // 链接器的自定义命令行选项。
         linkerOpts = ['-L/lib/search/path', '-L/another/search/path', '-lmylib']
 
-        // Base name for the output file.
+        // 输出文件的基本名称。
         baseName = 'foo'
 
-        // Custom entry point function.
+        // 自定义入口点函数。
         entryPoint = 'org.example.main'
 
-        // Accessing the output file.
-        println("Executable path: ${outputFile.absolutePath}")
+        // 访问输出文件。
+        println("可执行文件路径: ${outputFile.absolutePath}")
 
-        // Accessing the link task.
+        // 访问链接任务。
         linkTask.dependsOn(additionalPreprocessingTask)
 
-        // Accessing the run task.
-        // Note that the runTask is null for non-host platforms.
+        // 访问运行任务。
+        // 注意，非主机平台的 runTask 为 null。
         runTask?.dependsOn(prepareForRun)
     }
 
     framework('my_framework' [RELEASE]) {
-        // Include a static library instead of a dynamic one into the framework.
+        // 在框架中包含静态库而不是动态库。
         isStatic = true
     }
 }
@@ -365,44 +363,43 @@ binaries {
 </tab>
 </tabs>
 
-Learn more about [building native binaries](multiplatform-build-native-binaries.md).
+了解更多关于 [构建本地二进制文件](multiplatform-build-native-binaries.md) 的信息。
 
-#### CInterops
+#### CInterops {id=cinterops}
 
-`cinterops` is a collection of descriptions for interop with native libraries.
-To provide an interop with a library, add an entry to `cinterops` and define its parameters:
+`cinterops` 是与原生库互操作的描述集合。要提供与库的互操作性，向 `cinterops` 添加条目并定义其参数：
 
-| **Name**         | **Description**                                       | 
-|------------------|-------------------------------------------------------|
-| `definitionFile` | The `.def` file describing the native API.                |
-| `packageName`    | Package prefix for the generated Kotlin API.          |
-| `compilerOpts`   | Options to pass to the compiler by the cinterop tool. |
-| `includeDirs`    | Directories to look for headers.                      |
+| **名称**           | **描述**                   | 
+|------------------|--------------------------| 
+| `definitionFile` | 描述本地 API 的 `.def` 文件。    |
+| `packageName`    | 生成的 Kotlin API 的包前缀。     |
+| `compilerOpts`   | 通过 cinterop 工具传递给编译器的选项。 |
+| `includeDirs`    | 查找头文件的目录。                |
 
-Learn more how to [configure interop with native languages](multiplatform-configure-compilations.md#configure-interop-with-native-languages).
+了解更多关于 [配置与原生语言的互操作性](multiplatform-configure-compilations.md#configure-interop-with-native-languages) 的信息。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
 kotlin {
-    linuxX64 { // Replace with a target you need.
+    linuxX64 { // 替换为所需的目标。
         compilations.getByName("main") {
             val myInterop by cinterops.creating {
-                // Def-file describing the native API.
-                // The default path is src/nativeInterop/cinterop/<interop-name>.def
+                // 描述本地 API 的 Def 文件。
+                // 默认路径是 src/nativeInterop/cinterop/<interop-name>.def
                 definitionFile.set(project.file("def-file.def"))
 
-                // Package to place the Kotlin API generated.
+                // 生成的 Kotlin API 的包。
                 packageName("org.sample")
 
-                // Options to be passed to compiler by cinterop tool.
+                // 传递给 cinterop 工具的编译器选项。
                 compilerOpts("-Ipath/to/headers")
 
-                // Directories for header search (an analogue of the -I<path> compiler option).
+                // 头文件搜索目录（类似于 -I<path> 编译器选项）。
                 includeDirs.allHeaders("path1", "path2")
 
-                // A shortcut for includeDirs.allHeaders.
+                // includeDirs.allHeaders 的简写。
                 includeDirs("include/directory", "another/directory")
             }
 
@@ -417,24 +414,24 @@ kotlin {
 
 ```groovy
 kotlin {
-    linuxX64 { // Replace with a target you need.
+    linuxX64 { // 替换为所需的目标。
         compilations.main {
             cinterops {
                 myInterop {
-                    // Def-file describing the native API.
-                    // The default path is src/nativeInterop/cinterop/<interop-name>.def
+                    // 描述本地 API 的 Def 文件。
+                    // 默认路径是 src/nativeInterop/cinterop/<interop-name>.def
                     definitionFile = project.file("def-file.def")
 
-                    // Package to place the Kotlin API generated.
+                    // 生成的 Kotlin API 的包。
                     packageName 'org.sample'
 
-                    // Options to be passed to compiler by cinterop tool.
+                    // 传递给 cinterop 工具的编译器选项。
                     compilerOpts '-Ipath/to/headers'
 
-                    // Directories for header search (an analogue of the -I<path> compiler option).
+                    // 头文件搜索目录（类似于 -I<path> 编译器选项）。
                     includeDirs.allHeaders("path1", "path2")
 
-                    // A shortcut for includeDirs.allHeaders.
+                    // includeDirs.allHeaders 的简写。
                     includeDirs("include/directory", "another/directory")
                 }
 
@@ -448,15 +445,15 @@ kotlin {
 </tab>
 </tabs>
 
-### Android targets
+### Android 目标 {id=android-targets}
 
-The Kotlin Multiplatform plugin contains two specific functions for android targets.
-Two functions help you configure [build variants](https://developer.android.com/studio/build/build-variants):
+Kotlin 跨平台插件包含两个针对 Android 目标的特定函数。  
+这两个函数帮助你配置 [构建变体](https://developer.android.com/studio/build/build-variants)：
 
-| **Name**                      | **Description**                                                                                                                                | 
-|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| `publishLibraryVariants()`    | Specifies build variants to publish. Learn more about [publishing Android libraries](multiplatform-publish-lib.md#publish-an-android-library). |
-| `publishAllLibraryVariants()` | Publishes all build variants.                                                                                                                  |
+| **名称**                        | **描述**                                                                                         | 
+|-------------------------------|------------------------------------------------------------------------------------------------| 
+| `publishLibraryVariants()`    | 指定要发布的构建变体。了解更多关于 [发布 Android 库](multiplatform-publish-lib.md#publish-an-android-library) 的信息。 |
+| `publishAllLibraryVariants()` | 发布所有构建变体。                                                                                      |
 
 ```kotlin
 kotlin {
@@ -466,10 +463,10 @@ kotlin {
 }
 ```
 
-Learn more about [compilation for Android](multiplatform-configure-compilations.md#compilation-for-android).
+了解更多关于 [Android 的编译](multiplatform-configure-compilations.md#compilation-for-android) 的信息。
 
-> The `android` configuration inside `kotlin` doesn't replace the build configuration of any Android project.
-> Learn more about writing build scripts for Android projects in [Android developer documentation](https://developer.android.com/studio/build).
+> `kotlin` 内部的 `android` 配置并不会替换任何 Android 项目的构建配置。  
+> 了解更多关于为 Android 项目编写构建脚本的信息，请参见 [Android 开发者文档](https://developer.android.com/studio/build)。
 >
 {style="note"}
 
