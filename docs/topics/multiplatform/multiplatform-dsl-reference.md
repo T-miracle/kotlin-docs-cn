@@ -38,7 +38,7 @@ plugins {
 
 | **块**             | **描述**                                                                                                                            |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------| 
-| _\<targetName\>_  | 声明项目的特定目标。 可用目标的名称列在 [目标](#targets) 部分。                                                                                           |
+| _&lt;targetName&gt;_  | 声明项目的特定目标。 可用目标的名称列在 [目标](#targets) 部分。                                                                                           |
 | `targets`         | 项目的所有目标。                                                                                                                          |
 | `presets`         | 所有预定义目标。 用于一次 [配置多个预定义目标](#targets)。                                                                                              |
 | `sourceSets`      | 配置预定义并声明项目的自定义 [源代码集](#source-sets)。                                                                                              |
@@ -470,26 +470,24 @@ kotlin {
 >
 {style="note"}
 
-## Source sets
+## 源代码集 {id=source-sets}
 
-The `sourceSets {}` block describes source sets of the project. A source set contains Kotlin source files that participate
-in compilations together, along with their resources, dependencies, and language settings. 
+`sourceSets {}` 块描述了项目的源代码集。源代码集包含了参与一起编译的 Kotlin 源文件，以及它们的资源、依赖项和语言设置。
 
-A multiplatform project contains [predefined](#predefined-source-sets) source sets for its targets;
-developers can also create [custom](#custom-source-sets) source sets for their needs.
+一个跨平台项目包含为其目标平台 [预定义的](#predefined-source-sets) 源代码集；
+开发者也可以根据需要创建 [自定义](#custom-source-sets) 源代码集。
 
-### Predefined source sets
+### 预定义源代码集 {id=predefined-source-sets}
 
-Predefined source sets are set up automatically upon creation of a multiplatform project.
-Available predefined source sets are the following:
+预定义源代码集会在创建跨平台项目时自动设置。可用的预定义源代码集如下：
 
-| **Name**                            | **Description**                                                                                                                                                                                       | 
-|-------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `commonMain`                        | Code and resources shared between all platforms. Available in all multiplatform projects. Used in all main [compilations](#compilations) of a project.                                                |
-| `commonTest`                        | Test code and resources shared between all platforms. Available in all multiplatform projects. Used in all test compilations of a project.                                                            |
-| _\<targetName\>\<compilationName\>_ | Target-specific sources for a compilation. _\<targetName\>_ is the name of a predefined target and _\<compilationName\>_ is the name of a compilation for this target. Examples: `jsTest`, `jvmMain`. |
+| **名称**                                      | **描述**                                                                                                    | 
+|---------------------------------------------|-----------------------------------------------------------------------------------------------------------|
+| `commonMain`                                | 在所有平台之间共享的代码和资源。可用于所有跨平台项目，适用于项目的所有主要[编译](#compilations)。                                                 |
+| `commonTest`                                | 在所有平台之间共享的测试代码和资源。可用于所有跨平台项目，适用于项目的所有测试编译。                                                                |
+| _&lt;targetName&gt;&lt;compilationName&gt;_ | 针对特定目标平台的编译源代码集。_&lt;targetName&gt;_ 是预定义目标的名称，_&lt;compilationName&gt;_ 是该目标的编译名称。例如：`jsTest`，`jvmMain`。 |
 
-With Kotlin Gradle DSL, the sections of predefined source sets should be marked `by getting`.
+在 Kotlin Gradle DSL 中，预定义源代码集的部分应标记为 `by getting`。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -516,13 +514,13 @@ kotlin {
 </tab>
 </tabs>
 
-Learn more about [source sets](multiplatform-discover-project.md#source-sets).
+了解更多关于[源代码集](multiplatform-discover-project.md#source-sets)的内容。
 
-### Custom source sets
+### 自定义源代码集 {id=custom-source-sets}
 
-Custom source sets are created by the project developers manually.
-To create a custom source set, add a section with its name inside the `sourceSets` section.
-If using Kotlin Gradle DSL, mark custom source sets `by creating`.
+自定义源代码集由项目开发者手动创建。
+要创建一个自定义源代码集，请在 `sourceSets` 部分中添加其名称。
+如果使用 Kotlin Gradle DSL，需标记自定义源代码集为 `by creating`。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -530,7 +528,7 @@ If using Kotlin Gradle DSL, mark custom source sets `by creating`.
 ```kotlin
 kotlin { 
     sourceSets { 
-        val myMain by creating { /* ... */ } // create a new source set by the name 'MyMain'
+        val myMain by creating { /* ... */ } // 创建一个名为 'MyMain' 的新源代码集
     }
 }
 ```
@@ -541,7 +539,7 @@ kotlin {
 ```groovy
 kotlin { 
     sourceSets { 
-        myMain { /* ... */ } // create or configure a source set by the name 'myMain' 
+        myMain { /* ... */ } // 创建或配置一个名为 'myMain' 的源代码集
     }
 }
 ```
@@ -549,20 +547,20 @@ kotlin {
 </tab>
 </tabs>
 
-Note that a newly created source set isn't connected to other ones. To use it in the project's compilations,
-[connect it with other source sets](multiplatform-hierarchy.md#manual-configuration).
+请注意，新创建的源代码集并不会自动与其他源代码集连接。要在项目编译中使用它，请
+[将其与其他源代码集连接](multiplatform-hierarchy.md#manual-configuration)。
 
-### Source set parameters
+### 源代码集参数 {id=source-set-parameters}
 
-Configurations of source sets are stored inside the corresponding blocks of `sourceSets {}`. A source set has the following parameters:
+源代码集的配置存储在对应的 `sourceSets {}` 块中。一个源代码集包含以下参数：
 
-| **Name**           | **Description**                                                                        | 
-|--------------------|----------------------------------------------------------------------------------------|
-| `kotlin.srcDir`    | Location of Kotlin source files inside the source set directory.                       |
-| `resources.srcDir` | Location of resources inside the source set directory.                                 |
-| `dependsOn`        | [Connection with another source set](multiplatform-hierarchy.md#manual-configuration). |
-| `dependencies`     | [Dependencies](#dependencies) of the source set.                                       |
-| `languageSettings` | [Language settings](#language-settings) applied to the source set.                     |
+| **名称**             | **描述**                                                          | 
+|--------------------|-----------------------------------------------------------------|
+| `kotlin.srcDir`    | 源代码集目录中 Kotlin 源文件的位置。                                          |
+| `resources.srcDir` | 源代码集目录中资源文件的位置。                                                 |
+| `dependsOn`        | [与另一个源代码集的连接](multiplatform-hierarchy.md#manual-configuration)。 |
+| `dependencies`     | 源代码集的[依赖项](#dependencies)。                                      |
+| `languageSettings` | 应用于源代码集的[语言设置](#language-settings)。                             |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -603,25 +601,25 @@ kotlin {
 </tab>
 </tabs>
 
-## Compilations
+## 编译 {id=compilations}
 
-A target can have one or more compilations, for example, for production or testing. There are [predefined compilations](#predefined-compilations)
-that are added automatically upon target creation. You can additionally create [custom compilations](#custom-compilations).
+一个目标可以有一个或多个编译，例如用于生产或测试。创建目标时会自动添加[预定义编译](#predefined-compilations)。
+你还可以额外创建[自定义编译](#custom-compilations)。
 
-To refer to all or some particular compilations of a target, use the `compilations` object collection.
-From `compilations`, you can refer to a compilation by its name.
+要引用某个目标的所有或部分特定编译，使用 `compilations` 对象集合。
+通过 `compilations`，你可以根据编译的名称进行引用。
 
-Learn more about [configuring compilations](multiplatform-configure-compilations.md).
+了解更多关于[配置编译](multiplatform-configure-compilations.md)的内容。
 
-### Predefined compilations
+### 预定义编译 {id=predefined-compilations}
 
-Predefined compilations are created automatically for each target of a project except for Android targets.
-Available predefined compilations are the following:
+预定义编译会为项目的每个目标自动创建，Android 目标除外。
+可用的预定义编译如下：
 
-| **Name** | **Description**                     | 
-|----------|-------------------------------------|
-| `main`   | Compilation for production sources. |
-| `test`   | Compilation for tests.              |
+| **名称** | **描述**      | 
+|--------|-------------|
+| `main` | 用于生产源代码的编译。 |
+| `test` | 用于测试的编译。    |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -630,10 +628,10 @@ Available predefined compilations are the following:
 kotlin {
     jvm {
         val main by compilations.getting {
-            output // get the main compilation output
+            output // 获取 main 编译的输出
         }
 
-        compilations["test"].runtimeDependencyFiles // get the test runtime classpath
+        compilations["test"].runtimeDependencyFiles // 获取测试运行时的类路径
     }
 }
 ```
@@ -644,8 +642,8 @@ kotlin {
 ```groovy
 kotlin {
     jvm {
-        compilations.main.output // get the main compilation output
-        compilations.test.runtimeDependencyFiles // get the test runtime classpath
+        compilations.main.output // 获取 main 编译的输出
+        compilations.test.runtimeDependencyFiles // 获取测试运行时的类路径
     }
 }
 ```
@@ -653,13 +651,13 @@ kotlin {
 </tab>
 </tabs>
 
-### Custom compilations
+### 自定义编译 {id=custom-compilations}
 
-In addition to predefined compilations, you can create your own custom compilations.
-To create a custom compilation, add a new item into the `compilations` collection.
-If using Kotlin Gradle DSL, mark custom compilations `by creating`.
+除了预定义编译，你还可以创建自己的自定义编译。
+要创建自定义编译，向 `compilations` 集合中添加一个新项。
+如果使用 Kotlin Gradle DSL，需标记自定义编译为 `by creating`。
 
-Learn more about creating a [custom compilation](multiplatform-configure-compilations.md#create-a-custom-compilation).
+了解更多关于创建[自定义编译](multiplatform-configure-compilations.md#create-a-custom-compilation)的内容。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -675,7 +673,7 @@ kotlin {
                     }
                 }
 
-                // Create a test task to run the tests produced by this compilation:
+                // 创建一个测试任务来运行此编译生成的测试：
                 tasks.register<Test>("integrationTest") {
                     /* ... */
                 }
@@ -698,7 +696,7 @@ kotlin {
                 }
             }
 
-            // Create a test task to run the tests produced by this compilation:
+            // 创建一个测试任务来运行此编译生成的测试：
             tasks.register('jvmIntegrationTest', Test) {
                 /* ... */
             }
@@ -710,22 +708,22 @@ kotlin {
 </tab>
 </tabs>
 
-### Compilation parameters
+### 编译参数 {id=compilation-parameters}
 
-A compilation has the following parameters:
+一个编译包含以下参数：
 
-| **Name**                 | **Description**                                                                                                                                                           | 
-|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `defaultSourceSet`       | The compilation's default source set.                                                                                                                                     |
-| `kotlinSourceSets`       | Source sets participating in the compilation.                                                                                                                             |
-| `allKotlinSourceSets`    | Source sets participating in the compilation and their connections via `dependsOn()`.                                                                                     |
-| `compilerOptions`        | Compiler options applied to the compilation. For the list of available options, see [Compiler options](gradle-compiler-options.md).                                       |
-| `compileKotlinTask`      | Gradle task for compiling Kotlin sources.                                                                                                                                 |
-| `compileKotlinTaskName`  | Name of `compileKotlinTask`.                                                                                                                                              |
-| `compileAllTaskName`     | Name of the Gradle task for compiling all sources of a compilation.                                                                                                       |
-| `output`                 | The compilation output.                                                                                                                                                   |
-| `compileDependencyFiles` | Compile-time dependency files (classpath) of the compilation. For all Kotlin/Native compilations, this automatically includes standard library and platform dependencies. |
-| `runtimeDependencyFiles` | Runtime dependency files (classpath) of the compilation.                                                                                                                  |
+| **名称**                   | **描述**                                                    | 
+|--------------------------|-----------------------------------------------------------|
+| `defaultSourceSet`       | 编译的默认源代码集。                                                |
+| `kotlinSourceSets`       | 参与编译的源代码集。                                                |
+| `allKotlinSourceSets`    | 参与编译的源代码集及其通过 `dependsOn()` 连接的其他源代码集。                    |
+| `compilerOptions`        | 应用于编译的编译器选项。可用选项列表请参见[编译器选项](gradle-compiler-options.md)。 |
+| `compileKotlinTask`      | 编译 Kotlin 源代码的 Gradle 任务。                                 |
+| `compileKotlinTaskName`  | `compileKotlinTask` 的名称。                                  |
+| `compileAllTaskName`     | 编译所有源代码的 Gradle 任务名称。                                     |
+| `output`                 | 编译输出。                                                     |
+| `compileDependencyFiles` | 编译时的依赖文件（类路径）。对于所有 Kotlin/Native 编译，这会自动包含标准库和平台依赖项。      |
+| `runtimeDependencyFiles` | 运行时的依赖文件（类路径）。                                            |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -735,18 +733,18 @@ kotlin {
     jvm {
         val main by compilations.getting {
             compilerOptions.configure { 
-                // Set up the Kotlin compiler options for the 'main' compilation:
+                // 为 'main' 编译设置 Kotlin 编译器选项：
                 jvmTarget.set(JvmTarget.JVM_1_8)
             }
         
-            compileKotlinTask // get the Kotlin task 'compileKotlinJvm' 
-            output // get the main compilation output
+            compileKotlinTask // 获取 Kotlin 任务 'compileKotlinJvm' 
+            output // 获取 main 编译的输出
         }
         
-        compilations["test"].runtimeDependencyFiles // get the test runtime classpath
+        compilations["test"].runtimeDependencyFiles // 获取测试运行时的类路径
     }
 
-    // Configure all compilations of all targets:
+    // 配置所有目标的所有编译：
     targets.all {
         compilations.all {
             compilerOptions.configure {
@@ -764,16 +762,16 @@ kotlin {
 kotlin {
     jvm {
         compilations.main.compilerOptions.configure { 
-            // Setup the Kotlin compiler options for the 'main' compilation:
+            // 为 'main' 编译设置 Kotlin 编译器选项：
             jvmTarget = JvmTarget.JVM_1_8
         }
 
-        compilations.main.compileKotlinTask // get the Kotlin task 'compileKotlinJvm' 
-        compilations.main.output // get the main compilation output
-        compilations.test.runtimeDependencyFiles // get the test runtime classpath
+        compilations.main.compileKotlinTask // 获取 Kotlin 任务 'compileKotlinJvm' 
+        compilations.main.output // 获取 main 编译的输出
+        compilations.test.runtimeDependencyFiles // 获取测试运行时的类路径
     }
 
-    // Configure all compilations of all targets:
+    // 配置所有目标的所有编译：
     targets.all {
         compilations.all {
             compilerOptions.configure {
@@ -787,7 +785,7 @@ kotlin {
 </tab>
 </tabs>
 
-Alternatively, to configure compiler options that are common for all targets, you can use the `compilerOptions {}` [top-level block](multiplatform-dsl-reference.md#top-level-blocks):
+或者，要配置适用于所有目标的通用编译器选项，可以使用 `compilerOptions {}` [顶级块](multiplatform-dsl-reference.md#top-level-blocks)：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -795,7 +793,7 @@ Alternatively, to configure compiler options that are common for all targets, yo
 ```kotlin
 kotlin {
     
-    // Configure all compilations of all targets:
+    // 配置所有目标的所有编译：
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         allWarningsAsErrors.set(true)
@@ -809,7 +807,7 @@ kotlin {
 ```groovy
 kotlin {
     
-    // Configure all compilations of all targets:
+    // 配置所有目标的所有编译：
     compilerOptions {
         allWarningsAsErrors = true
     }
@@ -819,27 +817,27 @@ kotlin {
 </tab>
 </tabs>
 
-> The support for `compilerOptions {}` as a top-level block is [Experimental](components-stability.md#stability-levels-explained)
-> and requires opt-in. It may be dropped or changed at any time. Use it only for evaluation purposes. We would appreciate
-> your feedback on it in [YouTrack](https://kotl.in/issue).
+> 对 `compilerOptions {}` 作为顶级块的支持是[实验性的](components-stability.md#stability-levels-explained)
+> 需要选择加入。它可能会在任何时候被移除或更改。仅用于评估目的。
+> 我们非常欢迎你在 [YouTrack](https://kotl.in/issue) 上反馈。
 >
 {style="warning"}
 
 
-## Dependencies
+## 依赖 {id=dependencies}
 
-The `dependencies {}` block of the source set declaration contains the dependencies of this source set.
+`sourceSets {}` 声明块中的 `dependencies {}` 包含了该源代码集的依赖项。
 
-Learn more about [configuring dependencies](gradle-configure-project.md).
+了解更多关于[配置依赖项](gradle-configure-project.md)。
 
-There are four types of dependencies:
+依赖项有四种类型：
 
-| **Name**         | **Description**                                                                     | 
-|------------------|-------------------------------------------------------------------------------------|
-| `api`            | Dependencies used in the API of the current module.                                 |
-| `implementation` | Dependencies used in the module but not exposed outside it.                         |
-| `compileOnly`    | Dependencies used only for compilation of the current module.                       |
-| `runtimeOnly`    | Dependencies available at runtime but not visible during compilation of any module. |
+| **名称**           | **描述**                        | 
+|------------------|-------------------------------|
+| `api`            | 在当前模块的 API 中使用的依赖项。           |
+| `implementation` | 在模块中使用但不会对外暴露的依赖项。            |
+| `compileOnly`    | 仅用于当前模块编译的依赖项。                |
+| `runtimeOnly`    | 仅在运行时可用，但在编译过程中对任何模块都不可见的依赖项。 |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -884,11 +882,11 @@ kotlin {
 </tab>
 </tabs>
 
-Additionally, source sets can depend on each other and form a hierarchy.
-In this case, the [`dependsOn()`](#source-set-parameters) relation is used.
+此外，源代码集之间可以互相依赖并形成层次结构。
+在这种情况下，使用 [`dependsOn()`](#source-set-parameters) 关系。
 
-Source set dependencies can also be declared in the top-level `dependencies {}` block of the build script.
-In this case, their declarations follow the pattern `<sourceSetName><DependencyKind>`, for example, `commonMainApi`.
+源代码集的依赖项也可以在构建脚本的顶级 `dependencies {}` 块中声明。
+在这种情况下，它们的声明遵循 `<sourceSetName><DependencyKind>` 模式，例如，`commonMainApi`。
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -913,17 +911,17 @@ dependencies {
 </tab>
 </tabs>
 
-## Language settings
+## 语言设置 {id=language-settings}
 
-The `languageSettings {}` block of a source set defines certain aspects of project analysis and build. The following language settings are available:
+`sourceSets {}` 块中的 `languageSettings {}` 定义了项目分析和构建的某些方面。以下是可用的语言设置：
 
-| **Name**                | **Description**                                                                                                                                                                 | 
-|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `languageVersion`       | Provides source compatibility with the specified version of Kotlin.                                                                                                             |
-| `apiVersion`            | Allows using declarations only from the specified version of Kotlin bundled libraries.                                                                                          |
-| `enableLanguageFeature` | Enables the specified language feature. The available values correspond to the language features that are currently experimental or have been introduced as such at some point. |
-| `optIn`                 | Allows using the specified [opt-in annotation](opt-in-requirements.md).                                                                                                         |
-| `progressiveMode`       | Enables the [progressive mode](whatsnew13.md#progressive-mode).                                                                                                                 |
+| **名称**                  | **描述**                                               | 
+|-------------------------|------------------------------------------------------|
+| `languageVersion`       | 提供与指定版本的 Kotlin 源代码兼容性。                              |
+| `apiVersion`            | 只允许使用指定版本的 Kotlin 捆绑库中的声明。                           |
+| `enableLanguageFeature` | 启用指定的语言特性。可用的值对应于当前实验性语言特性或在某个时间点引入的语言特性。            |
+| `optIn`                 | 允许使用指定的 [opt-in 注解](opt-in-requirements.md)。         |
+| `progressiveMode`       | 启用 [progressive 模式](whatsnew13.md#progressive-mode)。 | 
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -932,11 +930,11 @@ The `languageSettings {}` block of a source set defines certain aspects of proje
 kotlin {
     sourceSets.all {
         languageSettings.apply {
-            languageVersion = "%languageVersion%" // possible values: '1.6', '1.7', '1.8', '1.9', `2.0`
-            apiVersion = "%apiVersion%" // possible values: '1.6', '1.7', '1.8', '1.9', `2.0`
-            enableLanguageFeature("InlineClasses") // language feature name
-            optIn("kotlin.ExperimentalUnsignedTypes") // annotation FQ-name
-            progressiveMode = true // false by default
+            languageVersion = "%languageVersion%" // 可选值: '1.6', '1.7', '1.8', '1.9', `2.0`
+            apiVersion = "%apiVersion%" // 可选值: '1.6', '1.7', '1.8', '1.9', `2.0`
+            enableLanguageFeature("InlineClasses") // 语言特性名称
+            optIn("kotlin.ExperimentalUnsignedTypes") // 注解 FQ 名称
+            progressiveMode = true // 默认值为 false
         }
     }
 }
@@ -949,11 +947,11 @@ kotlin {
 kotlin {
     sourceSets.all {
         languageSettings {
-            languageVersion = '%languageVersion%' // possible values: '1.6', '1.7', '1.8', '1.9', `2.0`
-            apiVersion = '%apiVersion%' // possible values: '1.6', '1.7', '1.8', '1.9', `2.0`
-            enableLanguageFeature('InlineClasses') // language feature name
-            optIn('kotlin.ExperimentalUnsignedTypes') // annotation FQ-name
-            progressiveMode = true // false by default
+            languageVersion = '%languageVersion%' // 可选值: '1.6', '1.7', '1.8', '1.9', `2.0`
+            apiVersion = '%apiVersion%' // 可选值: '1.6', '1.7', '1.8', '1.9', `2.0`
+            enableLanguageFeature('InlineClasses') // 语言特性名称
+            optIn('kotlin.ExperimentalUnsignedTypes') // 注解 FQ 名称
+            progressiveMode = true // 默认值为 false
         }
     }
 }
