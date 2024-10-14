@@ -1,81 +1,81 @@
-[//]: # (title: Android source set layout)
+[//]: # (title: Android 源码集布局)
 
-The new Android source set layout was introduced in Kotlin 1.8.0 and became the default in 1.9.0. Follow this guide to
-understand the key differences between the deprecated and the new layouts, as well as how to migrate your projects.
+新的 Android 源集布局在 Kotlin 1.8.0 中引入，并在 1.9.0 中成为默认布局。
+以下指南帮助你了解弃用的布局与新布局之间的主要区别，以及如何迁移你的项目。
 
-> You don't need to implement all the suggestions, only those that are applicable to your particular projects.
+> 注意：你无需实施所有建议，只需根据项目需求应用相关部分即可。
 >
 {style="tip"}
 
-## Check the compatibility
+## 检查兼容性 {id=check-the-compatibility}
 
-The new layout requires Android Gradle plugin 7.0 or later and is supported in Android Studio 2022.3 and later.
-Check your version of the Android Gradle plugin and upgrade if necessary.
+新布局要求 Android Gradle 插件 7.0 或更高版本，并在 Android Studio 2022.3 及更高版本中支持。
+请检查你使用的 Android Gradle 插件版本，并在必要时进行升级。
 
-## Rename Kotlin source sets
+## 重命名 Kotlin 源代码集 {id=rename-kotlin-source-sets}
 
-If applicable, rename the source sets in your project, following this pattern:
+如果适用，请按照以下模式重命名项目中的源代码集：
 
-| Previous source set layout             | New source set layout               |
+| 之前的源代码集布局                              | 新的源代码集布局                            |
 |----------------------------------------|-------------------------------------|
 | `targetName` + `AndroidSourceSet.name` | `targetName` + `AndroidVariantType` |
 
-`{AndroidSourceSet.name}` maps to `{KotlinSourceSet.name}` as follows:
+`{AndroidSourceSet.name}` 与 `{KotlinSourceSet.name}` 的映射关系如下：
 
-|             | Previous source set layout | New source set layout          |
-|-------------|----------------------------|--------------------------------|
-| main        | androidMain                | androidMain                    |
-| test        | androidTest                | android<b>Unit</b>Test         |
-| androidTest | android<b>Android</b>Test  | android<b>Instrumented</b>Test |
+|             | 之前的源代码集布局                 | 新的源代码集布局                       |
+|-------------|---------------------------|--------------------------------|
+| main        | androidMain               | androidMain                    |
+| test        | androidTest               | android<b>Unit</b>Test         |
+| androidTest | android<b>Android</b>Test | android<b>Instrumented</b>Test |
 
-## Move source files
+## 移动源代码文件 {id=move-source-files}
 
-If applicable, move your source files to the new directories, following this pattern:
+如果适用，请按照以下模式将源代码文件移动到新目录：
 
-| Previous source set layout                            | New source set layout               |
-|-------------------------------------------------------|-------------------------------------|
-| The layout had additional `/kotlin` SourceDirectories | `src/{KotlinSourceSet.name}/kotlin` |
+| 之前的源代码集布局                | 新的源代码集布局                            |
+|--------------------------|-------------------------------------|
+| 布局中包含额外的 `/kotlin` 源代码目录 | `src/{KotlinSourceSet.name}/kotlin` |
 
-`{AndroidSourceSet.name}` maps to `{SourceDirectories included}` as follows:
+`{AndroidSourceSet.name}` 与 `{SourceDirectories included}` 的映射关系如下：
 
-|             | Previous source set layout                                    | New source set layout                                                                             |
-|-------------|---------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| main        | src/androidMain/kotlin<br/>src/main/kotlin<br/>src/main/java  | src/androidMain/kotlin<br/>src/main/kotlin<br/>src/main/java                                      |
-| test        | src/androidTest/kotlin<br/>src/test/kotlin<br/>src/test/java  | src/android<b>Unit</b>Test/kotlin<br/>src/test/kotlin<br/>src/test/java                           |
-| androidTest | src/android<b>Android</b>Test/kotlin<br/>src/androidTest/java | src/android<b>Instrumented</b>Test/kotlin<br/>src/androidTest/java, <b>src/androidTest/kotlin</b> |
+|             | 之前的源代码集布局                                                          | 新的源代码集布局                                                                                                |
+|-------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| main        | `src/androidMain/kotlin`<br/>`src/main/kotlin`<br/>`src/main/java` | `src/androidMain/kotlin`<br/>`src/main/kotlin`<br/>`src/main/java`                                      |
+| test        | `src/androidTest/kotlin`<br/>`src/test/kotlin`<br/>`src/test/java` | `src/android<b>Unit</b>Test/kotlin`<br/>`src/test/kotlin`<br/>`src/test/java`                           |
+| androidTest | `src/android<b>Android</b>Test/kotlin`<br/>`src/androidTest/java`  | `src/android<b>Instrumented</b>Test/kotlin`<br/>`src/androidTest/java`, <b>`src/androidTest/kotlin`</b> |
 
-## Move the AndroidManifest.xml file
+## 移动 AndroidManifest.xml 文件
 
-If you have the `AndroidManifest.xml` file in your project, move it to the new directory, following this pattern:
+如果你的项目中有 `AndroidManifest.xml` 文件，请按照以下模式将其移动到新目录：
 
-| Previous source set layout                             | New source set layout                                 |
+| 之前的源代码集布局                                              | 新的源代码集布局                                              |
 |--------------------------------------------------------|-------------------------------------------------------|
 | src/{<b>Android</b>SourceSet.name}/AndroidManifest.xml | src/{<b>Kotlin</b>SourceSet.name}/AndroidManifest.xml |
 
-`{AndroidSourceSet.name}` maps to `{AndroidManifest.xml location}` as follows:
+`{AndroidSourceSet.name}` 与 `{AndroidManifest.xml 位置}` 的映射关系如下：
 
-|       | Previous source set layout    | New source set layout                       |
-|-------|-------------------------------|---------------------------------------------|
-| main  | src/main/AndroidManifest.xml  | src/<b>android</b>Main/AndroidManifest.xml  |
-| debug | src/debug/AndroidManifest.xml | src/<b>android</b>Debug/AndroidManifest.xml |
+|       | 之前的源代码集布局                       | 新的源代码集布局                                      |
+|-------|---------------------------------|-----------------------------------------------|
+| main  | `src/main/AndroidManifest.xml`  | `src/<b>android</b>Main/AndroidManifest.xml`  |
+| debug | `src/debug/AndroidManifest.xml` | `src/<b>android</b>Debug/AndroidManifest.xml` |
 
-## Check the relationship between Android and common tests
+## 检查 Android 与 common tests 之间的关系
 
-The new Android source set layout changes the relationship between Android-instrumented tests (renamed to `androidInstrumentedTest` in the new layout)
-and common tests.
+新的 Android 源代码集布局改变了 Android 设备测试（在新布局中重命名为 `androidInstrumentedTest`）与
+common tests 之间的关系。
 
-Previously, the `dependsOn` relationship between `androidAndroidTest` and `commonTest` was the default. It meant the following:
+以前，`androidAndroidTest` 与 `commonTest` 之间默认存在 `dependsOn` 关系。这意味着以下几点：
 
-* The code in `commonTest` was available in `androidAndroidTest`.
-* `expect` declarations in `commonTest` had to have corresponding `actual` implementations in `androidAndroidTest`.
-* Tests declared in `commonTest` were also running as Android instrumented tests.
+- `commonTest` 中的代码可在 `androidAndroidTest` 中使用。
+- `commonTest` 中的 `expect` 声明必须在 `androidAndroidTest` 中有相应的 `actual` 实现。
+- 在 `commonTest` 中声明的测试也会作为 Android 仪器测试运行。
 
-In the new Android source set layout, the `dependsOn` relationship is not added by default. If you prefer the previous behavior,
-manually declare the following relationship in your `build.gradle.kts` file:
+在新的 Android 源代码集布局中，`dependsOn` 关系不再是默认设置。如果你希望保持之前的行为，
+可以在 `build.gradle.kts` 文件中手动声明以下关系：
 
 ```kotlin
 kotlin {
-// ...
+    // ...
     sourceSets {
         val commonTest by getting
         val androidInstrumentedTest by getting {
@@ -85,17 +85,17 @@ kotlin {
 }
 ```
 
-## Adjust the implementation of Android flavors
+## 调整 Android 风味的实现 {id=adjust-the-implementation-of-android-flavors}
 
-Previously, the Kotlin Gradle plugin eagerly created source sets that corresponded to Android source sets containing `debug` and
-`release` build types or custom flavors like `demo` and `full`.
-It made the source sets accessible by using expressions like `val androidDebug by getting { ... }`.
+之前，Kotlin Gradle 插件会提前创建与 Android 源代码集对应的源代码集，这些源代码集包含 `debug` 和
+`release` 构建类型，或者像 `demo` 和 `full` 这样的自定义风味。  
+它通过使用诸如 `val androidDebug by getting { ... }` 这样的表达式来访问这些源代码集。
 
-The new Android source set layout makes use of Android's [`onVariants`](https://developer.android.com/reference/tools/gradle-api/8.0/com/android/build/api/variant/AndroidComponentsExtension#onVariants(com.android.build.api.variant.VariantSelector,kotlin.Function1))
-to create source sets. It makes such expressions invalid,
-leading to errors like `org.gradle.api.UnknownDomainObjectException: KotlinSourceSet with name 'androidDebug' not found`.
+新的 Android 源代码集布局使用 Android 的 [`onVariants`](https://developer.android.com/reference/tools/gradle-api/8.0/com/android/build/api/variant/AndroidComponentsExtension#onVariants(com.android.build.api.variant.VariantSelector,kotlin.Function1)) 来创建源代码集。  
+这使得类似的表达式无效，
+导致出现 `org.gradle.api.UnknownDomainObjectException: KotlinSourceSet with name 'androidDebug' not found` 这样的错误。
 
-To work around that, use the new `invokeWhenCreated()` API in your `build.gradle.kts` file:
+为了解决这个问题，可以在你的 `build.gradle.kts` 文件中使用新的 `invokeWhenCreated()` API：
 
 ```kotlin
 kotlin {
