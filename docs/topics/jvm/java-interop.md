@@ -1,62 +1,60 @@
-[//]: # (title: Calling Java from Kotlin)
+[//]: # (title: 在 Kotlin 中调用 Java)
 
-Kotlin is designed with Java interoperability in mind. Existing Java code can be called from Kotlin in a natural way,
-and Kotlin code can be used from Java rather smoothly as well.
-In this section, we describe some details about calling Java code from Kotlin.
+Kotlin 是以与 Java 的互操作性为设计目标的。现有的 Java 代码可以自然地从 Kotlin 中调用，Kotlin 代码也可以相对流畅地用于 Java。
+在本节中，我们将描述从 Kotlin 调用 Java 代码的一些细节。
 
-Pretty much all Java code can be used without any issues:
+几乎所有的 Java 代码都可以毫无问题地使用：
 
 ```kotlin
 import java.util.*
 
 fun demo(source: List<Int>) {
     val list = ArrayList<Int>()
-    // 'for'-loops work for Java collections:
+    // 'for' 循环适用于 Java 集合：
     for (item in source) {
         list.add(item)
     }
-    // Operator conventions work as well:
+    // 操作符约定也同样适用：
     for (i in 0..source.size - 1) {
-        list[i] = source[i] // get and set are called
+        list[i] = source[i] // 调用了 get 和 set 方法
     }
 }
 ```
 
-## Getters and setters
+## Getter 和 setter {id=getters-and-setters}
 
-Methods that follow the Java conventions for getters and setters (no-argument methods with names starting with `get`
-and single-argument methods with names starting with `set`) are represented as properties in Kotlin. Such properties are 
-also called _synthetic properties_. 
-`Boolean` accessor methods (where the name of the getter starts with `is` and the name of the setter starts with `set`)
-are represented as properties which have the same name as the getter method.
+遵循 Java getter 和 setter 约定的方法（无参数方法且以 `get`
+开头的名称，以及单参数方法且以 `set` 开头的名称）在 Kotlin 中被表示为属性。
+此类属性也称为 _合成属性_。  
+`Boolean` 的访问器方法（getter 方法的名称以 `is` 开头，setter 方法的名称以 `set` 开头）
+在 Kotlin 中表示为与 getter 方法同名的属性。
 
 ```kotlin
 import java.util.Calendar
 
 fun calendarDemo() {
     val calendar = Calendar.getInstance()
-    if (calendar.firstDayOfWeek == Calendar.SUNDAY) { // call getFirstDayOfWeek()
-        calendar.firstDayOfWeek = Calendar.MONDAY // call setFirstDayOfWeek()
+    if (calendar.firstDayOfWeek == Calendar.SUNDAY) { // 调用了 getFirstDayOfWeek()
+        calendar.firstDayOfWeek = Calendar.MONDAY // 调用了 setFirstDayOfWeek()
     }
-    if (!calendar.isLenient) { // call isLenient()
-        calendar.isLenient = true // call setLenient()
+    if (!calendar.isLenient) { // 调用了 isLenient()
+        calendar.isLenient = true // 调用了 setLenient()
     }
 }
 ```
 
-`calendar.firstDayOfWeek` above is an example of a synthetic property.
+上面的 `calendar.firstDayOfWeek` 是合成属性的一个示例。
 
-Note that, if the Java class only has a setter, it isn't visible as a property in Kotlin because Kotlin doesn't support
-set-only properties.
+请注意，如果 Java 类只有一个 setter 方法，那么它在 Kotlin 中不会被表示为属性，因为 Kotlin 不支持仅有 setter 的属性。
 
-## Java synthetic property references
+## Java 合成属性引用 {id=java-synthetic-property-references}
 
-> This feature is [Experimental](components-stability.md#stability-levels-explained). It may be dropped or changed at any time.
-> We recommend that you use it only for evaluation purposes.
+> 此功能是 [实验性的](components-stability.md#stability-levels-explained)。它可能随时被移除或更改。  
+> 我们建议仅将其用于评估目的。  
 >
 {style="warning"}
 
-Starting from Kotlin 1.8.20, you can create references to Java synthetic properties. Consider the following Java code:
+从 Kotlin 1.8.20 开始，你可以创建对 Java 合成属性的引用。请参考以下 Java 代码：
 
 ```java
 public class Person {
@@ -78,22 +76,22 @@ public class Person {
 }
 ```
 
-Kotlin has always allowed you to write `person.age`, where `age` is a synthetic property. Now, you can also 
-create references to `Person::age` and `person::age`. The same applies for `name`, as well.
+Kotlin 一直允许你使用 `person.age`，其中 `age` 是一个合成属性。
+现在，你也可以创建对 `Person::age` 和 `person::age` 的引用。`name` 同样适用。
 
 ```kotlin
 val persons = listOf(Person("Jack", 11), Person("Sofie", 12), Person("Peter", 11))
     persons
-         // Call a reference to Java synthetic property:
+         // 调用对 Java 合成属性的引用：
         .sortedBy(Person::age)
-         // Call Java getter via the Kotlin property syntax:
+         // 通过 Kotlin 属性语法调用 Java getter 方法：
         .forEach { person -> println(person.name) }
 ```
 
-### How to enable Java synthetic property references {collapsible="true"}
+### 如何启用 Java 合成属性引用 {id=how-to-enable-java-synthetic-property-references collapsible="true"}
 
-To enable this feature, set the `-language-version 2.1` compiler option. In a Gradle project, you can do so 
-by adding the following to your `build.gradle(.kts)`:
+要启用此功能，请设置编译器选项 `-language-version 2.1`。
+在 Gradle 项目中，你可以通过将以下内容添加到 `build.gradle(.kts)` 来实现：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -125,129 +123,122 @@ tasks
 </tab>
 </tabs>
 
-> Prior to Kotlin 1.9.0, to enable this feature you had to set the `-language-version 1.9` compiler option.
+> 在 Kotlin 1.9.0 之前，要启用此功能，必须设置编译器选项 `-language-version 1.9`。  
 > 
 {style="note"}
 
-## Methods returning void
+## 返回 void 的方法 {id=methods-returning-void}
 
-If a Java method returns `void`, it will return `Unit` when called from Kotlin.
-If by any chance someone uses that return value, it will be assigned at the call site by the Kotlin compiler
-since the value itself is known in advance (being `Unit`).
+如果一个 Java 方法返回 `void`，则在 Kotlin 中调用时会返回 `Unit`。  
+如果有人不小心使用了该返回值，Kotlin 编译器将在调用点进行赋值，因为该值在预先是已知的（为 `Unit`）。
 
-## Escaping for Java identifiers that are keywords in Kotlin
+## 对于在 Kotlin 中为关键字的 Java 标识符进行转义 {id=escaping-for-java-identifiers-that-are-keywords-in-kotlin}
 
-Some of the Kotlin keywords are valid identifiers in Java: `in`, `object`, `is`, and other.
-If a Java library uses a Kotlin keyword for a method, you can still call the method
-escaping it with the backtick (`) character:
+一些 Kotlin 关键字在 Java 中是有效的标识符：`in`、`object`、`is` 等。  
+如果一个 Java 库使用 Kotlin 关键字作为方法名，你仍然可以通过使用反引号（`）字符来调用该方法：
 
 ```kotlin
 foo.`is`(bar)
 ```
 
-## Null-safety and platform types
+## 空安全和平台类型 {id=null-safety-and-platform-types}
 
-Any reference in Java may be `null`, which makes Kotlin's requirements of strict null-safety impractical for objects coming from Java.
-Types of Java declarations are treated in Kotlin in a specific manner and called *platform types*. Null-checks are relaxed
-for such types, so that safety guarantees for them are the same as in Java (see more [below](#mapped-types)).
+在 Java 中，任何引用都可能为 `null`，这使得 Kotlin 对来自 Java 的对象严格的空安全要求变得不切实际。  
+Java 声明的类型在 Kotlin 中以特定方式处理，称为 *平台类型*。
+对于此类类型的空检查被放宽，因此它们的安全性保证与 Java 相同（详见 [下面](#mapped-types)）。
 
-Consider the following examples:
+考虑以下示例：
 
 ```kotlin
-val list = ArrayList<String>() // non-null (constructor result)
+val list = ArrayList<String>() // 非空（构造函数结果）
 list.add("Item")
-val size = list.size // non-null (primitive int)
-val item = list[0] // platform type inferred (ordinary Java object)
+val size = list.size // 非空（基本类型 int）
+val item = list[0] // 平台类型推断（普通 Java 对象）
 ```
 
-When you call methods on variables of platform types, Kotlin does not issue nullability errors at compile time,
-but the call may fail at runtime, because of a null-pointer exception or an assertion that Kotlin generates to
-prevent nulls from propagating:
+当你在平台类型的变量上调用方法时，Kotlin 不会在编译时发出空值错误，
+但该调用可能在运行时失败，因为会发生空指针异常或 Kotlin 生成的断言以防止空值传播：
 
 ```kotlin
-item.substring(1) // allowed, throws an exception if item == null
+item.substring(1) // 允许，如果 item == null 则抛出异常
 ```
 
-Platform types are *non-denotable*, meaning that you can't write them down explicitly in the language.
-When a platform value is assigned to a Kotlin variable, you can rely on the type inference (the variable will have an inferred
-platform type then, as `item` has in the example above), or you can choose the type you expect (both nullable and non-nullable types are allowed):
+平台类型是 *不可表述的*，这意味着你不能在语言中显式地书写它们。
+当一个平台值被赋值给 Kotlin 变量时，你可以依赖类型推断（该变量将具有推断的平台类型，正如上面示例中的
+`item`），或者你可以选择你期望的类型（允许 nullable 和 non-nullable 类型）：
 
 ```kotlin
-val nullable: String? = item // allowed, always works
-val notNull: String = item // allowed, may fail at runtime
+val nullable: String? = item // 允许，总是有效
+val notNull: String = item // 允许，可能在运行时失败
 ```
 
-If you choose a non-nullable type, the compiler will emit an assertion upon assignment. This prevents Kotlin's non-nullable variables from holding
-nulls. Assertions are also emitted when you pass platform values to Kotlin functions expecting non-null values and in other cases.
-Overall, the compiler does its best to prevent nulls from propagating far through the program although sometimes this is
-impossible to eliminate entirely, because of generics.
+如果你选择了非空类型，编译器将在赋值时发出断言。这防止了 Kotlin 的非空变量持有 null。
+当你将平台值传递给期望非空值的 Kotlin 函数时，编译器也会发出断言，其他情况亦然。
+总体而言，编译器尽力防止 null 在程序中传播，尽管有时由于泛型，这种传播是无法完全消除的。
 
-### Notation for platform types
+### 平台类型的表示法 {id=notation-for-platform-types}
 
-As mentioned above, platform types can't be mentioned explicitly in the program, so there's no syntax for them in the language.
-Nevertheless, the compiler and IDE need to display them sometimes (for example, in error messages or parameter info), 
-so there is a mnemonic notation for them:
+如上所述，平台类型不能在程序中显式提及，因此语言中没有它们的语法。  
+然而，编译器和 IDE 有时需要显示这些类型（例如，在错误消息或参数信息中），因此有一种助记符表示法：
 
-* `T!` means "`T` or `T?`",
-* `(Mutable)Collection<T>!` means "Java collection of `T` may be mutable or not, may be nullable or not",
-* `Array<(out) T>!` means "Java array of `T` (or a subtype of `T`), nullable or not"
+* `T!` 表示 "`T` 或 `T?`"，
+* `(Mutable)Collection<T>!` 表示 "Java 集合的 `T` 可能是可变的，也可能不是，可能是可空的，也可能不是"，
+* `Array<(out) T>!` 表示 "Java 数组的 `T`（或 `T` 的子类型），可能是可空的，也可能不是"。
 
-### Nullability annotations
+### 空值注解 {id=nullability-annotations}
 
-Java types that have nullability annotations are represented not as platform types, but as actual nullable or non-nullable
-Kotlin types. The compiler supports several flavors of nullability annotations, including:
+具有空值注解的 Java 类型被表示为实际的可空或非空
+Kotlin 类型，而不是平台类型。编译器支持几种类型的空值注解，包括：
 
   * [JetBrains](https://www.jetbrains.com/idea/help/nullable-and-notnull-annotations.html)
-(`@Nullable` and `@NotNull` from the `org.jetbrains.annotations` package)
-  * [JSpecify](https://jspecify.dev/) (`org.jspecify.nullness`)
-  * Android (`com.android.annotations` and `android.support.annotations`)
-  * JSR-305 (`javax.annotation`, more details below)
-  * FindBugs (`edu.umd.cs.findbugs.annotations`)
-  * Eclipse (`org.eclipse.jdt.annotation`)
-  * Lombok (`lombok.NonNull`)
-  * RxJava 3 (`io.reactivex.rxjava3.annotations`)
+（来自 `org.jetbrains.annotations` 包的 `@Nullable` 和 `@NotNull`）
+  * [JSpecify](https://jspecify.dev/)（`org.jspecify.nullness`）
+  * Android（`com.android.annotations` 和 `android.support.annotations`）
+  * JSR-305（`javax.annotation`，详细信息见下文）
+  * FindBugs（`edu.umd.cs.findbugs.annotations`）
+  * Eclipse（`org.eclipse.jdt.annotation`）
+  * Lombok（`lombok.NonNull`）
+  * RxJava 3（`io.reactivex.rxjava3.annotations`）
 
-You can specify whether the compiler reports a nullability mismatch based on the information from specific types of 
-nullability annotations. Use the compiler option `-Xnullability-annotations=@<package-name>:<report-level>`. 
-In the argument, specify the fully qualified nullability annotations package and one of these report levels:
-* `ignore` to ignore nullability mismatches
-* `warn` to report warnings
-* `strict` to report errors.
+你可以设置编译器，是否根据特定类型的空值注解来报告空值不匹配问题。
+使用编译器选项 `-Xnullability-annotations=@<package-name>:<report-level>`。
+在参数中，指定完全限定的空值注解包和以下报告级别之一：
+* `ignore` 以忽略空值不匹配
+* `warn` 以报告警告
+* `strict` 以报告错误。
 
-See the full list of supported nullability annotations in the 
-[Kotlin compiler source code](https://github.com/JetBrains/kotlin/blob/master/core/compiler.common.jvm/src/org/jetbrains/kotlin/load/java/JvmAnnotationNames.kt).
+请参阅[Kotlin 编译器源代码](https://github.com/JetBrains/kotlin/blob/master/core/compiler.common.jvm/src/org/jetbrains/kotlin/load/java/JvmAnnotationNames.kt)中支持的空值注解的完整列表。
 
-### Annotating type arguments and type parameters
+### 注解类型实参和类型形参 {id=annotating-type-arguments-and-type-parameters}
 
-You can annotate the type arguments and type parameters of generic types to provide nullability information for them as well. 
+你可以注解泛型类型的类型实参和类型形参，以提供它们的空值信息。
 
-> All examples in the section use JetBrains nullability annotations from the `org.jetbrains.annotations` package.
+> 本节中的所有示例使用来自 `org.jetbrains.annotations` 包的 JetBrains 空值注解。
 >
 {style="note"}
 
-#### Type arguments
+#### 类型实参 {id=type-arguments}
 
-Consider these annotations on a Java declaration:
+考虑以下 Java 声明中的注解：
 
 ```java
 @NotNull
 Set<@NotNull String> toSet(@NotNull Collection<@NotNull String> elements) { ... }
 ```
 
-They result in the following signature in Kotlin:
+它们在 Kotlin 中产生以下签名：
 
 ```kotlin
 fun toSet(elements: (Mutable)Collection<String>) : (Mutable)Set<String> { ... }
 ```
 
-When the `@NotNull` annotation is missing from a type argument, you get a platform type instead:
+当类型实参缺少 `@NotNull` 注解时，你将得到一个平台类型：
 
 ```kotlin
 fun toSet(elements: (Mutable)Collection<String!>) : (Mutable)Set<String!> { ... }
 ```
 
-Kotlin also takes into account nullability annotations on type arguments of base classes and interfaces. For example,
-there are two Java classes with the signatures provided below:
+Kotlin 还考虑了基类和接口的类型实参上的空值注解。例如，下面有两个 Java 类，其签名如下：
 
 ```java
 public class Base<T> {}
@@ -257,84 +248,82 @@ public class Base<T> {}
 public class Derived extends Base<@Nullable String> {}
 ```
 
-In the Kotlin code, passing the instance of `Derived` where the `Base<String>` is assumed produces the warning.
+在 Kotlin 代码中，将 `Derived` 的实例传递到假定为 `Base<String>` 的地方会产生警告。
 
 ```kotlin
 fun takeBaseOfNotNullStrings(x: Base<String>) {}
 
 fun main() {
-    takeBaseOfNotNullStrings(Derived()) // warning: nullability mismatch
+    takeBaseOfNotNullStrings(Derived()) // 警告：空值不匹配
 }
 ```
 
-The upper bound of `Derived` is set to `Base<String?>`, which is different from `Base<String>`.
+`Derived` 的上限被设置为 `Base<String?>`，这与 `Base<String>` 不同。
 
-Learn more about [Java generics in Kotlin](java-interop.md#java-generics-in-kotlin).
+了解更多关于[Kotlin中的 Java 泛型](java-interop.md#java-generics-in-kotlin)。
 
-#### Type parameters
+#### 类型形参 {id=type-parameters}
 
-By default, the nullability of plain type parameters in both Kotlin and Java is undefined. In Java, you can specify it 
-using nullability annotations. Let's annotate the type parameter of the `Base` class:
+默认情况下，Kotlin 和 Java 中普通类型形参的空值性是未定义的。在 Java 中，你可以使用空值注解来指定它。
+让我们为 `Base` 类的类型形参添加注解：
 
 ```java
 public class Base<@NotNull T> {}
 ```
 
-When inheriting from `Base`, Kotlin expects a non-nullable type argument or type parameter. 
-Thus, the following Kotlin code produces a warning:
+当从 `Base` 继承时，Kotlin 期望一个非空类型实参或类型形参。
+因此，以下 Kotlin 代码会产生警告：
 
 ```kotlin
-class Derived<K> : Base<K> {} // warning: K has undefined nullability
+class Derived<K> : Base<K> {} // 警告：K 的空值性未定义
 ```
 
-You can fix it by specifying the upper bound `K : Any`.
+你可以通过指定上限 `K : Any` 来修复它。
 
-Kotlin also supports nullability annotations on the bounds of Java type parameters. Let's add bounds to `Base`:
+Kotlin 还支持 Java 类型形参边界上的空值注解。让我们为 `Base` 添加边界：
 
 ```java
 public class BaseWithBound<T extends @NotNull Number> {}
 ```
 
-Kotlin translates this just as follows:
+Kotlin 将其翻译如下：
 
 ```kotlin
 class BaseWithBound<T : Number> {}
 ```
 
-So passing nullable type as a type argument or type parameter produces a warning.
+将可空类型作为类型实参或类型形参传递会产生警告。
 
-Annotating type arguments and type parameters works with the Java 8 target or higher. The feature requires that the 
-nullability annotations support the `TYPE_USE` target (`org.jetbrains.annotations` supports this in version 15 and above). 
-Pass the `-Xtype-enhancement-improvements-strict-mode` compiler option to report errors in Kotlin code that uses 
-nullability which deviates from the nullability annotations from Java.
+为类型实参和类型形参添加注解适用于 Java 8 及更高版本。
+此功能要求空值注解支持 `TYPE_USE` 目标（`org.jetbrains.annotations` 在 15 及更高版本中支持此目标）。
+使用 `-Xtype-enhancement-improvements-strict-mode` 编译器选项可以报告使用与 Java 的空值注解不符的 Kotlin 代码中的错误。
 
-> Note: If a nullability annotation supports other targets that are applicable to a type in addition to the `TYPE_USE` target, then
-> `TYPE_USE` takes priority. For example, if `@Nullable` has both `TYPE_USE` and `METHOD` targets, the Java method
-> signature `@Nullable String[] f()` becomes `fun f(): Array<String?>!` in Kotlin.
+> 注意：如果一个空值注解支持其他适用于类型的目标，除了 `TYPE_USE` 目标，则 `TYPE_USE` 优先。
+> 例如，如果 `@Nullable` 同时具有 `TYPE_USE` 和 `METHOD` 目标，则 Java 方法
+> 签名 `@Nullable String[] f()` 在 Kotlin 中变为 `fun f(): Array<String?>!`。
 >
 {style="note"}
 
-### JSR-305 support
+### JSR-305 支持 {id=jsr-305-support}
 
-The [`@Nonnull`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/Nonnull.html) annotation defined
-in [JSR-305](https://jcp.org/en/jsr/detail?id=305) is supported for denoting nullability of Java types.
+[`@Nonnull`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/Nonnull.html)
+注解在 [JSR-305](https://jcp.org/en/jsr/detail?id=305) 中定义，用于表示 Java 类型的可空性。
 
-If the `@Nonnull(when = ...)` value is `When.ALWAYS`, the annotated type is treated as non-nullable; `When.MAYBE` and
-`When.NEVER` denote a nullable type; and `When.UNKNOWN` forces the type to be [platform one](#null-safety-and-platform-types).
+如果 `@Nonnull(when = ...)` 的值为 `When.ALWAYS`，则标注的类型被视为非空类型；`When.MAYBE` 和
+`When.NEVER` 表示可空类型；而 `When.UNKNOWN` 强制类型为 [平台类型](#null-safety-and-platform-types)。
 
-A library can be compiled against the JSR-305 annotations, but there's no need to make the annotations artifact (e.g. `jsr305.jar`)
-a compile dependency for the library consumers. The Kotlin compiler can read the JSR-305 annotations from a library
-without the annotations present on the classpath.
+一个库可以针对 JSR-305 注解进行编译，但不需要将注解工件（例如 `jsr305.jar`）
+作为库消费者的编译依赖。Kotlin 编译器可以从没有注解存在于类路径上的库中读取 JSR-305 注解。
 
-[Custom nullability qualifiers (KEEP-79)](https://github.com/Kotlin/KEEP/blob/master/proposals/jsr-305-custom-nullability-qualifiers.md)
-are also supported (see below).
+[自定义可空性限定符 (KEEP-79)](https://github.com/Kotlin/KEEP/blob/master/proposals/jsr-305-custom-nullability-qualifiers.md)
+也得到了支持（见下文）。
 
-#### Type qualifier nicknames
+#### 类型限定符别名 {id=type-qualifier-nicknames}
 
-If an annotation type is annotated with both
+如果一个注解类型同时被标注为
 [`@TypeQualifierNickname`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/meta/TypeQualifierNickname.html)
-and JSR-305 `@Nonnull` (or its another nickname, such as `@CheckForNull`), then the annotation type is itself used for
-retrieving precise nullability and has the same meaning as that nullability annotation:
+和 JSR-305 的 `@Nonnull`（或其另一个别名，例如 `@CheckForNull`），则该注解类型本身用于获取精确的可空性，
+并且具有与该可空性注解相同的含义：
 
 ```java
 @TypeQualifierNickname
@@ -344,37 +333,34 @@ public @interface MyNonnull {
 }
 
 @TypeQualifierNickname
-@CheckForNull // a nickname to another type qualifier nickname
+@CheckForNull // 另一个类型限定符别名
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyNullable {
 }
 
 interface A {
     @MyNullable String foo(@MyNonnull String x);
-    // in Kotlin (strict mode): `fun foo(x: String): String?`
+    // 在 Kotlin（严格模式）：`fun foo(x: String): String?`
 
     String bar(List<@MyNonnull String> x);
-    // in Kotlin (strict mode): `fun bar(x: List<String>!): String!`
+    // 在 Kotlin（严格模式）：`fun bar(x: List<String>!): String!`
 }
 ```
 
-#### Type qualifier defaults
+#### 类型限定符默认值 {id=type-qualifier-defaults}
 
 [`@TypeQualifierDefault`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/meta/TypeQualifierDefault.html)
-allows introducing annotations that, when being applied, define the default nullability within the scope of the annotated
-element.
+允许引入注解，当应用时，在被注解元素的范围内定义默认的可空性。
 
-Such annotation type should itself be annotated with both `@Nonnull` (or its nickname) and `@TypeQualifierDefault(...)`
-with one or more `ElementType` values:
+这样的注解类型应该同时被标注为 `@Nonnull`（或其别名）和 `@TypeQualifierDefault(...)`，并且具有一个或多个 `ElementType` 值：
 
-* `ElementType.METHOD` for return types of methods
-* `ElementType.PARAMETER` for value parameters
-* `ElementType.FIELD` for fields
-* `ElementType.TYPE_USE` for any type including type arguments, upper bounds of type parameters and wildcard types
+* `ElementType.METHOD` 用于方法的返回类型
+* `ElementType.PARAMETER` 用于值参数
+* `ElementType.FIELD` 用于字段
+* `ElementType.TYPE_USE` 用于任何类型，包括类型参数的类型实参、上界和通配符类型
 
-The default nullability is used when a type itself is not annotated by a nullability annotation, and the default is
-determined by the innermost enclosing element annotated with a type qualifier default annotation with the
-`ElementType` matching the type usage.
+当类型本身没有被可空性注解标注时，会使用默认的可空性，默认值由最近的被标注为类型限定符默认注解的元素确定，该元素的
+`ElementType` 与类型使用相匹配。
 
 ```java
 @Nonnull
@@ -391,47 +377,43 @@ public @interface NullableApi {
 interface A {
     String foo(String x); // fun foo(x: String?): String?
 
-    @NotNullApi // overriding default from the interface
+    @NotNullApi // 覆盖接口中的默认值
     String bar(String x, @Nullable String y); // fun bar(x: String, y: String?): String
 
-    // The List<String> type argument is seen as nullable because of `@NullableApi`
-    // having the `TYPE_USE` element type:
+    // 由于 `@NullableApi` 具有 `TYPE_USE` 元素类型，List<String> 类型实参被视为可空：
     String baz(List<String> x); // fun baz(List<String?>?): String?
 
-    // The type of `x` parameter remains platform because there's an explicit
-    // UNKNOWN-marked nullability annotation:
+    // `x` 参数的类型保持平台类型，因为有一个显式的
+    // 标记为 UNKNOWN 的可空性注解：
     String qux(@Nonnull(when = When.UNKNOWN) String x); // fun baz(x: String!): String?
 }
 ```
 
-> The types in this example only take place with the strict mode enabled; otherwise, the platform types remain.
-> See the [`@UnderMigration` annotation](#undermigration-annotation) and [Compiler configuration](#compiler-configuration) sections.
+> 本示例中的类型仅在启用严格模式时生效；否则，平台类型保持不变。
+> 请参见 [`@UnderMigration` 注解](#undermigration-annotation) 和 [编译器配置](#compiler-configuration) 部分。
 >
 {style="note"}
 
-Package-level default nullability is also supported:
+包级默认可空性也得到了支持：
 
 ```java
 // FILE: test/package-info.java
-@NonNullApi // declaring all types in package 'test' as non-nullable by default
+@NonNullApi // 将包 'test' 中的所有类型声明为默认非空
 package test;
 ```
 
-#### @UnderMigration annotation
+#### @UnderMigration 注解 {id=undermigration-annotation}
 
-The `@UnderMigration` annotation (provided in a separate artifact `kotlin-annotations-jvm`) can be used by library
-maintainers to define the migration status for the nullability type qualifiers.
+`@UnderMigration` 注解（提供在单独的工件 `kotlin-annotations-jvm` 中）可以被库维护者用来定义可空性类型限定符的迁移状态。
 
-The status value in `@UnderMigration(status = ...)` specifies how the compiler treats inappropriate usages of the
-annotated types in Kotlin (e.g. using a `@MyNullable`-annotated type value as non-null):
+`@UnderMigration(status = ...)` 中的状态值指定了编译器如何处理
+Kotlin 中对标注类型的不当用法（例如，将标注为 `@MyNullable` 的类型值用作非空）：
 
-* `MigrationStatus.STRICT` makes annotation work as any plain nullability annotation, i.e. report errors for
-the inappropriate usages and affect the types in the annotated declarations as they are seen in Kotlin
-* `MigrationStatus.WARN`: the inappropriate usages are reported as compilation warnings instead of errors,
-but the types in the annotated declarations remain platform
-* `MigrationStatus.IGNORE` makes the compiler ignore the nullability annotation completely
+* `MigrationStatus.STRICT` 使注解像任何普通可空性注解一样工作，即对不当用法报告错误，并影响标注声明中类型在 Kotlin 中的表现。
+* `MigrationStatus.WARN`：不当用法会被报告为编译警告而不是错误，但标注声明中的类型保持为平台类型。
+* `MigrationStatus.IGNORE` 使编译器完全忽略可空性注解。
 
-A library maintainer can add `@UnderMigration` status to both type qualifier nicknames and type qualifier defaults:
+库维护者可以将 `@UnderMigration` 状态添加到类型限定符别名和类型限定符默认值中：
 
 ```java
 @Nonnull(when = When.ALWAYS)
@@ -440,19 +422,16 @@ A library maintainer can add `@UnderMigration` status to both type qualifier nic
 public @interface NonNullApi {
 }
 
-// The types in the class are non-nullable, but only warnings are reported
-// because `@NonNullApi` is annotated `@UnderMigration(status = MigrationStatus.WARN)`
+// 类中的类型是非空的，但由于 `@NonNullApi` 被标注为 `@UnderMigration(status = MigrationStatus.WARN)`，所以只报告警告
 @NonNullApi
 public class Test {}
 ```
 
-> The migration status of a nullability annotation is not inherited by its type qualifier nicknames but is applied
-> to its usages in default type qualifiers.
+> 可空性注解的迁移状态不会被其类型限定符别名继承，但会应用于默认类型限定符中的用法。
 >
 {style="note"}
 
-If a default type qualifier uses a type qualifier nickname and they are both `@UnderMigration`, the status
-from the default type qualifier is used.
+如果默认类型限定符使用了类型限定符别名，并且它们都标注为 `@UnderMigration`，则使用默认类型限定符中的状态。
 
 #### Compiler configuration
 

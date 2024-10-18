@@ -609,7 +609,7 @@ fun unboxBase(box: Box<@JvmSuppressWildcards Base>): Base = box.value
 
 ### Translation of type `Nothing`
  
-The type [`Nothing`](exceptions.md#Nothing类型) is special, because it has no natural counterpart in Java. Indeed, every Java reference type, including
+The type [`Nothing`](exceptions.md#nothing-type) is special, because it has no natural counterpart in Java. Indeed, every Java reference type, including
 `java.lang.Void`, accepts `null` as a value, and `Nothing` doesn't accept even that. So, this type cannot be accurately
 represented in the Java world. This is why Kotlin generates a raw type where an argument of type `Nothing` is used:
 

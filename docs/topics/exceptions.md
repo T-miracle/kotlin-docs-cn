@@ -495,7 +495,7 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-## Nothing 类型
+## Nothing 类型 {id=nothing-type}
 
 在 Kotlin 中，每个表达式都有一个类型。
 表达式 `throw IllegalArgumentException()` 的类型是 [`Nothing`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-nothing.html)，
