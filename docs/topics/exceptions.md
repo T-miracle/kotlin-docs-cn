@@ -3,8 +3,8 @@
 [//]: # (TODO 等待校对)
 
 异常有助于你的代码在发生运行时错误时仍能按预期运行，即使这些错误可能会中断程序的执行。
-Kotlin 默认将所有异常视为 _unchecked_（未检查）异常。
-未检查异常简化了异常处理过程：你可以捕获异常，但你不需要显式处理或 [声明](java-to-kotlin-interop.md#checked-exceptions) 它们。
+Kotlin 默认将所有异常视为 _unchecked_（未受检）异常。
+未受检异常简化了异常处理过程：你可以捕获异常，但你不需要显式处理或 [声明](java-to-kotlin-interop.md#checked-exceptions) 它们。
 
 > 了解更多关于 Kotlin 在与 Java、Swift 和 Objective-C 交互时如何处理异常的信息，请参阅
 > [Java、Swift 和 Objective-C 的异常互操作性](#exception-interoperability-with-java-swift-and-objective-c) 章节。
@@ -626,7 +626,7 @@ Kotlin 空安全特性的 Java 进行交互时。
     println(text!!.length)  // 抛出 NullPointerException
     ```
 
-虽然 Kotlin 中所有异常都是未检查异常，你不必显式捕获它们，但你仍然可以根据需要捕获它们。
+虽然 Kotlin 中所有异常都是未受检异常，你不必显式捕获它们，但你仍然可以根据需要捕获它们。
 
 ### 异常层次结构 {id=exception-hierarchy}
 
@@ -684,7 +684,7 @@ Exception in thread "main" java.lang.ArithmeticException: This is an arithmetic 
 
 ## Kotlin 与 Java、Swift 和 Objective-C 的异常互操作性 {id=exception-interoperability-with-java-swift-and-objective-c}
 
-由于 Kotlin 将所有异常视为未检查异常，这可能会导致从区分检查异常和未检查异常的语言中调用这些异常时出现复杂情况。
+由于 Kotlin 将所有异常视为未受检异常，这可能会导致从区分受检异常和未受检异常的语言中调用这些异常时出现复杂情况。
 为了解决 Kotlin 与 Java、Swift 和 Objective-C 等语言之间的异常处理差异，你可以使用
 [`@Throws`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-throws/) 注解。
 这个注解会提醒调用者可能会抛出异常。有关更多信息，请参见 [从 Java 调用 Kotlin](java-to-kotlin-interop.md#checked-exceptions) 和

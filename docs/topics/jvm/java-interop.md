@@ -433,206 +433,200 @@ public class Test {}
 
 如果默认类型限定符使用了类型限定符别名，并且它们都标注为 `@UnderMigration`，则使用默认类型限定符中的状态。
 
-#### Compiler configuration
+#### 编译器配置 {id=compiler-configuration}
 
-The JSR-305 checks can be configured by adding the `-Xjsr305` compiler flag with the following options (and their combination):
+可以通过添加 `-Xjsr305` 编译器标志和以下选项（及其组合）来配置 JSR-305 检查：
 
-* `-Xjsr305={strict|warn|ignore}` to set up the behavior for non-`@UnderMigration` annotations.
-Custom nullability qualifiers, especially
-`@TypeQualifierDefault`, are already spread among many well-known libraries, and users may need to migrate smoothly when
-updating to the Kotlin version containing JSR-305 support. Since Kotlin 1.1.60, this flag only affects non-`@UnderMigration` annotations.
+* `-Xjsr305={strict|warn|ignore}` 设置非 `@UnderMigration` 注解的行为。  
+自定义可空性限定符，尤其是 `@TypeQualifierDefault`，已广泛应用于许多知名库中，因此用户在更新到支持
+JSR-305 的 Kotlin 版本时可能需要平稳迁移。自 Kotlin 1.1.60 以来，此标志仅影响非 `@UnderMigration` 注解。
 
-* `-Xjsr305=under-migration:{strict|warn|ignore}` to override the behavior for the `@UnderMigration` annotations.
-Users may have different view on the migration status for the libraries:
-they may want to have errors while the official migration status is `WARN`, or vice versa,
-they may wish to postpone errors reporting for some until they complete their migration.
+* `-Xjsr305=under-migration:{strict|warn|ignore}` 用于覆盖 `@UnderMigration` 注解的行为。  
+  用户可能对库的迁移状态有不同看法：他们可能希望在官方迁移状态为 `WARN` 时强制显示错误，或反之，他们希望推迟错误报告，直到完成迁移。
 
-* `-Xjsr305=@<fq.name>:{strict|warn|ignore}` to override the behavior for a single annotation, where `<fq.name>`
-is the fully qualified class name of the annotation. May appear several times for different annotations. This is useful
-for managing the migration state for a particular library.
+* `-Xjsr305=@<fq.name>:{strict|warn|ignore}` 用于覆盖单个注解的行为，其中 `<fq.name>` 是注解的完全限定类名。
+可以针对不同的注解多次出现。此选项在管理特定库的迁移状态时非常有用。
 
-The `strict`, `warn` and `ignore` values have the same meaning as those of `MigrationStatus`,
-and only the `strict` mode affects the types in the annotated declarations as they are seen in Kotlin.
+`strict`、`warn` 和 `ignore` 值的含义与 `MigrationStatus` 的含义相同，并且只有 `strict` 模式会影响 Kotlin 中查看到的注解声明中的类型。
 
-> Note: the built-in JSR-305 annotations [`@Nonnull`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/Nonnull.html),
->[`@Nullable`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.1/javax/annotation/Nullable.html) and
->[`@CheckForNull`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/CheckForNull.html) are always enabled and
->affect the types of the annotated declarations in Kotlin, regardless of compiler configuration with the `-Xjsr305` flag.
+> 注意：内置的 JSR-305 注解 [`@Nonnull`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/Nonnull.html)、
+> [`@Nullable`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.1/javax/annotation/Nullable.html) 和
+> [`@CheckForNull`](https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/latest/javax/annotation/CheckForNull.html)
+> 始终启用，并影响 Kotlin 中注解声明的类型，无论 `-Xjsr305` 标志的编译器配置如何。  
 >
 {style="note"}
 
-For example, adding `-Xjsr305=ignore -Xjsr305=under-migration:ignore -Xjsr305=@org.library.MyNullable:warn` to the
-compiler arguments makes the compiler generate warnings for inappropriate usages of types annotated by
-`@org.library.MyNullable` and ignore all other JSR-305 annotations.
+例如，添加 `-Xjsr305=ignore -Xjsr305=under-migration:ignore -Xjsr305=@org.library.MyNullable:warn`
+到编译器参数中，会使编译器为不当使用
+`@org.library.MyNullable` 注解的类型生成警告，并忽略所有其他 JSR-305 注解。
 
-The default behavior is the same to `-Xjsr305=warn`. The
-`strict` value should be considered experimental (more checks may be added to it in the future).
+默认行为与 `-Xjsr305=warn` 相同。`strict` 值应视为实验性功能（将来可能会添加更多检查）。
 
-## Mapped types
+## 映射类型 {id=mapped-types}
 
-Kotlin treats some Java types specifically. Such types are not loaded from Java "as is", but are _mapped_ to corresponding Kotlin types.
-The mapping only matters at compile time, the runtime representation remains unchanged.
- Java's primitive types are mapped to corresponding Kotlin types (keeping [platform types](#null-safety-and-platform-types) in mind):
+Kotlin 特别处理某些 Java 类型。这些类型不会直接从 Java 加载，而是会 _映射_ 到相应的 Kotlin 类型。
+此映射仅在编译时生效，运行时表示保持不变。
+Java 的基本类型会映射到对应的 Kotlin 类型（需考虑[平台类型](#null-safety-and-platform-types)）：
 
-| **Java type** | **Kotlin type**  |
-|---------------|------------------|
-| `byte`        | `kotlin.Byte`    |
-| `short`       | `kotlin.Short`   |
-| `int`         | `kotlin.Int`     |
-| `long`        | `kotlin.Long`    |
-| `char`        | `kotlin.Char`    |
-| `float`       | `kotlin.Float`   |
-| `double`      | `kotlin.Double`  |
-| `boolean`     | `kotlin.Boolean` |
+| **Java 类型** | **Kotlin 类型**    |
+|-------------|------------------|
+| `byte`      | `kotlin.Byte`    |
+| `short`     | `kotlin.Short`   |
+| `int`       | `kotlin.Int`     |
+| `long`      | `kotlin.Long`    |
+| `char`      | `kotlin.Char`    |
+| `float`     | `kotlin.Float`   |
+| `double`    | `kotlin.Double`  |
+| `boolean`   | `kotlin.Boolean` |
 
-Some non-primitive built-in classes are also mapped:
+一些非原始内置类也被映射：
 
-| **Java type** | **Kotlin type**  |
-|---------------|------------------|
-| `java.lang.Object`       | `kotlin.Any!`    |
-| `java.lang.Cloneable`    | `kotlin.Cloneable!`    |
-| `java.lang.Comparable`   | `kotlin.Comparable!`    |
-| `java.lang.Enum`         | `kotlin.Enum!`    |
-| `java.lang.annotation.Annotation`   | `kotlin.Annotation!`    |
-| `java.lang.CharSequence` | `kotlin.CharSequence!`   |
-| `java.lang.String`       | `kotlin.String!`   |
-| `java.lang.Number`       | `kotlin.Number!`     |
-| `java.lang.Throwable`    | `kotlin.Throwable!`    |
+| **Java 类型**                       | **Kotlin 类型**          |
+|-----------------------------------|------------------------|
+| `java.lang.Object`                | `kotlin.Any!`          |
+| `java.lang.Cloneable`             | `kotlin.Cloneable!`    |
+| `java.lang.Comparable`            | `kotlin.Comparable!`   |
+| `java.lang.Enum`                  | `kotlin.Enum!`         |
+| `java.lang.annotation.Annotation` | `kotlin.Annotation!`   |
+| `java.lang.CharSequence`          | `kotlin.CharSequence!` |
+| `java.lang.String`                | `kotlin.String!`       |
+| `java.lang.Number`                | `kotlin.Number!`       |
+| `java.lang.Throwable`             | `kotlin.Throwable!`    |
 
-Java's boxed primitive types are mapped to nullable Kotlin types:
+Java 的装箱基本类型被映射为可空的 Kotlin 类型：
 
-| **Java type**           | **Kotlin type**  |
-|-------------------------|------------------|
-| `java.lang.Byte`        | `kotlin.Byte?`   |
-| `java.lang.Short`       | `kotlin.Short?`  |
-| `java.lang.Integer`     | `kotlin.Int?`    |
-| `java.lang.Long`        | `kotlin.Long?`   |
-| `java.lang.Character`   | `kotlin.Char?`   |
-| `java.lang.Float`       | `kotlin.Float?`  |
-| `java.lang.Double`      | `kotlin.Double?`  |
-| `java.lang.Boolean`     | `kotlin.Boolean?` |
+| **Java 类型**           | **Kotlin 类型**     |
+|-----------------------|-------------------|
+| `java.lang.Byte`      | `kotlin.Byte?`    |
+| `java.lang.Short`     | `kotlin.Short?`   |
+| `java.lang.Integer`   | `kotlin.Int?`     |
+| `java.lang.Long`      | `kotlin.Long?`    |
+| `java.lang.Character` | `kotlin.Char?`    |
+| `java.lang.Float`     | `kotlin.Float?`   |
+| `java.lang.Double`    | `kotlin.Double?`  |
+| `java.lang.Boolean`   | `kotlin.Boolean?` |
 
-Note that a boxed primitive type used as a type parameter is mapped to a platform type:
-for example, `List<java.lang.Integer>` becomes a `List<Int!>` in Kotlin.
+请注意，作为类型形参使用的装箱基本类型会映射为平台类型：
+例如，`List<java.lang.Integer>` 在 Kotlin 中会变成 `List<Int!>`。
 
-Collection types may be read-only or mutable in Kotlin, so Java's collections are mapped as follows
-(all Kotlin types in this table reside in the package `kotlin.collections`):
+在 Kotlin 中，集合类型可以是只读的或可变的，因此 Java 的集合映射如下表所示
+（本表中所有 Kotlin 类型都位于 `kotlin.collections` 包中）：
 
-| **Java type** | **Kotlin read-only type**  | **Kotlin mutable type** | **Loaded platform type** |
-|---------------|----------------------------|-------------------------|--------------------------|
-| `Iterator<T>`        | `Iterator<T>`        | `MutableIterator<T>`            | `(Mutable)Iterator<T>!`            |
-| `Iterable<T>`        | `Iterable<T>`        | `MutableIterable<T>`            | `(Mutable)Iterable<T>!`            |
-| `Collection<T>`      | `Collection<T>`      | `MutableCollection<T>`          | `(Mutable)Collection<T>!`          |
-| `Set<T>`             | `Set<T>`             | `MutableSet<T>`                 | `(Mutable)Set<T>!`                 |
-| `List<T>`            | `List<T>`            | `MutableList<T>`                | `(Mutable)List<T>!`                |
-| `ListIterator<T>`    | `ListIterator<T>`    | `MutableListIterator<T>`        | `(Mutable)ListIterator<T>!`        |
-| `Map<K, V>`          | `Map<K, V>`          | `MutableMap<K, V>`              | `(Mutable)Map<K, V>!`              |
-| `Map.Entry<K, V>`    | `Map.Entry<K, V>`    | `MutableMap.MutableEntry<K,V>` | `(Mutable)Map.(Mutable)Entry<K, V>!` |
+| **Java 类型**       | **Kotlin 只读类型**   | **Kotlin 可变类型**                | **加载的平台类型**                          |
+|-------------------|-------------------|--------------------------------|--------------------------------------|
+| `Iterator<T>`     | `Iterator<T>`     | `MutableIterator<T>`           | `(Mutable)Iterator<T>!`              |
+| `Iterable<T>`     | `Iterable<T>`     | `MutableIterable<T>`           | `(Mutable)Iterable<T>!`              |
+| `Collection<T>`   | `Collection<T>`   | `MutableCollection<T>`         | `(Mutable)Collection<T>!`            |
+| `Set<T>`          | `Set<T>`          | `MutableSet<T>`                | `(Mutable)Set<T>!`                   |
+| `List<T>`         | `List<T>`         | `MutableList<T>`               | `(Mutable)List<T>!`                  |
+| `ListIterator<T>` | `ListIterator<T>` | `MutableListIterator<T>`       | `(Mutable)ListIterator<T>!`          |
+| `Map<K, V>`       | `Map<K, V>`       | `MutableMap<K, V>`             | `(Mutable)Map<K, V>!`                |
+| `Map.Entry<K, V>` | `Map.Entry<K, V>` | `MutableMap.MutableEntry<K,V>` | `(Mutable)Map.(Mutable)Entry<K, V>!` |
 
-Java's arrays are mapped as mentioned [below](java-interop.md#java-arrays):
+Java 的数组映射如[下方](java-interop.md#java-arrays)所述：
 
-| **Java type** | **Kotlin type**                |
-|---------------|--------------------------------|
-| `int[]`       | `kotlin.IntArray!`             |
-| `String[]`    | `kotlin.Array<(out) String!>!` |
+| **Java 类型** | **Kotlin 类型**                  |
+|-------------|--------------------------------|
+| `int[]`     | `kotlin.IntArray!`             |
+| `String[]`  | `kotlin.Array<(out) String!>!` |
 
->The static members of these Java types are not directly accessible on the [companion objects](object-declarations.md#companion-objects)
->of the Kotlin types. To call them, use the full qualified names of the Java types, e.g. `java.lang.Integer.toHexString(foo)`.
+> 这些 Java 类型的静态成员无法直接通过 Kotlin 类型的[伴生对象](object-declarations.md#companion-objects)访问。
+> 要调用它们，请使用 Java 类型的完全限定名称，例如 `java.lang.Integer.toHexString(foo)`。
 >
 {style="note"}
 
-## Java generics in Kotlin
+## Kotlin 中的 Java 泛型 {id=java-generics-in-kotlin}
 
-Kotlin's generics are a little different from Java's (see [Generics](generics.md)).
-When importing Java types to Kotlin, the following conversions are done:
+Kotlin 的泛型与 Java 略有不同（参见[泛型](generics.md)）。
+导入 Java 类型到 Kotlin 时，会进行以下转换：
 
-* Java's wildcards are converted into type projections:
-  * `Foo<? extends Bar>` becomes `Foo<out Bar!>!`
-  * `Foo<? super Bar>` becomes `Foo<in Bar!>!`
+* Java 的通配符转换为类型投影：
+  * `Foo<? extends Bar>` 转换为 `Foo<out Bar!>!`
+  * `Foo<? super Bar>` 转换为 `Foo<in Bar!>!`
 
-* Java's raw types are converted into star projections:
-  * `List` becomes `List<*>!` that is `List<out Any?>!`
+* Java 的原始类型转换为星号投影：
+  * `List` 转换为 `List<*>!`，即 `List<out Any?>!`
 
-Like Java's, Kotlin's generics are not retained at runtime: objects do not carry information about actual type arguments
-passed to their constructors. For example, `ArrayList<Integer>()` is indistinguishable from `ArrayList<Character>()`.
-This makes it impossible to perform `is`-checks that take generics into account.
-Kotlin only allows `is`-checks for star-projected generic types:
+与 Java 一样，Kotlin 的泛型在运行时不会保留：对象不会携带传递给其构造函数的实际类型实参信息。
+例如，`ArrayList<Integer>()` 与 `ArrayList<Character>()` 无法区分。
+这使得无法执行考虑泛型的 `is` 检查。
+Kotlin 仅允许对星号投影的泛型类型进行 `is` 检查：
 
 ```kotlin
-if (a is List<Int>) // Error: cannot check if it is really a List of Ints
-// but
-if (a is List<*>) // OK: no guarantees about the contents of the list
+if (a is List<Int>) // 错误：无法检查是否确实为 Int 类型的 List
+// 但
+if (a is List<*>) // 可以：无法保证列表内容
 ```
 
-## Java arrays
+## Java 数组 {id=java-arrays}
 
-Arrays in Kotlin are invariant, unlike Java. This means that Kotlin won't let you assign an `Array<String>` to an `Array<Any>`,
-which prevents a possible runtime failure. Passing an array of a subclass as an array of superclass to a Kotlin method is also prohibited,
-but for Java methods this is allowed through [platform types](#null-safety-and-platform-types) of the form `Array<(out) String>!`.
+与 Java 不同，Kotlin 中的数组是不可变的。
+这意味着 Kotlin 不允许将 `Array<String>` 赋值给 `Array<Any>`，从而防止可能的运行时失败。
+将子类数组作为超类数组传递给 Kotlin 方法也是禁止的，但对于 Java 方法，通过 `Array<(out) String>!` 形式的平台类型可以实现此操作。
 
-Arrays are used with primitive datatypes on the Java platform to avoid the cost of boxing/unboxing operations.
-As Kotlin hides those implementation details, a workaround is required to interface with Java code.
-There are specialized classes for every type of primitive array (`IntArray`, `DoubleArray`, `CharArray`, and so on) to handle this case.
-They are not related to the `Array` class and are compiled down to Java's primitive arrays for maximum performance.
+在 Java 平台上，数组与基本数据类型一起使用，以避免装箱/拆箱操作的开销。
+由于 Kotlin 隐藏了这些实现细节，因此需要一个解决方法来与 Java 代码交互。
+对于每种基本数据类型，都有专门的数组类（如 `IntArray`、`DoubleArray`、`CharArray` 等）来处理这种情况。
+这些类与 `Array` 类无关，并且会编译为 Java 的基本类型数组以获得最大性能。
 
-Suppose there is a Java method that accepts an int array of indices:
+假设有一个 Java 方法接受一个整数数组作为索引：
 
 ``` java
 public class JavaArrayExample {
     public void removeIndices(int[] indices) {
-        // code here...
+        // 代码在这里...
     }
 }
 ```
 
-To pass an array of primitive values, you can do the following in Kotlin:
+要在 Kotlin 中传递一个原始值数组，可以这样做：
 
 ```kotlin
 val javaObj = JavaArrayExample()
 val array = intArrayOf(0, 1, 2, 3)
-javaObj.removeIndices(array)  // passes int[] to method
+javaObj.removeIndices(array)  // 将 int[] 传递给方法
 ```
 
-When compiling to the JVM bytecode, the compiler optimizes access to arrays so that there's no overhead introduced:
+在编译为 JVM 字节码时，编译器优化了对数组的访问，以确保没有引入额外的开销：
 
 ```kotlin
 val array = arrayOf(1, 2, 3, 4)
-array[1] = array[1] * 2 // no actual calls to get() and set() generated
-for (x in array) { // no iterator created
+array[1] = array[1] * 2 // 不会生成实际的 get() 和 set() 调用
+for (x in array) { // 不会创建迭代器
     print(x)
 }
 ```
 
-Even when you navigate with an index, it does not introduce any overhead:
+即使使用索引进行导航，也不会引入额外的开销：
 
 ```kotlin
-for (i in array.indices) { // no iterator created
+for (i in array.indices) { // 不会创建迭代器
     array[i] += 2
 }
 ```
 
-Finally, `in`-checks have no overhead either:
+最后，`in` 检查也没有开销：
 
 ```kotlin
-if (i in array.indices) { // same as (i >= 0 && i < array.size)
+if (i in array.indices) { // 同于 (i >= 0 && i < array.size)
     print(array[i])
 }
 ```
 
-## Java varargs
+## Java 可变参数 {id=java-varargs}
 
-Java classes sometimes use a method declaration for the indices with a variable number of arguments (varargs):
+Java 类有时会使用可变参数（varargs）的方法声明来接受多个索引：
 
 ``` java
 public class JavaArrayExample {
 
     public void removeIndicesVarArg(int... indices) {
-        // code here...
+        // 代码在这里...
     }
 }
 ```
 
-In that case you need to use the spread operator `*` to pass the `IntArray`:
+在这种情况下，您需要使用扩展运算符 `*` 来传递 `IntArray`：
 
 ```kotlin
 val javaObj = JavaArrayExample()
@@ -640,57 +634,58 @@ val array = intArrayOf(0, 1, 2, 3)
 javaObj.removeIndicesVarArg(*array)
 ```
 
-## Operators
+## 运算符 {id=operators}
 
-Since Java has no way of marking methods for which it makes sense to use the operator syntax, Kotlin allows using any
-Java methods with the right name and signature as operator overloads and other conventions (`invoke()` etc.)
-Calling Java methods using the infix call syntax is not allowed.
+由于 Java 没有标记哪些方法适合使用运算符语法，因此 Kotlin 允许将任何具有正确名称和签名的
+Java 方法用作运算符重载以及其他约定（如 `invoke()` 等）。
+但不允许使用中缀调用语法调用 Java 方法。
 
-## Checked exceptions
+## 受检异常 {id=checked-exceptions}
 
-In Kotlin, all [exceptions are unchecked](exceptions.md), meaning that the compiler does not force you to catch any of them.
-So, when you call a Java method that declares a checked exception, Kotlin does not force you to do anything:
+在 Kotlin 中，所有 [异常都是未受检的](exceptions.md)，这意味着编译器不会强制您捕获任何异常。
+因此，当您调用一个声明了受检异常的 Java 方法时，Kotlin 不会强制您执行任何操作：
 
 ```kotlin
 fun render(list: List<*>, to: Appendable) {
     for (item in list) {
-        to.append(item.toString()) // Java would require us to catch IOException here
+        to.append(item.toString()) // Java 会要求我们在这里捕获 IOException
     }
 }
 ```
 
-## Object methods
+## 对象方法 {id=object-methods}
 
-When Java types are imported into Kotlin, all the references of the type `java.lang.Object` are turned into `Any`.
-Since `Any` is not platform-specific, it only declares `toString()`, `hashCode()` and `equals()` as its members,
-so to make other members of `java.lang.Object` available, Kotlin uses [extension functions](extensions.md).
+当 Java 类型被导入到 Kotlin 时，所有对 `java.lang.Object` 类型的引用都会被转换为 `Any`。
+由于 `Any` 不是特定于平台的，它仅声明了 `toString()`、`hashCode()` 和 `equals()` 作为其成员。
+因此，为了使 `java.lang.Object` 的其他成员可用，Kotlin 使用了 [扩展函数](extensions.md)。
 
-### wait()/notify()
+### wait()/notify() {id=wait-notify}
 
-Methods `wait()` and `notify()` are not available on references of type `Any`. Their usage is generally discouraged in
-favor of `java.util.concurrent`. If you really need to call these methods, you can cast to `java.lang.Object`:
+方法 `wait()` 和 `notify()` 在 `Any` 类型的引用上不可用。
+一般不建议使用它们，建议使用 `java.util.concurrent`。
+如果您确实需要调用这些方法，可以将其强制转换为 `java.lang.Object`：
 
 ```kotlin
 (foo as java.lang.Object).wait()
 ```
 
-### getClass()
+### getClass() {id=getclass}
 
-To retrieve the Java class of an object, use the `java` extension property on a [class reference](reflection.md#class-references):
+要获取对象的 Java 类，可以使用 [类引用](reflection.md#class-references) 上的 `java` 扩展属性：
 
 ```kotlin
 val fooClass = foo::class.java
 ```
 
-The code above uses a [bound class reference](reflection.md#bound-class-references). You can also use the `javaClass` extension property:
+上面的代码使用了 [绑定类引用](reflection.md#bound-class-references)。您还可以使用 `javaClass` 扩展属性：
 
 ```kotlin
 val fooClass = foo.javaClass
 ```
 
-### clone()
+### clone() {id=clone}
 
-To override `clone()`, your class needs to extend `kotlin.Cloneable`:
+要重写 `clone()`，您的类需要扩展 `kotlin.Cloneable`：
 
 ```kotlin
 class Example : Cloneable {
@@ -698,99 +693,95 @@ class Example : Cloneable {
 }
 ```
 
-Don't forget about [Effective Java, 3rd Edition](https://www.oracle.com/technetwork/java/effectivejava-136174.html),
-Item 13: *Override clone judiciously*.
+别忘了参考 [Effective Java, 3rd Edition](https://www.oracle.com/technetwork/java/effectivejava-136174.html)，
+第 13 条：*谨慎重写 clone*。
 
-### finalize()
+### finalize() {id=finalize}
 
-To override `finalize()`, all you need to do is simply declare it, without using the `override` keyword:
+要重写 `finalize()`，您只需声明它，而无需使用 `override` 关键字：
 
 ```kotlin
 class C {
     protected fun finalize() {
-        // finalization logic
+        // 清理逻辑
     }
 }
 ```
 
-According to Java's rules, `finalize()` must not be `private`.
+根据 Java 的规则，`finalize()` 不能是 `private`。
 
-## Inheritance from Java classes
+## 从 Java 类的继承 {id=inheritance-from-java-classes}
 
-At most one Java class (and as many Java interfaces as you like) can be a supertype for a class in Kotlin.
+在 Kotlin 中，一个类最多只能有一个 Java 类（以及任意数量的 Java 接口）作为其超类型。
 
-## Accessing static members
+## 访问静态成员 {id=accessing-static-members}
 
-Static members of Java classes form "companion objects" for these classes. You can't pass such a "companion object"
-around as a value but can access the members explicitly, for example:
+Java 类的静态成员构成了这些类的 “伴生对象”。
+你不能将这样的“伴生对象”作为值传递，但可以显式访问其成员，例如：
 
 ```kotlin
 if (Character.isLetter(a)) { ... }
 ```
 
-To access static members of a Java type that is [mapped](#mapped-types) to a Kotlin type, use the full qualified name of
-the Java type: `java.lang.Integer.bitCount(foo)`.
+要访问映射到 Kotlin 类型的 Java 类型的静态成员，请使用 Java 类型的完全限定名：`java.lang.Integer.bitCount(foo)`。
 
-## Java reflection
+## Java 反射 {id=java-reflection}
 
-Java reflection works on Kotlin classes and vice versa. As mentioned above, you can use `instance::class.java`,
-`ClassName::class.java` or `instance.javaClass` to enter Java reflection through `java.lang.Class`.
-Do not use `ClassName.javaClass` for this purpose because it refers to `ClassName`'s companion object class,
-which is the same as `ClassName.Companion::class.java` and not `ClassName::class.java`.
+Java 反射可以用于 Kotlin 类，反之亦然。
+如上所述，你可以使用 `instance::class.java`、`ClassName::class.java` 或 `instance.javaClass` 通过 `java.lang.Class`
+进行 Java 反射。不要为此目的使用 `ClassName.javaClass`，因为它指的是 `ClassName` 的伴生对象类，这与
+`ClassName.Companion::class.java` 相同，而不是 `ClassName::class.java`。
 
-For each primitive type, there are two different Java classes, and Kotlin provides ways to get both. For
-example, `Int::class.java` will return the class instance representing the primitive type itself,
-corresponding to `Integer.TYPE` in Java. To get the class of the corresponding wrapper type, use
-`Int::class.javaObjectType`, which is equivalent of Java's `Integer.class`.
+对于每种基本类型，Java 有两个不同的类，而 Kotlin 提供了获取这两者的方法。
+例如，`Int::class.java` 将返回表示原始类型本身的类实例，对应于 Java 中的 `Integer.TYPE`。
+要获取对应包装类型的类，请使用 `Int::class.javaObjectType`，它等同于 Java 的 `Integer.class`。
 
-Other supported cases include acquiring a Java getter/setter method or a backing field for a Kotlin property, a `KProperty` for a Java field, a Java method or constructor for a `KFunction` and vice versa.
+其他支持的情况包括获取 Kotlin 属性的 Java getter/setter 方法或幕后字段、Java 字段的
+`KProperty`、`KFunction` 的 Java 方法或构造函数，反之亦然。
 
 
-## SAM conversions
+## SAM 转换 {id=sam-conversions}
 
-Kotlin supports SAM conversions for both Java and [Kotlin interfaces](fun-interfaces.md). 
-This support for Java means that Kotlin function literals can be automatically converted
-into implementations of Java interfaces with a single non-default method, as long as the parameter types of the interface
-method match the parameter types of the Kotlin function.
+Kotlin 支持对 Java 和 [Kotlin 接口](fun-interfaces.md) 的 SAM 转换。
+这种对 Java 的支持意味着，Kotlin 函数字面量可以自动转换为实现
+Java 接口的单一非默认方法，只要接口方法的参数类型与 Kotlin 函数的参数类型匹配。
 
-You can use this for creating instances of SAM interfaces:
+你可以用它来创建 SAM 接口的实例：
 
 ```kotlin
 val runnable = Runnable { println("This runs in a runnable") }
 ```
 
-...and in method calls:
+...并在方法调用中使用：
 
 ```kotlin
 val executor = ThreadPoolExecutor()
-// Java signature: void execute(Runnable command)
+// Java 签名：void execute(Runnable command)
 executor.execute { println("This runs in a thread pool") }
 ```
 
-If the Java class has multiple methods taking functional interfaces, you can choose the one you need to call by
-using an adapter function that converts a lambda to a specific SAM type. Those adapter functions are also generated
-by the compiler when needed:
+如果 Java 类有多个接受函数接口的方法，你可以通过使用适配器函数将
+lambda 转换为特定的 SAM 类型来选择你需要调用的方法。这些适配器函数在需要时也会由编译器生成：
 
 ```kotlin
 executor.execute(Runnable { println("This runs in a thread pool") })
 ```
 
-> SAM conversions only work for interfaces, not for abstract classes, even if those also have just a single
-abstract method.
+> SAM 转换仅适用于接口，不适用于抽象类，即使它们也只有一个抽象方法。
 >
 {style="note"}
 
-## Using JNI with Kotlin
+## 在 Kotlin 中使用 JNI {id=using-jni-with-kotlin}
 
-To declare a function that is implemented in native (C or C++) code, you need to mark it with the `external` modifier:
+要声明一个在原生（C 或 C++）代码中实现的函数，你需要用 `external` 修饰符标记它：
 
 ```kotlin
 external fun foo(x: Int): Double
 ```
 
-The rest of the procedure works in exactly the same way as in Java.
+其余的过程与 Java 中的方式完全相同。
 
-You can also mark property getters and setters as `external`:
+你还可以将属性的 getter 和 setter 标记为 `external`：
 
 ```kotlin
 var myProperty: String
@@ -798,11 +789,10 @@ var myProperty: String
     external set
 ```
 
-Behind the scenes, this will create two functions `getMyProperty` and `setMyProperty`, both marked as `external`.
+在幕后，这将创建两个函数 `getMyProperty` 和 `setMyProperty`，并且都被标记为 `external`。
 
-## Using Lombok-generated declarations in Kotlin
+## 在 Kotlin 中使用 Lombok 生成的声明 {id=using-lombok-generated-declarations-in-kotlin}
 
-You can use Java's Lombok-generated declarations in Kotlin code.
-If you need to generate and use these declarations in the same mixed Java/Kotlin module,
-you can learn how to do this on the [Lombok compiler plugin's page](lombok.md).
-If you call such declarations from another module, then you don't need to use this plugin to compile that module.
+你可以在 Kotlin 代码中使用 Java 的 Lombok 生成的声明。
+如果你需要在同一个混合的 Java/Kotlin 模块中生成并使用这些声明，你可以在 [Lombok 编译器插件页面](lombok.md) 学习如何做到这一点。
+如果你从另一个模块调用这些声明，则不需要使用此插件来编译该模块。
