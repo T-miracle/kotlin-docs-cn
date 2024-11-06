@@ -1,20 +1,18 @@
-[//]: # (title: Calling Kotlin from Java)
+[//]: # (title: 在 Java 中调用 Kotlin)
 
-Kotlin code can be easily called from Java.
-For example, instances of a Kotlin class can be seamlessly created and operated in Java methods.
-However, there are certain differences between Java and Kotlin that require attention when
-integrating Kotlin code into Java. 
-On this page, we'll describe the ways to tailor the interop of your Kotlin code with its Java clients.
+在 Java 中可以轻松地调用 Kotlin 代码。比如，可以在 Java 方法中无缝创建和操作 Kotlin 类的实例。
+然而，在将 Kotlin 代码集成到 Java 中时，需要注意 Java 和 Kotlin 之间的一些差异。
+在本页中，我们将描述如何调整 Kotlin 代码与其 Java 客户端的互操作性。
 
-## Properties
+## 属性 {id=properties}
 
-A Kotlin property is compiled to the following Java elements:
+Kotlin 属性会被编译为以下 Java 元素：
 
- * a getter method, with the name calculated by prepending the `get` prefix
- * a setter method, with the name calculated by prepending the `set` prefix (only for `var` properties)
- * a private field, with the same name as the property name (only for properties with backing fields)
+* 一个 getter 方法，名称通过在属性名前添加 `get` 前缀来计算
+* 一个 setter 方法，名称通过在属性名前添加 `set` 前缀来计算（仅适用于 `var` 属性）
+* 一个私有字段，名称与属性名称相同（仅适用于具有幕后字段的属性）
 
-For example, `var firstName: String` compiles to the following Java declarations:
+例如，`var firstName: String` 会编译为以下 Java 声明：
 
 ```java
 private String firstName;
@@ -28,15 +26,14 @@ public void setFirstName(String firstName) {
 }
 ```
 
-If the name of the property starts with `is`, a different name mapping rule is used: the name of the getter will be
-the same as the property name, and the name of the setter will be obtained by replacing `is` with `set`.
-For example, for a property `isOpen`, the getter will be called `isOpen()` and the setter will be called `setOpen()`.
-This rule applies for properties of any type, not just `Boolean`.
+如果属性名称以 `is` 开头，将使用不同的名称映射规则：getter 的名称将与属性名称相同，setter 的名称则是将 `is` 替换为 `set` 得到的名称。
+例如，对于属性 `isOpen`，getter 会被命名为 `isOpen()`，setter 会被命名为 `setOpen()`。
+该规则适用于任何类型的属性，而不仅仅是 `Boolean` 类型。
 
-## Package-level functions
+## 包级函数 {id=package-level-functions}
 
-All the functions and properties declared in a file `app.kt` inside a package `org.example`, including extension functions,
-are compiled into static methods of a Java class named `org.example.AppKt`.
+在 `org.example` 包中的文件 `app.kt` 中声明的所有函数和属性，包括扩展函数，
+都会被编译成一个名为 `org.example.AppKt` 的 Java 类的静态方法。
 
 ```kotlin
 // app.kt
@@ -54,7 +51,7 @@ new org.example.Util();
 org.example.AppKt.getTime();
 ```
 
-To set a custom name to the generated Java class, use the `@JvmName` annotation:
+要为生成的 Java 类设置自定义名称，可以使用 `@JvmName` 注解：
 
 ```kotlin
 @file:JvmName("DemoUtils")
@@ -73,12 +70,11 @@ new org.example.Util();
 org.example.DemoUtils.getTime();
 ```
 
-Having multiple files with the same generated Java class name (the same package and the same name or the same
-[`@JvmName`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html) annotation) is normally an error.
-However, the compiler can generate a single Java facade class which has the specified name and contains
-all the declarations from all the files which have that name.
-To enable the generation of such a facade, use the [`@JvmMultifileClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-multifile-class/index.html)
-annotation in all such files.
+如果多个文件具有相同的生成的 Java 类名称（相同的包和名称，或使用相同的
+[`@JvmName`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-name/index.html) 注解），通常会报错。
+但是，编译器可以生成一个单一的 Java Facade 类，该类具有指定的名称，并包含所有具有该名称的文件中的所有声明。
+要启用生成这样的 Facade 类，可以在所有相关文件中使用
+[`@JvmMultifileClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-multifile-class/index.html) 注解。
 
 ```kotlin
 // oldutils.kt
@@ -106,14 +102,14 @@ org.example.Utils.getTime();
 org.example.Utils.getDate();
 ```
 
-## Instance fields
+## 实例字段 {id=instance-fields}
 
-If you need to expose a Kotlin property as a field in Java, annotate it with the [`@JvmField`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html) annotation.
-The field will have the same visibility as the underlying property. You can annotate a property with `@JvmField` if it:
-* has a backing field
-* is not private
-* does not have `open`, `override` or `const` modifiers
-* is not a delegated property
+如果需要将 Kotlin 属性暴露为 Java 中的字段，可以使用 [`@JvmField`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html) 注解。
+该字段将具有与底层属性相同的可见性。只有满足以下条件时，可以为属性添加 `@JvmField` 注解：
+* 属性有幕后字段
+* 属性不是私有的
+* 属性没有 `open`、`override` 或 `const` 修饰符
+* 属性不是委托属性
 
 ```kotlin
 class User(id: String) {
@@ -122,7 +118,6 @@ class User(id: String) {
 ```
 
 ```java
-
 // Java
 class JavaClient {
     public String getID(User user) {
@@ -131,21 +126,20 @@ class JavaClient {
 }
 ```
 
-[Late-Initialized](properties.md#延迟初始化属性和变量) properties are also exposed as fields. 
-The visibility of the field will be the same as the visibility of `lateinit` property setter.
+[延迟初始化](properties.md#延迟初始化属性和变量) 属性也会作为字段暴露。  
+该字段的可见性将与 `lateinit` 属性 setter 的可见性相同。
 
-## Static fields
+## 静态字段 {id=static-fields}
 
-Kotlin properties declared in a named object or a companion object will have static backing fields
-either in that named object or in the class containing the companion object.
+在命名对象或伴生对象中声明的 Kotlin 属性，将具有静态的幕后字段，这些字段要么在该命名对象中，要么在包含伴生对象的类中。
 
-Usually these fields are private but they can be exposed in one of the following ways:
+通常这些字段是私有的，但可以通过以下方式暴露：
 
- - [`@JvmField`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html) annotation
- - `lateinit` modifier
- - `const` modifier
+- [`@JvmField`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html) 注解
+- `lateinit` 修饰符
+- `const` 修饰符
  
-Annotating such a property with `@JvmField` makes it a static field with the same visibility as the property itself.
+为此类属性添加 `@JvmField` 注解会使其成为一个静态字段，且具有与属性本身相同的可见性。
 
 ```kotlin
 class Key(val value: Int) {
@@ -159,11 +153,10 @@ class Key(val value: Int) {
 ```java
 // Java
 Key.COMPARATOR.compare(key1, key2);
-// public static final field in Key class
+// Key 类中的 public static final 字段
 ```
 
-A [late-initialized](properties.md#延迟初始化属性和变量) property in an object or a companion object
-has a static backing field with the same visibility as the property setter.
+在对象或伴生对象中的 [延迟初始化](properties.md#延迟初始化属性和变量) 属性具有静态的幕后字段，且其可见性与属性 setter 的可见性相同。
 
 ```kotlin
 object Singleton {
@@ -175,10 +168,10 @@ object Singleton {
 
 // Java
 Singleton.provider = new Provider();
-// public static non-final field in Singleton class
+// 在 Singleton 类中的 public static 非-final 字段
 ```
 
-Properties declared as `const` (in classes as well as at the top level) are turned into static fields in Java:
+声明为 `const` 的属性（无论是在类中还是在顶层）都会在 Java 中转换为静态字段：
 
 ```kotlin
 // file example.kt
@@ -196,7 +189,7 @@ class C {
 const val MAX = 239
 ```
 
-In Java:
+在 Java 中:
 
 ```java
 
@@ -205,13 +198,12 @@ int max = ExampleKt.MAX;
 int version = C.VERSION;
 ```
 
-## Static methods
+## 静态方法 {id=static-methods}
 
-As mentioned above, Kotlin represents package-level functions as static methods.
-Kotlin can also generate static methods for functions defined in named objects or companion objects if you annotate those
-functions as [`@JvmStatic`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html).
-If you use this annotation, the compiler will generate both a static method in the enclosing class of the object and
-an instance method in the object itself. For example:
+如上所述，Kotlin 将包级函数表示为静态方法。 
+如果为这些函数添加 [`@JvmStatic`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html) 注解，
+Kotlin 还可以为在命名对象或伴生对象中定义的函数生成静态方法。
+使用此注解时，编译器会在对象的外部类中生成一个静态方法，并在对象本身中生成一个实例方法。例如：
 
 ```kotlin
 class C {
@@ -222,17 +214,16 @@ class C {
 }
 ```
 
-Now, `callStatic()` is static in Java while `callNonStatic()` is not:
+现在，`callStatic()` 在 Java 中是静态的，而 `callNonStatic()` 不是：
 
 ```java
-
-C.callStatic(); // works fine
-C.callNonStatic(); // error: not a static method
-C.Companion.callStatic(); // instance method remains
-C.Companion.callNonStatic(); // the only way it works
+C.callStatic(); // 正常工作
+C.callNonStatic(); // 错误：不是静态方法
+C.Companion.callStatic(); // 实例方法保持不变
+C.Companion.callNonStatic(); // 这是唯一有效的方式
 ```
 
-Same for named objects:
+命名对象同样适用：
 
 ```kotlin
 object Obj {
@@ -241,19 +232,17 @@ object Obj {
 }
 ```
 
-In Java:
+在 Java 中：
 
 ```java
-
-Obj.callStatic(); // works fine
-Obj.callNonStatic(); // error
-Obj.INSTANCE.callNonStatic(); // works, a call through the singleton instance
-Obj.INSTANCE.callStatic(); // works too
+Obj.callStatic(); // 正常工作
+Obj.callNonStatic(); // 错误
+Obj.INSTANCE.callNonStatic(); // 工作，通过单例实例调用
+Obj.INSTANCE.callStatic(); // 也可以工作
 ```
 
-Starting from Kotlin 1.3, `@JvmStatic` applies to functions defined in companion objects of interfaces as well.
-Such functions compile to static methods in interfaces. Note that static method in interfaces were introduced in Java 1.8,
-so be sure to use the corresponding targets.  
+从 Kotlin 1.3 开始，`@JvmStatic` 注解也适用于接口中伴生对象中定义的函数。  
+这样的函数会被编译成接口中的静态方法。请注意，接口中的静态方法是在 Java 1.8 中引入的，因此确保使用相应的目标版本。
 
 ```kotlin
 interface ChatBot {
@@ -265,36 +254,35 @@ interface ChatBot {
 }
 ```
 
-`@JvmStatic` annotation can also be applied on a property of an object or a companion object
-making its getter and setter methods static members in that object or the class containing the companion object.
+`@JvmStatic` 注解还可以应用于对象或伴生对象的属性，使其
+getter 和 setter 方法成为该对象或包含伴生对象的类中的静态成员。
 
-## Default methods in interfaces
+## 接口中的默认方法 {id=default-methods-in-interfaces}
 
->Default methods are available only for targets JVM 1.8 and above.
+> 默认方法仅适用于目标 JVM 1.8 及以上版本。
 >
 {style="note"}
 
-Starting from JDK 1.8, interfaces in Java can contain [default methods](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html).
-To make all non-abstract members of Kotlin interfaces default for the Java classes implementing them, compile the Kotlin 
-code with the `-Xjvm-default=all` compiler option.
+从 JDK 1.8 开始，Java 接口可以包含 [默认方法](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)。
+为了使 Kotlin 接口中的所有非抽象成员在实现它们的 Java 类中成为默认方法，可以使用 `-Xjvm-default=all` 编译器选项编译 Kotlin 代码。
 
-Here is an example of a Kotlin interface with a default method:
+以下是一个带有默认方法的 Kotlin 接口示例：
 
 ```kotlin
-// compile with -Xjvm-default=all
+// 使用 -Xjvm-default=all 编译
 
 interface Robot {
-    fun move() { println("~walking~") }  // will be default in the Java interface
+    fun move() { println("~walking~") }  // 在 Java 接口中将成为默认方法
     fun speak(): Unit
 }
 ```
 
-The default implementation is available for Java classes implementing the interface.
+该默认实现对于实现该接口的 Java 类是可用的。
 
 ```java
-//Java implementation
+// Java 实现
 public class C3PO implements Robot {
-    // move() implementation from Robot is available implicitly
+    // Robot 中的 move() 实现隐式可用
     @Override
     public void speak() {
         System.out.println("I beg your pardon, sir");
@@ -304,16 +292,16 @@ public class C3PO implements Robot {
 
 ```java
 C3PO c3po = new C3PO();
-c3po.move(); // default implementation from the Robot interface
+c3po.move(); // 来自 Robot 接口的默认实现
 c3po.speak();
 ```
 
-Implementations of the interface can override default methods.
+接口的实现类可以重写默认方法。
 
 ```java
 //Java
 public class BB8 implements Robot {
-    //own implementation of the default method
+    // 自定义的默认方法实现
     @Override
     public void move() {
         System.out.println("~rolling~");
@@ -326,11 +314,12 @@ public class BB8 implements Robot {
 }
 ```
 
-> Prior to Kotlin 1.4, to generate default methods, you could use the `@JvmDefault` annotation on these methods.
-> Compiling with `-Xjvm-default=all` in 1.4+ generally works as if you annotated all non-abstract methods of interfaces
-> with `@JvmDefault`and compiled with `-Xjvm-default=enable`. However, there are cases when their behavior differs.
-> Detailed information about the changes in default methods generation in Kotlin 1.4 is provided in [this post](https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/)
-> on the Kotlin blog.
+> 在 Kotlin 1.4 之前，要生成默认方法，可以在这些方法上使用 `@JvmDefault` 注解。
+> 在 1.4 及以上版本中，使用 `-Xjvm-default=all` 编译选项通常相当于为接口的所有非抽象方法添加
+> `@JvmDefault` 注解，并使用 `-Xjvm-default=enable` 进行编译。
+> 然而，在某些情况下，它们的行为有所不同。
+> 关于 Kotlin 1.4 中默认方法生成变化的详细信息，可以参考 Kotlin 博客中的
+> [这篇文章](https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/)。
 >
 {style="note"}
 
