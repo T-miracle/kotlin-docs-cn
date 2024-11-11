@@ -184,7 +184,7 @@
             <toc-element topic="java-to-kotlin-interop.md"/>
             <toc-element toc-title="Spring">
                 <toc-element toc-title="使用 Spring Boot 创建一个带有数据库的 RESTful Web 服务">
-                    <toc-element topic="jvm-get-started-spring-boot.md" toc-title="开始使用 Spring Boot 和 Kotlin" accepts-web-file-names="jvm-spring-boot-restful.html,spring-boot-restful.html,spring-boot-restful-db.html,jvm-spring-boot-restful-db.html"/>
+                    <toc-element topic="jvm-get-started-spring-boot.md"  accepts-web-file-names="jvm-spring-boot-restful.html,spring-boot-restful.html,spring-boot-restful-db.html,jvm-spring-boot-restful-db.html"/>
                     <toc-element topic="jvm-create-project-with-spring-boot.md" toc-title="创建一个 Spring Boot 项目"/>
                     <toc-element topic="jvm-spring-boot-add-data-class.md" toc-title="使用数据类升级你的项目"/>
                     <toc-element topic="jvm-spring-boot-add-db-support.md" toc-title="为 Spring Boot 项目添加数据库支持"/>
