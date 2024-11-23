@@ -22,7 +22,7 @@ import kotlin.text.*
 
 请参阅 [包](packages.md)。
 
-## 程序入口点
+## 程序入口点 {id=program-entry-point}
 
 Kotlin 应用的入口是 `main` 函数：
 

@@ -1,138 +1,137 @@
-[//]: # (title: Create a Spring Boot project with Kotlin)
-[//]: # (description: Create a Spring Boot application with Kotlin using IntelliJ IDEA.)
+[//]: # (title: 使用 Kotlin 创建一个 Spring Boot 项目)
+[//]: # (description: 在 IntelliJ IDEA 中使用 Kotlin 创建一个 Spring Boot 应用程序)
 
-<microformat>
-    <p>This is the first part of the <strong>Get started with Spring Boot and Kotlin</strong> tutorial:</p><br/>
-    <p><img src="icon-1.svg" width="20" alt="First step"/> <strong>Create a Spring Boot project with Kotlin</strong><br/><img src="icon-2-todo.svg" width="20" alt="Second step"/> Add a data class to the Spring Boot project<br/><img src="icon-3-todo.svg" width="20" alt="Third step"/> Add database support for the Spring Boot project<br/><img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Use Spring Data CrudRepository for database access<br/></p>
-</microformat>
+<tldr>
+    <p>这是<strong>Spring Boot 和 Kotlin 入门</strong>教程的第一部分：</p><br/>  
+    <p><img src="icon-1.svg" width="20" alt="第一步"/> <strong>用 Kotlin 创建一个 Spring Boot 项目</strong><br/><img src="icon-2-todo.svg" width="20" alt="第二步"/> 向 Spring Boot 项目添加一个数据类<br/><img src="icon-3-todo.svg" width="20" alt="第三步"/> 为 Spring Boot 项目添加数据库支持<br/><img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问<br/></p>  
+</tldr> 
 
-The first part of the tutorial shows you how to create a Spring Boot project in IntelliJ IDEA using Project Wizard.
+教程的第一部分向您展示如何使用项目向导在 IntelliJ IDEA 中创建一个 Spring Boot 项目。
 
-## Before you start
+### 开始之前 {id=before-you-start}
 
-Download and install the latest version of [IntelliJ IDEA Ultimate Edition](https://www.jetbrains.com/idea/download/index.html).
+下载并安装最新版本的[IntelliJ IDEA Ultimate Edition](https://www.jetbrains.com/idea/download/index.html)。
 
-> If you use IntelliJ IDEA Community Edition or another IDE, you can generate a Spring Boot project using a [web-based project generator](https://start.spring.io).
+> 如果您使用的是 IntelliJ IDEA Community Edition 或其他 IDE，可以通过[基于 Web 的项目生成器](https://start.spring.io)生成一个 Spring Boot 项目。
 > 
 {style="note"}
 
-## Create a Spring Boot project
+### 创建一个 Spring Boot 项目 {id=create-a-spring-boot-project}
 
-Create a new Spring Boot project with Kotlin by using the Project Wizard in IntelliJ IDEA Ultimate Edition:
+通过 IntelliJ IDEA Ultimate Edition 中的项目向导使用 Kotlin 创建一个新的 Spring Boot 项目：
 
-> You can also create a new project using [IntelliJ IDEA with the Spring Boot plugin](https://www.jetbrains.com/help/idea/spring-boot.html).
+> 您也可以使用[带有 Spring Boot 插件的 IntelliJ IDEA](https://www.jetbrains.com/help/idea/spring-boot.html)创建一个新项目。
 >
 {style="note"}
 
-1. In IntelliJ IDEA, select **File** | **New** | **Project**. 
-2. In the panel on the left, select **New Project** | **Spring Initializr**.
-3. Specify the following fields and options in the Project Wizard window:
-   
+1. 在 IntelliJ IDEA 中，选择 **File** | **New** | **Project**。
+2. 在左侧面板中，选择 **New Project** | **Spring Initializr**。
+3. 在项目向导窗口中，指定以下字段和选项：
    * **Name**: demo
    * **Language**: Kotlin
    * **Build system**: Gradle
    * **JDK**: Java 17 JDK
      
-     > This tutorial uses **Amazon Corretto version 18**.
+     > 本教程使用 **Amazon Corretto version 18**。
      >
      {style="note"}
    
    * **Java**: 17
 
-   ![Create Spring Boot project](create-spring-boot-project.png){width=800}
+   ![创建 Spring Boot 项目](create-spring-boot-project.png){width=800}
 
-4. Ensure that you have specified all the fields and click **Next**.
+4. 确保已填写所有字段，然后单击 **Next**。
 
-5. Select the following dependencies that will be required for the tutorial:
+5. 选择本教程所需的以下依赖项：
 
    * **Web / Spring Web**
    * **SQL / Spring Data JDBC**
    * **SQL / H2 Database**
 
-   ![Set up Spring Boot project](set-up-spring-boot-project.png){width=800}
+   ![设置 Spring Boot 项目](set-up-spring-boot-project.png){width=800}
 
-6. Click **Create** to generate and set up the project.
+6. 单击 **Create** 以生成并设置项目。
 
-   > The IDE will generate and open a new project. It may take some time to download and import the project dependencies.
+   > IDE 将生成并打开一个新项目。下载和导入项目依赖项可能需要一些时间。
    >
-   {style="tip"} 
+   {style="tip"}
 
-7. After this, you can observe the following structure in the **Project view**:
+7. 完成后，您可以在 **Project view** 中观察到以下结构：
 
-   ![Set up Spring Boot project](spring-boot-project-view.png){width=400}
+   ![Spring Boot 项目视图](spring-boot-project-view.png){width=400}
 
-   The generated Gradle project corresponds to the Maven's standard directory layout:
-   * There are packages and classes under the `main/kotlin` folder that belong to the application.
-   * The entry point to the application is the `main()` method of the `DemoApplication.kt` file.
+   生成的 Gradle 项目符合 Maven 的标准目录布局：
+   * 应用程序的包和类位于 `main/kotlin` 文件夹下。
+   * 应用程序的入口点是 `DemoApplication.kt` 文件中的 `main()` 方法。
 
-## Explore the project Gradle build file {collapsible="true"}
+### 探索项目的 Gradle 构建文件 {id=explore-the-project-gradle-build-file collapsible="true"}
 
-Open the `build.gradle.kts` file: it is the Gradle Kotlin build script, which contains a list of the dependencies required for the application.
+打开 `build.gradle.kts` 文件：这是 Gradle 的 Kotlin 构建脚本，包含应用程序所需依赖项的列表。
 
-The Gradle file is standard for Spring Boot, but it also contains necessary Kotlin dependencies, including the kotlin-spring Gradle plugin – `kotlin("plugin.spring")`.
+Gradle 文件是 Spring Boot 的标准配置，但它还包含必要的 Kotlin 依赖项，包括 Kotlin-Spring Gradle 插件——`kotlin("plugin.spring")`。
 
-Here is the full script with the explanation of all parts and dependencies:
+以下是完整的脚本，并对其各部分及依赖项进行了解释：
 
 ```kotlin
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile // For `KotlinCompile` task below
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile // 用于下面的 `KotlinCompile` 任务
 
 plugins { 
-    id("org.springframework.boot") version "3.1.2"
-    id("io.spring.dependency-management") version "1.1.2"
-    kotlin("jvm") version "%kotlinVersion%" // The version of Kotlin to use
-    kotlin("plugin.spring") version "%kotlinVersion%" // The Kotlin Spring plugin
+    id("org.springframework.boot") version "3.1.2" // Spring Boot 插件
+    id("io.spring.dependency-management") version "1.1.2" // Spring 依赖管理插件
+    kotlin("jvm") version "%kotlinVersion%" // 要使用的 Kotlin 版本
+    kotlin("plugin.spring") version "%kotlinVersion%" // Kotlin Spring 插件
 }
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17 // 使用 Java 17 版本
 }
 
 repositories {
-    mavenCentral()
+    mavenCentral() // Maven 中央仓库
 }
 
 dependencies { 
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc") 
-    implementation("org.springframework.boot:spring-boot-starter-web") 
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin") // Jackson extensions for Kotlin for working with JSON
-    implementation("org.jetbrains.kotlin:kotlin-reflect") // Kotlin reflection library, required for working with Spring
-    runtimeOnly("com.h2database:h2") 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc") // Spring Data JDBC 启动器
+    implementation("org.springframework.boot:spring-boot-starter-web") // Spring Web 启动器
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin") // Jackson 的 Kotlin 扩展，用于处理 JSON
+    implementation("org.jetbrains.kotlin:kotlin-reflect") // Kotlin 反射库，Spring 必需
+    runtimeOnly("com.h2database:h2") // H2 数据库
+    testImplementation("org.springframework.boot:spring-boot-starter-test") // 测试启动器
 }
 
-tasks.withType<KotlinCompile> { // Settings for `KotlinCompile` tasks
-    kotlinOptions { // Kotlin compiler options
-        freeCompilerArgs = listOf("-Xjsr305=strict") // `-Xjsr305=strict` enables the strict mode for JSR-305 annotations
-        jvmTarget = "17" // This option specifies the target version of the generated JVM bytecode
+tasks.withType<KotlinCompile> { // 针对 `KotlinCompile` 任务的设置
+    kotlinOptions { // Kotlin 编译器选项
+        freeCompilerArgs = listOf("-Xjsr305=strict") // `-Xjsr305=strict` 启用 JSR-305 注解的严格模式
+        jvmTarget = "17" // 指定生成的 JVM 字节码的目标版本
     }
 }
 
 tasks.withType<Test> { 
-    useJUnitPlatform()
+    useJUnitPlatform() // 使用 JUnit 平台进行测试
 }
 ```
 
-As you can see, there are a few Kotlin-related artifacts added to the Gradle build file:
+如您所见，Gradle 构建文件中添加了几个与 Kotlin 相关的构件：
 
-1. In the `plugins` block, there are two Kotlin artifacts:
+1. 在 `plugins` 块中，有两个 Kotlin 插件：
 
-   * `kotlin("jvm")` – the plugin defines the version of Kotlin to be used in the project
-   * `kotlin("plugin.spring")` – Kotlin Spring compiler plugin for adding the `open` modifier to Kotlin classes in order to make them compatible with Spring Framework features
+   * `kotlin("jvm")` – 该插件定义了项目中使用的 Kotlin 版本
+   * `kotlin("plugin.spring")` – Kotlin Spring 编译插件，用于将 `open` 修饰符添加到 Kotlin 类，以使其与 Spring 框架功能兼容
 
-2. In the `dependencies` block, a few Kotlin-related modules listed:
+2. 在 `dependencies` 块中，列出了几个与 Kotlin 相关的模块：
 
-   * `com.fasterxml.jackson.module:jackson-module-kotlin` – the module adds support for serialization and deserialization of Kotlin classes and data classes
-   * `org.jetbrains.kotlin:kotlin-reflect` – Kotlin reflection library
+   * `com.fasterxml.jackson.module:jackson-module-kotlin` – 该模块为 Kotlin 类和数据类的序列化与反序列化提供支持
+   * `org.jetbrains.kotlin:kotlin-reflect` – Kotlin 反射库
 
-3. After the dependencies section, you can see the `KotlinCompile` task configuration block.
-   This is where you can add extra arguments to the compiler to enable or disable various language features.
+3. 在依赖部分之后，您可以看到 `KotlinCompile` 任务的配置块。  
+   在这里，您可以向编译器添加额外的参数，以启用或禁用各种语言特性。
 
-## Explore the generated Spring Boot application
+### 探索生成的 Spring Boot 应用程序 {id=explore-the-generated-spring-boot-application}
 
-Open the `DemoApplication.kt` file:
+打开 `DemoApplication.kt` 文件：
 
 ```kotlin
 package com.example.demo
@@ -149,37 +148,32 @@ fun main(args: Array<String>) {
 ```
 
 <deflist collapsible="true">
-   <def title="Declaring classes – class DemoApplication">
-      <p>Right after package declaration and import statements you can see the first class declaration, <code>class DemoApplication</code>.</p>
-      <p>In Kotlin, if a class doesn't include any members (properties or functions), you can omit the class body (<code>{}</code>) for good.</p>
+   <def title="声明类 – class DemoApplication">
+      <p>在包声明和导入语句之后，您可以看到第一个类声明，<code>class DemoApplication</code>。</p>
+      <p>在 Kotlin 中，如果一个类没有任何成员（属性或函数），您可以省略类体（<code>{}</code>）。</p>
    </def>
-   <def title="@SpringBootApplication annotation">
-      <p><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.using-the-springbootapplication-annotation"><code>@SpringBootApplication annotation</code></a> is a convenience annotation in a Spring Boot application.
-      It enables Spring Boot's <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.auto-configuration">auto-configuration</a>, <a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ComponentScan.html">component scan</a>, and be able to define an extra configuration on their "application class".
-      </p>
+   <def title="@SpringBootApplication 注解">
+      <p><a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.using-the-springbootapplication-annotation"><code>@SpringBootApplication</code> 注解</a> 是 Spring Boot 应用程序中的便捷注解。
+      它启用 Spring Boot 的 <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.auto-configuration">自动配置</a>、<a href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/annotation/ComponentScan.html">组件扫描</a>，并能够在“应用程序类”中定义额外的配置。</p>
    </def>
-   <def title="Program entry point – main()">
-      <p>The <a href="basic-syntax.md#program-entry-point"><code>main()</code></a> function is the entry point to the application.</p>
-      <p>It is declared as a <a href="functions.md#function-scope">top-level function</a> outside the <code>DemoApplication</code> class. The <code>main()</code> function invokes the Spring's <code>runApplication(*args)</code> function to start the application with the Spring Framework.</p>
+   <def title="程序入口点 – main()">
+      <p><a href="basic-syntax.md#program-entry-point"><code>main()</code></a> 函数是程序的入口点。</p>
+      <p>它被声明为 <a href="functions.md#function-scope">顶级函数</a>，在 <code>DemoApplication</code> 类之外。<code>main()</code> 函数调用 Spring 的 <code>runApplication(*args)</code> 函数，以便使用 Spring 框架启动应用程序。</p>
    </def>
-   <def title="Variable arguments – args: Array&lt;String&gt;">
-      <p>If you check the declaration of the <code>runApplication()</code> function, you will see that the parameter of the function is marked with <a href="functions.md#variable-number-of-arguments-varargs"><code>vararg</code> modifier</a>: <code>vararg args: String</code>.
-        This means that you can pass a variable number of String arguments to the function.
-      </p>
+   <def title="可变参数 – args: Array&lt;String&gt;">
+      <p>如果查看 <code>runApplication()</code> 函数的声明，您会看到该函数的参数被标记为 <a href="functions.md#可变参数数量varargs"><code>vararg</code> 修饰符</a>：<code>vararg args: String</code>。这意味着您可以将任意数量的 String 类型参数传递给该函数。</p>
    </def>
-   <def title="The spread operator – (*args)">
-      <p>The <code>args</code> is a parameter to the <code>main()</code> function declared as an array of Strings.
-        Since there is an array of strings, and you want to pass its content to the function, use the spread operator (prefix the array with a star sign <code>*</code>).
-      </p>
+   <def title="展开操作符 – (*args)">
+      <p><code>args</code> 是传递给 <code>main()</code> 函数的参数，声明为一个字符串数组。由于它是一个字符串数组，并且您希望将其内容传递给函数，因此使用展开操作符（在数组前面加上星号 <code>*</code>）。</p>
    </def>
 </deflist>
 
 
-## Create a controller
+### 创建 Controller {id=create-a-controller}
 
-The application is ready to run, but let's update its logic first.
+应用程序已准备好运行，但首先让我们更新其逻辑。
 
-In the Spring application, a controller is used to handle the web requests. In the `DemoApplication.kt` file, create the `MessageController` class as follows:
+在 Spring 应用程序中，Controller 用于处理 Web 请求。在 `DemoApplication.kt` 文件中，创建 `MessageController` 类，如下所示：
 
 ```kotlin
 @RestController
@@ -190,37 +184,37 @@ class MessageController {
 ```
 
 <deflist collapsible="true">
-   <def title="@RestController annotation">
-      <p>You need to tell Spring that <code>MessageController</code> is a REST Controller, so you should mark it with the <code>@RestController</code> annotation.</p>
-      <p>This annotation means this class will be picked up by the component scan because it's in the same package as our <code>DemoApplication</code> class.</p>
+   <def title="@RestController 注解">
+      <p>您需要告诉 Spring <code>MessageController</code> 是一个 REST Controller，因此应使用 <code>@RestController</code> 注解标记它。</p>
+      <p>这个注解意味着该类将被组件扫描识别，因为它与我们的 <code>DemoApplication</code> 类在同一个包中。</p>
    </def>
-   <def title="@GetMapping annotation">
-      <p><code>@GetMapping</code> marks the functions of the REST controller that implement the endpoints corresponding to HTTP GET calls:</p>
+   <def title="@GetMapping 注解">
+      <p><code>@GetMapping</code> 标记 REST Controller的函数，这些函数实现对应 HTTP GET 请求的端点：</p>
       <code style="block" lang="kotlin">
       @GetMapping("/")
       fun index(@RequestParam("name") name: String) = "Hello, $name!"
       </code>
    </def>
-   <def title="@RequestParam annotation">
-      <p>The function parameter <code>name</code> is marked with <code>@RequestParam</code> annotation. This annotation indicates that a method parameter should be bound to a web request parameter.</p>
-      <p>Hence, if you access the application at the root and supply a request parameter called "name", like <code>/?name=&lt;your-value&gt;</code>, the parameter value will be used as an argument for invoking the <code>index()</code> function.</p>
+   <def title="@RequestParam 注解">
+      <p>函数参数 <code>name</code> 被 <code>@RequestParam</code> 注解标记。这个注解表示方法参数应该绑定到 Web 请求的参数。</p>
+      <p>因此，如果您在根路径访问应用程序并提供一个名为 "name" 的请求参数，如 <code>/?name=&lt;your-value&gt;</code>，参数的值将作为参数传递给 <code>index()</code> 函数。</p>
    </def>
-   <def title="Single-expression functions – index()">
-      <p>Since the <code>index()</code> function contains only one statement you can declare it as a <a href="functions.md#single-expression-functions">single-expression function</a>.</p>
-      <p>This means the curly braces can be omitted and the body is specified after the equals sign <code>=</code>.</p>
+   <def title="单表达式函数 – index()">
+      <p>由于 <code>index()</code> 函数只包含一个语句，您可以将其声明为 <a href="functions.md#single-expression-functions">单表达式函数</a>。</p>
+      <p>这意味着花括号可以省略，函数体通过等号 <code>=</code> 后面的语句来指定。</p>
    </def>
-   <def title="Type inference for function return types">
-      <p>The <code>index()</code> function does not declare the return type explicitly. Instead, the compiler infers the return type by looking at the result of the statement on the right-hand side from the equals sign <code>=</code>.</p>
-      <p>The type of <code>Hello, $name!</code> expression is <code>String</code>, hence the return type of the function is also <code>String</code>.</p>
+   <def title="函数返回类型的类型推断">
+      <p><code>index()</code> 函数没有显式声明返回类型。相反，编译器通过查看等号 <code>=</code> 右边的语句结果来推断返回类型。</p>
+      <p><code>Hello, $name!</code> 表达式的类型是 <code>String</code>，因此函数的返回类型也是 <code>String</code>。</p>
    </def>
-   <def title="String templates – $name">
-      <p><code>Hello, $name!</code> expression is called a <a href="strings.md#string-templates"><i>String template</i></a> in Kotlin.</p>
-      <p>String templates are String literals that contain embedded expressions.</p>
-      <p>This is a convenient replacement for String concatenation operations.</p>
+   <def title="字符串模板 – $name">
+      <p><code>Hello, $name!</code> 表达式在 Kotlin 中称为 <a href="strings.md#string-templates"><i>字符串模板</i></a>。</p>
+      <p>字符串模板是包含嵌入式表达式的字符串字面量。</p>
+      <p>这是一种便捷的替代字符串连接操作的方式。</p>
    </def>
 </deflist>
 
-> These Spring annotations also require additional imports:
+> 这些 Spring 注解还需要额外的导入：
 >
 > ```kotlin
 > import org.springframework.web.bind.annotation.GetMapping
@@ -230,7 +224,7 @@ class MessageController {
 >
 {style="note"}
 
-Here is a complete code of the `DemoApplication.kt`:
+这是完整的 `DemoApplication.kt` 代码：
 
 ```kotlin
 package com.example.demo
@@ -256,32 +250,32 @@ class MessageController {
 ```
 {collapsible="true"}
 
-## Run the application
+## 运行应用程序 {id=run-the-application}
 
-The Spring application is now ready to run:
+Spring 应用程序现在已经准备好运行：
 
-1. Click the green Run icon in the gutter beside the `main()` method:
+1. 点击 `main()` 方法旁边的绿色运行图标：
 
-    ![Run Spring Boot application](run-spring-boot-application.png){width=706}
-    
-    > You can also run the `./gradlew bootRun` command in the terminal.
-    >
-    {style="tip"}
+   ![Run Spring Boot application](run-spring-boot-application.png){width=706}
 
-    This starts the local server on your computer.
+   > 您也可以在终端中运行 `./gradlew bootRun` 命令。
+   >
+   {style="tip"}
 
-2. Once the application starts, open the following URL:
+   这将在您的计算机上启动本地服务器。
+
+2. 一旦应用程序启动，打开以下 URL：
 
     ```text
     http://localhost:8080?name=John
     ```
 
-    You should see "Hello, John!" printed as a response:
+   您应该看到响应为 "Hello, John!"：
 
-    ![Spring Application response](spring-application-response.png){width=706}
+   ![Spring Application response](spring-application-response.png){width=706}
 
-## Next step
+## 下一步 {id=next-step}
 
-In the next part of the tutorial you'll learn about Kotlin data classes and how you can use them in your application.
+在教程的下一部分，您将学习 Kotlin 数据类，以及如何在您的应用程序中使用它们。
 
-**[Proceed to the next chapter](jvm-spring-boot-add-data-class.md)**
+**[继续下一章节](jvm-spring-boot-add-data-class.md)**

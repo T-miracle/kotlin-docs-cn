@@ -164,7 +164,7 @@ fun printHello(name: String?): Unit {
 fun printHello(name: String?) { ... }
 ```
 
-### 单表达式函数
+### 单表达式函数 {id=single-expression-functions}
 
 当函数体只包含一个表达式时，可以省略花括号，并在 `=` 符号之后指定函数体：
 
@@ -266,7 +266,7 @@ class MyStringCollection {
 }
 ```
 
-## 函数作用域
+## 函数作用域 {id=function-scope}
 
 Kotlin 中的函数可以在文件的顶层声明，这意味着你不需要像在 Java、C# 和 Scala 等语言中那样创建一个类来容纳函数（Scala 3 起提供顶层定义
 【[Scala 3 顶层定义](https://docs.scala-lang.org/scala3/book/taste-toplevel-definitions.html#inner-main)】）。
