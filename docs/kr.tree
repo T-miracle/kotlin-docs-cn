@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE instance-profile SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 <instance-profile id="kr" name="Kotlin" start-page="home.topic" status="release">
-	<toc-element toc-title="译者说" topic="translator-says.md"/>
+	<toc-element topic="translator-says.md"/>
 	<toc-element toc-title="首页" topic="home.topic"/>
 	<toc-element toc-title="入门" topic="getting-started.md"/>
 	<toc-element toc-title="Kotlin 之旅" topic="kotlin-tour-welcome.md">

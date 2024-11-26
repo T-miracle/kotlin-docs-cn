@@ -1,7 +1,7 @@
 /* 头部高度 */
-/*.wh-header {
+.wh-header {
   height: 64px;
-}*/
+}
 
 /* 标题粗细 */
 h1.article__h1, h2.article__h2, h3.article__h3, h4.article__h4, h5.article__h5, h6.article__h6 {
@@ -9,28 +9,28 @@ h1.article__h1, h2.article__h2, h3.article__h3, h4.article__h4, h5.article__h5, 
 }
 
 /* 头部链接高度 */
-/*.wh-header__link {
+.wh-header__link {
   height: 24px;
-}*/
+}
 
 /* 头部链接图标 */
-/*.wh-header__product-logo.wh-header__product-logo--custom {
+.wh-header__product-logo.wh-header__product-logo--custom {
   width: 100px;
   height: 24px;
   margin-right: 0;
-}*/
+}
 
 /* 头部链接文字 */
-/*.wh-header__product-name {
+.wh-header__product-name {
   display: none;
-}*/
+}
 
 /* 头部版本号 */
-/*[data-test="header-version"] {
+[data-test="header-version"] {
   transform: translateY(-6px);
   font-size: .85em;
   color: #bfbfc0;
-}*/
+}
 
 /* 斜体样式 */
 html .article .emphasis {

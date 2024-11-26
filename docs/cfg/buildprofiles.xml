@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
-  <sitemap priority="0.35" change-frequency="monthly"/>
+  <sitemap priority="0.8" change-frequency="daily"/>
   <variables>
+    <!--头部链接图标-->
+    <header-logo>title-icon.svg</header-logo>
+    <!--自定义favicon-->
+    <custom-favicons>logo.svg</custom-favicons>
+    <!--侧边栏可以拖动-->
+    <resizable-sidebar>true</resizable-sidebar>
+    <!--主题色-->
+    <primary-color>#7f52ff</primary-color>
+    <!--自定义样式文件-->
+    <custom-css>custom.css</custom-css>
+    <!--首页地址-->
+    <product-web-url>https://blog.namichong.com/translation-docs/kotlin-docs/</product-web-url>
+    <!--站点地图生成前缀-->
+    <generate-sitemap-url-prefix>https://blog.namichong.com/translation-docs/kotlin-docs/</generate-sitemap-url-prefix>
+    <generate-only-default-anchors>true</generate-only-default-anchors>
     <!--New tags-->
     <enable-contribution>true</enable-contribution>
     <contribute-url>https://github.com/T-miracle/kotlin-docs-cn/edit/main/docs/</contribute-url>
     <include-in-head>thirdparty/custom-settings.html</include-in-head>
     <analytics-head-script-file>google-analytics-code.html</analytics-head-script-file>
     <analytics-body-html-file>google-analytics-noscript.html</analytics-body-html-file>
-    <custom-css>custom.css</custom-css>
-    <website-title>%instance% 文档</website-title>
+    <website-title>%instance% 中文文档</website-title>
     <automaticLinkSummaries>false</automaticLinkSummaries>
-    <kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>
-    <product-web-url>%kotlinLatestUrl%</product-web-url>
+    <!--<kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>-->
+    <!--<product-web-url>%kotlinLatestUrl%</product-web-url>-->
     <web-root>https://blog.namichong.com/translation-docs/kotlin-docs/</web-root>
     <og-image>https://kotlinlang.org/assets/images/open-graph/docs.png</og-image>
     <og-twitter>@kotlin</og-twitter>
@@ -30,14 +44,20 @@
     <noindex-content status="deprecated">true</noindex-content>
     <search-scopes-provider>https://www.jetbrains.com/search/json/</search-scopes-provider>
     <!--		<generate-canonicals>true</generate-canonicals>-->
-    <custom-favicons>
+    <!--<custom-favicons>
       https://kotlinlang.org/assets/images/favicon.svg?v2,
       https://kotlinlang.org/assets/images/favicon.ico?v2,
       https://kotlinlang.org/assets/images/apple-touch-icon.png?v2,
       https://kotlinlang.org/assets/images/apple-touch-icon-72x72.png?v2,
       https://kotlinlang.org/assets/images/apple-touch-icon-114x114.png?v2,
       https://kotlinlang.org/assets/images/apple-touch-icon-144x144.png?v2
-    </custom-favicons>
+    </custom-favicons>-->
   </variables>
   <build-profile instance="kr"/>
+  <footer>
+    <link href="https://github.com/JetBrains/kotlin">Kotlin 源码</link>
+    <link href="https://twitter.com/kotlin">Twitter</link>
+    <link href="https://blog.namichong.com/translation-docs/">更多翻译文档</link>
+    <icp>桂ICP备2022008261号-1</icp>
+  </footer>
 </buildprofiles>
