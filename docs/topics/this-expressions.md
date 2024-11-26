@@ -44,8 +44,7 @@ class A { // 隐式标签 @A
 
 ```kotlin
 fun main() {
-//sampleStart
-    fun printLine() { println("顶级函数") }
+    fun printLine() { println("Local function") }
     
     class A {
         fun printLine() { println("成员函数") }
@@ -57,8 +56,7 @@ fun main() {
     }
     
     A().invokePrintLine() // 成员函数
-    A().invokePrintLine(omitThis = true) // 顶级函数
-//sampleEnd()
+    A().invokePrintLine(omitThis = true) // 局部函数
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}

@@ -211,7 +211,7 @@ Here are some of the key differences between the two layouts:
 | test        | src/androidTest/kotlin, src/test/kotlin, src/test/java     | src/android<b>Unit</b>Test/kotlin, src/test/kotlin, src/test/java                              |
 | androidTest | src/android<b>Android</b>Test/kotlin, src/androidTest/java | src/android<b>Instrumented</b>Test/kotlin, src/androidTest/java, <b>src/androidTest/kotlin</b> |
 
-#### The location of the `AndroidManifest.xml` file
+#### The location of the AndroidManifest.xml file
 
 | Current source set layout                              | New source set layout                                 |
 |--------------------------------------------------------|-------------------------------------------------------|
@@ -801,7 +801,7 @@ The Kotlin documentation has received some notable changes:
   IntelliJ IDEA and Gradle.
 * [Create a multiplatform app using Ktor and SQLDelight](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html) – create a mobile
   application for iOS and Android using Kotlin Multiplatform Mobile.
-* [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html) – learn about cross-platform
+* [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html) – learn about cross-platform
   mobile development with Kotlin and create an app that works on both Android and iOS.
 
 ## Install Kotlin 1.8.0
@@ -820,6 +820,6 @@ the upcoming Android Studios updates. The new command-line compiler is available
 
 ## Compatibility guide for Kotlin 1.8.0
 
-Kotlin 1.8.0 is a [feature release](kotlin-evolution.md#language-and-tooling-releases) and can, therefore,
+Kotlin 1.8.0 is a [feature release](kotlin-evolution-principles.md#language-and-tooling-releases) and can, therefore,
 bring changes that are incompatible with your code written for earlier versions of the language. Find the detailed list
 of these changes in the [Compatibility guide for Kotlin 1.8.0](compatibility-guide-18.md).

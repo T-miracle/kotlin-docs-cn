@@ -11,14 +11,14 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 ### 应用代码风格指南
 
-1. 转到 **Settings/Preferences | Editor | Code Style | Kotlin（设置/首选项 | 编辑器 | 代码样式 | Kotlin）**。
-2. 点击 **Set from...（设置自...）**。
+1. 转到 **Settings/Preferences | Editor | Code Style | Kotlin**。
+2. 点击 **Set from...**。
 3. 选择 **Kotlin style guide（Kotlin 样式指南）**。
 
 ### 验证您的代码是否遵循代码风格
 
-1. 转到 **Settings/Preferences | Editor | Inspections | General（设置/首选项 | 编辑器 | 检查 | 常规）**。
-2. 打开 **Incorrect formatting（格式设置不正确）** 检查。
+1. 转到 **Settings/Preferences | Editor | Inspections | General**。
+2. 打开 **Incorrect formatting** 检查。
    额外的检查，验证代码风格指南中描述的其他问题（如命名约定）默认已启用。
 
 ## 源代码组织
@@ -36,9 +36,10 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 ### 源文件命名 {id=source-file-names}
 
-如果一个 Kotlin 文件包含一个单一的类或接口（可能带有相关的顶级声明），其名称应与类的名称相同，附加 `.kt` 扩展名。这适用于所有类型的类和接口。
-如果一个文件包含多个类或仅包含顶级声明，请选择一个描述文件内容的名称，并相应地命名文件。
-使用[大驼峰命名法](https://en.wikipedia.org/wiki/Camel_case)（首字母大写，也称为帕斯卡命名法），例如，`ProcessDeclarations.kt`。
+如果一个 Kotlin 文件只包含一个类或接口（可能带有相关的顶层声明），那么文件名应该与类名相同，并附加 `.kt` 扩展名。
+此规则适用于所有类型的类和接口。如果文件包含多个类或仅包含顶层声明，则应选择一个描述文件内容的名称，并根据该内容命名文件。
+使用 [大驼峰命名法](https://en.wikipedia.org/wiki/Camel_case)，即每个单词的首字母都要大写。
+例如，`ProcessDeclarations.kt`。
 
 文件名应描述文件中代码的功能。因此，应避免在文件名中使用无意义的词汇，如 `Util`。
 
@@ -52,7 +53,7 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 
 至于公共源代码集，具有顶级声明的文件不应具有后缀。例如，`commonMain/kotlin/Platform.kt`。
 
-##### 技术细节 {collapsible="true"}
+##### 技术细节 {collapsible="true" collapsible="true"}
 
 由于 JVM 的限制，我们建议在跨平台项目中遵循这种文件命名方案：不允许顶级成员（函数、属性）。
 
@@ -71,12 +72,14 @@ root
 
 最简单的避免方法是根据上述准则之一重命名其中一个文件。这种命名方案有助于避免冲突同时保持代码可读性。
 
-> 有两种情况，这些建议可能看起来多余，但我们仍然建议遵循它们：
+> 有两种情况可能会让这些建议显得多余，但我们仍然建议遵循它们：
 >
-> * 非 JVM 平台不会出现重复文件门面的问题。然而，这种命名方案有助于保持文件命名的一致性。
-> * 在 JVM 上，如果源文件没有顶级声明，将不会生成文件门面，因此不会出现命名冲突。
+> * 非 JVM 平台不会出现文件门面重复的问题。然而，这种命名方案有助于保持文件命名的一致性。
+> * 在 JVM 上，如果源文件没有顶层声明，则不会生成文件门面，也不会遇到命名冲突。
 >
->   但是，这种命名方案有助于避免在简单的重构或添加操作中包含顶级函数并导致相同的 "Duplicate JVM classes" 错误的情况。
+>   然而，这种命名方案可以帮助您避免在进行简单的重构或添加时，可能包含顶层函数并导致相同的 “Duplicate JVM classes” 错误。
+> 
+{style="tip"}
 
 
 ### 源文件组织
@@ -112,12 +115,10 @@ root
 
 ## 命名规则
 
-在 Kotlin 中，包和类的命名规则非常简单：
+* 包名总是小写并且不使用下划线（`org.example.project`）。
+通常不建议使用多个单词的包名，但如果确实需要使用多个单词，可以直接将它们连接在一起，或者使用驼峰命名法（`org.example.myProject`）。
 
-* 包的名称始终为小写，并且不使用下划线（`org.example.project`）。
-  通常不鼓励使用多个单词的名称，但如果确实需要使用多个单词，可以将它们简单拼接在一起，或者使用驼峰式命名（`org.example.myProject`）。
-
-* 类和对象的名称以大写字母开头，使用驼峰式命名：
+* 类和对象的名称使用大驼峰命名法：
 
 ```kotlin
 open class DeclarationProcessor { /*...*/ }
@@ -126,8 +127,8 @@ object EmptyDeclarationProcessor : DeclarationProcessor() { /*...*/ }
 ```
 
 ### 函数名称 {id=function-names}
- 
-函数、属性和局部变量的名称以小写字母开头，使用驼峰式大小写且不带下划线：
+
+函数、属性和局部变量的名称以小写字母开头，并使用驼峰命名法，不使用下划线：
 
 ```kotlin
 fun processDeclarations() { /*...*/ }
@@ -160,7 +161,8 @@ class MyTestCase {
 
 ### 属性命名
 
-常量的名称（使用`const`标记的属性，或者没有自定义的`get`函数并且包含深度不可变数据的顶级/对象`val`属性）应该使用大写下划线分隔的命名风格（[尖叫蛇命名](https://en.wikipedia.org/wiki/Snake_case)）：
+常量的名称（标记为 `const` 的属性，或没有自定义 `get` 函数且保存深度不可变数据的顶层或对象 `val`
+属性）应使用全大写字母，单词之间用下划线分隔，遵循 ([尖叫蛇命名法](https://en.wikipedia.org/wiki/Snake_case)) 约定：
 
 ```kotlin
 const val MAX_COUNT = 8
@@ -179,9 +181,10 @@ val mutableCollection: MutableSet<String> = HashSet()
 val PersonComparator: Comparator<Person> = /*...*/
 ```
 
-对于枚举常量，可以使用大写下划线分隔的名称（[尖叫蛇命名](https://en.wikipedia.org/wiki/Snake_case)）（`enum class Color { RED, GREEN }`）或者大写驼峰命名法，具体取决于用途。
+对于枚举常量，可以使用全大写、下划线分隔的 ([尖叫蛇命名法](https://en.wikipedia.org/wiki/Snake_case)) 名称
+（`enum class Color { RED, GREEN }`），也可以使用大驼峰命名法，具体取决于使用场景。
 
-### 幕后属性的命名
+### 幕后属性的名称 {id=names-for-backing-properties}
 
 如果一个类有两个在概念上相同，但一个是公共 API 的一部分，另一个是实现细节的属性，请使用下划线作为私有属性名称的前缀：
 
@@ -229,11 +232,8 @@ if (elements != null) {
 ### 水平空白
 
 * 在二元运算符周围加上空格（`a + b`）。例外：在“范围运算符（range to）”（`0..i`）周围不加空格。
-
 * 不要在一元运算符周围加上空格（`a++`）。
-
 * 在控制流关键字（`if`、`when`、`for`和`while`）与相应的开括号之间加上空格。
-
 * 在主构造函数声明、方法声明或方法调用中，不要在开括号前加上空格。
 
 ```kotlin
@@ -246,31 +246,26 @@ fun bar() {
 }
 ```
 
-* 在 `(`、`[` 之后和 `]`、`)` 之前不加空格。
-
-* 在 `.` 或 `?.` 周围不加空格：`foo.bar().filter { it > 2 }.joinToString()`，`foo?.bar()`
-
-* 在 `//` 后加上空格：`// 这是一条注释`
-
-* 在用于指定类型参数的尖括号周围不加空格：`class Map<K, V> { ... }`
-
-* 在 `::` 周围不加空格：`Foo::class`，`String::length`
-
-* 在标记可空类型的 `?` 前不加空格：`String?`
+* 永远不要在 `(`、`[` 后或 `]`、`)` 前加空格。
+* 永远不要在 `.` 或 `?.` 周围加空格：`foo.bar().filter { it > 2 }.joinToString()`，`foo?.bar()`。
+* 在 `//` 后加一个空格：`// This is a comment`。
+* 不要在用于指定类型参数的尖括号周围加空格：`class Map<K, V> { ... }`。
+* 不要在 `::` 周围加空格：`Foo::class`，`String::length`。
+* 在 `?` 前不要加空格，它用于标记可空类型：`String?`。
 
 作为一般规则，避免任何形式的水平对齐。将标识符重命名为不同长度的名称不应该影响声明或者任何用法的格式。
 
 ### 冒号
 
-在以下情况下，在 `:` 前面加上空格：
+在以下场景中，冒号前要加空格：
 
-* 用于分隔类型和超类型时
-* 在委托到超类构造函数或同一类的不同构造函数时
-* 在 `object` 关键字后
+* 当它用于分隔类型和超类型时。
+* 当委托给父类构造函数或同一类的其他构造函数时。
+* 在 `object` 关键字后。
 
-在声明和其类型之间用冒号时，不要在 `:` 前面加空格。
+当冒号用于分隔声明和其类型时，不要在冒号前加空格。
 
-始终在 `:` 后面加上空格。
+始终在冒号后加空格。
 
 ```kotlin
 abstract class Foo<out T : Any> : IFoo {
@@ -605,7 +600,7 @@ class Person(
 **Settings/Preferences | Editor | Code Style | Kotlin（设置/首选项 | 编辑器 | 代码样式 | Kotlin）**，
 打开 **Other（其他）** 选项卡，并选择 **Use trailing comma（使用尾随逗号）** 选项。
 
-#### 枚举 {collapsible="true"}
+#### 枚举 {collapsible="true" collapsible="true"}
 
 ```kotlin
 enum class Direction {
@@ -616,7 +611,7 @@ enum class Direction {
 }
 ```
 
-#### 值参数 {collapsible="true"}
+#### 值参数 {collapsible="true" collapsible="true"}
 
 ```kotlin
 fun shift(x: Int, y: Int) { /*...*/ }
@@ -631,7 +626,7 @@ val colors = listOf(
 )
 ```
 
-#### 类属性和参数 {collapsible="true"}
+#### 类属性和参数 {collapsible="true" collapsible="true"}
 
 ```kotlin
 class Customer(
@@ -644,7 +639,7 @@ class Customer(
 )
 ```
 
-#### 函数值参数 {collapsible="true"}
+#### 函数值参数 {collapsible="true" collapsible="true"}
 
 ```kotlin
 fun powerOf(
@@ -661,7 +656,7 @@ fun print(
 ) {}
 ```
 
-#### 具有可选类型的参数（包括设置器） {collapsible="true"}
+#### 具有可选类型的参数（包括设置器） {collapsible="true" collapsible="true"}
 
 ```kotlin
 val sum: (Int, Int, Int) -> Int = fun(
@@ -674,7 +669,7 @@ val sum: (Int, Int, Int) -> Int = fun(
 println(sum(8, 8, 8))
 ```
 
-#### 索引后缀 {collapsible="true"}
+#### 索引后缀 {collapsible="true" collapsible="true"}
 
 ```kotlin
 class Surface {
@@ -687,7 +682,7 @@ fun getZValue(mySurface: Surface, xValue: Int, yValue: Int) =
     ]
 ```
 
-#### lambda 中的参数 {collapsible="true" id="lambda中的参数"}
+#### lambda 中的参数 {collapsible="true" id="lambda中的参数" collapsible="true"}
 
 ```kotlin
 fun main() {
@@ -701,7 +696,7 @@ fun main() {
 }
 ```
 
-#### `when` 入口 {collapsible="true"}
+#### when 入口 {initial-collapse-state="collapsed" collapsible="true"}
 
 ```kotlin
 fun isReferenceApplicable(myReference: KClass<*>) = when (myReference) {
@@ -713,7 +708,7 @@ fun isReferenceApplicable(myReference: KClass<*>) = when (myReference) {
 }
 ```
 
-#### 集合字面量（在注解中） {collapsible="true"}
+#### 集合字面量（在注解中） {collapsible="true" collapsible="true"}
 
 ```kotlin
 annotation class ApplicableFor(val services: Array<String>)
@@ -726,7 +721,7 @@ annotation class ApplicableFor(val services: Array<String>)
 fun run() {}
 ```
 
-#### 类型实参 {collapsible="true"}
+#### 类型实参 {collapsible="true" collapsible="true"}
 
 ```kotlin
 fun <T1, T2> foo() {}
@@ -738,7 +733,7 @@ fun main() {
 }
 ```
 
-#### 类型形参 {collapsible="true"}
+#### 类型形参 {collapsible="true" collapsible="true"}
 
 ```kotlin
 class MyMap<
@@ -747,7 +742,7 @@ class MyMap<
         > {}
 ```
 
-#### 解构声明 {collapsible="true"}
+#### 解构声明 {collapsible="true" collapsible="true"}
 
 ```kotlin
 data class Car(val manufacturer: String, val model: String, val year: Int)
@@ -1014,13 +1009,14 @@ fun main() {
 
 ### 函数与属性的选择
 
-在某些情况下，没有参数的函数可能与只读属性可互换。尽管语义相似，但在何时更喜欢其中一个时存在一些风格约定。
+在某些场景中，没有参数的函数可能与只读属性可互换。
+虽然语义相似，但在何时优先使用其中之一，有一些风格约定。
 
 当底层算法：
 
-* 不会抛出异常
-* 计算廉价（或在第一次运行时缓存）
-* 在对象状态未更改的情况下在调用之间返回相同结果时
+* 不会抛出异常。
+* 计算开销小（或在第一次运行时进行缓存）。
+* 如果对象状态没有变化，则每次调用返回相同的结果。
 
 优先使用属性而不是函数。
 
@@ -1086,8 +1082,8 @@ Kotlin 提供了一组函数，用于在给定对象的上下文中执行一块�
 
 在编写库时，建议遵循一组额外的规则，以确保 API 的稳定性：
 
-* 始终明确指定成员的可见性（以避免意外将声明暴露为公共 API）
-* 始终明确指定函数返回类型和属性类型（以避免在实现更改时意外更改返回类型）
-* 为所有公共成员提供[KDoc](kotlin-doc.md)注释，除了不需要任何新文档的覆盖（以支持为库生成文档）
+ * 始终明确指定成员的可见性（以避免意外地将声明暴露为公共 API）。
+ * 始终明确指定函数返回类型和属性类型（以避免在实现更改时意外改变返回类型）。
+ * 为所有公共成员提供 [KDoc](kotlin-doc.md) 注释，覆盖的成员除外，且这些覆盖不需要任何新文档（以支持生成库的文档）。
 
 了解更多关于编写库 API 时的最佳实践和需要考虑的想法，请参阅 [库作者指南](api-guidelines-introduction.md)。

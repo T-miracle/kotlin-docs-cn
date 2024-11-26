@@ -59,7 +59,7 @@ publishing {
   
   例如，Maven Central 明确禁止重复发布，并会导致发布过程失败。 <!-- TBD: 添加实际错误信息 -->
 
-### 如果你使用 Kotlin 1.7.0 或更早版本 {id=if-you-use-kotlin-170-or-earlier collapsible="true"}
+### 如果你使用 Kotlin 1.7.0 或更早版本 {id=if-you-use-kotlin-170-or-earlier collapsible="true" collapsible="true"}
 
 在 1.7.20 之前，Kotlin/Native 编译器不支持所有交叉编译选项。
 如果你使用更早的版本，你可能需要从多个主机发布跨平台项目：

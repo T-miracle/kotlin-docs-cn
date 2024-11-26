@@ -1,5 +1,7 @@
 [//]: # (title: 类)
 
+<no-index/>
+
 <tldr>
     <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
         <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
@@ -148,11 +150,11 @@ data class User(val name: String, val id: Int)
 
 数据类最有用的预定义成员函数有：
 
-| **函数**             | **描述**                        |
-|--------------------|-------------------------------|
-| `.toString()`      | 打印类实例及其属性的可读字符串。              |
-| `.equals()` 或 `==` | 比较类的实例。                       |
-| `.copy()`          | 通过复制另一个实例创建类实例，并且可以修改一些不同的属性。 |
+| **函数**            | **描述**                        |
+|-------------------|-------------------------------|
+| `toString()`      | 打印类实例及其属性的可读字符串。              |
+| `equals()` 或 `==` | 比较类的实例。                       |
+| `copy()`          | 通过复制另一个实例创建类的实例，可以选择性地修改某些属性。 |
 
 参见以下章节以了解如何使用每个函数：
 
@@ -162,8 +164,8 @@ data class User(val name: String, val id: Int)
 
 ### 打印为字符串 {id=print-as-string}
 
-要打印类实例的可读字符串，你可以显式调用 `.toString()` 函数，或者使用打印函数
-（`println()` 和 `print()`），它们会自动为你调用 `.toString()`：
+要打印类实例的可读字符串，你可以显式调用 `toString()` 函数，或者使用打印函数
+（`println()` 和 `print()`），它们会自动为你调用 `toString()`：
 
 ```kotlin
 data class User(val name: String, val id: Int)
@@ -209,10 +211,10 @@ fun main() {
 
 ### 复制实例 {id=copy-instance}
 
-要创建数据类实例的精确副本，可以在该实例上调用 `.copy()` 函数。
+要创建数据类实例的精确副本，可以调用实例的 `copy()` 函数。
 
-要创建数据类实例的副本 **并** 更改某些属性，可以在该实例上调用 `.copy()` 函数
-**并** 添加要替换的属性值作为函数参数。
+要创建数据类实例的副本 **并** 更改某些属性，可以调用实例的 `copy()` 函数
+**并** 将替换的属性值作为函数参数传入。
 
 例如：
 
@@ -249,7 +251,7 @@ fun main() {
 
 ## 实践
 
-### 练习 1 {collapsible="true"}
+### 练习 1 {collapsible="true" collapsible="true"}
 
 定义一个数据类 `Employee`，具有两个属性：一个是姓名，另一个是工资。
 确保工资属性是可变的，否则你在年底时将无法获得工资提升！
@@ -279,9 +281,9 @@ fun main() {
     println(emp)
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-classes-solution-1"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-classes-solution-1"}
 
-### 练习 2 {collapsible="true"}
+### 练习 2 {collapsible="true" collapsible="true"}
 
 声明该代码编译所需的额外数据类。
 
@@ -316,16 +318,16 @@ fun main() {
     )
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-classes-solution-2"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-classes-solution-2"}
 
-### 练习 3 {collapsible="true"}
+### 练习 3 {collapsible="true" collapsible="true"}
 
 为了测试你的代码，你需要一个生成器来创建随机员工。
 定义一个 `RandomEmployeeGenerator` 类，该类内部有一个固定的潜在姓名列表。
 在类头部配置最小和最大工资。在类体内，定义 `generateEmployee()` 函数。
 主函数再次演示了如何使用这个类。
 
-> 在这个练习中，你需要导入一个包以使用 `Random.nextInt()` 函数。
+> 在这个练习中，您导入一个包，以便可以使用 [`Random.nextInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.random/-random/next-int.html) 函数。
 > 有关导入包的更多信息，请参见 [包和导入](packages.md)。
 >
 {style = "tip"}
@@ -386,7 +388,7 @@ fun main() {
     println(empGen.generateEmployee())
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-classes-solution-3"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-classes-solution-3"}
 
 ## 下一步
 

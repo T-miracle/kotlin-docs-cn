@@ -89,7 +89,7 @@ tasks.test {
     useJUnitPlatform()
 }
 ```
-{initial-collapse-state="collapsed"}
+{initial-collapse-state="collapsed" collapsible="true"}
 
 ## Add the code to test it
 

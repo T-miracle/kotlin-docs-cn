@@ -1,13 +1,13 @@
 [//]: # (title: Add dependencies to your Kotlin Notebook)
 
-<microformat>
+<tldr>
    <p>This is the third part of the <strong>Getting started with Kotlin Notebook</strong> tutorial. Before proceeding, make sure you've completed the previous steps.</p>
    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="kotlin-notebook-set-up-env.md">Set up an environment</a><br/>
       <img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="kotlin-notebook-create.md">Create a Kotlin Notebook</a><br/>
       <img src="icon-3.svg" width="20" alt="Third step"/> <strong>Add dependencies to a Kotlin Notebook</strong><br/>      
       <img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Share a Kotlin Notebook<br/>
   </p>
-</microformat>
+</tldr>
 
 You've already created your first Kotlin Notebook! Now let's learn how to add dependencies to libraries, which
 is necessary to unlock advanced features.

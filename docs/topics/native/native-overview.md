@@ -45,13 +45,13 @@ POSIX、gzip、OpenGL、Metal、Foundation 等许多热门库和 Apple 框架都
 
 ## 在平台之间共享代码
 
-[Kotlin Multiplatform](multiplatform.md) 有助于在多个平台之间共享通用代码，包括 Android、iOS、JVM、
+[Kotlin Multiplatform](multiplatform-intro.md) 有助于在多个平台之间共享通用代码，包括 Android、iOS、JVM、
 Web 和本地。跨平台库提供了通用 Kotlin 代码所需的 API，并允许在一个地方编写项目的共享部分。
 
-您可以使用 [开始使用 Kotlin 跨平台](multiplatform-get-started.md) 教程
-创建应用程序并在 iOS 和 Android 之间共享业务逻辑。要在 iOS、Android、桌面和 Web 之间共享 UI，
-可以尝试使用 [Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/)，
-这是基于 Kotlin 和 [Jetpack Compose](https://developer.android.com/jetpack/compose) 的 JetBrains 声明式 UI 框架。
+您可以通过 [创建您的第一个跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
+教程来创建应用程序并在 iOS 和 Android 之间共享业务逻辑。要在 iOS、Android、桌面和 Web 之间共享 UI，请完成
+[Compose Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html)
+的教程，这是 JetBrains 基于 Kotlin 和 [Jetpack Compose](https://developer.android.com/jetpack/compose) 的声明式 UI 框架。
 
 ## 如何开始
 
@@ -59,14 +59,14 @@ Web 和本地。跨平台库提供了通用 Kotlin 代码所需的 API，并允�
 
 推荐的文档：
 
-* [开始使用 Kotlin 跨平台](multiplatform-get-started.md)
-* [与 C 互操作性](native-c-interop.md)
-* [与 Swift/Objective-C 互操作性](native-objc-interop.md)
+* [Kotlin 跨平台简介](multiplatform-intro.md)
+* [与 C 的互操作性](native-c-interop.md)
+* [与 Swift/Objective-C 的互操作性](native-objc-interop.md)
 
 推荐的教程：
 
 * [开始使用 Kotlin/Native](native-get-started.md)
-* [开始使用 Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html)
+* [创建您的第一个跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
 * [从 C 映射原始数据类型](mapping-primitive-data-types-from-c.md)
 * [Kotlin/Native 作为动态库](native-dynamic-libraries.md)
 * [Kotlin/Native 作为 Apple 框架](apple-framework.md)

@@ -7,7 +7,7 @@ Kotlin 跨平台项目使用编译来生成构件。每个目标可以有一个�
 * JVM、JS 和原生目标的 `main` 和 `test` 编译。
 * 针对 Android 目标的每个 [Android 构建变体](https://developer.android.com/studio/build/build-variants) 的[编译](#compilation-for-android)。
 
-![编译](compilations.png)
+![编译](compilations.svg)
 
 如果你需要编译生产代码和单元测试之外的内容，例如集成测试或性能测试，你可以[创建一个自定义编译](#create-a-custom-compilation)。
 
@@ -306,14 +306,14 @@ Java 源文件被放置在 Kotlin 源根目录的子目录中。例如，路径�
 
 Kotlin 提供了与[本地语言的互操作性](native-c-interop.md)和用于特定编译的 DSL 配置。
 
-| 本地语言                   | 支持的平台                            | 备注                                   |
-|------------------------|----------------------------------|--------------------------------------|
-| C                      | 所有平台，WebAssembly 除外              |                                      |
-| Objective-C            | Apple 平台（macOS、iOS、watchOS、tvOS） |                                      |
-| 通过 Objective-C 的 Swift | Apple 平台（macOS、iOS、watchOS、tvOS） | Kotlin 只能使用标记为 `@objc` 属性的 Swift 声明。 |
+| 本地语言                   | 支持的平台                            | 备注                                  |
+|------------------------|----------------------------------|-------------------------------------|
+| C                      | 所有平台，除了 WebAssembly              |                                     |
+| Objective-C            | Apple 平台（macOS、iOS、watchOS、tvOS） |                                     |
+| 通过 Objective-C 的 Swift | Apple 平台（macOS、iOS、watchOS、tvOS） | Kotlin 只能使用带有 `@objc` 属性的 Swift 声明。 |
 
-一个编译可以与多个本地库交互。在编译的 `cinterops` 块中配置互操作性，并使用
-[可用参数](multiplatform-dsl-reference.md#cinterops)。
+编译可以与多个本地库交互。通过在 [定义文件](native-definition-file.md) 或构建文件的
+[`cinterops` 块](multiplatform-dsl-reference.md#cinterops) 中配置互操作性：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -422,7 +422,7 @@ dependencies {
 
 Kotlin 可以使用 `dependsOn` 关系构建一个 [源代码集层级](multiplatform-share-on-platforms.md#share-code-on-similar-platforms)。
 
-![源代码集层级](jvm-js-main.png){width=400}
+![源代码集层级](jvm-js-main.svg)
 
 如果源代码集 `jvmMain` 依赖于源代码集 `commonMain`，则：
 

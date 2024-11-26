@@ -83,7 +83,7 @@ fun main() {
 ```
 
 请注意，在 [readLine()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/read-line.html) 函数调用之后使用了 Kotlin 的
-[null 断言运算符](null-safety.md#the-operator) `!!`。
+[null 断言运算符](null-safety.md#not-null-assertion-operator) `!!`。
 Kotlin 的 `readLine()` 函数被定义为返回可空类型 `String?`，在输入结束时返回 `null`，这明确要求开发者处理缺少输入的情况。
 
 在竞技编程中，无需处理格式错误的输入情况。

@@ -12,7 +12,7 @@ Here are some major improvements:
 
 You can also find a short overview of the changes in the [release blog post](https://blog.jetbrains.com/kotlin/2021/08/kotlin-1-5-30-released/) and this video:
 
-<video src="https://youtu.be/rNbb3A9IdOo" title="Kotlin 1.5.30"/>
+<video src="https://www.youtube.com/v/rNbb3A9IdOo" title="Kotlin 1.5.30"/>
 
 ## Language features
 
@@ -32,7 +32,7 @@ and type inference:
 >
 {style="warning"}
 
-An _exhaustive_ [`when`](control-flow.md#when-expression) statement contains branches for all possible types or values of its subject or for some types plus an `else` branch. In other words, it covers all possible cases.
+An _exhaustive_ [`when`](control-flow.md#when-expressions-and-statements) statement contains branches for either all possible types or values of its subject, or for certain types and includes an `else` branch to cover any remaining cases.
 
 We're planning to prohibit non-exhaustive `when` statements soon to make the behavior consistent with `when` expressions. To ensure smooth migration, you can configure the compiler to report warnings about non-exhaustive `when` statements with a sealed class or a Boolean. Such warnings will appear by default in Kotlin 1.6 and will become errors later.
 
@@ -431,7 +431,7 @@ Please share your thoughts and concerns about the transition to the LLD linker i
 * [Support for XCFrameworks](#support-for-xcframeworks)
 * [New default publishing setup for Android artifacts](#new-default-publishing-setup-for-android-artifacts)
 
-### Ability to use custom `cinterop` libraries in shared native code
+### Ability to use custom cinterop libraries in shared native code
 
 Kotlin Multiplatform gives you an [option](multiplatform-share-on-platforms.md#connect-platform-specific-libraries) to use platform-dependent interop libraries in shared source sets. Before 1.5.30, this worked only with [platform libraries](native-platform-libs.md) shipped with Kotlin/Native distribution. Starting from 1.5.30, you can use it with your custom `cinterop` libraries. To enable this feature, add the `kotlin.mpp.enableCInteropCommonization=true` property in your `gradle.properties`:
 

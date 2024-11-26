@@ -254,7 +254,7 @@ Kotlin 默认创建一些中间源代码集。
 >
 {style="tip"}
 
-#### Apple 设备和模拟器目标 {id=apple-device-and-simulator-targets} {collapsible="true"}
+#### Apple 设备和模拟器目标 {id=apple-device-and-simulator-targets collapsible="true" collapsible="true"}
 
 当你使用 Kotlin Multiplatform 开发 iOS 移动应用程序时，通常使用 `iosMain` 源代码集。
 虽然你可能认为这是 `ios` 目标的特定平台源代码集，但实际上没有单一的 `ios` 目标。

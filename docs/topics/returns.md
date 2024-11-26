@@ -12,7 +12,7 @@ Kotlin 有三个结构性跳转表达式：
 val s = person.name ?: return
 ```
 
-这些表达式的类型是 [Nothing 类型](exceptions.md#Nothing类型)。
+这些表达式的类型是 [Nothing 类型](exceptions.md#nothing-type)。
 
 ## 中断和继续标签 {id=中断和继续标签}
 

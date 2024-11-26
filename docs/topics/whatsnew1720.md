@@ -1,8 +1,8 @@
 [//]: # (title: What's new in Kotlin 1.7.20)
 
-<microformat>
+<tldr>
    <p>The IDE support for Kotlin 1.7.20 is available for IntelliJ IDEA 2021.3, 2022.1, and 2022.2.</p>
-</microformat>
+</tldr>
 
 _[Released: 29 September 2022](releases.md#release-details)_
 
@@ -15,7 +15,7 @@ The Kotlin 1.7.20 release is out! Here are some highlights from this release:
 
 You can also find a short overview of the changes in this video:
 
-<video src="https://youtu.be/OG9npowJgE8" title="What's new in Kotlin 1.7.20"/>
+<video src="https://www.youtube.com/v/OG9npowJgE8" title="What's new in Kotlin 1.7.20"/>
 
 ## Support for Kotlin K2 compiler plugins
 
@@ -98,7 +98,7 @@ Kotlin 1.7.20 introduces preview versions for new language features, as well as 
 This release introduces the new `..<` operator. Kotlin has the `..` operator to express a range of values. The new `..<`
 operator acts like the `until` function and helps you define the open-ended range.
 
-<video src="https://youtu.be/v0AHdAIBnbs" title="New operator for open-ended ranges"/>
+<video src="https://www.youtube.com/watch?v=v0AHdAIBnbs" title="New operator for open-ended ranges"/>
 
 Our research shows that this new operator does a better job at expressing open-ended ranges and making it clear that the
 upper bound is not included.
@@ -120,7 +120,7 @@ when (value) {
 The following new types and operations will be introduced in the `kotlin.ranges` packages in the common Kotlin standard
 library:
 
-##### New OpenEndRange<T> interface
+##### New OpenEndRange&lt;T&gt; interface
 
 The new interface to represent open-ended ranges is very similar to the existing `ClosedRange<T>` interface:
 
@@ -158,7 +158,7 @@ The `rangeUntil` operators will be provided for the same types and combinations 
 We provide them as extension functions for prototype purposes, but for consistency, we plan to make them members later
 before stabilizing the open-ended ranges API.
 
-#### How to enable the `..<` operator
+#### How to enable the ..&lt; operator
 
 To use the `..<` operator or to implement that operator convention for your own types, enable the `-language-version 1.8`
 compiler option.
@@ -178,7 +178,7 @@ the `-opt-in=kotlin.ExperimentalStdlibApi` compiler option.
 This release introduces a new type of `object` declaration for you to use: `data object`. [Data object](https://youtrack.jetbrains.com/issue/KT-4107)
 behaves conceptually identical to a regular `object` declaration but comes with a clean `toString` representation out of the box.
 
-<video src="https://youtu.be/ovAqcwFhEGc" title="Data objects in Kotlin 1.7.20"/>
+<video src="https://www.youtube.com/v/ovAqcwFhEGc" title="Data objects in Kotlin 1.7.20"/>
 
 ```kotlin
 package org.example
@@ -357,7 +357,7 @@ IR in the kapt stub generating task, making it possible to use all the newest Ko
 Kotlin 1.7.20 allows the underlying type of JVM inline classes to be a type parameter. The compiler maps it to `Any?` or,
 generally, to the upper bound of the type parameter.
 
-<video src="https://youtu.be/0JRPA0tt9og" title="Generic inline classes in Kotlin 1.7.20"/>
+<video src="https://www.youtube.com/v/0JRPA0tt9og" title="Generic inline classes in Kotlin 1.7.20"/>
 
 Consider the following example:
 
@@ -746,7 +746,7 @@ Since the previous release, the Kotlin documentation has received some notable c
 
 ### New and updated tutorials
 
-* [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html) – learn about cross-platform mobile development with Kotlin and create an app that works on both Android and iOS.
+* [Get started with Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html) – learn about cross-platform mobile development with Kotlin and create an app that works on both Android and iOS.
 * [Build a web application with React and Kotlin/JS](js-react.md) – create a browser app exploring Kotlin's DSLs and features of a typical React program.
 
 ### Changes in release documentation

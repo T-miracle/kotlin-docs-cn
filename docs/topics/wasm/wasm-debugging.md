@@ -21,7 +21,7 @@ Create a project using the Kotlin Multiplatform wizard:
 3. Select the **Web** option. Make sure that no other options are selected.
 4. Click the **Download** button and unpack the resulting archive.
 
-![Kotlin Multiplatform wizard](wasm-compose-wizard.png){width=600}
+![Kotlin Multiplatform wizard](wasm-compose-web-wizard.png){width=600}
 
 ## Open the project in IntelliJ IDEA
 
@@ -80,7 +80,7 @@ in your browser out of the box, without additional configurations.
 However, for other projects, you may need to configure additional settings in your Gradle 
 build file. For more information about how to configure your browser for debugging, expand the next section.
 
-### Configure your browser for debugging {collapsible="true"}
+### Configure your browser for debugging {collapsible="true" collapsible="true"}
 
 By default, browsers can't access some of the project's sources necessary for debugging. To provide access, you can configure the Webpack DevServer
 to serve these sources. In the `ComposeApp` directory, add the following code snippets to your `build.gradle.kts` file.
@@ -125,7 +125,7 @@ kotlin {
     }
 }
 ```
-{collapsible="true"}
+{collapsible="true" collapsible="true"}
 
 > Currently, you can't debug library sources.
 > [We will support this in the future](https://youtrack.jetbrains.com/issue/KT-64685).

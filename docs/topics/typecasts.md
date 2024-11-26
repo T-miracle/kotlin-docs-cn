@@ -48,7 +48,7 @@ print(x.length) // x 会自动转换为 String
 
 ### 控制流 {id=control-flow}
 
-智能类型转换不仅适用于 `if` 条件表达式，还适用于 [`when` 表达式](control-flow.md#when-expression)
+智能类型转换不仅适用于 `if` 条件表达式，还适用于 [`when` 表达式](control-flow.md#when-expressions-and-statements)
 和 [`while` 循环](control-flow.md#while-loops)：
 
 ```kotlin
@@ -173,8 +173,7 @@ fun runProcessor(): Processor? {
 
 ### 异常处理 {id=exception-handling}
 
-智能类型转换信息会传递到 `catch` 和 `finally` 块。
-这一变化使你的代码更安全，因为编译器会跟踪你的对象是否具有可空类型。例如：
+智能类型转换信息会传递到 `catch` 和 `finally` 块。这使代码更安全，因为编译器会跟踪对象是否具有可空类型。例如：
 
 ```kotlin
 //sampleStart
@@ -216,7 +215,7 @@ fun main() {
 
 智能转换可以在以下情况下使用：
 
-<table header-style="none">
+<table style="none">
     <tr>
         <td>
             <code>val</code> 局部变量

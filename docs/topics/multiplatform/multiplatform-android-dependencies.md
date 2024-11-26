@@ -11,8 +11,10 @@
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-sourceSets["androidMain"].dependencies {
-    implementation("com.example.android:app-magic:12.3")
+sourceSets {
+    androidMain.dependencies {
+        implementation("com.example.android:app-magic:12.3")
+    }
 }
 ```
 
@@ -35,13 +37,13 @@ sourceSets {
 将 Android 项目中的顶级依赖项移动到多平台项目中的特定源代码集中可能会比较困难，尤其是当顶级依赖项具有复杂的配置名称时。
 例如，要将 `debugImplementation` 依赖从 Android 项目的顶级移动过来，你需要在名为
 `androidDebug` 的源代码集中添加一个 implementation 依赖。
-为了减少处理类似迁移问题所需的工作量，你可以在 `android {}` 块内添加一个 `dependencies {}` 块：
+为了减少处理类似迁移问题所需的工作量，你可以在 `androidTarget {}` 块内添加一个 `dependencies {}` 块：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-android {
+androidTarget {
     //...
     dependencies {
         implementation("com.example.android:app-magic:12.3")
@@ -53,7 +55,7 @@ android {
 <tab title="Groovy" group-key="groovy">
 
 ```groovy
-android {
+androidTarget {
     //...
     dependencies {
         implementation 'com.example.android:app-magic:12.3'

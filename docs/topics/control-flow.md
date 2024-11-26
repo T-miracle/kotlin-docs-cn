@@ -27,10 +27,12 @@ fun main() {
     // 您还可以在表达式中使用 “else if”：
     val maxLimit = 1
     val maxOrLimit = if (maxLimit > a) maxLimit else if (a > b) a else b
-
-    //sampleEnd
+  
     println("max is $max")
+    // max is 3
     println("maxOrLimit is $maxOrLimit")
+    // maxOrLimit is 3
+    //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="if-else-if-kotlin"}
@@ -49,31 +51,120 @@ val max = if (a > b) {
 
 如果你将 `if` 用作表达式，例如用于 返回它的值 或 赋值给变量，`else` 分支是必需的。
 
-## When 表达式 {id=when-expression}
+## `when` 表达式和语句 {id=when-expressions-and-statements}
 
-`when` 定义了一个带有多个分支的条件表达式。它类似于 C 语言中的 `switch` 语句。
-它的简单形式如下：
+`when` 是一个条件表达式，根据多个可能的值或条件执行代码。
+它类似于 Java、C 及类似语言中的 `switch` 语句。例如：
 
 ```kotlin
-when (x) {
-    1 -> print("x == 1")
-    2 -> print("x == 2")
-    else -> {
-        print("x is neither 1 nor 2")
+fun main() {
+    //sampleStart
+    val x = 2
+    when (x) {
+        1 -> print("x == 1")
+        2 -> print("x == 2")
+        else -> print("x is neither 1 nor 2")
     }
+    // x == 2
+    //sampleEnd
 }
 ```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-conditions-when-statement"}
 
 `when` 会按顺序将其参数与所有分支进行匹配，直到某个分支的条件达到满足。
 
-`when` 可以作为表达式或语句使用。如果它作为表达式使用，则第一个匹配分支的值成为整体表达式的值。
-如果它作为语句使用，则忽略各个分支的值。
-与 `if` 一样，每个分支都可以是一个代码块，其值是代码块中的最后一个表达式的值。
+您可以以几种不同的方式使用 `when`。首先，您可以将 `when` 作为 **表达式** 或 **语句** 使用。  
+作为表达式，`when` 返回一个值，以供稍后在代码中使用。作为语句，`when` 完成一个动作，但不返回任何进一步有用的内容：
 
-如果没有其他分支的条件得到满足，将执行 `else` 分支。
+<table>
+   <tr>
+       <td>表达式</td>
+       <td>语句</td>
+   </tr>
+   <tr>
+<td>
 
-如果 `when` 作为一个 **表达式** 使用，`else` 分支是必需存在的，除非编译器能够证明所有可能的情况都通过分支条件覆盖。
-例如，使用 [`enum` 类](enum-classes.md) 条目和 [`sealed` 类](sealed-classes.md) 的子类型。
+```kotlin
+// 返回一个字符串并将其赋值给 text 变量
+val text = when (x) {
+    1 -> "x == 1"
+    2 -> "x == 2"
+    else -> "x is neither 1 nor 2"
+}
+```
+
+</td>
+<td>
+
+```kotlin
+// 不返回任何内容，但会触发
+// 打印语句
+when (x) {
+    1 -> print("x == 1")
+    2 -> print("x == 2")
+    else -> print("x is neither 1 nor 2")
+}
+```
+
+</td>
+</tr>
+</table>
+
+其次，您可以选择带有或不带有主体的 `when`。无论您是否使用主体，您的表达式或语句的行为都是相同的。
+我们建议在可能的情况下使用带有主体的 `when`，因为它能使您的代码更易于阅读和维护，并清楚地显示您正在检查的内容。
+
+<table>
+   <tr>
+       <td>带主体 <code>x</code></td>
+       <td>不带主体</td>
+   </tr>
+   <tr>
+<td>
+
+```kotlin
+when(x) { ... }
+```
+
+</td>
+<td>
+
+```kotlin
+when { ... }
+```
+
+</td>
+</tr>
+</table>
+
+根据您使用 `when` 的方式，是否需要覆盖所有可能的情况在不同情况下有不同的要求。
+
+如果您将 `when` 用作语句，则不必覆盖所有可能的情况。
+在此示例中，某些情况没有覆盖，因此不会发生任何事情。但不会出现错误：
+
+```kotlin
+fun main() {
+    //sampleStart
+    val x = 3
+    when (x) {
+        // 并未覆盖所有情况
+        1 -> print("x == 1")
+        2 -> print("x == 2")
+    }
+    //sampleEnd
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-when-statement"}
+
+在 `when` 语句中，单个分支的值会被忽略。
+就像使用 `if` 一样，每个分支可以是一个代码块，它的值是该块中最后一个表达式的值。
+
+如果您将 `when` 用作表达式，则必须覆盖所有可能的情况。
+换句话说，它必须是 _完全穷尽的_。
+第一个匹配分支的值将成为整个表达式的值。如果没有覆盖所有情况，编译器会抛出错误。
+
+如果您的 `when` 表达式有主体，您可以使用 `else` 分支来确保覆盖所有可能的情况，但这并不是强制性的。
+例如，如果您的主体是 `Boolean`、[`enum` 类](enum-classes.md)、[`sealed` 类](sealed-classes.md)
+或它们的可空类型，您可以在不使用 `else` 分支的情况下覆盖所有情况：
 
 ```kotlin
 enum class Bit {
@@ -81,36 +172,26 @@ enum class Bit {
 }
 
 val numericValue = when (getRandomBit()) {
+  // 不需要 else 分支，因为所有情况都已覆盖
     Bit.ZERO -> 0
     Bit.ONE -> 1
-    // 不需要“else”，因为涵盖了所有情况
 }
 ```
 
-在 `when` _语句_ 中，以下情况下 `else` 分支是必需存在的：
-* `when` 的主语（subject，译注：指 `when` 所判断的表达式）是 `Boolean`、[`enum`](enum-classes.md) 或 [`sealed`](sealed-classes.md) 类型，或它们的可空对应类型。
-* `when` 的分支没有覆盖此主语的所有可能情况。
+如果您的 `when` 表达式 **没有** 主体，则 **必须** 有一个 `else` 分支，否则编译器会抛出错误。
+当没有其他分支条件满足时，`else` 分支将被执行：
 
 ```kotlin
-enum class Color {
-    RED, GREEN, BLUE
-}
-
-when (getColor()) {  
-    Color.RED -> println("red")
-    Color.GREEN -> println("green")   
-    Color.BLUE -> println("blue")
-    // 不需要“else”，因为涵盖了所有情况
-}
-
-when (getColor()) {
-    Color.RED -> println("red") // GREEN 和 BLUE 没有分支
-    else -> println("not red") // “其他”为必填项
+when {
+    a > b -> "a is greater than b"
+    a < b -> "a is less than b"
+    else -> "a is equal to b"
 }
 ```
 
+`when` 表达式和语句提供了不同的方式来简化代码、处理多个条件并执行类型检查。
 
-为了使多个情况定义共同的行为，请将它们的条件用逗号在一行中组合：
+您可以通过在一行中使用逗号组合多个条件，定义多个情况的共同行为：
 
 ```kotlin
 when (x) {
@@ -119,7 +200,7 @@ when (x) {
 }
 ```
 
-你可以使用任意表达式（不仅限于常量）作为分支条件。
+您可以使用任意表达式（不仅限于常量）作为分支条件：
 
 ```kotlin
 when (x) {
@@ -128,7 +209,7 @@ when (x) {
 }
 ```
 
-你还可以检查一个值是否在（`in`）或不在（`!in`）[区间](ranges.md)或集合中：
+您还可以通过 `in` 或 `!in` 关键字检查一个值是否包含在某个 [区间](ranges.md) 或集合中：
 
 ```kotlin
 when (x) {
@@ -139,8 +220,8 @@ when (x) {
 }
 ```
 
-另一种选择是检查一个值是否 是（`is`） 或 不是（`!is`） 特定类型。请注意，
-由于[智能转换](typecasts.md#smart-casts)，你可以访问该类型的方法和属性而无需进行额外的检查。
+此外，您可以通过 `is` 或 `!is` 关键字检查一个值是否是特定类型。
+需要注意的是，由于 [智能类型转换](typecasts.md#smart-casts)，您可以在不进行额外检查的情况下访问该类型的成员函数和属性。
 
 ```kotlin
 fun hasPrefix(x: Any) = when(x) {
@@ -149,8 +230,8 @@ fun hasPrefix(x: Any) = when(x) {
 }
 ```
 
-`when` 也可以用作替代 `if`-`else` `if` 链的方式。
-如果没有提供参数，分支条件就是布尔表达式，当其条件为真时执行相应的分支：
+您可以将 `when` 作为 `if`-`else` 链的替代方案。
+如果没有主体，分支条件就是布尔表达式。第一个条件为 `true` 的分支会执行：
 
 ```kotlin
 when {
@@ -160,7 +241,7 @@ when {
 }
 ```
 
-你可以使用以下语法将 **when** 的主语捕获到一个变量中：
+您可以通过以下语法将主体捕获到一个变量中：
 
 ```kotlin
 fun Request.getBody() =
@@ -170,7 +251,7 @@ fun Request.getBody() =
     }
 ```
 
-**when** 表达式中引入的变量的作用域限制在 **when** 的主体内。
+作为主体引入的变量的作用域仅限于 `when` 表达式或语句的主体部分。
 
 ## For 循环 {id=for循环}
 
@@ -202,11 +283,12 @@ for (item: Int in ints) {
 fun main() {
 //sampleStart
     for (i in 1..3) {
-        println(i)
+        print(i)
     }
     for (i in 6 downTo 0 step 2) {
-        println(i)
+        print(i)
     }
+    // 1236420
 //sampleEnd
 }
 ```
@@ -221,8 +303,9 @@ fun main() {
     val array = arrayOf("a", "b", "c")
 //sampleStart
     for (i in array.indices) {
-        println(array[i])
+        print(array[i])
     }
+    // abc
 //sampleEnd
 }
 ```
@@ -237,6 +320,9 @@ fun main() {
     for ((index, value) in array.withIndex()) {
         println("the element at $index is $value")
     }
+    // the element at 0 is a
+    // the element at 1 is b
+    // the element at 2 is c
 //sampleEnd
 }
 ```
@@ -244,10 +330,10 @@ fun main() {
 
 ## While 循环 {id=while-loops}
 
-`while` 和 `do-while` 循环在其条件满足的情况下持续执行其主体。
-它们之间的区别在于条件检查的时间：
-* `while` 先检查条件，如果条件满足，则执行主体，然后返回到条件检查。
-* `do-while` 先执行主体，然后再检查条件。如果条件满足，循环重复。因此，`do-while` 的主体至少执行一次，不管条件如何。
+`while` 和 `do-while` 循环会在条件满足时不断地处理它们的主体。它们之间的区别在于条件检查的时间：
+
+* `while` 在每次处理主体之前先检查条件，如果条件满足，则处理主体，然后返回进行条件检查。
+* `do-while` 先处理主体，再检查条件。如果条件满足，循环会重复。因此，`do-while` 的主体至少会执行一次，无论条件是否满足。
 
 ```kotlin
 while (x > 0) {
@@ -256,7 +342,7 @@ while (x > 0) {
 
 do {
     val y = retrieveData()
-} while (y != null) // y is visible here!
+} while (y != null) // y 在这里可见！
 ```
 
 ## 循环中的 Break 和 Continue

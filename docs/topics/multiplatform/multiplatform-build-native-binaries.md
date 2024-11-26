@@ -412,7 +412,7 @@ kotlin {
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
-    kotlin("multiplatform")
+    kotlin("multiplatform") version "%kotlinVersion%"
 }
 
 kotlin {
@@ -435,7 +435,7 @@ kotlin {
 import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFrameworkConfig
 
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform'
+    id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
 }
 
 kotlin {
@@ -454,16 +454,20 @@ kotlin {
 </tab>
 </tabs>
 
-当您声明 XCFrameworks 时，Kotlin Gradle 插件将注册三个 Gradle 任务：
-* `assembleXCFramework`
-* `assembleDebugXCFramework`（附加的调试构件，包含 [dSYMs](native-ios-symbolication.md)）
-* `assembleReleaseXCFramework`
+当您声明 XCFramework 时，Kotlin Gradle 插件会注册几个 Gradle 任务：
 
-如果您在项目中使用 [CocoaPods 集成](native-cocoapods.md)，可以使用 Kotlin CocoaPods Gradle 插件构建 XCFrameworks。
-该插件包括以下任务，这些任务可以用所有已注册的目标构建 XCFrameworks，并生成 podspec 文件：
-- `podPublishReleaseXCFramework`：生成一个 release 版本的 XCFramework 以及一个 podspec 文件。
-- `podPublishDebugXCFramework`：生成一个 debug 版本的 XCFramework 以及一个 podspec 文件。
-- `podPublishXCFramework`：同时生成 debug 和 release 版本的 XCFramework 以及 podspec 文件。
+* `assembleXCFramework`
+* `assemble<Framework name>DebugXCFramework`（附加的调试构件，包含 [dSYMs](native-ios-symbolication.md)）
+* `assemble<Framework name>ReleaseXCFramework`
+
+<anchor name="build-frameworks"/>
+
+如果您在项目中使用 [CocoaPods 集成](native-cocoapods.md)，可以使用 Kotlin CocoaPods Gradle
+插件来构建 XCFramework。它包括以下任务，这些任务构建包含所有已注册目标的 XCFramework，并生成 podspec 文件：
+
+* `podPublishReleaseXCFramework`，生成发布版本的 XCFramework 以及 podspec 文件。
+* `podPublishDebugXCFramework`，生成调试版本的 XCFramework 以及 podspec 文件。
+* `podPublishXCFramework`，生成调试和发布版本的 XCFramework 以及 podspec 文件。
 
 这将帮助您通过 CocoaPods 将项目的共享部分与移动应用程序分开分发。您还可以使用 XCFrameworks
 发布到私有或公共的 podspec 仓库。

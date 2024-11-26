@@ -1,4 +1,4 @@
-[//]: # (title:  Kotlin 发布)
+[//]: # (title: Kotlin 发布)
 
 自 Kotlin 2.0.0 以来，我们发布以下类型的版本：
 
@@ -16,7 +16,13 @@
 对于每个语言版本和工具版本，我们还会发布多个预览版（**EAP**），以便你在新功能发布前进行试用。
 详情请参见 [早期访问预览](eap.md)。
 
-## 更新到新版本 {id=update-to-a-new-release}
+> 如果您想接收关于 Kotlin 新版本的通知，可以订阅 [Kotlin 新闻通讯](https://lp.jetbrains.com/subscribe-to-kotlin-news/)，  
+> 关注 [Kotlin 在 X 上的账号](https://x.com/kotlin)，  
+> 或者在 [Kotlin GitHub 仓库](https://github.com/JetBrains/kotlin) 上启用 **Watch | Custom | Releases** 选项。
+> 
+{style="note"}
+
+## 更新到新的 Kotlin 版本
 
 要将项目更新到新版本，需要更新你的构建脚本文件。
 例如，要更新到 Kotlin %kotlinVersion%，请更改 `build.gradle(.kts)` 文件中
@@ -31,7 +37,7 @@ plugins {
     kotlin("<...>") version "%kotlinVersion%"
     // 例如，如果你的目标环境是 JVM：
     // kotlin("jvm") version "%kotlinVersion%"
-    // 如果目标是 Kotlin 跨平台
+    // If your target is Kotlin Multiplatform:
     // kotlin("multiplatform") version "%kotlinVersion%"
 }
 ```
@@ -45,7 +51,7 @@ plugins {
     id 'org.jetbrains.kotlin.<...>' version '%kotlinVersion%'
     // 例如，如果你的目标环境是 JVM： 
     // id 'org.jetbrains.kotlin.jvm' version '%kotlinVersion%'
-    // 如果目标是 Kotlin 跨平台
+    // If your target is Kotlin Multiplatform:
     // id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
 }
 ```
@@ -74,13 +80,13 @@ plugins {
 
 ## Kotlin 版本兼容性 {id=kotlin-release-compatibility}
 
-了解更多关于 [Kotlin 版本类型及其兼容性](kotlin-evolution.md#language-and-tooling-releases) 的信息。
+了解更多关于 [Kotlin 版本类型及其兼容性](kotlin-evolution-principles.md#language-and-tooling-releases) 的信息。
 
 ## 发布详情 {id=release-details}
 
 以下表格列出了最新 Kotlin 版本的详细信息：
 
-> 你还可以使用 [Kotlin 的预览版本](eap.md#build-details)。
+> 您也可以尝试 [Kotlin 的早期访问预览 (EAP) 版本](eap.md#build-details)。
 > 
 {style="tip"}
 
@@ -90,13 +96,33 @@ plugins {
         <th>构建亮点</th>
     </tr>
     <tr>
-        <td><strong>2.0.10</strong>
-            <p>Released: <strong>August 6, 2024</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.10" target="_blank">Release on GitHub</a></p>
+        <td><strong>2.0.21</strong>
+            <p>发布日期： <strong>2024.10.10</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.21" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>A bug fix release for Kotlin 2.0.0.</p>
-            <p>Learn more about Kotlin 2.0.0 in <a href="whatsnew20.md" target="_blank">What's new in Kotlin 2.0.0</a>.</p>
+            <p>这是 Kotlin 2.0.20 的修复版本</p>
+            <p>更多详情，请参考 <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.21">更新日志</a>。</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>2.0.20</strong>
+            <p>发布日期: <strong>2024.8.22</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.20" target="_blank">GitHub 上的发布</a></p>
+        </td>
+        <td>
+            <p>Kotlin 2.0.0 的工具版本，包含性能改进和错误修复。新增特性还包括 Kotlin/Native 垃圾回收器中的并发标记、Kotlin 公共标准库中对 UUID 的支持、Compose 编译器更新，以及对 Gradle 8.8 的支持。</p>  
+            <p>在 <a href="whatsnew2020.md" target="_blank">Kotlin 2.0.20 的新特性</a> 中了解更多信息。</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>2.0.10</strong>
+            <p>发布日期: <strong>2024.8.6</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.10" target="_blank">GitHub 上的发布</a></p>
+        </td>
+        <td>
+            <p>Kotlin 2.0.0 的一个错误修复版本。</p>  
+            <p>在 <a href="whatsnew20.md" target="_blank">Kotlin 2.0.0 的新特性</a> 中了解更多信息。</p>
         </td>
     </tr>
     <tr>

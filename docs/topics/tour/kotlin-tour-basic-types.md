@@ -1,13 +1,15 @@
 [//]: # (title: 基本类型)
 
+<no-index/>
+
 <tldr>
-    <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
-        <img src="icon-2.svg" width="20" alt="第二步" /> <strong>基本类型</strong><br />
-        <img src="icon-3-todo.svg" width="20" alt="第三步" /> <a href="kotlin-tour-collections.md">集合</a><br />
-        <img src="icon-4-todo.svg" width="20" alt="第四步" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
-        <img src="icon-5-todo.svg" width="20" alt="第五步" /> <a href="kotlin-tour-functions.md">函数</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="第六步" /> <a href="kotlin-tour-classes.md">类</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
+    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
+        <img src="icon-2.svg" width="20" alt="Second step" /> <strong>Basic types</strong><br />
+        <img src="icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-collections.md">Collections</a><br />
+        <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-control-flow.md">Control flow</a><br />
+        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-functions.md">Functions</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-classes.md">Classes</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="Final step" /> <a href="kotlin-tour-null-safety.md">Null safety</a></p>
 </tldr>
 
 在 Kotlin 中，每个变量和数据结构都有类型。
@@ -99,7 +101,7 @@ fun main() {
 
 ## 实践 {id=practice}
 
-### 练习 {id="exercise" collapsible="true"}
+### 练习 {id="exercise" collapsible="true" collapsible="true"}
 
 显式声明每个变量的正确类型：
 
@@ -127,7 +129,7 @@ fun main() {
     val f: Char = '\n'
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-basic-types-solution"}
+{collapsible="true" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-basic-types-solution"}
 
 ## 下一步 {id=next-step}
 

@@ -52,6 +52,7 @@ object RuntimeError : Error
 然而，通过使用 **密封** 的错误类层次结构，库作者可以确保他们知道所有可能的错误类型，并且其他错误类型不能后来出现。
 
 该示例的层次结构如下所示：  
+
 ![密封类和接口的层次结构插图](sealed-classes-interfaces.svg){width=700 style=block}
 
 ### 构造函数 {id=constructors}
@@ -147,7 +148,7 @@ open class CustomError(): Error
 
 ### 跨平台项目中的继承 {id=inheritance-in-multiplatform-projects}
 
-在 [跨平台项目](multiplatform-get-started.md) 中，还有一个继承限制：密封类的直接子类必须位于同一个
+在 [跨平台项目](multiplatform-intro.md) 中，还有一个继承限制：密封类的直接子类必须位于同一个
 [源代码集](multiplatform-discover-project.md#source-sets) 中。
 这适用于没有 [expected 和 actual 修饰符](multiplatform-expect-actual.md) 的密封类。
 
@@ -159,7 +160,7 @@ open class CustomError(): Error
 
 ## 使用密封类与 when 表达式 {id=use-sealed-classes-with-when-expression}
 
-使用密封类的主要好处体现在将它们与 [`when`](control-flow.md#when-expression) 表达式结合使用时。  
+使用密封类的主要好处体现在将它们与 [`when`](control-flow.md#when-expressions-and-statements) 表达式结合使用时。  
 当 `when` 表达式与密封类一起使用时，Kotlin 编译器能够进行全面检查，确保所有可能的情况都已覆盖。  
 在这种情况下，你无需添加 `else` 子句：
 

@@ -100,7 +100,7 @@ class Polygon : Shape {
 }
 ```
 
-## 派生类初始化顺序 {id=派生类初始化顺序}
+## 派生类初始化顺序 {id=derived-class-initialization-order}
 
 在构造<tooltip term="派生类">派生类</tooltip>的新实例期间，基类初始化是第一步完成的（仅在基类构造函数的参数求值之前），这意味着它在<tooltip term="派生类">派生类</tooltip>的初始化逻辑运行之前发生。
 

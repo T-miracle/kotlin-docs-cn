@@ -20,7 +20,7 @@ Clone 本项目到本地，直接运行打开即可
 
 ## 当前同步官方提交记录 {id=current-commit-id}
 
-非Fork分支，本文档的内容来自以下 5 个不同的仓库源
+非 Fork 分支，本文档的内容来自以下 5 个不同的官方仓库源，使用 `git fetch [仓库名] [分支名]` 获取最新代码，然后进行 `优选` 合并：
 
 | 仓库                                                                       | 分支       | 当前提交版本号                   | 备注           |
 |--------------------------------------------------------------------------|----------|---------------------------|--------------|
@@ -29,13 +29,3 @@ Clone 本项目到本地，直接运行打开即可
 | [`lincheck`](https://github.com/JetBrains/lincheck.git)                  | `master` | `%lincheckCommitId%`      | lincheck（kl） |
 | [`api-guidelines`](https://github.com/Kotlin/api-guidelines.git)         | `main`   | `%apiGuidelinesCommitId%` | 库作者指南        |
 | [`dokka`](https://github.com/Kotlin/dokka.git)                           | `main`   | `%dokkaCommitId%`         | dokka        |
-
-## 翻译注意事项
-
-- 翻译时替换（官方文档中的一些写法请替换为 Writerside 的用法，不然显示样式会不一致）
-
-  |                  官方文档                  |       Writerside       |
-  |:--------------------------------------:|:----------------------:|
-  |             `{type="..."}`             |    `{style="..."}`     |
-  | `{initial-collapse-state="collapsed"}` | `{collapsible="true"}` |
-  |    `<microformat>...</microformat>`    |   `<tldr>...</tldr>`   |

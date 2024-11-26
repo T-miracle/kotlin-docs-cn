@@ -15,7 +15,7 @@ The Kotlin 1.8.20 release is out and here are some of its biggest highlights:
 
 You can also find a short overview of the changes in this video:
 
-<video src="https://youtu.be/R1JpkpPzyBU" title="What's new in Kotlin 1.8.20"/>
+<video src="https://www.youtube.com/v/R1JpkpPzyBU" title="What's new in Kotlin 1.8.20"/>
 
 ## IDE support
 
@@ -608,7 +608,7 @@ The following targets have been deprecated with Kotlin 1.8.20 and will be remove
 As for the remaining targets, there are now three tiers of support depending on how well a target is supported and
 tested in the Kotlin/Native compiler. A target can be moved to a different tier. For example, we'll do our best to
 provide full support for `iosArm64` in the future, as it is important
-for [Kotlin Multiplatform](multiplatform-get-started.md).
+for [Kotlin Multiplatform](multiplatform-intro.md).
 
 If you're a library author, these target tiers can help you decide which targets to test on CI tools and which ones to
 skip. The Kotlin team will use the same approach when developing official Kotlin libraries,
@@ -793,7 +793,7 @@ You can find the complete scheme for the default target hierarchy in the [docume
 >
 {style="note"}
 
-#### Why replace shortcuts {collapsible="true"}
+#### Why replace shortcuts {collapsible="true" collapsible="true"}
 
 Creating source sets hierarchies can be verbose, error-prone, and unfriendly for beginners. Our previous solution was to
 introduce shortcuts like `ios` that create a part of the hierarchy for you. However, working with shortcuts proved they
@@ -1016,7 +1016,7 @@ Gradle property to the `gradle.properties` file:
 kotlin.compiler.preciseCompilationResultsBackup=true
 ```
 
-#### Example of precise backup usage in JetBrains {collapsible="true"}
+#### Example of precise backup usage in JetBrains {collapsible="true" collapsible="true"}
 
 In the following charts, you can see examples of using precise backup compared to full backup:
 
@@ -1042,7 +1042,7 @@ different results. The factors affecting performance include but are not limited
 * Which modules are affected by the changes and how big these modules are.
 * Whether the changes are ABI or non-ABI.
 
-#### Evaluating optimizations with build reports {collapsible="true"}
+#### Evaluating optimizations with build reports {collapsible="true" collapsible="true"}
 
 To estimate the impact of the optimization on your computer for your project and your scenarios,
 you can use [Kotlin build reports](gradle-compilation-and-caches.md#build-reports).

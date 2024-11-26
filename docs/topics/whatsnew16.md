@@ -21,7 +21,7 @@ It also includes various type inference improvements and support for annotations
 
 ### Stable exhaustive when statements for enum, sealed, and Boolean subjects
 
-An _exhaustive_ [`when`](control-flow.md#when-expression) statement contains branches for all possible types or values of 
+An _exhaustive_ [`when`](control-flow.md#when-expressions-and-statements) statement contains branches for all possible types or values of 
 its subject, or for some types plus an `else` branch. It covers all possible cases, making your code safer.
 
 We will soon prohibit non-exhaustive `when` statements to make the behavior consistent with `when` expressions. 
@@ -474,7 +474,7 @@ IDE inspections will also recommend using new functions instead of the legacy `r
 
 We're planning to gradually deprecate the `readLine()` function in future releases.
 
-### Stable `typeOf()`
+### Stable typeOf()
 
 Version 1.6.0 brings a [Stable](components-stability.md) [`typeOf()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/type-of.html) function, closing one of the [major roadmap items](https://youtrack.jetbrains.com/issue/KT-45396).
 
@@ -668,7 +668,7 @@ It works with all language constructs, including inline functions.
 
 Learn more about Kover on its [GitHub repository](https://github.com/Kotlin/kotlinx-kover) or in this video:
 
-<video src="https://youtu.be/jNu5LY9HIbw" title="Kover – The Code Coverage Plugin"/>
+<video src="https://www.youtube.com/v/jNu5LY9HIbw" title="Kover – The Code Coverage Plugin"/>
 
 ## Coroutines 1.6.0-RC
 
@@ -689,12 +689,12 @@ Learn more in the [changelog](https://github.com/Kotlin/kotlinx.coroutines/relea
 IntelliJ IDEA and Android Studio will suggest updating the Kotlin plugin to 1.6.0 once it is available.
 
 To migrate existing projects to Kotlin 1.6.0, change the Kotlin version to `1.6.0` and reimport your Gradle or Maven
-project. [Learn how to update to Kotlin 1.6.0](releases.md#update-to-a-new-release).
+project. [Learn how to update to Kotlin 1.6.0](releases.md#update-to-a-new-kotlin-version).
 
-To start a new project with Kotlin 1.6.0, update the Kotlin plugin and run the Project Wizard from **File** \| **New** \|
+To start a new project with Kotlin 1.6.0, update the Kotlin plugin and run the Project Wizard from **File** | **New** |
 **Project**.
 
 The new command-line compiler is available for download on the [GitHub release page](https://github.com/JetBrains/kotlin/releases/tag/v1.6.0).
 
-Kotlin 1.6.0 is a [feature release](kotlin-evolution.md#language-and-tooling-releases) and can, therefore, bring changes that are incompatible with your code written for earlier versions of the language.
+Kotlin 1.6.0 is a [feature release](kotlin-evolution-principles.md#language-and-tooling-releases) and can, therefore, bring changes that are incompatible with your code written for earlier versions of the language.
 Find the detailed list of such changes in the [Compatibility Guide for Kotlin 1.6](compatibility-guide-16.md).

@@ -33,7 +33,7 @@ data class User(val name: String, val age: Int)
 
 [Learn more about using JVM records in Kotlin](jvm-records.md).
 
-<video src="https://youtu.be/iyEWXyuuseU" title="Support for JVM Records in Kotlin 1.5.0"/>
+<video src="https://www.youtube.com/v/iyEWXyuuseU" title="Support for JVM Records in Kotlin 1.5.0"/>
 
 ### Sealed interfaces
 
@@ -64,7 +64,7 @@ class FilledRectangle: Polygon, Fillable
 
 [Learn more about sealed interfaces](sealed-classes.md).
 
-<video src="https://youtu.be/d_Mor21W_60" title="Sealed Interfaces and Sealed Classes Improvements"/>
+<video src="https://www.youtube.com/v/d_Mor21W_60" title="Sealed Interfaces and Sealed Classes Improvements"/>
 
 ### Package-wide sealed class hierarchies
 
@@ -100,7 +100,7 @@ The `inline` modifier is now deprecated with a warning.
 
 [Learn more about inline classes](inline-classes.md).
 
-<video src="https://youtu.be/LpqvtgibbsQ" title="From Inline to Value Classes"/>
+<video src="https://www.youtube.com/v/LpqvtgibbsQ" title="From Inline to Value Classes"/>
 
 ## Kotlin/JVM
 
@@ -159,7 +159,6 @@ If you need to use the old backend in Kotlin 1.5.0, you can add the following li
  ```
 
 ### New default JVM target: 1.8
-{id=new-default-jvm-target-1-8}
 
 The default target version for Kotlin/JVM compilations is now `1.8`. The `1.6` target is deprecated.
 
@@ -173,7 +172,7 @@ If you need a build for JVM 1.6, you can still switch to this target. Learn how:
 
 Kotlin 1.5.0 now uses dynamic invocations (`invokedynamic`) for compiling SAM (Single Abstract Method) conversions:
 * Over any expression if the SAM type is a [Java interface](java-interop.md#sam-conversions)
-* Over lambda if the SAM type is a [Kotlin functional interface](fun-interfaces.md#sam-转换)
+* Over lambda if the SAM type is a [Kotlin functional interface](fun-interfaces.md#sam-conversions)
 
 The new implementation uses [`LambdaMetafactory.metafactory()`](https://docs.oracle.com/javase/8/docs/api/java/lang/invoke/LambdaMetafactory.html#metafactory-java.lang.invoke.MethodHandles.Lookup-java.lang.String-java.lang.invoke.MethodType-java.lang.invoke.MethodType-java.lang.invoke.MethodHandle-java.lang.invoke.MethodType-)
 and auxiliary wrapper classes are no longer generated during compilation. This decreases the size of the application's JAR,
@@ -335,7 +334,7 @@ The standard library has received a range of changes and improvements, from stab
 
 You can learn more about the standard library changes in [this blog post](https://blog.jetbrains.com/kotlin/2021/04/kotlin-1-5-0-rc-released).
 
-<video src="https://youtu.be/MyTkiT2I6-8" title="New Standard Library Features"/>
+<video src="https://www.youtube.com/v/MyTkiT2I6-8" title="New Standard Library Features"/>
 
 ### Stable unsigned integer types
 
@@ -435,7 +434,7 @@ New operations for modular arithmetics have been added to the standard library:
 * `floorDiv()` returns the result of [floored division](https://en.wikipedia.org/wiki/Floor_and_ceiling_functions). It is available for integer types.
 * `mod()` returns the remainder of floored division (_modulus_). It is available for all numeric types.
 
-These operations look quite similar to the existing [division of integers](numbers.md#数字的运算) and [rem()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/rem.html)
+These operations look quite similar to the existing [division of integers](numbers.md#operations-on-numbers) and [rem()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/rem.html)
 function (or the `%`operator), but they work differently on negative numbers:
 * `a.floorDiv(b)` differs from a regular `/` in that `floorDiv` rounds the result down (towards the lesser integer),
   whereas `/` truncates the result to the integer closer to 0.
@@ -755,7 +754,7 @@ are disabled and the `-Xcoroutines=experimental` flag is no longer supported.
 Learn more in the [changelog](https://github.com/Kotlin/kotlinx.coroutines/releases/tag/1.5.0-RC) and the
 [`kotlinx.coroutines` 1.5.0 release blog post](https://blog.jetbrains.com/kotlin/2021/05/kotlin-coroutines-1-5-0-released/).
 
-<video src="https://youtu.be/EVLnWOcR0is" title="kotlinx.coroutines 1.5.0"/>
+<video src="https://www.youtube.com/v/EVLnWOcR0is" title="kotlinx.coroutines 1.5.0"/>
 
 ### Serialization 1.2.1
 
@@ -768,7 +767,7 @@ Learn more in the [changelog](https://github.com/Kotlin/kotlinx.coroutines/relea
 Learn more in the [changelog](https://github.com/Kotlin/kotlinx.serialization/releases/tag/v1.2.1) and the
 [`kotlinx.serialization` 1.2.1 release blog post](https://blog.jetbrains.com/kotlin/2021/05/kotlinx-serialization-1-2-released/).
 
-<video src="https://youtu.be/698I_AH8h6s" title="kotlinx.serialization 1.2.1"/>
+<video src="https://www.youtube.com/v/698I_AH8h6s" title="kotlinx.serialization 1.2.1"/>
 
 ### dateTime 0.2.0
 
@@ -785,12 +784,12 @@ Learn more in the [changelog](https://github.com/Kotlin/kotlinx-datetime/release
 IntelliJ IDEA and Android Studio will suggest updating the Kotlin plugin to 1.5.0 once it is available.
 
 To migrate existing projects to Kotlin 1.5.0, just change the Kotlin version to `1.5.0` and re-import your Gradle or Maven
-project. [Learn how to update to Kotlin 1.5.0](releases.md#升级到新版本).
+project. [Learn how to update to Kotlin 1.5.0](releases.md#update-to-a-new-kotlin-version).
 
-To start a new project with Kotlin 1.5.0, update the Kotlin plugin and run the Project Wizard from **File** \| **New** \|
+To start a new project with Kotlin 1.5.0, update the Kotlin plugin and run the Project Wizard from **File** | **New** |
 **Project**.
 
 The new command-line compiler is available for downloading on the [GitHub release page](https://github.com/JetBrains/kotlin/releases/tag/v1.5.0).
 
-Kotlin 1.5.0 is a [feature release](kotlin-evolution.md#language-and-tooling-releases) and therefore can
+Kotlin 1.5.0 is a [feature release](kotlin-evolution-principles.md#language-and-tooling-releases) and therefore can
 bring incompatible changes to the language. Find the detailed list of such changes in the [Compatibility Guide for Kotlin 1.5](compatibility-guide-15.md).

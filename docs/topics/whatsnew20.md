@@ -20,7 +20,7 @@ some other highlights:
 Kotlin 2.0 is a huge milestone for the JetBrains team. This release was the center of KotlinConf 2024. Check out the opening
 keynote, where we announced exciting updates and addressed the recent work on the Kotlin language:
 
-<video src="https://youtu.be/Ar73Axsz2YA" title="KotlinConf'24 - Keynote"/>
+<video src="https://www.youtube.com/v/Ar73Axsz2YA" title="KotlinConf'24 - Keynote"/>
 
 ## IDE support
 
@@ -54,7 +54,7 @@ the K2 compiler performs and find instructions on how to collect performance ben
 You can also watch this talk from KotlinConf 2024, where Michail Zarečenskij, the lead language designer, discusses the
 feature evolution in Kotlin and the K2 compiler:
 
-<video src="https://youtu.be/tAGJ5zJXJ7w" title="Kotlin Language Features in 2.0 and Beyond"/>
+<video src="https://www.youtube.com/v/tAGJ5zJXJ7w" title="Kotlin Language Features in 2.0 and Beyond"/>
 
 ### Current K2 compiler limitations
 
@@ -146,7 +146,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-smart-casts-k2-local-variables" validate="false"}
 
-#### Type checks with logical `or` operator
+#### Type checks with logical or operator
 
 In Kotlin 2.0.0, if you combine type checks for objects with an `or` operator (`||`), a smart cast
 is made to their closest common supertype. Before this change, a smart cast was always made to the `Any` type.
@@ -386,7 +386,7 @@ In Kotlin 2.0.0, our implementation of the new Kotlin K2 compiler included a red
 strict separation between common and platform source sets. This change is most noticeable when you use [expected and actual functions](multiplatform-expect-actual.md#expected-and-actual-functions).
 Previously, it was possible for a function call in your common code to resolve to a function in platform code. For example:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Common code</td>
        <td>Platform code</td>
@@ -432,7 +432,7 @@ In addition to the improved consistency of behavior across platforms, we also wo
 conflicting behavior between IntelliJ IDEA or Android Studio and the compiler. For instance, when you used [expected and actual classes](multiplatform-expect-actual.md#expected-and-actual-classes),
 the following would happen:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Common code</td>
        <td>Platform code</td>
@@ -1462,7 +1462,8 @@ our [#gradle Slack channel](https://kotlinlang.slack.com/archives/C19FD9681). [G
 
 ### New directory for Kotlin data in Gradle projects
 
-> With this change, you may need to add the `.kotlin` directory to your project's `.gitignore` file.
+> Do not commit the `.kotlin` directory to version control.
+> For example, if you are using Git, add `.kotlin` to your project's `.gitignore` file.
 >
 {style="warning"}
 
@@ -1531,7 +1532,7 @@ Since Kotlin 2.0.0, the following DSLs for specifying compiler options are depre
 
 * The `kotlinOptions` DSL from the `KotlinCompile` interface that implements all Kotlin compilation tasks. Use
   `KotlinCompilationTask<CompilerOptions>` instead.
-* The `compilerOptions` property with the `HasCompilerOptions` type from the `KotlinCompiation` interface. This DSL was
+* The `compilerOptions` property with the `HasCompilerOptions` type from the `KotlinCompilation` interface. This DSL was
   inconsistent with other DSLs and configured the same `KotlinCommonCompilerOptions` object as `compilerOptions` inside
   the `KotlinCompilation.compileTaskProvider` compilation task, which was confusing.
 
@@ -1551,7 +1552,7 @@ Since Kotlin 2.0.0, the following DSLs for specifying compiler options are depre
       js(IR) {
           compilations.all {
               compileTaskProvider.configure {
-                  compilerOptions.freeCompilerArgs.add("-Xerror-tolerance-policy=SYNTAX")
+                  compilerOptions.freeCompilerArgs.add("-Xir-minimized-member-names=false")
               }
           }
       }
@@ -1603,7 +1604,7 @@ To configure JSON output format for your build reports, declare the following pr
 kotlin.build.report.output=json
 
 // The directory to store your build reports
-kotlin.build.report.json.directory="my/directory/path"
+kotlin.build.report.json.directory=my/directory/path
 ```
 
 Alternatively, you can run the following command:

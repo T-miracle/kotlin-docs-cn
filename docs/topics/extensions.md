@@ -103,7 +103,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-## 可空接收者 {id=可空接收者}
+## 可空接收者 {id=nullable-receiver}
 
 请注意，扩展函数可以使用可空的接收者类型进行定义。这意味着即使对象变量的值为 `null`，也可以在其上调用这些扩展函数。
 如果接收者为 `null`，那么 `this` 也为 `null`。

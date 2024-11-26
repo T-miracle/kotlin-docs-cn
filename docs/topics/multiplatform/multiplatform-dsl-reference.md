@@ -1,8 +1,8 @@
 [//]: # (title: 跨平台 Gradle DSL 参考)
 
-Kotlin 跨平台 Gradle 插件是用于创建 [Kotlin 跨平台](multiplatform.md) 项目的工具。
-这里提供了其内容的参考；在编写 Kotlin 跨平台项目的 Gradle 构建脚本时，请将其作为提醒。
-了解 [Kotlin 跨平台项目的概念、如何创建和配置它们](multiplatform-get-started.md)。
+Kotlin 跨平台 Gradle 插件是用于创建 Kotlin 跨平台项目的工具。  
+在这里，我们提供了它的内容参考；在编写 Kotlin 跨平台项目的 Gradle 构建脚本时，可以将其作为提醒。  
+了解 [Kotlin 跨平台项目的概念，以及如何创建和配置它们](multiplatform-intro.md)。
 
 ## ID 和版本 {id=id-and-version}
 
@@ -37,8 +37,8 @@ plugins {
 在 `kotlin {}` 中，可以编写以下块：
 
 | **块**             | **描述**                                                                                                                            |
-|-------------------|-----------------------------------------------------------------------------------------------------------------------------------| 
-| _&lt;targetName&gt;_  | 声明项目的特定目标。 可用目标的名称列在 [目标](#targets) 部分。                                                                                           |
+|----------------------|-----------------------------------------------------------------------------------------------------------------------------------| 
+| _&lt;targetName&gt;_ | 声明项目的特定目标。 可用目标的名称列在 [目标](#targets) 部分。                                                                                           |
 | `targets`         | 项目的所有目标。                                                                                                                          |
 | `presets`         | 所有预定义目标。 用于一次 [配置多个预定义目标](#targets)。                                                                                              |
 | `sourceSets`      | 配置预定义并声明项目的自定义 [源代码集](#source-sets)。                                                                                              |
@@ -201,22 +201,18 @@ kotlin {
 
 `browser {}` 可以包含以下配置块：
 
-| **名称**         | **描述**                                           | 
-|----------------|--------------------------------------------------| 
-| `testRuns`     | 测试执行的配置。                                         |
-| `runTask`      | 项目运行的配置。                                         |
-| `webpackTask`  | 使用 [Webpack](https://webpack.js.org/) 进行项目打包的配置。 |
-| `dceTask`      | [死代码消除](javascript-dce.md) 的配置。                  |
-| `distribution` | 输出文件的路径。                                         |
+| **名称**         | **描述**                                         |  
+|----------------|------------------------------------------------|  
+| `testRuns`     | 测试执行的配置。                                       |  
+| `runTask`      | 项目运行的配置。                                       |  
+| `webpackTask`  | 使用 [Webpack](https://webpack.js.org/) 打包项目的配置。 |  
+| `distribution` | 输出文件的路径。                                       |  
 
 ```kotlin
 kotlin {
     js().browser {
         webpackTask { /* ... */ }
         testRuns { /* ... */ }
-        dceTask {
-            keep("myKotlinJsApplication.org.example.keepFromDce")
-        }
         distribution {
             directory = File("$projectDir/customdir/")
         }
@@ -369,14 +365,14 @@ binaries {
 
 `cinterops` 是与原生库互操作的描述集合。要提供与库的互操作性，向 `cinterops` 添加条目并定义其参数：
 
-| **名称**           | **描述**                   | 
-|------------------|--------------------------| 
-| `definitionFile` | 描述本地 API 的 `.def` 文件。    |
-| `packageName`    | 生成的 Kotlin API 的包前缀。     |
-| `compilerOpts`   | 通过 cinterop 工具传递给编译器的选项。 |
-| `includeDirs`    | 查找头文件的目录。                |
-
-了解更多关于 [配置与原生语言的互操作性](multiplatform-configure-compilations.md#configure-interop-with-native-languages) 的信息。
+| **名称**           | **描述**                      |
+|------------------|-----------------------------|
+| `definitionFile` | 描述本地 API 的 `.def` 文件。       |
+| `packageName`    | 生成的 Kotlin API 的包前缀。        |
+| `compilerOpts`   | 传递给编译器的选项，通过 cinterop 工具使用。 |
+| `includeDirs`    | 查找头文件的目录。                   |
+| `header`         | 要包含在绑定中的头文件。                |
+| `headers`        | 要包含在绑定中的头文件列表。              |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -401,6 +397,10 @@ kotlin {
 
                 // includeDirs.allHeaders 的简写。
                 includeDirs("include/directory", "another/directory")
+
+                // Header files to be included in the bindings.
+                header("path/to/header.h")
+                headers("path/to/header1.h", "path/to/header2.h")
             }
 
             val anotherInterop by cinterops.creating { /* ... */ }
@@ -433,6 +433,10 @@ kotlin {
 
                     // includeDirs.allHeaders 的简写。
                     includeDirs("include/directory", "another/directory")
+
+                    // 要包含在绑定中的头文件。
+                    header("path/to/header.h")
+                    headers("path/to/header1.h", "path/to/header2.h")
                 }
 
                 anotherInterop { /* ... */ }
@@ -444,6 +448,8 @@ kotlin {
 
 </tab>
 </tabs>
+
+有关更多的 cinterop 属性，请参见 [定义文件](native-definition-file.md#properties)。
 
 ### Android 目标 {id=android-targets}
 
@@ -481,11 +487,11 @@ kotlin {
 
 预定义源代码集会在创建跨平台项目时自动设置。可用的预定义源代码集如下：
 
-| **名称**                                      | **描述**                                                                                                    | 
-|---------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| `commonMain`                                | 在所有平台之间共享的代码和资源。可用于所有跨平台项目，适用于项目的所有主要[编译](#compilations)。                                                 |
-| `commonTest`                                | 在所有平台之间共享的测试代码和资源。可用于所有跨平台项目，适用于项目的所有测试编译。                                                                |
-| _&lt;targetName&gt;&lt;compilationName&gt;_ | 针对特定目标平台的编译源代码集。_&lt;targetName&gt;_ 是预定义目标的名称，_&lt;compilationName&gt;_ 是该目标的编译名称。例如：`jsTest`，`jvmMain`。 |
+| **名称**                                      | **描述**                                                                                                | 
+|---------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| `commonMain`                                | 所有平台共享的代码和资源。适用于所有跨平台项目。在项目的所有主要[编译](#compilations)中使用。                                               |
+| `commonTest`                                | 所有平台共享的测试代码和资源。适用于所有跨平台项目。在项目的所有测试编译中使用。                                                              |
+| _&lt;targetName&gt;&lt;compilationName&gt;_ | 针对特定目标的编译源。 _&lt;targetName&gt;_ 是预定义目标的名称，_&lt;compilationName&gt;_ 是该目标的编译名称。例如：`jsTest`，`jvmMain`。 |
 
 在 Kotlin Gradle DSL 中，预定义源代码集的部分应标记为 `by getting`。
 

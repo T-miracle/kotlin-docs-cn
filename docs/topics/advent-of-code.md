@@ -16,7 +16,7 @@ We'll take you through the basic tips on how to get up and running with solving 
 * Use [this GitHub template](https://github.com/kotlin-hands-on/advent-of-code-kotlin-template) to create projects
 * Check out the welcome video by Kotlin Developer Advocate, Sebastian Aigner:
 
-<video width="560" height="315" src="https://youtu.be/6-XSehwRgSY" title="Get Ready for Advent of Code 2021"/>
+<video width="560" height="315" src="https://www.youtube.com/v/6-XSehwRgSY" title="Get Ready for Advent of Code 2021"/>
 
 ## Advent of Code 2022
 
@@ -230,7 +230,7 @@ or watch the video:
 
 ### Day 4: Passport processing
 
-Apply the [`when`](control-flow.md#when-expression) expression and explore different ways of how to validate the input:
+Apply the [`when`](control-flow.md#when-expressions-and-statements) expression and explore different ways of how to validate the input:
 utility functions, working with ranges, checking set membership, and matching a particular regular expression.
 
 * Read the puzzle description on [Advent of Code](https://adventofcode.com/2020/day/4)

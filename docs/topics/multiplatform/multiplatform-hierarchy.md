@@ -18,9 +18,9 @@ Kotlin 工具链确保每个源代码集只能访问该源代码集编译的所�
 
 ## 默认层级模板 {id=default-hierarchy-template}
 
-从 Kotlin 1.9.20 开始，Kotlin Gradle 插件内置了默认的 [层级模板](#see-the-full-hierarchy-template)。  
-它为一些常见的使用场景预定义了中间源代码集。
-插件会根据你项目中指定的目标自动设置这些源代码集。
+从 Kotlin 1.9.20 开始，Kotlin Gradle 插件内置了一个默认的 [层次结构模板](#see-the-full-hierarchy-template)。  
+该模板为一些常见的用例预定义了中间源代码集。  
+插件会根据项目中指定的目标，自动设置这些源代码集。
 
 考虑以下示例：
 
@@ -52,16 +52,18 @@ kotlin {
 当你在代码中声明 `androidTarget`、`iosArm64` 和 `iosSimulatorArm64` 这些目标时，Kotlin Gradle
 插件会从模板中找到合适的共享源代码集并为你创建它们。最终的层级结构如下所示：
 
-![使用默认层级模板的示例](default-hierarchy-example.svg){thumbnail="true" width="350" thumbnail-same-file="true"}
+![使用默认层级模板的示例](default-hierarchy-example.svg)
 
-绿色的源代码集是实际创建并存在于项目中的，而灰色的则来自默认模板，但被忽略了。
-例如，Kotlin Gradle 插件没有创建 `watchos`源代码集，因为项目中没有 watchOS 目标。
+彩色的源代码集实际上是已创建并存在于项目中的，而灰色的源代码集则是来自默认模板并被忽略的。
+例如，Kotlin Gradle 插件没有创建 `watchos` 源代码集，因为项目中没有 watchOS 目标。
 
 如果你添加了一个 watchOS 目标，例如 `watchosArm64`，那么 `watchos`源代码集会被创建，`apple`、`native`
 和 `common`源代码集中的代码也会被编译到 `watchosArm64`。
 
-Kotlin Gradle 插件为默认层级模板中的所有源代码集创建了类型安全的访问器，因此你可以直接引用它们，而不需要像
-[手动配置](#manual-configuration) 中那样使用 `by getting` 或 `by creating` 的结构：
+Kotlin Gradle 插件为默认层次结构模板中的所有源代码集提供了类型安全和静态访问器，因此与
+[手动配置](#manual-configuration) 相比，可以在不使用 `by getting` 或 `by creating` 构造的情况下引用它们。
+
+如果在未先声明相应目标的情况下尝试访问源代码集，您将看到一个警告：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -76,6 +78,8 @@ kotlin {
         iosMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
         }
+        // 警告：未声明目标就访问源代码集
+        linuxX64Main { }
     }
 }
 ```
@@ -95,6 +99,8 @@ kotlin {
                 implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%'
             }
         }
+        // 警告：未声明目标就访问源代码集
+        linuxX64Main { }
     }
 }
 ```
@@ -229,7 +235,8 @@ Learn more about hierarchy templates: https://kotl.in/hierarchy-template
 >
 {style="tip"}
 
-#### 查看完整的层级模板 {id=see-the-full-hierarchy-template}
+
+查看完整的层次结构模板 {id=see-the-full-hierarchy-template initial-collapse-state="collapsed" collapsible="true"}
 
 当您声明项目编译的目标时，插件根据模板中指定的目标选择共享源代码集，并在您的项目中创建这些源代码集。
 
@@ -303,7 +310,7 @@ kotlin {
 
 结果层级结构如下所示：
 
-![手动配置的层级结构](manual-hierarchical-structure.png)
+![手动配置的层级结构](manual-hierarchical-structure.svg)
 
 您可以为以下目标组合共享源代码集：
 

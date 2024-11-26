@@ -6,7 +6,7 @@ Kotlin 1.6.20 reveals previews of the future language features, makes the hierar
 
 You can also find a short overview of the changes in this video:
 
-<video src="https://youtu.be/8F19ds109-o" title="What's new in Kotlin 1.6.20"/>
+<video src="https://www.youtube.com/v/8F19ds109-o" title="What's new in Kotlin 1.6.20"/>
 
 ## Language
 
@@ -341,7 +341,7 @@ Uncaught Kotlin exception: kotlin.IllegalStateException:
    at 4   example.kexe        0x25d708       kfun:#bar(){} + 104
    at 5   example.kexe        0x25d68c       kfun:#main(){} + 12
 ```
-{collapsible="true"}
+{collapsible="true" collapsible="true"}
 
 * **1.6.20 with libbacktrace:**
 
@@ -356,7 +356,7 @@ Uncaught Kotlin exception: kotlin.IllegalStateException:
    at 6   example.kexe        0x25fac8    kfun:#bar(){} + 104 (/private/tmp/backtrace/src/commonMain/kotlin/app.kt:2:13)
    at 7   example.kexe        0x25fa4c    kfun:#main(){} + 12 (/private/tmp/backtrace/src/commonMain/kotlin/app.kt:1:14)
 ```
-{collapsible="true"}
+{collapsible="true" collapsible="true"}
 
 On Apple targets, which already had file locations and line numbers in stack traces, libbacktrace provides more details for inline function calls:
 
@@ -372,7 +372,7 @@ Uncaught Kotlin exception: kotlin.IllegalStateException:
    at 5   example.kexe    0x10a84891c    kfun:#main(){} + 12 (/private/tmp/backtrace/src/commonMain/kotlin/app.kt:1:14)
 ...
 ```
-{collapsible="true"}
+{collapsible="true" collapsible="true"}
 
 
 * **1.6.20 with libbacktrace:**
@@ -389,7 +389,7 @@ Uncaught Kotlin exception: kotlin.IllegalStateException:
    at 7   example.kexe    0x106689cac    kfun:#main(){} + 12 (/private/tmp/backtrace/src/commonMain/kotlin/app.kt:1:14)
 ...
 ```
-{collapsible="true"}
+{collapsible="true" collapsible="true"}
 
 To produce better stack traces with libbacktrace, add the following line to `gradle.properties`:
 

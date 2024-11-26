@@ -88,7 +88,7 @@ val persons = listOf(Person("Jack", 11), Person("Sofie", 12), Person("Peter", 11
         .forEach { person -> println(person.name) }
 ```
 
-### 如何启用 Java 合成属性引用 {id=how-to-enable-java-synthetic-property-references collapsible="true"}
+### 如何启用 Java 合成属性引用 {id=how-to-enable-java-synthetic-property-references collapsible="true" collapsible="true"}
 
 要启用此功能，请设置编译器选项 `-language-version 2.1`。
 在 Gradle 项目中，你可以通过将以下内容添加到 `build.gradle(.kts)` 来实现：

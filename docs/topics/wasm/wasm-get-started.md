@@ -1,6 +1,6 @@
-[//]: # (title: 在 IntelliJ IDEA 中开始使用 Kotlin/Wasm)
+[//]: # (title: Kotlin/Wasm 和 Compose 跨平台入门)
 
-> Kotlin/Wasm 目前处于 [Alpha](components-stability.md) 阶段，可能随时发生变化。
+> Kotlin/Wasm 处于 [Alpha](components-stability.md) 阶段，可能随时发生变化。
 >
 > [加入 Kotlin/Wasm 社区。](https://slack-chats.kotlinlang.org/c/webassembly)
 >
@@ -24,7 +24,7 @@
 3. 选择 **Web** 选项，确保没有其他选项被选中。
 4. 点击 **下载** 按钮，并解压缩生成的归档文件。
 
-![Kotlin Multiplatform 启动向导](wasm-compose-wizard.png){width=600}
+![Kotlin Multiplatform 启动向导](wasm-compose-web-wizard.png){width=600}
 
 ## 在 IntelliJ IDEA 中打开项目 {id=open-the-project-in-intellij-idea}
 
@@ -35,6 +35,8 @@
 ## 运行应用程序 {id=run-the-application}
 
 1. 在 IntelliJ IDEA 中，通过选择 **View** | **Tool Windows** | **Gradle** 打开 **Gradle** 工具窗口。
+
+   项目加载后，您可以在 Gradle 工具窗口中找到 Gradle 任务。
 
    > 你需要至少 Java 11 作为你的 Gradle JVM，以确保任务成功加载。
    >
@@ -103,12 +105,11 @@
 
 加入 Kotlin/Wasm 社区，加入 Kotlin Slack：
 
-<a href="https://slack-chats.kotlinlang.org/c/webassembly"><img src="join-slack-channel.svg" width="700" style="block" alt="加入 Kotlin/Wasm 社区"/></a>
+<a href="https://slack-chats.kotlinlang.org/c/webassembly"><img src="join-slack-channel.svg" width="700" alt="加入 Kotlin/Wasm 社区" style="block"/></a>
 
-尝试来自 `kotlin-wasm-examples` 仓库的 Kotlin/Wasm 示例：
+尝试更多 Kotlin/Wasm 示例：
 
-* [Compose 图像查看器](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-imageviewer)
-* [Jetsnack 应用程序](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-jetsnack)
-* [Node.js 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/nodejs-example)
-* [WASI 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/wasi-example)
-* [Compose 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-example)
+* [Compose 图像查看器](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer)
+* [Jetsnack 应用](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/jetsnack)
+* [Node.js 示例](https://github.com/Kotlin/kotlin-wasm-nodejs-template)
+* [WASI 示例](https://github.com/Kotlin/kotlin-wasm-wasi-template)

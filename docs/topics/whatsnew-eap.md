@@ -10,7 +10,7 @@ _[Released: %kotlinEapReleaseDate%](eap.md#build-details)_
 {style="note"}
 
 The Kotlin %kotlinEapVersion% release is out!
-This document contains some details of this EAP release.
+This document contains some details about this EAP release.
 
 ## IDE support {id=ide-support}
 
@@ -18,567 +18,763 @@ The Kotlin plugins that support %kotlinEapVersion% are bundled in the latest Int
 You don't need to update the Kotlin plugin in your IDE. 
 All you need to do is to [change the Kotlin version](configure-build-for-eap.md) to %kotlinEapVersion% in your build scripts.
 
-See [Update to a new release](releases.md#update-to-a-new-release) for details.
+See [Update to a new release](releases.md#update-to-a-new-kotlin-version) for details.
 
 ## Language
 
-### Data class copy function to have the same visibility as constructor
+After the Kotlin 2.0.0 release with the K2 compiler, 
+the Kotlin team at JetBrains is focusing on improving the language with new features. 
+In this release, we are excited to announce several new language design features.
 
-Currently, if you create a data class using a `private` constructor, 
-the automatically generated `.copy()` function doesn't have the same visibility. 
-This can cause problems later in your code. 
-In future Kotlin releases, we will introduce the behavior that the default visibility of the `.copy()` function is the same as the constructor.
-This change will be introduced gradually to help you migrate your code as smoothly as possible.
+These features are available in preview, and we encourage you to try them and share your feedback:
+* Guard conditions in `when` with a subject. [Read the KEEP document for details](https://github.com/Kotlin/KEEP/blob/master/proposals/guards.md)
+* [Non-local `break` and `continue`](#non-local-break-and-continue)
+* Multidollar interpolation: improved handling of `$` in string literals. 
+  [Read the KEEP document for details](https://github.com/Kotlin/KEEP/blob/master/proposals/dollar-escape.md)
 
-Our migration plan starts with Kotlin %kotlinEapVersion%, 
-where we issue warnings in your code where the visibility will change in the future. 
-For example:
+> All the features have IDE support in the latest EAP version of IntelliJ IDEA with the K2 mode enabled.
+> 
+> Learn more in the [IntelliJ IDEA 2024.3 EAP blog post](https://blog.jetbrains.com/idea/2024/09/intellij-idea-2024-3-eap/#k2-mode-enabled-by-default).
+> 
+{style="tip"}
 
-```kotlin
-// Triggers a warning in %kotlinEapVersion%
-data class PositiveInteger private constructor(val number: Int) {
-    companion object {
-        fun create(number: Int): PositiveInteger? = if (number > 0) PositiveInteger(number) else null
-    }
-}
+[See the full list of Kotlin language design features and proposals](kotlin-language-features-and-proposals.md).
 
-fun main() {
-    val positiveNumber = PositiveInteger.create(42) ?: return
-    // Triggers a warning in %kotlinEapVersion%
-    val negativeNumber = positiveNumber.copy(number = -1)
-    // warning: non-public primary constructor is exposed via the generated 'copy()' method of the 'data' class.
-    // The generated 'copy()' will change its visibility in future releases.
-}
+### Non-local break and continue
+
+Kotlin %kotlinEapVersion% introduces a preview of a new feature, an ability to use non-local `break` and
+`continue`. It reduces boilerplate code and adds more flexibility when working with inline functions.
+
+Previously, you could only use non-local returns in your project. Now, Kotlin also supports `break` and `continue` [jump expressions](returns.md)
+non-locally. That means that you can apply them within lambdas passed as arguments to an inline function that encloses
+the loop:
+
+<compare>
+    <code-block lang="kotlin">
+        fun processList(elements: List&lt;Int&gt;): Boolean {
+            for (element in elements) {
+                val variable = element.nullableMethod()
+                if (variable == null) {
+                    log.warning("Element is null or invalid, continuing...")
+                    continue
+                }
+                if (variable == 0) return true
+            }
+            return false
+        }
+    </code-block>
+    <code-block lang="kotlin">
+        fun processList(elements: List&lt;Int&gt;): Boolean {
+            for (element in elements) {
+                val variable = element.nullableMethod() ?: run {
+                    log.warning("Element is null or invalid, continuing...")
+                    continue
+                }
+                if (variable == 0) return true
+            }
+            return false
+        }
+    </code-block>
+</compare>
+
+The feature is currently [Experimental](components-stability.md#stability-levels-explained). To try it out in your project,
+use the `-Xnon-local-break-continue` compiler option in the command line:
+
+```bash
+kotlinc -Xnon-local-break-continue main.kt
 ```
 
-For the latest information about our migration plan,
-see the corresponding issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-11914).
-
-To give you more control over this behavior, in Kotlin %kotlinEapVersion% we’ve introduced two annotations:
-
-* `@ConsistentCopyVisibility` to opt in to the behavior now before we make it the default in a later release.
-* `@ExposedCopyVisibility` to opt out of the behavior and suppress warnings at the declaration site. 
-Note that even with this annotation, the compiler still reports warnings when the `.copy()` function is called.
-
-If you want to opt in to the new behavior already in %kotlinEapVersion% for a whole module rather than in individual classes,
-you can use the `-Xconsistent-data-class-copy-visibility` compiler option.
-This option has the same effect as adding the `@ConsistentCopyVisibility` annotation to all data classes in a module.
-
-### Phased removal of context receivers feature
-
-In Kotlin 1.6.20, we introduced [context receivers](whatsnew1620.md#prototype-of-context-receivers-for-kotlin-jvm) 
-as an [Experimental](components-stability.md#stability-levels-explained) feature.
-After listening to community feedback, we've decided not to continue with it.
-Instead, we plan to introduce a replacement in future Kotlin releases: context parameters.
-You can find the proposal for context parameters in the [KEEP](https://github.com/Kotlin/KEEP/blob/context-parameters/proposals/context-parameters.md).
-
-Although context receivers have always been an Experimental feature, 
-we know they are already used by a large number of developers. So we will remove support for context receivers gradually.
-
-Our migration plan starts with Kotlin %kotlinEapVersion%, 
-where we issue warnings in your code where context receivers are used when you use the `-Xcontext-receivers` compiler option. 
-For example:
-
-```kotlin
-class MyContext
-
-context(MyContext)
-// warning: experimental context receivers are deprecated and will be superseded by context parameters. 
-// Please don't use context receivers. You can either pass parameters explicitly or use members with extensions.
-fun someFunction() {
-}
-```
-
-This warning will become an error in future Kotlin releases.
-
-If you use context receivers in your code, we recommend that you migrate your code to use either:
-
-* Explicit parameters.
-
-   <table header-style="top">
-      <tr>
-          <td>Before</td>
-          <td>After</td>
-      </tr>
-      <tr>
-   <td>
-
-   ```kotlin
-   context(ContextReceiverType)
-   fun someFunction() {
-       contextReceiverMember()
-   }
-   ```
-   
-   </td>
-   <td>
-   
-   ```kotlin
-   fun someFunction(explicitContext: ContextReceiverType) {
-       explicitContext.contextReceiverMember()
-   }
-   ```
-   
-   </td>
-   </tr>
-   </table>
-
-* Extension member functions, if possible.
-
-   <table header-style="top">
-      <tr>
-          <td>Before</td>
-          <td>After</td>
-      </tr>
-      <tr>
-   <td>
-   
-   ```kotlin
-   context(ContextReceiverType)
-   fun contextReceiverMember() = TODO()
-   
-   context(ContextReceiverType)
-   fun someFunction() {
-       contextReceiverMember()
-   }
-   ```
-   
-   </td>
-   <td>
-   
-   ```kotlin
-   class ContextReceiverType {
-       fun contextReceiverMember() = TODO()
-   }
-   
-   fun ContextReceiverType.someFunction() {
-       contextReceiverMember()
-   }
-   ```
-   
-   </td>
-   </tr>
-   </table>
-
-## Kotlin Multiplatform
-
-### Static accessors for source sets from the default target hierarchy
-
-Since Kotlin 1.9.20, the [default hierarchy template](multiplatform-hierarchy.md#default-hierarchy-template) 
-is automatically applied to all Kotlin Multiplatform projects. 
-And for all of the source sets from the default hierarchy template, the Kotlin Gradle plugin provided type-safe accessors.
-That way you could finally access source sets for all the specified targets without having to use `by getting` or `by creating` constructions.
-
-Kotlin 2.0.20 aims to improve your IDE experience even further. It now provides static assessors in 
-the `sourceSets {}` block for all the source sets from the default hierarchy template. 
-We believe this change will make accessing source sets by name easier and more predictable.
-
-Each such source set now has a detailed KDoc comment with a sample and a diagnostic message with a warning 
-in case you try to access the source set without declaring the corresponding target first:
+Or set it in the `compilerOptions {}` block of your Gradle build file:
 
 ```kotlin
 kotlin {
-    jvm()
-    linuxX64()
-    linuxArm64()
-    mingwX64()
-  
-    sourceSets {
-        commonMain.languageSettings {
-            progressiveMode = true
-        }
-
-
-        jvmMain { }
-        linuxX64Main { }
-        linuxArm64Main { }
-        iosX64Main { } // Warning: accessing source set
-                       // without registering the target
+    compilerOptions {
+        freeCompilerArgs.add("-Xnon-local-break-continue")
     }
 }
 ```
 
-![Accessing the source sets by name](accessing-sourse-sets.png){width=700}
+We're planning to make this feature stable in future Kotlin releases. If you encounter any issues when using non-local
+`break` and `continue`, please report them to our [issue tracker](http://kotl.in/issue).
 
-Learn more about the [hierarchical project structure in Kotlin Multiplatform](multiplatform-hierarchy.md).
+### Support for requiring opt-in to extend APIs
 
-### Deprecated compatibility with Gradle Java plugins
+Kotlin %kotlinEapVersion% introduces the [`@SubclassOptInRequired`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-subclass-opt-in-required/) annotation.
+This annotation allows library authors
+to require explicit opt-in before users can implement experimental interfaces or extend experimental classes.
 
-Due to compatibility issues between the Kotlin Multiplatform Gradle plugin and the Gradle plugins 
-[Java](https://docs.gradle.org/current/userguide/java_plugin.html), 
-[Java Library](https://docs.gradle.org/current/userguide/java_library_plugin.html), 
-and [Application](https://docs.gradle.org/current/userguide/application_plugin.html), 
-Kotlin %kotlinEapVersion% introduces a deprecation warning when you apply these plugins in the same project.
-In future Kotlin releases, the warning will be increased to an error.
+This feature can be useful when a library API is stable enough to use but might evolve with new abstract functions,
+making it unstable for inheritance.
 
-If you want to use both the Kotlin Multiplatform Gradle plugin in combination with these Gradle plugins for Java in your multiplatform project, 
-we recommend that you:
+To add the opt-in requirement to an API element,
+use the `@SubclassOptInRequired` annotation with a reference to the annotation class:
 
-1. Create a separate subproject in your multiplatform project.
-2. In your subproject, apply the Gradle plugin for Java.
-3. In your subproject, add a dependency on your parent multiplatform project.
+```kotlin
+@RequiresOptIn(
+    level = RequiresOptIn.Level.WARNING,
+    message = "Interfaces in this library are experimental"
+)
+annotation class UnstableApi()
 
-> Your subproject must **not** be a multiplatform project, and you must only use it to set up a dependency on your multiplatform project.
+@SubclassOptInRequired(UnstableApi::class)
+interface CoreLibraryApi
+```
+
+In this example, the `CoreLibraryApi` interface requires users to opt in before they can implement it.
+A user can opt in like this:
+
+```kotlin
+@OptIn(UnstableApi::class)
+interface MyImplementation : CoreLibraryApi
+```
+
+> When you use the `@SubclassOptInRequired` annotation to require opt-in,
+> the requirement is not propagated to any [inner or nested classes](nested-classes.md).
+>
+{style="note"}
+
+For a real-world example of how to use the `@SubclassOptInRequired` annotation in your API,
+check out the [`SharedFlow`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-shared-flow/)
+interface in the `kotlinx.coroutines` library.
+
+### Improved overload resolution for functions with generic types
+
+Previously, if you had a number of overloads for a function where some have value parameters of generic type
+and others had function types at the same position, the resolution behavior was inconsistent in some cases.
+
+This led to different behavior depending on whether your overloads were member functions or extension functions.
+For example:
+
+```kotlin
+class KeyValueStore<K, V> {
+    fun store(key: K, value: V) {} // 1
+    fun store(key: K, lazyValue: () -> V) {} // 2
+}
+
+fun <K, V> KeyValueStore<K, V>.storeExtension(key: K, value: V) {} // 1 
+fun <K, V> KeyValueStore<K, V>.storeExtension(key: K, lazyValue: () -> V) {} // 2
+
+fun test(kvs: KeyValueStore<String, Int>) {
+    // Member functions
+    kvs.store("", 1)    // Resolves to 1
+    kvs.store("") { 1 } // Resolves to 2
+
+    // Extension functions
+    kvs.storeExtension("", 1)    // Resolves to 1
+    kvs.storeExtension("") { 1 } // Doesn't resolve
+}
+```
+
+In the example, the `KeyValueStore` class has two overloads for the `store()` function,
+where one overload has function parameters with generic types `K`, `V`,
+and another has a lambda function that returns a generic type `V`.
+Similarly, there are two overloads for the extension function: `storeExtension()`.
+
+When you called the `store()` function with and without a lambda function,
+the compiler successfully resolved the correct overloads.
+However, when you called the extension function `storeExtension()` with a lambda function,
+the compiler didn't resolve the correct overload because it incorrectly considered both overloads as applicable.
+
+To fix this problem, we've introduced a new heuristic
+so that the compiler can discard a possible overload
+when a function parameter with generic type can't accept a lambda function based on information from a different argument.
+This change makes the behavior of member functions and extension functions consistent,
+and is enabled by default in Kotlin %kotlinEapVersion%.
+
+### Improved exhaustiveness checks for when expressions with sealed classes
+
+In previous versions of Kotlin, 
+the compiler required an `else` branch in `when` expressions for type parameters with sealed upper bounds, 
+even when all cases in the `sealed class` hierarchy were covered. 
+This behavior is addressed and improved in Kotlin %kotlinEapVersion%, 
+making exhaustiveness checks more powerful and allowing you to remove redundant `else` branches. 
+This keeps `when` expressions cleaner and more intuitive.
+
+Here's an example demonstrating the change:
+
+```kotlin
+sealed class Result
+object Error : Result()
+class Success(val value: String) : Result()
+
+fun <T : Result> render(result: T) = when (result) {
+    Error -> "Error!"
+    is Success -> result.value
+    // Requires no else branch
+}
+```
+
+## Kotlin K2 compiler
+
+With Kotlin %kotlinEapVersion%, the K2 compiler now provides more flexibility when working with compiler checks and
+warnings, as well as improved support for the kapt plugin.
+
+### Extra compiler checks
+
+With Kotlin %kotlinEapVersion%, you can now enable additional checks in the K2 compiler.
+These are extra declaration, expression, and type checks that are usually not crucial for compilation,
+but can still be useful if you want to validate the following cases:
+
+| Check type                                            | Comment                                                                                  |
+|-------------------------------------------------------|------------------------------------------------------------------------------------------|
+| `REDUNDANT_NULLABLE`                                  | `Boolean??` is used instead of `Boolean?`                                                |
+| `PLATFORM_CLASS_MAPPED_TO_KOTLIN`                     | `java.lang.String` is used instead of `kotlin.String`                                    |
+| `ARRAY_EQUALITY_OPERATOR_CAN_BE_REPLACED_WITH_EQUALS` | `arrayOf("") == arrayOf("")` is used instead of `arrayOf("").contentEquals(arrayOf(""))` |
+| `REDUNDANT_CALL_OF_CONVERSION_METHOD`                 | `42.toInt()` is used instead of `42`                                                     |
+| `USELESS_CALL_ON_NOT_NULL`                            | `"".orEmpty()` is used instead of `""`                                                   |
+| `REDUNDANT_SINGLE_EXPRESSION_STRING_TEMPLATE`         | `"$string"` is used instead of `string`                                                  |
+| `UNUSED_ANONYMOUS_PARAMETER`                          | A parameter is passed in the lambda expression but never used                            |
+| `REDUNDANT_VISIBILITY_MODIFIER`                       | `public class Klass` is used instead of `class Klass`                                    |
+| `REDUNDANT_MODALITY_MODIFIER`                         | `final class Klass` is used instead of `class Klass`                                     |
+| `REDUNDANT_SETTER_PARAMETER_TYPE`                     | `set(value: Int)` is used instead of `set(value)`                                        |
+| `CAN_BE_VAL`                                          | `var local = 0` is defined, but never reassigned, can be `val local = 42` instead        |
+| `ASSIGNED_VALUE_IS_NEVER_READ`                        | `val local = 42` is defined, but never used afterward in the code                        |
+| `UNUSED_VARIABLE`                                     | `val local = 0` is defined, but never used in the code                                   |
+| `REDUNDANT_RETURN_UNIT_TYPE`                          | `fun foo(): Unit {}` is used instead of `fun foo() {}`                                   |
+| `UNREACHABLE_CODE`                                    | Code statement is present, but can never been executed                                   |
+
+If the check is true, you'll receive a compiler warning with a suggestion on how to fix the problem.
+
+Extra checks are disabled by default.
+To enable them, use the `-Wextra` compiler option in the command line or specify `extraWarnings`
+in the `compilerOptions {}` block of your Gradle build file:
+
+```kotlin
+kotlin {
+    compilerOptions {
+        extraWarnings.set(true)
+    }
+}
+```
+
+For more information on how to define and use options,
+see [Compiler options in the Kotlin Gradle plugin](gradle-compiler-options.md).
+
+### Global warning suppression
+
+In %kotlinEapVersion%, the Kotlin compiler has received a highly requested feature, the ability to suppress warnings globally.
+
+Now you can suppress specific warnings in the whole project. To do that, use the `-Xsuppress-warning=WARNING_NAME` syntax
+in the command line or the `freeCompilerArgs` attribute in the `compilerOptions {}` block of your build file.
+
+For example, if you have [extra compiler checks](#extra-compiler-checks) enabled in your project, but want to suppress
+one of them, use:
+
+```kotlin
+kotlin {
+    compilerOptions {
+        extraWarnings.set(true)
+        freeCompilerArgs.add("-Xsuppress-warning=CAN_BE_VAL")
+    }
+}
+```
+
+To get the warning name, select the problematic element and click the light bulb icon
+(or use <shortcut>Cmd + Enter</shortcut>/<shortcut>Alt + Enter</shortcut>):
+
+![Warning name intention](warning-name-intention.png){width="500"}
+
+The new compiler option is currently [Experimental](components-stability.md#stability-levels-explained).
+Mind the following nuances:
+
+* Error suppression is not allowed.
+* If you pass an unknown warning name, the compilation will result in an error.
+* You can also specify several warnings at once:
+
+<tabs>
+<tab title="Command line">
+
+```bash
+kotlinc -Xsuppress-warning=NOTHING_TO_INLINE -Xsuppress-warning=NO_TAIL_CALLS_FOUND main.kt
+```
+
+</tab>
+<tab title="Build file">
+
+```kotlin
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll(
+            listOf(
+                "-Xsuppress-warning=NOTHING_TO_INLINE",
+                "-Xsuppress-warning=NO_TAIL_CALLS_FOUND"
+            )
+        )
+    }
+}
+```
+
+</tab>
+</tabs>
+
+### Improved K2 kapt implementation
+
+> The kapt plugin for the K2 compiler (K2 kapt) is in [Alpha](components-stability.md#stability-levels-explained).
+> It may be changed at any time. We would appreciate your feedback in [YouTrack](https://youtrack.jetbrains.com/issue/KT-71439/K2-kapt-feedback).
 >
 {style="warning"}
 
-For example, you have a multiplatform project called `my-main-project` and you want 
-to use the [Application](https://docs.gradle.org/current/userguide/application_plugin.html) Gradle plugin to run a JVM application.
+Currently, projects using the [kapt](kapt.md) plugin work with the K1 compiler by default,
+supporting Kotlin versions up to 1.9.
 
-Once you've created a subproject, let's call it `subproject-A`, your parent project structure should look like this:
+In Kotlin 1.9.20, we launched an experimental implementation of the kapt plugin with the K2 compiler (K2 kapt).
+Now, we improve K2 kapt's internal implementation to mitigate technical and performance issues.
+
+While the new K2 kapt implementation doesn't introduce new features,
+its performance has significantly improved compared to the previous K2 kapt implementation.
+Additionally, the K2 kapt plugin's behavior is now much closer to K1 kapt.
+
+To use the new K2 kapt plugin implementation, enable it the same way as the previous K2 kapt plugin.
+Add the following flag to the `gradle.properties` file of your project:
 
 ```text
-.
-├── build.gradle
-├── settings.gradle
-├── subproject-A
-    └── build.gradle
-    └── src
-        └── Main.java
+kapt.use.k2=true
 ```
 
-In your subproject's `build.gradle.kts` file, apply the Application plugin in the `plugins {}` block:
+In upcoming releases, the K2 kapt implementation will be enabled by default instead of K1 kapt,
+so you won't longer need to enable it manually.
 
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
+When using the K2 kapt plugin, you may encounter a compilation error during the `kaptGenerateStubs*` tasks,
+even though the actual error details are missing from the Gradle log.
+This is a [known issue](https://youtrack.jetbrains.com/issue/KT-71431) that occurs when kapt is enabled in a module,
+but no annotation processors are present. The workaround is to disable the kapt plugin in the module.
+
+We highly appreciate your [feedback](https://youtrack.jetbrains.com/issue/KT-71439/K2-kapt-feedback)
+before the new implementation is stabilized.
+
+## Kotlin Multiplatform
+
+Kotlin %kotlinEapVersion% focuses on the improvements around Gradle: stabilizes new DSL for configuring compiler options
+in multiplatform projects and introduces a preview of Isolated Projects feature.
+
+### New Gradle DSL for compiler options in multiplatform projects is stable
+
+In Kotlin 2.0.0, [we introduced a new Experimental Gradle DSL](whatsnew20.md#new-gradle-dsl-for-compiler-options-in-multiplatform-projects)
+to simplify the configuration of compiler options across your multiplatform projects.
+In Kotlin %kotlinEapVersion%, this DSL has been promoted to Stable.
+
+With this new DSL, you can configure compiler options at the extension level for all targets and shared source sets
+like `commonMain`, as well as at the target level for specific targets:
 
 ```kotlin
-plugins {
-    id("application")
+kotlin {
+    compilerOptions {
+        // Extension-level common compiler options that are used as defaults
+        // for all targets and shared source sets
+        allWarningsAsErrors.set(true)
+    }
+    jvm {
+        compilerOptions {
+            // Target-level JVM compiler options that are used as defaults
+            // for all compilations in this target
+            noJdk.set(true)
+        }
+    }
 }
 ```
 
-</tab>
-<tab title="Groovy" group-key="groovy">
+The overall project configuration now has three layers.
+The highest is the extension level, then the target level,
+and the lowest is the compilation unit (which is usually a compilation task):
 
-```groovy
-plugins {
-    id('application')
-}
-```
+![Kotlin compiler options levels](compiler-options-levels.svg){width=700}
 
-</tab>
-</tabs>
+The settings at a higher level are used as a convention (default) for a lower level:
 
-In your subproject's `build.gradle.kts` file, add a dependency on your parent multiplatform project:
+* The values of extension compiler options are the default for target compiler options, including shared source sets,
+  like `commonMain`, `nativeMain`, and `commonTest`.
+* The values of target compiler options are used as the default for compilation unit (task) compiler options, for
+  example, `compileKotlinJvm` and `compileTestKotlinJvm` tasks.
 
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
+In turn, configurations made at a lower level override related settings at a higher level:
 
-```kotlin
-dependencies {
-    implementation(project(":my-main-project")) // The name of your parent multiplatform project
-}
-```
+* Task-level compiler options override related configurations at the target or the extension level.
+* Target-level compiler options override related configurations at the extension level.
 
-</tab>
-<tab title="Groovy" group-key="groovy">
+When configuring your project, keep in mind that some old ways
+of setting up compiler options have been [deprecated](whatsnew20.md#deprecated-old-ways-of-defining-compiler-options).
 
-```groovy
-dependencies {
-    implementation project(':my-main-project') // The name of your parent multiplatform project
-}
-```
+### Preview Gradle's Isolated Projects in Kotlin Multiplatform
 
-</tab>
-</tabs>
+> This feature is [Experimental](components-stability.md#stability-levels-explained) and is currently in a pre-alpha state with Gradle.
+> Use it only with Gradle version 8.10 and solely for evaluation purposes. The feature may be dropped or changed at any time.
+> We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-57279/Support-Gradle-Project-Isolation-Feature-for-Kotlin-Multiplatform). Opt-in is required (see details below).
+>
+{style="warning"}
 
+In Kotlin %kotlinEapVersion%, you can preview Gradle's [Isolated Projects](https://docs.gradle.org/current/userguide/isolated_projects.html)
+feature in your multiplatform projects.
 
-Your parent project is now set up to work with both plugins.
+The Isolated Projects feature in Gradle improves build performance by "isolating" individual Gradle projects from each
+other. Each project's build logic is restricted from directly accessing the mutable state of other projects, allowing them
+to safely run in parallel. To support this feature, we made some changes to the Kotlin Gradle plugin's model, and we are
+interested in hearing about your experiences during this preview phase.
+
+There are two ways to enable the Kotlin Gradle plugin's new model:
+
+* Option 1: **Testing compatibility without enabling Isolated Projects**: To check compatibility with the Kotlin Gradle
+  plugin's new model without enabling the Isolated Projects feature, add the following Gradle property in the
+  `gradle.properties` file of your project:
+
+  ```none
+  kotlin.kmp.isolated-projects.support=enable
+  ```
+
+* Option 2: **Testing with Isolated Projects enabled**: Enabling the Isolated Projects feature in Gradle automatically
+  configures the Kotlin Gradle plugin to use the new model. To enable the Isolated Projects feature, [set the system property](https://docs.gradle.org/current/userguide/isolated_projects.html#how_do_i_use_it).
+  In this case, you don't need to add the Gradle property for the Kotlin Gradle plugin to your project.
 
 ## Kotlin/Native
 
-### Concurrent marking in garbage collector
+Kotlin %kotlinEapVersion% includes an upgrade for the `iosArm64` target support, improved cinterop caching process, and other updates.
 
-In Kotlin %kotlinEapVersion%, the JetBrains team takes another step toward improving Kotlin/Native runtime performance.
-We add experimental support for concurrent marking in the garbage collector (GC).
+### iosArm64 is promoted to Tier 1
 
-By default, application threads must be paused when GC is marking objects in the heap. 
-This greatly affects the duration of the GC pause time,
-which is important for the performance of latency-critical applications,
-such as UI applications built with Compose Multiplatform.
+The `iosArm64` target, which is crucial for [Kotlin Multiplatform](multiplatform-intro.md) development, has been promoted
+to Tier 1. It's the highest level of support in the Kotlin/Native compiler.
 
-Now, the marking phase of the garbage collection can be run simultaneously with application threads.
-This should significantly shorten the GC pause time and help improve app responsiveness.
+This means the target is regularly tested on CI to ensure that it's able to compile and run. We also provide source and
+binary compatibility between compiler releases for it.
 
-#### How to enable
+For more information on target tiers, see [Kotlin/Native target support](native-target-support.md).
 
-The feature is currently [Experimental](components-stability.md#stability-levels-explained). 
-To enable it, set the following option in your `gradle.properties` file:
+### LLVM update from 11.1.0 to 16.0.0
 
-```none
-kotlin.native.binary.gc=cms
-```
+In Kotlin %kotlinEapVersion%, we updated LLVM from version 11.1.0 to 16.0.0. The new version includes LLVM bug fixes and
+security updates. In certain cases, it also brings compiler optimizations and faster compilation.
 
-Please report any problems to our issue tracker [YouTrack](https://kotl.in/issue).
+If you have Linux targets in your project, mind that the Kotlin/Native compiler now uses the `lld` linker by default for
+all Linux targets.
 
-### Support for bitcode embedding removed
+This update shouldn't affect your code, but if you encounter any issues, please report them to our [issue tracker](http://kotl.in/issue).
 
-Starting with Kotlin %kotlinEapVersion%, the Kotlin/Native compiler no longer supports bitcode embedding.
-Bitcode embedding was deprecated in Xcode 14 and removed in Xcode 15 for all Apple targets.
+### Changes to caching in cinterop
 
-Now, the `embedBitcode` parameter for the framework configuration, 
-as well as the `-Xembed-bitcode` and `-Xembed-bitcode-marker` command line arguments are deprecated.
+In Kotlin %kotlinEapVersion%, we're making changes to the cinterop caching process. It no longer has the
+[`CacheableTask`](https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/CacheableTask.html) annotation type.
+The recommended approach now is to use the [`cacheIf`](https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.api.tasks/-task-outputs/cache-if.html)
+output type to cache the results of the task.
 
-If you still use earlier versions of Xcode but want to upgrade to %kotlinEapVersion%, 
-disable bitcode embedding in your Xcode projects.
-
-### Changes to monitoring GC performance with signposts
-
-Kotlin 2.0.0 made it possible to monitor the performance of Kotlin/Native garbage collector 
-(GC) through Xcode Instruments. Instruments include the signposts tool, which can show GC pauses as events. 
-This comes in handy when checking GC-related freezes in your iOS apps.
-
-The feature was enabled by default, but unfortunately, 
-it sometimes led to crashes when the application was run simultaneously with Xcode Instruments. 
-Starting with %kotlinEapVersion%, it requires an explicit opt-in with the following compilation option:
-
-```none
--Xbinary=enableSafepointSignposts=true
-```
-
-<!-- Uncomment for the final release
-Learn more about GC performance analysis in the [documentation](native-memory-manager.md#monitor-gc-performance). -->
+This should fix the issue when changes to header files specified in the [definition file](native-definition-file.md) were
+not recognized by UP-TO-DATE checks, so the build system failed to recompile the code.
 
 ## Kotlin/Wasm
 
-### Error in default export usage
+### Support for incremental compilation
 
-As part of the migration towards named exports, 
-a warning message was previously printed to the console when using a default import for Kotlin/Wasm exports in JavaScript.
+Previously, when you changed something to your Kotlin code, 
+the Kotlin/Wasm toolchain had to recompile the entire codebase.
 
-To fully support named exports, this warning has now upgraded to an error. 
-If you use a default import, you encounter the following error message:
+Starting from %kotlinEapVersion%, incremental compilation is supported for the Wasm targets.
+In development tasks, the compiler now recompiles only files relevant to changes from the last compilation,
+which noticeably reduces the compilation time.
+
+This change doubles the development speed for now, with plans to improve it further in future releases.
+
+In the current setup, incremental compilation for the Wasm targets is disabled by default.
+To enable incremental compilation, add the following line to your project's `local.properties` or `gradle.properties` file:
 
 ```text
-Do not use default import. Use the corresponding named import instead.
+kotlin.incremental.wasm=true
 ```
 
-This change is part of a deprecation cycle to migrate towards named exports. Here's what you can expect during each phase:
+Try out the Kotlin/Wasm incremental compilation 
+and [share your feedback](https://youtrack.jetbrains.com/issue/KT-72158/Kotlin-Wasm-incremental-compilation-feedback)!
+Your insights will help make this feature stable and default sooner.
 
-* **In version 2.0.0**: a warning message is printed to the console, explaining that exporting entities via default exports is deprecated.
-* **In version 2.0.20**: an error occurs, requesting the use of the corresponding named import.
-* **In version 2.1.0**: the use of default imports is completely removed.
+### Browser APIs moved to the kotlinx-browser stand-alone library
 
-### New location of ExperimentalWasmDsl annotation
+Before, the declarations for Web APIs and related target utilities were part of the Kotlin/Wasm standard library.
 
-Previously, the `@ExperimentalWasmDsl` annotation for WebAssembly (Wasm) 
-features was placed in this location within the Kotlin Gradle plugin:
+In this release, the `org.w3c.*`
+declarations have been moved from the Kotlin/Wasm standard library to the new [kotlinx-browser library](https://github.com/kotlin/kotlinx-browser).
+This library also includes other web-related packages, such as `org.khronos.webgl`, `kotlin.dom`, and `kotlin.browser`.
 
-```Kotlin
-org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
-```
+This separation provides modularity, 
+enabling independent updates for web-related APIs outside of Kotlin's release cycle. 
+Additionally, the Kotlin/Wasm standard library now contains only declarations available in any JavaScript environments.
 
-In %kotlinEapVersion%, the `@ExperimentalWasmDsl` annotation has been relocated to:
-
-```Kotlin
-org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-```
-
-The previous location is now deprecated and might lead to build failures with unresolved references.
-
-To reflect the new location of the `@ExperimentalWasmDsl` annotation, 
-update the import statement in your Gradle build scripts. 
-Use an explicit import for the new `@ExperimentalWasmDsl` location:
+To use the declarations from the moved packages, you need to add the `kotlinx-browser` 
+dependency in your project's build configuration file:
 
 ```kotlin
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+val wasmJsMain by getting {
+    dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-browser:0.2")
+    }
+}
 ```
 
-Alternatively, remove this star import statement from the old package:
+### Improved debugging experience for Kotlin/Wasm
+
+Previously, when debugging Kotlin/Wasm code in web browsers, you might encounter
+a low-level representation of variable values in the debugging interface. 
+This often made it challenging to track the current state of the application.
+
+![Kotlin/Wasm old debugger](wasm-old-debugger.png){width=700}
+
+To improve this experience, custom formatters have been added in the variable view.
+The implementation uses the [custom formatters API](https://firefox-source-docs.mozilla.org/devtools-user/custom_formatters/index.html),
+which is supported across major browsers like Firefox and Chromium-based.
+
+With this change, you can now display and locate variable values in a more user-friendly and comprehensible manner.
+
+![Kotlin/Wasm improved debugger](wasm-debugger-improved.png){width=700}
+
+To try the new debugging experience:
+
+1. Add the following compiler argument to the `wasmJs` compiler options:
+
+   ```kotlin
+   kotlin {
+       wasmJs {
+           …
+           compilerOptions {
+               freeCompilerArgs.add("-Xwasm-debugger-custom-formatters")
+           }
+       }
+   }
+   ```
+
+2. Enable the **Custom formatters** feature in your browser.
+
+   In the Chrome DevTools, it's placed in **Settings | Preferences | Console**:
+
+   ![Enable custom formatters in Chrome](wasm-custom-formatters-chrome.png){width=700}
+
+   In the Firefox Developer Tools, it's placed in **Settings | Advanced settings**:
+
+   ![Enable custom formatters in Firefox](wasm-custom-formatters-firefox.png){width=700}
+
+### Reduced size of Kotlin/Wasm binaries
+
+The size of your Wasm binaries produced by production builds will be reduced by up to 30%,
+and you may see some performance improvements.
+This is due to the fact that Binaryen options 
+`--closed-world`, `--type-ssa`, and `--type-merging` are now considered safe to use for 
+all Kotlin/Wasm projects and are enabled by default.
+
+### Improved JavaScript array interoperability in Kotlin/Wasm
+
+While Kotlin/Wasm's standard library provides the `JsArray<T>` type for JavaScript arrays,
+there was no direct method to transform `JsArray<T>` into Kotlin's native `Array` or `List` types.
+
+This gap required creating custom functions for array transformations, complicating interoperability between 
+Kotlin and JavaScript code.
+
+This release introduces an adapter function that automatically converts `JsArray<T>` to `Array<T>` and vice versa,
+simplifying array operations.
+
+Here's an example of conversion between generic types: Kotlin `List<T> `and `Array<T>` to JavaScript `JsArray<T>.`
 
 ```kotlin
-import org.jetbrains.kotlin.gradle.targets.js.dsl.*
+val list: List<JsString> =
+    listOf("Kotlin", "Wasm").map { it.toJsString() }
+
+// Uses .toJsArray() to convert List or Array to JsArray
+val jsArray: JsArray<JsString> = list.toJsArray()
+
+// Uses .toArray() and .toList() to convert it back to Kotlin types 
+val kotlinArray: Array<JsString> = jsArray.toArray()
+val kotlinList: List<JsString> = jsArray.toList()
+```
+
+Similar methods are available for converting typed arrays to their Kotlin equivalents
+(for example, `IntArray` and `Int32Array`). For detailed information and implementation,
+see the [`kotlinx-browser` repository]( https://github.com/Kotlin/kotlinx-browser/blob/dfbdceed314567983c98f1d66e8c2e10d99c5a55/src/wasmJsMain/kotlin/arrayCopy.kt).
+
+Here's an example of conversion between typed arrays: Kotlin `IntArray` to JavaScript `Int32Array`.
+
+```kotlin
+import org.khronos.webgl.*
+
+    // ...
+
+    val intArray: IntArray = intArrayOf(1, 2, 3)
+    
+    // Uses .toInt32Array() to convert Kotlin IntArray to JavaScript Int32Array
+    val jsInt32Array: Int32Array = intArray.toInt32Array()
+    
+    // Uses toIntArray() to convert JavaScript Int32Array back to Kotlin IntArray
+    val kotlnIntArray: IntArray = jsInt32Array.toIntArray()
+```
+
+### Support for accessing JavaScript exception details in Kotlin/Wasm
+
+Previously, when a JavaScript exception occurred in Kotlin/Wasm, 
+the `JsException` type provided only a generic message without details from the original JavaScript error.
+
+Starting from Kotlin %kotlinEapVersion%, 
+you can now configure `JsException` to include the original error message and stack trace by enabling a specific compiler flag,
+providing more context to help diagnose issues originating from JavaScript.
+
+This behavior depends on the `WebAssembly.JSTag` API, which is available only in certain browsers:
+
+* **Chrome**: Supported from version 115
+* **Firefox**: Supported from version 129
+* **Safari**: Not yet supported
+
+This feature is disabled by default. To enable this feature, add the following compiler flag to your `build.gradle.kts` file:
+
+```kotlin
+kotlin {
+    wasmJs {
+        compilerOptions {
+            freeCompilerArgs.add("-Xwasm-attach-js-exception")
+        }
+    }
+}
+```
+
+Here’s an example demonstrating the new behavior:
+
+```kotlin
+external object JSON {
+    fun <T: JsAny> parse(json: String): T
+}
+
+fun main() {
+    try {
+        JSON.parse("an invalid JSON")
+    } catch (e: JsException) {
+        println("Thrown value is: ${e.thrownValue}")
+        // SyntaxError: Unexpected token 'a', "an invalid JSON" is not valid JSON
+
+        println("Message: ${e.message}")
+        // Message: Unexpected token 'a', "an invalid JSON" is not valid JSON
+
+        println("Stacktrace:")
+        // Stacktrace:
+
+        // Prints the full JavaScript stack trace 
+        e.printStackTrace()
+    }
+}
+```
+
+With the `-Xwasm-attach-js-exception` flag enabled, `JsException` provides specific details from the JavaScript error.
+Without the flag, `JsException` includes only a generic message stating that an exception was thrown while running JavaScript code.
+
+### Deprecation of default exports
+
+As part of the migration towards named exports, 
+an error was previously printed to the console when using a default import for Kotlin/Wasm exports in JavaScript.
+
+In %kotlinEapVersion%, default imports are completely removed in order to fully support named exports.
+
+When coding in JavaScript for the Kotlin/Wasm target,
+you now need to use the corresponding named imports instead of default imports.
+
+This change marks the last phase of a deprecation cycle to migrate towards named exports:
+
+**In version 2.0.0:** A warning message was printed to the console, 
+explaining that exporting entities via default exports is deprecated.
+
+**In version 2.0.20:** An error occurred, requesting the use of the corresponding named import.
+
+**In version 2.1.0:** The use of default imports is completely removed.
+
+## Support for non-identifier characters in Kotlin/JS properties
+
+Kotlin/JS previously did not allow
+using [names for test methods](coding-conventions.md#names-for-test-methods) with spaces
+enclosed in backticks.
+
+Similarly, it was not possible to access JavaScript object properties
+that contained characters not permitted in Kotlin identifiers, such as hyphens or spaces:
+
+```kotlin
+external interface Headers {
+    var accept: String?
+
+    // Invalid Kotlin identifier due to hyphen
+    var `content-length`: String?
+}
+
+val headers: Headers = TODO("value provided by a JS library")
+val accept = headers.accept
+// Causes error due to the hyphen in property name
+val length = headers.`content-length`
+```
+
+This behavior differed from JavaScript and TypeScript,
+which allow such properties to be accessed using non-identifier characters.
+
+Starting from Kotlin %kotlinEapVersion%, this feature is enabled by default.
+Kotlin/JS now allows you to use the backquote syntax and the `@JsName` annotation
+to interact with JavaScript properties that contain non-identifier characters and to use names for test methods.
+
+Now, you can enclose property names in backticks (``) to reference non-identifier characters. Additionally,
+you can use the `@JsName` and `@JsQualifier` annotations to map Kotlin property names to JavaScript equivalents:
+
+```kotlin
+object Bar {
+    val `property example`: String = "bar"
+}
+
+@JsQualifier("fooNamespace")
+external object Foo {
+    val `property example`: String
+}
+
+@JsExport
+object Baz {
+    val `property example`: String = "bar"
+}
+
+fun main() {
+    // In JS, this is compiled into Bar.property_example_HASH
+    println(Bar.`property example`)
+    // In JS, this is compiled into fooNamespace["property example"]
+    println(Foo.`property example`)
+    // In JS, this is compiled into Baz["property example"]
+    println(Baz.`property example`)
+}
 ```
 
 ## Gradle improvements
 
-### Gradle support for versions 8.6–8.8
-{id=gradle-support-for-versions-8-6-8-8}
+Kotlin %kotlinEapVersion% is fully compatible with Gradle 7.6.3 through 8.6. 
+Gradle versions 8.7 to 8.10 are also supported, with only one exception: 
+If you use the Kotlin Multiplatform Gradle plugin, 
+you may see deprecation warnings in your multiplatform projects calling the [`withJava()` function in the JVM target](multiplatform-dsl-reference.md#jvm-targets).
+We plan to fix this issue as soon as possible.
 
-Kotlin %kotlinEapVersion% is fully compatible with Gradle 6.8.3 through 8.6. 
-Gradle 8.7 and 8.8 are also supported, with only one exception: if you use the Kotlin Multiplatform Gradle plugin, 
-you may see deprecation warnings in your multiplatform projects
-if you use the [`withJava()` function in the JVM target](multiplatform-dsl-reference.md#jvm-targets). 
-We plan to fix this issue as soon as possible. 
+For more information, 
+see the issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-66542/Gradle-JVM-target-with-withJava-produces-a-deprecation-warning).
 
-For more information, see the issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-66542/Gradle-JVM-target-with-withJava-produces-a-deprecation-warning).
+You can also use Gradle versions up to the latest Gradle release, 
+but if you do, keep in mind that you may encounter deprecation warnings or some new Gradle features might not work.
 
-### Deprecated incremental compilation based on JVM history files
+### Bumped the minimum supported AGP version to 7.3.1
 
-In Kotlin %kotlinEapVersion%, the incremental compilation approach based on JVM history files is deprecated in favor of 
-the [new incremental compilation approach](gradle-compilation-and-caches.md#a-new-approach-to-incremental-compilation) 
-that has been enabled by default since Kotlin 1.8.20.
+Starting with Kotlin %kotlinEapVersion%, the minimum supported Android Gradle plugin version is 7.3.1.
 
-The incremental compilation approach based on JVM history files suffered from limitations, 
-such as not working with [Gradle's build cache](https://docs.gradle.org/current/userguide/build_cache.html) 
-and not supporting compilation avoidance. 
-In contrast, the new incremental compilation approach overcomes these limitations and has performed well since its introduction.
+### Bumped the minimum supported Gradle version to 7.6.3
 
-Given that the new incremental compilation approach has been used by default for the last two major Kotlin releases, 
-the `kotlin.incremental.useClasspathSnapshot` Gradle property is deprecated in Kotlin %kotlinEapVersion%.
-Therefore, if you use it to opt out, you will see a deprecation warning.
+Starting with Kotlin %kotlinEapVersion%, the minimum supported Gradle version is 7.6.3.
 
-### Added task dependency for a rare case when compile task is missing one on an artifact
+## Compose compiler updates
 
-Prior to %kotlinEapVersion%, 
-we found that there were scenarios where a compile task was missing a task dependency for one of its artifact inputs.
-This meant that the result of the dependent compile task was unstable, as sometimes the artifact had been generated in time,
-but sometimes it hadn't.
+### Support for multiple stability configuration files
 
-To fix this issue, the Kotlin Gradle plugin now automatically adds the required task dependency in these scenarios.
+Compose compiler is able to interpret multiple stability configuration files,
+but the `stabilityConfigurationFile` option of the Compose Compiler Gradle plugin is only allowed for a single file to be specified.
 
-In very rare cases, we've found that this new behavior can cause a circular dependency error.
-For example, if you have multiple compilations where one compilation can see all internal declarations of the other,
-and the generated artifact relies on the output of both compilation tasks, you could see an error like:
+In Kotlin %kotlinEapVersion%, this functionality was reworked to allow you to use several stability configuration files 
+for a single module:
 
-```none
-FAILURE: Build failed with an exception.
+* The `stabilityConfigurationFile` option is deprecated.
+* There is a new option, `stabilityConfigurationFiles` with the type `ListProperty<RegularFile>`.
 
-What went wrong:
-Circular dependency between the following tasks:
-:lib:compileKotlinJvm
---- :lib:jvmJar
-     \--- :lib:compileKotlinJvm (*)
-(*) - details omitted (listed previously)
-```
-
-To fix this circular dependency error, we've added a Gradle property: `archivesTaskOutputAsFriendModule`.
-
-By default, this property is set to `true` to track the task dependency. 
-To disable the use of the artifact in the compilation task, so that no task dependency is required, 
-add the following in your `gradle.properties` file:
-
-```kotlin
-kotlin.build.archivesTaskOutputAsFriendModule=false
-```
-
-For more information, see the issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-69330).
-
-### Option to share JVM artifacts between projects as class files
-
-> This feature is [Experimental](components-stability.md#stability-levels-explained). 
-> It may be dropped or changed at any time. Use it only for evaluation purposes. 
-> We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-61861/Gradle-Kotlin-compilations-depend-on-packed-artifacts). 
-> Opt-in is required (see details below).
->
-{style="warning"}
-
-In Kotlin %kotlinEapVersion%, we introduce a new approach that changes the way the outputs of Kotlin/JVM compilations, 
-such as JAR files, are shared between projects. 
-With this approach, Gradle's `apiElements` configuration now has a secondary variant 
-that provides access to the directory containing compiled `.class` files. 
-When configured, your project uses this directory instead of requesting the compressed JAR artifact during compilation. 
-This reduces the number of times JAR files are compressed and decompressed, especially for incremental builds.
-
-Our testing shows that this new approach can provide build performance improvements for Linux and macOS hosts. 
-However, on Windows hosts, we have seen a degradation in performance due to how Windows handles I/O operations when working with files.
-
-To try this new approach, add the following property to your `gradle.properties` file:
-
-```none
-kotlin.jvm.addClassesVariant=true
-```
-
-By default, this property is set to false and the `apiElements` variant in Gradle requests the compressed JAR artifact.
-
-> Gradle has a related property that you can use in your Java-only projects to only expose the  
-> compressed JAR artifact during compilation **instead** of the directories containing compiled
-> `.class` files:
->
-> ```none
-> org.gradle.java.compile-classpath-packaging=true
-> ```
->
-> For more information on this property and its purpose, 
-> see Gradle's documentation on [Significant build performance drop on Windows for huge multi-projects](https://docs.gradle.org/current/userguide/java_library_plugin.html#sub:java_library_known_issues_windows_performance).
->
-{type="note"}
-
-We would appreciate your feedback on this new approach. Do you also see performance improvements? 
-Let us know by adding a comment in [YouTrack](https://youtrack.jetbrains.com/issue/KT-61861/Gradle-Kotlin-compilations-depend-on-packed-artifacts).
-
-## Compose compiler
-
-In %kotlinEapVersion%, the Compose compiler gets a few improvements.
-
-### Fixed the unnecessary recompositions issue introduced in 2.0.0
-
-Compose compiler 2.0.0 has an issue where it sometimes incorrectly infers the stability of types in multiplatform projects
-with non-JVM targets. This can lead to unnecessary (or even endless) recompositions. It is strongly recommended to update
-your Compose apps made for Kotlin 2.0.0 to the 2.0.10 version or newer.
-
-If your app is built with Compose compiler 2.0.10 or newer but uses dependencies built with Compose compiler 2.0.0,
-these older dependencies may still cause recomposition issues.
-To prevent this, update your dependencies to versions built with the same Compose compiler as your app.
-
-### New way to configure compiler options
-
-We have introduced a new option configuration mechanism to avoid churn of top-level parameters:
-it's harder for the Compose compiler team to test things out
-by creating or removing top-level entries for the `composeCompiler {}` block.
-So options such as strong skipping mode and non-skipping group optimizations are now enabled through the `featureFlags` property.
-
-This property will be used to test new Compose compiler options that will eventually become default.
-
-This change has also been applied to the Compose compiler Gradle plugin. To configure feature flags going forward,
-use the following syntax (this code will flip all of the default values):
+Here's how you can pass several files to the Compose compiler using the new option:
 
 ```kotlin
 composeCompiler {
-         featureFlags = setOf(
-               ComposeFeatureFlag.IntrinsicRemember.disabled(),
-               ComposeFeatureFlag.OptimizeNonSkippingGroups,
-               ComposeFeatureFlag.StrongSkipping.disabled()
-         )
-}
-```
-
-Or, if you are configuring the Compose compiler directly, use the following syntax:
-
-```text
--P plugin:androidx.compose.compiler.plugins.kotlin:featureFlag=IntrinsicRemember
-```
-
-The `enableIntrinsicRemember`, `enableNonSkippingGroupOptimization`, and `enableStrongSkippingMode` properties have been therefore deprecated.
-
-We would appreciate any feedback
-you have on this new approach in [YouTrack](https://youtrack.jetbrains.com/issue/KT-68651/Compose-provide-a-single-place-in-extension-to-configure-all-compose-flags).
-
-### strongSkipping mode enabled by default
-
-Strong skipping mode for the Compose compiler is now enabled by default.
-
-Strong skipping mode is a Compose compiler configuration option that changes the rules for what composables can be skipped.
-With strong skipping mode enabled, composables with unstable parameters can now also be skipped.
-Strong skipping mode also automatically remembers lambdas used in composable functions,
-so you should no longer need to wrap your lambdas with `remember` to avoid recomposition.
-
-For more details, see the [strong skipping mode documentation](https://developer.android.com/develop/ui/compose/performance/stability/strongskipping).
-
-### Non-skipping group optimizations
-
-This release includes a new compiler option: when enabled,
-non-skippable and non-restartable composable functions will no longer generate a group around the body of the composable.
-This leads to less allocations and thus to improved performance.
-This option is experimental and disabled by default but can be enabled with the feature flag `OptimizeNonSkippingGroups`
-as shown [above](#new-way-to-configure-compiler-options).
-
-This feature flag is now ready for wider testing.
-Any issues found when enabling the feature can be filed on the [Google issue tracker](https://goo.gle/compose-feedback).
-
-### open and abstract Composable functions support default parameters
-
-You can now add default parameters to open and abstract Composable functions.
-
-Previously, the Compose compiler would report an error when attempting to do this even though it is valid Kotlin.
-We have now added support for this in the Compose compiler, and the restriction has been removed.
-This is especially useful for including default `Modifier` values:
-
-```kotlin
-abstract class Composables {
-    @Composable
-    abstract fun Composable(modifier: Modifier = Modifier)
+    stabilityConfigurationFiles.addAll(
+        project.layout.projectDirectory.file("configuration-file1.conf"),
+        project.layout.projectDirectory.file("configuration-file2.conf"),
+    )
 }
 ```
 

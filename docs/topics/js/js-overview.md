@@ -28,7 +28,7 @@ Kotlin/JS 提供将您的 Kotlin 代码、Kotlin 标准库和任何兼容的依�
 ### KVision
 
 _KVision_ 是一款面向对象的 Web 框架，可以在 Kotlin/JS 中编写具有即用型组件的应用程序，这些组件可以作为应用程序用户界面的构建块使用。
-您可以使用响应式和命令式编程模型来构建前端，使用连接器与 Ktor、Spring Boot 和其他框架集成到您的服务器端应用程序，并使用 [Kotlin 跨平台](multiplatform.md) 共享代码。
+您可以使用响应式和命令式编程模型来构建前端，使用连接器与 Ktor、Spring Boot 和其他框架集成到您的服务器端应用程序，并使用 [Kotlin 跨平台](multiplatform-intro.md) 共享代码。
 
 [访问 KVision 网站](https://kvision.io) 获取文档、教程和示例。
 

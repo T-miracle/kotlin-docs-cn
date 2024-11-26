@@ -25,14 +25,21 @@
 {style="note"}
 
 1. 在 IntelliJ IDEA 中，选择 **File** | **New** | **Project**。
-2. 在左侧面板中，选择 **New Project** | **Spring Initializr**。
+2. 在左侧面板中，选择 **New Project** | **Spring Boot**。
 3. 在项目向导窗口中，指定以下字段和选项：
    * **Name**: demo
    * **Language**: Kotlin
-   * **Build system**: Gradle
-   * **JDK**: Java 17 JDK
-     
-     > 本教程使用 **Amazon Corretto version 18**。
+   * **Type**: Gradle - Kotlin
+
+     > 该选项指定构建系统和 DSL。
+     >
+     {style="tip"}
+
+   * **Package name**: demo
+   * **JDK**: Java JDK
+
+     > 本教程使用 **Amazon Corretto version 21**。
+     > 如果您尚未安装 JDK，可以从下拉列表中下载。
      >
      {style="note"}
    
@@ -44,9 +51,9 @@
 
 5. 选择本教程所需的以下依赖项：
 
-   * **Web / Spring Web**
-   * **SQL / Spring Data JDBC**
-   * **SQL / H2 Database**
+   * **Web | Spring Web**
+   * **SQL | Spring Data JDBC**
+   * **SQL | H2 Database**
 
    ![设置 Spring Boot 项目](set-up-spring-boot-project.png){width=800}
 
@@ -64,7 +71,7 @@
    * 应用程序的包和类位于 `main/kotlin` 文件夹下。
    * 应用程序的入口点是 `DemoApplication.kt` 文件中的 `main()` 方法。
 
-### 探索项目的 Gradle 构建文件 {id=explore-the-project-gradle-build-file collapsible="true"}
+### 探索项目的 Gradle 构建文件 {id=explore-the-project-gradle-build-file collapsible="true" collapsible="true"}
 
 打开 `build.gradle.kts` 文件：这是 Gradle 的 Kotlin 构建脚本，包含应用程序所需依赖项的列表。
 
@@ -73,43 +80,45 @@ Gradle 文件是 Spring Boot 的标准配置，但它还包含必要的 Kotlin �
 以下是完整的脚本，并对其各部分及依赖项进行了解释：
 
 ```kotlin
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile // 用于下面的 `KotlinCompile` 任务
-
-plugins { 
-    id("org.springframework.boot") version "3.1.2" // Spring Boot 插件
-    id("io.spring.dependency-management") version "1.1.2" // Spring 依赖管理插件
-    kotlin("jvm") version "%kotlinVersion%" // 要使用的 Kotlin 版本
-    kotlin("plugin.spring") version "%kotlinVersion%" // Kotlin Spring 插件
+// build.gradle.kts
+plugins {
+    kotlin("jvm") version "1.9.24" // 要使用的 Kotlin 版本
+    kotlin("plugin.spring") version "1.9.24" // Kotlin Spring 插件
+    id("org.springframework.boot") version "3.3.4"
+    id("io.spring.dependency-management") version "1.1.6"
 }
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17 // 使用 Java 17 版本
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 repositories {
     mavenCentral() // Maven 中央仓库
 }
 
-dependencies { 
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc") // Spring Data JDBC 启动器
-    implementation("org.springframework.boot:spring-boot-starter-web") // Spring Web 启动器
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin") // Jackson 的 Kotlin 扩展，用于处理 JSON
-    implementation("org.jetbrains.kotlin:kotlin-reflect") // Kotlin 反射库，Spring 必需
-    runtimeOnly("com.h2database:h2") // H2 数据库
-    testImplementation("org.springframework.boot:spring-boot-starter-test") // 测试启动器
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin") // 用于使用 JSON 的 Kotlin 的 Jackson 扩展
+    implementation("org.jetbrains.kotlin:kotlin-reflect") // Kotlin 反射库，使用 Spring 所需
+    runtimeOnly("com.h2database:h2")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-tasks.withType<KotlinCompile> { // 针对 `KotlinCompile` 任务的设置
-    kotlinOptions { // Kotlin 编译器选项
-        freeCompilerArgs = listOf("-Xjsr305=strict") // `-Xjsr305=strict` 启用 JSR-305 注解的严格模式
-        jvmTarget = "17" // 指定生成的 JVM 字节码的目标版本
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll("-Xjsr305=strict") // `-Xjsr305=strict` 启用 JSR-305 注释的严格模式
     }
 }
 
-tasks.withType<Test> { 
+tasks.withType<Test> {
     useJUnitPlatform() // 使用 JUnit 平台进行测试
 }
 ```
@@ -126,15 +135,16 @@ tasks.withType<Test> {
    * `com.fasterxml.jackson.module:jackson-module-kotlin` – 该模块为 Kotlin 类和数据类的序列化与反序列化提供支持
    * `org.jetbrains.kotlin:kotlin-reflect` – Kotlin 反射库
 
-3. 在依赖部分之后，您可以看到 `KotlinCompile` 任务的配置块。  
-   在这里，您可以向编译器添加额外的参数，以启用或禁用各种语言特性。
+3. 在依赖项部分之后，您可以看到 `kotlin` 插件配置块。  
+   在这里，您可以添加额外的参数给编译器，以启用或禁用各种语言特性。
 
 ### 探索生成的 Spring Boot 应用程序 {id=explore-the-generated-spring-boot-application}
 
 打开 `DemoApplication.kt` 文件：
 
 ```kotlin
-package com.example.demo
+// DemoApplication.kt
+package demo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -173,9 +183,17 @@ fun main(args: Array<String>) {
 
 应用程序已准备好运行，但首先让我们更新其逻辑。
 
-在 Spring 应用程序中，Controller 用于处理 Web 请求。在 `DemoApplication.kt` 文件中，创建 `MessageController` 类，如下所示：
+在 Spring 应用中，控制器用于处理 Web 请求。  
+在与 `DemoApplication.kt` 文件相同的包中，创建 `MessageController.kt` 文件，并定义 `MessageController` 类，如下所示：
 
 ```kotlin
+// MessageController.kt
+package demo
+
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
+
 @RestController
 class MessageController {
     @GetMapping("/")
@@ -190,10 +208,10 @@ class MessageController {
    </def>
    <def title="@GetMapping 注解">
       <p><code>@GetMapping</code> 标记 REST Controller的函数，这些函数实现对应 HTTP GET 请求的端点：</p>
-      <code style="block" lang="kotlin">
+      <code-block lang="kotlin">
       @GetMapping("/")
       fun index(@RequestParam("name") name: String) = "Hello, $name!"
-      </code>
+      </code-block>
    </def>
    <def title="@RequestParam 注解">
       <p>函数参数 <code>name</code> 被 <code>@RequestParam</code> 注解标记。这个注解表示方法参数应该绑定到 Web 请求的参数。</p>
@@ -214,49 +232,13 @@ class MessageController {
    </def>
 </deflist>
 
-> 这些 Spring 注解还需要额外的导入：
->
-> ```kotlin
-> import org.springframework.web.bind.annotation.GetMapping
-> import org.springframework.web.bind.annotation.RequestParam
-> import org.springframework.web.bind.annotation.RestController
-> ```
->
-{style="note"}
-
-这是完整的 `DemoApplication.kt` 代码：
-
-```kotlin
-package com.example.demo
-
-import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.runApplication
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
-
-@SpringBootApplication
-class DemoApplication
-
-fun main(args: Array<String>) {
-    runApplication<DemoApplication>(*args)
-}
-
-@RestController
-class MessageController {
-    @GetMapping("/")
-    fun index(@RequestParam("name") name: String) = "Hello, $name!"
-}
-```
-{collapsible="true"}
-
 ## 运行应用程序 {id=run-the-application}
 
 Spring 应用程序现在已经准备好运行：
 
 1. 点击 `main()` 方法旁边的绿色运行图标：
 
-   ![Run Spring Boot application](run-spring-boot-application.png){width=706}
+   ![运行 Spring Boot 应用程序](run-spring-boot-application.png){width=706}
 
    > 您也可以在终端中运行 `./gradlew bootRun` 命令。
    >
@@ -276,6 +258,6 @@ Spring 应用程序现在已经准备好运行：
 
 ## 下一步 {id=next-step}
 
-在教程的下一部分，您将学习 Kotlin 数据类，以及如何在您的应用程序中使用它们。
+在接下来的教程部分，您将学习 Kotlin 数据类以及如何在您的应用程序中使用它们。
 
 **[继续下一章节](jvm-spring-boot-add-data-class.md)**

@@ -1,5 +1,7 @@
 [//]: # (title: Hello world)
 
+<no-index/>
+
 <tldr>
     <p><img src="icon-1.svg" width="20" alt="第一步" /> <strong>Hello world</strong><br />
         <img src="icon-2-todo.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
@@ -60,8 +62,10 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-variables"}
 
-> 变量可以在 `main()` 函数之外在程序的开头声明。
-> 以这种方式声明的变量被称为在 **顶层** 声明。
+> 变量可以在程序开始时，`main()` 函数外部声明。
+> 以这种方式声明的变量被称为**顶级**声明。
+>
+{style="tip"}
 
 
 由于 `customers` 是可变变量，它的值可以在声明后重新赋值。
@@ -99,7 +103,7 @@ fun main() {
 
 ## 实践
 
-### 练习 {collapsible="true"}
+### 练习 {collapsible="true" collapsible="true"}
 
 完成以下代码，使程序将 `"Mary is 20 years old"` 打印到标准输出：
 
@@ -121,7 +125,7 @@ fun main() {
     println("$name is $age years old")
 }
 ```
-{collapsible="true" collapsed-title="Example solution" id="kotlin-tour-hello-world-solution"}
+{collapsible="true" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-hello-world-solution"}
 
 ## 下一步
 

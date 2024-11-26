@@ -1,80 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE vars
-  SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
 
 <vars>
 
-  <!--当前主仓库版本号-->
-  <var name="commitId" value="eae90f55a0d81f1f54e32a185fbef2888bed53d6" type="string"/>
+    <!--当前主仓库版本号-->
+    <var name="commitId" value="d8254bd0e920fd9eb0ae359fe76959842ba0e46d" type="string"/>
 
-  <!--当前 协程 仓库版本号-->
-  <var name="coroutinesCommitId" value="c1ba5af8c5d10a3d2f923f89b98f6ab1b394e24d" type="string"/>
+    <!--当前 协程 仓库版本号-->
+    <var name="coroutinesCommitId" value="c1ba5af8c5d10a3d2f923f89b98f6ab1b394e24d" type="string"/>
 
-  <!--协程 远程仓库前缀-->
-  <var name="coroutinesRemotePrefix" value="https://github.com/Kotlin/kotlinx.coroutines/blob/master" type="string"/>
+    <!--协程 远程仓库前缀-->
+    <var name="coroutinesRemotePrefix" value="https://github.com/Kotlin/kotlinx.coroutines/blob/master" type="string"/>
 
-  <!--当前 lincheck 仓库版本号-->
-  <var name="lincheckCommitId" value="f1c24bd39c21307bb5441ed6253fc7295e08b84b" type="string"/>
+    <!--当前 lincheck 仓库版本号-->
+    <var name="lincheckCommitId" value="f1c24bd39c21307bb5441ed6253fc7295e08b84b" type="string"/>
 
-  <!--当前 api-guidelines 仓库版本号-->
-  <var name="apiGuidelinesCommitId" value="e7fd19a8154bcbca06f3faf98391ffbf36777043" type="string"/>
+    <!--当前 api-guidelines 仓库版本号-->
+    <var name="apiGuidelinesCommitId" value="e7fd19a8154bcbca06f3faf98391ffbf36777043" type="string"/>
 
-  <!--当前 dokka 仓库版本号-->
-  <var name="dokkaCommitId" value="f1ea0c921a2df8c36a8f9fc1572b9cec52e8a553" type="string"/>
+    <!--当前 dokka 仓库版本号-->
+    <var name="dokkaCommitId" value="f1ea0c921a2df8c36a8f9fc1572b9cec52e8a553" type="string"/>
 
-  <var name="kotlinVersion" value="2.0.10" type="string"/>
 
-  <var name="kotlinEapVersion" value="2.0.20-RC" type="string"/>
+    <!-- Kotlin -->
+    <var name="kotlinVersion" value="2.0.21" type="string"/>
+    <var name="kotlinReleaseDate" value="October 10, 2024" type="string"/>
+    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.0.21" type="string"/>
 
-  <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.0.10" type="string"/>
+    <var name="languageVersion" value="2.0" type="string"/>
+    <var name="apiVersion" value="2.0" type="string"/>
 
-  <var name="kotlinReleaseDate" value="August 6, 2024" type="string"/>
+    <!-- Kotlin EAP -->
+    <var name="kotlinEapVersion" value="2.1.0-RC2" type="string"/>
+    <var name="kotlinEapReleaseDate" value="November 18, 2024" type="string"/>
 
-  <var name="kotlinEapReleaseDate" value="July 30, 2024" type="string"/>
+    <!-- Libraries and Frameworks -->
+    <var name="coroutinesVersion" value="1.9.0" type="string"/>
+    <var name="coroutinesEapVersion" value="1.9.0-RC.2" type="string"/>
 
-  <var name="coroutinesVersion" value="1.8.1" type="string"/>
+    <var name="serializationVersion" value="1.7.3" type="string"/>
 
-  <var name="coroutinesEapVersion" value="1.7.3" type="string"/>
+    <var name="dateTimeVersion" value="0.6.1" type="string"/>
 
-  <var name="minGradleVersion" value="6.8.3" type="string"/>
+    <var name="lincheckVersion" value="2.34" type="string"/>
 
-  <var name="maxGradleVersion" value="8.5" type="string"/>
+    <var name="ktorVersion" value="3.0.0" type="string"/>
 
-  <var name="minAndroidGradleVersion" value="7.1.3" type="string"/>
+    <var name="sqlDelightVersion" value="2.0.2" type="string"/>
 
-  <var name="maxAndroidGradleVersion" value="8.3.1" type="string"/>
+    <!-- Gradle, KGP, AGP -->
+    <var name="minGradleVersion" value="6.8.3" type="string"/>
+    <var name="maxGradleVersion" value="8.8" type="string"/>
 
-  <var name="gradleVersion" value="8.5" type="string"/>
+    <var name="minAndroidGradleVersion" value="7.1.3" type="string"/>
 
-  <var name="gradleLanguageVersion" value="KOTLIN_2_0" type="string"/>
+    <var name="maxAndroidGradleVersion" value="8.5" type="string"/>
 
-  <var name="gradleApiVersion" value="KOTLIN_2_0" type="string"/>
+    <var name="gradleVersion" value="8.5" type="string"/>
 
-  <var name="serializationVersion" value="1.7.1" type="string"/>
+    <var name="gradleLanguageVersion" value="KOTLIN_2_0" type="string"/>
 
-  <var name="defaultJvmTargetVersion" value="1.8" type="string"/>
+    <var name="gradleApiVersion" value="KOTLIN_2_0" type="string"/>
 
-  <var name="jvmLTSVersionSupportedByKotlin" value="17" type="string"/>
+    <!-- KSP -->
+    <var name="kspSupportedKotlinVersion" value="2.0.21" type="string"/>
+    <var name="kspVersion" value="1.0.25" type="string"/>
 
-  <var name="webpackMajorVersion" value="5" type="string"/>
+    <!-- Other -->
+    <var name="defaultJvmTargetVersion" value="1.8" type="string"/>
 
-  <var name="webpackPreviousMajorVersion" value="4" type="string"/>
+    <var name="jvmLTSVersionSupportedByKotlin" value="17" type="string"/>
 
-  <var name="sqlDelightVersion" value="2.0.0" type="string"/>
+    <var name="webpackMajorVersion" value="5" type="string"/>
 
-  <var name="kspSupportedKotlinVersion" value="2.0.0" type="string"/>
+    <var name="webpackPreviousMajorVersion" value="4" type="string"/>
 
-  <var name="kspVersion" value="1.0.23" type="string"/>
+    <var name="foojayResolver" value="0.5.0" type="string"/>
 
-  <var name="ktorVersion" value="2.3.12" type="string"/>
 
-  <var name="dateTimeVersion" value="0.6.0" type="string"/>
+    <var name="jctoolsVersion" value="3.3.0" type="string"/>
 
-  <var name="foojayResolver" value="0.5.0" type="string"/>
-
-  <var name="languageVersion" value="2.0" type="string"/>
-
-  <var name="apiVersion" value="2.0" type="string"/>
-
+    <var name="dokkaVersion"
+         value="1.9.20"
+         type="string"/>
+    <var name="kotlinVersion"
+         value="1.9.22"
+         type="string"/>
 
 </vars>

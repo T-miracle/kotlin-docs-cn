@@ -1,19 +1,33 @@
-[//]: # (title: Kotlin Wasm)
+[//]: # (title: Kotlin/Wasm)
 
-> Kotlin/Wasm 目前处于 [Alpha](components-stability.md) 阶段。
-> 可能随时发生变化。你可以在生产前使用它。我们非常欢迎你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492) 上提供反馈。
-> 
+> Kotlin/Wasm 处于 [Alpha](components-stability.md) 阶段，可能随时发生变化。
+> 在生产环境之前，您可以在其他场景中使用它。我们非常欢迎您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492) 提供反馈。
+>
 > [加入 Kotlin/Wasm 社区](https://slack-chats.kotlinlang.org/c/webassembly)。
 >
 {style="note"}
 
-使用 Kotlin，你可以通过 Compose Multiplatform 和 Kotlin/Wasm 在你的
-web 项目中构建应用程序并重用移动和桌面用户界面（UI）。
+Kotlin/Wasm 具有将您的 Kotlin 代码编译为 [WebAssembly (Wasm)](https://webassembly.org/) 格式的能力。  
+借助 Kotlin/Wasm，您可以创建在支持 Wasm 且满足 Kotlin 要求的不同环境和设备上运行的应用程序。
 
-[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 是一个基于 Kotlin
-和 [Jetpack Compose](https://developer.android.com/jetpack/compose) 的声明式框架，它允许你一次实现
-UI，并在你目标的所有平台上共享它。对于 web 平台，Compose Multiplatform 使用
-Kotlin/Wasm 作为其编译目标。
+Wasm 是一种面向栈的虚拟机的二进制指令格式。该格式是平台无关的，因为它在自己的虚拟机上运行。
+Wasm 为 Kotlin 和其他语言提供了一个编译目标。
+
+您可以在不同的目标环境中使用 Kotlin/Wasm，例如浏览器中，用于开发使用
+[Compose Multiplatform](https://www.jetbrains.com/lp/compose-multiplatform/) 构建的 Web 应用程序，或者在浏览器之外的独立
+Wasm 虚拟机中。在浏览器外的使用场景中， [WebAssembly System Interface (WASI)](https://wasi.dev/)
+提供了对平台 API 的访问，您也可以利用这些 API。
+
+
+## Kotlin/Wasm 和 Compose 跨平台 {id=kotlin-wasm-and-compose-multiplatform}
+
+借助 Kotlin，您可以通过 Compose 跨平台和 Kotlin/Wasm 在您的 Web 项目中构建应用程序并重用移动和桌面用户界面（UI）。
+
+[Compose 跨平台](https://www.jetbrains.com/lp/compose-multiplatform/) 是一个基于 Kotlin 和
+[Jetpack Compose](https://developer.android.com/jetpack/compose) 的声明式框架，允许您一次实现 UI 并在所有目标平台上共享它。
+
+对于 Web 平台，Compose 跨平台使用 Kotlin/Wasm 作为其编译目标。
+使用 Kotlin/Wasm 和 Compose 跨平台构建的应用程序使用 `wasm-js` 目标并在浏览器中运行。
 
 [探索我们基于 Compose Multiplatform 和 Kotlin/Wasm 构建的应用程序的在线演示](https://zal.im/wasm/jetsnack/)
 
@@ -25,20 +39,27 @@ Kotlin/Wasm 作为其编译目标。
 >
 {style="tip"}
 
-[WebAssembly (Wasm)](https://webassembly.org/) 是一种用于基于栈的虚拟机的二进制指令格式。  
-这种格式是平台无关的，因为它在自己的虚拟机上运行。
-Wasm 为 Kotlin 和其他语言提供了一个在 Web 上运行的编译目标。
-
-Kotlin/Wasm 将你的 Kotlin 代码编译成 Wasm 格式。
-使用 Kotlin/Wasm，你可以创建在支持 Wasm 和符合 Kotlin 要求的不同环境和设备上运行的应用程序。
-
-此外，你可以轻松使用最流行的 Kotlin 库在 Kotlin/Wasm 中使用。
-像其他 Kotlin 和跨平台项目一样，你可以在构建脚本中包含依赖声明。
-更多信息，请参见 [在跨平台库上添加依赖](multiplatform-add-dependencies.md)。
+此外，您可以在 Kotlin/Wasm 中开箱即用地使用最流行的 Kotlin 库。
+与其他 Kotlin 和跨平台项目一样，您可以在构建脚本中包含依赖声明。
+有关更多信息，请参见 [添加跨平台库的依赖](multiplatform-add-dependencies.md)。
 
 你想自己尝试一下吗？
 
-<a href="wasm-get-started.md"><img src="wasm-get-started-button.svg" width="700" style="block" alt="Kotlin/Wasm 入门"/></a>
+<a href="wasm-get-started.md"><img src="wasm-get-started-button.svg" width="700" alt="Kotlin/Wasm 入门" style="block"/></a>
+
+## Kotlin/Wasm 和 WASI {id=kotlin-wasm-and-wasi}
+
+Kotlin/Wasm 使用 [WebAssembly System Interface (WASI)](https://wasi.dev/) 来支持服务器端应用程序。  
+使用 Kotlin/Wasm 和 WASI 构建的应用程序使用 Wasm-WASI 目标，允许您调用 WASI API 并在浏览器环境之外运行应用程序。
+
+Kotlin/Wasm 利用 WASI 抽象平台特定的细节，使得相同的 Kotlin 代码能够在不同的平台上运行。
+这使得 Kotlin/Wasm 的应用范围超越了 Web 应用程序，而无需为每个运行时环境进行自定义处理。
+
+WASI 提供了一个安全的标准接口，用于在不同环境中运行编译为 WebAssembly 的 Kotlin 应用程序。
+
+> 要查看 Kotlin/Wasm 和 WASI 的实际应用，请查看 [开始使用 Kotlin/Wasm 和 WASI 教程](wasm-wasi.md)。
+>
+{style="tip"}
 
 ## Kotlin/Wasm 性能
 

@@ -104,8 +104,10 @@ val hexBytes = 0xFF_EC_DE_5E
 val bytes = 0b11010010_01101001_10010100_10010010
 ```
 
-> 对于无符号整数字面常量，还有特殊的标记。  
-> 详细了解 [无符号整数类型的字面常量](unsigned-integer-types.md)。
+> 对于无符号整数字面量，还有特殊的标签。  
+> 阅读更多关于 [无符号整数类型的字面量](unsigned-integer-types.md) 的内容。
+>
+{style="tip"}
 
 
 ## JVM 平台上的数字表示 {id=numbers-representation-on-the-jvm}

@@ -10,10 +10,10 @@ data class User(val name: String, val age: Int)
 
 编译器会自动根据主构造函数中声明的属性生成以下成员：
 
-* `.equals()`/`.hashCode()` 对。
-* 形式为 `"User(name=John, age=42)"` 的 `.toString()`。
-* [`.componentN()` 函数](destructuring-declarations.md)，对应于属性的声明顺序。
-* `.copy()` 函数（见下文）。
+* `equals()`/`hashCode()` 配对。
+* `toString()` 形式为 `"User(name=John, age=42)"`。
+* 与声明顺序对应的 [`componentN()` 函数](destructuring-declarations.md)。
+* `copy()` 函数（见下文）。
 
 为了确保生成的代码一致并且具有有意义的行为，数据类必须符合以下规定：
 
@@ -23,10 +23,11 @@ data class User(val name: String, val age: Int)
 
 此外，关于数据类成员的生成，遵循以下继承规则：
 
-* 如果在数据类体内有明确实现 `.equals()`、`.hashCode()` 或 `.toString()`，或者在超类中有`final` 实现，系统将不会自动生成这些函数，而是沿用已有的实现。
-* 如果超类型具有 `open` 且返回兼容类型的 `.componentN()` 函数，那么将为数据类生成相应的函数，并覆盖超类型的函数。
-  如果由于不兼容的签名或它们是最终实现而无法覆盖超类型的函数，则会报告错误。
-* 请勿为 `.componentN()` 和 `.copy()` 函数提供显式实现，这是不允许的。
+* 如果在数据类的主体中有 `equals()`、`hashCode()` 或 `toString()` 的显式实现，或者在超类中有
+  `final` 实现，则这些函数不会被生成，现有的实现将被使用。
+* 如果超类型具有 `open` 的 `componentN()` 函数并且返回兼容类型，则为数据类生成相应的函数，并重写超类型中的函数。
+  如果由于签名不兼容或函数为 `final`，无法重写超类型的函数，则会报告错误。
+* 不允许为 `componentN()` 和 `copy()` 函数提供显式实现。
 
 数据类可以扩展其他类（参见[密封类](sealed-classes.md)以获取示例）。
 
@@ -49,10 +50,10 @@ data class Person(val name: String) {
 }
 ```
 
-在下面的示例中，只有 `name` 属性在 `.toString()`、`.equals()`、`.hashCode()`
-和 `.copy()` 实现中被默认使用，并且只有一个组件函数 `.component1()`。
+在下面的示例中，只有 `name` 属性在 `toString()`、`equals()`、`hashCode()`
+和 `copy()` 实现中被默认使用，并且只有一个组件函数 `component1()`。
 `age` 属性是在类体内部声明的，因此被排除在外。
-因此，两个 `Person` 对象如果 `name` 相同但 `age` 值不同，它们会被认为是相等的，因为 `.equals()`
+因此，两个 `Person` 对象如果 `name` 相同但 `age` 值不同，它们会被认为是相等的，因为 `equals()`
 只评估来自主构造函数的属性：
 
 ```kotlin
@@ -81,7 +82,7 @@ fun main() {
 
 ## 复制
 
-使用 `.copy()` 函数复制一个对象，允许你在保持其余属性不变的情况下修改**部分**属性。
+使用 `copy()` 函数复制一个对象，允许你在保持其余属性不变的情况下修改**部分**属性。
 上面 `User` 类的此函数实现如下：
 
 ```kotlin

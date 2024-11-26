@@ -309,7 +309,7 @@ lambda 表达式和匿名函数之间的另一个区别是[非局部返回](inli
 
 ### 闭包 {id=closures}
 
-lambda 表达式或匿名函数（以及 [局部函数](functions.md#局部函数) 和 [对象表达式](object-declarations.md#对象表达式)）可以访问其*闭包*，其中包括外部作用域中声明的变量。在闭包中捕获的变量可以在 lambda 中进行修改：
+lambda 表达式或匿名函数（以及 [局部函数](functions.md#局部函数) 和 [对象表达式](object-declarations.md#object-expressions)）可以访问其*闭包*，其中包括外部作用域中声明的变量。在闭包中捕获的变量可以在 lambda 中进行修改：
 
 ```kotlin
 var sum = 0

@@ -1,5 +1,7 @@
 [//]: # (title: 集合)
 
+<no-index/>
+
 <tldr>
     <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
         <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
@@ -421,7 +423,7 @@ fun main() {
 
 ## 练习 {id=practice}
 
-### 练习 1 {id=exercise-1 collapsible="true"}
+### 练习 1 {id=exercise-1 collapsible="true" collapsible="true"}
 
 你有一个 “green” 数字列表和一个 “red” 数字列表。 完成代码以打印总共有多少个数字。
 
@@ -444,9 +446,9 @@ fun main() {
     println(totalCount)
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-1"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-1"}
 
-### 练习 2 {id=exercise-2 collapsible="true"}
+### 练习 2 {id=exercise-2 collapsible="true" collapsible="true"}
 
 你有一组由服务器支持的协议。用户请求使用某个特定协议。
 完成程序以检查所请求的协议是否受支持（`isSupported` 必须是一个布尔值）。
@@ -477,9 +479,9 @@ fun main() {
     println("Support for $requested: $isSupported")
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-2"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-2"}
 
-### 练习 3 {id=exercise-3 collapsible="true"}
+### 练习 3 {id=exercise-3 collapsible="true" collapsible="true"}
 
 定义一个将 1 到 3 的整数与它们对应的拼写关联的映射。
 使用这个映射来拼写给定的数字。
@@ -502,7 +504,7 @@ fun main() {
     println("$n is spelt as '${number2word[n]}'")
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-3"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-collections-solution-3"}
 
 ## 下一步
 

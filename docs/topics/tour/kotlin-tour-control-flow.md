@@ -1,5 +1,7 @@
 [//]: # (title: 控制流程)
 
+<no-index/>
+
 <tldr>
     <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
         <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
@@ -173,27 +175,9 @@ fun main() {
 当使用带主体的 `when` 表达式时，它还帮助 Kotlin 检查所有可能的情况是否都被覆盖。
 否则，如果不使用主体的 `when` 表达式，你需要提供一个 else 分支。
 
-## 区间 {id=ranges}
+## 条件表达式练习 {id=conditional-expressions-practice}
 
-在讨论循环之前，了解如何构建循环迭代的区间是很有用的。
-
-在 Kotlin 中，创建区间最常见的方式是使用 `..` 运算符。例如，`1..4` 等同于 `1, 2, 3, 4`。
-
-要声明一个不包括结束值的区间，可以使用 `..<` 运算符。例如，`1..<4` 等同于 `1, 2, 3`。
-
-要声明一个反序区间，可以使用 `downTo`。例如，`4 downTo 1` 等同于 `4, 3, 2, 1`。
-
-要声明一个步长不为 1 的区间，可以使用 `step` 和你想要的增量值。
-例如，`1..5 step 2` 等同于 `1, 3, 5`。
-
-你也可以对 `Char` 类型的区间做同样的操作：
-
-* `'a'..'d'` 等同于 `'a', 'b', 'c', 'd'`
-* `'z' downTo 's' step 2` 等同于 `'z', 'x', 'v', 't'`
-
-## 条件表达式和区间练习 {id=conditional-expressions-and-ranges-practice}
-
-### 练习 1 {id=exercise-1} {collapsible="true" id="conditional-expressions-exercise-1"}
+### 练习 1 {id=exercise-1} {collapsible="true" collapsible="true" id="conditional-expressions-exercise-1"}
 
 创建一个简单的游戏，如果投掷两个骰子结果相同，你就赢了。
 使用 `if` 打印 `你赢了 :)`，如果骰子相同；否则，打印 `你输了 :(`。
@@ -234,11 +218,11 @@ fun main() {
         println("你输了 :(")
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-conditional-solution-1"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-conditional-solution-1"}
 
-### 练习 2 {id=exercise-2} {collapsible="true" id="conditional-expressions-exercise-2"}
+### 练习 2 {id=exercise-2} {collapsible="true" collapsible="true" id="conditional-expressions-exercise-2"}
 
-使用 `when` 表达式，更新以下程序，使得当你输入 GameBoy 按钮的名称时，输出相应的操作。
+使用 `when` 表达式，更新以下程序，使其在输入游戏控制器按钮名称时打印对应的操作。
 
 | **按钮** | **操作** |
 |--------|--------|
@@ -276,7 +260,24 @@ fun main() {
     )
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-conditional-solution-2"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-conditional-solution-2"}
+
+## 区间 {id=ranges}
+
+在讨论循环之前，了解如何构造区间供循环遍历是很有用的。
+
+在 Kotlin 中，创建区间最常见的方式是使用 `..` 运算符。例如，`1..4` 等价于 `1, 2, 3, 4`。
+
+要声明一个不包括结束值的区间，使用 `..<` 运算符。例如，`1..<4` 等价于 `1, 2, 3`。
+
+要声明一个逆序的区间，使用 `downTo`。例如，`4 downTo 1` 等价于 `4, 3, 2, 1`。
+
+要声明一个增量不是 1 的区间，使用 `step` 和你想要的增量值。例如，`1..5 step 2` 等价于 `1, 3, 5`。
+
+你也可以对 `Char` 类型的区间做相同的操作：
+
+* `'a'..'d'` 等价于 `'a', 'b', 'c', 'd'`
+* `'z' downTo 's' step 2` 等价于 `'z', 'x', 'v', 't'`
 
 ## 循环 {id=loops}
 
@@ -389,7 +390,7 @@ fun main() {
 
 ## 循环练习 {id=loops-practice}
 
-### 练习 1 {collapsible="true" id="loops-exercise-1"}
+### 练习 1 {collapsible="true" collapsible="true" id="loops-exercise-1"}
 
 你有一个程序，它会计数披萨片数，直到有一个完整的 8 片披萨。请以两种方式重构这个程序：
 
@@ -434,7 +435,7 @@ fun main() {
     println("披萨片有 $pizzaSlices 片。太棒了！我们有一整张披萨了！ :D")
 }
 ```
-{collapsible="true" collapsed-title="示例解答 1" id="kotlin-tour-control-flow-loops-exercise-1-solution-1"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答 1" id="kotlin-tour-control-flow-loops-exercise-1-solution-1"}
 
 |---|---|
 ```kotlin
@@ -449,9 +450,9 @@ fun main() {
 }
 
 ```
-{collapsible="true" collapsed-title="示例解答 2" id="kotlin-tour-control-flow-loops-exercise-1-solution-2"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答 2" id="kotlin-tour-control-flow-loops-exercise-1-solution-2"}
 
-### 练习 2 {collapsible="true" id="loops-exercise-2"}
+### 练习 2 {collapsible="true" collapsible="true" id="loops-exercise-2"}
 
 编写一个程序来模拟 [Fizz buzz](https://en.wikipedia.org/wiki/Fizz_buzz) 游戏。
 你的任务是从 1 到 100 打印数字，任何能被 3 整除的数字用“fizz”替换，任何能被 5 整除的数字用“buzz”替换。
@@ -492,9 +493,9 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-loops-solution-2"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-loops-solution-2"}
 
-### 练习 3 {collapsible="true" id="loops-exercise-3"}
+### 练习 3 {collapsible="true" collapsible="true" id="loops-exercise-3"}
 
 你有一个单词列表。使用 `for` 和 `if` 只打印以字母 `l` 开头的单词。
 
@@ -523,7 +524,7 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-loops-solution-3"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-control-flow-loops-solution-3"}
 
 ## 下一步
 

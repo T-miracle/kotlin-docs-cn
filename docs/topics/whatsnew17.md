@@ -1,8 +1,8 @@
 [//]: # (title: What's new in Kotlin 1.7.0)
 
-<microformat>
+<tldr>
    <p>The IDE support for Kotlin 1.7.0 is available for IntelliJ IDEA 2021.2, 2021.3, and 2022.1.</p>
-</microformat>
+</tldr>
 
 _[Released: 9 June 2022](releases.md#release-details)_
 
@@ -24,7 +24,7 @@ Here is a list of the major updates in this version:
 
 You can also find a short overview of the changes in this video:
 
-<video src="https://youtu.be/54WEfLKtCGk" title="What's new in Kotlin 1.7.0"/>
+<video src="https://www.youtube.com/v/54WEfLKtCGk" title="What's new in Kotlin 1.7.0"/>
 
 ## New Kotlin K2 compiler for the JVM in Alpha
 
@@ -525,7 +525,7 @@ compatibility, see [Compatibility modes](compatibility-modes.md).
 
 ### Access to annotations via reflection
 
-The `KAnnotatedElement.[findAnnotations()](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect.full/find-annotations.html)`
+The [`KAnnotatedElement.findAnnotations()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect.full/find-annotations.html)
 extension function, which was first [introduced in 1.6.0](whatsnew16.md#repeatable-annotations-with-runtime-retention-for-1-8-jvm-target),
 is now [Stable](components-stability.md). This [reflection](reflection.md)
 function returns all annotations of a given type on an element, including individually applied and repeated annotations.
@@ -1069,12 +1069,12 @@ The new command-line compiler is available for download on the [GitHub release p
 ### Migrate existing or start a new project with Kotlin 1.7.0
 
 * To migrate existing projects to Kotlin 1.7.0, change the Kotlin version to `1.7.0` and reimport your Gradle or Maven
-project. [Learn how to update to Kotlin 1.7.0](releases.md#update-to-a-new-release).
+project. [Learn how to update to Kotlin 1.7.0](releases.md#update-to-a-new-kotlin-version).
 
-* To start a new project with Kotlin 1.7.0, update the Kotlin plugin and run the Project Wizard from **File** \| **New** \|
+* To start a new project with Kotlin 1.7.0, update the Kotlin plugin and run the Project Wizard from **File** | **New** |
 **Project**.
 
 ### Compatibility guide for Kotlin 1.7.0
 
-Kotlin 1.7.0 is a [feature release](kotlin-evolution.md#language-and-tooling-releases) and can, therefore, bring changes that are incompatible with your code written for earlier versions of the language.
+Kotlin 1.7.0 is a [feature release](kotlin-evolution-principles.md#language-and-tooling-releases) and can, therefore, bring changes that are incompatible with your code written for earlier versions of the language.
 Find the detailed list of such changes in the [Compatibility guide for Kotlin 1.7.0](compatibility-guide-17.md).

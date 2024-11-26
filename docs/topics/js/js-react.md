@@ -1,6 +1,9 @@
 [//]: # (title: 使用 React 和 Kotlin/JS 构建 Web 应用程序 — 教程)
 
-这个教程将教你如何使用 Kotlin/JS 和 [React](https://reactjs.org/) 框架构建一个浏览器应用程序。你将会：
+<no-index/>
+
+本教程将教您如何使用 Kotlin/JS 和 [React](https://reactjs.org/) 构建浏览器应用程序
+框架。你会：
 
 * 完成与构建典型 React 应用程序相关的常见任务。
 * 了解如何利用 [Kotlin 的 DSL](type-safe-builders.md) 来简洁、一致地表达概念，同时保持可读性，从而实现全面采用 Kotlin
@@ -1197,7 +1200,7 @@ Heroku 可以非常简单地启动一个可通过其自己的域名访问的应�
 
 ## 接下来做什么
 
-### 添加更多功能 {collapsible="true"}
+### 添加更多功能 {collapsible="true" collapsible="true"}
 
 您可以使用生成的应用程序作为探索 React、Kotlin/JS 等领域更高级主题的起点。
 
@@ -1210,22 +1213,22 @@ Heroku 可以非常简单地启动一个可通过其自己的域名访问的应�
   可用。您可以将各种数据拉入应用程序。例如，您可以构建一个 [猫照片的可视化器](https://thecatapi.com/)
   或 [免费的库存照片 API](https://unsplash.com/developers)。
 
-### 改进样式：响应式和网格 {collapsible="true"}
+### 改进样式：响应式和网格 {collapsible="true" collapsible="true"}
 
 应用程序设计仍然非常简单，在移动设备或窄窗口中可能看起来不太好。探索更多的 CSS DSL，使应用程序更易于访问。
 
-### 加入社区并获取帮助 {collapsible="true"}
+### 加入社区并获取帮助 {collapsible="true" collapsible="true"}
 
 报告问题和获取帮助的最佳途径是 [kotlin-wrappers 问题跟踪器](https://github.com/JetBrains/kotlin-wrappers/issues)。
 如果找不到与您的问题相关的票，可以随时提交新票。
 您还可以加入官方的 [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)。
 有 `#javascript` 和 `#react` 等频道。
 
-### 了解更多关于协程的知识 {collapsible="true"}
+### 了解更多关于协程的知识 {collapsible="true" collapsible="true"}
 
 如果您对了解如何编写并发代码感兴趣，请查看关于 [协程](coroutines-and-channels.md) 的教程。
 
-### 了解更多关于 React 的知识 {collapsible="true" id="了解更多关于React的知识"}
+### 了解更多关于 React 的知识 {collapsible="true" id="了解更多关于React的知识" collapsible="true"}
 
 现在您已经了解了基本的 React 概念以及它们如何转换为 Kotlin，您可以将[React 文档](https://react.dev/learn)中概述的其他概念转换为
 Kotlin。

@@ -24,4 +24,4 @@
 
 准备好了吗？
 
-<a href="kotlin-tour-hello-world.md"><img src="start-kotlin-tour.svg" width="700" style="block" alt="Start the Kotlin tour"/></a>
+<a href="kotlin-tour-hello-world.md"><img src="start-kotlin-tour.svg" width="700" alt="Start the Kotlin tour" style="block"/></a>

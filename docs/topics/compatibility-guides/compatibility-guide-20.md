@@ -1,6 +1,6 @@
 [//]: # (title: Compatibility guide for Kotlin 2.0)
 
-_[Keeping the Language Modern](kotlin-evolution.md)_ and _[Comfortable Updates](kotlin-evolution.md)_ are among the fundamental principles in
+_[Keeping the Language Modern](kotlin-evolution-principles.md)_ and _[Comfortable Updates](kotlin-evolution-principles.md)_ are among the fundamental principles in
 Kotlin Language Design. The former says that constructs which obstruct language evolution should be removed, and the
 latter says that this removal should be well-communicated beforehand to make code migration as smooth as possible.
 
@@ -555,7 +555,7 @@ perspective
 >   a non-nullable type that should be nullable, prompting to specify the type explicitly to avoid NPEs
 > - 2.0.0: nullable types are approximated by nullable supertypes
 
-### Remove special handling for `false && ...` and `false || ...` for the purposes of smart-casting
+### Remove special handling for false && ... and false || ... for the purposes of smart-casting
 
 > **Issue**: [KT-65776](https://youtrack.jetbrains.com/issue/KT-65776)
 >

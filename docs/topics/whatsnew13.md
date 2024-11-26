@@ -29,7 +29,7 @@ The key differences to the old model are:
   (for example, in a module that targets JS, Android and iOS, you can have a source set that is shared only between Android and iOS).
   * [Publishing multiplatform libraries](multiplatform-publish-lib.md) is now supported.
 
-For more information, please refer to the [multiplatform programming documentation](multiplatform.md).
+For more information, please refer to the [multiplatform programming documentation](multiplatform-intro.md).
 
 ## Contracts
 
@@ -133,7 +133,7 @@ fun String?.isNullOrEmpty(): Boolean {
 
 See the details on the syntax as well as the compatibility notice in the [KEEP](https://github.com/Kotlin/KEEP/blob/master/proposals/kotlin-contracts.md).
 
-## Capturing `when` subject in a variable
+## Capturing when subject in a variable
 
 In Kotlin 1.3, it is now possible to capture the `when` subject into a variable:
 
@@ -146,7 +146,7 @@ fun Request.getBody() =
 ```
 
 While it was already possible to extract this variable just before `when` , `val` in `when` has its scope properly restricted
-to the body of `when`, and so preventing namespace pollution. [See the full documentation on `when` here](control-flow.md#when-expression).
+to the body of `when`, and so preventing namespace pollution. [See the full documentation on `when` here](control-flow.md#when-expressions-and-statements).
 
 ## @JvmStatic and @JvmField in companions of interfaces
 
@@ -197,7 +197,7 @@ annotation class Foo {
 }
 ```
 
-## Parameterless `main`
+## Parameterless main
 
 By convention, the entry point of a Kotlin program is a function with a signature like `main(args: Array<String>)`,
 where `args` represent the command-line arguments passed to the program. However, not every application supports command-line arguments,

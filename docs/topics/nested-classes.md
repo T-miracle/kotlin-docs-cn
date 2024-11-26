@@ -46,7 +46,7 @@ val demo = Outer().Inner().foo() // == 1
 
 ## 匿名内部类
 
-使用 [对象表达式](object-declarations.md#对象表达式) 创建匿名内部类的实例：
+使用 [对象表达式](object-declarations.md#object-expressions) 创建匿名内部类的实例：
 
 ```kotlin
 window.addMouseListener(object : MouseAdapter() {

@@ -48,21 +48,27 @@ plugins {
 When configuring your project, check the Kotlin Gradle plugin (KGP) compatibility with available Gradle versions. 
 In the following table, there are the minimum and maximum **fully supported** versions of Gradle and Android Gradle plugin (AGP):
 
-| KGP version   | Gradle min and max versions           | AGP min and max versions                            |
-|---------------|---------------------------------------|-----------------------------------------------------|
-| 2.0.0         | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% |
-| 1.9.20–1.9.25 | 6.8.3–8.1.1                           | 4.2.2–8.1.0                                         |
-| 1.9.0–1.9.10  | 6.8.3–7.6.0                           | 4.2.2–7.4.0                                         |
-| 1.8.20–1.8.22 | 6.8.3–7.6.0                           | 4.1.3–7.4.0                                         |      
-| 1.8.0–1.8.11  | 6.8.3–7.3.3                           | 4.1.3–7.2.1                                         |   
-| 1.7.20–1.7.22 | 6.7.1–7.1.1                           | 3.6.4–7.0.4                                         |
-| 1.7.0–1.7.10  | 6.7.1–7.0.2                           | 3.4.3–7.0.2                                         |
-| 1.6.20–1.6.21 | 6.1.1–7.0.2                           | 3.4.3–7.0.2                                         |
+| KGP version   | Gradle min and max versions            | AGP min and max versions                            |
+|---------------|----------------------------------------|-----------------------------------------------------|
+| 2.0.20        | %minGradleVersion%–%maxGradleVersion%* | %minAndroidGradleVersion%–%maxAndroidGradleVersion% |
+| 2.0.0         | 6.8.3–8.5                              | 7.1.3–8.3.1                                         |
+| 1.9.20–1.9.25 | 6.8.3–8.1.1                            | 4.2.2–8.1.0                                         |
+| 1.9.0–1.9.10  | 6.8.3–7.6.0                            | 4.2.2–7.4.0                                         |
+| 1.8.20–1.8.22 | 6.8.3–7.6.0                            | 4.1.3–7.4.0                                         |      
+| 1.8.0–1.8.11  | 6.8.3–7.3.3                            | 4.1.3–7.2.1                                         |   
+| 1.7.20–1.7.22 | 6.7.1–7.1.1                            | 3.6.4–7.0.4                                         |
+| 1.7.0–1.7.10  | 6.7.1–7.0.2                            | 3.4.3–7.0.2                                         |
+| 1.6.20–1.6.21 | 6.1.1–7.0.2                            | 3.4.3–7.0.2                                         |
 
-> You can also use Gradle and AGP versions up to the latest releases, but if you do, keep in mind that you might encounter 
-> deprecation warnings or some new features might not work.
+> *Kotlin 2.0.20 is fully compatible with Gradle 6.8.3 through 8.6.
+> Gradle 8.7 and 8.8 are also supported, with only one exception: If you use the Kotlin Multiplatform Gradle plugin,
+> you may see deprecation warnings in your multiplatform projects calling the [`withJava()` function in the JVM target](multiplatform-dsl-reference.md#jvm-targets).
+> For more information, see the issue in [YouTrack](https://youtrack.jetbrains.com/issue/KT-66542/Gradle-JVM-target-with-withJava-produces-a-deprecation-warning).
 >
-{style="note"}
+{style="warning"}
+
+You can also use Gradle and AGP versions up to the latest releases, but if you do, keep in mind that you might encounter 
+deprecation warnings or some new features might not work.
 
 For example, the Kotlin Gradle plugin and the `kotlin-multiplatform` plugin %kotlinVersion% require the minimum Gradle
 version of %minGradleVersion% for your project to compile.
@@ -75,7 +81,8 @@ methods and properties, and supports all the current Gradle features.
 By default, the Kotlin Gradle plugin stores persistent project-specific data at the root of the project,
 in the `.kotlin` directory.
 
-> You may want to add the `.kotlin` directory to your project's `.gitignore` file.
+> Do not commit the `.kotlin` directory to version control.
+> For example, if you are using Git, add `.kotlin` to your project's `.gitignore` file.
 >
 {style="warning"}
 
@@ -208,7 +215,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile.class).configu
 
 To avoid JVM target incompatibility, [configure a toolchain](#gradle-java-toolchains-support) or align JVM versions manually.
 
-#### What can go wrong if targets are incompatible {collapsible="true"}
+#### What can go wrong if targets are incompatible {collapsible="true" collapsible="true"}
 
 There are two ways of manually setting JVM targets for Kotlin and Java source sets:
 * The implicit way via [setting up a Java toolchain](#gradle-java-toolchains-support).
@@ -540,6 +547,37 @@ Learn more about:
 
 Learn more about [Kotlin/JVM](jvm-get-started.md).
 
+#### Disable use of artifact in compilation task
+
+In some rare scenarios, you can experience a build failure caused by a circular dependency error. For example, when you 
+have multiple compilations where one compilation can see all internal declarations of another, and the generated artifact
+relies on the output of both compilation tasks:
+
+```none
+FAILURE: Build failed with an exception.
+
+What went wrong:
+Circular dependency between the following tasks:
+:lib:compileKotlinJvm
+--- :lib:jvmJar
+     \--- :lib:compileKotlinJvm (*)
+(*) - details omitted (listed previously)
+```
+
+To fix this circular dependency error, we've added a Gradle property: `archivesTaskOutputAsFriendModule`.
+This property controls the use of artifact inputs in the compilation task and determines if a task dependency is created
+as a result.
+
+By default, this property is set to `true` to track the task dependency. If you encounter a circular dependency error,
+you can disable the use of the artifact in the compilation task to remove the task dependency and avoid the circular 
+dependency error.
+
+To disable the use of the artifact in the compilation task, add the following to your `gradle.properties` file:
+
+```kotlin
+kotlin.build.archivesTaskOutputAsFriendModule=false
+```
+
 #### Lazy Kotlin/JVM task creation
 
 Starting from Kotlin 1.8.20, the Kotlin Gradle plugin registers all tasks and doesn't configure them on a dry run.
@@ -559,7 +597,7 @@ tasks.jar(type: Jar) {
 
 ## Targeting multiple platforms
 
-Projects targeting [multiple platforms](multiplatform-dsl-reference.md#targets), called [multiplatform projects](multiplatform-get-started.md),
+Projects targeting [multiple platforms](multiplatform-dsl-reference.md#targets), called [multiplatform projects](multiplatform-intro.md),
 require the `kotlin-multiplatform` plugin.
 
 >The `kotlin-multiplatform` plugin works with Gradle %minGradleVersion% or later.
@@ -587,7 +625,7 @@ plugins {
 </tab>
 </tabs>
 
-Learn more about [Kotlin Multiplatform for different platforms](multiplatform-get-started.md) and 
+Learn more about [Kotlin Multiplatform for different platforms](multiplatform-intro.md) and 
 [Kotlin Multiplatform for iOS and Android](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html).
 
 ## Targeting Android
@@ -795,7 +833,7 @@ file:
 kotlin.stdlib.jdk.variants.version.alignment=false
 ```
 
-##### Other ways to align versions {collapsible="true"}
+##### Other ways to align versions {collapsible="true" collapsible="true"}
 
 * If you have issues with version alignment, you can align all versions via the Kotlin [BOM](https://docs.gradle.org/current/userguide/platforms.html#sub:bom_import). 
   Declare a platform dependency on `kotlin-bom` in your build script:

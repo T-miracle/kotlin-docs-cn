@@ -82,10 +82,9 @@ interface Collection<E> ... {
 }
 ```
 
-通配符类型参数 `? extends E` 表示该方法接受一个包含 `E` 对象或 `E` 的子类型的集合，而不仅仅是 `E` 本身。
-这意味着你可以安全地从 items 中 **读取** `E`（该集合的元素是 `E` 子类的实例），但 **不能写入**，因为你不知道哪些对象符合未知的 `E` 子类型。
-作为对这个限制的回报，你得到了期望的行为：`Collection<String>` **是** `Collection<? extends Object>` 的子类型。
-换句话说，带有 **extends** 限定（**上界** 限定）的通配符使得类型可以更灵活地适应子类型，实现了[类型的**协变**（covariant）](type-covariant.md)。
+`? extends E` 的 _通配符类型实参_ 表示该方法接受的是 `E` 的对象集合，_或者是_ `E` 的子类型，而不仅仅是 `E` 本身。这意味着你可以安全地从集合中读取 `E` 类型的元素（这些元素是 `E` 的子类的实例），但是无法写入其中，因为你不知道符合该未知子类型的对象是什么。
+作为这种限制的回报，你得到了期望的行为：`Collection<String>` _是_ `Collection<? extends Object>` 的一个子类型。
+换句话说，带有 _extends_ 约束（_上_界限）的通配符使得该类型变得 _协变_。
 
 理解为什么这样能够工作的关键相当简单：
 如果你只能从集合中**取出**东西，那么你可以从包含`String`的集合中读取`Object`。
@@ -183,7 +182,7 @@ fun demo(x: Comparable<Number>) {
 单词 **in** 和 **out** 似乎是不言自明的（因为它们在 C# 中已经成功使用了相当长的时间），因此上面提到的助记法实际上并不是真正需要的。
 实际上，它可以以更高层次的抽象重新表达：
 
-**[存在主义](https://en.wikipedia.org/wiki/Existentialism) 转换：消费者逆变，生产者协变\!** :-)
+**[存在主义](https://en.wikipedia.org/wiki/Existentialism) 转换：消费者逆变，生产者协变！** :-)
 
 ## 类型投影 {id=type-projections}
 
@@ -309,7 +308,8 @@ sort(listOf(1, 2, 3)) // OK。Int 是 Comparable<Int> 的子类型
 sort(listOf(HashMap<Int, String>())) // 错误：HashMap<Int, String> 不是 Comparable<HashMap<Int, String>> 的子类型
 ```
 
-如果未指定上界，则默认上界为 `Any?`。在尖括号内只能指定一个上界。如果同一个类型形参需要多个上界，则需要一个独立的 **where** 子句：
+默认的上界（如果没有指定）是 `Any?`。在尖括号内只能指定一个上界。
+如果相同的类型参数需要多个上界，则需要单独的 _where_ 子句：
 
 ```kotlin
 fun <T> copyWhenGreater(list: List<T>, threshold: T): List<String>

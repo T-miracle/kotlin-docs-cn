@@ -60,7 +60,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-> 在大多数情况下，使用 [字符串模板](#字符串模板) 或 [多行字符串](#多行字符串) 更可取，而不是字符串连接。
+> 在大多数情况下，使用 [字符串模板](#string-templates) 或 [多行字符串](#多行字符串) 更可取，而不是字符串连接。
 > 
 {style="note"}
 

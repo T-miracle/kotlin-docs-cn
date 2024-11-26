@@ -1,5 +1,7 @@
 [//]: # (title: 函数)
 
+<no-index/>
+
 <tldr>
     <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
         <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
@@ -209,7 +211,7 @@ fun main() {
 
 ## 函数练习 {id=functions-practice}
 
-### 练习 1 {collapsible="true" id="functions-exercise-1"}
+### 练习 1 {collapsible="true" collapsible="true" id="functions-exercise-1"}
 
 编写一个名为 `circleArea` 的函数，该函数以整数格式的圆半径作为参数，并输出该圆的面积。
 
@@ -222,9 +224,7 @@ fun main() {
 ```kotlin
 import kotlin.math.PI
 
-fun circleArea() {
-    // 在这里写下你的代码
-}
+// 在这里写下你的代码
 fun main() {
     println(circleArea(2))
 }
@@ -243,9 +243,9 @@ fun main() {
     println(circleArea(2)) // 12.566370614359172
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-functions-solution-1"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-functions-solution-1"}
 
-### 练习 2 {collapsible="true" id="functions-exercise-2"}
+### 练习 2 {collapsible="true" collapsible="true" id="functions-exercise-2"}
 
 将前一个练习中的 `circleArea` 函数重写为单表达式函数。
 
@@ -271,9 +271,9 @@ fun main() {
     println(circleArea(2)) // 12.566370614359172
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-functions-solution-2"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-functions-solution-2"}
 
-### 练习 3 {collapsible="true" id="functions-exercise-3"}
+### 练习 3 {collapsible="true" collapsible="true" id="functions-exercise-3"}
 
 你有一个函数，它将以小时、分钟和秒表示的时间间隔转换为秒。
 在大多数情况下，你只需要传递一个或两个函数参数，而其余参数默认为 0。
@@ -307,7 +307,7 @@ fun main() {
     println(intervalInSeconds(hours = 1, seconds = 1))
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-functions-solution-3"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-functions-solution-3"}
 
 ## Lambda 表达式 {id=lambda-expressions}
 
@@ -548,7 +548,7 @@ fun main() {
 
 ## Lambda 表达式练习
 
-### 练习 1 {collapsible="true" id="lambdas-exercise-1"}
+### 练习 1 {collapsible="true" collapsible="true" id="lambdas-exercise-1"}
 
 你有一个 web 服务支持的动作列表，一个请求的公共前缀，以及一个特定资源的 ID。  
 要对 ID 为 5 的资源请求一个 `title` 动作，你需要创建以下 URL：`https://example.com/book-info/5/title`。  
@@ -576,9 +576,9 @@ fun main() {
     println(urls)
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-lambdas-solution-1"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-lambdas-solution-1"}
 
-### 练习 2 {collapsible="true" id="lambdas-exercise-2"}
+### 练习 2 {collapsible="true" collapsible="true" id="lambdas-exercise-2"}
 
 编写一个函数，该函数接收一个 `Int` 值和一个动作（一个类型为 `() -> Unit` 的函数），然后重复执行该动作指定的次数。
 然后使用这个函数打印 “Hello” 5 次。
@@ -609,7 +609,7 @@ fun main() {
     }
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-lambdas-solution-2"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-lambdas-solution-2"}
 
 ## 下一步 {id=next-step}
 

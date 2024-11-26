@@ -117,7 +117,7 @@ fun main(){
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-smart-casts-k2-local-variables" validate="false"}
 
-#### Type checks with the logical `or` operator
+#### Type checks with the logical or operator
 
 In Kotlin 2.0.0, if you combine type checks for objects with an `or` operator (`||`), a smart cast
 is made to their closest common supertype. Before this change, a smart cast was always made to the `Any` type.
@@ -356,7 +356,7 @@ In Kotlin 2.0.0, our implementation of the new Kotlin K2 compiler included a red
 strict separation between common and platform source sets. This change is most noticeable when you use [expected and actual functions](multiplatform-expect-actual.md#expected-and-actual-functions).
 Previously, it was possible for a function call in your common code to resolve to a function in platform code. For example:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Common code</td>
        <td>Platform code</td>
@@ -401,7 +401,7 @@ In addition to the improved consistency of behavior across platforms, we also wo
 conflicting behavior between IntelliJ IDEA or Android Studio and the compiler. For instance, when you used [expected and actual classes](multiplatform-expect-actual.md#expected-and-actual-classes),
 the following would happen:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Common code</td>
        <td>Platform code</td>
@@ -525,7 +525,7 @@ class Expanded                                  // Visibility is public by defau
 
 Starting with Kotlin 2.0.0, the Kotlin K2 compiler is enabled by default.
 
-To upgrade the Kotlin version, change it to 2.0.0 in your [Gradle](gradle-configure-project.md#apply-the-plugin) and
+To upgrade the Kotlin version, change it to 2.0.0 or a later release in your [Gradle](gradle-configure-project.md#apply-the-plugin) and
 [Maven](maven.md#configure-and-enable-the-plugin) build scripts.
 
 To have the best experience with IntelliJ IDEA or Android Studio, consider [enabling K2 mode](#support-in-ides)
@@ -592,11 +592,11 @@ by your build system only.
 
 ## Try the Kotlin K2 compiler in the Kotlin Playground
 
-The Kotlin Playground supports the 2.0.0 release. [Check it out!](https://pl.kotl.in/czuoQprce)
+The Kotlin Playground supports Kotlin 2.0.0 and later releases. [Check it out!](https://pl.kotl.in/czuoQprce)
 
 ## How to roll back to the previous compiler
 
-To use the previous compiler in Kotlin 2.0.0, either:
+To use the previous compiler in Kotlin 2.0.0 and later releases, either:
 
 * In your `build.gradle.kts` file, [set your language version](gradle-compiler-options.md#example-of-setting-a-languageversion) to `1.9`.
 
@@ -769,7 +769,7 @@ For example, you have the same generic class declaration in module one. In modul
 a type argument:
 
 
-<table header-style="top">
+<table>
    <tr>
        <td>Module one</td>
        <td>Module two</td>
@@ -818,7 +818,7 @@ Kotlin 2.0.0 by adding warnings for some scenarios with inaccessible types, incl
 For example, let's use the same module setup as the previous examples, but turn the generic class `Node<V>` into a 
 non-generic class `IntNode`, with all functions declared in module two:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Module one</td>
        <td>Module two</td>
@@ -945,7 +945,7 @@ subclass takes precedence over the Kotlin property with the same name.
 
 Consider this example:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Kotlin</td>
        <td>Java</td>
@@ -1072,7 +1072,7 @@ In your common code, if you have an expected non-abstract class called `Platform
 an abstract function in a non-abstract class in Kotlin. To make the `listFiles()` function non-abstract, you must declare
 it as an override without the `abstract` keyword:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Common code</td>
        <td>Platform code</td>
@@ -1115,7 +1115,7 @@ For more information, see the corresponding issue in [YouTrack](https://youtrack
 These subject areas list changes that are unlikely to affect your code but provide links to the relevant YouTrack issues
 for further reading. Changes listed with an asterisk (*) next to the Issue ID are explained at the beginning of the section.
 
-#### Type inference {collapsible="true"}
+#### Type inference {collapsible="true" collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                      |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -1136,7 +1136,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-65750](https://youtrack.jetbrains.com/issue/KT-65750) | Increment and plus operators that change return type must affect smart casts                               |
 | [KT-65349](https://youtrack.jetbrains.com/issue/KT-65349) | [LC] K2: specifying variable types explicitly breaks bound smart casts in some cases that worked in K1     |
 
-#### Generics {collapsible="true"}
+#### Generics {collapsible="true" collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                                 |
 |------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1154,7 +1154,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-64966](https://youtrack.jetbrains.com/issue/KT-64966)  | Forbid generic delegating constructor calls with wrong type for generic parameter                                                                     |
 | [KT-65712](https://youtrack.jetbrains.com/issue/KT-65712)  | Report missing upper bound violation when upper bound is captured type                                                                                |
 
-#### Resolution {collapsible="true"}
+#### Resolution {collapsible="true" collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                                                                        |
 |------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1170,7 +1170,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-64431](https://youtrack.jetbrains.com/issue/KT-64431)  | K2: forbid using typealiases as qualifier in imports                                                                                                                                         |
 | [KT-56520](https://youtrack.jetbrains.com/issue/KT-56520)  | K1/K2: incorrect work of resolve tower for type references with ambiguity at lower level                                                                                                     |
 
-#### Visibility {collapsible="true"}
+#### Visibility {collapsible="true" collapsible="true"}
 
 | Issue ID                                                    | Title                                                                                                                          |
 |-------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
@@ -1185,7 +1185,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-65004](https://youtrack.jetbrains.com/issue/KT-65004)   | K1: Setter of var, which overrides protected val, is generates as public                                                       |
 | [KT-64972](https://youtrack.jetbrains.com/issue/KT-64972)   | Forbid overriding by private members in link-time for Kotlin/Native                                                            |
 
-#### Annotations {collapsible="true"}
+#### Annotations {collapsible="true" collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                  |
 |-----------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
@@ -1199,7 +1199,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-63389](https://youtrack.jetbrains.com/issue/KT-63389) | K2: \`WRONG_ANNOTATION_TARGET\` is reported on incompatible annotations of a type wrapped into \`()?\` |
 | [KT-63388](https://youtrack.jetbrains.com/issue/KT-63388) | K2: \`WRONG_ANNOTATION_TARGET\` is reported on catch parameter type's annotations                      |
 
-#### Null safety {collapsible="true"}
+#### Null safety {collapsible="true" collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                   |
 |------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
@@ -1210,7 +1210,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-62998](https://youtrack.jetbrains.com/issue/KT-62998)  | Forbid assignment of a nullable to a not-null Java field as a selector of unsafe assignment                             |
 | [KT-63209](https://youtrack.jetbrains.com/issue/KT-63209)  | Report missing errors for error-level nullable arguments of warning-level Java types                                    |
 
-#### Java interoperability {collapsible="true"}
+#### Java interoperability {collapsible="true" collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                      |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
@@ -1220,7 +1220,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-66220](https://youtrack.jetbrains.com/issue/KT-66220) | Passing java vararg method to inline function leads to array of arrays in runtime instead of just an array |
 | [KT-66204](https://youtrack.jetbrains.com/issue/KT-66204) | Allow to override internal members in K-J-K hierarchy                                                      |
 
-#### Properties {collapsible="true"}
+#### Properties {collapsible="true" collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                         |
 |------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1230,7 +1230,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-57290](https://youtrack.jetbrains.com/issue/KT-57290)  | Deprecate smart cast on base class property from invisible derived class if base class is from another module                                 |
 | [KT-62661](https://youtrack.jetbrains.com/issue/KT-62661)  | K2: Missed OPT_IN_USAGE_ERROR for data class properties                                                                                       |
 
-#### Control flow {collapsible="true"}
+#### Control flow {collapsible="true" collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                      |
 |-----------------------------------------------------------|--------------------------------------------------------------------------------------------|
@@ -1239,7 +1239,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-42995](https://youtrack.jetbrains.com/issue/KT-42995) | False negative "VAL_REASSIGNMENT" in try/catch block with initialization in scope function |
 | [KT-65724](https://youtrack.jetbrains.com/issue/KT-65724) | Propagate data flow information from try block to catch and finally blocks                 |
 
-#### Enum classes {collapsible="true"}
+#### Enum classes {collapsible="true" collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                        |
 |-----------------------------------------------------------|----------------------------------------------------------------------------------------------|
@@ -1248,7 +1248,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-52802](https://youtrack.jetbrains.com/issue/KT-52802) | Report ambiguity resolving between property/field and enum entry                             |
 | [KT-47310](https://youtrack.jetbrains.com/issue/KT-47310) | Change qualifier resolution behavior when companion property is preferred against enum entry |
 
-#### Functional (SAM) interfaces {collapsible="true"}
+#### Functional (SAM) interfaces {collapsible="true" collapsible="true"}
 
 | Issue ID                                                  | Title                                                                                                           |
 |-----------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
@@ -1256,14 +1256,14 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-57014](https://youtrack.jetbrains.com/issue/KT-57014) | Prohibit returning values with incorrect nullability from lambda for SAM constructor of JDK function interfaces |
 | [KT-64342](https://youtrack.jetbrains.com/issue/KT-64342) | SAM conversion of parameter types of callable references leads to CCE                                           |
 
-#### Companion object {collapsible="true"}
+#### Companion object {collapsible="true" collapsible="true"}
 
 | Issue ID                                                  | Title                                                                    |
 |-----------------------------------------------------------|--------------------------------------------------------------------------|
 | [KT-54316](https://youtrack.jetbrains.com/issue/KT-54316) | Out-of-call reference to companion object's member has invalid signature |
 | [KT-47313](https://youtrack.jetbrains.com/issue/KT-47313) | Change (V)::foo reference resolution when V has a companion              |
 
-#### Miscellaneous {collapsible="true"}
+#### Miscellaneous {collapsible="true" collapsible="true"}
 
 | Issue ID                                                   | Title                                                                                                                                      |
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1274,7 +1274,7 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 | [KT-55111](https://youtrack.jetbrains.com/issue/KT-55111)  | OptIn: forbid constructor calls with default arguments under marker                                                                        |
 | [KT-61182](https://youtrack.jetbrains.com/issue/KT-61182)  | Unit conversion is accidentally allowed to be used for expressions on variables + invoke resolution                                        |
 | [KT-55199](https://youtrack.jetbrains.com/issue/KT-55199)  | Forbid promoting callable references with adaptations to KFunction                                                                         |
-| [KT-65776](https://youtrack.jetbrains.com/issue/KT-65776)  | [LC] K2 breaks \`false && ...\` and \`false \|\| ...\`                                                                                     |
+| [KT-65776](https://youtrack.jetbrains.com/issue/KT-65776)  | [LC] K2 breaks \`false && ...\` and \`false &VerticalLine;&VerticalLine; ...\`                                                             |
 | [KT-65682](https://youtrack.jetbrains.com/issue/KT-65682)  | [LC] Deprecate \`header\`/\`impl\` keywords                                                                                                |
 | [KT-45375](https://youtrack.jetbrains.com/issue/KT-45375)  | Generate all Kotlin lambdas via invokedynamic + LambdaMetafactory by default                                                               |
 
@@ -1282,12 +1282,12 @@ for further reading. Changes listed with an asterisk (*) next to the Issue ID ar
 
 The following Kotlin releases have support for the new K2 compiler:
 
-| Kotlin release | Stability level |
-|----------------|-----------------|
-| 2.0.0          | Stable          |
-| 1.9.20–1.9.25  | Beta            |
-| 1.9.0–1.9.10   | JVM is Beta     |
-| 1.7.0–1.8.22   | Alpha           |
+| Kotlin release        | Stability level |
+|-----------------------|-----------------|
+| 2.0.0–%kotlinVersion% | Stable          |
+| 1.9.20–1.9.25         | Beta            |
+| 1.9.0–1.9.10          | JVM is Beta     |
+| 1.7.0–1.8.22          | Alpha           |
 
 ## Compatibility with Kotlin libraries
 

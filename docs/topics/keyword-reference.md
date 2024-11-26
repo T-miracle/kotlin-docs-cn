@@ -21,19 +21,19 @@ The following tokens are always interpreted as keywords and cannot be used as id
      - specifies the object being iterated in a [for loop](control-flow.md#for循环).
      - is used as an infix operator to check that a value belongs to [a range](ranges.md),
        a collection, or another entity that [defines a 'contains' method](operator-overloading.md#in-operator).
-     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
+     - is used in [when expressions](control-flow.md#when-expressions-and-statements) for the same purpose.
      - marks a type parameter as [contravariant](generics.md#declaration-site-variance).
  * `!in`
      - is used as an operator to check that a value does NOT belong to [a range](ranges.md),
        a collection, or another entity that [defines a 'contains' method](operator-overloading.md#in-operator).
-     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
+     - is used in [when expressions](control-flow.md#when-expressions-and-statements) for the same purpose.
  * `interface` declares an [interface](interfaces.md).
  * `is`
      - checks that [a value has a certain type](typecasts.md#是或不是操作符).
-     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
+     - is used in [when expressions](control-flow.md#when-expressions-and-statements) for the same purpose.
  * `!is`
      - checks that [a value does NOT have a certain type](typecasts.md#是或不是操作符).
-     - is used in [when expressions](control-flow.md#when-expression) for the same purpose.
+     - is used in [when expressions](control-flow.md#when-expressions-and-statements) for the same purpose.
  * `null` is a constant representing an object reference that doesn't point to any object.
  * `object` declares [a class and its instance at the same time](object-declarations.md).
  * `package` specifies the [package for the current file](packages.md).
@@ -51,7 +51,7 @@ The following tokens are always interpreted as keywords and cannot be used as id
  * `typeof` is reserved for future use.
  * `val` declares a read-only [property](properties.md) or [local variable](basic-syntax.md#variables).
  * `var` declares a mutable [property](properties.md) or [local variable](basic-syntax.md#variables).
- * `when` begins a [when expression](control-flow.md#when-expression) (executes one of the given branches).
+ * `when` begins a [when expression](control-flow.md#when-expressions-and-statements) (executes one of the given branches).
  * `while` begins a [while loop](control-flow.md#while-loops) (a loop with a precondition).
 
 ## Soft keywords
@@ -76,7 +76,7 @@ as identifiers in other contexts:
  * `init` begins an [initializer block](classes.md#constructors).
  * `param` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `property` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
- * `receiver`is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
+ * `receiver` is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
  * `set`
      - declares the [setter of a property](properties.md#getters和setters).
      - is used as an [annotation use-site target](annotations.md#annotation-use-site-targets).
@@ -90,21 +90,21 @@ The following tokens act as keywords in modifier lists of declarations, and they
 in other contexts:
 
  * `abstract` marks a class or member as [abstract](classes.md#abstract-classes).
- * `actual` denotes a platform-specific implementation in [multiplatform projects](multiplatform.md).
+ * `actual` denotes a platform-specific implementation in [multiplatform projects](multiplatform-expect-actual.md).
  * `annotation` declares an [annotation class](annotations.md).
  * `companion` declares a [companion object](object-declarations.md#companion-objects).
  * `const` marks a property as a [compile-time constant](properties.md#编译时常量).
  * `crossinline` forbids [non-local returns in a lambda passed to an inline function](inline-functions.md#non-local-returns).
  * `data` instructs the compiler to [generate canonical members for a class](data-classes.md).
  * `enum` declares an [enumeration](enum-classes.md).
- * `expect` marks a declaration as [platform-specific](multiplatform.md), expecting an implementation in platform modules.
+ * `expect` marks a declaration as [platform-specific](multiplatform-expect-actual.md), expecting an implementation in platform modules.
  * `external` marks a declaration as implemented outside of Kotlin (accessible through [JNI](java-interop.md#using-jni-with-kotlin) or in [JavaScript](js-interop.md#external-modifier)).
  * `final` forbids [overriding a member](inheritance.md#重写方法).
  * `infix` allows calling a function using [infix notation](functions.md#infix-notation).
  * `inline` tells the compiler to [inline a function and the lambdas passed to it at the call site](inline-functions.md).
  * `inner` allows referring to an outer class instance from a [nested class](nested-classes.md).
  * `internal` marks a declaration as [visible in the current module](visibility-modifiers.md).
- * `lateinit` allows initializing a [non-nullable property outside of a constructor](properties.md#延迟初始化属性和变量).
+ * `lateinit` allows initializing a [non-nullable property outside of a constructor](properties.md#late-initialized-properties-and-variables).
  * `noinline` turns off [inlining of a lambda passed to an inline function](inline-functions.md#noinline).
  * `open` allows [subclassing a class or overriding a member](classes.md#继承).
  * `operator` marks a function as [overloading an operator or implementing a convention](operator-overloading.md).
@@ -143,8 +143,8 @@ Kotlin supports the following operators and special symbols:
  * `===`, `!==` - [referential equality operators](equality.md#referential-equality).
  * `<`, `>`, `<=`, `>=` - [comparison operators](operator-overloading.md#comparison-operators) (translated to calls of `compareTo()` for non-primitive types).
  * `[`, `]` - [indexed access operator](operator-overloading.md#indexed-access-operator) (translated to calls of `get` and `set`).
- * `!!` [asserts that an expression is non-nullable](null-safety.md#the-operator).
- * `?.` performs a [safe call](null-safety.md#safe-calls) (calls a method or accesses a property if the receiver is non-nullable).
+ * `!!` [asserts that an expression is non-nullable](null-safety.md#not-null-assertion-operator).
+ * `?.` performs a [safe call](null-safety.md#safe-call-operator) (calls a method or accesses a property if the receiver is non-nullable).
  * `?:` takes the right-hand value if the left-hand value is null (the [elvis operator](null-safety.md#elvis-operator)).
  * `::` creates a [member reference](reflection.md#function-references) or a [class reference](reflection.md#class-references).
  * `..`, `..<` create [ranges](ranges.md).
@@ -153,7 +153,7 @@ Kotlin supports the following operators and special symbols:
  * `->`
      - separates the parameters and body of a [lambda expression](lambdas.md#lambda-expression-syntax).
      - separates the parameters and return type declaration in a [function type](lambdas.md#function-types).
-     - separates the condition and body of a [when expression](control-flow.md#when-expression) branch.
+     - separates the condition and body of a [when expression](control-flow.md#when-expressions-and-statements) branch.
  * `@`
      - introduces an [annotation](annotations.md#usage).
      - introduces or references a [loop label](returns.md).

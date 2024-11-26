@@ -17,7 +17,7 @@ The Kotlin 1.9.0 release is out and the K2 compiler for the JVM is now in **Beta
 
 You can also find a short overview of the updates in this video:
 
-<video src="https://youtu.be/fvwTZc-dxsM" title="What's new in Kotlin 1.9.0"/>
+<video src="https://www.youtube.com/v/fvwTZc-dxsM" title="What's new in Kotlin 1.9.0"/>
 
 ## IDE support
 
@@ -223,7 +223,7 @@ development of Kotlin inline classes in [this KEEP](https://github.com/Kotlin/KE
 Starting with version 1.9.0, the compiler can generate classes with a bytecode version corresponding to JVM 20. In addition,
 the deprecation of the `JvmDefault` annotation and legacy `-Xjvm-default` modes continues.
 
-### Deprecation of `JvmDefault` annotation and legacy `-Xjvm-default` modes
+### Deprecation of JvmDefault annotation and legacy -Xjvm-default modes
 
 Starting from Kotlin 1.5, the usage of the `JvmDefault` annotation has been deprecated in favor of the newer `-Xjvm-default`
 modes: `all` and `all-compatibility`. With the introduction of `JvmDefaultWithoutCompatibility` in Kotlin 1.4 and 
@@ -501,7 +501,7 @@ The new layout requires the Android Gradle plugin version 7.0 or later and is su
 
 ### Preview of the Gradle configuration cache
 
-<anchor name="preview-of-gradle-configuration-cache"></anchor>
+<anchor name="preview-of-gradle-configuration-cache"/>
 
 Kotlin 1.9.0 comes with support for the [Gradle configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html)
 in multiplatform libraries. If you're a library author, you can already benefit from the improved build performance.
@@ -1239,6 +1239,6 @@ If the repository is not specified, Gradle uses the sunset JCenter repository, w
 
 ## Compatibility guide for Kotlin 1.9.0
 
-Kotlin 1.9.0 is a [feature release](kotlin-evolution.md#language-and-tooling-releases) and can, therefore, 
+Kotlin 1.9.0 is a [feature release](kotlin-evolution-principles.md#language-and-tooling-releases) and can, therefore, 
 bring changes that are incompatible with your code written for earlier versions of the language. Find the detailed list 
 of these changes in the [Compatibility guide for Kotlin 1.9.0](compatibility-guide-19.md).

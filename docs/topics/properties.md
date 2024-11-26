@@ -189,7 +189,7 @@ public static final void foo() { ... }
 
 可以发现，`@Deprecated` 中的 `message` 被替换成了实际值，常量 `SUBSYSTEM_DEPRECATED` 也没有被删除。
 
-## 延迟初始化属性和变量 {id=延迟初始化属性和变量}
+## 延迟初始化属性和变量 {id=late-initialized-properties-and-variables}
 
 通常，声明为非空类型的属性在构造函数中必须初始化。然而，有时情况并不方便。
 例如，属性可能通过依赖注入进行初始化，或者在单元测试的设置方法中初始化。
@@ -216,7 +216,7 @@ public class MyTest {
 
 在初始化之前访问 `lateinit` 属性会引发一个特殊的异常，清晰地标识正在访问的属性以及它尚未被初始化的事实。
 
-### 检查 `lateinit var` 是否已初始化
+### 检查 `lateinit var` 是否已初始化 {id=checking-whether-a-lateinit-var-is-initialized}
 
 要检查 `lateinit var` 是否已经初始化，可以在对[该属性的引用](reflection.md#property-references)上使用 `.isInitialized`：
 

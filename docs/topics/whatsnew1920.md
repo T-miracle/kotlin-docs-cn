@@ -14,7 +14,7 @@ and [Kotlin Multiplatform is now Stable](#kotlin-multiplatform-is-stable). Addit
 
 You can also find a short overview of the updates in this video:
 
-<video src="https://youtu.be/Ol_96CHKqg8" title="What's new in Kotlin 1.9.20"/>
+<video src="https://www.youtube.com/v/Ol_96CHKqg8" title="What's new in Kotlin 1.9.20"/>
 
 ## IDE support
 
@@ -367,7 +367,7 @@ with the new project wizards and other notable features:
 
 ### Kotlin Multiplatform is Stable
 
-The 1.9.20 release marks an important milestone in the evolution of Kotlin: [Kotlin Multiplatform](multiplatform.md) has finally
+The 1.9.20 release marks an important milestone in the evolution of Kotlin: [Kotlin Multiplatform](multiplatform-intro.md) has finally
 become Stable. This means that the technology is safe to use in your projects and 100% ready for production. It also
 means that further development of Kotlin Multiplatform will continue according to our strict [backward compatibility rules](https://kotlinfoundation.org/language-committee-guidelines/).
 
@@ -395,7 +395,7 @@ It includes intermediate source sets that Kotlin automatically creates for the t
 Consider a multiplatform project that targets both Android and iPhone devices and is developed on an Apple silicon MacBook.
 Compare how this project is set up between different versions of Kotlin:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Kotlin 1.9.0 and earlier (a standard setup)</td>
        <td>Kotlin 1.9.20</td>
@@ -458,7 +458,7 @@ Green source sets are actually created and included in the project, while gray o
 
 To make it easier to work with the created project structure, IntelliJ IDEA now provides completion for source sets created with the default hierarchy template:
 
-<img src="multiplatform-hierarchy-completion.png" alt="IDE completion for source set names" width="350" animated="true"/>
+<img src="multiplatform-hierarchy-completion.animated.gif" alt="IDE completion for source set names" width="350" preview-src="multiplatform-hierarchy-completion.png"/>
 
 Kotlin also warns you if you attempt to access a source set that doesn't exist because you haven't declared the respective target.
 In the example below, there is no JVM target (only `androidTarget`, which is not the same). But let's try to use the `jvmMain` source set
@@ -540,7 +540,7 @@ introduced intermediate sources manually with  `dependsOn()` calls. To solve thi
 
   We're currently working on an API for creating your own hierarchy templates to simplify the setup process in such cases.
 
-#### See the full hierarchy template {collapsible="true"}
+#### See the full hierarchy template {collapsible="true" collapsible="true"}
 
 When you declare the targets to which your project compiles,
 the plugin picks the shared source sets from the template accordingly and creates them in your project.
@@ -578,7 +578,7 @@ If you encounter any issues, please report them to [YouTrack](https://kotl.in/is
 with the wizard.
 
 <a href="https://kmp.jetbrains.com">
-   <img src="multiplatform-create-project-button.png" alt="Create a project"/>
+   <img src="multiplatform-create-project-button.png" alt="Create a project" style="block"/>
 </a>
 
 ### Full support for the Gradle configuration cache in Kotlin Multiplatform
@@ -602,7 +602,7 @@ Previously, if you wanted to configure a dependency on the standard library manu
 each source set individually. From `kotlin-stdlib:1.9.20` onward, you only need to configure the dependency **once** in
 the `commonMain` root source set:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Standard library version 1.9.10 and earlier</td>
        <td>Standard library version 1.9.20</td>
@@ -714,7 +714,7 @@ In 1.9.20, Kotlin Wasm reached the [Alpha level](components-stability.md) of sta
 >
 > We would appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
 >
-{style="warning"}
+{style="note"}
 
 ### Compatibility with Wasm GC phase 4 and final opcodes
 
@@ -724,7 +724,7 @@ We also recommend using the latest versions of browsers with the Wasm environmen
 * Version 119 or newer for Chrome and Chromium–based browsers.
 * Version 119 or newer for Firefox. Note that in Firefox 119, you need to [turn on Wasm GC manually](wasm-troubleshooting.md).
 
-### New `wasm-wasi` target, and the renaming of the `wasm` target to `wasm-js`
+### New wasm-wasi target, and the renaming of the wasm target to wasm-js
 
 In this release, we're introducing a new target for Kotlin/Wasm – `wasm-wasi`. We're also renaming the `wasm` target to `wasm-js`.
 In the Gradle DSL, these targets are available as `wasmWasi {}` and `wasmJs {}`, respectively.
@@ -778,7 +778,7 @@ private external fun wasiRawClockTimeGet(clockId: Int, precision: Long, resultPt
 This release delivers several quality-of-life improvements to the Kotlin/Wasm API.
 For example, you're no longer required to return a value for DOM event listeners:
 
-<table header-style="top">
+<table>
    <tr>
        <td>Before 1.9.20</td>
        <td>In 1.9.20</td>

@@ -14,7 +14,7 @@
 
 如果你有适用于所有平台的业务逻辑，不需要为每个平台编写相同的代码——只需将它共享在通用的源代码集中。
 
-![为所有平台共享的代码](flat-structure.png)
+![为所有平台共享的代码](flat-structure.svg)
 
 某些源代码集的依赖项是默认设置的，你不需要手动指定任何 `dependsOn` 关系，比如下面的：
 * 对于依赖于通用源代码集的所有特定平台的源代码集，如 `jvmMain`、`macosX64Main` 等。
@@ -50,7 +50,7 @@
 
 例如，查看 `kotlinx.coroutines` 仓库中的以下源代码集层次结构：
 
-![库的分层结构](lib-hierarchical-structure.png)
+![库的分层结构](lib-hierarchical-structure.svg)
 
 `concurrent` 源代码集声明了函数 `runBlocking`，并且为 JVM 和本地目标编译。
 一旦 `kotlinx.coroutines` 库使用分层项目结构更新并发布后，你可以依赖它，并在共享 JVM 和本地目标的源代码集中调用

@@ -126,7 +126,7 @@ class JavaClient {
 }
 ```
 
-[延迟初始化](properties.md#延迟初始化属性和变量) 属性也会作为字段暴露。  
+[延迟初始化](properties.md#late-initialized-properties-and-variables) 属性也会作为字段暴露。  
 该字段的可见性将与 `lateinit` 属性 setter 的可见性相同。
 
 ## 静态字段 {id=static-fields}
@@ -156,7 +156,7 @@ Key.COMPARATOR.compare(key1, key2);
 // Key 类中的 public static final 字段
 ```
 
-在对象或伴生对象中的 [延迟初始化](properties.md#延迟初始化属性和变量) 属性具有静态的幕后字段，且其可见性与属性 setter 的可见性相同。
+在对象或伴生对象中的 [延迟初始化](properties.md#late-initialized-properties-and-variables) 属性具有静态的幕后字段，且其可见性与属性 setter 的可见性相同。
 
 ```kotlin
 object Singleton {
@@ -337,11 +337,11 @@ public class BB8 implements Robot {
 
 了解更多关于兼容模式的信息：
 
-#### disable {collapsible="true" id=disable}
+#### disable {initial-collapse-state="collapsed" collapsible="true"}
 
 默认行为。 不生成 JVM 默认方法，并禁止使用 `@JvmDefault` 注解。
 
-#### all {collapsible="true" id=all}
+#### all {initial-collapse-state="collapsed" collapsible="true"}
 
 为模块中所有带有方法体的接口声明生成 JVM 默认方法。不会为带有方法体的接口声明生成
 [`DefaultImpls`](https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/)
@@ -355,7 +355,7 @@ public class BB8 implements Robot {
 >
 {style="note"}
 
-#### all-compatibility {collapsible="true" id=all-compatibility}
+#### all-compatibility {initial-collapse-state="collapsed" collapsible="true"}
 
 在 `all` 模式的基础上，还会在
 [`DefaultImpls`](https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/)

@@ -1,13 +1,15 @@
 [//]: # (title: 空值安全)
 
+<no-index/>
+
 <tldr>
     <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-hello-world.md">Hello world</a><br />
         <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-basic-types.md">基本类型</a><br />
         <img src="icon-3-done.svg" width="20" alt="第三步" /> <a href="kotlin-tour-collections.md">集合</a><br />
         <img src="icon-4-done.svg" width="20" alt="第四步" /> <a href="kotlin-tour-control-flow.md">控制流</a><br />
         <img src="icon-5-done.svg" width="20" alt="第五步" /> <a href="kotlin-tour-functions.md">函数</a><br />
-        <img src="icon-6.svg" width="20" alt="第六步" /> <strong>类</strong><br />
-        <img src="icon-7-todo.svg" width="20" alt="最后一步" /> <a href="kotlin-tour-null-safety.md">空值安全</a></p>
+        <img src="icon-6-done.svg" width="20" alt="第六步" /> <a href="kotlin-tour-classes.md">类</a><br />
+        <img src="icon-7.svg" width="20" alt="最后一步" /> <strong>空值安全</strong><br /></p>
 </tldr>
 
 在 Kotlin 中，`null` 值是有可能出现的。当某些东西缺失或尚未设置时，Kotlin 就会使用 `null` 值。
@@ -151,7 +153,7 @@ fun main() {
 
 ## 实践 {id=practice}
 
-### 练习 {collapsible="true"}
+### 练习 {collapsible="true" collapsible="true"}
 
 你有一个 `employeeById` 函数，它可以访问公司员工的数据库。
 不幸的是，这个函数返回 `Employee?` 类型的值，因此结果可能是 `null`。
@@ -195,11 +197,11 @@ fun main() {
     println((1..5).sumOf { id -> salaryById(id) })
 }
 ```
-{collapsible="true" collapsed-title="示例解答" id="kotlin-tour-null-safety-solution"}
+{collapsible="true" collapsible="true" collapsed-title="示例解答" id="kotlin-tour-null-safety-solution"}
 
 ## 下一步是什么？
 
 恭喜！现在你已经完成了 Kotlin 之旅，之后请查看我们有关 Kotlin 常用应用的教程：
 
 * [创建后台应用程序](jvm-create-project-with-spring-boot.md)
-* [为 Android 和 iOS 创建跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html)
+* [为 Android 和 iOS 创建跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)

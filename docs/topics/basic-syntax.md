@@ -436,7 +436,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-when-expression"}
 
-请参阅 [when 表达式](control-flow.md#when-expression)。
+请参阅 [when 表达式和语句](control-flow.md#when-expressions-and-statements)。
 
 ## Ranges（区间）
 
