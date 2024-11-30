@@ -1,56 +1,53 @@
-[//]: # (title: Add a data class to Spring Boot project)
-[//]: # (description: Add a Kotlin data class to Spring Boot project.)
+[//]: # (title: 向 Spring Boot 项目添加数据类)
+[//]: # (description: 向 Spring Boot 项目添加一个 Kotlin 数据类。)
 
-<tldr>
-    <p>This is the second part of the <strong>Getting started with Spring Boot and Kotlin</strong> tutorial. Before proceeding, make sure you've completed previous steps:</p><br/>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot.md">Create a Spring Boot project with Kotlin</a><br/><img src="icon-2.svg" width="20" alt="Second step"/> <strong>Add a data class to the Spring Boot project</strong><br/><img src="icon-3-todo.svg" width="20" alt="Third step"/> Add database support for Spring Boot project<br/><img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Use Spring Data CrudRepository for database access</p>
-</tldr>
+<tldr>  
+   <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第二部分。在继续之前，请确保已完成以下步骤：</p><br/>  
+   <p><img src="icon-1-done.svg" width="20" alt="第一步完成"/> <a href="jvm-create-project-with-spring-boot.md">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="icon-2.svg" width="20" alt="第二步"/> <strong>向 Spring Boot 项目添加数据类</strong><br/><img src="icon-3-todo.svg" width="20" alt="第三步"/> 为 Spring Boot 项目添加数据库支持<br/><img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问</p>  
+</tldr>  
 
-In this part of the tutorial, you'll add some more functionality to the application and discover more Kotlin language features, such as data classes.
-It requires changing the `MessageController` class to respond with a JSON document containing a collection of serialized objects.
+在本教程的这一部分，您将为应用程序添加更多功能，并探索更多 Kotlin 的语言特性，例如数据类。  
+这需要修改 `MessageController` 类，使其返回一个包含序列化对象集合的 JSON 文档。
 
-## Update your application
+## 更新您的应用程序 {id=update-your-application}
 
-1. In the same package, create a `Message.kt` file with a data class with two properties: `id` and `text`:
+1. 在相同的包中创建一个名为 `Message.kt` 的文件，并定义一个具有两个属性的数据类：`id` 和 `text`：
 
     ```kotlin
     // Message.kt
     package demo
    
     data class Message(val id: String?, val text: String)
-    ```
+    ```  
 
-   `Message` class will be used for data transfer: a list of serialized `Message` objects will make up the JSON document that the controller is going to respond to the browser request.
+   `Message` 类将用于数据传输：一个序列化的 `Message` 对象列表将构成控制器响应浏览器请求时生成的 JSON 文档。
 
-   <deflist collapsible="true">
-       <def title="Data classes – data class Message">
-          <p>The main purpose of <a href="data-classes.md">data classes</a> in Kotlin is to hold data. Such classes are marked with the <code>data</code> keyword, and some standard functionality and some utility functions are often mechanically derivable from the class structure.</p>
-          <p>In this example, you declared <code>Message</code> as a data class as its main purpose is to store the data.</p>
-       </def>
-       <def title="val and var properties">
-          <p><a href="properties.md">Properties in Kotlin</a> classes can be declared either as:</p>
-          <list>
-             <li><i>mutable</i>, using the <code>var</code> keyword</li>
-             <li><i>read-only</i>, using the <code>val</code> keyword</li>
-          </list>
-          <p>The <code>Message</code> class declares two properties using <code>val</code> keyword, the <code>id</code> and <code>text</code>.
-          The compiler will automatically generate the getters for both of these properties.
-          It will not be possible to reassign the values of these properties after an instance of the <code>Message</code> class is created.
-          </p>
-       </def>
-       <def title="Nullable types – String?">
-          <p>Kotlin provides <a href="null-safety.md#nullable-types-and-non-nullable-types">built-in support for nullable types</a>. In Kotlin, the type system distinguishes between references that can hold <code>null</code> (<i>nullable references</i>) and those that cannot (<i>non-nullable references</i>).<br/>
-          For example, a regular variable of type <code>String</code> cannot hold <code>null</code>. To allow nulls, you can declare a variable as a nullable string by writing <code>String?</code>.
-          </p>
-          <p>The <code>id</code> property of the <code>Message</code> class is declared as a nullable type this time.
-          Hence, it is possible to create an instance of <code>Message</code> class by passing <code>null</code> as a value for <code>id</code>:
-          </p>
-          <code-block lang="kotlin">
-          Message(null, "Hello!")
-          </code-block>
-       </def>
-   </deflist>
-2. In the `MessageController.kt` file, instead of the `index()` function, create the `listMessages()` function returning a list of `Message` objects:
+   <deflist collapsible="true">  
+       <def title="数据类 – data class Message">  
+          <p>在 Kotlin 中，<a href="data-classes.md">数据类</a> 的主要目的是保存数据。这类类通过 <code>data</code> 关键字标记，一些标准功能和实用函数可以根据类的结构自动派生。</p>  
+          <p>在此示例中，您将 <code>Message</code> 声明为数据类，因为其主要目的是存储数据。</p>  
+       </def>  
+       <def title="val 和 var 属性">  
+          <p>在 Kotlin 中，<a href="properties.md">类的属性</a>可以通过以下方式声明：</p>  
+          <list>  
+             <li><i>可变</i>，使用 <code>var</code> 关键字</li>  
+             <li><i>只读</i>，使用 <code>val</code> 关键字</li>  
+          </list>  
+          <p><code>Message</code> 类通过 <code>val</code> 关键字声明了两个属性：<code>id</code> 和 <code>text</code>。  
+          编译器会自动生成这两个属性的 getter 方法。  
+          在创建 <code>Message</code> 类的实例后，无法重新分配这些属性的值。</p>  
+       </def>  
+       <def title="可空类型 – String?">  
+          <p>Kotlin 提供了<a href="null-safety.md#nullable-types-and-non-nullable-types">对可空类型的内置支持</a>。Kotlin 的类型系统区分了可以包含 <code>null</code> 的引用（<i>可空引用</i>）和不能包含 <code>null</code> 的引用（<i>非空引用</i>）。<br/>  
+          例如，常规的 <code>String</code> 类型变量不能包含 <code>null</code>。如果需要允许 <code>null</code>，可以通过写作 <code>String?</code> 来声明一个可空字符串变量。</p>  
+          <p>在本例中，<code>Message</code> 类的 <code>id</code> 属性被声明为可空类型。  
+          因此，可以通过为 <code>id</code> 传递 <code>null</code> 值来创建 <code>Message</code> 类的实例：</p>  
+          <code-block lang="kotlin">  
+          Message(null, "Hello!")  
+          </code-block>  
+       </def>  
+   </deflist>  
+2. 在 `MessageController.kt` 文件中，替换 `index()` 函数，创建一个 `listMessages()` 函数，返回一个 `Message` 对象的列表：
 
     ```kotlin
     // MessageController.kt
@@ -73,40 +70,37 @@ It requires changing the `MessageController` class to respond with a JSON docume
     ```
 
     <deflist collapsible="true">
-       <def title="Collections – listOf()">
-          <p>The Kotlin Standard Library provides implementations for basic collection types: sets, lists, and maps.<br/>
-          A pair of interfaces represents each collection type:</p>
+       <def title="集合 – listOf()">
+          <p>Kotlin 标准库提供了基本集合类型的实现：集合（sets）、列表（lists）和映射（maps）。<br/>
+          每个集合类型由一对接口表示：</p>
           <list>
-              <li>A <i>read-only</i> interface that provides operations for accessing collection elements.</li>
-              <li>A <i>mutable</i> interface that extends the corresponding read-only interface with write operations: adding, removing, and updating its elements.</li>
+              <li>一个 <i>只读</i> 接口，提供访问集合元素的操作。</li>
+              <li>一个 <i>可变</i> 接口，扩展了相应的只读接口，提供写操作：添加、删除和更新元素。</li>
           </list>
-          <p>The corresponding factory functions are also provided by the Kotlin Standard Library to create instances of such collections.
-          </p>
-          <p>In this tutorial, you use the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/list-of.html"><code>listOf()</code></a> function to create a list of <code>Message</code> objects.
-          This is the factory function to create a <i>read-only</i> list of objects: you can't add or remove elements from the list.<br/>
-          If it is required to perform write operations on the list, call the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-list-of.html"><code>mutableListOf()</code></a> function to create a mutable list instance.
-          </p>
+          <p>Kotlin 标准库还提供了相应的工厂函数来创建这些集合的实例。</p>
+          <p>在本教程中，您使用 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/list-of.html"><code>listOf()</code></a> 函数创建一个 `Message` 对象的列表。  
+          这是一个创建 <i>只读</i> 列表的工厂函数：您不能对列表进行添加或删除操作。<br/>
+          如果需要对列表执行写操作，可以调用 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/mutable-list-of.html"><code>mutableListOf()</code></a> 函数来创建一个可变列表实例。</p>
        </def>
-       <def title="Trailing comma">
-          <p>A <a href="coding-conventions.md#trailing-commas">trailing comma</a> is a comma symbol after the <b>last item</b> of a series of elements:</p>
+       <def title="尾随逗号">
+          <p><a href="coding-conventions.md#trailing-commas">尾随逗号</a>是系列元素中最后一项后的逗号符号：</p>
             <code-block lang="kotlin">
             Message("3", "Privet!"),
             </code-block>
-          <p>This is a convenient feature of Kotlin syntax and is entirely optional – your code will still work without them.
-          </p>
-          <p>In the example above, creating a list of <code>Message</code> objects includes the trailing comma after the last <code>listOf()</code> function argument.</p>
+          <p>这是 Kotlin 语法的一个便捷特性，完全是可选的 – 即使没有尾随逗号，您的代码仍然可以正常工作。</p>
+          <p>在上面的例子中，创建一个 `Message` 对象的列表时，最后一个 `<code>listOf()</code>` 函数参数后面加了一个尾随逗号。</p>
        </def>
     </deflist>
 
-The response from `MessageController` will now be a JSON document containing a collection of `Message` objects.
+`MessageController` 的响应现在将是一个包含 `Message` 对象集合的 JSON 文档。
 
-> Any controller in the Spring application renders JSON response by default if Jackson library is on the classpath.
-> As you [specified the `spring-boot-starter-web` dependency in the `build.gradle.kts` file](jvm-create-project-with-spring-boot.md#explore-the-project-gradle-build-file), you received Jackson as a _transitive_ dependency.
-> Hence, the application responds with a JSON document if the endpoint returns a data structure that can be serialized to JSON.
+> 如果 Jackson 库在类路径中，Spring 应用程序中的任何控制器默认都会渲染 JSON 响应。  
+> 正如您在 [`build.gradle.kts` 文件中指定了 `spring-boot-starter-web` 依赖项](jvm-create-project-with-spring-boot.md#explore-the-project-gradle-build-file)，您已经作为 _传递性_ 依赖项引入了 Jackson。  
+> 因此，当端点返回可以序列化为 JSON 的数据结构时，应用程序将响应一个 JSON 文档。
 >
 {style="note"}
 
-Here is a complete code of the `DemoApplication.kt`, `MessageController.kt`, and `Message.kt` files:
+以下是 `DemoApplication.kt`、`MessageController.kt` 和 `Message.kt` 文件的完整代码：
 
 ```kotlin
 // DemoApplication.kt
@@ -153,24 +147,24 @@ data class Message(val id: String?, val text: String)
 ```
 {collapsible="true" collapsible="true"}
 
-## Run the application
+## 运行应用程序 {id=run-the-application}
 
-The Spring application is ready to run:
+Spring 应用程序已经准备好运行：
 
-1. Run the application again.
+1. 再次运行应用程序。
 
-2. Once the application starts, open the following URL:
+2. 应用程序启动后，打开以下 URL：
 
     ```text
     http://localhost:8080
     ```
 
-    You will see a page with a collection of messages in JSON format:
+   您将看到一个包含消息集合的 JSON 格式的页面：
 
-    ![Run the application](messages-in-json-format.png){width=800}
+   ![运行应用程序](messages-in-json-format.png){width=800}
 
-## Next step
+## 下一步 {id=next-step}
 
-In the next part of the tutorial, you'll add and configure a database to your project, and make HTTP requests.
+在教程的下一部分，您将为项目添加并配置数据库，并进行 HTTP 请求。
 
-**[Proceed to the next chapter](jvm-spring-boot-add-db-support.md)**
+**[继续下一章节](jvm-spring-boot-add-db-support.md)**
