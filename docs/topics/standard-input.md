@@ -1,106 +1,102 @@
-[//]: # (title: Standard input)
+[//]: # (title: 标准输入(Standard input))
 
-> Java Scanner is a slow tool. Use it only when you need the specific functionalities it offers.
-> Otherwise, it's generally preferable to use Kotlin's `readln()` function to [read standard input](basic-syntax.md#read-from-the-standard-input).
+> Java 的 Scanner 是一个较慢的工具。仅在需要其提供的特定功能时才有必要使用它。  
+> 否则，通常更推荐使用 Kotlin 的 `readln()` 方法来[读取标准输入](basic-syntax.md#read-from-the-standard-input)。
 >
 {style="note"}
 
-To read from the standard input, Java provides the `Scanner` class. Kotlin offers two main ways to read from the standard input: 
-the `Scanner` class, similar to Java, and the `readln()` function.
+要读取标准输入，Java 提供了 `Scanner` 类。Kotlin 提供了两种主要方式来读取标准输入：  
+与 Java 类似的 `Scanner` 类，以及 `readln()` 方法。
 
-## Read from the standard input with Java Scanner
+## 使用 Java Scanner 读取标准输入 {id=read-from-the-standard-input-with-java-scanner}
 
-In Java, the standard input is typically accessed through the `System.in` object. You need to import the `Scanner` class, 
-create an object, and use methods like `.nextLine()` and `.nextInt()` to read different data types:
+在 Java 中，标准输入通常通过 `System.in` 对象访问。您需要导入 `Scanner` 类，
+创建一个对象，并使用 `.nextLine()` 和 `.nextInt()` 等方法来读取不同的数据类型：
 
 ```java
-//Java implementation
+// Java 实现
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Reads a single line of input. For example: Hi there!
+        // 读取一行输入。例如：Hi there!
         System.out.print("Enter a line: ");
         String line = scanner.nextLine();
         System.out.println("You entered: " + line);
-        // You entered: Hi there!
+        // 打印：You entered: Hi there!
 
-        // Reads an integer. For example: 08081990
+        // 读取一个整数。例如：08081990
         System.out.print("Enter an integer: ");
         int number = scanner.nextInt();
         System.out.println("You entered: " + number);
-        // You entered: 08081990
+        // 打印：You entered: 08081990
 
         scanner.close();
     }
 }
 ```
 
-### Use Java Scanner in Kotlin
+### 在 Kotlin 中使用 Java Scanner {id=use-java-scanner-in-kotlin}
 
-Due to Kotlin's interoperability with Java libraries,
-you can access Java Scanner from Kotlin code out of the box.
+由于 Kotlin 与 Java 库的互操作性，您可以直接在 Kotlin 代码中访问 Java Scanner。
 
-To use Java Scanner in Kotlin, you need to import the `Scanner` class and initialize it by passing a `System.in` object that represents the standard input stream and dictates how to read the data.
-You can use the [available reading methods](https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html) for reading values different from strings,
-such as `.nextLine()`, `.next()`, and `.nextInt()`:
+要在 Kotlin 中使用 Java Scanner，您需要导入 `Scanner` 类，并通过传递 `System.in` 对象来初始化它，该对象表示标准输入流并决定如何读取数据。  
+您可以使用[可用的读取方法](https://docs.oracle.com/javase/8/docs/api/java/util/Scanner.html)来读取不同于字符串的值，
+例如 `.nextLine()`、`.next()` 和 `.nextInt()`：
 
 ```kotlin
-// Imports Java Scanner
+// 导入 Java Scanner
 import java.util.Scanner
 
 fun main() {
-    // Initializes the Scanner
+    // 初始化 Scanner
     val scanner = Scanner(System.`in`)
 
-    // Reads a whole string line. For example: "Hello, Kotlin"
+    // 读取一整行字符串。例如："Hello, Kotlin"
     val line = scanner.nextLine()
     print(line)
     // Hello, Kotlin
 
-    // Reads a string. For example: "Hello"
+    // 读取一个字符串。例如："Hello"
     val string = scanner.next()
     print(string)
     // Hello
 
-    // Reads a number. For example: 123
+    // 读取一个数字。例如：123
     val num = scanner.nextInt()
     print(num)
     // 123
 }
 ```
 
-Other useful methods for reading input with Java Scanner are `.hasNext()`, `.useDelimiter()`, and `.close()`: 
+使用 Java Scanner 读取输入时，其他有用的方法包括 `.hasNext()`、`.useDelimiter()` 和 `.close()`：
 
-* The `.hasNext()`
-  method checks if there's more data available in the input. It returns the boolean value `true` if there are remaining elements to iterate and `false` if no more elements are left in the input.
+* `.hasNext()` 方法检查输入中是否还有数据可用。如果输入中还有剩余元素可迭代，则返回布尔值 `true`，如果没有更多元素，则返回 `false`。
 
-* The `.useDelimiter()` method sets the delimiter for reading input elements. The delimiter is whitespaces by default, but you can specify other characters. 
-  For example, `.useDelimiter(",")` reads the input elements separated by commas. 
+* `.useDelimiter()` 方法设置读取输入元素的分隔符。默认情况下，分隔符是空白字符，但您可以指定其他字符。例如，`.useDelimiter(",")` 将按逗号分隔输入元素。
 
-* The `.close()` method closes the input stream associated with the Scanner, preventing further use of the Scanner for reading input.
+* `.close()` 方法关闭与 Scanner 关联的输入流，防止 Scanner 继续用于读取输入。
 
-> Always use the `.close()` method when you're finished using Java Scanner. Closing the Java Scanner
-> releases the resources it consumes and ensures proper program behavior.
+> 使用完 Java Scanner 后，务必调用 `.close()` 方法。关闭 Java Scanner 会释放其占用的资源，确保程序行为的正确性。
 >
 {style="note"}
 
-## Read from the standard input with readln()
+## 使用 readln() 读取标准输入 {id=read-from-the-standard-input-with-readln}
 
-In Kotlin, apart from the Java Scanner, you have the `readln()` function. It is the most straightforward way to read input. This function reads a line 
-of text from the standard input and returns it as a string:
+在 Kotlin 中，除了 Java Scanner 之外，还有 `readln()` 方法。它是读取输入的最简单方式。
+该方法从标准输入读取一行文本，并将其作为字符串返回：
 
 ```kotlin
-// Reads a string. For example: Charlotte
+// 读取一个字符串。例如：Charlotte
 val name = readln()
 
-// Reads a string and converts it into an integer. For example: 43
+// 读取一个字符串并将其转换为整数。例如：43
 val age = readln().toInt()
 
 println("Hello, $name! You are $age years old.")
-// Hello, Charlotte! You are 43 years old.
+// 打印：Hello, Charlotte! You are 43 years old.
 ```
 
-For more information, see [Read standard input](read-standard-input.md).
+欲了解更多信息，请参阅 [读取标准输入](read-standard-input.md)。
