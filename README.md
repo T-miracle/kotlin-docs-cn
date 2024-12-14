@@ -20,4 +20,4 @@ Clone 本项目到本地，直接运行打开即可
 
 ## 当前同步官方提交修订记录
 
-非Fork分支，[点击查看当前修订号](https://blog.namichong.com/translation-docs/kotlin-docs/translator-says.html#current-commit-id)
+非Fork分支，[点击查看当前修订号](https://docs.namichong.com/kotlin/translator-says.html#current-commit-id)

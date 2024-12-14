@@ -13,9 +13,9 @@
     <!--自定义样式文件-->
     <custom-css>custom.css</custom-css>
     <!--首页地址-->
-    <product-web-url>https://blog.namichong.com/translation-docs/kotlin-docs/</product-web-url>
+    <product-web-url>https://docs.namichong.com/kotlin/</product-web-url>
     <!--站点地图生成前缀-->
-    <generate-sitemap-url-prefix>https://blog.namichong.com/translation-docs/kotlin-docs/</generate-sitemap-url-prefix>
+    <generate-sitemap-url-prefix>https://docs.namichong.com/kotlin/</generate-sitemap-url-prefix>
     <generate-only-default-anchors>true</generate-only-default-anchors>
     <!--New tags-->
     <enable-contribution>true</enable-contribution>
@@ -27,7 +27,7 @@
     <automaticLinkSummaries>false</automaticLinkSummaries>
     <!--<kotlin-latest-url>%kotlinLatestUrl%</kotlin-latest-url>-->
     <!--<product-web-url>%kotlinLatestUrl%</product-web-url>-->
-    <web-root>https://blog.namichong.com/translation-docs/kotlin-docs/</web-root>
+    <web-root>https://docs.namichong.com/kotlin/</web-root>
     <og-image>https://kotlinlang.org/assets/images/open-graph/docs.png</og-image>
     <og-twitter>@kotlin</og-twitter>
     <download-page/>
