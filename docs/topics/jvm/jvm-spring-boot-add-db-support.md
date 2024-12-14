@@ -1,21 +1,24 @@
-[//]: # (title: Add database support for Spring Boot project)
-[//]: # (description: Add a database support for Sprint Boot project written in Kotlin using JDBC template.)
+[//]: # (title: 为 Spring Boot 项目添加数据库支持)
+[//]: # (description: 使用 JDBCtemplate 为 Kotlin 编写的 Spring Boot 项目添加数据库支持。)
 
 <tldr>
-    <p>This is the third part of the <strong>Getting started with Spring Boot and Kotlin</strong> tutorial. Before proceeding, make sure you've completed previous steps:</p><br/>
-    <p><img src="icon-1-done.svg" width="20" alt="First step"/> <a href="jvm-create-project-with-spring-boot.md">Create a Spring Boot project with Kotlin</a><br/><img src="icon-2-done.svg" width="20" alt="Second step"/> <a href="jvm-spring-boot-add-data-class.md">Add a data class to the Spring Boot project</a><br/><img src="icon-3.svg" width="20" alt="Third step"/> <strong>Add database support for Spring Boot project</strong><br/><img src="icon-4-todo.svg" width="20" alt="Fourth step"/> Use Spring Data CrudRepository for database access</p>
+    <p>这是<strong>Spring Boot 和 Kotlin 入门</strong>教程的第三部分：</p><br/>  
+    <p><img src="icon-1-done.svg" width="20" alt="第一步"/> 用 Kotlin 创建一个 Spring Boot 项目 <br/>
+      <img src="icon-2-done.svg" width="20" alt="第二步"/> 向 Spring Boot 项目添加一个数据类<br/>
+      <img src="icon-3.svg" width="20" alt="第三步"/> <strong> 为 Spring Boot 项目添加数据库支持</strong><br/>
+      <img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问<br/></p>  
 </tldr>
 
-In this part of the tutorial, you'll add and configure a database to your project using JDBC. In JVM applications, you use JDBC to interact with databases.
-For convenience, the Spring Framework provides the `JdbcTemplate` class that simplifies the use of JDBC and helps to avoid common errors.
+在本部分教程中，您将使用 JDBC 向项目添加并配置数据库。在 JVM 应用程序中，您使用 JDBC 与数据库进行交互。  
+为了方便，Spring 框架提供了 `JdbcTemplate` 类，它简化了 JDBC 的使用，并帮助避免常见错误。
 
-## Add database support
+## 添加数据库支持 {id=add-database-support}
 
-The common practice in Spring Framework based applications is to implement the database access logic within the so-called _service_ layer – this is where business logic lives.
-In Spring, you should mark classes with the `@Service` annotation to imply that the class belongs to the service layer of the application.
-In this application, you will create the `MessageService` class for this purpose.
+在基于 Spring 框架的应用程序中，通常的做法是将数据库访问逻辑实现于所谓的 _服务_ 层——这里是业务逻辑所在的位置。  
+在 Spring 中，您应该使用 `@Service` 注解标记类，以表示该类属于应用程序的服务层。  
+在本应用程序中，您将创建 `MessageService` 类来实现这个功能。
 
-In the same package, create the `MessageService.kt` file and the `MessageService` class as follows:
+在相同的包中，创建 `MessageService.kt` 文件，并实现 `MessageService` 类，如下所示：
 
 ```kotlin
 // MessageService.kt
@@ -41,44 +44,47 @@ class MessageService(private val db: JdbcTemplate) {
 }
 ```
 
-<deflist collapsible="true">
-   <def title="Constructor argument and dependency injection – (private val db: JdbcTemplate)">
-      <p>A class in Kotlin has a primary constructor. It can also have one or more <a href="classes.md#secondary-constructors">secondary constructors</a>.
-      The <i>primary constructor</i> is a part of the class header, and it goes after the class name and optional type parameters. In our case, the constructor is <code>(val db: JdbcTemplate)</code>.</p>
-      <p><code>val db: JdbcTemplate</code> is the constructor's argument:</p>
-      <code-block lang="kotlin">
-      @Service
-      class MessageService(private val db: JdbcTemplate)
-      </code-block>
-  </def>
-   <def title="Trailing lambda and SAM conversion">
-      <p>The <code>findMessages()</code> function calls the <code>query()</code> function of the <code>JdbcTemplate</code> class. The <code>query()</code> function takes two arguments: an SQL query as a String instance, and a callback that will map one object per row:</p>
-      <code-block lang="sql">
-      db.query("...", RowMapper { ... } )
-      </code-block><br/>
-      <p>The <code>RowMapper</code> interface declares only one method, so it is possible to implement it via lambda expression by omitting the name of the interface. The Kotlin compiler knows the interface that the lambda expression needs to be converted to because you use it as a parameter for the function call. This is known as <a href="java-interop.md#sam-conversions">SAM conversion in Kotlin</a>:</p>
-      <code-block lang="sql">
-      db.query("...", { ... } )
-      </code-block><br/>
-      <p>After the SAM conversion, the query function ends up with two arguments: a String at the first position, and a lambda expression at the last position. According to the Kotlin convention, if the last parameter of a function is a function, then a lambda expression passed as the corresponding argument can be placed outside the parentheses. Such syntax is also known as <a href="lambdas.md#passing-trailing-lambdas">trailing lambda</a>:</p>
-      <code-block lang="sql">
-      db.query("...") { ... }
-      </code-block>
-   </def>
-   <def title="Underscore for unused lambda argument">
-      <p>For a lambda with multiple parameters, you can use the underscore <code>_</code> character to replace the names of the parameters you don't use.</p>
-      <p>Hence, the final syntax for query function call looks like this:</p>
-      <code-block lang="kotlin">
-      db.query("select * from messages") { response, _ ->
-          Message(response.getString("id"), response.getString("text"))
-      }
-      </code-block>
-   </def>
+<deflist collapsible="true">  
+   <def title="构造函数参数和依赖注入 – (private val db: JdbcTemplate)">  
+      <p>在 Kotlin 中，类有一个主构造函数。它还可以有一个或多个 <a href="classes.md#secondary-constructors">次构造函数</a>。  
+      <i>主构造函数</i> 是类头的一部分，位于类名和可选类型参数之后。在我们的例子中，构造函数是 <code>(val db: JdbcTemplate)</code>。</p>  
+      <p><code>val db: JdbcTemplate</code> 是构造函数的参数：</p>  
+      <code-block lang="kotlin">  
+      @Service  
+      class MessageService(private val db: JdbcTemplate)  
+      </code-block>  
+  </def>  
+   <def title="尾部 lambda 和 SAM 转换">  
+      <p><code>findMessages()</code> 函数调用了 <code>JdbcTemplate</code> 类的 <code>query()</code> 函数。  
+      <code>query()</code> 函数接受两个参数：一个 SQL 查询字符串和一个回调，用于将每一行映射为一个对象：</p>  
+      <code-block lang="sql">  
+      db.query("...", RowMapper { ... } )  
+      </code-block><br/>  
+      <p><code>RowMapper</code> 接口声明了一个方法，因此可以通过 lambda 表达式来实现它，省略接口名。  
+      Kotlin 编译器知道 lambda 表达式需要转换成哪个接口，因为它作为函数调用的参数使用。这种转换称为 <a href="java-interop.md#sam-conversions">Kotlin 中的 SAM 转换</a>：</p>  
+      <code-block lang="sql">  
+      db.query("...", { ... } )  
+      </code-block><br/>  
+      <p>经过 SAM 转换后，<code>query</code> 函数将接收到两个参数：第一个是 String 类型，最后一个是 lambda 表达式。  
+      根据 Kotlin 的约定，如果函数的最后一个参数是函数类型，那么传入的 lambda 表达式可以放在括号外面。这种语法也称为 <a href="lambdas.md#passing-trailing-lambdas">尾部 lambda</a>：</p>  
+      <code-block lang="sql">  
+      db.query("...") { ... }  
+      </code-block>  
+   </def>  
+   <def title="未使用的 lambda 参数使用下划线">  
+      <p>对于具有多个参数的 lambda，您可以使用下划线 <code>_</code> 来替代不使用的参数名。</p>  
+      <p>因此，最终的 query 函数调用语法如下所示：</p>  
+      <code-block lang="kotlin">  
+      db.query("select * from messages") { response, _ ->  
+          Message(response.getString("id"), response.getString("text"))  
+      }  
+      </code-block>  
+   </def>  
 </deflist>
 
-## Update the MessageController class
+## 更新 MessageController 类 {id=update-the-messagecontroller-class}
 
-Update `MessageController.kt` to use the new `MessageService` class:
+更新 `MessageController.kt` 以使用新的 `MessageService` 类：
 
 ```kotlin
 // MessageController.kt
@@ -107,28 +113,28 @@ class MessageController(private val service: MessageService) {
 }
 ```
 
-<deflist collapsible="true">
-   <def title="@PostMapping annotation">
-      <p>The method responsible for handling HTTP POST requests needs to be annotated with <code>@PostMapping</code> annotation. To be able to convert the JSON sent as HTTP Body content into an object, you need to use the <code>@RequestBody</code> annotation for the method argument. Thanks to having Jackson library in the classpath of the application, the conversion happens automatically.</p>
-   </def>
-   <def title="ResponseEntity">
-      <p><code>ResponseEntity</code> represents the whole HTTP response: status code, headers, and body.</p>
-      <p> Using the <code>created()</code> method you configure the response status code (201) and set the location header indicating the context path for the created resource.</p>
-   </def>
-</deflist>
+<deflist collapsible="true">  
+   <def title="@PostMapping 注解">  
+      <p>负责处理 HTTP POST 请求的方法需要使用 <code>@PostMapping</code> 注解。为了能够将作为 HTTP Body 内容发送的 JSON 转换为对象，您需要在方法参数上使用 <code>@RequestBody</code> 注解。  
+      由于 Jackson 库已经包含在应用程序的类路径中，转换会自动发生。</p>  
+   </def>  
+   <def title="ResponseEntity">  
+      <p><code>ResponseEntity</code> 代表整个 HTTP 响应：状态码、头部信息和主体内容。</p>  
+      <p>使用 <code>created()</code> 方法，您可以配置响应状态码（201），并设置 Location 头部，指示已创建资源的上下文路径。</p>  
+   </def>  
+</deflist>  
 
-## Update the MessageService class
+## 更新 MessageService 类 {id=update-the-messageservice-class}
 
-The `id` for `Message` class was declared as a nullable String:
+`Message` 类的 `id` 被声明为一个可空的 String：
 
 ```kotlin
 data class Message(val id: String?, val text: String)
 ```
 
-It would not be correct to store the `null` as an `id` value in the database though: you need to handle this situation gracefully.
+然而，在数据库中存储 `null` 作为 `id` 值是不正确的：您需要优雅地处理这种情况。
 
-Update your code of the `MessageService.kt` file to generate a new value when the `id` is `null`
-while storing the messages in the database:
+更新 `MessageService.kt` 文件中的代码，当 `id` 为 `null` 时，在将消息存储到数据库时生成一个新值：
 
 ```kotlin
 // MessageService.kt
@@ -156,23 +162,25 @@ class MessageService(private val db: JdbcTemplate) {
 }
 ```
 
-<deflist collapsible="true">
-   <def title="Elvis operator – ?:">
-      <p>The code <code>message.id ?: UUID.randomUUID().toString()</code> uses the <a href="null-safety.md#elvis-operator">Elvis operator (if-not-null-else shorthand) <code>?:</code></a>. If the expression to the left of <code>?:</code> is not <code>null</code>, the Elvis operator returns it; otherwise, it returns the expression to the right. Note that the expression on the right-hand side is evaluated only if the left-hand side is <code>null</code>.</p>
-   </def>
-</deflist>
+<deflist collapsible="true">  
+   <def title="Elvis 操作符 – ?:">  
+      <p>代码 <code>message.id ?: UUID.randomUUID().toString()</code> 使用了 <a href="null-safety.md#elvis-operator">Elvis 操作符 (空值合并表达式) <code>?:</code></a>。  
+      如果 <code>?:</code> 左侧的表达式不为 <code>null</code>，Elvis 操作符返回该值；否则，它返回右侧的表达式。  
+      注意，只有在左侧表达式为 <code>null</code> 时，右侧的表达式才会被求值。</p>  
+   </def>  
+</deflist>  
 
-The application code is ready to work with the database. It is now required to configure the data source.
+应用程序代码已经准备好与数据库工作。现在需要配置数据源。
 
-## Configure the database
+## 配置数据库 {id=configure-the-database}
 
-Configure the database in the application:
+在应用程序中配置数据库：
 
-1. Create `schema.sql` file in the `src/main/resources` directory. It will store the database object definitions:
+1. 在 `src/main/resources` 目录下创建 `schema.sql` 文件。该文件将存储数据库对象定义：
 
-   ![Create database schema](create-database-schema.png){width=400}
+   ![创建数据库模式](create-database-schema.png){width=400}
 
-2. Update the `src/main/resources/schema.sql` file with the following code:
+2. 用以下代码更新 `src/main/resources/schema.sql` 文件：
 
    ```sql
    -- schema.sql
@@ -182,9 +190,9 @@ Configure the database in the application:
    );
    ```
 
-   It creates the `messages` table with two columns: `id` and `text`. The table structure matches the structure of the `Message` class.
+   这会创建一个 `messages` 表，包含 `id` 和 `text` 两列。表结构与 `Message` 类的结构匹配。
 
-3. Open the `application.properties` file located in the `src/main/resources` folder and add the following application properties:
+3. 打开位于 `src/main/resources` 文件夹中的 `application.properties` 文件，并添加以下应用程序属性：
 
    ```none
    spring.application.name=demo
@@ -196,19 +204,19 @@ Configure the database in the application:
    spring.sql.init.mode=always
    ```
 
-   These settings enable the database for the Spring Boot application.  
-   See the full list of common application properties in the [Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html).
+   这些设置启用 Spring Boot 应用程序的数据库连接。  
+   请参阅 [Spring 文档](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html) 了解常见应用程序属性的完整列表。
 
-## Add messages to database via HTTP request
+## 通过 HTTP 请求将消息添加到数据库 {id=add-messages-to-database-via-http-request}
 
-You should use an HTTP client to work with previously created endpoints. In IntelliJ IDEA, use the embedded HTTP client:
+您应该使用 HTTP 客户端来操作之前创建的端点。在 IntelliJ IDEA 中，使用内嵌的 HTTP 客户端：
 
-1. Run the application. Once the application is up and running, you can execute POST requests to store messages in the database.
+1. 运行应用程序。应用程序启动并运行后，您可以执行 POST 请求将消息存储到数据库中。
 
-2. Create the `requests.http` file in the project root folder and add the following HTTP requests:
+2. 在项目根目录创建 `requests.http` 文件，并添加以下 HTTP 请求：
 
    ```http request
-   ### Post "Hello!"
+   ### 发送 "Hello!"
    POST http://localhost:8080/
    Content-Type: application/json
    
@@ -216,7 +224,7 @@ You should use an HTTP client to work with previously created endpoints. In Inte
      "text": "Hello!"
    }
    
-   ### Post "Bonjour!"
+   ### 发送 "Bonjour!"
    
    POST http://localhost:8080/
    Content-Type: application/json
@@ -225,7 +233,7 @@ You should use an HTTP client to work with previously created endpoints. In Inte
      "text": "Bonjour!"
    }
    
-   ### Post "Privet!"
+   ### 发送 "Privet!"
    
    POST http://localhost:8080/
    Content-Type: application/json
@@ -234,23 +242,22 @@ You should use an HTTP client to work with previously created endpoints. In Inte
      "text": "Privet!"
    }
    
-   ### Get all the messages
+   ### 获取所有消息
    GET http://localhost:8080/
    ```
 
-3. Execute all POST requests. Use the green **Run** icon in the gutter next to the request declaration.
-   These requests write the text messages to the database:
+3. 执行所有 POST 请求。使用请求声明旁边的绿色 **Run** 图标来执行请求。  
+   这些请求将文本消息写入数据库：
 
-   ![Execute POST request](execute-post-requests.png)
+   ![执行 POST 请求](execute-post-requests.png)
 
-4. Execute the GET request and see the result in the **Run** tool window:
+4. 执行 GET 请求，并在 **Run** 工具窗口中查看结果：
 
-   ![Execute GET requests](execute-get-requests.png)
+   ![执行 GET 请求](execute-get-requests.png)
 
-### Alternative way to execute requests {collapsible="true" collapsible="true"}
+### 执行请求的另一种方式 {id=alternative-way-to-execute-requests collapsible="true"}
 
-You can also use any other HTTP client or the cURL command-line tool. For example, run the following commands in
-the terminal to get the same result:
+您还可以使用其他 HTTP 客户端或 cURL 命令行工具。例如，在终端中运行以下命令以获得相同的结果：
 
 ```bash
 curl -X POST --location "http://localhost:8080" -H "Content-Type: application/json" -d "{ \"text\": \"Hello!\" }"
@@ -262,11 +269,11 @@ curl -X POST --location "http://localhost:8080" -H "Content-Type: application/js
 curl -X GET --location "http://localhost:8080"
 ```
 
-## Retrieve messages by id
+## 通过 id 检索消息 {id=retrieve-messages-by-id}
 
-Extend the functionality of the application to retrieve the individual messages by id.
+扩展应用程序的功能，以便通过 id 检索单独的消息。
 
-1. In the `MessageService` class, add the new function `findMessageById(id: String)` to retrieve the individual messages by id:
+1. 在 `MessageService` 类中，添加新的函数 `findMessageById(id: String)` 以通过 id 检索单独的消息：
 
     ```kotlin
     // MessageService.kt
@@ -289,22 +296,22 @@ Extend the functionality of the application to retrieve the individual messages 
         }.singleOrNull()
     
         fun save(message: Message): Message {
-            val id = message.id ?: UUID.randomUUID().toString() // Generate new id if it is null
+            val id = message.id ?: UUID.randomUUID().toString() // 如果 id 为 null，则生成新 id
             db.update(
                 "insert into messages values ( ?, ? )",
                 id, message.text
             )
-            return message.copy(id = id) // Return a copy of the message with the new id
+            return message.copy(id = id) // 返回带有新 id 的消息副本
         }
     }
     ```
-   
-    > The `.query()` function that is used to fetch the message by its id is a [Kotlin extension function](extensions.md#extension-functions)
-    > provided by the Spring Framework. It requires an additional import `import org.springframework.jdbc.core.query` as demonstrated in the code above.
-    >
-    {style="warning"}
 
-2. Add the new `index(...)` function with the `id` parameter to the `MessageController` class:
+   > 用于通过 id 获取消息的 `.query()` 函数是 Spring 框架提供的 [Kotlin 扩展函数](extensions.md#extension-functions)，  
+   > 它需要额外的导入 `import org.springframework.jdbc.core.query`，如上面代码所示。
+   >
+   {style="warning"}
+
+2. 在 `MessageController` 类中添加新的 `index(...)` 函数，带有 `id` 参数：
 
     ```kotlin
     // MessageController.kt
@@ -336,37 +343,37 @@ Extend the functionality of the application to retrieve the individual messages 
             service.findMessageById(id).toResponseEntity()
         
         private fun Message?.toResponseEntity(): ResponseEntity<Message> =
-            // If the message is null (not found), set response code to 404
+            // 如果消息为 null（未找到），则设置响应代码为 404
             this?.let { ResponseEntity.ok(it) } ?: ResponseEntity.notFound().build() 
     }
     ```
 
-    <deflist collapsible="true">
-    <def title="Retrieving a value from the context path">
-       <p>The message <code>id</code> is retrieved from the context path by the Spring Framework as you annotated the new function by <code>@GetMapping(&quot;/{id}&quot;)</code>. By annotating the function argument with <code>@PathVariable</code>, you tell the framework to use the retrieved value as a function argument. The new function makes a call to <code>MessageService</code> to retrieve the individual message by its id.</p>
-    </def>
-    <def title="vararg argument position in the parameter list">
-        <p>The <code>query()</code> function takes three arguments:</p>
-        <list>
-            <li>SQL query string that requires a parameter to run</li>
-            <li><code>id</code>, which is a parameter of type String</li>
-            <li><code>RowMapper</code> instance is implemented by a lambda expression</li>
-        </list>
-        <p>The second parameter for the <code>query()</code> function is declared as a <i>variable argument</i> (<code>vararg</code>). In Kotlin, the position of the variable arguments parameter is not required to be the last in the parameters list.</p>
-    </def>
-    <def title="Extension function with nullable receiver">
-         <p>Extensions can be defined with a nullable receiver type. If the receiver is <code>null</code>, then <code>this</code> is also <code>null</code>. So when defining an extension with a nullable receiver type, it is recommended performing a <code>this == null</code> check inside the function body.</p>
-         <p>You can also use the null-safe invocation operator (<code>?.</code>) to perform the null check as in the <code>toResponseBody</code> function above:</p>
+   <deflist collapsible="true">
+      <def title="从上下文路径中检索值">
+         <p>消息的 <code>id</code> 是通过 Spring 框架从上下文路径中检索的，因为您在新函数上使用了 <code>@GetMapping(&quot;/{id}&quot;)</code> 注解。通过在函数参数上添加 <code>@PathVariable</code> 注解，您告诉框架使用检索到的值作为函数的参数。这个新函数会调用 <code>MessageService</code> 来根据 id 检索单独的消息。</p>
+      </def>
+      <def title="vararg 参数在参数列表中的位置">
+         <p><code>query()</code> 函数接受三个参数：</p>
+         <list>
+            <li>需要参数的 SQL 查询字符串</li>
+            <li><code>id</code>，这是一个类型为 String 的参数</li>
+            <li><code>RowMapper</code> 实例，通过 lambda 表达式实现</li>
+         </list>
+         <p><code>query()</code> 函数的第二个参数声明为一个 <i>可变参数</i>（<code>vararg</code>）。在 Kotlin 中，可变参数的位置不必总是参数列表中的最后一个。</p>
+      </def>
+      <def title="带有可空接收者的扩展函数">
+         <p>可以定义带有可空接收者类型的扩展函数。如果接收者为 <code>null</code>，那么 <code>this</code> 也为 <code>null</code>。因此，在定义带有可空接收者类型的扩展时，建议在函数体内执行 <code>this == null</code> 检查。</p>
+         <p>您还可以使用空安全调用操作符（<code>?.</code>）来执行空检查，如上面 <code>toResponseBody</code> 函数中的代码：</p>
          <code-block lang="kotlin">
          this?.let { ResponseEntity.ok(it) }
          </code-block>
-    </def>
-    <def title="ResponseEntity">
-        <p><code>ResponseEntity</code> represents the HTTP response, including the status code, headers, and body. It is a generic wrapper that allows you to send customized HTTP responses back to the client with more control over the content.</p>
-    </def>
-    </deflist>
+      </def>
+      <def title="ResponseEntity">
+         <p><code>ResponseEntity</code> 代表 HTTP 响应，包括状态码、头部信息和主体内容。它是一个通用包装器，允许您发送定制的 HTTP 响应回客户端，并对内容有更多控制。</p>
+      </def>
+   </deflist>
 
-Here is a complete code of the application:
+这是应用程序的完整代码：
 
 ```kotlin
 // DemoApplication.kt
@@ -459,38 +466,38 @@ class MessageController(private val service: MessageService) {
 ```
 {collapsible="true" collapsible="true"}
 
-## Run the application
+## 运行应用程序 {id=run-the-application}
 
-The Spring application is ready to run:
+Spring 应用程序已经准备好运行：
 
-1. Run the application again.
+1. 再次运行应用程序。
 
-2. Open the `requests.http` file and add the new GET request:
+2. 打开 `requests.http` 文件并添加新的 GET 请求：
 
     ```http request
-    ### Get the message by its id
+    ### 通过 id 获取消息
     GET http://localhost:8080/id
     ```
 
-3. Execute the GET request to retrieve all the messages from the database.
+3. 执行 GET 请求，从数据库中检索所有消息。
 
-4. In the **Run** tool window copy one of the ids and add it to the request, like this:
+4. 在 **Run** 工具窗口中复制其中一个 id，并将其添加到请求中，如下所示：
 
     ```http request
-    ### Get the message by its id
+    ### 通过 id 获取消息
     GET http://localhost:8080/f16c1d2e-08dc-455c-abfe-68440229b84f
     ```
-    
-    > Put your message id instead of the mentioned above.
+
+    > 将您自己的消息 id 替换掉上面提到的 id。
     >
     {style="note"}
 
-5. Execute the GET request and see the result in the **Run** tool window:
+5. 执行 GET 请求并在 **Run** 工具窗口中查看结果：
 
-    ![Retrieve message by its id](retrieve-message-by-its-id.png){width=706}
+   ![通过 id 检索消息](retrieve-message-by-its-id.png){width=706}
 
-## Next step
+## 下一步 {id=next-step}
 
-The final step shows you how to use more popular connection to database using Spring Data. 
+最后一步将向您展示如何使用更流行的数据库连接方式——Spring Data。
 
-**[Proceed to the next chapter](jvm-spring-boot-using-crudrepository.md)**
+**[继续下一章节](jvm-spring-boot-using-crudrepository.md)**

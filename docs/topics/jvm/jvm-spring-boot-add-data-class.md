@@ -1,10 +1,13 @@
 [//]: # (title: 向 Spring Boot 项目添加数据类)
 [//]: # (description: 向 Spring Boot 项目添加一个 Kotlin 数据类。)
 
-<tldr>  
-   <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第二部分。在继续之前，请确保已完成以下步骤：</p><br/>  
-   <p><img src="icon-1-done.svg" width="20" alt="第一步完成"/> <a href="jvm-create-project-with-spring-boot.md">使用 Kotlin 创建一个 Spring Boot 项目</a><br/><img src="icon-2.svg" width="20" alt="第二步"/> <strong>向 Spring Boot 项目添加数据类</strong><br/><img src="icon-3-todo.svg" width="20" alt="第三步"/> 为 Spring Boot 项目添加数据库支持<br/><img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问</p>  
-</tldr>  
+<tldr>
+    <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第二部分：</p><br/>  
+    <p><img src="icon-1-done.svg" width="20" alt="第一步"/> 用 Kotlin 创建一个 Spring Boot 项目 <br/>
+      <img src="icon-2.svg" width="20" alt="第二步"/> <strong> 向 Spring Boot 项目添加一个数据类</strong><br/>
+      <img src="icon-3-todo.svg" width="20" alt="第三步"/> 为 Spring Boot 项目添加数据库支持<br/>
+      <img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问<br/></p>  
+</tldr>
 
 在本教程的这一部分，您将为应用程序添加更多功能，并探索更多 Kotlin 的语言特性，例如数据类。  
 这需要修改 `MessageController` 类，使其返回一个包含序列化对象集合的 JSON 文档。

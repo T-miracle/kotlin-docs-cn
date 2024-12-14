@@ -2,9 +2,12 @@
 [//]: # (description: 在 IntelliJ IDEA 中使用 Kotlin 创建一个 Spring Boot 应用程序)
 
 <tldr>
-    <p>这是<strong>Spring Boot 和 Kotlin 入门</strong>教程的第一部分：</p><br/>  
-    <p><img src="icon-1.svg" width="20" alt="第一步"/> <strong>用 Kotlin 创建一个 Spring Boot 项目</strong><br/><img src="icon-2-todo.svg" width="20" alt="第二步"/> 向 Spring Boot 项目添加一个数据类<br/><img src="icon-3-todo.svg" width="20" alt="第三步"/> 为 Spring Boot 项目添加数据库支持<br/><img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问<br/></p>  
-</tldr> 
+    <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第一部分：</p><br/>  
+    <p><img src="icon-1.svg" width="20" alt="第一步"/><strong> 用 Kotlin 创建一个 Spring Boot 项目 </strong><br/>
+      <img src="icon-2-todo.svg" width="20" alt="第二步"/> 向 Spring Boot 项目添加一个数据类<br/>
+      <img src="icon-3-todo.svg" width="20" alt="第三步"/> 为 Spring Boot 项目添加数据库支持<br/>
+      <img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问<br/></p>  
+</tldr>
 
 教程的第一部分向您展示如何使用项目向导在 IntelliJ IDEA 中创建一个 Spring Boot 项目。
 
