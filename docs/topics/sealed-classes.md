@@ -195,6 +195,9 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.5"}
 
+在使用密封类与 `when` 表达式时，你还可以添加守卫条件，以便在单个分支中包含额外的检查。  
+有关更多信息，请参见 [when 表达式中的守卫条件](control-flow.md#guard-conditions-in-when-expressions)。
+
 > 在跨平台项目中，如果你在公共代码中有一个带有 `when` 表达式的密封类作为
 > [expected 声明](multiplatform-expect-actual.md)，你仍然需要一个 `else` 分支。  
 > 这是因为 `actual` 平台实现的子类可能扩展了在公共代码中未知的密封类。
@@ -263,35 +266,6 @@ fun processPayment(payment: Payment) {
 `ApiRequest` 密封接口定义了特定的请求类型：`LoginRequest` 用于登录，`LogoutRequest` 用于登出操作。  
 密封类 `ApiResponse` 封装了不同的响应场景：`UserSuccess` 包含用户数据，`UserNotFound` 表示用户不存在，`Error` 处理任何失败。
 `handleRequest` 函数使用 `when` 表达式以类型安全的方式处理这些请求，同时 `getUserById` 模拟用户检索：
-
-```kotlin
-sealed interface ApiRequest
-data class LoginRequest(val username: String, val password: String) : ApiRequest
-data class LogoutRequest(val userId: String) : ApiRequest
-
-sealed class ApiResponse
-data class UserSuccess(val userData: String) : ApiResponse()
-object UserNotFound : ApiResponse()
-data class Error(val message: String) : ApiResponse()
-
-fun handleRequest(request: ApiRequest): ApiResponse {
-    return when (request) {
-        is LoginRequest -> {
-            val user = getUserById(request.username)
-            if (user != null) UserSuccess(user) else UserNotFound
-        }
-        is LogoutRequest -> {
-            // 处理登出逻辑
-            UserSuccess("成功登出")
-        }
-    }
-}
-
-fun getUserById(username: String): String? {
-    // 模拟用户检索
-    return if (username == "validUser") "UserDataFor_$username" else null
-}
-```
 
 ```kotlin
 // 导入必要的模块

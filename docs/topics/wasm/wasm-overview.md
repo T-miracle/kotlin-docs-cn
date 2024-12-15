@@ -45,7 +45,7 @@ Wasm 虚拟机中。在浏览器外的使用场景中， [WebAssembly System Int
 
 你想自己尝试一下吗？
 
-<a href="wasm-get-started.md"><img src="wasm-get-started-button.svg" width="700" alt="Kotlin/Wasm 入门" style="block"/></a>
+<a href="wasm-get-started.md"><img src="wasm-get-started-button.svg" width="600" alt="Kotlin/Wasm 入门" style="block"/></a>
 
 ## Kotlin/Wasm 和 WASI {id=kotlin-wasm-and-wasi}
 

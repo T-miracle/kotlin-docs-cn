@@ -51,13 +51,23 @@ publishing {
 
 ## 主机要求 {id=host-requirements}
 
-除了 Apple 平台目标外，Kotlin/Native 支持交叉编译，允许任何主机生成所需的构件。
+Kotlin/Native 支持交叉编译，允许任何主机生成所需的 `.klib` 工件。
 
-为了避免发布过程中的任何问题：
-* 当你的项目目标是 Apple 操作系统时，仅从 Apple 主机进行发布。
-* 仅从一个主机发布所有构件，以避免在仓库中出现重复发布。
-  
-  例如，Maven Central 明确禁止重复发布，并会导致发布过程失败。 <!-- TBD: 添加实际错误信息 -->
+对于具有 Apple 目标的项目，通常需要一台 Apple 机器来生成工件。  
+然而，如果你想使用其他主机，可以在 `gradle.properties` 文件中设置这个
+[实验性](components-stability.md#stability-levels-explained) 选项：
+
+```none
+kotlin.native.enableKlibsCrossCompilation=true
+```
+
+> 要为 Apple 目标构建 [最终二进制文件](multiplatform-build-native-binaries.md)，仍然需要使用 Mac 机器。
+>
+{style="note"}
+
+为了避免发布过程中的问题，建议从单一主机发布所有工件，以避免在仓库中重复发布。
+例如，Maven Central 明确禁止重复发布，并会导致构建失败。
+<!-- TBD: add the actual error -->
 
 ### 如果你使用 Kotlin 1.7.0 或更早版本 {id=if-you-use-kotlin-170-or-earlier collapsible="true" collapsible="true"}
 
@@ -132,7 +142,7 @@ kotlin {
 ```kotlin
 kotlin {
     androidTarget {
-        publishLibraryVariants("release", "debug")
+        publishLibraryVariants("release")
     }
 }
 

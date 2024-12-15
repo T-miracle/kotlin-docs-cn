@@ -356,7 +356,7 @@ fun main() {
 ```
 {kotlin-runnable="true" id="join-strings-trim-margin-kotlin"}
 
-了解更多关于 [多行字符串](coding-conventions.md#字符串)。
+了解更多关于 [多行字符串](coding-conventions.md#strings)。
 
 ## 接下来做什么？ {id="whats-next"}
 

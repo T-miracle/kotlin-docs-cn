@@ -116,7 +116,7 @@ kotlin {
     // 源代码集声明：
     sourceSets {
         commonMain {
-            // 配置 commonMain 源代码集
+            // 配置 commonMain 源集
         }
     }
 }
@@ -196,7 +196,7 @@ Kotlin 为公共代码创建 `commonMain` 源代码集，并为特定目标创�
 
 ```kotlin
 kotlin {
-    android()
+    androidTarget()
     iosArm64()   // 64 位 iPhone 设备
     macosArm64() // 现代 Apple Silicon 版 Mac
     watchosX64() // 现代 64 位 Apple Watch 设备
@@ -301,6 +301,6 @@ Kotlin 提供了默认的 [`kotlin.test`](https://kotlinlang.org/api/latest/kotl
 
 ## 接下来做什么？
 
-* [了解在 Gradle 脚本中声明和使用预定义源代码集的更多信息](multiplatform-hierarchy.md)
-* [探索多平台项目结构的高级概念](multiplatform-advanced-project-structure.md)
-* [学习如何配置编译](multiplatform-configure-compilations.md)
+* [了解更多关于在 Gradle 脚本中声明和使用预定义源集](multiplatform-hierarchy.md)
+* [探索跨平台项目结构的高级概念](multiplatform-advanced-project-structure.md)
+* [了解更多关于目标编译和创建自定义编译的内容](multiplatform-configure-compilations.md)

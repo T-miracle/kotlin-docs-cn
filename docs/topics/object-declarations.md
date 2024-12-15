@@ -427,8 +427,8 @@ fun main() {
 
 ### 将匿名对象用作返回值和类型 {id="use-anonymous-objects-as-return-and-value-types"}
 
-当你从局部函数或 [`private`](visibility-modifiers.md#packages) 函数或属性返回匿名对象时（但不是
-[inline 函数](inline-functions.md)），该匿名对象的所有成员都可以通过该函数或属性访问：
+当你从一个局部或 [`private`](visibility-modifiers.md#packages) 函数或属性返回一个匿名对象时，
+匿名对象的所有成员都可以通过该函数或属性访问：
 
 ```kotlin
 //sampleStart
@@ -455,7 +455,7 @@ fun main() {
 
 这使得你可以返回一个具有特定属性的匿名对象，为你提供了一种简单的方式来封装数据或行为，而无需创建单独的类。
 
-如果返回匿名对象的函数或属性是 `public` 或 `private`，则其实际类型为：
+如果一个返回匿名对象的函数或属性具有 `public`、`protected` 或 `internal` 可见性，则其实际类型是：
 
 * 如果匿名对象没有声明的超类，则类型为 `Any`。
 * 如果匿名对象有且仅有一个声明的超类，则类型为该超类。

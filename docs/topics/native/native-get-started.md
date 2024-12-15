@@ -104,7 +104,7 @@ performs an incremental build of the project.
    * Use the [`replace()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/replace.html) function to remove the empty spaces in the name.
    * Use the scope function [`let`](scope-functions.md#let) to run the function within the object context.
    * Use a [string template](strings.md#string-templates) to insert your name length into the string by adding a dollar sign `$` and enclosing it in curly braces – `${it.length}`.
-     `it` is the default name of a [lambda parameter](coding-conventions.md#lambda参数).
+     `it` is the default name of a [lambda parameter](coding-conventions.md#lambda-parameters).
 
    ```kotlin
    fun main() {

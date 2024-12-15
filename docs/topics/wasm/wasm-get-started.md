@@ -24,7 +24,7 @@
 3. 选择 **Web** 选项，确保没有其他选项被选中。
 4. 点击 **下载** 按钮，并解压缩生成的归档文件。
 
-![Kotlin Multiplatform 启动向导](wasm-compose-web-wizard.png){width=600}
+![Kotlin Multiplatform 启动向导](wasm-compose-web-wizard.png){width=400}
 
 ## 在 IntelliJ IDEA 中打开项目 {id=open-the-project-in-intellij-idea}
 
@@ -105,11 +105,12 @@
 
 加入 Kotlin/Wasm 社区，加入 Kotlin Slack：
 
-<a href="https://slack-chats.kotlinlang.org/c/webassembly"><img src="join-slack-channel.svg" width="700" alt="加入 Kotlin/Wasm 社区" style="block"/></a>
+<a href="https://slack-chats.kotlinlang.org/c/webassembly"><img src="join-slack-channel.svg" width="500" alt="加入 Kotlin/Wasm 社区" style="block"/></a>
 
 尝试更多 Kotlin/Wasm 示例：
 
-* [Compose 图像查看器](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/imageviewer)
-* [Jetsnack 应用](https://github.com/JetBrains/compose-multiplatform/tree/master/examples/jetsnack)
-* [Node.js 示例](https://github.com/Kotlin/kotlin-wasm-nodejs-template)
-* [WASI 示例](https://github.com/Kotlin/kotlin-wasm-wasi-template)
+* [Compose 图像查看器](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-imageviewer)
+* [Jetsnack 应用](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-jetsnack)
+* [Node.js 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/nodejs-example)
+* [WASI 示例](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/wasi-example)
+* [Compose example](https://github.com/Kotlin/kotlin-wasm-examples/tree/main/compose-example)

@@ -397,10 +397,10 @@ kotlin {
 默认情况下，为 Android 目标创建的编译与 [Android 构建变体](https://developer.android.com/studio/build/build-variants) 相关联：
 每个构建变体下会创建一个相同名称的 Kotlin 编译。
 
-然后，对于为每个变体编译的每个 [Android 源代码集](https://developer.android.com/studio/build/build-variants#sourcesets)，
-会创建一个以目标名称为前缀的 Kotlin 源代码集，例如 Android 源代码集 `debug` 的
-Kotlin 源代码集 `androidDebug` 和名为 `android` 的 Kotlin 目标。
-这些 Kotlin 源代码集会被相应地添加到变体的编译中。
+然后，对于每个为每个变体编译的 [Android 源集](https://developer.android.com/studio/build/build-variants#sourcesets)，
+会根据该源集的名称并在前面加上目标名称创建一个 Kotlin 源集，
+例如 Android 源集 `debug` 对应的 Kotlin 源集 `androidDebug`，以及名为 `androidTarget` 的 Kotlin 目标。  
+这些 Kotlin 源集会被相应地添加到变体的编译中。
 
 默认源代码集 `commonMain` 会被添加到每个生产（应用程序或库）变体的编译中。
 `commonTest` 源代码集同样被添加到单元测试和仪器测试变体的编译中。
@@ -410,7 +410,7 @@ Kotlin 源代码集 `androidDebug` 和名为 `android` 的 Kotlin 目标。
 
 ```kotlin
 kotlin {
-    android { /* ... */ }
+    androidTarget { /* ... */ }
 }
 
 dependencies {
@@ -433,8 +433,36 @@ Kotlin 可以使用 `dependsOn` 关系构建一个 [源代码集层级](multipla
 * `commonMain` 的资源总是会与 `jvmMain` 的资源一起处理和复制。
 * `jvmMain` 和 `commonMain` 的 [语言设置](multiplatform-dsl-reference.md#language-settings) 应该保持一致。
 
-语言设置的一致性检查方式包括：
-* `jvmMain` 的 `languageVersion` 应该大于或等于 `commonMain` 的 `languageVersion`。
-* `jvmMain` 应该启用所有 `commonMain` 启用的非稳定语言特性（对于 bugfix 的特性没有这种要求）。
-* `jvmMain` 应该使用 `commonMain` 使用的所有实验性注解。
-* `apiVersion`、bugfix 的语言特性和 `progressiveMode` 可以任意设置。
+Language settings are checked for consistency in the following ways:
+* `jvmMain` should set a `languageVersion` that is greater than or equal to that of `commonMain`.
+* `jvmMain` should enable all unstable language features that `commonMain` enables (there's no such requirement for 
+bugfix features).
+* `jvmMain` should use all experimental annotations that `commonMain` uses.
+* `apiVersion`, bugfix language features, and `progressiveMode` can be set arbitrarily.
+
+## Configure Isolated Projects feature in Gradle
+
+> This feature is [Experimental](components-stability.md#stability-levels-explained) and is currently in a pre-alpha state with Gradle. 
+> Use it only with Gradle versions 8.10 or higher, and solely for evaluation purposes. The feature may be dropped or changed at any time.
+> We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-57279/Support-Gradle-Project-Isolation-Feature-for-Kotlin-Multiplatform). 
+> Opt-in is required (see details below).
+> 
+{style="warning"}
+
+Gradle provides the [Isolated Projects](https://docs.gradle.org/current/userguide/isolated_projects.html) feature,
+which improves build performance by "isolating" individual projects from each other. The feature separates the build scripts
+and plugins between projects, allowing them to run safely in parallel.
+
+To enable this feature, follow Gradle's instructions to [set the system property](https://docs.gradle.org/current/userguide/isolated_projects.html#how_do_i_use_it).
+
+If you want to check compatibility before enabling Isolated Projects in Gradle, you can test your projects with the new 
+Kotlin Gradle plugin model. Add the following Gradle property to your `gradle.properties` file:
+
+```none
+kotlin.kmp.isolated-projects.support=enable
+```
+
+If you decide to enable the Isolated Projects feature later, remember to remove this Gradle property. The Kotlin Gradle plugin
+applies and manages this Gradle property directly.
+
+For more information about the Isolated Projects feature, see [Gradle's documentation](https://docs.gradle.org/current/userguide/isolated_projects.html).

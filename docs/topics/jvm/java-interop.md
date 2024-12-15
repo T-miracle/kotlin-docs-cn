@@ -192,7 +192,7 @@ Kotlin 类型，而不是平台类型。编译器支持几种类型的空值注�
 
   * [JetBrains](https://www.jetbrains.com/idea/help/nullable-and-notnull-annotations.html)
 （来自 `org.jetbrains.annotations` 包的 `@Nullable` 和 `@NotNull`）
-  * [JSpecify](https://jspecify.dev/)（`org.jspecify.nullness`）
+  * [JSpecify](https://jspecify.dev/)（`org.jspecify.annotations`）
   * Android（`com.android.annotations` 和 `android.support.annotations`）
   * JSR-305（`javax.annotation`，详细信息见下文）
   * FindBugs（`edu.umd.cs.findbugs.annotations`）

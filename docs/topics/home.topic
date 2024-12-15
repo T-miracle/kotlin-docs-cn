@@ -28,11 +28,11 @@
         </secondary>
         <misc>
             <cards narrow="false">
-                <title>推荐主题</title>
-                <a href="whatsnew2020.md" summary="Kotlin 2.0.0 的性能改进和 bug 修复，Kotlin K2 编译器变为稳定版">Kotlin 2.0.20 新特性</a>
-                <a href="releases.md" summary="最新的 Kotlin 发布版本及更新指南">Kotlin 发布</a>
-                <a href="https://kotlinlang.org/api/latest/jvm/stdlib/" summary="Kotlin 日常工作所需的基本内容：IO、文件、线程、集合等">标准库 API 参考</a>
-                <a href="basic-types.md" summary="Kotlin 类型系统：数字、字符串、数组和其他内置类型">基本类型</a>
+                <title>精选话题</title>
+                <a href="whatsnew21.md" summary="新语言特性及其他更新">Kotlin 2.1.0 新特性</a>
+                <a href="releases.md" summary="最新的 Kotlin 版本和更新说明">Kotlin 发布</a>
+                <a href="https://kotlinlang.org/api/latest/jvm/stdlib/" summary="Kotlin 日常工作中常用的工具：IO、文件、线程、集合等">标准库 API 参考</a>
+                <a href="basic-types.md" summary="Kotlin 类型系统：数字、字符串、数组和其他内建类型">基础类型</a>
                 <a href="collections-overview.md" summary="集合：列表、集合和映射">集合</a>
                 <a href="coroutines-overview.md" summary="并发：协程、流、通道">协程</a>
             </cards>

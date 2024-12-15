@@ -149,7 +149,7 @@ val immutableNumbers = listOf("one", "two")
 ```
 {id="mutability-kotlin"}
 
-Read more about immutability on the [Kotlin coding conventions](coding-conventions.md#不可变性) page.
+Read more about immutability on the [Kotlin coding conventions](coding-conventions.md#immutability) page.
 
 ## Covariance
 

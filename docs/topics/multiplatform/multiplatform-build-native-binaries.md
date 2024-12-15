@@ -457,7 +457,7 @@ kotlin {
 当您声明 XCFramework 时，Kotlin Gradle 插件会注册几个 Gradle 任务：
 
 * `assembleXCFramework`
-* `assemble<Framework name>DebugXCFramework`（附加的调试构件，包含 [dSYMs](native-ios-symbolication.md)）
+* `assemble<Framework name>DebugXCFramework`
 * `assemble<Framework name>ReleaseXCFramework`
 
 <anchor name="build-frameworks"/>

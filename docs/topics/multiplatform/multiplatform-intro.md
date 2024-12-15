@@ -20,8 +20,7 @@ Kotlin 跨平台允许你在不同平台之间共享代码，无论是移动端�
 
 有关此主题的更多详细信息，请参阅：
 
-* [Kotlin 跨平台项目结构的基础知识](multiplatform-discover-project.md)
-* [手动设置目标](multiplatform-set-up-targets.md)
+* [Kotlin 跨平台项目结构基础](multiplatform-discover-project.md)
 * [跨平台项目结构的高级概念](multiplatform-advanced-project-structure.md)
 
 ## 使用代码共享机制 {id=use-code-sharing-mechanisms}

@@ -181,6 +181,8 @@ This results in fewer slots being used and fewer comparisons being made at runti
 
 ### OptimizeNonSkippingGroups
 
+<primary-label ref="experimental-general"/>
+
 **Default**: disabled
 
 If enabled, remove groups around non-skipping composable functions.
@@ -190,9 +192,24 @@ unnecessary groups around composables which do not skip (and thus do not require
 This optimization will remove the groups, for example, around functions explicitly marked as `@NonSkippableComposable`
 and functions that are implicitly not skippable (inline functions and functions that return a non-`Unit` value such as `remember`).
 
-> This feature is considered [Experimental](components-stability.md#stability-levels-explained) and is disabled by default.
+### PausableComposition
+
+<primary-label ref="experimental-general"/>
+
+**Default**: disabled
+
+If enabled, changes the code generation of composable functions to allow pausing when part of a pausable composition.
+This lets Compose runtime suspend composition at skipping points,
+splitting long-running compositions across multiple frames.
+
+Lazy lists and other performance intensive components use pausable composition to prefetch content
+that might cause visual jank when executed in a blocking manner.
+
+> The feature flag affects behavior only with a version of Compose runtime that supports pausable composition,
+> starting with `androidx.compose.runtime` 1.8.0-alpha02.
+> Older versions ignore the feature flag.
 >
-{style="warning"}
+{style="note"}
 
 ### StrongSkipping
 

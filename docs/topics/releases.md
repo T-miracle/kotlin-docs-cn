@@ -70,10 +70,7 @@ plugins {
 从 2024.1 开始，IntelliJ IDEA 可以使用新的 K2 编译器来分析你的代码，通过其 K2 模式进行分析。
 要启用它，请前往 **Settings** | **Languages & Frameworks** | **Kotlin**，然后选择 **Enable K2 Kotlin Mode** 选项。
 
-> K2 模式从 2024.2 开始处于 Beta 阶段。
-> 我们正在致力于提高稳定性和代码分析，但并非所有 IDE 功能都已支持。
->
-{style="warning"}
+![Enable K2 mode](k2-mode.png){width=200}
 
 启用 K2 模式后，由于编译器行为的变化，你可能会注意到 IDE 分析中的差异。
 有关新的 K2 编译器与以前编译器的不同之处，请参见 [迁移指南](k2-compiler-migration-guide.md)。
@@ -94,6 +91,16 @@ plugins {
     <tr>
         <th>构建信息</th>
         <th>构建亮点</th>
+    </tr>
+    <tr>
+        <td><strong>2.1.0</strong>
+            <p>Released: <strong>November 27, 2024</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.0" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A language release introducing new language features.</p>
+            <p>Learn more about Kotlin 2.1.0 in <a href="whatsnew21.md" target="_blank">What's new in Kotlin 2.1.0</a>.</p>
+        </td>
     </tr>
     <tr>
         <td><strong>2.0.21</strong>

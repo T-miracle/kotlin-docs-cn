@@ -595,7 +595,67 @@ each of which defines a mode, as well as [include](https://webpack.js.org/config
 ## Node.js
 
 For Kotlin/JS projects targeting Node.js, the plugin automatically downloads and installs the Node.js environment on the
-host. You can also use an existing Node.js instance if you have it.
+host.
+You can also use an existing Node.js instance if you have it.
+
+### Configuring Node.js settings
+
+You can configure Node.js settings for each subproject, or set them for the project as a whole.
+
+For example, to set the Node.js version for a specific subproject, add the following lines to its Gradle block
+in your `build.gradle(.kts)` file:
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin> {
+    project.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec>().version = "your Node.js version"
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+project.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin) {
+    project.extensions.getByType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec).version = "your Node.js version"
+}
+```
+
+</tab>
+</tabs>
+
+To set a version for the entire project, including all subprojects, apply the same code to the `allProjects {}` block:
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+allprojects {
+    project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin> {
+        project.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec>().version = "your Node.js version"
+    }
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+allprojects {
+    project.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin) {
+        project.extensions.getByType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec).version = "your Node.js version"
+}
+```
+
+</tab>
+</tabs>
+
+> Using the `NodeJsRootPlugin` class to configure Node.js setting for the entire project is deprecated and will eventually
+> stop being supported.
+> 
+{style="note"}
 
 ### Use pre-installed Node.js
 {id=use-pre-installed-node-js}
@@ -603,31 +663,30 @@ host. You can also use an existing Node.js instance if you have it.
 If Node.js is already installed on the host where you build Kotlin/JS projects, you can configure the Kotlin Multiplatform Gradle
 plugin to use it instead of installing its own Node.js instance.
 
-To use the pre-installed Node.js instance, add the following lines to `build.gradle(.kts)`:
+To use a pre-installed Node.js instance, add the following lines to your `build.gradle(.kts)` file:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
-rootProject.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin> {
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().download = false
-    // "true" for default behavior
+project.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin) {
+    // Set to `true` for default behavior
+    project.extensions.getByType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec).download = false
 }
- 
 ```
 
 </tab>
 <tab title="Groovy" group-key="groovy">
 
 ```groovy
-rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin) {
-    rootProject.extensions.getByType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension).download = false
+project.plugins.withType<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsPlugin> {
+    // Set to `true` for default behavior
+    project.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsEnvSpec>().download = false
 }
 ```
 
 </tab>
 </tabs>
-
 
 ## Yarn
 

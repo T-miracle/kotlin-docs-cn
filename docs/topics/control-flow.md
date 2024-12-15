@@ -253,6 +253,81 @@ fun Request.getBody() =
 
 作为主体引入的变量的作用域仅限于 `when` 表达式或语句的主体部分。
 
+### when 表达式中的守卫条件 {id=guard-conditions-in-when-expressions}
+
+> 守卫条件是一个[实验性特性](components-stability.md#stability-levels-explained)，可能会随时发生变化。
+> 我们欢迎你在[YouTrack](https://youtrack.jetbrains.com/issue/KT-71140/Guard-conditions-in-when-expressions-feedback)上提供反馈。
+>
+{style="warning"}
+
+守卫条件允许你在 `when` 表达式的分支中包含多个条件，使得复杂的控制流更加明确和简洁。  
+你可以在带有主体的 `when` 表达式或语句中使用守卫条件。
+
+要在分支中包含守卫条件，将其放在主要条件之后，并用 `if` 分隔：
+
+```kotlin
+sealed interface Animal {
+    data class Cat(val mouseHunter: Boolean) : Animal
+    data class Dog(val breed: String) : Animal
+}
+
+fun feedAnimal(animal: Animal) {
+    when (animal) {
+        // 只有主要条件的分支。当 `Animal` 是 `Dog` 时调用 `feedDog()`
+        is Animal.Dog -> feedDog()
+        // 同时有主要条件和守卫条件的分支。当 `Animal` 是 `Cat` 且不是 `mouseHunter` 时调用 `feedCat()`
+        is Animal.Cat if !animal.mouseHunter -> feedCat()
+        // 如果上述条件都不匹配，则打印 "Unknown animal"
+        else -> println("Unknown animal")
+    }
+}
+```
+
+在一个单一的 `when` 表达式中，你可以将带有守卫条件和不带守卫条件的分支结合起来。  
+带有守卫条件的分支只有在主条件和守卫条件都为 `true` 时才会执行。  
+如果主条件不匹配，守卫条件则不会被求值。
+
+如果你在没有 `else` 分支的 `when` 语句中使用守卫条件，并且没有任何条件匹配，则不会执行任何分支。
+
+否则，如果你在没有 `else` 分支的 `when` 表达式中使用守卫条件，编译器要求你声明所有可能的情况，以避免运行时错误。
+
+此外，守卫条件还支持 `else if`：
+
+```kotlin
+when (animal) {
+    // 检查 `animal` 是否是 `Dog`
+    is Animal.Dog -> feedDog()
+    // 守卫条件检查 `animal` 是否是 `Cat` 且不是 `mouseHunter`
+    is Animal.Cat if !animal.mouseHunter -> feedCat()
+    // 如果上述条件都不匹配且 animal.eatsPlants 为 true，调用 giveLettuce()
+    else if animal.eatsPlants -> giveLettuce()
+    // 如果上述条件都不匹配，打印 "Unknown animal"
+    else -> println("Unknown animal")
+}
+```
+
+你可以在单个分支中使用布尔运算符 `&&`（与）或 `||`（或）来组合多个守卫条件。  
+使用圆括号来包围布尔表达式，以[避免混淆](coding-conventions.md#guard-conditions-in-when-expression)：
+
+```kotlin
+when (animal) {
+    is Animal.Cat if (!animal.mouseHunter && animal.hungry) -> feedCat()
+}
+```
+
+你可以在任何带有主体的 `when` 表达式或语句中使用守卫条件，除了在使用逗号分隔的多个条件的情况下。  
+例如，`0, 1 -> print("x == 0 or x == 1")`。
+
+> 要在命令行界面（CLI）中启用守卫条件，请运行以下命令：
+>
+> `kotlinc -Xwhen-guards main.kt`
+>
+> 要在 Gradle 中启用守卫条件，请将以下行添加到 `build.gradle.kts` 文件：
+>
+> `kotlin.compilerOptions.freeCompilerArgs.add("-Xwhen-guards")`
+>
+{style="note"}
+
 ## For 循环 {id=for循环}
 
 `for` 循环用于迭代任何提供迭代器的对象。在类似 C# 的语言中，这类似于 `foreach` 循环。`for` 的语法如下：
@@ -345,6 +420,6 @@ do {
 } while (y != null) // y 在这里可见！
 ```
 
-## 循环中的 Break 和 Continue
+## 循环中的 Break 和 Continue {id=break-and-continue-in-loops}
 
 Kotlin 支持在循环中使用传统的 `break` 和 `continue` 操作符。详见[返回和跳转](returns.md)。

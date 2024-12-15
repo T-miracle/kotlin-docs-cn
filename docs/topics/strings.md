@@ -68,10 +68,10 @@ fun main() {
 
 Kotlin 有两种类型的字符串字面量：
 
-* [转义字符串](#转义字符串)
+* [转义字符串](#escaped-strings)
 * [多行字符串](#多行字符串)
 
-### 转义字符串 {id=转义字符串}
+### 转义字符串 {id=escaped-strings}
 
 _转义字符串_ 可以包含转义字符。  
 以下是转义字符串的示例：
@@ -85,13 +85,14 @@ val s = "Hello, world!\n"
 
 ### 多行字符串 {id=多行字符串}
 
-_多行字符串_ 可以包含换行和任意文本。它由三个双引号 (`"""`) 括起，不包含转义，可以包含换行和任何其他字符：
+_多行字符串_ 可以包含换行符和任意文本。
+它由三个引号（`"""`）界定，不需要转义，可以包含换行符和任何其他字符：
 
 ```kotlin
 val text = """
     for (c in "foo")
         print(c)
-"""
+    """
 ```
 
 要从多行字符串中删除前导空格，请使用 [`trimMargin()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim-margin.html) 函数：
@@ -142,15 +143,103 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-你可以在多行字符串和转义字符串中都使用模板。
-在多行字符串（不支持反斜杠转义）中插入美元符号 `$`，在任何允许作为
-[标识符](https://kotlinlang.org/docs/reference/grammar.html#identifiers) 起始符号的地方使用以下语法：
+你可以在多行字符串和转义字符串中使用模板。
+然而，多行字符串不支持反斜杠转义。  
+要在多行字符串中插入美元符号 `$`，并且在任何符号前面都允许作为 [标识符](https://kotlinlang.org/docs/reference/grammar.html#identifiers) 开头的字符，
+可以使用以下语法：
 
 ```kotlin
 val price = """
 ${'$'}_9.99
 """
 ```
+
+> 为了避免字符串中的 `${'$'}` 序列，你可以使用实验性的 [多重美元符号字符串插值特性](#multi-dollar-string-interpolation)。
+>
+{style="note"}
+
+### 多美元符号字符串插值 {id=multi-dollar-string-interpolation}
+
+> 多美元符号字符串插值是[实验性](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained)的，
+> 且需要显式开启（详见下文）。
+> 
+> 它可能随时发生变化。我们非常欢迎您在[YouTrack](https://youtrack.jetbrains.com/issue/KT-2425)上提供反馈。
+>
+> {style="warning"}
+
+多美元符号字符串插值允许你指定需要多少个连续的美元符号来触发插值。  
+插值是将变量或表达式直接嵌入到字符串中的过程。
+
+虽然你可以为单行字符串[转义字面量](#escaped-strings)，  
+但 Kotlin 中的多行字符串不支持反斜杠转义。  
+要将美元符号（`$`）作为字面量字符包含在内，你必须使用`${'$'}`构造来防止字符串插值。  
+这种方法可能会使代码更难以阅读，特别是当字符串中包含多个美元符号时。
+
+多美元符号字符串插值通过允许你在单行和多行字符串中将美元符号视为字面量字符，简化了这一过程。  
+例如：
+
+```kotlin
+val KClass<*>.jsonSchema : String
+    get() = $$"""
+    {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "$id": "https://example.com/product.schema.json",
+      "$dynamicAnchor": "meta"
+      "title": "$${simpleName ?: qualifiedName ?: "unknown"}",
+      "type": "object"
+    }
+    """
+```
+
+这里，`$$` 前缀指定需要两个连续的美元符号来触发字符串插值。  
+单个美元符号保持为字面量字符。
+
+你可以调整触发插值所需的美元符号数量。  
+例如，使用三个连续的美元符号（`$$$`）可以让 `$` 和 `$$` 保持为字面量，
+同时启用 `$$$` 进行插值：
+
+```kotlin
+val productName = "carrot"
+val requestedData =
+    $$$"""{
+      "currency": "$",
+      "enteredAmount": "42.45 $$",
+      "$$serviceField": "none",
+      "product": "$$$productName"
+    }
+    """
+
+println(requestedData)
+//{
+//    "currency": "$",
+//    "enteredAmount": "42.45 $$",
+//    "$$serviceField": "none",
+//    "product": "carrot"
+//}
+```
+
+在这里，`$$$` 前缀允许字符串包含 `$` 和 `$$`，而无需使用 `${'$'}` 构造进行转义。
+
+要启用此功能，可以在命令行中使用以下编译器选项：
+
+```bash
+kotlinc -Xmulti-dollar-interpolation main.kt
+```
+
+或者，更新你 Gradle 构建文件中的 `compilerOptions {}` 块：
+
+```kotlin
+// build.gradle.kts
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xmulti-dollar-interpolation")
+    }
+}
+```
+
+此功能不会影响现有的使用单美元符号字符串插值的代码。  
+你可以继续像之前一样使用单个 `$`，
+并在需要处理字符串中的字面量美元符号时，应用多美元符号插值。
 
 ## 字符串格式化 {id=string-formatting}
 
@@ -203,4 +292,4 @@ fun main() {
 
 此外，您可以将格式字符串从变量赋值。这在格式字符串发生变化时非常有用，例如在依赖用户区域的本地化情况下。
 
-使用 `String.format()` 函数时要小心，因为很容易使参数的数量或位置与其对应的占位符不匹配。
+使用 `String.format()` 函数时要小心，因为很容易导致参数的数量或位置与对应的占位符不匹配。

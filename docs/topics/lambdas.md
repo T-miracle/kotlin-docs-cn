@@ -239,7 +239,7 @@ ints.filter { it > 0 } // 这个字面量的类型是 '(it: Int) -> Boolean'
 
 ### 从 lambda 表达式返回值 {id=returning-a-value-from-a-lambda-expression}
 
-你可以使用 [qualified return](returns.md#返回到标签) 语法来显式地从 lambda 返回值。
+你可以使用 [qualified return](returns.md#return-to-labels) 语法来显式地从 lambda 返回值。
 否则，最后一个表达式的值将隐式返回。
 
 因此，以下两个代码片段是等价的：
@@ -303,7 +303,7 @@ ints.filter(fun(item) = item > 0)
 >
 {style="note"}
 
-lambda 表达式和匿名函数之间的另一个区别是[非局部返回](inline-functions.md#non-local-returns)的行为。
+lambda 表达式和匿名函数之间的另一个区别是[非局部返回](inline-functions.md#returns)的行为。
 没有标签的 `return` 语句总是从使用 `fun` 关键字声明的函数中返回。
 这意味着 lambda 表达式中的 `return` 将从包含它的函数返回，而匿名函数中的 `return` 将从匿名函数本身返回。
 

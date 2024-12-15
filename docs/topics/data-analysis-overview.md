@@ -87,7 +87,7 @@ Kandy 与 Kotlin Notebook、Datalore 和 Kotlin-Jupyter Notebook 无缝集成。
 
 ## 接下来做什么 {id=whats-next}
 
-* [开始使用 Kotlin Notebook。](get-started-with-kotlin-notebooks.md)
-* [使用 Kotlin DataFrame 库检索和转换数据。](data-analysis-work-with-data-sources.md)
-* [使用 Kandy 库可视化数据。](data-analysis-visualization.md)
-* [了解更多关于 Kotlin 和 Java 数据分析库的信息。](data-analysis-libraries.md)
+* [开始使用 Kotlin Notebook](get-started-with-kotlin-notebooks.md)
+* [使用 Kotlin DataFrame 库获取和转换数据](data-analysis-work-with-data-sources.md)
+* [使用 Kandy 库可视化数据](data-analysis-visualization.md)
+* [了解更多关于 Kotlin 和 Java 的数据分析库](data-analysis-libraries.md)

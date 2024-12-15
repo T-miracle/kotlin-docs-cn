@@ -38,6 +38,25 @@ Android Studio 会在新的 Kotlin 跨平台插件发布时建议你进行更新
 <tr>  
 <td>  
 
+**0.8.4**
+
+Released: 06 December, 2024
+
+</td>
+<td>
+
+* Support for Kotlin’s [K2 mode](k2-compiler-migration-guide.md#support-in-ides) for improved stability and code analysis.
+
+</td>
+<td>
+
+* [Any of Kotlin plugin versions](releases.md#release-details)
+
+</td>
+</tr>
+<tr>
+<td>
+
 **0.8.3**
 
 发布日期：2024年7月23日

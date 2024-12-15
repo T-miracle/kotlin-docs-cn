@@ -26,7 +26,7 @@ loop@ for (i in 1..100) {
 }
 ```
 
-现在，我们可以使用标签来限定 `break` 或 `continue`：
+现在，你可以使用标签来限定 `break` 或 `continue`：
 
 ```kotlin
 loop@ for (i in 1..100) {
@@ -39,34 +39,18 @@ loop@ for (i in 1..100) {
 带有标签的 `break` 允许你跳出带有特定标签的循环，并从标签所在的循环后面的执行点开始执行。
 而带有标签的 `continue` 允许你跳到带有特定标签的循环的下一次迭代。
 
-通俗点说，带标签的 `break` 可以中断指定循环，而带标签的 `continue` 可以跳到指定循环的下一次迭代。
+> 在某些情况下，你可以在不显式定义标签的情况下 *非局部* 使用 `break` 和 `continue`。  
+> 这种非局部使用在用于封闭的 [内联函数](inline-functions.md#break-and-continue) 中的 lambda 表达式中是有效的。
+>
+{style="note"}
 
-## 返回到标签 {id=返回到标签}
+## 返回到标签 {id=return-to-labels}
 
-在 Kotlin 中，函数可以使用函数字面量、局部函数和对象表达式进行嵌套。
-使用带有标签的 `return` 可以从外部函数中返回。
-其中，最重要的用例之一是在 lambda 表达式中使用。
-简而言之，当我们编写如下代码时，`return` 表达式将从最近的封闭函数 `foo` 返回：
+在 Kotlin 中，函数可以通过函数字面量、局部函数和对象表达式进行嵌套。  
+一个带有限定的 `return` 允许你从外部函数返回。
 
-```kotlin
-//sampleStart
-fun foo() {
-    listOf(1, 2, 3, 4, 5).forEach {
-        if (it == 3) return // 非局部返回直接返回给调用 `foo()` 的调用者。
-        print(it)
-    }
-    println("这个点是无法到达的")
-}
-//sampleEnd
-
-fun main() {
-    foo()
-}
-```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-需要注意的是，这种非局部返回只支持传递给[内联函数](inline-functions.md)的 lambda 表达式。
-如果想要从 lambda 表达式中返回，需要对其进行标记，然后使用带有标签的 `return`：
+最常见的用例是从 lambda 表达式中返回。要从 lambda 表达式中返回，
+需要为其打上标签并限定 `return`：
 
 ```kotlin
 //sampleStart
@@ -153,4 +137,9 @@ fun main() {
 return@a 1
 ```
 
-这表示"在标签 `@a` 处返回 `1`"，而不是"返回一个带有标签的表达式 `(@a 1)`"。
+这意味着 “在标签 `@a` 处返回 `1`”，而不是 “返回一个标记的表达式 `(@a 1)`”。
+
+> 在某些情况下，你可以在不使用标签的情况下从 lambda 表达式中返回。
+> 这种 *非局部* 返回位于 lambda 中，但会退出封闭的 [内联函数](inline-functions.md#returns)。
+>
+{style="note"}
