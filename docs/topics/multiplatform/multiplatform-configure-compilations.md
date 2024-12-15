@@ -433,36 +433,35 @@ Kotlin 可以使用 `dependsOn` 关系构建一个 [源代码集层级](multipla
 * `commonMain` 的资源总是会与 `jvmMain` 的资源一起处理和复制。
 * `jvmMain` 和 `commonMain` 的 [语言设置](multiplatform-dsl-reference.md#language-settings) 应该保持一致。
 
-Language settings are checked for consistency in the following ways:
-* `jvmMain` should set a `languageVersion` that is greater than or equal to that of `commonMain`.
-* `jvmMain` should enable all unstable language features that `commonMain` enables (there's no such requirement for 
-bugfix features).
-* `jvmMain` should use all experimental annotations that `commonMain` uses.
-* `apiVersion`, bugfix language features, and `progressiveMode` can be set arbitrarily.
+语言设置的一致性通过以下方式进行检查：
+* `jvmMain` 应设置一个大于或等于 `commonMain` 的 `languageVersion`。
+* `jvmMain` 应启用 `commonMain` 启用的所有不稳定语言特性（对于 bugfix 特性没有此要求）。
+* `jvmMain` 应使用 `commonMain` 使用的所有实验性注解。
+* `apiVersion`、bugfix 语言特性和 `progressiveMode` 可以任意设置。
 
-## Configure Isolated Projects feature in Gradle
+## 在 Gradle 中配置 Isolated Projects 特性 {id=configure-isolated-projects-feature-in-gradle}
 
-> This feature is [Experimental](components-stability.md#stability-levels-explained) and is currently in a pre-alpha state with Gradle. 
-> Use it only with Gradle versions 8.10 or higher, and solely for evaluation purposes. The feature may be dropped or changed at any time.
-> We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-57279/Support-Gradle-Project-Isolation-Feature-for-Kotlin-Multiplatform). 
-> Opt-in is required (see details below).
+> 此功能是[实验性](components-stability.md#stability-levels-explained)的，目前在 Gradle 中处于预先 alpha 状态。  
+> 仅在 Gradle 版本 8.10 或更高版本中使用，并仅限于评估目的。该功能可能随时被废弃或更改。  
+> 我们非常欢迎你在[YouTrack](https://youtrack.jetbrains.com/issue/KT-57279/Support-Gradle-Project-Isolation-Feature-for-Kotlin-Multiplatform)上提供反馈。  
+> 需要显式开启（详见下文）。
 > 
 {style="warning"}
 
-Gradle provides the [Isolated Projects](https://docs.gradle.org/current/userguide/isolated_projects.html) feature,
-which improves build performance by "isolating" individual projects from each other. The feature separates the build scripts
-and plugins between projects, allowing them to run safely in parallel.
+Gradle 提供了[Isolated Projects](https://docs.gradle.org/current/userguide/isolated_projects.html)功能，
+通过“隔离”各个项目来提高构建性能。
+该功能在项目之间分离构建脚本和插件，允许它们安全地并行运行。
 
-To enable this feature, follow Gradle's instructions to [set the system property](https://docs.gradle.org/current/userguide/isolated_projects.html#how_do_i_use_it).
+要启用此功能，请按照 Gradle 的说明[设置系统属性](https://docs.gradle.org/current/userguide/isolated_projects.html#how_do_i_use_it)。
 
-If you want to check compatibility before enabling Isolated Projects in Gradle, you can test your projects with the new 
-Kotlin Gradle plugin model. Add the following Gradle property to your `gradle.properties` file:
+如果你想在启用 Gradle 中的 Isolated Projects 之前检查兼容性，可以使用新的 Kotlin Gradle 插件模型来测试你的项目。
+将以下 Gradle 属性添加到 `gradle.properties` 文件中：
 
 ```none
 kotlin.kmp.isolated-projects.support=enable
 ```
 
-If you decide to enable the Isolated Projects feature later, remember to remove this Gradle property. The Kotlin Gradle plugin
-applies and manages this Gradle property directly.
+如果你决定稍后启用 Isolated Projects 功能，记得移除此 Gradle 属性。
+Kotlin Gradle 插件会直接应用并管理此 Gradle 属性。
 
-For more information about the Isolated Projects feature, see [Gradle's documentation](https://docs.gradle.org/current/userguide/isolated_projects.html).
+有关 Isolated Projects 功能的更多信息，请参阅[Gradle 的文档](https://docs.gradle.org/current/userguide/isolated_projects.html)。

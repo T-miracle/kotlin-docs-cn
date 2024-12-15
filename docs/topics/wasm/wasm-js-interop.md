@@ -224,32 +224,32 @@ external class User : JsAny {
 }
 ```
 
-### Array interoperability
+### 数组互操作性 {id=array-interoperability}
 
-You can copy JavaScript's `JsArray<T>` into Kotlin's native `Array` or `List` types; likewise, 
-you can copy these Kotlin types to `JsArray<T>`.
+你可以将 JavaScript 的 `JsArray<T>` 复制到 Kotlin 的原生 `Array` 或 `List` 类型；
+同样，你也可以将这些 Kotlin 类型复制到 `JsArray<T>`。
 
-To convert `JsArray<T>` to `Array<T>` or the other way around, use one of the available [adapter functions](https://github.com/Kotlin/kotlinx-browser/blob/dfbdceed314567983c98f1d66e8c2e10d99c5a55/src/wasmJsMain/kotlin/arrayCopy.kt).
+要将 `JsArray<T>` 转换为 `Array<T>` 或反向转换，可以使用其中一个可用的 [适配器函数](https://github.com/Kotlin/kotlinx-browser/blob/dfbdceed314567983c98f1d66e8c2e10d99c5a55/src/wasmJsMain/kotlin/arrayCopy.kt)。
 
-Here's an example of conversion between generic types:
+下面是一个泛型类型之间转换的示例：
 
 ```kotlin
 val list: List<JsString> =
     listOf("Kotlin", "Wasm").map { it.toJsString() }
 
-// Uses .toJsArray() to convert List or Array to JsArray
+// 使用 .toJsArray() 将 List 或 Array 转换为 JsArray
 val jsArray: JsArray<JsString> = list.toJsArray()
 
-// Uses .toArray() and .toList() to convert it back to Kotlin types 
+// 使用 .toArray() 和 .toList() 将其转换回 Kotlin 类型
 val kotlinArray: Array<JsString> = jsArray.toArray()
 val kotlinList: List<JsString> = jsArray.toList()
 ```
 
-Similar adapter functions are available for converting typed arrays to their Kotlin equivalents
-(for example, `IntArray` and `Int32Array`). For detailed information and implementation,
-see the [`kotlinx-browser` repository]( https://github.com/Kotlin/kotlinx-browser/blob/dfbdceed314567983c98f1d66e8c2e10d99c5a55/src/wasmJsMain/kotlin/arrayCopy.kt).
+类似的适配器函数也可以用于将类型化数组转换为它们在 Kotlin 中的等效类型
+（例如，`IntArray` 和 `Int32Array`）。有关详细信息和实现，
+请参见 [`kotlinx-browser` 仓库](https://github.com/Kotlin/kotlinx-browser/blob/dfbdceed314567983c98f1d66e8c2e10d99c5a55/src/wasmJsMain/kotlin/arrayCopy.kt)。
 
-Here's an example of conversion between typed arrays:
+下面是类型化数组之间转换的示例：
 
 ```kotlin
 import org.khronos.webgl.*
@@ -258,10 +258,10 @@ import org.khronos.webgl.*
 
     val intArray: IntArray = intArrayOf(1, 2, 3)
     
-    // Uses .toInt32Array() to convert Kotlin IntArray to JavaScript Int32Array
+    // 使用 .toInt32Array() 将 Kotlin IntArray 转换为 JavaScript Int32Array
     val jsInt32Array: Int32Array = intArray.toInt32Array()
     
-    // Uses toIntArray() to convert JavaScript Int32Array back to Kotlin IntArray
+    // 使用 toIntArray() 将 JavaScript Int32Array 转换回 Kotlin IntArray
     val kotlnIntArray: IntArray = jsInt32Array.toIntArray()
 ```
 
@@ -495,20 +495,20 @@ fun main() {
 >
 {style="note"}
 
-## Web-related browser APIs
+## 与 Web 相关的浏览器 API {id=web-related-browser-apis}
 
-The [`kotlinx-browser` library](https://github.com/kotlin/kotlinx-browser) is a standalone
-library that provides JavaScript browser APIs, including:
-* Package `org.khronos.webgl`:
-  * Typed arrays, like `Int8Array`.
-  * WebGL types.
-* Packages `org.w3c.dom.*`:
-  * DOM API types.
-* Package `kotlinx.browser`:
-  * DOM API global objects, like `window` and `document`.
+[`kotlinx-browser` 库](https://github.com/kotlin/kotlinx-browser)是一个独立的库，
+提供了 JavaScript 浏览器 API，包括：
+* 包 `org.khronos.webgl`：
+  * 类型化数组，如 `Int8Array`。
+  * WebGL 类型。
+* 包 `org.w3c.dom.*`：
+  * DOM API 类型。
+* 包 `kotlinx.browser`：
+  * DOM API 全局对象，如 `window` 和 `document`。
 
-To use the declarations from the `kotlinx-browser` library, add it as a dependency in your
-project's build configuration file:
+要使用 `kotlinx-browser` 库中的声明，
+需将其作为依赖项添加到项目的构建配置文件中：
 
 ```kotlin
 val wasmJsMain by getting {

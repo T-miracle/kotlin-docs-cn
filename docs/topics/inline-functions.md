@@ -51,9 +51,9 @@ inline fun foo(inlined: () -> Unit, noinline notInlined: () -> Unit) { ... }
 >
 {style="note"}
 
-## Non-local jump expressions
+## 非局部跳转表达式 {id=non-local-jump-expressions}
 
-### Returns
+### 返回 {id=returns}
 
 在 Kotlin 中，你只能使用普通的、未限定的 `return` 来退出一个命名函数或匿名函数。
 要退出 lambda，请使用一个[标签](returns.md#return-to-labels)。
@@ -119,17 +119,17 @@ inline fun f(crossinline body: () -> Unit) {
 }
 ```
 
-### Break and continue
+### Break 和 Continue {id=break-and-continue}
 
-> This feature is currently [In preview](kotlin-evolution-principles.md#pre-stable-features).
-> We're planning to stabilize it in future releases.
-> To opt in, use the `-Xnon-local-break-continue` compiler option.
-> We would appreciate your feedback on it in [YouTrack](https://youtrack.jetbrains.com/issue/KT-1436).
+> 此功能目前处于[预览阶段](kotlin-evolution-principles.md#pre-stable-features)。  
+> 我们计划在未来的版本中稳定此功能。  
+> 要启用此功能，请使用 `-Xnon-local-break-continue` 编译器选项。  
+> 我们非常欢迎你在[YouTrack](https://youtrack.jetbrains.com/issue/KT-1436)上提供反馈。
 >
-{style="warning"}
+> {style="warning"}
 
-Similar to non-local `return`, you can apply `break` and `continue` [jump expressions](returns.md) in lambdas passed
-as arguments to an inline function that encloses a loop:
+与非局部 `return` 类似，你可以在作为参数传递给包含循环的内联函数的 Lambda 表达式中应用
+`break` 和 `continue` [跳转表达式](returns.md)：
 
 ```kotlin
 fun processList(elements: List<Int>): Boolean {
