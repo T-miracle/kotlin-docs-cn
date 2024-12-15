@@ -120,8 +120,8 @@
 		<toc-element topic="reflection.md"/>
 	</toc-element>
 	<toc-element toc-title="跨平台开发">
-		<toc-element accepts-web-file-names="building-mpp-with-gradle.html,intro-to-kotlin-mpp.html,mpp-intro.html,mpp-get-started.html,multiplatform-tutorials.html,multiplatform-get-started.html" toc-title="Introduction" topic="multiplatform-intro.md"/>
-		<toc-element accepts-web-file-names="mpp-discover-project.html,mpp-set-up-targets.html,multiplatform-set-up-targets.html" toc-title="Understand basic project structure" topic="multiplatform-discover-project.md"/>
+		<toc-element accepts-web-file-names="building-mpp-with-gradle.html,intro-to-kotlin-mpp.html,mpp-intro.html,mpp-get-started.html,multiplatform-tutorials.html,multiplatform-get-started.html" toc-title="介绍" topic="multiplatform-intro.md"/>
+		<toc-element accepts-web-file-names="mpp-discover-project.html,mpp-set-up-targets.html,multiplatform-set-up-targets.html" toc-title="了解基本项目结构" topic="multiplatform-discover-project.md"/>
 		<toc-element toc-title="探索先进的项目结构" topic="multiplatform-advanced-project-structure.md"/>
 		<toc-element toc-title="共享代码">
 			<toc-element accepts-web-file-names="mpp-share-on-platforms.html" topic="multiplatform-share-on-platforms.md"/>

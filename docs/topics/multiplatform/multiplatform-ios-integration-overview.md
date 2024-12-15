@@ -1,67 +1,64 @@
-[//]: # (title: iOS integration methods)
+[//]: # (title: iOS 集成方法)
 
-You can integrate a Kotlin Multiplatform shared module into your iOS app. For that, you generate an [iOS framework](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html)
-from the shared module and then add it as a dependency to the iOS project:
+你可以将 Kotlin Multiplatform 共享模块集成到 iOS 应用中。为此，你需要从共享模块生成一个
+[iOS 框架](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPFrameworks/Concepts/WhatAreFrameworks.html)
+，然后将其作为依赖项添加到 iOS 项目中：
 
-![iOS integration scheme](ios-integration-scheme.svg)
+![iOS 集成示意图](ios-integration-scheme.svg)
 
-It's possible to consume this framework as a local or remote dependency. Choose local integration if you want to have
-full control over the entire codebase and get instant updates to final applications when the common code changes.
+可以将此框架作为本地或远程依赖项进行使用。
+如果你希望完全控制整个代码库，并且在公共代码发生变化时能够即时更新最终应用程序，则选择本地集成。
 
-If you want to explicitly separate the code base of your final application from the common code base, set up remote
-integration. In this case, the shared code will be integrated into final applications like a regular third-party
-dependency.
+如果你想显式地将最终应用程序的代码库与公共代码库分离，则设置远程集成。
+在这种情况下，共享代码将像常规的第三方依赖项一样集成到最终应用程序中。
 
-## Local integration
+## 本地集成 {id=local-integration}
 
-In a local setup, there are two main integration options. You can use direct integration through a special script, which
-makes the Kotlin build a part of the iOS build. If you have Pod dependencies in your Kotlin Multiplatform project,
-take the CocoaPods integration approach.
+在本地集成设置中，有两种主要的集成选项。
+你可以通过一个特殊的脚本使用直接集成，这会将 Kotlin 构建作为 iOS 构建的一部分。
+如果你的 Kotlin Multiplatform 项目中有 Pod 依赖项，可以选择 CocoaPods 集成方式。
 
-### Direct integration
+### 直接集成 {id=direct-integration}
 
-You can connect the iOS framework directly from the Kotlin Multiplatform project by adding a special script to your Xcode
-project. The script is integrated into the build phase of your project's build settings.
+你可以通过向 Xcode 项目添加一个特殊的脚本，直接将 iOS 框架从 Kotlin Multiplatform 项目中连接到 iOS。
+该脚本会集成到项目构建设置的构建阶段。
 
-This integration method can work for you if you do **not** import CocoaPods dependencies in your Kotlin Multiplatform
-project.
+如果你的 Kotlin Multiplatform 项目中**没有**导入 CocoaPods 依赖项，这种集成方式适合你。
 
-If you create a project in Android Studio, choose the **Regular framework** option to have this setup generated
-automatically. If you use the [Kotlin Multiplatform web wizard](https://kmp.jetbrains.com/), direct integration
-is applied by default.
+如果你在 Android Studio 中创建项目，选择 **Regular framework** 选项将自动生成此设置。
+如果你使用 [Kotlin Multiplatform web 向导](https://kmp.jetbrains.com/)，则默认应用直接集成。
 
-For more information, see [Direct integration](multiplatform-direct-integration.md).
+有关更多信息，请参见 [直接集成](multiplatform-direct-integration.md)。
 
-### CocoaPods integration with a local podspec
+### 使用本地 podspec 的 CocoaPods 集成 {id=cocoapods-integration-with-a-local-podspec}
 
-You can connect the iOS framework from the Kotlin Multiplatform project through [CocoaPods](https://cocoapods.org/),
-a popular dependency manager for Swift and Objective-C projects.
+你可以通过 [CocoaPods](https://cocoapods.org/)，一个流行的
+Swift 和 Objective-C 项目的依赖管理工具，从 Kotlin Multiplatform 项目连接 iOS 框架。
 
-This integration method works for you if:
+这种集成方式适合以下情况：
 
-* You have a mono repository setup with an iOS project that uses CocoaPods
-* You import CocoaPods dependencies in your Kotlin Multiplatform project
+* 你有一个使用 CocoaPods 的 iOS 项目，并且在一个 mono 仓库中设置了该项目
+* 你在 Kotlin Multiplatform 项目中导入了 CocoaPods 依赖项
 
-To set up a workflow with a local CocoaPods dependency, you can either edit the scripts manually or generate the project
-using a wizard in Android Studio.
+要设置包含本地 CocoaPods 依赖项的工作流程，你可以手动编辑脚本或通过 Android Studio 中的向导生成项目。
 
-For more information, see [CocoaPods overview and setup](native-cocoapods.md).
+有关更多信息，请参见 [CocoaPods 概述和设置](native-cocoapods.md)。
 
-## Remote integration
+## 远程集成 {id=remote-integration}
 
-For remote integration, your project might use the Swift Package Manager (SPM) or the CocoaPods dependency manager to
-connect the iOS framework from a Kotlin Multiplatform project.
+对于远程集成，您的项目可能会使用 Swift 包管理器（SPM）或 CocoaPods 作为依赖管理工具，将
+Kotlin Multiplatform 项目与 iOS 框架连接起来。
 
-### Swift package manager with XCFrameworks
+### 使用 XCFrameworks 的 Swift 包管理器 {id=swift-package-manager-with-xcframeworks}
 
-You can set up a Swift package manager (SPM) dependency using XCFrameworks to connect the iOS framework from the Kotlin
-Multiplatform project.
+你可以使用 XCFrameworks 设置一个 Swift 包管理器（SPM）依赖项，以连接来自
+Kotlin Multiplatform 项目的 iOS 框架。
 
-For more information, see [Swift package export setup](native-spm.md).
+有关更多信息，请参见 [Swift 包导出设置](native-spm.md)。
 
-### CocoaPods integration with XCFrameworks
+### 使用 XCFrameworks 的 CocoaPods 集成 {id=cocoapods-integration-with-xcframeworks}
 
-You can build XCFrameworks with the Kotlin CocoaPods Gradle plugin and then distribute shared parts of your project
-separately from mobile apps through CocoaPods.
+你可以使用 Kotlin CocoaPods Gradle 插件构建 XCFrameworks，然后通过
+CocoaPods 将项目的共享部分与移动应用分开进行分发。
 
-For more information, see [Build final native binaries](multiplatform-build-native-binaries.md#build-frameworks).
+有关更多信息，请参见 [构建最终的原生二进制文件](multiplatform-build-native-binaries.md#build-frameworks)。
