@@ -1,97 +1,97 @@
-[//]: # (title: Direct integration)
+[//]: # (title: 直接集成)
 
 <tldr>
-   This is a local integration method. It can work for you if:<br/>
+   这是一种本地集成方法。如果符合以下条件，它适合你：<br/>
 
-   * You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
-   * Your Kotlin Multiplatform project does not have CocoaPods dependencies.<br/>
-
-   [Choose the integration method that suits you best](multiplatform-ios-integration-overview.md)
+   * 你已经在本地机器上设置了一个目标为 iOS 的 Kotlin Multiplatform 项目。
+   * 你的 Kotlin Multiplatform 项目没有 CocoaPods 依赖项。<br/>
+   
+   [选择最适合你的集成方法](multiplatform-ios-integration-overview.md)
 </tldr>
 
-If you want to develop your Kotlin Multiplatform project and an iOS project simultaneously by sharing code between them,
-you can set up direct integration using a special script.
+如果你想通过共享代码在 Kotlin Multiplatform 项目和 iOS 项目之间同时进行开发，
+可以使用特殊脚本设置直接集成。
 
-This script automates the process of connecting the Kotlin framework to iOS projects in Xcode:
+这个脚本将 Kotlin 框架连接到 iOS 项目的过程自动化了：
 
-![Direct integration diagram](direct-integration-scheme.svg){width=700}
+![直接集成示意图](direct-integration-scheme.svg){width=700}
 
-The script uses the `embedAndSignAppleFrameworkForXcode` Gradle task designed specifically for the Xcode environment.
-During the setup, you add it to the run script phase of the iOS app build. After that, the Kotlin artifact
-is built and included in the derived data before running the iOS app build.
+该脚本使用了专门为 Xcode 环境设计的 `embedAndSignAppleFrameworkForXcode` Gradle 任务。  
+在设置过程中，你需要将其添加到 iOS 应用构建的运行脚本阶段。
+之后，Kotlin 构件会在运行 iOS 应用构建之前被构建并包含到派生数据中。
 
-In general, the script:
+一般来说，脚本会：
 
-* Copies the compiled Kotlin framework into the correct directory within the iOS project structure.
-* Handles the code signing process of the embedded framework.
-* Ensures that code changes in the Kotlin framework are reflected in the iOS app in Xcode.
+* 将编译后的 Kotlin 框架复制到 iOS 项目结构中的正确目录。
+* 处理嵌入框架的代码签名过程。
+* 确保 Kotlin 框架中的代码更改能够反映到 Xcode 中的 iOS 应用。
 
-## How to set up
+## 如何设置 {id=how-to-set-up}
 
-If you're currently using the CocoaPods plugin to connect your Kotlin framework, migrate first.
+如果你当前正在使用 CocoaPods 插件连接你的 Kotlin 框架，请首先进行迁移。
 
-### Migrate from CocoaPods plugin to direct integration {initial-collapse-state="collapsed" collapsible="true"}
+### 从 CocoaPods 插件迁移到直接集成 {initial-collapse-state="collapsed" collapsible="true"}
 
-To migrate from the CocoaPods plugin:
+要从 CocoaPods 插件迁移：
 
-1. In Xcode, clean build directories using **Product** | **Clean Build Folder** or with the
-   <shortcut>Cmd + Shift + K</shortcut> shortcut.
-2. In the directory with the `Podfile` file, run the following command:
+1. 在 Xcode 中，使用 **Product** | **Clean Build Folder** 清理构建目录，或者使用快捷键 
+   <shortcut>Cmd + Shift + K</shortcut>。
+2. 在包含 `Podfile` 文件的目录中，运行以下命令：
 
     ```none
    pod deintegrate
    ```
 
-3. Remove the `cocoapods {}` block from your `build.gradle(.kts)` files.
-4. Delete the `.podspec` and `Podfile` files.
+3. 从 `build.gradle(.kts)` 文件中删除 `cocoapods {}` 块。
+4. 删除 `.podspec` 和 `Podfile` 文件。
 
-### Connect the framework to your project
+### 将框架连接到你的项目 {id=connect-the-framework-to-your-project}
 
-To connect the Kotlin framework generated from the multiplatform project to your Xcode project:
+要将从 Kotlin Multiplatform 项目生成的 Kotlin 框架连接到你的 Xcode 项目，请进行以下步骤：
 
-1. The `embedAndSignAppleFrameworkForXcode` task only registers if the `binaries.framework` configuration option is
-   declared. In your Kotlin Multiplatform project, check the iOS target declaration in the `build.gradle.kts` file.
-2. In Xcode, open the iOS project settings by double-clicking the project name.
-3. On the **Build Phases** tab of the project settings, click **+** and select **New Run Script Phase**.
+1. `embedAndSignAppleFrameworkForXcode` 任务只有在声明了 `binaries.framework` 配置选项时才会注册。
+   在你的 Kotlin Multiplatform 项目中，检查 `build.gradle.kts` 文件中的 iOS 目标声明。
+2. 在 Xcode 中，双击项目名称以打开 iOS 项目设置。
+3. 在项目设置的 **Build Phases** 标签页中，点击 **+** 并选择 **New Run Script Phase**。
 
-   ![Add run script phase](xcode-run-script-phase-1.png){width=700}
+   ![添加运行脚本阶段](xcode-run-script-phase-1.png){width=700}
 
-4. Adjust the following script and copy the result to the run script phase:
+4. 调整以下脚本并将结果复制到运行脚本阶段：
 
    ```bash
-   cd "<Path to the root of the multiplatform project>"
-   ./gradlew :<Shared module name>:embedAndSignAppleFrameworkForXcode 
+   cd "<跨平台项目的根路径>"
+   ./gradlew :<共享模块名称>:embedAndSignAppleFrameworkForXcode 
    ```
 
-   * In the `cd` command, specify the path to the root of your Kotlin Multiplatform project, for example, `$SRCROOT/..`.
-   * In the `./gradlew` command, specify the name of the shared module, for example, `:shared` or `:composeApp`.
+   * 在 `cd` 命令中，指定你的 Kotlin Multiplatform 项目根目录的路径，例如 `$SRCROOT/..`。
+   * 在 `./gradlew` 命令中，指定共享模块的名称，例如 `:shared` 或 `:composeApp`。
 
-   ![Add the script](xcode-run-script-phase-2.png){width=700}
+   ![添加脚本](xcode-run-script-phase-2.png){width=700}
 
-5. Drag the **Run Script** phase before the **Compile Sources** phase.
+5. 将 **Run Script** 阶段拖动到 **Compile Sources** 阶段之前。
 
-   ![Drag the Run Script phase](xcode-run-script-phase-3.png){width=700}
+   ![拖动 Run Script 阶段](xcode-run-script-phase-3.png){width=700}
 
-6. On the **Build Settings** tab, disable the **User Script Sandboxing** option under **Build Options**:
+6. 在 **Build Settings** 标签页中，在 **Build Options** 下禁用 **User Script Sandboxing** 选项：
 
-   ![User Script Sandboxing](disable-sandboxing-in-xcode-project-settings.png){width=700}
+   ![禁用脚本沙箱](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
-   > This may require restarting your Gradle daemon, if you built the iOS project without disabling sandboxing first.
-   > Stop the Gradle daemon process that might have been sandboxed:
-   > ```shell
-   > ./gradlew --stop
+   > 如果你在没有首先禁用沙箱的情况下构建了 iOS 项目，这可能需要重新启动 Gradle 守护进程。
+   > 停止可能已被沙箱化的 Gradle 守护进程：
+   > ```shell  
+   > ./gradlew --stop  
    > ```
    >
    > {style="tip"}
 
-7. Build the project in Xcode. If everything is set up correctly, the project will successfully build.
+7. 在 Xcode 中构建项目。如果一切设置正确，项目将成功构建。
 
-> If you have a custom build configuration different from the default `Debug` or `Release`, on the **Build Settings**
-> tab, add the `KOTLIN_FRAMEWORK_BUILD_TYPE` setting under **User-Defined** and set it to `Debug` or `Release`.
+> 如果你使用了与默认的 `Debug` 或 `Release` 不同的自定义构建配置，在 **Build Settings** 标签页中，
+> 在 **User-Defined** 下添加 `KOTLIN_FRAMEWORK_BUILD_TYPE` 设置，并将其设置为 `Debug` 或 `Release`。
 >
 {style="note"}
 
-## What's next?
+## 接下来该做什么？ {id=whats-next}
 
-You can also take advantage of local integration when working with the Swift package manager. [Learn how to add a
-dependency on a Kotlin framework in a local package](multiplatform-spm-local-integration.md).
+你还可以在使用 Swift 包管理器时利用本地集成功能。
+[了解如何在本地包中添加 Kotlin 框架依赖](multiplatform-spm-local-integration.md)。
