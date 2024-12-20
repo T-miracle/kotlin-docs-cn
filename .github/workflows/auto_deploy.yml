@@ -36,9 +36,8 @@ jobs:
           script: |
             cd /var/www/docs/kotlin/
             unzip -o webHelpKR2.zip
-            rm webHelpKR2.zip
       
-      # 上传 B.zip 到服务器
+      # 上传 webHelpImages.zip 到服务器
       - name: Upload webHelpImages.zip to server
         uses: appleboy/ssh-action@v0.1.8
         with:
@@ -60,4 +59,3 @@ jobs:
           script: |
             cd /var/www/docs/kotlin/
             unzip -o webHelpImages.zip -d ./images/
-            rm webHelpImages.zip  # 可选：解压完成后删除 B.zip 文件
