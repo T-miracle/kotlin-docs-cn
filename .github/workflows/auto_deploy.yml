@@ -10,31 +10,54 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete Zip
-        run: |
-          ssh -i ${{ secrets.PRIVATE_KEY }} -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
-            rm -rf ${TARGET}/*
-          EOF
-
-      - name: Upload Pages ZIP to server
-        run: |
-          scp -i ${{ secrets.PRIVATE_KEY }} -P ${{ secrets.PORT }} ./webHelpKR2.zip ${{ secrets.USER }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
-
-      - name: Unzip on server
-        run: |
-          ssh -i ${{ secrets.PRIVATE_KEY }} -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
-            unzip -o ${TARGET}/webHelpKR2.zip -d ${TARGET}
-            rm ${TARGET}/webHelpKR2.zip
-          EOF
-
-      - name: Upload Images ZIP to server
-        run: |
-          scp -i ${{ secrets.PRIVATE_KEY }} -P ${{ secrets.PORT }} ./webHelpImages.zip ${{ secrets.USER }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
-
-      - name: Unzip on server
-        run: |
-          ssh -i ${{ secrets.PRIVATE_KEY }} -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
-            unzip -o ${TARGET}/webHelpImages.zip -d ${TARGET}/images/
-            rm ${TARGET}/webHelpKR2.zip
-            rm ${TARGET}/webHelpImages.zip
-          EOF
+      # 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      # 上传 webHelpKR2.zip 到服务器
+      - name: Upload webHelpKR2.zip to server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "./webHelpKR2.zip"  # 本地 webHelpKR2.zip 文件的路径
+          target: "/var/www/docs/kotlin/"  # 服务器上存放 webHelpKR2.zip 的目录
+      
+      # 解压 webHelpKR2.zip 文件
+      - name: Unzip webHelpKR2.zip on server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/docs/kotlin/
+            unzip -o webHelpKR2.zip
+            rm webHelpKR2.zip
+      
+      # 上传 B.zip 到服务器
+      - name: Upload webHelpImages.zip to server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "./webHelpKR2.zip"  # 本地 webHelpImages.zip 文件的路径
+          target: "/var/www/docs/kotlin/"  # 服务器上存放 webHelpImages.zip 的目录
+      
+      # 解压 webHelpImages.zip 文件
+      - name: Unzip webHelpImages.zip on server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /var/www/docs/kotlin/
+            unzip -o webHelpImages.zip -d ./images/
+            rm webHelpImages.zip  # 可选：解压完成后删除 B.zip 文件
