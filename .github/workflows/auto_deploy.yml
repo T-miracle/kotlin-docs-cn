@@ -13,7 +13,7 @@ jobs:
       - name: Set up SSH key
         uses: shimataro/ssh-key-action@v2
         with:
-          ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+          key: ${{ secrets.PRIVATE_KEY }}
 
       - name: Delete Zip
         run: |
