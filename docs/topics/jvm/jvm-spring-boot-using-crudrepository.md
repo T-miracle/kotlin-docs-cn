@@ -13,7 +13,7 @@
 _CrudRepository_ 是一个 Spring Data 接口，用于对特定类型的仓库执行通用的 [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) 操作。  
 它提供了多个开箱即用的方法，用于与数据库进行交互。
 
-## Update your application
+## 更新您的应用程序 {id=update-your-application}
 
 First, you need to adjust the `Message` class for work with the `CrudRepository` API:
 
