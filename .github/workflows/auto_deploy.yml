@@ -46,7 +46,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
-          source: "./webHelpKR2.zip"  # 本地 webHelpImages.zip 文件的路径
+          source: "./webHelpImages.zip"  # 本地 webHelpImages.zip 文件的路径
           target: "/var/www/docs/kotlin/"  # 服务器上存放 webHelpImages.zip 的目录
       
       # 解压 webHelpImages.zip 文件
