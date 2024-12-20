@@ -10,8 +10,7 @@
    [选择最适合你的集成方法](multiplatform-ios-integration-overview.md)
 </tldr>
 
-In this tutorial, you'll learn how to integrate a Kotlin framework from a Kotlin Multiplatform project into a local
-package using the Swift package manager (SPM).
+在本教程中，你将学习如何将 Kotlin 跨平台项目中的 Kotlin 框架集成到本地包中，并使用 Swift 包管理器 (SPM)。
 
 ![Direct integration diagram](direct-integration-scheme.svg){width=700}
 
