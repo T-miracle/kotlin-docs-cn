@@ -1,5 +1,5 @@
-[//]: # (title: Use Spring Data CrudRepository for database access)
-[//]: # (description: Work with Spring Data interface in a Spring Boot project written in Kotlin.)
+[//]: # (title: 使用 Spring Data CrudRepository 进行数据库访问)
+[//]: # (description: 在用 Kotlin 编写的 Spring Boot 项目中使用 Spring Data 接口。)
 
 <tldr>
     <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第四部分：</p><br/>  
@@ -9,9 +9,9 @@
       <img src="icon-4-todo.svg" width="20" alt="第四步"/> <strong> 使用 Spring Data CrudRepository 进行数据库访问</strong><br/></p>  
 </tldr>
 
-In this part, you will migrate the service layer to use the [Spring Data](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html) `CrudRepository` instead of `JdbcTemplate` for database access.
-_CrudRepository_ is a Spring Data interface for generic [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) operations on a repository of a specific type.
-It provides several methods out of the box for interacting with a database.
+在这一部分，你将迁移服务层，改为使用 [Spring Data](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html) 的 `CrudRepository`，而不是使用 `JdbcTemplate` 进行数据库访问。  
+_CrudRepository_ 是一个 Spring Data 接口，用于对特定类型的仓库执行通用的 [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) 操作。  
+它提供了多个开箱即用的方法，用于与数据库进行交互。
 
 ## Update your application
 

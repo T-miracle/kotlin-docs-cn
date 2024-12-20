@@ -1,0 +1,45 @@
+name: Auto Deploy
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'webHelpKR2.zip'
+      - 'webHelpImages.zip'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Delete Zip
+        run: |
+          ssh -i ${{ secrets.PRIVATE_KEY }} -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
+            rm -rf ${TARGET}/*
+          EOF
+
+      - name: Upload Pages ZIP to server
+        run: |
+          scp -i ${{ secrets.PRIVATE_KEY }} -P ${{ secrets.PORT }} ./webHelpKR2.zip ${{ secrets.USER }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
+
+      - name: Unzip on server
+        run: |
+          ssh -i ${{ secrets.PRIVATE_KEY }} -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
+            unzip -o ${TARGET}/webHelpKR2.zip -d ${TARGET}
+            rm ${TARGET}/webHelpKR2.zip
+          EOF
+
+      - name: Upload Images ZIP to server
+        run: |
+          scp -i ${{ secrets.PRIVATE_KEY }} -P ${{ secrets.PORT }} ./webHelpImages.zip ${{ secrets.USER }}@${{ secrets.HOST }}:${{ secrets.TARGET }}
+
+      - name: Unzip on server
+        run: |
+          ssh -i ${{ secrets.PRIVATE_KEY }} -p ${{ secrets.PORT }} ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
+            unzip -o ${TARGET}/webHelpImages.zip -d ${TARGET}/images/
+            rm ${TARGET}/webHelpKR2.zip
+            rm ${TARGET}/webHelpImages.zip
+          EOF

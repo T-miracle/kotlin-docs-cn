@@ -1,13 +1,13 @@
-[//]: # (title: Using Kotlin from local Swift packages)
+[//]: # (title: 从本地 Swift 包使用 Kotlin)
 
 <tldr>
-   This is a local integration method. It can work for you if:<br/>
+   这是一个本地集成方法。如果满足以下条件，它可以为你工作：<br/>
 
-   * You have an iOS app with local SPM modules.
-   * You've already set up a Kotlin Multiplatform project targeting iOS on your local machine.
-   * Your existing iOS project has a static linking type.<br/>
+   * 你有一个包含本地 SPM 模块的 iOS 应用。
+   * 你已经在本地机器上设置了一个针对 iOS 的 Kotlin 跨平台项目。
+   * 你现有的 iOS 项目使用静态链接方式。<br/>
 
-   [Choose the integration method that suits you best](multiplatform-ios-integration-overview.md)
+   [选择最适合你的集成方法](multiplatform-ios-integration-overview.md)
 </tldr>
 
 In this tutorial, you'll learn how to integrate a Kotlin framework from a Kotlin Multiplatform project into a local
