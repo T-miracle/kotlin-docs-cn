@@ -16,46 +16,62 @@ jobs:
       
       # 上传 webHelpKR2.zip 到服务器
       - name: Upload webHelpKR2.zip to server
-        uses: appleboy/ssh-action@v0.1.8
+        uses: easingthemes/ssh-deploy@main
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          source: "./webHelpKR2.zip"  # 本地 webHelpKR2.zip 文件的路径
-          target: "/var/www/docs/kotlin/"  # 服务器上存放 webHelpKR2.zip 的目录
+          # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
+          ARGS: "-avz --delete"
+          # 源目录
+          SOURCE: "./webHelpKR2.zip"
+          # 部署目标主机
+          REMOTE_HOST: ${{ secrets.HOST }}
+          # 部署目标主机端口
+          REMOTE_PORT: ${{ secrets.PORT }}
+          # 登录用户
+          REMOTE_USER: ${{ secrets.USER }}
+          # 部署目标目录
+          TARGET: ${{ secrets.TARGET }}
+
+      # 上传 webHelpImages.zip 到服务器
+      - name: Upload webHelpImages.zip to server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
+          ARGS: "-avz --delete"
+          # 源目录
+          SOURCE: "./webHelpImages.zip"
+          # 部署目标主机
+          REMOTE_HOST: ${{ secrets.HOST }}
+          # 部署目标主机端口
+          REMOTE_PORT: ${{ secrets.PORT }}
+          # 登录用户
+          REMOTE_USER: ${{ secrets.USER }}
+          # 部署目标目录
+          TARGET: ${{ secrets.TARGET }}
       
       # 解压 webHelpKR2.zip 文件
       - name: Unzip webHelpKR2.zip on server
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/docs/kotlin/
+            cd ${{ secrets.TARGET }}
             unzip -o webHelpKR2.zip
-      
-      # 上传 webHelpImages.zip 到服务器
-      - name: Upload webHelpImages.zip to server
-        uses: appleboy/ssh-action@v0.1.8
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          port: ${{ secrets.PORT }}
-          source: "./webHelpImages.zip"  # 本地 webHelpImages.zip 文件的路径
-          target: "/var/www/docs/kotlin/"  # 服务器上存放 webHelpImages.zip 的目录
       
       # 解压 webHelpImages.zip 文件
       - name: Unzip webHelpImages.zip on server
-        uses: appleboy/ssh-action@v0.1.8
+        uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /var/www/docs/kotlin/
+            cd ${{ secrets.TARGET }}
             unzip -o webHelpImages.zip -d ./images/
