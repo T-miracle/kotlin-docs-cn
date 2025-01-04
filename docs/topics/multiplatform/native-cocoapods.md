@@ -21,9 +21,9 @@ Pod 库的依赖，也可以将包含原生目标的跨平台项目用作 CocoaP
 根据你的项目和目的，你可以添加以下依赖关系：[Kotlin 项目与 Pod 库之间的依赖](native-cocoapods-libraries.md)
 以及 [Kotlin Gradle 项目与 Xcode 项目之间的依赖](native-cocoapods-xcode.md)。
 
-## Set up an environment to work with CocoaPods
+## 设置与 CocoaPods 一起工作的环境 {id=set-up-an-environment-to-work-with-cocoapods}
 
-Install the [CocoaPods dependency manager](https://cocoapods.org/) using the installation tool of your choice:
+使用你选择的安装工具安装 [CocoaPods 依赖管理器](https://cocoapods.org/)：
 
 <tabs>
 <tab title="RVM">
