@@ -1,0 +1,45 @@
+name: Auto Deploy Pages
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'webHelpKR2.zip'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      # 上传 webHelpKR2.zip 到服务器
+      - name: Upload webHelpKR2.zip to server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          # 本地.ssh文件下的私钥id_rsa，存在secrets的PRIVATE_KEY中
+          SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          # 复制操作的参数。"-avzr --delete"意味部署时清空服务器目标目录下的文件
+          ARGS: "-avz --delete --exclude='images/"
+          # 源目录
+          SOURCE: "./webHelpKR2.zip"
+          # 部署目标主机
+          REMOTE_HOST: ${{ secrets.HOST }}
+          # 部署目标主机端口
+          REMOTE_PORT: ${{ secrets.PORT }}
+          # 登录用户
+          REMOTE_USER: ${{ secrets.USER }}
+          # 部署目标目录
+          TARGET: ${{ secrets.TARGET }}
+      
+      # 解压 webHelpKR2.zip 文件
+      - name: Unzip webHelpKR2.zip on server
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd ${{ secrets.TARGET }}
+            unzip -o webHelpKR2.zip

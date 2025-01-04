@@ -1,25 +1,25 @@
-[//]: # (title: CocoaPods overview and setup)
+[//]: # (title: CocoaPods 概述和设置)
 
 <tldr>
-   This is a local integration method. It can work for you if:<br/>
+   这是一个本地集成方法。它适用于以下情况：<br/>
 
-   * You have a mono repository setup with an iOS project that uses CocoaPods.
-   * Your Kotlin Multiplatform project has CocoaPods dependencies.<br/>
+   * 你有一个使用 CocoaPods 的 iOS 项目的单体代码库。
+   * 你的 Kotlin 跨平台项目包含 CocoaPods 依赖项。<br/>
 
-   [Choose the integration method that suits you best](multiplatform-ios-integration-overview.md)
+   [选择最适合你的集成方法](multiplatform-ios-integration-overview.md)
 </tldr>
 
-Kotlin/Native provides integration with the [CocoaPods dependency manager](https://cocoapods.org/). You can add dependencies
-on Pod libraries as well as use a multiplatform project with native targets as a CocoaPods dependency.
+Kotlin/Native 提供了与 [CocoaPods 依赖管理器](https://cocoapods.org/) 的集成支持。你可以添加对
+Pod 库的依赖，也可以将包含原生目标的跨平台项目用作 CocoaPods 依赖。
 
-You can manage Pod dependencies directly in IntelliJ IDEA or Android Studio and enjoy all the additional features such as
-code highlighting and completion. You can build the whole Kotlin project with Gradle and not ever have to switch to Xcode. 
+你可以直接在 IntelliJ IDEA 或 Android Studio 中管理 Pod 依赖，并享受所有附加功能，例如代码高亮和补全。
+你可以使用 Gradle 构建整个 Kotlin 项目，而无需切换到 Xcode。
 
-You only need Xcode if you want to change Swift/Objective-C code or run your application on an Apple simulator or device.
-To work correctly with Xcode, you should [update your Podfile](#update-podfile-for-xcode). 
+仅当你需要修改 Swift/Objective-C 代码或在 Apple 模拟器或设备上运行应用程序时才需要使用 Xcode。
+为了与 Xcode 正确配合工作，你需要 [更新你的 Podfile](#update-podfile-for-xcode)。
 
-Depending on your project and purposes, you can add dependencies between [a Kotlin project and a Pod library](native-cocoapods-libraries.md)
-as well as [a Kotlin Gradle project and an Xcode project](native-cocoapods-xcode.md).
+根据你的项目和目的，你可以添加以下依赖关系：[Kotlin 项目与 Pod 库之间的依赖](native-cocoapods-libraries.md)
+以及 [Kotlin Gradle 项目与 Xcode 项目之间的依赖](native-cocoapods-xcode.md)。
 
 ## Set up an environment to work with CocoaPods
 
