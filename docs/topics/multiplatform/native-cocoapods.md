@@ -28,14 +28,15 @@ Pod 库的依赖，也可以将包含原生目标的跨平台项目用作 CocoaP
 <tabs>
 <tab title="RVM">
 
-1. Install [Ruby version manager](https://rvm.io/rvm/install) in case you don't have it yet.
-2. Install Ruby. You can choose a specific version:
+1. 安装 [Ruby 版本管理器](https://rvm.io/rvm/install) ，如果你尚未安装。
+
+2. 安装 Ruby。你可以选择一个特定的版本：
 
     ```bash
     rvm install ruby 3.0.0
     ```
 
-3. Install CocoaPods:
+3. 安装 CocoaPods：
 
     ```bash
     sudo gem install -n /usr/local/bin cocoapods
@@ -44,20 +45,20 @@ Pod 库的依赖，也可以将包含原生目标的跨平台项目用作 CocoaP
 </tab>
 <tab title="Rbenv">
 
-1. Install [rbenv from GitHub](https://github.com/rbenv/rbenv#installation) in case you don't have it yet.
-2. Install Ruby. You can choose a specific version:
+1. 安装 [rbenv（来自 GitHub）](https://github.com/rbenv/rbenv#installation) ，如果你尚未安装。
+2. 安装 Ruby。你可以选择一个特定的版本：
 
     ```bash
     rbenv install 3.0.0
     ```
 
-3. Set the Ruby version as local for a particular directory or global for the whole machine:
+3. 将该 Ruby 版本设置为本地目录专用或全局机器通用：
 
     ```bash
     rbenv global 3.0.0
     ```
-    
-4. Install CocoaPods:
+
+4. 安装 CocoaPods：
 
     ```bash
     sudo gem install -n /usr/local/bin cocoapods
@@ -66,98 +67,97 @@ Pod 库的依赖，也可以将包含原生目标的跨平台项目用作 CocoaP
 </tab>
 <tab title="Default Ruby">
 
-> This way of installation doesn't work on devices with Apple M chips. Use other tools to set up an environment to work
-> with CocoaPods.
+> 这种安装方式不适用于带有 Apple M 芯片的设备。请使用其他工具来配置用于 CocoaPods 的环境。
 >
 {style="note"}
 
-You can install the CocoaPods dependency manager with the default Ruby that should be available on macOS:
+你可以使用 macOS 上默认可用的 Ruby 安装 CocoaPods 依赖管理工具：
 
 ```bash
 sudo gem install cocoapods
-```
+```  
 
 </tab>
 <tab title="Homebrew">
 
-> The CocoaPods installation with Homebrew might result in compatibility issues.
+> 使用 Homebrew 安装 CocoaPods 可能会导致兼容性问题。
 >
-> When installing CocoaPods, Homebrew also installs the [Xcodeproj](https://github.com/CocoaPods/Xcodeproj) gem that is
-> necessary for working with Xcode.
-> However, it cannot be updated with Homebrew, and if the installed Xcodeproj doesn't support the newest Xcode version yet,
-> you'll get errors with Pod installation. If this is the case, try other tools to install CocoaPods.
+> 安装 CocoaPods 时，Homebrew 还会安装 [Xcodeproj](https://github.com/CocoaPods/Xcodeproj) gem，它是与
+> Xcode 一起工作的必要组件。
+> 然而，Homebrew 无法更新 Xcodeproj。如果安装的 Xcodeproj 尚未支持最新版本的 Xcode，你将在 Pod 安装时遇到错误。
+> 如果遇到此问题，请尝试使用其他工具安装 CocoaPods。
 >
 {style="warning"}
 
-1. Install [Homebrew](https://brew.sh/) in case you don't have it yet.
-2. Install CocoaPods:
+1. 安装 [Homebrew](https://brew.sh/) ，如果你尚未安装。
+
+2. 安装 CocoaPods：
 
     ```bash
     brew install cocoapods
-    ```
+    ```  
 
 </tab>
 </tabs>
 
-If you encounter problems during the installation, check the [Possible issues and solutions](#possible-issues-and-solutions) section.
+如果在安装过程中遇到问题，请查看 [可能的问题及解决方案](#possible-issues-and-solutions) 部分。
 
-## Create a project
+## 创建项目 {id=create-a-project}
 
-When your environment is set up, you can create a new Kotlin Multiplatform project. For that, use the
-Kotlin Multiplatform web wizard or the Kotlin Multiplatform plugin for Android Studio.
+当你的环境配置完成后，你可以创建一个新的 Kotlin 跨平台项目。为此，可以使用
+Kotlin 跨平台网页向导或 Android Studio 的 Kotlin 跨平台插件。
 
-### Using web wizard
+### 使用网页向导 {id=using-web-wizard}
 
-To create a project using the web wizard and configure the CocoaPods integration:
+要使用网页向导创建项目并配置 CocoaPods 集成：
 
-1. Open the [Kotlin Multiplatform wizard](https://kmp.jetbrains.com) and select target platforms for your project.
-2. Click the **Download** button and unpack the downloaded archive.
-3. In Android Studio, select **File | Open** in the menu.
-4. Navigate to the unpacked project folder and then click **Open**.
-5. Add the Kotlin CocoaPods Gradle plugin to the version catalog. In the `gradle/libs.versions.toml` file,
-   add the following declaration to the `[plugins]` block:
- 
+1. 打开 [Kotlin 跨平台向导](https://kmp.jetbrains.com) 并选择你的项目目标平台。
+2. 点击 **Download** 按钮并解压下载的归档文件。
+3. 在 Android Studio 的菜单中选择 **File | Open**。
+4. 导航到解压后的项目文件夹，然后点击 **Open**。
+5. 将 Kotlin CocoaPods Gradle 插件添加到版本目录。在 `gradle/libs.versions.toml` 文件中，
+   将以下声明添加到 `[plugins]` 块：
+
    ```text
    kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
-   ```
-   
-6. Navigate to the root `build.gradle.kts` file of your project and add the following alias to the `plugins {}` block:
+   ```  
+
+6. 导航到项目的根 `build.gradle.kts` 文件，并在 `plugins {}` 块中添加以下别名：
 
    ```kotlin
    alias(libs.plugins.kotlinCocoapods) apply false
-   ```
+   ```  
 
-7. Open the module where you want to integrate CocoaPods, for example the `composeApp` module, and add the following alias
-   to the `plugins {}` block:
+7. 打开你希望集成 CocoaPods 的模块，例如 `composeApp` 模块，并在 `plugins {}` 块中添加以下别名：
 
    ```kotlin
    alias(libs.plugins.kotlinCocoapods)
-   ```
+   ```  
 
-Now you are ready to use CocoaPods in your Kotlin Multiplatform project.
+现在，你已经准备好在 Kotlin 跨平台项目中使用 CocoaPods 了。
 
-### In Android Studio
+### 在 Android Studio 中 {id=in-android-studio}
 
-To create a project in Android Studio with the CocoaPods integration:
+要在 Android Studio 中创建具有 CocoaPods 集成的项目：
 
-1. Install the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) to Android Studio.
-2. In Android Studio, select  **File** | **New** | **New Project** in the menu.
-3. In the list of project templates, select **Kotlin Multiplatform App** and then click **Next**.
-4. Name your application and click **Next**.
-5. Choose **CocoaPods Dependency Manager** as the iOS framework distribution option.
+1. 安装 [Kotlin Multiplatform 插件](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) 到 Android Studio。
+2. 在 Android Studio 的菜单中选择 **File** | **New** | **New Project**。
+3. 在项目模板列表中选择 **Kotlin Multiplatform App**，然后点击 **Next**。
+4. 为你的应用命名并点击 **Next**。
+5. 选择 **CocoaPods Dependency Manager** 作为 iOS 框架的分发选项。
 
-   ![Android Studio wizard with the Kotlin Multiplatform plugin](as-project-wizard.png){width=700}
+   ![Android Studio 向导中的 Kotlin 跨平台插件](as-project-wizard.png){width=700}
 
-6. Keep all other options default. Click **Finish**.
+6. 保持所有其他选项为默认设置。点击 **Finish**。
 
-   The plugin will automatically generate the project with the CocoaPods integration set up.
+   插件会自动生成已配置好 CocoaPods 集成的项目。
 
-## Configure existing project
+## 配置现有项目 {id=configure-existing-project}
 
-If you already have a project, you can add and configure the Kotlin CocoaPods Gradle plugin manually:
+如果你已经有一个项目，可以手动添加并配置 Kotlin CocoaPods Gradle 插件：
 
-1. In `build.gradle(.kts)` of your project, apply the CocoaPods plugin as well as the Kotlin Multiplatform plugin:
-    
+1. 在你的项目的 `build.gradle(.kts)` 文件中，应用 CocoaPods 插件以及 Kotlin 跨平台插件：
+
     ```kotlin
     plugins {
         kotlin("multiplatform") version "%kotlinVersion%"
@@ -165,7 +165,7 @@ If you already have a project, you can add and configure the Kotlin CocoaPods Gr
     }
     ```
 
-2. Configure `version`, `summary`, `homepage`, and `baseName` of the Podspec file in the `cocoapods` block:
+2. 配置 `version`、`summary`、`homepage` 和 `baseName` 在 `cocoapods` 块中的 Podspec 文件：
     
     ```kotlin
     plugins {
@@ -175,159 +175,149 @@ If you already have a project, you can add and configure the Kotlin CocoaPods Gr
  
     kotlin {
         cocoapods {
-            // Required properties
-            // Specify the required Pod version here. Otherwise, the Gradle project version is used.
+            // 必需属性
+            // 在这里指定所需的 Pod 版本。如果没有指定，将使用 Gradle 项目的版本。
             version = "1.0"
-            summary = "Some description for a Kotlin/Native module"
-            homepage = "Link to a Kotlin/Native module homepage"
+            summary = "Kotlin/Native 模块的描述"
+            homepage = "Kotlin/Native 模块主页的链接"
    
-            // Optional properties
-            // Configure the Pod name here instead of changing the Gradle project name
+            // 可选属性
+            // 在这里配置 Pod 名称，而不是修改 Gradle 项目的名称
             name = "MyCocoaPod"
 
             framework {
-                // Required properties              
-                // Framework name configuration. Use this property instead of deprecated 'frameworkName'
+                // 必需属性               
+                // 框架名称配置。使用此属性而不是已废弃的 'frameworkName'
                 baseName = "MyFramework"
                 
-                // Optional properties
-                // Specify the framework linking type. It's dynamic by default. 
+                // 可选属性
+                // 指定框架链接类型。默认为动态链接。
                 isStatic = false
-                // Dependency export
-                // Uncomment and specify another project module if you have one:
+                // 依赖导出
+                // 如果有其他项目模块，取消注释并指定：
                 // export(project(":<your other KMP module>"))
-                transitiveExport = false // This is default.
+                transitiveExport = false // 默认值。
             }
 
-            // Maps custom Xcode configuration to NativeBuildType
+            // 将自定义的 Xcode 配置映射到 NativeBuildType
             xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
             xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
         }
     }
     ```
 
-    > See the full syntax of Kotlin DSL in the [Kotlin Gradle plugin repository](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/targets/native/cocoapods/CocoapodsExtension.kt).
+    > 请参见 [Kotlin Gradle 插件仓库](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/targets/native/cocoapods/CocoapodsExtension.kt) 中的完整 Kotlin DSL 语法。
     >
     {style="note"}
     
-3. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
-4. Generate the [Gradle wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) to avoid compatibility
-   issues during an Xcode build.
+3. 在 IntelliJ IDEA 中运行 **重新加载所有 Gradle 项目**（或在 Android Studio 中运行 **同步项目与 Gradle 文件**）
+   以重新导入项目。
+4. 生成 [Gradle wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html)，以避免在
+   Xcode 构建期间出现兼容性问题。
 
-When applied, the CocoaPods plugin does the following:
+应用后，CocoaPods 插件会执行以下操作：
 
-* Adds both `debug` and `release` frameworks as output binaries for all macOS, iOS, tvOS, and watchOS targets.
-* Creates a `podspec` task which generates a [Podspec](https://guides.cocoapods.org/syntax/podspec.html)
-file for the project.
+* 为所有 macOS、iOS、tvOS 和 watchOS 目标添加 `debug` 和 `release` 框架作为输出二进制文件。
+* 创建一个 `podspec` 任务，该任务为项目生成一个 [Podspec](https://guides.cocoapods.org/syntax/podspec.html) 文件。
 
-The `Podspec` file includes a path to an output framework and script phases that automate building this framework during 
-the build process of an Xcode project.
+`Podspec` 文件包括指向输出框架的路径以及在 Xcode 项目构建过程中自动构建此框架的脚本阶段。
 
-## Update Podfile for Xcode
+## 更新 Xcode 的 Podfile {id=update-podfile-for-xcode}
 
-If you want to import your Kotlin project to an Xcode project:
+如果你想将 Kotlin 项目导入到 Xcode 项目中：
 
-1. Make changes in your Podfile:
+1. 在你的 Podfile 中做出以下更改：
 
-   * If your project has any Git, HTTP, or custom Podspec repository dependencies, you should specify the path to
-     the Podspec in the Podfile.
+    * 如果你的项目有任何 Git、HTTP 或自定义 Podspec 仓库依赖项，你应该在 Podfile 中指定 Podspec 的路径。
 
-     For example, if you add a dependency on `podspecWithFilesExample`, declare the path to the Podspec in the Podfile:
+      例如，如果你添加了对 `podspecWithFilesExample` 的依赖，在 Podfile 中声明 Podspec 的路径：
 
-     ```ruby
-     target 'ios-app' do
-        # ... other dependencies ...
-        pod 'podspecWithFilesExample', :path => 'cocoapods/externalSources/url/podspecWithFilesExample' 
-     end
-     ```
+      ```ruby
+      target 'ios-app' do
+         # ... 其他依赖项 ...
+         pod 'podspecWithFilesExample', :path => 'cocoapods/externalSources/url/podspecWithFilesExample' 
+      end
+      ```
 
-     The `:path` should contain the filepath to the Pod.
+      `:path` 应该包含 Pod 的文件路径。
 
-   * When you add a library from the custom Podspec repository, you should also specify the [location](https://guides.cocoapods.org/syntax/podfile.html#source)
-     of specs at the beginning of your Podfile:
+    * 当你从自定义 Podspec 仓库添加库时，应该在 Podfile 开头指定 [specs 的位置](https://guides.cocoapods.org/syntax/podfile.html#source)：
 
-     ```ruby
-     source 'https://github.com/Kotlin/kotlin-cocoapods-spec.git'
+      ```ruby
+      source 'https://github.com/Kotlin/kotlin-cocoapods-spec.git'
+ 
+      target 'kotlin-cocoapods-xcproj' do
+          # ... 其他依赖项 ...
+          pod 'example'
+      end
+      ```
 
-     target 'kotlin-cocoapods-xcproj' do
-         # ... other dependencies ...
-         pod 'example'
-     end
-     ```
+2. 在你的项目目录中运行 `pod install`。
 
-2. Run `pod install` in you project directory.
+   当你第一次运行 `pod install` 时，它会创建 `.xcworkspace` 文件。此文件包含你的原始 `.xcodeproj` 和 CocoaPods 项目。
+3. 关闭你的 `.xcodeproj` 文件，并改为打开新的 `.xcworkspace` 文件。这样可以避免项目依赖关系的问题。
+4. 在 IntelliJ IDEA 中运行 **重新加载所有 Gradle 项目**（或在 Android Studio 中运行 **同步项目与 Gradle 文件**）
+   以重新导入项目。
 
-   When you run `pod install` for the first time, it creates the `.xcworkspace` file. This file
-   includes your original `.xcodeproj` and the CocoaPods project.
-3. Close your `.xcodeproj` and open the new `.xcworkspace` file instead. This way you avoid issues with project dependencies.
-4. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+如果你没有在 Podfile 中做出这些更改，`podInstall` 任务将会失败，CocoaPods 插件将在日志中显示错误消息。
 
-If you don't make these changes in the Podfile, the `podInstall` task will fail, and the CocoaPods plugin will show
-an error message in the log.
+## 可能的问题和解决方案 {id=possible-issues-and-solutions}
 
-## Possible issues and solutions
+### CocoaPods 安装 {id=cocoapods-installation collapsible="true" collapsible="true"}
 
-### CocoaPods installation {collapsible="true" collapsible="true"}
+#### Ruby 安装 {id=ruby-installation}
 
-#### Ruby installation
+CocoaPods 是用 Ruby 构建的，你可以使用 macOS 上默认的 Ruby 进行安装。
+Ruby 1.9 或更高版本内置了 RubyGems 包管理框架，帮助你安装 [CocoaPods 依赖管理器](https://guides.cocoapods.org/using/getting-started.html#installation)。
 
-CocoaPods is built with Ruby, and you can install it with the default Ruby that should be available on macOS.
-Ruby 1.9 or later has a built-in RubyGems package management framework that helps you install the [CocoaPods dependency manager](https://guides.cocoapods.org/using/getting-started.html#installation).
+如果你在安装 CocoaPods 并使其正常工作时遇到问题，请按照 [此指南](https://www.ruby-lang.org/en/documentation/installation/)
+安装 Ruby，或参考 [RubyGems 网站](https://rubygems.org/pages/download/) 安装该框架。
 
-If you're experiencing problems installing CocoaPods and getting it to work, follow [this guide](https://www.ruby-lang.org/en/documentation/installation/)
-to install Ruby or refer to the [RubyGems website](https://rubygems.org/pages/download/) to install the framework.
+#### 版本兼容性 {id=version-compatibility}
 
-#### Version compatibility
+我们建议使用最新的 Kotlin 版本。如果你当前的版本早于 1.7.0，你需要额外安装
+[`cocoapods-generate`](https://github.com/square/cocoapods-generate#installation) 插件。
 
-We recommend using the latest Kotlin version. If your current version is earlier than 1.7.0, you'll need to additionally
-install the [`cocoapods-generate`](https://github.com/square/cocoapods-generate#installation") plugin.
+然而，`cocoapods-generate` 与 Ruby 3.0.0 或更高版本不兼容。在这种情况下，请降级 Ruby 或升级 Kotlin
+至 1.7.0 或更高版本。
 
-However, `cocoapods-generate` is not compatible with Ruby 3.0.0 or later. In this case, downgrade Ruby or upgrade Kotlin
-to 1.7.0 or later.
+### 使用 Xcode 时的构建错误 {id=build-errors-when-using-xcode collapsible="true" collapsible="true"}
 
-### Build errors when using Xcode {collapsible="true" collapsible="true"}
+某些 CocoaPods 安装方式可能会导致在 Xcode 中出现构建错误。
+通常，Kotlin Gradle 插件会在 `PATH` 中发现 `pod` 可执行文件，但根据你的环境，这可能不一致。
 
-Some variations of the CocoaPods installation can lead to build errors in Xcode.
-Generally, the Kotlin Gradle plugin discovers the `pod` executable in `PATH`, but this may be inconsistent depending on
-your environment.
+为了显式设置 CocoaPods 安装路径，你可以手动将其添加到项目的 `local.properties` 文件中，或者使用 shell 命令：
 
-To set the CocoaPods installation path explicitly, you can add it to the `local.properties` file of your project
-manually or using a shell command:
-
-* If using a code editor, add the following line to the `local.properties` file:
+* 如果使用代码编辑器，请将以下行添加到 `local.properties` 文件：
 
     ```text
     kotlin.apple.cocoapods.bin=/Users/Jane.Doe/.rbenv/shims/pod
     ```
 
-* If using a terminal, run the following command:
+* 如果使用终端，请运行以下命令：
 
     ```shell
     echo -e "kotlin.apple.cocoapods.bin=$(which pod)" >> local.properties
     ```
 
-### Module not found {collapsible="true" collapsible="true"}
+### 模块未找到 {id=module-not-found collapsible="true" collapsible="true"}
 
-You may encounter a `module 'SomeSDK' not found` error that is connected with the [C-interop](native-c-interop.md) issue.
-Try these workarounds to avoid this error:
+你可能会遇到 `module 'SomeSDK' not found` 错误，这与 [C 语言互操作](native-c-interop.md) 问题相关。
+尝试以下解决方法以避免此错误：
 
-#### Specify the framework name 
+#### 指定框架名称 {id=specify-the-framework-name}
 
-1. Look through the downloaded Pod directory `[shared_module_name]/build/cocoapods/synthetic/IOS/Pods/...`
-   for the `module.modulemap` file.
-2. Check the framework name inside the module, for example `AppsFlyerLib {}`. If the framework name doesn't match the Pod
-name, specify it explicitly:
+1. 查看下载的 Pod 目录 `[shared_module_name]/build/cocoapods/synthetic/IOS/Pods/...` 中的 `module.modulemap` 文件。
+2. 检查模块中的框架名称，例如 `AppsFlyerLib {}`。如果框架名称与 Pod 名称不匹配，请显式指定：
 
     ```kotlin
     pod("FirebaseAuth") {
         moduleName = "AppsFlyerLib"
     }
     ```
-#### Specify headers
+#### 指定头文件 {id=specify-headers}
 
-If the Pod doesn't contain a `.modulemap` file, like the `pod("NearbyMessages")`, specify the main header explicitly:
+如果 Pod 不包含 `.modulemap` 文件，比如 `pod("NearbyMessages")`，请显式指定主头文件：
 
 ```kotlin
 pod("NearbyMessages") {
@@ -336,21 +326,21 @@ pod("NearbyMessages") {
 }
 ```
 
-Check the [CocoaPods documentation](https://guides.cocoapods.org/) for more information. If nothing works, and you still
-encounter this error, report an issue in [YouTrack](https://youtrack.jetbrains.com/newissue?project=kt).
+有关更多信息，请查看 [CocoaPods 文档](https://guides.cocoapods.org/)。
+如果以上方法都无效，且你仍然遇到此错误，请在 [YouTrack](https://youtrack.jetbrains.com/newissue?project=kt) 上报告问题。
 
-### Rsync error {collapsible="true" collapsible="true"}
+### Rsync 错误 {id=rsync-error collapsible="true" collapsible="true"}
 
-You might encounter the `rsync error: some files could not be transferred` error. It's a [known issue](https://github.com/CocoaPods/CocoaPods/issues/11946)
-that occurs if the application target in Xcode has sandboxing of the user scripts enabled.
+你可能会遇到 `rsync error: some files could not be transferred` 错误。
+这是一个 [已知问题](https://github.com/CocoaPods/CocoaPods/issues/11946)，当 Xcode 中的应用目标启用了用户脚本的沙盒时会发生。
 
-To solve this issue:
+解决此问题的方法：
 
-1. Disable sandboxing of user scripts in the application target:
+1. 禁用应用目标中的用户脚本沙盒：
 
-   ![Disable sandboxing CocoaPods](disable-sandboxing-cocoapods.png){width=700}
+   ![禁用沙盒 CocoaPods](disable-sandboxing-cocoapods.png){width=700}
 
-2. Stop the Gradle daemon process that might have been sandboxed:
+2. 停止可能被沙盒化的 Gradle 守护进程：
 
     ```shell
     ./gradlew --stop
