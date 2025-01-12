@@ -1,36 +1,34 @@
-[//]: # (title: Add dependencies on a Pod library)
+[//]: # (title: 添加对 Pod 库的依赖)
 
-To add dependencies between a Kotlin project and a Pod library, [complete the initial configuration](native-cocoapods.md#set-up-an-environment-to-work-with-cocoapods).
-You can then add dependencies on different types of Pod libraries.
+要在 Kotlin 项目和 Pod 库之间添加依赖关系，需要[完成初始配置](native-cocoapods.md#set-up-an-environment-to-work-with-cocoapods) 。
+然后，您可以为不同类型的 Pod 库添加依赖项。
 
-When you add a new dependency and re-import the project in your IDE, the new dependency will be added automatically.
-No additional steps are required.
+当您添加新的依赖项并在 IDE 中重新导入项目时，新依赖项将会自动添加。
+无需执行额外的步骤。
 
-To use your Kotlin project with Xcode, you should [make changes in your project Podfile](native-cocoapods.md#update-podfile-for-xcode).
+如果需要将您的 Kotlin 项目与 Xcode 一起使用，您应当[在项目的 Podfile 中进行更改](native-cocoapods.md#update-podfile-for-xcode) 。
 
-A Kotlin project requires the `pod()` function call in `build.gradle(.kts)` for adding a Pod dependency.
-Each dependency requires its separate function call. You can specify the parameters for the dependency in
-the configuration block of the function.
+Kotlin 项目需要在 `build.gradle(.kts)` 文件中通过调用 `pod()` 函数来添加 Pod 依赖项。
+每个依赖项都需要单独调用该函数。您可以在函数的配置块中指定依赖项的参数。
 
-> If you don't specify the minimum deployment target version and a dependency Pod requires a higher deployment target,
-> you will get an error.
+> 如果您未指定最低部署目标版本，并且某个依赖项 Pod 需要更高的部署目标版本，
+> 您将会遇到错误。
 >
 {style="note"}
 
-You can find a sample project [here](https://github.com/Kotlin/kmm-with-cocoapods-sample).
+您可以在[这里](https://github.com/Kotlin/kmm-with-cocoapods-sample)找到一个示例项目。
 
-## From the CocoaPods repository
+## 来自 CocoaPods 仓库 {id=from-the-cocoapods-repository}
 
-1. Specify the name of a Pod library in the `pod()` function.
+1. 在 `pod()` 函数中指定 Pod 库的名称。
    
-   In the configuration block, you can specify the version of the library using the `version` parameter. To use the latest
-version of the library, you can just omit this parameter altogether.
+   在配置块中，您可以使用 `version` 参数指定库的版本。如果想使用库的最新版本，可以直接省略该参数。
 
-   > You can add dependencies on subspecs.
+   > 您可以添加对子规格（subspecs）的依赖。
    >
    {style="note"}
 
-2. Specify the minimum deployment target version for the Pod library.
+2. 指定 Pod 库的最低部署目标版本。
 
     ```kotlin
     kotlin {
@@ -39,7 +37,7 @@ version of the library, you can just omit this parameter altogether.
         cocoapods {
             iosArm64.deploymentTarget = "13.5"
 
-            summary = "CocoaPods test library"
+            summary = "CocoaPods 测试库"
             homepage = "https://github.com/JetBrains/kotlin"
 
             pod("FirebaseAuth") {
@@ -47,37 +45,36 @@ version of the library, you can just omit this parameter altogether.
             }
         }
     }
-    ```
+    ```  
 
-3. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+3. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）
+   以重新导入项目。
 
-To use these dependencies from the Kotlin code, import the packages `cocoapods.<library-name>`:
+要从 Kotlin 代码中使用这些依赖项，请导入包 `cocoapods.<library-name>`：
 
 ```kotlin
 import cocoapods.FirebaseAuth.*
-```
+```  
 
-## On a locally stored library
+## 在本地存储的库上 {id=on-a-locally-stored-library}
 
-1. Specify the name of a Pod library in the `pod()` function.
+1. 在 `pod()` 函数中指定 Pod 库的名称。
 
-   In the configuration block, specify the path to the local Pod library: use the `path()` function in the `source` parameter value.
+   在配置块中，通过在 `source` 参数中使用 `path()` 函数来指定本地 Pod 库的路径。
 
-   > You can add local dependencies on subspecs as well.
-   > The `cocoapods` block can include dependencies to Pods stored locally and Pods from the CocoaPods repository at
-   > the same time.
+   > 您也可以添加对子规格（subspecs）的本地依赖。  
+   > `cocoapods` 块可以同时包含对本地存储的 Pods 和 CocoaPods 仓库中 Pods 的依赖。
    >
    {style="note"}
 
-2. Specify the minimum deployment target version for the Pod library.
+2. 指定 Pod 库的最低部署目标版本。
 
     ```kotlin
     kotlin {
         iosArm64()
 
         cocoapods {
-            summary = "CocoaPods test library"
+            summary = "CocoaPods 测试库"
             homepage = "https://github.com/JetBrains/kotlin"
 
             iosArm64.deploymentTarget = "13.5"
@@ -95,17 +92,17 @@ import cocoapods.FirebaseAuth.*
             }
         }
     }
-    ```
+    ```  
 
-   > You can also specify the version of the library using `version` parameter in the configuration block.
-   > To use the latest version of the library, omit the parameter.
+   > 您还可以在配置块中通过 `version` 参数指定库的版本。  
+   > 如果想使用库的最新版本，可以省略该参数。
    >
    {style="note"}
 
-3. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+3. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）
+   以重新导入项目。
 
-To use these dependencies from the Kotlin code, import the packages `cocoapods.<library-name>`:
+要从 Kotlin 代码中使用这些依赖项，请导入包 `cocoapods.<library-name>`：
 
 ```kotlin
 import cocoapods.pod_dependency.*
@@ -113,25 +110,25 @@ import cocoapods.subspec_dependency.*
 import cocoapods.FirebaseAuth.*
 ```
 
-## From a custom Git repository
+## 来自自定义 Git 仓库 {id=from-a-custom-git-repository}
 
-1. Specify the name of a Pod library in the `pod()` function.
+1. 在 `pod()` 函数中指定 Pod 库的名称。
 
-   In the configuration block, specify the path to the git repository: use the `git()` function in the `source` parameter value.
+   在配置块中，指定 Git 仓库的路径：在 `source` 参数值中使用 `git()` 函数。
 
-   Additionally, you can specify the following parameters in the block after `git()`:
-    * `commit` – to use a specific commit from the repository
-    * `tag` – to use a specific tag from the repository
-    * `branch` – to use a specific branch from the repository
+   此外，您可以在 `git()` 后指定以下参数：
+   * `commit` – 使用仓库中的特定提交
+   * `tag` – 使用仓库中的特定标签
+   * `branch` – 使用仓库中的特定分支
 
-   The `git()` function prioritizes passed parameters in the following order: `commit`, `tag`, `branch`.
-   If you don't specify a parameter, the Kotlin plugin uses `HEAD` from the `master` branch.
+   `git()` 函数会按照以下优先顺序处理传递的参数：`commit`、`tag`、`branch`。  
+   如果您未指定某个参数，Kotlin 插件将使用 `master` 分支中的 `HEAD`。
 
-   > You can combine `branch`, `commit`, and `tag` parameters to get the specific version of a Pod.
+   > 您可以结合使用 `branch`、`commit` 和 `tag` 参数，以获取特定版本的 Pod。
    >
    {style="note"}
 
-2. Specify the minimum deployment target version for the Pod library.
+2. 指定 Pod 库的最低部署目标版本。
 
     ```kotlin
     kotlin {
@@ -164,10 +161,10 @@ import cocoapods.FirebaseAuth.*
     }
     ```
 
-3. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+3. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）
+   以重新导入项目。
 
-To use these dependencies from the Kotlin code, import the packages `cocoapods.<library-name>`:
+要从 Kotlin 代码中使用这些依赖项，请导入包 `cocoapods.<library-name>`：
 
 ```kotlin
 import cocoapods.Alamofire.*
@@ -175,11 +172,11 @@ import cocoapods.JSONModel.*
 import cocoapods.CocoaLumberjack.*
 ```
 
-## From a custom Podspec repository
+## 来自自定义 Podspec 仓库 {id=from-a-custom-podspec-repository}
 
-1. Specify the HTTP address to the custom Podspec repository using the `url()` inside the `specRepos` block.
-2. Specify the name of a Pod library in the `pod()` function.
-3. Specify the minimum deployment target version for the Pod library.
+1. 在 `specRepos` 块中使用 `url()` 指定自定义 Podspec 仓库的 HTTP 地址。
+2. 在 `pod()` 函数中指定 Pod 库的名称。
+3. 指定 Pod 库的最低部署目标版本。
 
     ```kotlin
     kotlin {
@@ -199,33 +196,33 @@ import cocoapods.CocoaLumberjack.*
     }
     ```
 
-4. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+4. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）
+   以重新导入项目。
 
-> To work correctly with Xcode, you should specify the location of specs at the beginning of your Podfile.
-> For example,
+> 为了与 Xcode 正常协作，您应当在 Podfile 开头指定 specs 的位置。  
+> 例如，
 > ```ruby
 > source 'https://github.com/Kotlin/kotlin-cocoapods-spec.git'
 > ```
 >
 {style="note"}
 
-To use these dependencies from the Kotlin code, import the packages `cocoapods.<library-name>`:
+要从 Kotlin 代码中使用这些依赖项，请导入包 `cocoapods.<library-name>`：
 
 ```kotlin
 import cocoapods.example.*
 ```
 
-## With custom cinterop options
+## 使用自定义 cinterop 选项 {id=with-custom-cinterop-options}
 
-1. Specify the name of a Pod library in the `pod()` function.
+1. 在 `pod()` 函数中指定 Pod 库的名称。
 
-   In the configuration block, specify the cinterop options:
-   * `extraOpts` – to specify the list of options for a Pod library. For example, specific flags: `extraOpts = listOf("-compiler-option")`.
-   * `packageName` – to specify the package name. If you specify this, you can import the library using the package name:
-     `import <packageName>`.
+   在配置块中，指定 cinterop 选项：
+   * `extraOpts` – 指定 Pod 库的选项列表。例如，特定的标志：`extraOpts = listOf("-compiler-option")`。
+   * `packageName` – 指定包名。如果指定了该选项，您可以使用包名导入库：  
+     `import <packageName>`。
 
-2. Specify the minimum deployment target version for the Pod library.
+2. 指定 Pod 库的最低部署目标版本。
 
     ```kotlin
     kotlin {
@@ -244,34 +241,34 @@ import cocoapods.example.*
     }
     ```
 
-3. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+3. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）
+   以重新导入项目。
 
-To use these dependencies from the Kotlin code, import the packages `cocoapods.<library-name>`:
+要从 Kotlin 代码中使用这些依赖项，请导入包 `cocoapods.<library-name>`：
    
 ```kotlin
 import cocoapods.YandexMapKit.*
 ```
    
-If you use the `packageName` parameter, you can import the library using the package name `import <packageName>`:
+如果使用了 `packageName` 参数，您可以通过包名导入库：`import <packageName>`。
    
 ```kotlin
 import YandexMK.YMKPoint
 import YandexMK.YMKDistance
 ```
 
-### Support for Objective-C headers with @import directives
+### 对带有 `@import` 指令的 Objective-C 头文件的支持 {id=support-for-objective-c-headers-with-import-directives}
 
-> This feature is [Experimental](components-stability.md#stability-levels-explained).
-> It may be dropped or changed at any time. Use it only for evaluation purposes.
-> We'd appreciate your feedback on it in [YouTrack](https://kotl.in/issue).
+> 该功能是[实验性的](components-stability.md#stability-levels-explained)。  
+> 它可能会在任何时候被废弃或更改。仅供评估使用。  
+> 我们欢迎您在 [YouTrack](https://kotl.in/issue) 提供反馈。
 >
 {style="warning"}
 
-Some Objective-C libraries, specifically those that serve as wrappers for Swift libraries,
-have `@import` directives in their headers. By default, cinterop doesn't provide support for these directives.
+一些 Objective-C 库，特别是作为 Swift 库的包装器的库，
+其头文件中包含 `@import` 指令。默认情况下，cinterop 不支持这些指令。
 
-To enable support for `@import` directives, specify the `-fmodules` option in the configuration block of the `pod()` function:
+要启用对 `@import` 指令的支持，请在 `pod()` 函数的配置块中指定 `-fmodules` 选项：
 
 ```kotlin
 kotlin {
@@ -290,27 +287,24 @@ kotlin {
 }
 ```
 
-### Share Kotlin cinterop between dependent Pods
+### 在依赖的 Pods 之间共享 Kotlin cinterop {id=share-kotlin-cinterop-between-dependent-pods}
 
-If you add multiple dependencies on Pods using the `pod()` function, you might encounter issues when
-there are dependencies between APIs of your Pods.
+如果您使用 `pod()` 函数添加了多个 Pod 依赖，可能会遇到当您的 Pods 之间存在 API 依赖时的问题。
 
-To make the code compile in such cases, use the `useInteropBindingFrom()` function.
-It utilizes the cinterop binding generated for another Pod while building a binding for the new Pod.
+为了解决此类问题，使用 `useInteropBindingFrom()` 函数。
+它在为新 Pod 构建绑定时，利用了为另一个 Pod 生成的 cinterop 绑定。
 
-You should declare the dependent Pod before setting up the dependency:
+您应该在设置依赖项之前声明依赖的 Pod：
 
 ```kotlin
-// The cinterop of pod("WebImage"):
+// pod("WebImage") 的 cinterop：
 fun loadImage(): WebImage
 
-// The cinterop of pod("Info"):
+// pod("Info") 的 cinterop：
 fun printImageInfo(image: WebImage)
 
-// Your code:
+// 您的代码：
 printImageInfo(loadImage())
 ```
 
-If you haven't configured the correct dependencies between cinterops in this case,
-the code would be invalid because the `WebImage` type would be sourced from different cinterop files and, consequently,
-different packages.
+如果在这种情况下未配置正确的 cinterop 依赖关系，代码将无效，因为 `WebImage` 类型将来自不同的 cinterop 文件，因此，来自不同的包。
