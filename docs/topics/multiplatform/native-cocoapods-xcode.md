@@ -1,42 +1,39 @@
-[//]: # (title: Use a Kotlin Gradle project as a CocoaPods dependency)
+[//]: # (title: 使用 Kotlin Gradle 项目作为 CocoaPods 依赖)
 
-To use a Kotlin Multiplatform project with native targets as a CocoaPods dependency, [complete the initial configuration](native-cocoapods.md#set-up-an-environment-to-work-with-cocoapods).
-You can include such a dependency in the Podfile of the Xcode project by its name and path to the project directory
-containing the generated Podspec.
+要将带有原生目标的 Kotlin 跨平台项目用作 CocoaPods 依赖项，[请完成初始配置](native-cocoapods.md#set-up-an-environment-to-work-with-cocoapods)。
+你可以通过它的名称和包含生成的 Podspec 的项目目录路径，在 Xcode 项目的 Podfile 中包含此类依赖项。
 
-This dependency will be automatically built (and rebuilt) along with this project. Such an approach
-simplifies importing to Xcode by removing a need to write the corresponding Gradle tasks and Xcode build steps manually.
+此依赖项将与此项目一起自动构建（并重新构建）。
+这种方法简化了导入到 Xcode 的过程，因为无需手动编写相应的 Gradle 任务和 Xcode 构建步骤。
 
-You can add dependencies between a Kotlin Gradle project and an Xcode project with one or several targets. It's also possible to add
-dependencies between a Gradle project and multiple Xcode projects. However, in this case, you need to add a
-dependency by calling `pod install` manually for each Xcode project. In other cases, it's done automatically.
+你可以在 Kotlin Gradle 项目和一个或多个目标的 Xcode 项目之间添加依赖关系。
+也可以在 Gradle 项目和多个 Xcode 项目之间添加依赖关系。然而，在这种情况下，你需要为每个 Xcode 项目手动调用 `pod install` 来添加依赖项。
+在其他情况下，这是自动完成的。
 
-> * To correctly import the dependencies into the Kotlin/Native module, the `Podfile` must contain either
->   [`use_modular_headers!`](https://guides.cocoapods.org/syntax/podfile.html#use_modular_headers_bang) or
->   [`use_frameworks!`](https://guides.cocoapods.org/syntax/podfile.html#use_frameworks_bang) directive.
-> * If you don't specify the minimum deployment target version and a dependency Pod requires a higher deployment target,
->   you will get an error.
+> * 为了正确地将依赖项导入到 Kotlin/Native 模块中，`Podfile` 必须包含
+>   [`use_modular_headers!`](https://guides.cocoapods.org/syntax/podfile.html#use_modular_headers_bang) 或
+>   [`use_frameworks!`](https://guides.cocoapods.org/syntax/podfile.html#use_frameworks_bang) 指令。
+> * 如果你没有指定最低部署目标版本，而依赖的 Pod 需要更高的部署目标，则会出现错误。
 >
 {style="note"}
 
-## Xcode project with one target
+## 带有单目标的 Xcode 项目 {id=xcode-project-with-one-target}
 
-1. Create an Xcode project with a `Podfile` if you haven't done so yet.
-2. Make sure to disable **User Script Sandboxing** under **Build Options** in the application target:
+1. 如果尚未创建，请创建一个带有 `Podfile` 的 Xcode 项目。
+2. 确保在应用程序目标的 **Build Options** 下禁用 **User Script Sandboxing**：
 
-   ![Disable sandboxing CocoaPods](disable-sandboxing-cocoapods.png)
+   ![禁用 CocoaPods 沙盒](disable-sandboxing-cocoapods.png)
 
-3. Add the path to your Xcode project `Podfile` with `podfile = project.file(..)` in the `build.gradle(.kts)` file
-   of your Kotlin project.
-   This step helps synchronize your Xcode project with Gradle project dependencies by calling `pod install` for your `Podfile`.
-4. Specify the minimum deployment target version for the Pod library.
+3. 在 Kotlin 项目的 `build.gradle(.kts)` 文件中，使用 `podfile = project.file(..)` 添加指向 Xcode 项目 `Podfile` 的路径。
+   此步骤通过为你的 `Podfile` 调用 `pod install`，帮助同步 Xcode 项目与 Gradle 项目的依赖项。
+4. 为 Pod 库指定最低部署目标版本。
 
     ```kotlin
     kotlin {
         iosArm64()
 
         cocoapods {
-            summary = "CocoaPods test library"
+            summary = "CocoaPods 测试库"
             homepage = "https://github.com/JetBrains/kotlin"
             iosArm64.deploymentTarget = "13.5"
             pod("FirebaseAuth") {
@@ -47,7 +44,7 @@ dependency by calling `pod install` manually for each Xcode project. In other ca
     }
     ```
 
-5. Add the name and path of the Gradle project you want to include in the Xcode project to `Podfile`.
+5. 将你要包含在 Xcode 项目中的 Gradle 项目的名称和路径添加到 `Podfile`。
 
     ```ruby
     use_frameworks!
@@ -59,22 +56,19 @@ dependency by calling `pod install` manually for each Xcode project. In other ca
     end
     ```
 
-6. Run `pod install` in you project directory.
+6. 在项目目录中运行 `pod install`。
 
-   When you run `pod install` for the first time, it creates the `.xcworkspace` file. This file
-   includes your original `.xcodeproj` and the CocoaPods project.
-7. Close your `.xcodeproj` and open the new `.xcworkspace` file instead. This way you avoid issues with project dependencies.
-8. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+   当你第一次运行 `pod install` 时，它会创建 `.xcworkspace` 文件。该文件包含你原始的 `.xcodeproj` 和 CocoaPods 项目。
+7. 关闭你的 `.xcodeproj` 并打开新的 `.xcworkspace` 文件。这样可以避免项目依赖项的问题。
+8. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）以重新导入项目。
 
-## Xcode project with several targets
+## 带有多个目标的 Xcode 项目 {id=xcode-project-with-several-targets}
 
-1. Create an Xcode project with a `Podfile` if you haven't done so yet.
-2. Add the path to your Xcode project `Podfile` with `podfile = project.file(..)` to `build.gradle(.kts)`
-   of your Kotlin project.
-   This step helps synchronize your Xcode project with Gradle project dependencies by calling `pod install` for your `Podfile`.
-3. Add dependencies to the Pod libraries you want to use in your project with `pod()`.
-4. For each target, specify the minimum deployment target version for the Pod library.
+1. 如果尚未创建，请创建一个带有 `Podfile` 的 Xcode 项目。
+2. 在 Kotlin 项目的 `build.gradle(.kts)` 文件中，使用 `podfile = project.file(..)` 添加指向 Xcode 项目 `Podfile` 的路径。  
+   此步骤通过为你的 `Podfile` 调用 `pod install`，帮助同步 Xcode 项目与 Gradle 项目的依赖项。
+3. 使用 `pod()` 添加你希望在项目中使用的 Pod 库的依赖项。
+4. 为每个目标指定 Pod 库的最低部署目标版本。
 
     ```kotlin
     kotlin {
@@ -82,7 +76,7 @@ dependency by calling `pod install` manually for each Xcode project. In other ca
         tvosArm64()
 
         cocoapods {
-            summary = "CocoaPods test library"
+            summary = "CocoaPods 测试库"
             homepage = "https://github.com/JetBrains/kotlin"
             iosArm64.deploymentTarget = "13.5"
             tvosArm64.deploymentTarget = "13.4"
@@ -90,18 +84,18 @@ dependency by calling `pod install` manually for each Xcode project. In other ca
             pod("FirebaseAuth") {
                 version = "10.16.0"
             }
-            podfile = project.file("../severalTargetsXcodeProject/Podfile") // specify the path to the Podfile
+            podfile = project.file("../severalTargetsXcodeProject/Podfile") // 指定 Podfile 的路径
         }
     }
     ```
 
-5. Add the name and path of the Gradle project you want to include in the Xcode project to the `Podfile`.
+5. 将你要包含在 Xcode 项目中的 Gradle 项目的名称和路径添加到 `Podfile`。
 
     ```ruby
     target 'iosApp' do
       use_frameworks!
       platform :ios, '13.5'
-      # Pods for iosApp
+      # iosApp 的 Pods
       pod 'kotlin_library', :path => '../kotlin-library'
     end
 
@@ -109,22 +103,20 @@ dependency by calling `pod install` manually for each Xcode project. In other ca
       use_frameworks!
       platform :tvos, '13.4'
 
-      # Pods for TVosApp
+      # TVosApp 的 Pods
       pod 'kotlin_library', :path => '../kotlin-library'
     end
     ```
 
-6. Run `pod install` in you project directory.
+6. 在项目目录中运行 `pod install`。
 
-   When you run `pod install` for the first time, it creates the `.xcworkspace` file. This file
-   includes your original `.xcodeproj` and the CocoaPods project.
-7. Close your `.xcodeproj` and open the new `.xcworkspace` file instead. This way you avoid issues with project dependencies.
-8. Run **Reload All Gradle Projects** in IntelliJ IDEA (or **Sync Project with Gradle Files** in Android Studio)
-   to re-import the project.
+   当你第一次运行 `pod install` 时，它会创建 `.xcworkspace` 文件。该文件包含你原始的 `.xcodeproj` 和 CocoaPods 项目。
+7. 关闭你的 `.xcodeproj` 并打开新的 `.xcworkspace` 文件。这样可以避免项目依赖项的问题。
+8. 在 IntelliJ IDEA 中运行 **Reload All Gradle Projects**（或在 Android Studio 中运行 **Sync Project with Gradle Files**）以重新导入项目。
 
-You can find a sample project [here](https://github.com/Kotlin/kmm-with-cocoapods-multitarget-xcode-sample).
+你可以在[这里](https://github.com/Kotlin/kmm-with-cocoapods-multitarget-xcode-sample)找到一个示例项目。
 
-## What's next
+## 下一步 {id=whats-next}
 
-See [Connect the framework to your iOS project](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html#connect-the-framework-to-your-ios-project)
-to learn how to add a custom build script to build phases in Xcode projects.
+查看[将框架连接到你的 iOS 项目](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html#connect-the-framework-to-your-ios-project)，
+了解如何在 Xcode 项目的构建阶段添加自定义构建脚本。
