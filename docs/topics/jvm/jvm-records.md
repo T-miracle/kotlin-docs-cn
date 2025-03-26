@@ -1,38 +1,41 @@
-[//]: # (title: Using Java records in Kotlin)
+[//]: # (title: 在 Kotlin 中使用 Java 记录类（records）)
 
-_Records_ are [classes](https://openjdk.java.net/jeps/395) in Java for storing immutable data. Records carry a fixed set of values – the _records components_.
-They have a concise syntax in Java and save you from having to write boilerplate code:
+_记录类_（_Records_）是 Java 中用来存储不可变数据的[类](https://openjdk.java.net/jeps/395)。
+记录类包含一组固定的值 —— _记录组件_（_record components_）。
+它们在 Java 中有简洁的语法，省去了大量样板代码：
 
 ```java
 // Java
 public record Person (String name, int age) {}
 ```
 
-The compiler automatically generates a final class inherited from [`java.lang.Record`](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Record.html) with the following members:
-* a private final field for each record component
-* a public constructor with parameters for all fields
-* a set of methods to implement structural equality: `equals()`, `hashCode()`, `toString()`
-* a public method for reading each record component
+编译器会自动生成一个继承自
+[`java.lang.Record`](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Record.html)
+的 **final** 类，包含以下成员：
+* 每个记录组件对应的 **private final** 字段
+* 一个包含所有字段参数的 **public** 构造函数
+* 用于实现结构化相等的方法：`equals()`、`hashCode()`、`toString()`
+* 每个记录组件对应的 **public** 读取方法
 
-Records are very similar to Kotlin [data classes](data-classes.md).
+记录类和 Kotlin 的 [数据类](data-classes.md) 非常相似。
 
-## Using Java records from Kotlin code
+## 在 Kotlin 代码中使用 Java 记录类 {id=using-java-records-from-kotlin-code}
 
-You can use record classes with components that are declared in Java the same way you would use classes with properties in Kotlin.
-To access the record component, just use its name like you do for [Kotlin properties](properties.md):
+你可以像在 Kotlin 中使用属性类一样，使用 Java 中声明的记录类及其组件。
+要访问记录组件，直接使用它的名字，就像访问 [Kotlin 属性](properties.md) 一样：
 
 ```kotlin
 val newPerson = Person("Kotlin", 10)
 val firstName = newPerson.name
 ```
 
-## Declare records in Kotlin
+## 在 Kotlin 中声明记录类 {id=declare-records-in-kotlin}
 
-Kotlin supports record declaration only for data classes, and the data class must meet the [requirements](#requirements).
+Kotlin 仅支持数据类声明为记录类，并且数据类必须满足 [要求](#requirements)。
 
-To declare a record class in Kotlin, use the `@JvmRecord` annotation:
+要在 Kotlin 中声明一个记录类，可以使用 `@JvmRecord` 注解：
 
-> Applying `@JvmRecord` to an existing class is not a binary compatible change. It alters the naming convention of the class property accessors.
+> 对现有类应用 `@JvmRecord` 并不是一个二进制兼容的修改，它会改变类属性访问器的命名约定。  
 >
 {style="note"}
 
@@ -41,30 +44,31 @@ To declare a record class in Kotlin, use the `@JvmRecord` annotation:
 data class Person(val name: String, val age: Int)
 ```
 
-This JVM-specific annotation enables generating:
+这个 JVM 特定的注解可以生成：
 
-* the record components corresponding to the class properties in the class file
-* the property accessor methods named according to the Java record naming convention
+* 对应于类属性的记录组件，在类文件中生成
+* 按照 Java 记录命名约定命名的属性访问方法
 
-The data class provides `equals()`, `hashCode()`, and `toString()` method implementations.
+数据类还提供了 `equals()`、`hashCode()` 和 `toString()` 方法的实现。
 
-### Requirements
+### 使用要求 {id=requirements}
 
-To declare a data class with the `@JvmRecord` annotation, it must meet the following requirements:
+要使数据类能够使用 `@JvmRecord` 注解声明，必须满足以下条件：
 
-* The class must be in a module that targets JVM 16 bytecode (or 15 if the `-Xjvm-enable-preview` compiler option is enabled).
-* The class cannot explicitly inherit any other class (including `Any`) because all JVM records implicitly inherit `java.lang.Record`. However, the class can implement interfaces.
-* The class cannot declare any properties with backing fields – except those initialized from the corresponding primary constructor parameters.
-* The class cannot declare any mutable properties with backing fields.
-* The class cannot be local.
-* The primary constructor of the class must be as visible as the class itself.
+* 该类必须位于目标为 JVM 16 字节码的模块中（如果启用了 `-Xjvm-enable-preview` 编译器选项，则可以使用 15）
+* 该类不能显式继承任何其他类（包括 `Any`），因为所有 JVM 记录都隐式继承 `java.lang.Record`，但可以实现接口
+* 该类不能声明任何具有幕后字段的属性（通过主构造函数参数初始化的属性除外）
+* 该类不能声明任何具有幕后字段的可变属性
+* 该类不能是局部类
+* 该类的主构造函数可见性必须与类本身相同
 
-### Enabling JVM records
+### 启用 JVM 记录 {id=enabling-jvm-records}
 
-JVM records require the `16` target version or higher of the generated JVM bytecode.
+JVM 记录要求生成的 JVM 字节码目标版本为 `16` 或更高。
 
-To specify it explicitly, use the `jvmTarget` compiler option in [Gradle](gradle-compiler-options.md#attributes-specific-to-jvm) or [Maven](maven.md#attributes-specific-to-jvm).
+要显式指定目标版本，可以在 [Gradle](gradle-compiler-options.md#attributes-specific-to-jvm) 或
+[Maven](maven.md#attributes-specific-to-jvm) 中使用 `jvmTarget` 编译器选项。
 
-## Further discussion
+## 深入讨论 {id=further-discussion}
 
-See this [language proposal for JVM records](https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-records.md) for further technical details and discussion.
+有关更多技术细节和讨论，请参阅 [JVM 记录的语言提案](https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-records.md)。
