@@ -10,7 +10,7 @@
 
 ## 如何启动
 
-使用 `IntelliJ IDEA` 安装 `WriterSide` 插件 或者 直接安装 [`WriterSide` 编辑器](https://www.jetbrains.com/writerside/)
+使用 `IntelliJ IDEA` 安装 `WriterSide` 插件 或者 ~~直接安装 [`WriterSide` 编辑器](https://www.jetbrains.com/writerside/)~~
 
 Clone 本项目到本地，直接运行打开即可
 
