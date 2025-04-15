@@ -40,14 +40,14 @@
 方法，并在项目构建阶段使用了 `embedAndSignAppleFrameworkForXcode` 任务。
 如果您是通过 CocoaPods 插件或通过 Swift 包的 `binaryTarget` 连接 Kotlin 框架，请先进行迁移。
 
-### 从 SPM 的 binaryTarget 集成迁移到本地直接集成 {id=migrate-from-spm-binarytarget-integration-to-local-direct-integration initial-collapse-state="collapsed" collapsible="true"}
+### 从 SPM 的 binaryTarget 集成迁移 {id=migrate-from-spm-binarytarget-integration initial-collapse-state="collapsed" collapsible="true"}
 
 要从使用 `binaryTarget` 的 SPM 集成迁移：
 
 1. 在 Xcode 中，使用 **Product** | **Clean Build Folder** 或快捷键 <shortcut>Cmd + Shift + K</shortcut> 清理构建目录。
 2. 在每个 `Package.swift` 文件中，移除对包含 Kotlin 框架的包的依赖项以及目标对这些产品的依赖项。
 
-### 从 CocoaPods 插件迁移到直接集成 {id=migrate-from-cocoapods-plugin-to-direct-integration initial-collapse-state="collapsed" collapsible="true"}
+### 从 CocoaPods 插件迁移 {id=migrate-from-the-cocoapods-plugin initial-collapse-state="collapsed" collapsible="true"}
 
 > 如果您在 `cocoapods {}` 块中依赖其他 Pods，则必须继续使用 CocoaPods 集成方法。
 > 当前，无法在多模式 SPM 项目中同时依赖 Pods 和 Kotlin 框架。
@@ -74,7 +74,7 @@
 
 为了在本地 Swift 包中使用 Kotlin 代码，请将从跨平台项目生成的 Kotlin 框架连接到您的 Xcode 项目：
 
-1. 在 Xcode 中，进入 **Product** | **Scheme** | **Edit scheme**，或者点击顶部栏的方案图标并选择 **Edit scheme**：
+1. 在 Xcode 中，前往 **Product** | **Scheme** | **Edit scheme**，或者点击顶部栏中的 scheme 图标并选择 **Edit scheme**：
 
    ![编辑方案](xcode-edit-schemes.png){width=700}
 
@@ -96,7 +96,9 @@
 
    ![已填写运行脚本动作](xcode-filled-run-script-action.png){width=700}
 
-5. 您现在可以将共享模块导入到本地 Swift 包中并使用 Kotlin 代码。例如，定义以下函数：
+5. 你现在可以将共享模块导入本地 Swift 包中，并使用 Kotlin 代码。
+
+   在 Xcode 中，导航到你的本地 Swift 包，并定义一个带有模块导入的函数，例如：
 
    ```Swift
    import Shared

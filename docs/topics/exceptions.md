@@ -578,17 +578,16 @@ fun main() {
     >
     {style="note"}
 
-* [`NoSuchElementException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-no-such-element-exception/): 当访问某个集合中不存在的元素时，就会抛出这个异常。
-它发生在使用期望特定元素的方法时，例如 [`first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html)、
-[`last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html) 或
-[`elementAt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/element-at.html)。
+* [`NoSuchElementException`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-no-such-element-exception/)：
+当访问某个集合中不存在的元素时，会抛出该异常。
+它通常出现在使用像 [`first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 或 [`last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html) 这类期望存在特定元素的方法时。
 
     ```kotlin
     val emptyList = listOf<Int>()
     val firstElement = emptyList.first()  // 抛出 NoSuchElementException
     ```
 
-    > 避免此异常的方法是使用更安全的替代方案，例如 [`firstOrNull()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first-or-null.html) 函数：
+    > 为避免此异常，可以使用更安全的替代方法，例如 [`firstOrNull()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first-or-null.html) 函数：
     >
     > ```kotlin
     > val emptyList = listOf<Int>()

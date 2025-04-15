@@ -5,53 +5,56 @@
 <vars>
 
     <!--当前主仓库版本号-->
-    <var name="commitId" value="5fec135de3268da65a773c7e7de47ec46c1694d2" type="string"/>
+    <var name="commitId" value="3eb0955614a504d06c78d9891fe08adb68ca7729" type="string"/>
 
     <!--当前 协程 仓库版本号-->
-    <var name="coroutinesCommitId" value="c1ba5af8c5d10a3d2f923f89b98f6ab1b394e24d" type="string"/>
+    <var name="coroutinesCommitId" value="465e29d325841244f3a1aac2e13073bc965f9736" type="string"/>
 
     <!--协程 远程仓库前缀-->
     <var name="coroutinesRemotePrefix" value="https://github.com/Kotlin/kotlinx.coroutines/blob/master" type="string"/>
 
     <!--当前 lincheck 仓库版本号-->
-    <var name="lincheckCommitId" value="f1c24bd39c21307bb5441ed6253fc7295e08b84b" type="string"/>
+    <var name="lincheckCommitId" value="9b0b4ac4c6be461dc2cdac7d653aecfee6e13069" type="string"/>
 
     <!--当前 api-guidelines 仓库版本号-->
-    <var name="apiGuidelinesCommitId" value="e7fd19a8154bcbca06f3faf98391ffbf36777043" type="string"/>
+    <var name="apiGuidelinesCommitId" value="a7285927ab1fe342b568bc8c8f98834330a048aa" type="string"/>
 
     <!--当前 dokka 仓库版本号-->
-    <var name="dokkaCommitId" value="f1ea0c921a2df8c36a8f9fc1572b9cec52e8a553" type="string"/>
+    <var name="dokkaCommitId" value="1554f6efafc0ad099be7fe1d5c55dc9692408327" type="string"/>
 
 
     <!-- Kotlin -->
-    <var name="kotlinVersion" value="2.1.0" type="string"/>
-    <var name="kotlinReleaseDate" value="November 27, 2024" type="string"/>
-    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.1.0" type="string"/>
+    <var name="kotlinVersion" value="2.1.20" type="string"/>
+    <var name="kotlinReleaseDate" value="March 20, 2025" type="string"/>
+    <var name="kotlinLatestUrl" value="https://github.com/JetBrains/kotlin/releases/tag/v2.1.20" type="string"/>
+    <var name="kotlinLatestWhatsnew" value="whatsnew2120.md" type="string"/>
 
     <var name="languageVersion" value="2.1" type="string"/>
     <var name="apiVersion" value="2.1" type="string"/>
 
     <!-- Kotlin EAP -->
-    <var name="kotlinEapVersion" value="2.1.0-RC2" type="string"/>
-    <var name="kotlinEapReleaseDate" value="November 18, 2024" type="string"/>
+    <var name="kotlinEapVersion" value="2.1.20-RC3" type="string"/>
+    <var name="kotlinEapReleaseDate" value="March 14, 2025" type="string"/>
 
     <!-- Libraries and Frameworks -->
-    <var name="coroutinesVersion" value="1.9.0" type="string"/>
-    <var name="coroutinesEapVersion" value="1.9.0-RC.2" type="string"/>
+    <var name="coroutinesVersion" value="1.10.1" type="string"/>
+    <var name="coroutinesEapVersion" value="1.10.1" type="string"/>
 
-    <var name="serializationVersion" value="1.7.3" type="string"/>
+    <var name="serializationVersion" value="1.8.0" type="string"/>
 
     <var name="dateTimeVersion" value="0.6.1" type="string"/>
 
     <var name="lincheckVersion" value="2.34" type="string"/>
 
-    <var name="ktorVersion" value="3.0.1" type="string"/>
+    <var name="ktorVersion" value="3.1.1" type="string"/>
+
+    <var name="lombokVersion" value="8.13" type="string"/>
 
     <var name="sqlDelightVersion" value="2.0.2" type="string"/>
 
     <!-- Gradle, KGP, AGP -->
     <var name="minGradleVersion" value="7.6.3" type="string"/>
-    <var name="maxGradleVersion" value="8.10" type="string"/>
+    <var name="maxGradleVersion" value="8.11" type="string"/>
 
     <var name="minAndroidGradleVersion" value="7.3.1" type="string"/>
     <var name="maxAndroidGradleVersion" value="8.7.2" type="string"/>
@@ -61,8 +64,8 @@
     <var name="gradleApiVersion" value="KOTLIN_2_1" type="string"/>
 
     <!-- KSP -->
-    <var name="kspSupportedKotlinVersion" value="2.1.0" type="string"/>
-    <var name="kspVersion" value="1.0.29" type="string"/>
+    <var name="kspSupportedKotlinVersion" value="2.1.20" type="string"/>
+    <var name="kspVersion" value="1.0.32" type="string"/>
 
     <!-- Other -->
     <var name="defaultJvmTargetVersion" value="1.8" type="string"/>
@@ -72,13 +75,8 @@
     <var name="webpackMajorVersion" value="5" type="string"/>
     <var name="webpackPreviousMajorVersion" value="4" type="string"/>
 
-    <var name="foojayResolver" value="0.5.0" type="string"/>
+    <var name="foojayResolver" value="0.9.0" type="string"/>
     <var name="jctoolsVersion" value="3.3.0" type="string"/>
 
-    <var name="dokkaVersion"
-         value="1.9.20"
-         type="string"/>
-
-    <var name="xcode" value="16.0" type="string"/>
-
+    <var name="dokkaVersion" value="2.0.0" type="string"/>
 </vars>

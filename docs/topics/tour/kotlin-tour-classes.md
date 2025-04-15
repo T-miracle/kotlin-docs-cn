@@ -224,8 +224,6 @@ data class User(val name: String, val id: Int)
 fun main() {
     //sampleStart
     val user = User("Alex", 1)
-    val secondUser = User("Alex", 1)
-    val thirdUser = User("Max", 2)
 
     // 创建 user 的精确副本
     println(user.copy())       

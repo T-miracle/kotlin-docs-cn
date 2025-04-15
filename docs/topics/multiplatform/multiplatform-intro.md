@@ -53,6 +53,17 @@ Kotlin 会自动解析并将适当的平台特定部分添加到其他源代码�
 * [添加对 Android 库的依赖](multiplatform-android-dependencies.md)
 * [添加对 iOS 库的依赖](multiplatform-ios-dependencies.md)
 
+## 设置与 iOS 的集成 {id=set-up-integration-with-ios}
+
+如果你的跨平台项目针对 iOS，你可以将 Kotlin 跨平台共享模块与 iOS 应用进行集成。
+
+为此，你需要生成一个 iOS 框架，然后将其作为本地或远程依赖项添加到 iOS 项目中：
+
+* **本地集成**：通过特殊脚本将跨平台项目与 Xcode 项目直接连接，或者在涉及本地 Pod 依赖项的设置中使用 CocoaPods 依赖管理器。
+* **远程集成**：使用 XCFrameworks 设置 SPM 依赖项，或通过 CocoaPods 分发共享模块。
+
+有关此主题的更多细节，请参见 [iOS 集成方法](multiplatform-ios-integration-overview.md)。
+
 ## 配置编译 {id=configure-compilations}
 
 每个目标可以有多个编译，用于不同的目的，通常是生产或测试，但你也可以定义自定义编译。

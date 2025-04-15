@@ -1,4 +1,5 @@
 <!--- TEST_NAME SharedStateGuideTest -->
+<contribute-url>https://github.com/Kotlin/kotlinx.coroutines/edit/master/docs/topics/</contribute-url>
 
 [//]: # (title: Shared mutable state and concurrency)
 
@@ -67,8 +68,8 @@ fun main() = runBlocking {
 //sampleEnd    
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-sync-01.kt).
+<!--- KNIT example-sync-01.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-sync-01.kt).
 >
 {style="note"}
 
@@ -120,8 +121,8 @@ fun main() = runBlocking {
 //sampleEnd    
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-sync-02.kt).
+<!--- KNIT example-sync-02.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-sync-02.kt).
 >
 {style="note"}
 
@@ -177,8 +178,8 @@ fun main() = runBlocking {
 //sampleEnd    
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-sync-03.kt).
+<!--- KNIT example-sync-03.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-sync-03.kt).
 >
 {style="note"}
 
@@ -236,8 +237,8 @@ fun main() = runBlocking {
 //sampleEnd      
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-sync-04.kt).
+<!--- KNIT example-sync-04.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-sync-04.kt).
 >
 {style="note"}
 
@@ -293,8 +294,8 @@ fun main() = runBlocking {
 //sampleEnd     
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-sync-05.kt).
+<!--- KNIT example-sync-05.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-sync-05.kt).
 >
 {style="note"}
 
@@ -355,8 +356,8 @@ fun main() = runBlocking {
 //sampleEnd    
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-sync-06.kt).
+<!--- KNIT example-sync-06.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-sync-06.kt).
 >
 {style="note"}
 

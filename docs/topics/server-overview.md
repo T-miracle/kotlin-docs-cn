@@ -2,12 +2,12 @@
 
 Kotlin 在开发服务器端应用程序方面表现出色。它允许你编写简洁而富有表现力的代码，同时保持与现有基于 Java 的技术堆栈的完全兼容性，而且学习曲线平缓：
 
-* **表现力**: Kotlin 创新的语言特性，如对 [类型安全构建器](type-safe-builders.md) 和 [委托属性](delegated-properties.md) 的支持，有助于构建强大而易于使用的抽象。
-* **可扩展性**: Kotlin 对 [协程](coroutines-overview.md) 的支持有助于构建规模庞大、对硬件要求不高的服务器端应用程序。
-* **互操作性**: Kotlin 与所有基于 Java 的框架完全兼容，因此你可以在保持对更现代语言的利用的同时，使用熟悉的技术堆栈。
-* **迁移**: Kotlin 支持逐步从 Java 迁移到 Kotlin 的大型代码库。你可以在 Kotlin 中开始编写新代码，同时保留系统中旧部分的 Java 代码。
-* **工具支持**: 除了一般的出色 IDE 支持外，Kotlin 还在 IntelliJ IDEA Ultimate 插件中提供了面向框架的工具支持（例如 Spring）。
-* **学习曲线**: 对于 Java 开发者来说，入门 Kotlin 很容易。Kotlin 插件中包含的自动 Java 到 Kotlin 转换器有助于迈出第一步。[Kotlin Koans](koans.md) 可以通过一系列交互式练习引导你了解语言的关键特性。
+- **表达力**：Kotlin 的创新语言特性，例如其对 [类型安全构建器](type-safe-builders.md) 和 [委托属性](delegated-properties.md) 的支持，有助于构建强大且易于使用的抽象。
+- **可扩展性**：Kotlin 对 [协程](coroutines-overview.md) 的支持，有助于构建能够在硬件资源有限的情况下处理大量客户端的服务端应用程序。
+- **互操作性**：Kotlin 与所有基于 Java 的框架完全兼容，因此你可以在保留熟悉技术栈的同时，享受到更现代语言带来的优势。
+- **迁移能力**：Kotlin 支持从 Java 到 Kotlin 的大型代码库逐步迁移。你可以开始用 Kotlin 编写新代码，同时保留系统中旧有的 Java 部分。
+- **工具支持**：除了广泛的 IDE 支持外，Kotlin 还在 IntelliJ IDEA Ultimate 插件中提供了针对特定框架（例如 Spring 和 Ktor）的专用工具支持。
+- **学习曲线**：对于 Java 开发者来说，入门 Kotlin 十分容易。Kotlin 插件内置的 Java 到 Kotlin 自动转换器能够帮助你迈出第一步。[Kotlin 习题集](koans.md) 通过一系列交互式练习引导你掌握关键语言特性。像 [Ktor](https://ktor.io/) 这样的 Kotlin 专用框架，提供了一种简单直观的方式，避免了大型框架中隐藏的复杂性。
 
 ## 使用 Kotlin 进行服务器端开发的框架
 
@@ -60,11 +60,18 @@ Google Cloud Platform 提供了一系列教程，用于将 Kotlin 应用程序�
 
 [JetBrains Account](https://account.jetbrains.com/) 是 JetBrains 负责整个许可证销售和验证过程的系统，完全使用 Kotlin 编写，自 2015 年以来在生产环境中运行，没有出现重大问题。
 
+[Chess.com](https://www.chess.com/) 是一个专注于国际象棋及全球数百万棋迷的网站。
+Chess.com 使用 Ktor 来无缝配置多个 HTTP 客户端。
+
+[Adobe](https://blog.developer.adobe.com/streamlining-server-side-app-development-with-kotlin-be8cf9d8b61a) 的工程师使用 Kotlin 进行服务端应用开发，并在 Adobe Experience
+Platform 中使用 Ktor 进行原型开发，该平台能够帮助组织集中并标准化客户数据，然后应用数据科学和机器学习。
+
+
 ## 下一步
 
-* 要深入了解这门语言，请查看本站上的 Kotlin 文档和 [Kotlin Koans](koans.md)。
-* 观看关于 ["使用 Kotlin 进行微服务的 Micronaut"](https://micronaut.io/2020/12/03/webinar-micronaut-for-microservices-with-kotlin/) 的网络研讨会，并探索一个详细的 [指南](https://guides.micronaut.io/latest/micronaut-kotlin-extension-fns.html)，展示了如何在 Micronaut 框架中使用 [Kotlin 扩展函数](extensions.md#extension-functions)。
-* http4k 提供 [CLI](https://toolbox.http4k.org) 以生成完整的项目，并提供一个 [starter](https://start.http4k.org) 存储库，使用单个 bash 命令即可生成使用 GitHub、Travis 和 Heroku 的整个 CD 流水线。
-* 想要从 Java 迁移到 Kotlin 吗？学习如何在 [Java 和 Kotlin 中执行典型的字符串任务](java-to-kotlin-idioms-strings.md)。
-
+- 若想更深入了解这门语言，请查看本站上的 Kotlin 文档以及 [Kotlin 习题集](koans.md)。
+- 探索如何 [使用 Ktor 构建异步服务端应用](https://ktor.io/docs/server-create-a-new-project.html)，该框架基于 Kotlin 协程构建。
+- 观看网络研讨会 [“Micronaut for microservices with Kotlin”](https://micronaut.io/2020/12/03/webinar-micronaut-for-microservices-with-kotlin/)，并查看详细的 [指南](https://guides.micronaut.io/latest/micronaut-kotlin-extension-fns.html)，了解如何在 Micronaut 框架中使用 [Kotlin 扩展函数](extensions.md#extension-functions)。
+- http4k 提供了用于生成完整项目的 [命令行工具](https://toolbox.http4k.org)，以及一个 [starter 仓库](https://start.http4k.org)，通过一条 bash 命令即可使用 GitHub、Travis 和 Heroku 构建整个 CD 流水线。
+- 想从 Java 迁移到 Kotlin？学习如何在 Java 与 Kotlin 中执行 [字符串的常见操作](java-to-kotlin-idioms-strings.md)。
 

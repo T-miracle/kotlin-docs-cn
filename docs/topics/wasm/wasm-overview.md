@@ -33,9 +33,8 @@ Wasm 虚拟机中。在浏览器外的使用场景中， [WebAssembly System Int
 
 ![Kotlin/Wasm 示例](wasm-demo.png){width=700}
 
-> 要在浏览器中运行使用 Kotlin/Wasm 构建的应用程序，你需要一个支持新的垃圾回收和异常处理提案的浏览器版本。
-> 要检查浏览器的支持状态，请参见 [WebAssembly
-> 路线图](https://webassembly.org/roadmap/)。
+> 要在浏览器中运行使用 Kotlin/Wasm 构建的应用程序，您需要支持新垃圾回收机制和旧版异常处理提案的浏览器版本。
+> 要检查浏览器支持状态，请参阅 [WebAssembly 路线图](https://webassembly.org/roadmap/)。
 >
 {style="tip"}
 

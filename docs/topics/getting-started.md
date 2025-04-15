@@ -30,10 +30,10 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
    * ![StackOverflow](stackoverflow.svg){width=25}{type="joined"} StackOverflow: 订阅 ["kotlin"](https://stackoverflow.com/questions/tagged/kotlin) 标签。
 
 4. **在以下平台关注 Kotlin：**
-
+   * ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
    * ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)
+   * ![Bluesky](bsky.svg){width=18}{type="joined"} [Bluesky](https://bsky.app/profile/kotlinlang.org)
    * ![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/)
-   * ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
 
 如果遇到任何困难或问题，请在我们的 [问题追踪器](https://youtrack.jetbrains.com/issues/KT) 中报告问题。
 
@@ -45,8 +45,8 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 1. **创建您的第一个后端应用程序：**
 
-   * [使用 Spring Boot 创建一个 RESTful web 服务](jvm-get-started-spring-boot.md)。
-   * [使用 Ktor 创建 HTTP APIs](https://ktor.io/docs/creating-http-apis.html)。
+     * [使用 Spring Boot 创建 RESTful Web 服务](jvm-get-started-spring-boot.md)
+     * [使用 Ktor 创建 HTTP API](https://ktor.io/docs/creating-http-apis.html)
 
 2. **[学习如何在应用程序中混合使用 Kotlin 和 Java 代码](mixing-java-kotlin-intellij.md)。**
 
@@ -57,9 +57,10 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 4. **在以下平台关注 Kotlin：**
 
+   * ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
    * ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)
+   * ![Bluesky](bsky.svg){width=18}{type="joined"} [Bluesky](https://bsky.app/profile/kotlinlang.org)
    * ![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/)
-   * ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
 
 如果遇到任何困难或问题，请在我们的 [问题追踪器](https://youtrack.jetbrains.com/issues/KT) 中报告问题。
 
@@ -73,9 +74,11 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 2. **创建您的第一个 iOS 和 Android 应用程序：**
 
-   * [从零开始使用项目向导创建一个基本的跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)。
-   * [使现有的 Android 应用在 iOS 上运行](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html)。
-   * [使用 Ktor 和 SQLdelight 创建跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)。
+  * 从零开始创建跨平台应用：
+    * [共享业务逻辑，同时保持 UI 原生](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
+    * [共享业务逻辑和 UI](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html)
+  * [使现有 Android 应用支持 iOS](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html)
+  * [使用 Ktor 和 SQLDelight 创建跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-ktor-sqldelight.html)
 
 3. **探索 [示例项目](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-samples.html)**。
 
@@ -86,9 +89,10 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 5. **关注 Kotlin** 在：
 
+   * ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
    * ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)
+   * ![Bluesky](bsky.svg){width=18}{type="joined"} [Bluesky](https://bsky.app/profile/kotlinlang.org)
    * ![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/)
-   * ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
 
 如果遇到任何困难或问题，请在我们的 [问题追踪器](https://youtrack.jetbrains.com/issues/KT) 中报告问题。
 
@@ -100,7 +104,11 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 加入 Android 社区在 ![Slack](slack.svg){width=25}{type="joined"} Slack：[获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)，并加入 [#android](https://kotlinlang.slack.com/archives/C0B8M7BUY) 频道。
 
-关注 Kotlin 在 ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)、![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/)，以及 ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)，不要错过任何重要的生态系统更新。
+关注 Kotlin 官方频道，获取重要生态系统更新：
+![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
+![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)
+![Bluesky](bsky.svg){width=18}{type="joined"} [Bluesky](https://bsky.app/profile/kotlinlang.org)
+![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/)
 
 </tab>
 
@@ -110,22 +118,23 @@ Kotlin 包含在每个 [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 
 1. **在 IDE 中无缝创建和编辑笔记本：**
 
-  * [开始使用 Kotlin Notebook](get-started-with-kotlin-notebooks.md)。
+   * [开始使用 Kotlin Notebook](get-started-with-kotlin-notebooks.md)
 
 2. **探索和实验您的数据：**
 
-  * [DataFrame](https://kotlin.github.io/dataframe/overview.html) – 一个用于数据分析和操作的库。
-  * [Kandy](https://kotlin.github.io/kandy/welcome.html) – 一个用于数据可视化的绘图工具。
+   * [DataFrame](https://kotlin.github.io/dataframe/overview.html) – 一个用于数据分析和操作的库。
+   * [Kandy](https://kotlin.github.io/kandy/welcome.html) – 一个用于数据可视化的绘图工具。
 
 3. **获取 Kotlin 数据分析的最新更新：**
 
-  * ![Slack](slack.svg){width=25}{type="joined"} Slack： [获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) 并加入 [#datascience](https://kotlinlang.slack.com/archives/C4W52CFEZ) 频道。
-  * ![Twitter](twitter.svg){width=18}{type="joined"} Twitter：关注 [KotlinForData](http://twitter.com/KotlinForData)。
+   * ![Slack](slack.svg){width=25}{type="joined"} Slack： [获取邀请](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) 并加入 [#datascience](https://kotlinlang.slack.com/archives/C4W52CFEZ) 频道。
+   * ![Twitter](twitter.svg){width=18}{type="joined"} Twitter：关注 [KotlinForData](http://twitter.com/KotlinForData)。
 
 4. **在以下平台关注 Kotlin：**
+   * ![YouTube](youtube.svg){width=25}{type="joined"} [Youtube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
    * ![Twitter](twitter.svg){width=18}{type="joined"} [Twitter](https://twitter.com/kotlin)
+   * ![Bluesky](bsky.svg){width=18}{type="joined"} [Bluesky](https://bsky.app/profile/kotlinlang.org)
    * ![Reddit](reddit.svg){width=25}{type="joined"} [Reddit](https://www.reddit.com/r/Kotlin/)
-   * ![YouTube](youtube.svg){width=25}{type="joined"} [YouTube](https://www.youtube.com/channel/UCP7uiEZIqci43m22KDl0sNw)
 
 </tab>
 

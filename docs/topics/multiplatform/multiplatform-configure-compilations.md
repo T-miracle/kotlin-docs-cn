@@ -168,8 +168,10 @@ kotlin {
 kotlin {
     jvm {
         val main by compilations.getting {
-            compilerOptions.configure {
-                jvmTarget.set(JvmTarget.JVM_1_8)
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.JVM_1_8)
+                }
             }
         }
     }
@@ -183,8 +185,10 @@ kotlin {
 kotlin {
     jvm {
         compilations.main {
-            compilerOptions.configure {
-                jvmTarget = JvmTarget.JVM_1_8
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget = JvmTarget.JVM_1_8
+                }
             }
         }
     }
@@ -274,33 +278,84 @@ kotlin {
 你还需要在其他情况下创建自定义编译，例如，如果你想将不同
 JVM 版本的编译合并到最终构件中，或者你已经在 Gradle 中设置了源代码集并想迁移到跨平台项目。
 
-## 在 JVM 编译中使用 Java 源代码 {id=use-java-sources-in-jvm-compilations}
+## 为 JVM 编译 {id=compilation-for-jvm}
 
-在使用 [项目向导](https://kmp.jetbrains.com/) 创建项目时，Java 源代码会包含在 JVM 目标的编译中。
+当你在多平台项目中声明 `jvm` 目标时，Kotlin 跨平台插件会自动创建
+Java 源代码集，并将其包含在 JVM 目标的编译中。
 
-在构建脚本中，以下部分应用了 Gradle 的 `java` 插件，并配置了目标以配合它：
+通用源代码集不能包含 Java 资源，因此你应将资源放在多平台项目中对应的子目录下。
+例如：
+
+![Java source files](java-source-paths.png){width=200}
+
+目前，Kotlin 跨平台插件会替换 Java 插件配置的某些任务：
+
+* JAR 任务：不是使用标准的 `jar`，而是使用基于构件名称的目标特定任务，例如，对于 `jvm()` 目标声明是 `jvmJar`，对于 `jvm("desktop")` 是 `desktopJar`。
+* 测试任务：不是使用标准的 `test`，而是使用基于构件名称的目标特定任务，例如 `jvmTest`。
+* 资源处理：不是使用 `*ProcessResources` 任务，而是由对应的编译任务来处理资源。
+
+这些任务在声明目标时会自动创建。不过，你也可以手动定义并配置 JAR 任务（如有需要）：
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
 
 ```kotlin
+// Shared module's `build.gradle.kts` file
+plugins {
+    kotlin("multiplatform") version "%kotlinVersion%"
+}
+
 kotlin {
+    // Specify the JVM target
     jvm {
-        withJava()
+        // Add the task for JAR generation
+        tasks.named<Jar>(artifactsTaskName).configure {
+            // Configure the task
+        }
+    }
+
+    sourceSets {
+        jvmMain {
+            dependencies {
+                // Add JVM-specific dependencies
+            }
+        }
     }
 }
 ```
 
-Java 源文件被放置在 Kotlin 源根目录的子目录中。例如，路径如下：
+</tab>
+<tab title="Groovy" group-key="groovy">
 
-![Java 源文件](java-source-paths.png){width=200}
+```groovy
+// Shared module's `build.gradle` file
+plugins {
+    id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
+}
 
-公共源代码集不能包含 Java 源代码。
+kotlin {
+    // 指定 JVM 目标
+    jvm {
+        // 添加 JAR 生成的任务
+        tasks.named<Jar>(artifactsTaskName).configure {
+            // 配置任务
+        }
+    }
 
-由于当前的限制，Kotlin 插件会替代 Java 插件配置的一些任务：
+    sourceSets {
+        jvmMain {
+            dependencies {
+                // 添加 JVM-specific 依赖
+            }
+        }
+    }
+}
+```
 
-* 目标的 JAR 任务，而不是 `jar`（例如，`jvmJar`）。
-* 目标的测试任务，而不是 `test`（例如，`jvmTest`）。
-* 资源由编译的等效任务处理，而不是 `*ProcessResources` 任务。
+</tab>
+</tabs>
 
-此目标的发布由 Kotlin 插件处理，不需要 Java 插件特有的步骤。
+此目标由 Kotlin 跨平台插件发布，无需执行 Java 插件特有的步骤。
 
 ## 配置与本地语言的互操作性 {id=configure-interop-with-native-languages}
 
@@ -454,14 +509,4 @@ Gradle 提供了[Isolated Projects](https://docs.gradle.org/current/userguide/is
 
 要启用此功能，请按照 Gradle 的说明[设置系统属性](https://docs.gradle.org/current/userguide/isolated_projects.html#how_do_i_use_it)。
 
-如果你想在启用 Gradle 中的 Isolated Projects 之前检查兼容性，可以使用新的 Kotlin Gradle 插件模型来测试你的项目。
-将以下 Gradle 属性添加到 `gradle.properties` 文件中：
-
-```none
-kotlin.kmp.isolated-projects.support=enable
-```
-
-如果你决定稍后启用 Isolated Projects 功能，记得移除此 Gradle 属性。
-Kotlin Gradle 插件会直接应用并管理此 Gradle 属性。
-
-有关 Isolated Projects 功能的更多信息，请参阅[Gradle 的文档](https://docs.gradle.org/current/userguide/isolated_projects.html)。
+有关 Isolated Projects 功能的更多信息，请参阅 [Gradle 的文档](https://docs.gradle.org/current/userguide/isolated_projects.html)。

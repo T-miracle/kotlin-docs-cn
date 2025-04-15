@@ -127,6 +127,69 @@ JetBrains 根据 [Kotlin 语言演进原则](kotlin-evolution-principles.md) 逐
 </td>
 <td>
 
+**kotlin.time.Instant**
+
+* KEEP proposal: [Instant and Clock](https://github.com/dkhalanskyjb/KEEP/blob/dkhalanskyjb-instant/proposals/stdlib/instant.md)
+
+</td>
+</tr>
+
+<tr filter="keep">
+<td>
+
+**KEEP discussion**
+
+</td>
+<td>
+
+**Common Atomics and Atomic Arrays**
+
+* KEEP proposal: [Common atomics](https://github.com/Kotlin/KEEP/blob/mvicsokolova/common-atomics/proposals/common-atomics.md)
+* YouTrack issue: [KT-62423](https://youtrack.jetbrains.com/issue/KT-62423)
+
+</td>
+</tr>
+
+<tr filter="keep">
+<td>
+
+**KEEP discussion**
+
+</td>
+<td>
+
+**Improvements to annotation use-site targets on properties**
+
+* KEEP proposal: [Improvements to annotation use-site targets on properties](https://github.com/Kotlin/KEEP/blob/change-defaulting-rule/proposals/change-defaulting-rule.md)
+* YouTrack issue: [KT-19289](https://youtrack.jetbrains.com/issue/KT-19289)
+
+</td>
+</tr>
+
+<tr filter="keep">
+<td>
+
+**KEEP discussion**
+
+</td>
+<td>
+
+**Nested (non-capturing) type aliases**
+
+* KEEP proposal: [Nested (non-capturing) type aliases](https://github.com/Kotlin/KEEP/blob/nested-typealias/proposals/nested-typealias.md)
+* YouTrack issue: [KT-45285](https://youtrack.jetbrains.com/issue/KT-45285)
+
+</td>
+</tr>
+
+<tr filter="keep">
+<td>
+
+**KEEP discussion**
+
+</td>
+<td>
+
 **Streamline KDoc ambiguity links**
 
 * KEEP proposal: [streamline-KDoc-ambiguity-references.md](https://github.com/Kotlin/KEEP/blob/kdoc/Streamline-KDoc-ambiguity-references/proposals/kdoc/streamline-KDoc-ambiguity-references.md)
@@ -239,79 +302,11 @@ JetBrains 根据 [Kotlin 语言演进原则](kotlin-evolution-principles.md) 逐
 </td>
 <td>
 
-**Guard conditions in when-with-subject**
-
-* KEEP proposal: [guards.md](https://github.com/Kotlin/KEEP/blob/guards/proposals/guards.md)
-* YouTrack issue: [KT-13626](https://youtrack.jetbrains.com/issue/KT-13626)
-* Target version: 2.1.0
-
-</td>
-</tr>
-
-<tr filter="keep">
-<td>
-
-**KEEP discussion**
-
-</td>
-<td>
-
-**Stabilized `@SubclassOptInRequired`**
-
-* KEEP proposal: [subclass-opt-in-required.md](https://github.com/Kotlin/KEEP/blob/master/proposals/subclass-opt-in-required.md)
-* YouTrack issue: [KT-54617](https://youtrack.jetbrains.com/issue/KT-54617)
-* Target version: 2.1.0
-
-</td>
-</tr>
-
-<tr filter="keep">
-<td>
-
-**KEEP discussion**
-
-</td>
-<td>
-
-**Multidollar interpolation: improved handling of `$` in string literals**
-
-* KEEP proposal: [dollar-escape.md](https://github.com/Kotlin/KEEP/blob/master/proposals/dollar-escape.md)
-* YouTrack issue: [KT-2425](https://youtrack.jetbrains.com/issue/KT-2425)
-* Target version: 2.1.0
-
-</td>
-</tr>
-
-<tr filter="keep">
-<td>
-
-**KEEP discussion**
-
-</td>
-<td>
-
-**Non-local `break` and `continue`**
-
-* KEEP proposal: [break-continue-in-inline-lambdas.md](https://github.com/Kotlin/KEEP/blob/master/proposals/break-continue-in-inline-lambdas.md)
-* YouTrack issue: [KT-1436](https://youtrack.jetbrains.com/issue/KT-1436)
-* Target version: 2.1.0
-
-</td>
-</tr>
-
-<tr filter="keep">
-<td>
-
-**KEEP discussion**
-
-</td>
-<td>
-
 **Java synthetic property references**
 
 * KEEP proposal: [references-to-java-synthetic-properties.md](https://github.com/Kotlin/KEEP/blob/master/proposals/references-to-java-synthetic-properties.md)
 * YouTrack issue: [KT-8575](https://youtrack.jetbrains.com/issue/KT-8575)
-* Target version: 2.1.0
+* Target version: 2.2.0
 
 </td>
 </tr>
@@ -320,7 +315,75 @@ JetBrains 根据 [Kotlin 语言演进原则](kotlin-evolution-principles.md) 逐
 
 <!-- IN PREVIEW BLOCK -->
 
+<tr filter="in-preview">
+<td width="200">
+
+**In preview**
+
+</td>
+<td>
+
+**Guard conditions in when-with-subject**
+
+* KEEP proposal: [guards.md](https://github.com/Kotlin/KEEP/blob/guards/proposals/guards.md)
+* YouTrack issue: [KT-13626](https://youtrack.jetbrains.com/issue/KT-13626)
+* Available since: 2.1.0
+
+</td>
+</tr>
+
 <!-- the first td element should have the width="200" attribute -->
+
+<tr filter="stable">
+<td>
+
+**Stable**
+
+</td>
+<td>
+
+**Stabilized `@SubclassOptInRequired`**
+
+* KEEP proposal: [subclass-opt-in-required.md](https://github.com/Kotlin/KEEP/blob/master/proposals/subclass-opt-in-required.md)
+* YouTrack issue: [KT-54617](https://youtrack.jetbrains.com/issue/KT-54617)
+* Available since: 2.1.0
+
+</td>
+</tr>
+
+<tr filter="in-preview">
+<td>
+
+**In preview**
+
+</td>
+<td>
+
+**Multidollar interpolation: improved handling of `$` in string literals**
+
+* KEEP proposal: [dollar-escape.md](https://github.com/Kotlin/KEEP/blob/master/proposals/dollar-escape.md)
+* YouTrack issue: [KT-2425](https://youtrack.jetbrains.com/issue/KT-2425)
+* Available since: 2.1.0
+
+</td>
+</tr>
+
+<tr filter="in-preview">
+<td>
+
+**In preview**
+
+</td>
+<td>
+
+**Non-local `break` and `continue`**
+
+* KEEP proposal: [break-continue-in-inline-lambdas.md](https://github.com/Kotlin/KEEP/blob/master/proposals/break-continue-in-inline-lambdas.md)
+* YouTrack issue: [KT-1436](https://youtrack.jetbrains.com/issue/KT-1436)
+* Available since: 2.1.0
+
+</td>
+</tr>
 
 <!-- END OF IN PREVIEW BLOCK -->
 

@@ -19,7 +19,7 @@ The Kotlin 2.1.0 release is here! Here are the main highlights:
 
 The Kotlin plugins that support 2.1.0 are bundled in the latest IntelliJ IDEA and Android Studio.
 You don't need to update the Kotlin plugin in your IDE.
-All you need to do is [change the Kotlin version](configure-build-for-eap.md) to 2.1.0 in your build scripts.
+All you need to do is change the Kotlin version to 2.1.0 in your build scripts.
 
 See [Update to a new Kotlin version](releases.md#update-to-a-new-kotlin-version) for details.
 
@@ -669,12 +669,29 @@ which you can access from Xcode.
 #### How to enable Swift export
 
 Keep in mind that the feature is currently only in the early stages of development.
-To try it out in your project, add the following Gradle option to your `gradle.properties` file:
 
-```none
-# gradle.properties
-kotlin.experimental.swift-export.enabled=true
-```
+Swift export currently works in projects that use
+[direct integration](multiplatform-direct-integration.md) to connect the iOS framework to the Xcode project.
+This is a standard configuration for Kotlin Multiplatform projects created in Android Studio or through the [web wizard](https://kmp.jetbrains.com/).
+
+To try out Swift export in your project:
+
+1. Add the following Gradle option to your `gradle.properties` file:
+
+   ```none
+   # gradle.properties
+   kotlin.experimental.swift-export.enabled=true
+   ```
+
+2. In Xcode, open the project settings.
+3. On the **Build Phases** tab, locate the **Run Script** phase with the `embedAndSignAppleFrameworkForXcode` task.
+4. Adjust the script to feature the `embedSwiftExportForXcode` task instead in the run script phase:
+
+   ```bash
+   ./gradlew :<Shared module name>:embedSwiftExportForXcode
+   ```
+
+   ![Add the Swift export script](xcode-swift-export-run-script-phase.png){width=700}
 
 #### Leave feedback on Swift export
 
@@ -693,30 +710,31 @@ The Kotlin compiler produces `.klib` artifacts for publishing Kotlin libraries.
 Previously, you could get the necessary artifacts from any host, except for Apple platform targets that required a Mac machine. 
 That put a special restraint on Kotlin Multiplatform projects that targeted iOS, macOS, tvOS, and watchOS targets.
 
-Kotlin 2.1.0 lifts this restriction, achieving full support for cross-compilation.
+Kotlin 2.1.0 lifts this restriction, adding support for cross-compilation.
 Now you can use any host to produce `.klib` artifacts,
 which should greatly simplify the publishing process for Kotlin and Kotlin Multiplatform libraries.
 
-> To build [final binaries](multiplatform-build-native-binaries.md) for Apple targets, you still need to use a Mac machine.
->
-{style="note"}
+#### How to enable publishing libraries from any host
 
-For more information, see [Publishing multiplatform libraries](https://kotlinlang.org/docs/multiplatform-publish-lib.html).
-
-#### How to enable the publishing Kotlin libraries from any host feature
-
-This feature is currently [Experimental](components-stability.md#stability-levels-explained).
-To try it out in your project, add the following binary option to your `gradle.properties` file:
+To try cross-compilation out in your project, add the following binary option to your `gradle.properties` file:
 
 ```none
 # gradle.properties
 kotlin.native.enableKlibsCrossCompilation=true
 ```
 
-#### Leave feedback on the publishing Kotlin libraries from any host feature
+This feature is currently Experimental and has some limitations. You still need to use a Mac machine if:
+
+* Your library has a [cinterop dependency](native-c-interop.md).
+* You have [CocoaPods integration](native-cocoapods.md) set up in your project.
+* You need to build or test [final binaries](multiplatform-build-native-binaries.md) for Apple targets.
+
+#### Leave feedback on publishing libraries from any host
 
 We're planning to stabilize this feature and further improve library publication in future Kotlin releases.
 Please leave your feedback in our issue tracker [YouTrack](https://youtrack.jetbrains.com/issue/KT-71290).
+
+For more information, see [Publishing multiplatform libraries](multiplatform-publish-lib.md).
 
 ### Support for non-packed klibs
 
@@ -1163,7 +1181,7 @@ Learn more about [ES2015 (ECMAScript 2015, ES6) in the official documentation](h
 Kotlin 2.1.0 is fully compatible with Gradle 7.6.3 through 8.6.
 Gradle versions 8.7 to 8.10 are also supported, with only one exception.
 If you use the Kotlin Multiplatform Gradle plugin,
-you may see deprecation warnings in your multiplatform projects calling the [`withJava()` function in the JVM target](multiplatform-dsl-reference.md#jvm-targets).
+you may see deprecation warnings in your multiplatform projects calling the `withJava()` function in the JVM target.
 We plan to fix this issue as soon as possible.
 
 For more information,
@@ -1231,16 +1249,20 @@ You can use the `KotlinAndroidExtension` in exactly the same way.
 
 ### Compiler symbols hidden from the Kotlin Gradle plugin API
 
-Starting with Kotlin 2.1.0,
-you will receive a warning if you access compiler module symbols bundled within the Kotlin Gradle plugin (KGP).
-Previously, the KGP included `org.jetbrains.kotlin:kotlin-compiler-embeddable` in its runtime dependencies,
-making internal compiler symbols, such as `KotlinCompilerVersion`, available in the build script classpath.
+Previously, KGP included `org.jetbrains.kotlin:kotlin-compiler-embeddable` in its runtime dependencies,
+making internal compiler symbols available in the build script classpath.
+These symbols were intended for internal use only.
 
-These symbols are intended for internal use only.
-Access to them will be removed in upcoming Kotlin releases to prevent compatibility issues and simplify KGP maintenance.
-If your build logic relies on any compiler symbols,
-you need to update it and use the [Gradle Workers API](https://docs.gradle.org/current/userguide/worker_api.html)
-with classloader or process isolation to ensure safe interaction with the compiler.
+Starting with Kotlin 2.1.0, KGP bundles a subset of `org.jetbrains.kotlin:kotlin-compiler-embeddable` class files in its JAR file and progressively removes them.
+This change aims to prevent compatibility issues and simplify KGP maintenance.
+
+If other parts of your build logic, such as plugins like `kotlinter`, depend on a different version of `org.jetbrains.kotlin:kotlin-compiler-embeddable`
+than the one bundled with KGP, it can lead to conflicts and runtime exceptions.
+
+To prevent such issues, KGP now shows a warning if `org.jetbrains.kotlin:kotlin-compiler-embeddable` is present in the build classpath alongside KGP.
+
+As a long-term solution, if you're a plugin author using `org.jetbrains.kotlin:kotlin-compiler-embeddable` classes, we recommend running them in an isolated classloader.
+For example, you can achieve it using the [Gradle Workers API](https://docs.gradle.org/current/userguide/worker_api.html) with classloader or process isolation.
 
 #### Using the Gradle Workers API
 

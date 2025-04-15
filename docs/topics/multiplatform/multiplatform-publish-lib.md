@@ -1,49 +1,55 @@
-[//]: # (title: 发布跨平台库)
+[//]: # (title: 设置跨平台库的发布)
 
-你可以使用 [`maven-publish` Gradle 插件](https://docs.gradle.org/current/userguide/publishing_maven.html)
-将一个跨平台库发布到本地 Maven 仓库。在 `shared/build.gradle.kts` 文件中，指定库的 group、version，以及要发布到的
-[repositories（仓库）](https://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven:repositories)。
-该插件会自动创建发布内容。
+你可以将你的跨平台库发布到不同的位置：
 
-```kotlin
-plugins {
-    //...
-    id("maven-publish")
-}
+* [发布到本地 Maven 仓库](#publishing-to-a-local-maven-repository)
+* 发布到 Maven Central 仓库。了解如何设置帐户凭证、定制库元数据，并在 [我们的教程](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html) 中配置发布插件。
+* 发布到 GitHub 仓库。更多信息，请参见 GitHub 的 [GitHub 包](https://docs.github.com/en/packages) 文档。
 
-group = "com.example"
-version = "1.0"
+## 发布到本地 Maven 仓库 {id=publishing-to-a-local-maven-repository}
 
-publishing {
-    repositories {
-        maven {
-            //...
-        }
-    }
-}
-```
+你可以使用 `maven-publish` Gradle 插件将一个跨平台库发布到本地 Maven 仓库：
 
-> 你还可以将一个跨平台库发布到 GitHub 仓库。
-> 更多信息请参见 GitHub 关于 [GitHub packages（GitHub 软件包）](https://docs.github.com/en/packages) 的文档。
->
-{style="tip"}
+1. 在 `shared/build.gradle.kts` 文件中，添加 [`maven-publish` Gradle 插件](https://docs.gradle.org/current/userguide/publishing_maven.html)。
+2. 为库指定 `group` 和 `version`，以及应该发布到的 [repositories](https://docs.gradle.org/current/userguide/publishing_maven.html#publishing_maven:repositories)：
+
+   ```kotlin
+   plugins {
+       // ...
+       id("maven-publish")
+   }
+
+   group = "com.example"
+   version = "1.0"
+
+   publishing {
+       repositories {
+           maven {
+               //...
+           }
+       }
+   }
+   ```
+
+当与 `maven-publish` 一起使用时，Kotlin 插件会自动为每个可以在当前主机上构建的目标创建发布，
+除了 Android 目标，它需要 [额外的步骤来配置发布](#publish-an-android-library)。
 
 ## 发布结构 {id=structure-of-publications}
 
-在使用 `maven-publish` 时，Kotlin 插件会为每个可以在当前主机上构建的目标自动创建发布内容，但 Android 目标除外，
-因为它需要[额外的步骤来配置发布](#publish-an-android-library)。
-
-跨平台库的发布内容中包含一个额外的 _根（root）_ 发布 `kotlinMultiplatform`，
-代表整个库，并在被添加为公共源代码集的依赖项时自动解析为适当的特定平台构件。
-了解更多关于[添加依赖项](multiplatform-add-dependencies.md)。
+当与 `maven-publish` 一起使用时，Kotlin 插件会自动为每个可以在当前主机上构建的目标创建发布，除了 Android 目标，它需要 [额外的步骤来配置发布](#publish-an-android-library)。
+跨平台库的发布包括一个额外的 _root_ 发布 `kotlinMultiplatform`，它代表整个库，并在作为依赖项添加到公共源代码集时，自动解析为适当的特定平台工件。  
+了解更多关于 [添加依赖项](multiplatform-add-dependencies.md) 的信息。
 
 这个 `kotlinMultiplatform` 发布包括元数据构件，并将其他发布作为其变体引用。
 
-> 一些仓库（例如 Maven Central）要求根模块包含一个不带分类符的 JAR 构件，例如 `kotlinMultiplatform-1.0.jar`。  
-> Kotlin 跨平台插件会自动生成包含嵌入式元数据构件的所需构件。  
-> 这意味着你不需要通过向库的根模块添加空构件来定制你的构建以满足仓库的要求。
+一些仓库，例如 Maven Central，要求根模块包含一个没有分类符的 JAR 工件，例如 `kotlinMultiplatform-1.0.jar`。  
+Kotlin 跨平台插件会自动生成所需的工件，并包含嵌入的元数据工件。  
+这意味着你不需要为库的根模块添加一个空的工件来满足仓库的要求。
+
+> Learn more about JAR artifact generation with [Gradle](multiplatform-configure-compilations.md#compilation-for-jvm)
+> and [Maven](maven.md#create-jar-file) build systems.
 >
-{style="note"}
+{style="tip"}
 
 `kotlinMultiplatform` 发布可能还需要源代码和文档构件，如果仓库有这样的要求。
 在这种情况下，可以在发布范围内使用 [`artifact(...)`](https://docs.gradle.org/current/javadoc/org/gradle/api/publish/maven/MavenPublication.html#artifact-java.lang.Object-)
@@ -51,93 +57,39 @@ publishing {
 
 ## 主机要求 {id=host-requirements}
 
-Kotlin/Native 支持交叉编译，允许任何主机生成所需的 `.klib` 工件。
+Kotlin/Native 支持交叉编译，允许任何主机生成必要的 `.klib` 工件。  
+然而，仍然有一些细节需要你注意。
 
-对于具有 Apple 目标的项目，通常需要一台 Apple 机器来生成工件。  
-然而，如果你想使用其他主机，可以在 `gradle.properties` 文件中设置这个
-[实验性](components-stability.md#stability-levels-explained) 选项：
+### 针对 Apple 目标的编译 {id=compilation-for-apple-targets}
+<primary-label ref="experimental-opt-in"/>
+
+要为具有 Apple 目标的项目生成工件，通常需要一台 Apple 机器。  
+然而，如果你想使用其他主机，可以在你的 `gradle.properties` 文件中设置这个选项：
 
 ```none
 kotlin.native.enableKlibsCrossCompilation=true
 ```
 
-> 要为 Apple 目标构建 [最终二进制文件](multiplatform-build-native-binaries.md)，仍然需要使用 Mac 机器。
->
-{style="note"}
+交叉编译目前是实验性的，并且有一些限制。如果：
+
+* 你的库有 [cinterop 依赖](native-c-interop.md)。
+* 你的项目中设置了 [CocoaPods 集成](native-cocoapods.md)。
+* 你需要为 Apple 目标构建或测试 [最终二进制文件](multiplatform-build-native-binaries.md)。
+
+你仍然需要使用一台 Mac 机器。
+
+### 重复发布 {id=duplicating-publications}
 
 为了避免发布过程中的问题，建议从单一主机发布所有工件，以避免在仓库中重复发布。
 例如，Maven Central 明确禁止重复发布，并会导致构建失败。
 <!-- TBD: add the actual error -->
 
-### 如果你使用 Kotlin 1.7.0 或更早版本 {id=if-you-use-kotlin-170-or-earlier collapsible="true" collapsible="true"}
-
-在 1.7.20 之前，Kotlin/Native 编译器不支持所有交叉编译选项。
-如果你使用更早的版本，你可能需要从多个主机发布跨平台项目：
-例如，从 Windows 主机编译 Windows 目标，从 Linux 主机编译 Linux 目标，依此类推。
-这可能会导致模块的重复发布。避免这种情况的最简单方法是升级到更新版本的 Kotlin，并按照上述方式从单一主机发布。
-
-如果无法升级，为每个目标指定一个主要主机，并在 `shared/build.gradle(.kts)` 文件中检查它：
-
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
-
-```kotlin
-kotlin {
-    jvm()
-    js()
-    mingwX64()
-    linuxX64()
-  
-    val publicationsFromMainHost =
-        listOf(jvm(), js()).map { it.name } + "kotlinMultiplatform"
-  
-    publishing {
-        publications {
-            matching { it.name in publicationsFromMainHost }.all {
-                val targetPublication = this@all
-                tasks.withType<AbstractPublishToMaven>()
-                    .matching { it.publication == targetPublication }
-                    .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
-            }
-        }
-    }
-}
-```
-
-</tab>
-<tab title="Groovy" group-key="groovy">
-
-```groovy
-kotlin {
-    jvm()
-    js()
-    mingwX64()
-    linuxX64()
-  
-    def publicationsFromMainHost =
-        [jvm(), js()].collect { it.name } + "kotlinMultiplatform"
-  
-    publishing {
-        publications {
-            matching { it.name in publicationsFromMainHost }.all { targetPublication ->
-                tasks.withType(AbstractPublishToMaven)
-                    .matching { it.publication == targetPublication }
-                    .configureEach { onlyIf { findProperty("isMainHost") == "true" } }
-            }
-        }
-    }
-}
-```
-
-</tab>
-</tabs>
-
 ## 发布一个 Android 库 {id=publish-an-android-library}
 
 要发布一个 Android 库，你需要提供额外的配置。
 
-默认情况下，不会发布 Android 库的任何构件。要发布由一组 [Android 变体](https://developer.android.com/studio/build/build-variants)
-生成的构件，请在 `shared/build.gradle.kts` 文件中的 Android 目标块中指定变体名称：
+默认情况下，Android 库不会发布任何构件。要发布由一组 Android [构建变体](https://developer.android.com/build/build-variants) 生成的工件，  
+请在 `shared/build.gradle.kts` 文件中的 Android 目标块中指定变体名称：
 
 ```kotlin
 kotlin {
@@ -148,7 +100,7 @@ kotlin {
 
 ```
 
-这个示例适用于没有 [产品变种](https://developer.android.com/studio/build/build-variants#product-flavors) 的 Android 库。
+这个示例适用于没有 [产品变种](https://developer.android.com/build/build-variants#product-flavors) 的 Android 库。
 对于带有产品变种的库，变体名称还会包含这些风味，比如 `fooBarDebug` 或 `fooBarRelease`。
 
 默认的发布设置如下：
@@ -229,3 +181,15 @@ kotlin {
 ```none
 kotlin.publishJvmEnvironmentAttribute=false
 ```
+
+## Promote your library
+
+Your library can be featured on the [JetBrains' search platform](https://klibs.io/).
+It's designed to make it easy to look for Kotlin Multiplatform libraries based on their target platforms.
+
+Libraries that meet the criteria are added automatically. For more information on how to add your library, see [FAQ](https://klibs.io/faq).
+
+## What's next
+
+* [Learn how to publish your Kotlin Multiplatform library to the Maven Central repository](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html)
+* [See the Library authors' guidelines for best practices and tips on designing a library for Kotlin Multiplatform](api-guidelines-build-for-multiplatform.md)

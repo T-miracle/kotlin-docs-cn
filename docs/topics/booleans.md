@@ -40,6 +40,6 @@ fun main() {
 * 如果第一个操作数为 `true`，`||` 运算符不会计算第二个操作数。
 * 如果第一个操作数为 `false`，`&&` 运算符不会计算第二个操作数。
 
-> 在 JVM 上，布尔对象的可空引用被封装在 Java 类中，就像 [数字](numbers.md#numbers-representation-on-the-jvm) 一样。
+> 在 JVM 上，布尔对象的可空引用被封装在 Java 类中，就像 [数字](numbers.md#boxing-and-caching-numbers-on-the-java-virtual-machine) 一样。
 >
 {style="note"}

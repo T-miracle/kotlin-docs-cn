@@ -135,27 +135,6 @@ kotlin {
 | `components`        | 用于设置 Gradle 发布的组件。                                                                                                          |
 | `compilerOptions`   | 用于该目标的 [编译器选项](#compiler-options)。此声明将覆盖在 [顶层](multiplatform-dsl-reference.md#top-level-blocks) 配置的任何 `compilerOptions {}`。 |
 
-### JVM 目标 {id=jvm-targets}
-
-除了 [通用目标配置](#common-target-configuration)，`jvm` 目标有一个特定的功能：
-
-| **名称**       | **描述**                    | 
-|--------------|---------------------------|
-| `withJava()` | 将 Java 源代码包含到 JVM 目标的编译中。 |
-
-对于包含 Java 和 Kotlin 源文件的项目，使用此函数。
-请注意，Java 源代码的默认源目录并不遵循 Java 插件的默认设置。相反，它们是从 Kotlin 源代码集派生的。
-例如，如果 JVM 目标的默认名称为 `jvm`，那么路径为 `src/jvmMain/java`（用于生产 Java 源代码）和 `src/jvmTest/java`（用于测试 Java 源代码）。  
-了解更多关于 [JVM 编译中的 Java 源代码](multiplatform-configure-compilations.md#use-java-sources-in-jvm-compilations)。
-
-```kotlin
-kotlin {
-    jvm {
-        withJava()
-    } 
-}
-```
-
 ### Web 目标 {id=web-targets}
 
 `js {}` 块描述 Kotlin/JS 目标的配置，`wasmJs {}` 块描述与 JavaScript 互操作的 Kotlin/Wasm 目标的配置。
@@ -725,9 +704,11 @@ kotlin {
 kotlin {
     jvm {
         val main by compilations.getting {
-            compilerOptions.configure { 
-                // 为 'main' 编译设置 Kotlin 编译器选项：
-                jvmTarget.set(JvmTarget.JVM_1_8)
+            compileTaskProvider.configure {
+                compilerOptions {
+                    // 为 'main' 编译设置 Kotlin 编译器选项：
+                    jvmTarget.set(JvmTarget.JVM_1_8)
+                }
             }
         
             compileKotlinTask // 获取 Kotlin 任务 'compileKotlinJvm' 
@@ -750,9 +731,13 @@ kotlin {
 ```groovy
 kotlin {
     jvm {
-        compilations.main.compilerOptions.configure { 
-            // 为 'main' 编译设置 Kotlin 编译器选项：
-            jvmTarget = JvmTarget.JVM_1_8
+        compilations.main {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    // 为 'main' 编译设置 Kotlin 编译器选项：
+                    jvmTarget = JvmTarget.JVM_1_8
+                }
+            }
         }
 
         compilations.main.compileKotlinTask // 获取 Kotlin 任务 'compileKotlinJvm' 

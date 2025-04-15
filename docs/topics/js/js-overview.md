@@ -25,6 +25,23 @@ Kotlin/JS 提供将您的 Kotlin 代码、Kotlin 标准库和任何兼容的依�
 
 现代 Web 开发在很大程度上受益于简化构建 Web 应用程序的框架。以下是一些由不同作者编写的 Kotlin/JS 的热门 Web 框架示例：
 
+### Kobweb
+
+_Kobweb_ is an opinionated Kotlin framework for creating websites and web apps. It leverages [Compose HTML](https://github.com/JetBrains/compose-multiplatform?tab=readme-ov-file#compose-html) and
+live-reloading for fast development. Inspired by [Next.js](https://nextjs.org/), Kobweb promotes a standard structure for adding widgets, layouts,
+and pages.
+
+Out of the box, Kobweb provides page routing, light/dark mode, CSS styling, Markdown support, backend APIs, and more features.
+It also includes a UI library called Silk, a set of versatile widgets for modern UIs. 
+
+Kobweb also supports site export, generating page snapshots
+for SEO and automatic search indexing. Additionally, Kobweb makes it easy to create DOM-based UIs that efficiently update in response to state changes.
+
+Visit the [Kobweb](https://kobweb.varabyte.com/) site for documentation and examples.
+
+For updates and discussions about the framework, join the [#kobweb](https://kotlinlang.slack.com/archives/C04RTD72RQ8) and
+[#compose-web](https://kotlinlang.slack.com/archives/C01F2HV7868) channels in the Kotlin Slack.
+
 ### KVision
 
 _KVision_ 是一款面向对象的 Web 框架，可以在 Kotlin/JS 中编写具有即用型组件的应用程序，这些组件可以作为应用程序用户界面的构建块使用。

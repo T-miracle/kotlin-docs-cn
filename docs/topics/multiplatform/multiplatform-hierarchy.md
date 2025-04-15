@@ -22,7 +22,7 @@ Kotlin 工具链确保每个源代码集只能访问该源代码集编译的所�
 该模板为一些常见的用例预定义了中间源代码集。  
 插件会根据项目中指定的目标，自动设置这些源代码集。
 
-考虑以下示例：
+考虑项目中包含共享代码模块的以下 `build.gradle(.kts)` 文件：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -63,7 +63,7 @@ kotlin {
 Kotlin Gradle 插件为默认层次结构模板中的所有源代码集提供了类型安全和静态访问器，因此与
 [手动配置](#manual-configuration) 相比，可以在不使用 `by getting` 或 `by creating` 构造的情况下引用它们。
 
-如果在未先声明相应目标的情况下尝试访问源代码集，您将看到一个警告：
+如果您未先声明对应目标就尝试访问共享模块 `build.gradle(.kts)` 文件中的源代码集，将会看到警告：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -142,8 +142,8 @@ Learn more about hierarchy templates: https://kotl.in/hierarchy-template
 
 **问题场景**：你所有的中间源代码集目前都由默认层级模板覆盖。
 
-**解决方案**：移除所有手动的 `dependsOn()` 调用和通过 `by creating` 构造的源代码集。  
-要查看所有默认源代码集的列表，请参见 [完整的层级模板](#see-the-full-hierarchy-template)。
+**解决方案**：在共享模块的 `build.gradle(.kts)` 文件中，移除所有手动 `dependsOn()` 调用和通过
+`by creating` 构造的源代码集。要查看所有默认源代码集的完整列表，请参阅[完整层级结构模板](#see-the-full-hierarchy-template)。
 
 #### 创建额外的源代码集 {id=creating-additional-source-sets}
 
@@ -152,8 +152,8 @@ Learn more about hierarchy templates: https://kotl.in/hierarchy-template
 
 **解决方案**：
 
-1. 通过显式调用 `applyDefaultHierarchyTemplate()` 重新应用模板。
-2. 使用 `dependsOn()` [手动](#manual-configuration) 配置额外的源代码集：
+1. 在共享模块的 `build.gradle(.kts)` 文件中，通过显式调用 `applyDefaultHierarchyTemplate()` 重新应用模板。
+2. 使用 `dependsOn()` [手动配置](#manual-configuration)其他源代码集：
 
     <tabs group="build-script">
     <tab title="Kotlin" group-key="kotlin">
@@ -252,61 +252,61 @@ Learn more about hierarchy templates: https://kotl.in/hierarchy-template
 您可以手动在源代码集结构中引入一个中间源代码集。
 它将保存多个目标的共享代码。
 
-例如，如果您想在本地 Linux、Windows 和 macOS 目标
-(`linuxX64`、`mingwX64` 和 `macosX64`) 之间共享代码，可以按以下步骤操作：
+例如，如果您想在原生 Linux、Windows 和 macOS 目标 (`linuxX64`、`mingwX64` 和 `macosX64`) 之间共享代码，可以按照以下步骤操作：
 
-1. 添加中间源代码集 `desktopMain`，该源代码集保存这些目标的共享逻辑。
-2. 使用 `dependsOn` 关系指定源代码集的层级结构。
+1. 在共享模块的 `build.gradle(.kts)` 文件中，添加中间源代码集 `desktopMain`，它包含这些目标平台的共享逻辑。
+2. 使用 `dependsOn` 关系建立源代码集层次结构。将 `commonMain` 与 `desktopMain` 连接，然后将
+   `desktopMain` 与每个目标源代码集连接起来：
 
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
-
-```kotlin
-kotlin {
-    linuxX64()
-    mingwX64()
-    macosX64()
-
-    sourceSets {
-        val desktopMain by creating {
-            dependsOn(commonMain.get())
-        }
-
-        linuxX64Main.get().dependsOn(desktopMain)
-        mingwX64Main.get().dependsOn(desktopMain)
-        macosX64Main.get().dependsOn(desktopMain)
-    }
-}
-```
-
-</tab>
-<tab title="Groovy" group-key="groovy">
-
-```groovy
-kotlin {
-    linuxX64()
-    mingwX64()
-    macosX64()
-
-    sourceSets {
-        desktopMain {
-            dependsOn(commonMain.get())
-        }
-        linuxX64Main {
-            dependsOn(desktopMain)
-        }
-        mingwX64Main {
-            dependsOn(desktopMain)
-        }
-        macosX64Main {
-            dependsOn(desktopMain)
+    <tabs group="build-script">
+    <tab title="Kotlin" group-key="kotlin">
+    
+    ```kotlin
+    kotlin {
+        linuxX64()
+        mingwX64()
+        macosX64()
+    
+        sourceSets {
+            val desktopMain by creating {
+                dependsOn(commonMain.get())
+            }
+    
+            linuxX64Main.get().dependsOn(desktopMain)
+            mingwX64Main.get().dependsOn(desktopMain)
+            macosX64Main.get().dependsOn(desktopMain)
         }
     }
-}
-```
-
-</tab>
-</tabs>
+    ```
+    
+    </tab>
+    <tab title="Groovy" group-key="groovy">
+    
+    ```groovy
+    kotlin {
+        linuxX64()
+        mingwX64()
+        macosX64()
+    
+        sourceSets {
+            desktopMain {
+                dependsOn(commonMain.get())
+            }
+            linuxX64Main {
+                dependsOn(desktopMain)
+            }
+            mingwX64Main {
+                dependsOn(desktopMain)
+            }
+            macosX64Main {
+                dependsOn(desktopMain)
+            }
+        }
+    }
+    ```
+    
+    </tab>
+    </tabs>
 
 结果层级结构如下所示：
 

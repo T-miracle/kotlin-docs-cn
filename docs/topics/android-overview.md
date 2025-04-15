@@ -20,5 +20,5 @@
 
 要开始使用 Kotlin：
 
-* 进行 Android 开发，请阅读 [使用 Kotlin 开发 Android 应用程序的 Google 文档](https://developer.android.com/kotlin/get-started)。
-* 开发跨平台移动应用程序，请参阅 [开始使用 Kotlin 跨平台 用于 Android 和 iOS](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)。
+* Android 开发，请阅读 [Google 的 Kotlin 开发 Android 应用文档](https://developer.android.com/kotlin/get-started)。
+* 开发跨平台移动应用，请参见 [创建具有共享逻辑和原生 UI 的应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)。

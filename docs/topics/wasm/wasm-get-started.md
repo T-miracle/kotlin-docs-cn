@@ -42,14 +42,14 @@
    >
    {style="note"}
 
-2. 在 **composeApp** | **Tasks** | **kotlin browser** 下，选择并运行 **wasmJsBrowserRun** 任务。
+2. 在 **composeApp** | **Tasks** | **kotlin browser** 下，选择并运行 **wasmJsBrowserDevelopmentRun** 任务。
 
    ![运行 Gradle 任务](wasm-gradle-task-window.png){width=600}
 
    另外，你也可以在 `WasmDemo` 根目录的终端中运行以下命令：
 
    ```bash
-   ./gradlew wasmJsBrowserRun -t
+   ./gradlew wasmJsBrowserDevelopmentRun -t
    ```
 
 3. 应用程序启动后，在浏览器中打开以下 URL：

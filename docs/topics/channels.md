@@ -1,4 +1,5 @@
 <!--- TEST_NAME ChannelsGuideTest -->
+<contribute-url>https://github.com/Kotlin/kotlinx.coroutines/edit/master/docs/topics/</contribute-url>
 
 [//]: # (title: Channels)
 
@@ -30,8 +31,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-01.kt).
+<!--- KNIT example-channel-01.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-01.kt).
 >
 {style="note"}
 
@@ -76,8 +77,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-02.kt).
+<!--- KNIT example-channel-02.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-02.kt).
 >
 {style="note"}
 
@@ -117,8 +118,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-03.kt).
+<!--- KNIT example-channel-03.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-03.kt).
 >
 {style="note"}
 
@@ -181,8 +182,8 @@ fun CoroutineScope.square(numbers: ReceiveChannel<Int>): ReceiveChannel<Int> = p
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-04.kt).
+<!--- KNIT example-channel-04.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-04.kt).
 >
 {style="note"}
 
@@ -225,7 +226,7 @@ fun CoroutineScope.filter(numbers: ReceiveChannel<Int>, prime: Int) = produce<In
 Now we build our pipeline by starting a stream of numbers from 2, taking a prime number from the current channel, 
 and launching new pipeline stage for each prime number found:
  
-```Text
+```
 numbersFrom(2) -> filter(2) -> filter(3) -> filter(5) -> filter(7) ... 
 ```
  
@@ -265,8 +266,8 @@ fun CoroutineScope.filter(numbers: ReceiveChannel<Int>, prime: Int) = produce<In
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-05.kt).
+<!--- KNIT example-channel-05.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-05.kt).
 >
 {style="note"}
 
@@ -359,12 +360,12 @@ fun CoroutineScope.launchProcessor(id: Int, channel: ReceiveChannel<Int>) = laun
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-06.kt).
+<!--- KNIT example-channel-06.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-06.kt).
 >
 {style="note"}
 
-The output will be similar to the the following one, albeit the processor ids that receive
+The output will be similar to the following one, albeit the processor ids that receive
 each specific integer may be different:
 
 ```text
@@ -434,8 +435,8 @@ suspend fun sendString(channel: SendChannel<String>, s: String, time: Long) {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-07.kt).
+<!--- KNIT example-channel-07.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-07.kt).
 >
 {style="note"}
 
@@ -484,8 +485,8 @@ fun main() = runBlocking<Unit> {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-08.kt).
+<!--- KNIT example-channel-08.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-08.kt).
 >
 {style="note"}
 
@@ -537,8 +538,8 @@ suspend fun player(name: String, table: Channel<Ball>) {
 //sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-09.kt).
+<!--- KNIT example-channel-09.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-09.kt).
 >
 {style="note"}
 
@@ -601,8 +602,8 @@ fun main() = runBlocking<Unit> {
 //sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-channel-10.kt).
+<!--- KNIT example-channel-10.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-channel-10.kt).
 >
 {style="note"}
 

@@ -142,13 +142,14 @@ By default, you can find ready-to-use documentation under `{parentProject}/build
 Given a project with the following structure:
 
 ```text
-parentProject
-    └── childProjectA
-        ├── demo
-            ├── ChildProjectAClass
-    └── childProjectB
-        ├── demo
-            ├── ChildProjectBClass
+.
+└── parentProject/
+    ├── childProjectA/
+    │   └── demo/
+    │       └── ChildProjectAClass
+    └── childProjectB/
+        └── demo/
+            └── ChildProjectBClass
 ```
 
 These pages are generated after running `dokkaHtmlMultiModule`:
@@ -179,13 +180,14 @@ build that contains all declarations from the subprojects.
 Given a project with the following structure:
 
 ```text
-parentProject
-    └── childProjectA
-        ├── demo
-            ├── ChildProjectAClass
-    └── childProjectB
-        ├── demo
-            ├── ChildProjectBClass
+.
+└── parentProject/
+    ├── childProjectA/
+    │   └── demo/
+    │       └── ChildProjectAClass
+    └── childProjectB/
+        └── demo/
+            └── ChildProjectBClass
 ```
 
 These pages are generated after running `dokkaHtmlCollector`:
@@ -306,15 +308,15 @@ Multiplatform:
 ```text
 .
 ├── build.gradle.kts
-└── src
-    └── commonMain
-        └── kotlin
-            └── Common.kt
-    └── jvmMain
-        └── kotlin
-            └── JvmUtils.kt
-    └── nativeMain
-        └── kotlin
+└── src/
+    ├── commonMain/
+    │   └── kotlin/
+    │       └── Common.kt
+    ├── jvmMain/
+    │   └── kotlin/
+    │       └── JvmUtils.kt
+    └── nativeMain/
+        └── kotlin/
             └── NativeUtils.kt
 ```
 
@@ -337,15 +339,15 @@ Multiplatform:
 ```text
 .
 ├── build.gradle
-└── src
-    └── commonMain
-        └── kotlin
-            └── Common.kt
-    └── jvmMain
-        └── kotlin
-            └── JvmUtils.kt
-    └── nativeMain
-        └── kotlin
+└── src/
+    ├── commonMain/
+    │   └── kotlin/
+    │       └── Common.kt
+    ├── jvmMain/
+    │   └── kotlin/
+    │       └── JvmUtils.kt
+    └── nativeMain/
+        └── kotlin/
             └── NativeUtils.kt
 ```
 
@@ -479,17 +481,17 @@ typically have the following structure:
 .
 ├── build.gradle.kts
 ├── settings.gradle.kts
-├── subproject-A
-    └── build.gradle.kts
-    └── src
-        └── main
-            └── kotlin
-                └── HelloFromA.kt
-├── subproject-B
-    └── build.gradle.kts
-    └── src
-        └── main
-            └── kotlin
+├── subproject-A/
+│   ├── build.gradle.kts
+│   └── src/
+│       └── main/
+│           └── kotlin/
+│               └── HelloFromA.kt
+└── subproject-B/
+    ├── build.gradle.kts
+    └── src/
+        └── main/
+            └── kotlin/
                 └── HelloFromB.kt
 ```
 
@@ -500,17 +502,17 @@ typically have the following structure:
 .
 ├── build.gradle
 ├── settings.gradle
-├── subproject-A
-    └── build.gradle
-    └── src
-        └── main
-            └── kotlin
-                └── HelloFromA.kt
-├── subproject-B
-    └── build.gradle
-    └── src
-        └── main
-            └── kotlin
+├── subproject-A/
+│   ├── build.gradle
+│   └── src/
+│       └── main/
+│           └── kotlin/
+│               └── HelloFromA.kt
+└── subproject-B/
+    ├── build.gradle
+    └── src/
+        └── main/
+            └── kotlin/
                 └── HelloFromB.kt
 ```
 
@@ -761,7 +763,7 @@ tasks.withType(DokkaTask.class) {
     <def title="suppressObviousFunctions">
         <p>Whether to suppress obvious functions.</p>
         <p>
-            A function is considered to be obvious if it is:
+            A function is considered to be obvious if it is:</p>
             <list>
                 <li>
                     Inherited from <code>kotlin.Any</code>, <code>Kotlin.Enum</code>, <code>java.lang.Object</code> or
@@ -772,7 +774,6 @@ tasks.withType(DokkaTask.class) {
                     <code>dataClass.componentN</code> or <code>dataClass.copy</code>.
                 </li>
             </list>
-        </p>
         <p>Default: <code>true</code></p>
     </def>
     <def title="suppressInheritedMembers">
@@ -1166,13 +1167,12 @@ tasks.withType(DokkaTask.class) {
             is <code>#L10</code>.
         </p>
         <p>
-            Suffixes used by popular services:
+            Suffixes used by popular services:</p>
             <list>
                 <li>GitHub: <code>#L</code></li>
                 <li>GitLab: <code>#L</code></li>
                 <li>Bitbucket: <code>#lines-</code></li>
             </list>
-        </p>
         <p>Default: <code>#L</code></p>
     </def>
 </deflist>
@@ -1438,7 +1438,7 @@ tasks.withType<DokkaTask>().configureEach {
             }
 
             externalDocumentationLink {
-                url.set(URL("https://kotlinlang.org/api/latest/jvm/stdlib/"))
+                url.set(URL("https://kotlinlang.org/api/core/kotlin-stdlib/"))
                 packageListUrl.set(
                     rootProject.projectDir.resolve("stdlib.package.list").toURL()
                 )
@@ -1517,7 +1517,7 @@ tasks.withType(DokkaTask.class) {
             }
 
             externalDocumentationLink {
-                url.set(new URL("https://kotlinlang.org/api/latest/jvm/stdlib/"))
+                url.set(new URL("https://kotlinlang.org/api/core/kotlin-stdlib/"))
                 packageListUrl.set(
                         file("stdlib.package.list").toURL()
                 )

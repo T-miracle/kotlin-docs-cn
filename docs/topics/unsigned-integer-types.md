@@ -42,25 +42,25 @@
 
 ## 无符号整数字面常量
 
-为了使无符号整数更容易使用，Kotlin 提供了一种方法，可以使用后缀标记整数字面常量，指示特定的无符号类型（类似于 `Float` 或 `Long`）：
+为了使无符号整数更易于使用，你可以为整数字面量添加后缀来指定特定的无符号类型（类似于 `F` 表示 `Float` 或 `L` 表示 `Long`）：
 
-* `u` 和 `U` 标签用于无符号字面常量。确切的类型取决于期望的类型。
-  如果没有提供期望的类型，编译器将根据字面常量的大小使用 `UInt` 或 `ULong`。
+* `u` 和 `U` 表示无符号字面量，但不指定具体类型。  
+  如果没有提供预期类型，编译器会根据字面量的大小选择 `UInt` 或 `ULong`：
 
-  ```kotlin
-  val b: UByte = 1u  // UByte, 已提供的预期类型
-  val s: UShort = 1u // UShort, 已提供的预期类型
-  val l: ULong = 1u  // ULong, 已提供的预期类型
+    ```kotlin
+    val b: UByte = 1u  // UByte，提供了预期类型  
+    val s: UShort = 1u // UShort，提供了预期类型  
+    val l: ULong = 1u  // ULong，提供了预期类型  
   
-  val a1 = 42u // UInt: 未提供预期类型，常量适合 UInt
-  val a2 = 0xFFFF_FFFF_FFFFu // ULong: 未提供预期类型，常量不适合 UInt
-  ```
+    val a1 = 42u // UInt：未提供预期类型，常量适合 UInt  
+    val a2 = 0xFFFF_FFFF_FFFFu // ULong：未提供预期类型，常量超出 UInt 范围  
+    ```  
 
-* `uL` 和 `UL` 明确将字面常量标记为无符号长整数：
+* `uL` 和 `UL` 显式指定字面量为无符号长整型：
 
-  ```kotlin
-  val a = 1UL // ULong，即使没有提供期望的类型，常量仍然适合 UInt
-  ```
+    ```kotlin
+    val a = 1UL // ULong，即使未提供预期类型且常量适合 UInt  
+    ```
 
 ## 使用案例
 

@@ -28,9 +28,10 @@
 
 ## 如何设置 {id=how-to-set-up}
 
-如果你当前正在使用 CocoaPods 插件连接你的 Kotlin 框架，请首先进行迁移。
+如果您当前正在使用 CocoaPods 插件来连接您的 Kotlin 框架，请先进行迁移。  
+如果您的项目没有 CocoaPods 依赖项，请[跳过此步骤](#connect-the-framework-to-your-project)。
 
-### 从 CocoaPods 插件迁移到直接集成 {initial-collapse-state="collapsed" collapsible="true"}
+### 从 CocoaPods 插件迁移 {id=migrate-from-the-cocoapods-plugin}
 
 要从 CocoaPods 插件迁移：
 
@@ -76,10 +77,10 @@
 
    ![禁用脚本沙箱](disable-sandboxing-in-xcode-project-settings.png){width=700}
 
-   > 如果你在没有首先禁用沙箱的情况下构建了 iOS 项目，这可能需要重新启动 Gradle 守护进程。
-   > 停止可能已被沙箱化的 Gradle 守护进程：
-   > ```shell  
-   > ./gradlew --stop  
+   > 如果您在未先禁用沙盒的情况下构建了 iOS 项目，则可能需要重启 Gradle 守护进程。  
+   > 停止可能已被沙盒化的 Gradle 守护进程：
+   > ```shell
+   > ./gradlew --stop
    > ```
    >
    > {style="tip"}

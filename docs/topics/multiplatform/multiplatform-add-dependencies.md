@@ -91,8 +91,8 @@ kotlin {
 
 ### kotlinx 库 {id=kotlinx-libraries}
 
-如果你使用多平台库并且需要 [依赖共享代码](#library-shared-for-all-source-sets)，只需在共享源代码集中设置一次依赖。
-使用库的基础构件名称，例如 `kotlinx-coroutines-core`。
+如果你使用跨平台库并需要[依赖共享代码](#library-shared-for-all-source-sets)，只需在共享源代码集中设置一次依赖。
+使用库的基础构件名称，例如 `kotlinx-coroutines-core`：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -125,9 +125,8 @@ kotlin {
 </tab>
 </tabs>
 
-如果你使用 kotlinx 库并且需要 [特定平台依赖](#library-used-in-specific-source-sets)，
-可以使用带有后缀如 `-jvm` 或 `-js` 的平台特定库变体，
-例如 `kotlinx-coroutines-core-jvm`。
+如果你需要为[平台特定依赖](#library-used-in-specific-source-sets)添加 kotlinx 库，  
+仍然可以在对应平台源代码集中使用该库的基础构件名称：
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -136,7 +135,7 @@ kotlin {
 kotlin {
     sourceSets {
         jvmMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:%coroutinesVersion%")
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
         }
     }
 }
@@ -150,7 +149,7 @@ kotlin {
     sourceSets {
         jvmMain {
             dependencies {
-                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:%coroutinesVersion%'
+                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%'
             }
         }
     }
@@ -166,7 +165,9 @@ kotlin {
 [SQLDelight](https://github.com/cashapp/sqldelight)。
 这些库的作者通常会提供将其依赖项添加到项目中的指南。
 
-查看这个 [社区维护的 Kotlin 跨平台库列表](https://libs.kmp.icerock.dev/)。
+> 在 [JetBrains 搜索平台](https://klibs.io/) 上查找 Kotlin 跨平台 库。
+>
+{style="tip"}
 
 ### 共享给所有源代码集的库 {id=library-shared-for-all-source-sets}
 

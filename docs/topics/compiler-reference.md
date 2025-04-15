@@ -138,7 +138,7 @@ fully qualified name.
 
 ### -Xsuppress-warning
 
-Suppresses specific warnings [globally across the whole project](whatsnew-eap.md), for example:
+Suppresses specific warnings [globally across the whole project](whatsnew21.md#global-warning-suppression), for example:
 
 ```bash
 kotlinc -Xsuppress-warning=NOTHING_TO_INLINE -Xsuppress-warning=NO_TAIL_CALLS_FOUND main.kt
@@ -216,6 +216,10 @@ The Kotlin compiler for JS compiles Kotlin source files into JavaScript code.
 The command-line tool for Kotlin to JS compilation is `kotlinc-js`.
 
 In addition to the [common options](#common-options), Kotlin/JS compiler has the options listed below.
+
+### -target {es5|es2015}
+
+Generate JS files for the specified ECMA version.
 
 ### -libraries _path_
 
@@ -341,7 +345,7 @@ Include the native bitcode library.
 
 ### -no-default-libs
 
-Disable linking user code with the [default platform libraries](native-platform-libs.md) distributed with the compiler.
+Disable linking user code with the prebuilt [platform libraries](native-platform-libs.md) distributed with the compiler.
 
 ### -nomain
 

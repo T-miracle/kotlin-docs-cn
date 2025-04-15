@@ -234,7 +234,40 @@ html {
 }
 ```
 
-## `com.example.html` 包的完整定义 {id=full-definition-of-the-com-example-html-package}
+您也可以直接将 `@DslMarker` 注解应用于[函数类型](lambdas.md#function-types)。  
+只需为 `@DslMarker` 注解添加 `@Target(AnnotationTarget.TYPE)` 注解目标：
+
+```kotlin
+@Target(AnnotationTarget.TYPE)
+@DslMarker
+annotation class HtmlTagMarker
+```
+
+这样，`@DslMarker` 注解就可以应用于函数类型，最常见的是带接收者的 lambda 表达式。例如：
+
+```kotlin
+fun html(init: @HtmlTagMarker HTML.() -> Unit): HTML { ... }
+
+fun HTML.head(init: @HtmlTagMarker Head.() -> Unit): Head { ... }
+
+fun Head.title(init: @HtmlTagMarker Title.() -> Unit): Title { ... }
+```
+
+当您调用这些函数时，`@DslMarker` 注解会限制在被标记的 lambda 表达式体内对外部接收者的访问，除非显式指定：
+
+```kotlin
+html {
+    head {
+        title {
+            // 这里对外部接收者（title、head 或其他函数）的访问受到限制
+        }
+    }
+}
+```
+
+在 lambda 表达式内部，只有最近接收者的成员和扩展是可访问的，这可以防止嵌套作用域之间的意外交互。
+
+### com.example.html 包的完整定义 {id=full-definition-of-the-comexamplehtml-package}
 
 这是 `com.example.html` 包的定义（仅包含上述示例中使用的元素）。
 它构建了一个 HTML 树。
@@ -337,4 +370,3 @@ fun html(init: HTML.() -> Unit): HTML {
     return html
 }
 ```
-

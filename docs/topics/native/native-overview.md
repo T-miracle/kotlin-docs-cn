@@ -40,18 +40,18 @@ Kotlin/Native 支持互操作性，可以直接从 Kotlin/Native 中使用现有
 也可以轻松使用现有的本地代码、静态或动态的 [C 库](native-c-interop.md)、
 Swift/Objective-C [框架](native-objc-interop.md)、图形引擎以及其他任何内容直接从 Kotlin/Native 中使用。
 
-Kotlin/Native [库](native-platform-libs.md) 有助于在项目之间共享 Kotlin 代码。
-POSIX、gzip、OpenGL、Metal、Foundation 等许多热门库和 Apple 框架都已作为 Kotlin/Native 库预导入并包含在编译器包中。
+Kotlin/Native [平台库](native-platform-libs.md) 帮助你在项目之间共享 Kotlin 代码。  
+POSIX、gzip、OpenGL、Metal、Foundation 以及许多其他流行的库和 Apple 框架已经预先导入，并作为 Kotlin/Native 库包含在编译器包中。
 
 ## 在平台之间共享代码
 
 [Kotlin Multiplatform](multiplatform-intro.md) 有助于在多个平台之间共享通用代码，包括 Android、iOS、JVM、
 Web 和本地。跨平台库提供了通用 Kotlin 代码所需的 API，并允许在一个地方编写项目的共享部分。
 
-您可以通过 [创建您的第一个跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
-教程来创建应用程序并在 iOS 和 Android 之间共享业务逻辑。要在 iOS、Android、桌面和 Web 之间共享 UI，请完成
-[Compose Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html)
-的教程，这是 JetBrains 基于 Kotlin 和 [Jetpack Compose](https://developer.android.com/jetpack/compose) 的声明式 UI 框架。
+你可以使用 [创建你的 Kotlin 跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html) 教程
+来创建应用并在 iOS 和 Android 之间共享业务逻辑。  
+要在 iOS、Android、桌面和 Web 之间共享 UI，请完成 [Compose Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html) 的教程，
+它是 JetBrains 基于 Kotlin 和 [Jetpack Compose](https://developer.android.com/jetpack/compose) 的声明式 UI 框架。
 
 ## 如何开始
 
@@ -66,7 +66,7 @@ Web 和本地。跨平台库提供了通用 Kotlin 代码所需的 API，并允�
 推荐的教程：
 
 * [开始使用 Kotlin/Native](native-get-started.md)
-* [创建您的第一个跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
+* [创建你的 Kotlin 跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
 * [从 C 映射原始数据类型](mapping-primitive-data-types-from-c.md)
 * [Kotlin/Native 作为动态库](native-dynamic-libraries.md)
 * [Kotlin/Native 作为 Apple 框架](apple-framework.md)

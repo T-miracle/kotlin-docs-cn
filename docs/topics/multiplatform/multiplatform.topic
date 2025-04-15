@@ -41,10 +41,10 @@
                 <group>
                     <title>工具</title>
                     <a href="https://kmp.jetbrains.com/" summary="快速创建并下载跨平台项目模板">新建项目向导</a>
-                    <a href="https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform" summary="Android Studio 插件，用于开发 Android 和 iOS 应用">Android Studio 插件</a>
-                    <a href="https://www.jetbrains.com/lp/compose-multiplatform/" summary="JetBrains 开发的基于 Kotlin 的声明式 UI 框架">Compose 跨平台 UI 框架</a>
-                    <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/fleet.html" summary="使用 Fleet 进行跨平台开发">Fleet 代码编辑器</a>
-                    <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/amper.html" summary="使用 Amper 配置项目">Amper 配置工具</a>
+                    <a href="https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform" summary="用于在 Android 和 iOS 上开发应用程序的 Android Studio 插件">Android Studio 插件</a>
+                    <a href="https://www.jetbrains.com/lp/compose-multiplatform/" summary="由 JetBrains 开发的基于 Kotlin 的声明式 UI 框架">Compose 跨平台 UI 框架</a>
+                    <a href="https://klibs.io/" summary="由 JetBrains 开发的 Kotlin Multiplatform 库的实验性搜索平台">库搜索平台</a>
+                    <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/amper.html" summary="使用 Amper 进行项目配置">Amper 配置工具</a>
                 </group>
                 <group>
                     <title>社区与帮助</title>

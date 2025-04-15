@@ -134,17 +134,17 @@ Kotlin 跨平台网页向导或 Android Studio 的 Kotlin 跨平台插件。
    alias(libs.plugins.kotlinCocoapods)
    ```  
 
-现在，你已经准备好在 Kotlin 跨平台项目中使用 CocoaPods 了。
+Now you are ready to [configure CocoaPods in your Kotlin Multiplatform project](#configure-the-project).
 
 ### 在 Android Studio 中 {id=in-android-studio}
 
 要在 Android Studio 中创建具有 CocoaPods 集成的项目：
 
-1. 安装 [Kotlin Multiplatform 插件](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) 到 Android Studio。
-2. 在 Android Studio 的菜单中选择 **File** | **New** | **New Project**。
-3. 在项目模板列表中选择 **Kotlin Multiplatform App**，然后点击 **Next**。
-4. 为你的应用命名并点击 **Next**。
-5. 选择 **CocoaPods Dependency Manager** 作为 iOS 框架的分发选项。
+1. 为 Android Studio 安装 [Kotlin 跨平台插件](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
+2. 在 Android Studio 中，选择菜单栏的 **File** | **New** | **New Project**
+3. 在项目模板列表中，选择 **Kotlin 跨平台应用** 然后点击 **Next**
+4. 为您的应用程序命名并点击 **Next**
+5. 选择 **CocoaPods 依赖管理器** 作为 iOS 框架分发选项
 
    ![Android Studio 向导中的 Kotlin 跨平台插件](as-project-wizard.png){width=700}
 
@@ -152,12 +152,17 @@ Kotlin 跨平台网页向导或 Android Studio 的 Kotlin 跨平台插件。
 
    插件会自动生成已配置好 CocoaPods 集成的项目。
 
-## 配置现有项目 {id=configure-existing-project}
+## 配置项目 {id=configure-the-project}
 
-如果你已经有一个项目，可以手动添加并配置 Kotlin CocoaPods Gradle 插件：
+要在跨平台项目中配置 Kotlin CocoaPods Gradle 插件：
 
-1. 在你的项目的 `build.gradle(.kts)` 文件中，应用 CocoaPods 插件以及 Kotlin 跨平台插件：
+1. 在项目的 `build.gradle(.kts)` 文件中，同时应用 CocoaPods 插件和 Kotlin 跨平台插件。
 
+   > 如果您是使用 [Web 向导](#using-web-wizard) 或
+   > [Android Studio 的 Kotlin 跨平台插件](#in-android-studio) 创建的项目，请跳过此步骤。
+   >
+   {style="note"}
+    
     ```kotlin
     plugins {
         kotlin("multiplatform") version "%kotlinVersion%"
@@ -176,7 +181,8 @@ Kotlin 跨平台网页向导或 Android Studio 的 Kotlin 跨平台插件。
     kotlin {
         cocoapods {
             // 必需属性
-            // 在这里指定所需的 Pod 版本。如果没有指定，将使用 Gradle 项目的版本。
+            // 在此处指定所需的 Pod 版本
+            // 否则将使用 Gradle 项目版本
             version = "1.0"
             summary = "Kotlin/Native 模块的描述"
             homepage = "Kotlin/Native 模块主页的链接"
@@ -307,12 +313,12 @@ Ruby 1.9 或更高版本内置了 RubyGems 包管理框架，帮助你安装 [Co
 
 #### 指定框架名称 {id=specify-the-framework-name}
 
-1. 查看下载的 Pod 目录 `[shared_module_name]/build/cocoapods/synthetic/IOS/Pods/...` 中的 `module.modulemap` 文件。
-2. 检查模块中的框架名称，例如 `AppsFlyerLib {}`。如果框架名称与 Pod 名称不匹配，请显式指定：
+1. 在下载的 Pod 目录 `[shared_module_name]/build/cocoapods/synthetic/IOS/Pods/...` 中查找 `module.modulemap` 文件
+2. 检查模块内的框架名称，例如 `SDWebImageMapKit {}`。如果框架名称与 Pod 名称不匹配，请显式指定：
 
     ```kotlin
-    pod("FirebaseAuth") {
-        moduleName = "AppsFlyerLib"
+    pod("SDWebImage/MapKit") {
+        moduleName = "SDWebImageMapKit"
     }
     ```
 #### 指定头文件 {id=specify-headers}

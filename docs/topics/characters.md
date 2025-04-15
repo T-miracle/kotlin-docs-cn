@@ -37,7 +37,7 @@ fun main() {
 如果字符变量的值是数字，你可以使用
 [`digitToInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/digit-to-int.html) 函数将其明确转换为 `Int` 数字。
 
-> 在 JVM 上，当需要一个可空引用时，字符会像 [数字](numbers.md#numbers-representation-on-the-jvm) 一样在 Java 类中装箱。
-> 装箱操作不保持对象的同一性。
+> 在 JVM 上，当需要可空引用时，字符会被装箱到 Java 类中，这与[数字](numbers.md#boxing-and-caching-numbers-on-the-java-virtual-machine)的情况类似。
+> 装箱操作不会保留身份标识。
 >
 {style="note"}

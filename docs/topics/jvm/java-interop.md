@@ -294,13 +294,12 @@ class BaseWithBound<T : Number> {}
 
 将可空类型作为类型实参或类型形参传递会产生警告。
 
-为类型实参和类型形参添加注解适用于 Java 8 及更高版本。
-此功能要求空值注解支持 `TYPE_USE` 目标（`org.jetbrains.annotations` 在 15 及更高版本中支持此目标）。
-使用 `-Xtype-enhancement-improvements-strict-mode` 编译器选项可以报告使用与 Java 的空值注解不符的 Kotlin 代码中的错误。
+对类型实参和类型形参的注解需要 Java 8 或更高版本目标平台。
+该功能要求可空性注解支持 `TYPE_USE` 目标（`org.jetbrains.annotations` 在 15 及以上版本支持此特性）。
 
-> 注意：如果一个空值注解支持其他适用于类型的目标，除了 `TYPE_USE` 目标，则 `TYPE_USE` 优先。
-> 例如，如果 `@Nullable` 同时具有 `TYPE_USE` 和 `METHOD` 目标，则 Java 方法
-> 签名 `@Nullable String[] f()` 在 Kotlin 中变为 `fun f(): Array<String?>!`。
+> 如果一个可空性注解除了支持 `TYPE_USE` 目标外还支持其他适用于类型的注解目标，则优先采用 `TYPE_USE` 目标。
+> 例如，如果 `@Nullable` 同时具有 `TYPE_USE` 和 `METHOD` 目标，Java 方法签名
+> `@Nullable String[] f()` 在 Kotlin 中会变成 `fun f(): Array<String?>!`
 >
 {style="note"}
 

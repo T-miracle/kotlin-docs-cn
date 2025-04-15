@@ -104,6 +104,7 @@ kotlin {
 ```kotlin
 kotlin {
     cocoapods {
+        version = "2.0"
         framework {
             baseName = "MyFramework"
             isStatic = false
@@ -120,28 +121,29 @@ kotlin {
 
 你可以在函数参数中指定 Pod 库的名称，并在其配置代码块中指定其他参数值，例如库的 `version` 和 `source`：
 
-| **名称**                       | **描述**                                                                                                                                                     | 
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `version`                    | 库的版本。要使用库的最新版本，请省略此参数。                                                                                                                                     |
-| `source`                     | 配置 Pod 的来源：<list><li>使用 `git()` 从 Git 仓库获取。在 `git()` 后的代码块中，可以指定 `commit` 以使用特定提交，`tag` 以使用特定标签，`branch` 以使用仓库中的特定分支</li><li>使用 `path()` 从本地仓库获取</li></list> |
-| `packageName`                | 指定包名称。                                                                                                                                                     |
-| `extraOpts`                  | 指定 Pod 库的选项列表。例如，特定标志：<code-block lang="Kotlin">extraOpts = listOf("-compiler-option")</code-block>                                                        |
-| `linkOnly`                   | 指示 CocoaPods 插件使用动态框架的 Pod 依赖项，而不生成 cinterop 绑定。如果与静态框架一起使用，此选项将完全移除 Pod 依赖项。                                                                              |
-| `interopBindingDependencies` | 包含对其他 Pod 的依赖项列表。此列表用于为新 Pod 构建 Kotlin 绑定时使用。                                                                                                              |
-| `useInteropBindingFrom()`    | 指定现有 Pod 的名称，该 Pod 用作依赖项。此 Pod 应在函数执行之前声明。该函数指示 CocoaPods 插件在为新 Pod 构建绑定时使用现有 Pod 的 Kotlin 绑定。                                                             |
+| **名称**                       | **描述**                                                                                                                                         | 
+|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| `version`                    | 库版本号。如需使用最新版本库，可省略此参数。                                                                                                                         |
+| `source`                     | 配置 Pod 来源：<list><li>使用 `git()` 指定 Git 仓库。在 `git()` 代码块后可指定 `commit` 使用特定提交、`tag` 使用特定标签、`branch` 使用特定分支</li><li>使用 `path()` 指定本地仓库</li></list> |
+| `packageName`                | 指定包名称。                                                                                                                                         |
+| `extraOpts`                  | 指定 Pod 库的选项列表。例如特定标志：<code-block lang="Kotlin">extraOpts = listOf("-compiler-option")</code-block>                                             |
+| `linkOnly`                   | 指示 CocoaPods 插件仅使用动态框架的 Pod 依赖而不生成 cinterop 绑定。若与静态框架一起使用，该选项将完全移除 Pod 依赖。                                                                     |
+| `interopBindingDependencies` | 包含其他 Pod 的依赖列表。在为新 Pod 构建 Kotlin 绑定时会使用此列表。                                                                                                    |
+| `useInteropBindingFrom()`    | 指定现有 Pod 的名称作为依赖项（该 Pod 需在函数执行前声明）。该函数指示 CocoaPods 插件在为新的 Pod 构建绑定时使用现有 Pod 的 Kotlin 绑定。                                                       |
 
 ```kotlin
 kotlin {
     iosArm64()
-   
+    
     cocoapods {
+        version = "2.0"
         summary = "CocoaPods test library"
         homepage = "https://github.com/JetBrains/kotlin"
-
-        iosArm64.deploymentTarget = "13.5"
+        ios.deploymentTarget = "16.0"
       
         pod("pod_dependency") {
             version = "1.0"
+            extraOpts += listOf("-compiler-option")
             linkOnly = true
             source = path(project.file("../pod_dependency"))
         }

@@ -1,4 +1,5 @@
 <!--- TEST_NAME BasicsGuideTest -->
+<contribute-url>https://github.com/Kotlin/kotlinx.coroutines/edit/master/docs/topics/</contribute-url>
 
 [//]: # (title: Coroutines basics)
 
@@ -29,8 +30,8 @@ fun main() = runBlocking { // this: CoroutineScope
 //sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-basic-01.kt).
+<!--- KNIT example-basic-01.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-basic-01.kt).
 >
 {style="note"}
 
@@ -59,7 +60,7 @@ the code with coroutines inside of `runBlocking { ... }` curly braces. This is h
 If you remove or forget `runBlocking` in this code, you'll get an error on the [launch] call, since `launch`
 is declared only on the [CoroutineScope]:
 
-```Text
+```
 Unresolved reference: launch
 ```
 
@@ -104,8 +105,8 @@ suspend fun doWorld() {
 //sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-basic-02.kt).
+<!--- KNIT example-basic-02.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-basic-02.kt).
 >
 {style="note"}
 
@@ -145,8 +146,8 @@ suspend fun doWorld() = coroutineScope {  // this: CoroutineScope
 //sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-basic-03.kt).
+<!--- KNIT example-basic-03.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-basic-03.kt).
 >
 {style="note"}
 
@@ -189,8 +190,8 @@ suspend fun doWorld() = coroutineScope { // this: CoroutineScope
 //sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-basic-04.kt).
+<!--- KNIT example-basic-04.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-basic-04.kt).
 >
 {style="note"}
 
@@ -211,8 +212,8 @@ Done
 ## An explicit job
 
 A [launch] coroutine builder returns a [Job] object that is a handle to the launched coroutine and can be 
-used to explicitly wait for its completion. For example, you can wait for completion of the child coroutine
-and then print "Done" string:
+used to wait for its completion explicitly.
+For example, you can wait for the completion of the child coroutine and then print the "Done" string:
 
 ```kotlin
 import kotlinx.coroutines.*
@@ -230,8 +231,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-basic-05.kt).
+<!--- KNIT example-basic-05.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-basic-05.kt).
 >
 {style="note"}
 
@@ -266,8 +267,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-basic-06.kt).
+<!--- KNIT example-basic-06.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-basic-06.kt).
 >
 {style="note"}
 

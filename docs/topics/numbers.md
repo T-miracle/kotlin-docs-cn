@@ -2,19 +2,27 @@
 
 ## 整数类型 {id=整数类型}
 
-Kotlin 提供了一组内置类型来表示数字。对于整数，有四种类型，它们具有不同的大小，因此值的范围也不同：
+Kotlin 提供了一组内置类型来表示数字。  
+对于整数类型，有四种不同大小和值范围的类型：
 
-| 类型      | 大小（位） | 最小值                                          | 最大值                                            |
-|---------|-------|----------------------------------------------|------------------------------------------------|
-| `Byte`  | 8     | -128                                         | 127                                            |
-| `Short` | 16    | -32768                                       | 32767                                          |
-| `Int`   | 32    | -2,147,483,648 (-2<sup>31</sup>)             | 2,147,483,647 (2<sup>31</sup> - 1)             |
-| `Long`  | 64    | -9,223,372,036,854,775,808 (-2<sup>63</sup>) | 9,223,372,036,854,775,807 (2<sup>63</sup> - 1) |
+| 类型      | 大小(比特) | 最小值                                          | 最大值                                            |
+|---------|--------|----------------------------------------------|------------------------------------------------|
+| `Byte`  | 8      | -128                                         | 127                                            |
+| `Short` | 16     | -32768                                       | 32767                                          |
+| `Int`   | 32     | -2,147,483,648 (-2<sup>31</sup>)             | 2,147,483,647 (2<sup>31</sup> - 1)             |
+| `Long`  | 64     | -9,223,372,036,854,775,808 (-2<sup>63</sup>) | 9,223,372,036,854,775,807 (2<sup>63</sup> - 1) |
 
-当你初始化一个没有指定显式类型的变量时，编译器会自动推断类型，该类型从 `Int` 开始推断，直到找到符合值范围的类型。
-如果不超过 `Int` 的范围，类型为 `Int`。
-如果超过范围，则类型为 `Long`。要明确指定 `Long` 值，请将后缀 `L` 追加到值。
-显式类型规定会触发编译器检查值是否超过指定类型的范围。
+> 除了有符号整数类型外，Kotlin 还提供了无符号整数类型。
+> 由于无符号整数针对不同的使用场景，它们将单独介绍。
+> 参见 [](unsigned-integer-types.md)。
+>
+{style="tip"}
+
+当您初始化变量且未显式指定类型时，编译器会自动推断出从 `Int` 开始、足以表示该值的最小范围类型。
+如果值不超过 `Int` 的范围，则类型为 `Int`；如果超过该范围，则类型为 `Long`。
+要显式指定 `Long` 值，请在值后追加后缀 `L`。
+要使用 `Byte` 或 `Short` 类型，请在声明中显式指定。
+显式类型声明会触发编译器检查该值是否不超过指定类型的范围。
 
 ```kotlin
 val one = 1 // Int
@@ -23,65 +31,74 @@ val oneLong = 1L // Long
 val oneByte: Byte = 1
 ```
 
-> 除了整数类型之外，Kotlin 还提供了无符号整数类型。有关更多信息，请参阅[无符号整数类型](unsigned-integer-types.md)。
->
-{style="tip"}
-
-## 浮点数类型
+## 浮点类型 {id=floating-point-types}
 
 对于实数，Kotlin 提供了遵循 [IEEE 754 标准](https://en.wikipedia.org/wiki/IEEE_754) 的浮点数类型 `Float` 和 `Double`。
 `Float` 表示 IEEE 754 的 **单精度**，而 `Double` 表示 **双精度**。
 
 这些类型在大小上有所不同，并提供了不同精度的浮点数存储：
 
-| 类型       | 大小（位） | 有效位数 | 指数位数 | 十进制数字位数 |
-|----------|-------|------|------|---------|
-| `Float`  | 32    | 24   | 8    | 6-7     |
-| `Double` | 64    | 53   | 11   | 15-16   |    
+| 类型       | 位数（比特） | 有效位数 | 指数位数 | 十进制精度 |
+|----------|--------|------|------|-------|
+| `Float`  | 32     | 24   | 8    | 6-7   |
+| `Double` | 64     | 53   | 11   | 15-16 |    
 
-你可以用具有小数部分的数字初始化 `Double` 和 `Float` 变量。
-小数部分与整数部分由句点（`.`）分隔。
-对于用小数初始化的变量，编译器会推断为 `Double` 类型：
+初始化 `Double` 和 `Float` 变量时，只能使用带有小数部分的数字。  
+用点号（`.`）分隔整数部分和小数部分。
 
-```kotlin
-val pi = 3.14 // Double
-// val one: Double = 1 // 错误：类型不匹配
-val oneDouble = 1.0 // Double
-```
-
-要显式指定值为 `Float` 类型，请添加后缀 `f` 或 `F`。
-如果这样的值包含超过 6-7 个小数位，它将被舍入：
+对于使用小数初始化的变量，编译器会推断为 `Double` 类型：
 
 ```kotlin
-val e = 2.7182818284 // Double
-val eFloat = 2.7182818284f // Float，实际值为2.7182817
+val pi = 3.14          // Double
+
+val one: Double = 1    // 推断为 Int
+// 初始化器类型不匹配
+
+val oneDouble = 1.0    // Double
+```
+{validate="false"}
+
+若要显式指定值的 `Float` 类型，请添加后缀 `f` 或 `F`。  
+如果以这种方式提供的值超过 7 位小数，则会进行四舍五入：
+
+```kotlin
+val e = 2.7182818284          // Double
+val eFloat = 2.7182818284f    // Float，实际值为 2.7182817
 ```
 
-与其他一些语言不同，在 Kotlin 中，数字没有隐式的扩展转换。
-例如，具有 `Double` 参数的函数只能在 `Double` 值上调用，而不能在 `Float`、`Int` 或其他数值上调用：
+Unlike in some other languages, there are no implicit widening conversions for numbers in Kotlin.
+For example, a function with a `Double` parameter can be called only on `Double` values, but not `Float`,
+`Int`, or other numeric values:
 
 ```kotlin
 fun main() {
-    fun printDouble(d: Double) { print(d) }
+//sampleStart
+    fun printDouble(x: Double) { print(x) }
 
-    val i = 1    
-    val d = 1.0
-    val f = 1.0f 
+    val x = 1.0
+    val xInt = 1    
+    val xFloat = 1.0f 
 
-    printDouble(d)
-//    printDouble(i) // 错误：类型不匹配
-//    printDouble(f) // 错误：类型不匹配
+    printDouble(x)
+    
+    printDouble(xInt)   
+    // 参数类型不匹配
+    
+    printDouble(xFloat)
+    // 参数类型不匹配
+//sampleEnd
 }
 ```
+{kotlin-runnable="true" validate="false"}
 
 要将数字值转换为不同类型，请使用[显式转换](#显式数字转换)。
 
 ## 数字的字面常量
 
-对于整数值，有以下几种字面常量：
+整型数值的字面常量有以下几种形式：
 
 * 十进制：`123`
-* 长整型使用大写 `L` 标记：`123L`
+* Long 类型，以大写 `L` 结尾：`123L`
 * 十六进制：`0x0F`
 * 二进制：`0b00001011`
 
@@ -89,10 +106,10 @@ fun main() {
 >
 {style="note"}
 
-Kotlin 还支持浮点数的传统表示法：
+Kotlin 同样支持标准的浮点数字面量表示法：
 
-* 默认为双精度：`123.5`，`123.5e10`
-* 浮点数使用 `f` 或 `F` 标记：`123.5f`
+* Double 类型（默认，小数部分不以字母结尾）：`123.5`、`123.5e10`
+* Float 类型，以字母 `f` 或 `F` 结尾：`123.5f`
 
 你可以使用下划线使数字常量更易读：
 
@@ -102,21 +119,24 @@ val creditCardNumber = 1234_5678_9012_3456L
 val socialSecurityNumber = 999_99_9999L
 val hexBytes = 0xFF_EC_DE_5E
 val bytes = 0b11010010_01101001_10010100_10010010
+val bigFractional = 1_234_567.7182818284
 ```
 
-> 对于无符号整数字面量，还有特殊的标签。  
-> 阅读更多关于 [无符号整数类型的字面量](unsigned-integer-types.md) 的内容。
+> 无符号整型字面量还包含特殊后缀。  
+> 了解更多关于[无符号整型字面量](unsigned-integer-types.md)的内容。
 >
 {style="tip"}
 
+## Java 虚拟机上的数字装箱与缓存 {id=boxing-and-caching-numbers-on-the-java-virtual-machine}
 
-## JVM 平台上的数字表示 {id=numbers-representation-on-the-jvm}
+由于 JVM 默认对较小（字节大小）数值使用缓存机制，其存储数字的方式可能导致代码行为与直觉不符。
 
-在 JVM 平台上，数字被存储为原始类型：`int`、`double` 等。
-特例是当你创建可空的数字引用，如 `Int?` 或使用泛型时。
-在这些情况下，数字会被装箱为 Java 类 `Integer`、`Double` 等。
+JVM 将数字存储为基本类型：`int`、`double` 等。  
+当使用[泛型类型](generics.md)或创建可空数字引用（如 `Int?`）时，数字会被装箱为 `Integer` 或 `Double` 等 Java 类。
 
-对同一数字的可空引用可能引用不同的对象：
+JVM 对表示 `−128` 到 `127` 之间数值的 `Integer` 等对象应用了[内存优化技术](https://docs.oracle.com/javase/specs/jls/se22/html/jls-5.html#jls-5.1.7)。  
+所有对此类对象的可空引用均指向同一个缓存对象。  
+例如，以下代码中的可空对象具有[引用相等性](equality.md#referential-equality):
 
 ```kotlin
 fun main() {
@@ -125,71 +145,89 @@ fun main() {
     val boxedA: Int? = a
     val anotherBoxedA: Int? = a
     
-    val b: Int = 10000
-    val boxedB: Int? = b
-    val anotherBoxedB: Int? = b
-    
     println(boxedA === anotherBoxedA) // true
-    println(boxedB === anotherBoxedB) // false
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-所有对于 `a` 的可空引用实际上都是相同的对象，这是因为 JVM 在 `-128` 到 `127` 之间的 `Integer` 上应用的内存优化。
-这并不适用于 `b` 引用，因此它们是不同的对象。
-
-另一方面，它们仍然是相等的：
+对于超出此范围的数值，可空对象虽然不同但具有[结构相等性](equality.md#structural-equality)：
 
 ```kotlin
 fun main() {
 //sampleStart
     val b: Int = 10000
-    println(b == b) // 打印 'true'
     val boxedB: Int? = b
     val anotherBoxedB: Int? = b
-    println(boxedB == anotherBoxedB) // 打印 'true'
+    
+    println(boxedB === anotherBoxedB) // false
+    println(boxedB == anotherBoxedB) // true
 //sampleEnd
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-## 显式数字转换 {id=显式数字转换}
+因此，Kotlin 会对可装箱数字和字面量使用引用相等性操作发出警告，提示：  
+`"禁止对...和...类型的参数使用同一性相等检查"`
+在比较 `Int`、`Short`、`Long` 和 `Byte` 类型（以及 `Char` 和 `Boolean`）时，  
+应使用结构相等性检查以获取一致结果。
 
-由于不同的表示方式，较小的类型 **并不是** 较大类型的子类型。
-如果是的话，我们将会遇到以下类似的问题：
+## 显式数字转换 {id=explicit-number-conversions}
 
-```kotlin
-// 假设的代码，实际上无法编译：
-val a: Int? = 1 // 一个装箱 Int (java.lang.Integer)
-val b: Long? = a // 隐式转换产生一个装箱的 Long (java.lang.Long)
-print(b == a) // 惊喜！这会打印出 "false"，因为 `Long` 的 `equals()` 方法检查另一个是否也是 `Long` 类型。
-```
-
-因此，相等性会默默丧失，更不用说标识了。
-
-因此，较小的类型 **不会被隐式转换** 为较大的类型。
-这意味着将 `Byte` 类型的值分配给 `Int` 变量需要进行显式转换：
+由于采用不同的存储方式，数字类型之间_不存在子类型关系_。  
+因此，较小类型_不会_隐式转换为较大类型，反之亦然。  
+例如，将 `Byte` 类型值赋给 `Int` 变量需要显式转换：
 
 ```kotlin
-val b: Byte = 1 // 正确，文字是静态检查的
-// val i: Int = b // 错误
-val i1: Int = b.toInt()
+fun main() {
+//sampleStart
+    val byte: Byte = 1
+    // 允许，字面量会进行静态检查
+    
+    val intAssignedByte: Int = byte 
+    // 初始化器类型不匹配
+    
+    val intConvertedByte: Int = byte.toInt()
+    
+    println(intConvertedByte)
+//sampleEnd
+}
 ```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" validate="false"}
 
 所有数字类型都支持转换为其他类型：
 
-* `toByte(): Byte`
+* `toByte(): Byte` (deprecated for [Float](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/to-byte.html) and [Double](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/to-byte.html))
 * `toShort(): Short`
 * `toInt(): Int`
 * `toLong(): Long`
 * `toFloat(): Float`
 * `toDouble(): Double`
 
-在许多情况下，不需要显式转换，因为类型会从上下文中推断出来，并且算术操作已经为适当的转换进行了重载，例如：
+在很多情况下，不需要显式转换，因为类型会从上下文中推断出来，而且算术运算符已经重载以自动处理转换。例如：
 
 ```kotlin
-val l = 1L + 3 // Long + Int => Long
+fun main() {
+//sampleStart
+    val l = 1L + 3       // Long + Int => Long
+    println(l is Long)   // true
+//sampleEnd
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.5"}
+
+### Reasoning against implicit conversions
+
+Kotlin doesn't support implicit conversions because they can lead to unexpected behavior.
+
+If numbers of different types were converted implicitly, we could sometimes lose equality and identity silently.
+For example, imagine if `Int` was a subtype of `Long`:
+
+```kotlin
+// Hypothetical code, does not actually compile:
+val a: Int? = 1    // A boxed Int (java.lang.Integer)
+val b: Long? = a   // Implicit conversion yields a boxed Long (java.lang.Long)
+print(b == a)      // Prints "false" as Long.equals() checks not only the value but whether the other number is Long as well
 ```
 
 ## 数字的运算 {id=数字的运算}
@@ -209,22 +247,26 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-你还可以为自定义类重写这些操作符。有关详细信息，请参阅[运算符重载](operator-overloading.md)。
+您可以在自定义数字类中重写这些运算符。  
+详情请参阅[运算符重载](operator-overloading.md) {id=operator-overloading}
 
 ### 整数的除法
 
-整数之间的除法始终返回一个整数。任何小数部分都将被丢弃。
+整数之间的除法运算总是返回整数，小数部分会被舍弃。
 
 ```kotlin
 fun main() {
 //sampleStart
     val x = 5 / 2
-    //println(x == 2.5) // 错误：无法将操作符 '==' 应用于 'Int' 和 'Double'
-    println(x == 2)
+    println(x == 2.5) 
+    // 运算符 '==' 不能应用于 'Int' 和 'Double' 类型
+    
+    println(x == 2)   
+    // 输出 true  
 //sampleEnd
 }
-```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+``` {id=division-between-integer-numbers}
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" validate="false"}
 
 这对于任何两个整数类型之间的除法都是成立的：
 
@@ -232,13 +274,17 @@ fun main() {
 fun main() {
 //sampleStart
     val x = 5L / 2
+    println (x == 2)
+    // Error, as Long (x) cannot be compared to Int (2)
+    
     println(x == 2L)
+    // true
 //sampleEnd
 }
 ```
-{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" validate="false"}
 
-如果想返回浮点类型，请显式将其中一个参数转换为浮点类型：
+要返回带小数部分的除法结果，请显式地将其中一个参数转换为浮点类型：
 
 ```kotlin
 fun main() {
@@ -257,10 +303,21 @@ Kotlin 提供了一组在整数数字上进行 **位运算** 的操作。
 位运算由可以以中缀形式调用的函数表示。它们仅适用于 `Int` 和 `Long`：
 
 ```kotlin
-val x = (1 shl 2) and 0x000FF000
+fun main() {
+//sampleStart
+    val x = 1
+    val xShiftedLeft = (x shl 2)
+    println(xShiftedLeft)  
+    // 4
+    
+    val xAnd = x and 0x000FF000
+    println(xAnd)          
+    // 0
+//sampleEnd
+}
 ```
 
-以下是完整的位运算列表：
+按位运算的完整列表：
 
 * `shl(bits)` – 有符号左移
 * `shr(bits)` – 有符号右移
@@ -296,13 +353,15 @@ fun main() {
     //sampleStart
     // 操作数在静态上已知为浮点数
     println(Double.NaN == Double.NaN)                 // false
-    // 操作数在静态上不已知为浮点数
-    // 因此 NaN 等于它自己
+    
+    // 操作数未静态类型化为浮点数  
+    // 因此 NaN 等于其自身
     println(listOf(Double.NaN) == listOf(Double.NaN)) // true
 
     // 操作数在静态上已知为浮点数
     println(0.0 == -0.0)                              // true
-    // 操作数在静态上不已知为浮点数
+    
+    // 操作数未静态类型化为浮点数  
     // 因此 -0.0 小于 0.0
     println(listOf(0.0) == listOf(-0.0))              // false
 

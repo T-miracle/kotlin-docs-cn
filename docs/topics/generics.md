@@ -236,8 +236,8 @@ fun copy(from: Array<out Any>, to: Array<Any>) { ... }
 fun fill(dest: Array<in String>, value: String) { ... }
 ```
 
-`Array<in String>` 对应于 Java 的 `Array<? super String>`。
-这意味着您可以将 `CharSequence` 数组或 `Object` 数组传递给 `fill()` 函数。
+`Array<in String>` 对应 Java 中的 `Array<? super String>`。这意味着你可以向
+`fill()` 方法传递 `String`、`CharSequence` 或 `Object` 类型的数组。
 
 ### 星投影（`*`投影）{id=星投影}
 

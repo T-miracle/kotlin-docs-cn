@@ -90,14 +90,15 @@ Kotlin 语言和工具集分为多个组件，例如用于 JVM、JS 和 Native �
 
 ### Kotlin 库 {id=kotlin-libraries}
 
-| **组件**                | **状态** | **自版本起生效** | **备注** |
-|-----------------------|--------|------------|--------|
-| kotlin-stdlib (JVM)   | 稳定版    | 1.0.0      |        |
-| kotlinx-coroutines    | 稳定版    | 1.3.0      |        |
-| kotlinx-serialization | 稳定版    | 1.0.0      |        |
-| kotlin-reflect (JVM)  | Beta   | 1.0.0      |        |
-| kotlinx-datetime      | Alpha  | 0.2.0      |        |
-| kotlinx-io            | Alpha  | 0.2.0      |        |
+| **组件**                | **状态** | **稳定版本** | **备注** |
+|-----------------------|--------|----------|--------|
+| kotlin-stdlib (JVM)   | 稳定     | 1.0.0    |        |
+| kotlinx-coroutines    | 稳定     | 1.3.0    |        |
+| kotlinx-serialization | 稳定     | 1.0.0    |        |
+| kotlin-metadata-jvm   | 稳定     | 2.0.0    |        |
+| kotlin-reflect (JVM)  | Beta   | 1.0.0    |        |
+| kotlinx-datetime      | Alpha  | 0.2.0    |        |
+| kotlinx-io            | Alpha  | 0.2.0    |        |
 
 ### Kotlin 跨平台 {id=kotlin-multiplatform}
 

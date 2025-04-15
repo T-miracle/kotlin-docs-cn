@@ -1,4 +1,5 @@
 <!--- TEST_NAME CancellationGuideTest -->
+<contribute-url>https://github.com/Kotlin/kotlinx.coroutines/edit/master/docs/topics/</contribute-url>
 
 [//]: # (title: Cancellation and timeouts)
 
@@ -6,8 +7,8 @@ This section covers coroutine cancellation and timeouts.
 
 ## Cancelling coroutine execution
 
-In a long-running application you might need fine-grained control on your background coroutines.
-For example, a user might have closed the page that launched a coroutine and now its result
+In a long-running application, you might need fine-grained control on your background coroutines.
+For example, a user might have closed the page that launched a coroutine, and now its result
 is no longer needed and its operation can be cancelled. 
 The [launch] function returns a [Job] that can be used to cancel the running coroutine:
 
@@ -31,8 +32,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-01.kt).
+<!--- KNIT example-cancel-01.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-01.kt).
 >
 {style="note"}
 
@@ -85,8 +86,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-02.kt).
+<!--- KNIT example-cancel-02.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-02.kt).
 >
 {style="note"}
 
@@ -130,8 +131,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-03.kt).
+<!--- KNIT example-cancel-03.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-03.kt).
 >
 {style="note"}
 
@@ -141,9 +142,12 @@ which does not rethrow [CancellationException].
 
 ## Making computation code cancellable
 
-There are two approaches to making computation code cancellable. The first one is to periodically 
-invoke a suspending function that checks for cancellation. There is a [yield] function that is a good choice for that purpose.
-The other one is to explicitly check the cancellation status. Let us try the latter approach. 
+There are two approaches to making computation code cancellable.
+The first one is periodically invoking a suspending function that checks for cancellation.
+There are the [yield] and [ensureActive]
+functions, which are great choices for that purpose.
+The other one is explicitly checking the cancellation status using [isActive].
+Let us try the latter approach.
 
 Replace `while (i < 5)` in the previous example with `while (isActive)` and rerun it. 
 
@@ -157,7 +161,7 @@ fun main() = runBlocking {
         var nextPrintTime = startTime
         var i = 0
         while (isActive) { // cancellable computation loop
-            // print a message twice a second
+            // prints a message twice a second
             if (System.currentTimeMillis() >= nextPrintTime) {
                 println("job: I'm sleeping ${i++} ...")
                 nextPrintTime += 500L
@@ -172,8 +176,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-04.kt).
+<!--- KNIT example-cancel-04.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-04.kt).
 >
 {style="note"}
 
@@ -188,11 +192,13 @@ main: I'm tired of waiting!
 main: Now I can quit.
 -->
 
-## Closing resources with `finally`
+## Closing resources with finally
 
 Cancellable suspending functions throw [CancellationException] on cancellation, which can be handled in 
-the usual way. For example, the `try {...} finally {...}` expression and Kotlin's `use` function execute their
-finalization actions normally when a coroutine is cancelled:
+the usual way.
+For example,
+the `try {...} finally {...}` expression and Kotlin's [use](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.io/use.html)
+function execute their finalization actions normally when a coroutine is cancelled:
 
 ```kotlin
 import kotlinx.coroutines.*
@@ -217,8 +223,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-05.kt).
+<!--- KNIT example-cancel-05.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-05.kt).
 >
 {style="note"}
 
@@ -240,7 +246,7 @@ main: Now I can quit.
 
 Any attempt to use a suspending function in the `finally` block of the previous example causes
 [CancellationException], because the coroutine running this code is cancelled. Usually, this is not a 
-problem, since all well-behaving closing operations (closing a file, cancelling a job, or closing any kind of a 
+problem, since all well-behaved closing operations (closing a file, cancelling a job, or closing any kind of 
 communication channel) are usually non-blocking and do not involve any suspending functions. However, in the 
 rare case when you need to suspend in a cancelled coroutine you can wrap the corresponding code in
 `withContext(NonCancellable) {...}` using [withContext] function and [NonCancellable] context as the following example shows:
@@ -272,8 +278,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-06.kt).
+<!--- KNIT example-cancel-06.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-06.kt).
 >
 {style="note"}
 
@@ -310,8 +316,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-07.kt).
+<!--- KNIT example-cancel-07.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-07.kt).
 >
 {style="note"}
 
@@ -326,7 +332,7 @@ Exception in thread "main" kotlinx.coroutines.TimeoutCancellationException: Time
 
 <!--- TEST STARTS_WITH -->
 
-The `TimeoutCancellationException` that is thrown by [withTimeout] is a subclass of [CancellationException].
+The [TimeoutCancellationException] that is thrown by [withTimeout] is a subclass of [CancellationException].
 We have not seen its stack trace printed on the console before. That is because
 inside a cancelled coroutine `CancellationException` is considered to be a normal reason for coroutine completion. 
 However, in this example we have used `withTimeout` right inside the `main` function. 
@@ -353,8 +359,8 @@ fun main() = runBlocking {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-08.kt).
+<!--- KNIT example-cancel-08.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-08.kt).
 >
 {style="note"}
 
@@ -414,8 +420,8 @@ fun main() {
 //sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-09.kt).
+<!--- KNIT example-cancel-09.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-09.kt).
 >
 {style="note"}
 
@@ -467,8 +473,8 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-
-> You can get the full code [here](%coroutinesRemotePrefix%/kotlinx-coroutines-core/jvm/test/guide/example-cancel-10.kt).
+<!--- KNIT example-cancel-10.kt -->
+> You can get the full code [here](https://github.com/Kotlin/kotlinx.coroutines/blob/master/kotlinx-coroutines-core/jvm/test/guide/example-cancel-10.kt).
 >
 {style="note"}
 
@@ -488,11 +494,13 @@ This example always prints zero. Resources do not leak.
 [Job.join]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-job/join.html
 [CancellationException]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-cancellation-exception/index.html
 [yield]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/yield.html
+[ensureActive]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/ensure-active.html
 [isActive]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/is-active.html
 [CoroutineScope]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-coroutine-scope/index.html
 [withContext]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-context.html
 [NonCancellable]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-non-cancellable/index.html
 [withTimeout]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-timeout.html
+[TimeoutCancellationException]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/-timeout-cancellation-exception/index.html
 [withTimeoutOrNull]: https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines/with-timeout-or-null.html
 
 <!--- END -->

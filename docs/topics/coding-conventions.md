@@ -208,7 +208,10 @@ class C {
 
 名称应该清楚地表明实体的目的，因此最好避免在名称中使用无意义的词汇（`Manager`（管理器），`Wrapper`（包装器））。
 
-在声明名称中使用首字母缩写时，如果它由两个字母组成，则将其大写（`IOStream`）；如果它更长，则仅大写第一个字母（`XmlFormatter`，`HttpInputStream`）。
+在使用缩写作为声明名称的一部分时，遵循以下规则：
+
+* 对于两个字母的缩写，两个字母都使用大写。例如，`IOStream`。
+* 对于超过两个字母的缩写，只对第一个字母进行大写。例如，`XmlFormatter` 或 `HttpInputStream`。
 
 ## 格式化 {id=formatting}
 

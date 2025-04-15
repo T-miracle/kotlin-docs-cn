@@ -97,7 +97,7 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-string-templates"}
 
-有关更多信息，请参阅 [字符串模板](strings.md)。
+有关更多信息，请参阅 [字符串模板](strings.md#string-templates)。
 
 您会注意到变量没有声明任何类型。Kotlin 自己已经推断出类型：`Int`。本教程将在 [下一章节](kotlin-tour-basic-types.md) 解释不同的 Kotlin 基本类型以及如何声明它们。
 

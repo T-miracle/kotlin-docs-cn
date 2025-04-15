@@ -19,9 +19,9 @@ The Gradle DSL allows comprehensive
 configuration of compiler options. It is available for [Kotlin Multiplatform](multiplatform-dsl-reference.md) and [JVM/Android](#target-the-jvm) projects.
 
 With the Gradle DSL, you can configure compiler options within the build script at three levels: 
-* **Extension level**, in the `kotlin {}` block for all targets and shared source sets.
-* **Target level**, in the block for a specific target.
-* **Compilation unit level,** usually in a specific compilation task.
+* **[Extension level](#extension-level)**, in the `kotlin {}` block for all targets and shared source sets.
+* **[Target level](#target-level)**, in the block for a specific target.
+* **[Compilation unit level](#compilation-unit-level),** usually in a specific compilation task.
 
 ![Kotlin compiler options levels](compiler-options-levels.svg){width=700}
 
@@ -117,7 +117,7 @@ show how to set this configuration up in both Kotlin and Groovy DSLs:
 ```kotlin
 tasks.named("compileKotlin", org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask::class.java) {
     compilerOptions {
-        apiVersion.set("1.8")
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
     }
 }
 ```
@@ -128,7 +128,7 @@ tasks.named("compileKotlin", org.jetbrains.kotlin.gradle.tasks.KotlinCompilation
 ```groovy
 tasks.named('compileKotlin', org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask.class) {
     compilerOptions {
-        apiVersion.set("1.8")
+        apiVersion.set(org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0)
     }
 }
 ```
@@ -138,7 +138,7 @@ tasks.named('compileKotlin', org.jetbrains.kotlin.gradle.tasks.KotlinCompilation
 
 ## Target the JVM
 
-As explained before, you can define compiler options for your JVM/Android projects at the extension, target, and compilation unit levels.
+[As explained before](#how-to-define-options), you can define compiler options for your JVM/Android projects at the extension, target, and compilation unit levels (tasks).
 
 Default JVM compilation tasks are called `compileKotlin` for production code and `compileTestKotlin`
 for test code. The tasks for custom source sets are named according to their `compile<Name>Kotlin` patterns.
@@ -192,6 +192,9 @@ Note that with the Gradle Kotlin DSL, you should get the task from the project's
 
 Use the `Kotlin2JsCompile` and `KotlinCompileCommon` types for JS and common targets, respectively.
 
+You can see the list of JavaScript compilation tasks by running the `gradlew tasks --all` command in the terminal
+and searching for `compile*KotlinJS` task names in the `Other tasks` group.
+
 ## All Kotlin compilation tasks
 
 It is also possible to configure all the Kotlin compilation tasks in the project:
@@ -242,7 +245,7 @@ Here is a complete list of options for the Gradle compiler:
 | `javaParameters`          | Generate metadata for Java 1.8 reflection on method parameters                                                                                                                                                                                |                                                                                                         | false                       |
 | `jvmTarget`               | Target version of the generated JVM bytecode                                                                                                                                                                                                  | "1.8", "9", "10", ...,  "22", "23". Also, see [Types for compiler options](#types-for-compiler-options) | "%defaultJvmTargetVersion%" |
 | `noJdk`                   | Don't automatically include the Java runtime into the classpath                                                                                                                                                                               |                                                                                                         | false                       |
-| `jvmTargetValidationMode` | <list><li>Validation of the [JVM target compatibility](gradle-configure-project.md#check-for-jvm-target-compatibility-of-related-compile-tasks) between Kotlin and Java</li><li>A property for tasks of the `KotlinCompile` type.</li></list> | `WARNING`, `ERROR`, `INFO`                                                                              | `ERROR`                     |
+| `jvmTargetValidationMode` | <list><li>Validation of the [JVM target compatibility](gradle-configure-project.md#check-for-jvm-target-compatibility-of-related-compile-tasks) between Kotlin and Java</li><li>A property for tasks of the `KotlinCompile` type.</li></list> | `WARNING`, `ERROR`, `IGNORE`                                                                              | `ERROR`                     |
 
 ### Attributes common to JVM and JavaScript
 
@@ -361,19 +364,17 @@ Also, see [Types for compiler options](#types-for-compiler-options).
 
 ### Attributes specific to JavaScript
 
-| Name | Description | Possible values |Default value |
-|---|---|---|---|
-| `friendModulesDisabled` | Disable internal declaration export| | false |
-| `main` | Define whether the `main` function should be called upon execution | "call", "noCall". Also, see [Types for compiler options](#types-for-compiler-options) | "call" |
-| `metaInfo` | Generate .meta.js and .kjsm files with metadata. Use to create a library | | true |
-| `moduleKind` | The kind of JS module generated by the compiler | "umd", "commonjs", "amd", "plain", "es". Also, see [Types for compiler options](#types-for-compiler-options) | "umd" |
-| `outputFile` | Destination *.js file for the compilation result | | "&lt;buildDir&gt;/js/packages/<project.name>/kotlin/<project.name>.js" |
-| `sourceMap` | Generate source map | | true |
-| `sourceMapEmbedSources` | Embed source files into the source map | "never", "always", "inlining". Also, see [Types for compiler options](#types-for-compiler-options) |  |
-| `sourceMapNamesPolicy` | Add variable and function names that you declared in Kotlin code into the source map. For more information on the behavior, see our [compiler reference](compiler-reference.md#source-map-names-policy-simple-names-fully-qualified-names-no). | "simple-names", "fully-qualified-names", "no". Also, see [Types for compiler options](#types-for-compiler-options)                                                              | "simple-names" |
-| `sourceMapPrefix` | Add the specified prefix to paths in the source map |  |  |
-| `target` | Generate JS files for specific ECMA version  | "v5"  | "v5" |
-| `typedArrays` | Translate primitive arrays to JS typed arrays | | true |
+| Name | Description                                                                                                                                                                                                                              | Possible values                                                                                                                                                            | Default value                      |
+|---|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------|
+| `friendModulesDisabled` | Disable internal declaration export                                                                                                                                                                                                      |                                                                                                                                                                            | `false`                              |
+| `main` | Specify whether the `main` function should be called upon execution                                                                                                                                                                       | `JsMainFunctionExecutionMode.CALL`, `JsMainFunctionExecutionMode.NO_CALL`                                                                                                  | `JsMainFunctionExecutionMode.CALL` |
+| `moduleKind` | The kind of JS module generated by the compiler                                                                                                                                                                                          | `JsModuleKind.MODULE_AMD`, `JsModuleKind.MODULE_PLAIN`, `JsModuleKind.MODULE_ES`, `JsModuleKind.MODULE_COMMONJS`, `JsModuleKind.MODULE_UMD`                                | `null`                               |
+| `sourceMap` | Generate source map                                                                                                                                                                                                                      |                                                                                                                                                                            | `false`                              |
+| `sourceMapEmbedSources` | Embed source files into the source map                                                                                                                                                                                                   | `JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_INLINING`, `JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_NEVER`, `JsSourceMapEmbedMode.SOURCE_MAP_SOURCE_CONTENT_ALWAYS` | `null`                               |
+| `sourceMapNamesPolicy` | Add variable and function names that you declared in Kotlin code into the source map. For more information on the behavior, see our [compiler reference](compiler-reference.md#source-map-names-policy-simple-names-fully-qualified-names-no) | `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_FQ_NAMES`, `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_SIMPLE_NAMES`, `JsSourceMapNamesPolicy.SOURCE_MAP_NAMES_POLICY_NO` | `null`                               |
+| `sourceMapPrefix` | Add the specified prefix to paths in the source map                                                                                                                                                                                      |                                                                                                                                                                            | `null`                               |
+| `target` | Generate JS files for specific ECMA version                                                                                                                                                                                              | `"es5"`, `"es2015"`                                                                                                                                                            | `"es5"`                              |
+| `useEsClasses` | Let generated JavaScript code use ES2015 classes. Enabled by default in case of ES2015 target usage                                                                                                                                                                                              |                                                                                                                                                                            | `null`                               |
 
 ### Types for compiler options
 

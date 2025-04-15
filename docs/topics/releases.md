@@ -1,6 +1,11 @@
 [//]: # (title: Kotlin 发布)
 
-自 Kotlin 2.0.0 以来，我们发布以下类型的版本：
+<tldr>
+    <p>最新 Kotlin 版本: <strong>%kotlinVersion%</strong></p>
+    <p>详情请参阅 <a href="%kotlinLatestWhatsnew%">Kotlin %kotlinVersion% 新特性</a></p>
+</tldr>
+
+Since Kotlin 2.0.0, we ship the following types of releases:
 
 * **语言版本**（2._x_._0_）：带来语言的重大变更，并包含工具更新。每 6 个月发布一次。
 * **工具版本**（2._x_._20_）：在语言版本之间发布，包含工具更新、性能改进和错误修复。对应的**语言版本**发布 3 个月后发布。
@@ -92,9 +97,29 @@ plugins {
         <th>构建信息</th>
         <th>构建亮点</th>
     </tr>
+   <tr>
+        <td><strong>2.1.20</strong>
+            <p>发布日期: <strong>March 20, 2025</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.20" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+           <p>A tooling release for Kotlin 2.1.0 containing new experimental features, performance improvements, and bug fixes.</p>
+            <p>Learn more about Kotlin 2.1.20 in <a href="whatsnew2120.md" target="_blank">What's new in Kotlin 2.1.20</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>2.1.10</strong>
+            <p>发布日期: <strong>January 27, 2025</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.10" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A bug fix release for Kotlin 2.1.0</p>
+            <p>For more details, please refer to the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.10">changelog</a>.</p>
+        </td>
+    </tr>
     <tr>
         <td><strong>2.1.0</strong>
-            <p>Released: <strong>November 27, 2024</strong></p>
+            <p>发布日期: <strong>November 27, 2024</strong></p>
             <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.0" target="_blank">Release on GitHub</a></p>
         </td>
         <td>

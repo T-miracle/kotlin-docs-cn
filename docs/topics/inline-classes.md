@@ -98,9 +98,9 @@ fun main() {
 
 ## 表示 {id=表示}
 
-在生成的代码中，Kotlin 编译器为每个内联类保留一个*包装器*。
-内联类实例在运行时可以表示为包装器或基础类型。
-这类似于 `Int` 可以被[表示](numbers.md#numbers-representation-on-the-jvm)为基本类型 `int` 或包装器 `Integer` 的方式。
+在生成的代码中，Kotlin 编译器为每个内联类保留一个 *包装器*。
+内联类实例在运行时可以作为包装器或作为底层类型来表示。
+这类似于 `Int` 可以 [表示](numbers.md#boxing-and-caching-numbers-on-the-java-virtual-machine) 为原始的 `int` 或包装器 `Integer`。
 
 Kotlin 编译器将优先使用基础类型而不是包装器，以生成性能最佳且经过优化的代码。
 但是，有时需要保留包装器。
