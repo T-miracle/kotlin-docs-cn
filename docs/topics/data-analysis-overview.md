@@ -21,7 +21,7 @@ REST APIs 时接收包含大量数据的 JSON 文件，这些只是其中的一�
 
 你想尝试我们的 Kotlin 数据分析工具吗？
 
-<a href="get-started-with-kotlin-notebooks.md"><img src="kotlin-notebooks-button.svg" width="600" style="block" alt="开始使用 Kotlin Notebook" style="block"/></a>
+<a href="get-started-with-kotlin-notebooks.md"><img src="kotlin-notebooks-button.svg" width="600" style="block" alt="开始使用 Kotlin Notebook"/></a>
 
 我们的 Kotlin 数据分析工具让你能够从头到尾流畅地处理数据。
 只需简单的拖放功能，就能在 Kotlin Notebook 中轻松获取数据。使用几行代码即可对数据进行清理、转换和可视化。

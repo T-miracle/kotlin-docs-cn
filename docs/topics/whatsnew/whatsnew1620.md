@@ -15,7 +15,7 @@ In Kotlin 1.6.20, you can try two new language features:
 * [Prototype of context receivers for Kotlin/JVM](#prototype-of-context-receivers-for-kotlin-jvm)
 * [Definitely non-nullable types](#definitely-non-nullable-types)
 
-### Prototype of context receivers for Kotlin/JVM
+### Prototype of context receivers for Kotlin/JVM {id=prototype-of-context-receivers-for-kotlin-jvm}
 
 > The feature is a prototype available only for Kotlin/JVM. With `-Xcontext-receivers` enabled,
 > the compiler will produce pre-release binaries that cannot be used in production code.

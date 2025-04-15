@@ -91,7 +91,7 @@ fun main() {
 ```
 {kotlin-runnable="true" validate="false"}
 
-要将数字值转换为不同类型，请使用[显式转换](#显式数字转换)。
+要将数字值转换为不同类型，请使用[显式转换](#explicit-number-conversions)。
 
 ## 数字的字面常量
 

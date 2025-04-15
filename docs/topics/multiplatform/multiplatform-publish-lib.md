@@ -182,14 +182,14 @@ kotlin {
 kotlin.publishJvmEnvironmentAttribute=false
 ```
 
-## Promote your library
+## 推广您的库 {id=promote-your-library}
 
-Your library can be featured on the [JetBrains' search platform](https://klibs.io/).
-It's designed to make it easy to look for Kotlin Multiplatform libraries based on their target platforms.
+您的库可以展示在 [JetBrains 搜索平台](https://klibs.io/) 上。
+该平台旨在帮助开发者根据目标平台轻松查找 Kotlin 跨平台库。
 
-Libraries that meet the criteria are added automatically. For more information on how to add your library, see [FAQ](https://klibs.io/faq).
+符合标准的库会被自动收录。有关如何添加您的库的更多信息，请参阅 [常见问题](https://klibs.io/faq)。
 
-## What's next
+## 下一步做什么 {id=whats-next}
 
-* [Learn how to publish your Kotlin Multiplatform library to the Maven Central repository](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html)
-* [See the Library authors' guidelines for best practices and tips on designing a library for Kotlin Multiplatform](api-guidelines-build-for-multiplatform.md)
+* [了解如何将 Kotlin 跨平台库发布到 Maven Central 仓库](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html)
+* [查看库作者指南，了解为 Kotlin 跨平台设计库的最佳实践和技巧](api-guidelines-build-for-multiplatform.md)

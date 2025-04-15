@@ -27,7 +27,7 @@ Since Kotlin 2.0.0, we ship the following types of releases:
 > 
 {style="note"}
 
-## 更新到新的 Kotlin 版本
+## 更新到新的 Kotlin 版本 {id=update-to-a-new-kotlin-version}
 
 要将项目更新到新版本，需要更新你的构建脚本文件。
 例如，要更新到 Kotlin %kotlinVersion%，请更改 `build.gradle(.kts)` 文件中
@@ -99,32 +99,32 @@ plugins {
     </tr>
    <tr>
         <td><strong>2.1.20</strong>
-            <p>发布日期: <strong>March 20, 2025</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.20" target="_blank">Release on GitHub</a></p>
+            <p>发布日期: <strong>2025.3.20</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.20" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-           <p>A tooling release for Kotlin 2.1.0 containing new experimental features, performance improvements, and bug fixes.</p>
-            <p>Learn more about Kotlin 2.1.20 in <a href="whatsnew2120.md" target="_blank">What's new in Kotlin 2.1.20</a>.</p>
+           <p>Kotlin 2.1.0 的工具版本，包含新的实验性功能、性能改进和错误修复。</p>
+            <p>了解更多关于 Kotlin 2.1.20 的信息，请参阅 <a href="whatsnew2120.md" target="_blank">Kotlin 2.1.20 新特性</a> 。</p>
         </td>
     </tr>
     <tr>
         <td><strong>2.1.10</strong>
-            <p>发布日期: <strong>January 27, 2025</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.10" target="_blank">Release on GitHub</a></p>
+            <p>发布日期: <strong>2025.1.27</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.10" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>A bug fix release for Kotlin 2.1.0</p>
-            <p>For more details, please refer to the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.10">changelog</a>.</p>
+            <p>Kotlin 2.1.0 的错误修复版本</p>
+            <p>更多详情，请参阅 <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.10">更新日志</a> 。</p>
         </td>
     </tr>
     <tr>
         <td><strong>2.1.0</strong>
             <p>发布日期: <strong>November 27, 2024</strong></p>
-            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.0" target="_blank">Release on GitHub</a></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.0" target="_blank">GitHub 上的发布</a></p>
         </td>
         <td>
-            <p>A language release introducing new language features.</p>
-            <p>Learn more about Kotlin 2.1.0 in <a href="whatsnew21.md" target="_blank">What's new in Kotlin 2.1.0</a>.</p>
+            <p>本次版本更新引入了新的语言特性。</p>
+            <p>了解更多关于 Kotlin 2.1.0 的信息，请参阅 <a href="whatsnew21.md" target="_blank">Kotlin 2.1.0 新特性</a> 。</p>
         </td>
     </tr>
     <tr>
@@ -134,7 +134,7 @@ plugins {
         </td>
         <td>
             <p>这是 Kotlin 2.0.20 的修复版本</p>
-            <p>更多详情，请参考 <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.21">更新日志</a>。</p>
+            <p>更多详情，请参考 <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.0.21">更新日志</a> 。</p>
         </td>
     </tr>
     <tr>
