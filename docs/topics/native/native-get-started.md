@@ -1,44 +1,39 @@
-[//]: # (title: Get started with Kotlin/Native)
+[//]: # (title: 开始使用 Kotlin/Native)
 
-In this tutorial, you'll learn how to create a Kotlin/Native application. Choose the tool that works best for you and
-create your app using:
+在本教程中，您将学习如何创建 Kotlin/Native 应用程序。选择最适合您的工具并通过以下方式创建应用：
 
-* **[The IDE](#in-ide)**. Here, you can clone the project template from a version control system and use it in IntelliJ IDEA.
-* **[The Gradle build system](#using-gradle)**. To better understand how things work under the hood,
-  create build files for your project manually.
-* **[The command line tool](#using-the-command-line-compiler)**. You can use the Kotlin/Native compiler,
-  which is shipped as a part of the standard Kotlin distribution, and create the app directly in the command line tool.
+* **[集成开发环境](#in-ide)**。您可以克隆版本控制系统中的项目模板，并在 IntelliJ IDEA 中使用它。
+* **[Gradle 构建系统](#using-gradle)**。为了更好地理解底层工作原理，请手动为您的项目创建构建文件。
+* **[命令行工具](#using-the-command-line-compiler)**。您可以使用 Kotlin/Native 编译器（作为标准 Kotlin 发行版的一部分提供），直接在命令行工具中创建应用。
 
-  Console compilation may seem easy and straightforward, but it doesn't scale well for larger projects with hundreds of
-  files and libraries. For such projects, we recommend using an IDE or a build system.
+  控制台编译看似简单直接，但对于具有数百个文件和库的大型项目而言并不理想。对于此类项目，我们建议使用集成开发环境或构建系统。
 
-With Kotlin/Native, you can compile for [different targets](native-target-support.md), including Linux, macOS, and Windows.
-While cross-platform compilation is possible, which means using one platform to compile for a different one,
-in this tutorial, you'll be targeting the same platform you're compiling on.
+使用 Kotlin/Native，您可以编译到[不同目标平台](native-target-support.md)，包括 Linux、macOS 和 Windows。
+虽然可以进行跨平台编译（即使用一个平台为另一个平台编译），但在本教程中，您将定位到与编译平台相同的目标。
 
-> If you use a Mac and want to create and run applications for macOS or other Apple targets, you also need to
-> install [Xcode Command Line Tools](https://developer.apple.com/download/), launch it, and accept the license terms first.
+> 如果您使用 Mac 并希望为 macOS 或其他 Apple 目标平台创建和运行应用程序，还需要先安装
+> [Xcode 命令行工具](https://developer.apple.com/download/)，启动它并接受许可条款。
 >
 {style="note"}
 
-## In IDE
+## 在集成开发环境中 {id=in-ide}
 
-In this section, you'll learn how to use IntelliJ IDEA to create a Kotlin/Native application. You can use both
-the Community Edition and the Ultimate Edition.
+在本节中，您将学习如何使用 IntelliJ IDEA 创建 Kotlin/Native 应用程序。
+您可以使用 Community Edition 或 Ultimate Edition。
 
-### Create the project
+### 创建项目 {id=create-the-project}
 
-1. Download and install the latest version of [IntelliJ IDEA](https://www.jetbrains.com/idea/).
-2. Clone the [project template](https://github.com/Kotlin/kmp-native-wizard)
-   by selecting **File** | **New** | **Project from Version Control** in IntelliJ IDEA and using this URL:
+1. 下载并安装最新版本的 [IntelliJ IDEA](https://www.jetbrains.com/idea/)。
+2. 克隆 [项目模板](https://github.com/Kotlin/kmp-native-wizard)，在 IntelliJ IDEA
+   中选择 **File** | **New** | **Project from Version Control** 并使用以下 URL：
 
    ```none
    https://github.com/Kotlin/kmp-native-wizard
-   ```   
+   ```
 
-3. Open the `gradle/libs.versions.toml` file, which is the version catalog for project dependencies. To create Kotlin/Native
-   applications, you need the Kotlin Multiplatform Gradle plugin, which has the same version as Kotlin. Ensure that you
-   use the latest Kotlin version:
+3. 打开 `gradle/libs.versions.toml` 文件，这是项目依赖项的版本目录。
+   要创建 Kotlin/Native 应用程序，您需要 Kotlin 跨平台 Gradle 插件，其版本与 Kotlin 相同。
+   确保使用最新的 Kotlin 版本：
 
    ```none
    [versions]
@@ -49,31 +44,31 @@ the Community Edition and the Ultimate Edition.
 
    ![加载 Gradle 变更按钮](load-gradle-changes.png){width=295}
 
-For more information about these settings, see the [Multiplatform Gradle DSL reference](multiplatform-dsl-reference.md).
+如需了解这些设置的更多信息，请参阅 [跨平台 Gradle DSL 参考文档](multiplatform-dsl-reference.md)。
 
-### Build and run the application
+### 构建并运行应用程序 {id=build-and-run-the-application}
 
-Open the `Main.kt` file in the `src/nativeMain/kotlin/` directory:
+打开 `src/nativeMain/kotlin/` 目录中的 `Main.kt` 文件：
 
-* The `src` directory contains Kotlin source files.
-* The `Main.kt` file includes code that prints "Hello, Kotlin/Native!" using the [`println()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) function.
+* `src` 目录包含 Kotlin 源代码文件
+* `Main.kt` 文件包含使用 [`println()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/println.html) 函数打印 "Hello, Kotlin/Native!" 的代码
 
-Press the green icon in the gutter to run the code:
+点击侧边栏的绿色图标运行代码：
 
 ![运行应用程序](native-run-gutter.png){width=478}
 
-IntelliJ IDEA runs the code using the Gradle task and outputs the result in the **Run** tab:
+IntelliJ IDEA 会使用 Gradle 任务运行代码，并在 **Run** 标签页中显示输出结果：
 
 ![应用输出](native-output-gutter-1.png){width=331}
 
-After the first run, the IDE creates the corresponding run configuration at the top:
+首次运行后，IDE 会在顶部创建对应的运行配置：
 
 ![Gradle 运行配置](native-run-config.png){width=503}
 
-> IntelliJ IDEA Ultimate users can install
-> the [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support)
-> plugin that allows debugging compiled native executables and also automatically creates run configurations for
-> imported Kotlin/Native projects.
+> IntelliJ IDEA Ultimate 用户可以安装
+> [Native Debugging Support](https://plugins.jetbrains.com/plugin/12775-native-debugging-support)
+> 插件，该插件支持调试已编译的原生可执行文件，并会为导入的
+> Kotlin/Native 项目自动创建运行配置。
 
 你可以[配置 IntelliJ IDEA](https://www.jetbrains.com/help/idea/compiling-applications.html#auto-build) 启用自动构建：
 
@@ -81,15 +76,15 @@ After the first run, the IDE creates the corresponding run configuration at the 
 2. 在 **Compiler** 页面勾选 **Build project automatically**
 3. 应用更改
 
-Now, when you make changes in the class files or save the file (<shortcut>Ctrl + S</shortcut>/<shortcut>Cmd + S</shortcut>),
-IntelliJ IDEA automatically performs an incremental build of the project.
+现在，当您在类文件中进行修改或保存文件时（<shortcut>Ctrl + S</shortcut>/<shortcut>Cmd + S</shortcut>），
+IntelliJ IDEA 会自动执行项目的增量构建。
 
-### Update the application
+### 更新应用程序 {id=update-the-application}
 
-Let's add a feature to your application so it can count the number of letters in your name:
+让我们为应用程序添加一个统计姓名字母数量的功能：
 
-1. In the `Main.kt` file, add code to read the input. Use the [`readln()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln.html)
-   function to read the input value and assign it to the `name` variable:
+1. 在 `Main.kt` 文件中添加读取输入的代码。使用 [`readln()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.io/readln.html)
+   函数读取输入值并赋值给 `name` 变量：
 
    ```kotlin
    fun main() {
@@ -141,10 +136,10 @@ Let's add a feature to your application so it can count the number of letters in
 
    ![应用输出](native-output-gutter-2.png){width=422}
 
-Now let's count only the unique letters in your name:
+现在让我们只统计您姓名中的不重复字母数量：
 
-1. In the `Main.kt` file, declare the new [extension function](extensions.md#extension-functions)
-   `.countDistinctCharacters()` for `String`:
+1. 在 `Main.kt` 文件中为 `String` 声明新的[扩展函数](extensions.md#extension-functions)
+   `.countDistinctCharacters()`：
 
    * 使用 [`.lowercase()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/lowercase.html) 函数将姓名转为小写
    * 使用 [`toList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/to-list.html) 函数将输入字符串转为字符列表
@@ -173,22 +168,22 @@ Now let's count only the unique letters in your name:
    }
    ```
 
-3. Run the application.
-4. Enter your name and see the result:
+3. 运行应用程序。
+4. 输入您的姓名并查看结果：
 
    ![应用输出](native-output-gutter-3.png){width=422}
 
-## Using Gradle
+## 使用 Gradle {id=using-gradle}
 
-In this section, you'll learn how to manually create a Kotlin/Native application using [Gradle](https://gradle.org).
-It's the default build system for Kotlin/Native and Kotlin Multiplatform projects, which is also commonly used in Java,
-Android, and other ecosystems.
+在本节中，您将学习如何使用 [Gradle](https://gradle.org) 手动创建 Kotlin/Native 应用程序。
+这是 Kotlin/Native 和 Kotlin 跨平台项目的默认构建系统，也常用于 Java、
+Android 和其他生态系统。
 
-### Create project files
+### 创建项目文件 {id=create-project-files}
 
-1. To get started, install a compatible version of [Gradle](https://gradle.org/install/). See the [compatibility table](gradle-configure-project.md#apply-the-plugin)
-   to check the Kotlin Gradle plugin (KGP) compatibility with available Gradle versions.
-2. Create an empty project directory. Inside it, create a `build.gradle(.kts)` file with the following content:
+1. 首先安装兼容版本的 [Gradle](https://gradle.org/install/)。请查看 [兼容性表格](gradle-configure-project.md#apply-the-plugin)
+   确认 Kotlin Gradle 插件(KGP)与可用 Gradle 版本的兼容性。
+2. 创建空项目目录，在其中创建包含以下内容的 `build.gradle(.kts)` 文件：
 
    <tabs group="build-script">
    <tab title="Kotlin" group-key="kotlin">
@@ -204,9 +199,9 @@ Android, and other ecosystems.
    }
 
    kotlin {
-       macosArm64("native") {  // on macOS
-       // linuxArm64("native") // on Linux
-       // mingwX64("native")   // on Windows
+       macosArm64("native") {  // macOS平台
+       // linuxArm64("native") // Linux平台
+       // mingwX64("native")   // Windows平台
            binaries {
                executable()
            }
@@ -233,9 +228,9 @@ Android, and other ecosystems.
    }
 
    kotlin {
-       macosArm64('native') {  // on macOS
-       // linuxArm64('native') // on Linux
-       // mingwX64('native')   // on Windows
+       macosArm64('native') {  // macOS平台
+       // linuxArm64('native') // Linux平台
+       // mingwX64('native')   // Windows平台
            binaries {
                executable()
            }
@@ -251,13 +246,13 @@ Android, and other ecosystems.
    </tab>
    </tabs>
 
-   You can use different [target names](native-target-support.md), such as `macosArm64`, `iosArm64` `linuxArm64`,
-   and `mingwX64` to define the targets for which you are compiling your code.
-   These target names can optionally take the platform name as a parameter, which in this case is `native`.
-   The platform name is used to generate the source paths and task names in the project.
+   您可以使用不同的 [目标平台名称](native-target-support.md)，如 `macosArm64`、`iosArm64`、`linuxArm64`
+   和 `mingwX64` 来定义代码编译的目标平台。
+   这些目标名称可选择性地接受平台名称作为参数(本例中为 `native`).。
+   平台名称用于生成项目中的源路径和任务名称。
 
-3. Create an empty `settings.gradle(.kts)` file in the project directory.
-4. Create a `src/nativeMain/kotlin` directory and place a `hello.kt` file inside with the following content:
+3. 在项目目录中创建空的 `settings.gradle(.kts)` 文件。
+4. 创建 `src/nativeMain/kotlin` 目录，并在其中放置包含以下内容的 `hello.kt` 文件：
 
    ```kotlin
    fun main() {
@@ -265,68 +260,65 @@ Android, and other ecosystems.
    }
    ```
 
-By convention, all sources are located in the `src/<target name>[Main|Test]/kotlin` directories, where `Main` is for the
-source code and `Test` is for tests. `<target name>` corresponds to the target platform (in this case, `native`),
-as specified in the build file.
+按照约定，所有源代码都应位于 `src/<目标名称>[Main|Test]/kotlin` 目录中，其中 `Main`
+用于源代码，`Test` 用于测试代码。`<目标名称>` 对应构建文件中指定的目标平台(本例中为 `native`)。
 
-### Build and run the project
+### 构建并运行项目 {id=build-and-run-the-project}
 
-1. From the root project directory, run the build command:
+1. 从项目根目录执行构建命令：
 
    ```bash
    ./gradlew nativeBinaries
    ```
 
-   This command creates the `build/bin/native` directory with two directories inside: `debugExecutable` and
-   `releaseExecutable`. They contain the corresponding binary files.
+   该命令会在 `build/bin/native` 目录下生成两个子目录：`debugExecutable` 和
+   `releaseExecutable`，其中包含相应的二进制文件。
 
-   By default, the name of the binary file is the same as the project directory.
+   默认情况下，二进制文件名与项目目录名相同。
 
-2. To run the project, execute the following command:
-
-   ```bash
-   build/bin/native/debugExecutable/<project_name>.kexe
-   ```
-
-The terminal prints "Hello, Kotlin/Native!".
-
-### Open the project in IDE
-
-Now, you can open your project in any IDE that supports Gradle. If you use IntelliJ IDEA:
-
-1. Select **File** | **Open**.
-2. Select the project directory and click **Open**.
-   IntelliJ IDEA automatically detects if it's a Kotlin/Native project.
-
-If you encounter a problem with the project, IntelliJ IDEA displays the error message in the **Build** tab.
-
-## Using the command-line compiler
-
-In this section, you'll learn how to create a Kotlin/Native application using the Kotlin compiler in the command line tool.
-
-### Download and install the compiler
-
-To install the compiler:
-
-1. Go to the Kotlin's [GitHub releases](%kotlinLatestUrl%) page.
-2. Look for a file with `kotlin-native` in the name and download one that is suitable for your operating system,
-   for example `kotlin-native-prebuilt-linux-x86_64-2.0.21.tar.gz`.
-3. Unpack the archive to a directory of your choice.
-4. Open your shell profile and add the path to the compiler's `/bin` directory to the `PATH` environment variable: 
+2. 运行以下命令执行项目：
 
    ```bash
-   export PATH="/<path to the compiler>/kotlin-native/bin:$PATH"
+   build/bin/native/debugExecutable/<项目名称>.kexe
    ```
 
-> Although the compiler output has no dependencies or virtual machine requirements, the compiler itself
-> requires Java 1.8 or higher runtime. It's supported
-> by [JDK 8 (JAVA SE 8) or later versions](https://www.oracle.com/java/technologies/downloads/).
+终端将输出 "Hello, Kotlin/Native!"。
+
+### 在 IDE 中打开项目 {id=open-the-project-in-ide}
+
+现在您可以在任何支持 Gradle 的 IDE 中打开项目。如果使用 IntelliJ IDEA：
+
+1. 选择 **File** | **Open**
+2. 选择项目目录并点击 **Open**
+   IntelliJ IDEA 会自动检测是否为 Kotlin/Native 项目
+
+如果项目存在问题，IntelliJ IDEA 会在 **Build** 标签页显示错误信息
+
+## 使用命令行编译器 {id=using-the-command-line-compiler}
+
+在本节中，您将学习如何使用命令行工具中的 Kotlin 编译器创建 Kotlin/Native 应用程序
+
+### 下载并安装编译器 {id=download-and-install-the-compiler}
+
+要安装编译器：
+
+1. 访问 Kotlin 的 [GitHub 发布页面](%kotlinLatestUrl%)
+2. 查找名称中包含 `kotlin-native` 的文件，下载适合您操作系统的版本，例如 `kotlin-native-prebuilt-linux-x86_64-2.0.21.tar.gz`
+3. 将压缩包解压到您选择的目录
+4. 打开 shell 配置文件，将编译器的 `/bin` 目录路径添加到 `PATH` 环境变量：
+
+   ```bash
+   export PATH="/<编译器路径>/kotlin-native/bin:$PATH"
+   ```
+
+> 虽然编译器输出没有依赖项或虚拟机要求，但编译器本身需要 Java 1.8 或更高版本的运行时环境。
+> 支持 [JDK 8 (JAVA SE 8) 或更高版本](https://www.oracle.com/java/technologies/downloads/)。
 >
 {style="note"}
 
-### Create the program
+### 创建程序 {id=create-the-program}
 
-Choose a working directory and create a file named `hello.kt`. Update it with the following code:
+选择工作目录并创建名为 `hello.kt` 的文件，添加以下代码：
 
 ```kotlin
 fun main() {
@@ -334,26 +326,24 @@ fun main() {
 }
 ```
 
-### Compile the code from the console
+### 从控制台编译代码 {id=compile-the-code-from-the-console}
 
-To compile the application, execute the following command with the downloaded compiler:
+使用下载的编译器执行以下命令来编译应用程序：
 
 ```bash
 kotlinc-native hello.kt -o hello
 ```
 
-The value of the `-o` option specifies the name of the output file, so this call generates the `hello.kexe` binary file
-on macOS and Linux (and `hello.exe` on Windows).
+`-o` 选项的值指定输出文件名，此命令将在 macOS 和 Linux 上生成 `hello.kexe` 二进制文件（在 Windows 上生成 `hello.exe`）。
 
-For the full list of available options, see [Kotlin compiler options](compiler-reference.md).
+完整选项列表请参阅 [Kotlin 编译器选项](compiler-reference.md)。
 
-### Run the program
+### 运行程序 {id=run-the-program}
 
-To run the program, in your command line tool, navigate to the directory containing the binary file and run the
-following command:
+在命令行工具中，导航至包含二进制文件的目录并执行以下命令来运行程序：
 
 <tabs>
-<tab title="macOS and Linux">
+<tab title="macOS 和 Linux">
 
 ```none
 ./hello.kexe
@@ -369,11 +359,10 @@ following command:
 </tab>
 </tabs>
 
-The application prints "Hello, Kotlin/Native" to the standard output.
+应用程序会向标准输出打印 "Hello, Kotlin/Native"。
 
-## What's next?
+## 下一步 {id=whats-next}
 
-* Complete the [Create an app using C Interop and libcurl](native-app-with-c-and-libcurl.md) tutorial that explains how
-  to create a native HTTP client and interoperate with C libraries.
-* Learn how to [write Gradle build scripts for real-life Kotlin/Native projects](multiplatform-dsl-reference.md).
-* Read more about the Gradle build system in the [documentation](gradle.md).
+* 完成 [使用 C 语言互操作和 libcurl 创建应用](native-app-with-c-and-libcurl.md) 教程，了解如何创建原生 HTTP 客户端并与 C 语言库交互
+* 学习如何 [为实际项目编写 Kotlin/Native 的 Gradle 构建脚本](multiplatform-dsl-reference.md)
+* 在 [文档](gradle.md) 中了解更多关于 Gradle 构建系统的内容
