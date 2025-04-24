@@ -25,22 +25,22 @@ Kotlin/JS 提供将您的 Kotlin 代码、Kotlin 标准库和任何兼容的依�
 
 现代 Web 开发在很大程度上受益于简化构建 Web 应用程序的框架。以下是一些由不同作者编写的 Kotlin/JS 的热门 Web 框架示例：
 
-### Kobweb
+### Kobweb {id=kobweb}
 
-_Kobweb_ is an opinionated Kotlin framework for creating websites and web apps. It leverages [Compose HTML](https://github.com/JetBrains/compose-multiplatform?tab=readme-ov-file#compose-html) and
-live-reloading for fast development. Inspired by [Next.js](https://nextjs.org/), Kobweb promotes a standard structure for adding widgets, layouts,
-and pages.
+_Kobweb_ 是一个基于 Kotlin 的强约定框架，用于创建网站和 Web 应用。
+它利用 [Compose HTML](https://github.com/JetBrains/compose-multiplatform?tab=readme-ov-file#compose-html) 和实时重载实现快速开发。
+受 [Next.js](https://nextjs.org/) 启发，Kobweb 提供了一套标准结构来添加组件、布局和页面。
 
-Out of the box, Kobweb provides page routing, light/dark mode, CSS styling, Markdown support, backend APIs, and more features.
-It also includes a UI library called Silk, a set of versatile widgets for modern UIs. 
+开箱即用，Kobweb 提供页面路由、明暗模式、CSS 样式、Markdown 支持、后端 API 等功能。
+它还包含一个名为 Silk 的 UI 库，提供适用于现代 UI 的多功能组件集。
 
-Kobweb also supports site export, generating page snapshots
-for SEO and automatic search indexing. Additionally, Kobweb makes it easy to create DOM-based UIs that efficiently update in response to state changes.
+Kobweb 还支持站点导出，生成页面快照以优化 SEO 并支持自动搜索索引。
+此外，Kobweb 能轻松创建基于 DOM 的 UI，这些 UI 会根据状态变化高效更新。
 
-Visit the [Kobweb](https://kobweb.varabyte.com/) site for documentation and examples.
+访问 [Kobweb 官网](https://kobweb.varabyte.com/) 获取文档和示例。
 
-For updates and discussions about the framework, join the [#kobweb](https://kotlinlang.slack.com/archives/C04RTD72RQ8) and
-[#compose-web](https://kotlinlang.slack.com/archives/C01F2HV7868) channels in the Kotlin Slack.
+要了解框架更新和参与讨论，请加入 Kotlin Slack 的 [#kobweb](https://kotlinlang.slack.com/archives/C04RTD72RQ8) 和
+[#compose-web](https://kotlinlang.slack.com/archives/C01F2HV7868) 频道。
 
 ### KVision
 

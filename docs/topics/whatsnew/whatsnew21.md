@@ -910,7 +910,7 @@ val wasmJsMain by getting {
 }
 ```
 
-### Improved debugging experience for Kotlin/Wasm
+### Improved debugging experience for Kotlin/Wasm {id=improved-debugging-experience-for-kotlin-wasm}
 
 Previously, when debugging Kotlin/Wasm code in web browsers, you might have encountered
 a low-level representation of variable values in the debugging interface.

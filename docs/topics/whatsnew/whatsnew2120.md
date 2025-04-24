@@ -119,7 +119,7 @@ plugin is applied on the first `executable {}` block.
 
 If you run into any issues, report them in our [issue tracker](https://kotl.in/issue) or let us know in our [public Slack channel](https://kotlinlang.slack.com/archives/C19FD9681).
 
-## Kotlin/Native: new inlining optimization
+## Kotlin/Native: new inlining optimization {id=kotlin-native-new-inlining-optimization}
 <primary-label ref="experimental-opt-in"/>
 
 Kotlin 2.1.20 introduces a new inlining optimization pass, which comes before the actual code generation phase.
@@ -140,7 +140,7 @@ of 9.5%. Of course, you can try out other values, too.
 
 If you experience increased binary size or compilation time, please report such issues via [YouTrack](https://kotl.in/issue).
 
-## Kotlin/Wasm
+## Kotlin/Wasm {id=kotlin-wasm}
 
 This release improves Kotlin/Wasm debugging and property usage. Custom formatters now work out of the box in development
 builds, while DWARF debugging facilitates code inspection. Additionally, the Provider API simplifies property usage in
