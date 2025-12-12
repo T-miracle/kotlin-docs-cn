@@ -36,7 +36,7 @@ class OrdersList: IndexedContainer {
 - 如果函数不存在或不确定，则会编译错误。
 - 如果函数存在且其返回类型为 `R`，则表达式 `+a` 的类型为 `R`。
 
-> 这些操作以及其他所有操作都针对 [基本类型](basic-types.md) 进行了优化，不会为它们引入函数调用开销。
+> 这些操作以及其他所有操作都针对 [基本类型](types-overview.md) 进行了优化，不会为它们引入函数调用开销。
 >
 {style="note"}
 
@@ -173,18 +173,18 @@ data class Counter(val dayIndex: Int) {
 | `a == b` | `a?.equals(b) ?: (b === null)`    |
 | `a != b` | `!(a?.equals(b) ?: (b === null))` |
 
-这些操作符只能使用 [`equals(other: Any?): Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html)
-函数进行工作，
-它可以被重写以提供自定义的相等性检查实现。任何其他具有相同名称的函数（如 `equals(other: Foo)`）都不会被调用。
+These operators only work with the function [`equals(other: Any?): Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/equals.html), 
+which you can override to provide a custom equality check implementation.
+Any other function with the same name (like `equals(other: Foo)`) is ignored.
 
-> `===` 和 `!==`（身份检查）不可重载，因此没有它们的约定存在。
+Kotlin calls `.equals()` when neither operand compares directly to `null` in the `==` expression and the comparison isn't between two floating-point types.
+Otherwise, Kotlin uses `===` for direct `null` comparisons and compares non-null floating-point values by numeric value.
+
+> `===` and `!==` (identity checks) aren't overloadable, so no conventions exist for them.
 >
 {style="note"}
 
-`==` 操作是特殊的：它被转换为一个复杂的表达式，用于检查 `null`。
-`null == null` 总是 true，对于非空的 `x`，`x == null` 总是 false，并且不会调用 `x.equals()`。
-
-### 比较操作符 {id=comparison-operators}
+### Comparison operators
 
 | 表达式      | 转换为                   |
 |----------|-----------------------|

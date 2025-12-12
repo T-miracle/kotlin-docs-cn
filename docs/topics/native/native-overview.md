@@ -1,72 +1,74 @@
-[//]: # (title: Kotlin Native（Kotlin 原生）)
+[//]: # (title: Kotlin/Native)
 
-Kotlin/Native 是一种将 Kotlin 代码编译为本地二进制文件的技术，可以在没有虚拟机的情况下运行。
-Kotlin/Native 包括 Kotlin 编译器的基于 [LLVM](https://llvm.org/) 的后端和 Kotlin 标准库的本地实现。
+Kotlin/Native is a technology for compiling Kotlin code to native binaries that can run without a virtual machine.
+Kotlin/Native includes an [LLVM](https://llvm.org/)-based backend for the Kotlin compiler and a native implementation of
+the Kotlin standard library.
 
-## 为什么使用 Kotlin/Native？
+## Why Kotlin/Native?
 
-Kotlin/Native 主要设计用于允许在不适合或不可能使用 _虚拟机_ 的平台上进行编译，例如嵌入式设备或 iOS。
-在需要生成一个不需要额外运行时或虚拟机的独立程序的情况下，它非常理想。
+Kotlin/Native is primarily designed to allow compilation for platforms on which _virtual machines_ are not desirable or
+possible, such as embedded devices or iOS. It's ideal for situations when you need to produce a self-contained
+program that doesn't require an additional runtime or a virtual machine.
 
-## 目标平台 {id=目标平台}
+It's easy to include compiled Kotlin code in existing projects written in C, C++, Swift, Objective-C, and other languages.
+You can also use existing native code, static or dynamic C libraries, Swift/Objective-C frameworks, graphical engines,
+and anything else directly from Kotlin/Native.
 
-Kotlin/Native 支持以下平台：
-* macOS
-* iOS, tvOS, watchOS
+<a href="native-get-started.md"><img src="native-get-started-button.svg" width="350" alt="Get started with Kotlin/Native" style="block"/></a>
+
+## Target platforms
+
+Kotlin/Native supports the following platforms:
+
 * Linux
-* Windows (MinGW)
-* Android NDK
+* Windows (through [MinGW](https://www.mingw-w64.org/))
+* [Android NDK](https://developer.android.com/ndk)
+* Apple targets for macOS, iOS, tvOS, and watchOS
 
-> 要编译苹果平台的目标，包括 macOS、iOS、tvOS 和 watchOS，
-> 您需要安装 [Xcode](https://apps.apple.com/us/app/xcode/id497799835) 及其命令行工具。
-> 
-{style="note"}
+  > To compile Apple targets, you need to install [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
+  > and its command-line tools.
+  >
+  {style="note"}
 
-[查看支持目标的完整列表](native-target-support.md).
+[See the full list of supported targets and hosts](native-target-support.md).
 
-## 互通性
+## Interoperability
 
-Kotlin/Native 支持与不同操作系统的本地编程语言进行双向互操作性。
-编译器创建：
-* 适用于多个 [平台](#目标平台) 的可执行文件
-* 针对 C/C++ 项目的带有 C 标头的静态库或 [动态库](native-dynamic-libraries.md)
-* 针对 Swift 和 Objective-C 项目的 [Apple 框架](apple-framework.md)
+Kotlin/Native supports two-way interoperability with native programming languages for different operating systems.
+The compiler can create executables for many platforms, static or dynamic C libraries, and Swift/Objective-C frameworks.
 
-Kotlin/Native 支持互操作性，可以直接从 Kotlin/Native 中使用现有库：
-* 静态或动态的 [C 库](native-c-interop.md)
-* C、[Swift 和 Objective-C](native-objc-interop.md) 框架
+### Interoperability with C
 
-可以轻松将已编译的 Kotlin 代码包含在使用 C、C++、Swift、Objective-C 等语言编写的现有项目中。
-也可以轻松使用现有的本地代码、静态或动态的 [C 库](native-c-interop.md)、
-Swift/Objective-C [框架](native-objc-interop.md)、图形引擎以及其他任何内容直接从 Kotlin/Native 中使用。
+Kotlin/Native provides [interoperability with C](native-c-interop.md). You can use existing C libraries directly from
+Kotlin code.
 
-Kotlin/Native [平台库](native-platform-libs.md) 帮助你在项目之间共享 Kotlin 代码。  
-POSIX、gzip、OpenGL、Metal、Foundation 以及许多其他流行的库和 Apple 框架已经预先导入，并作为 Kotlin/Native 库包含在编译器包中。
+To learn more, complete the following tutorials:
 
-## 在平台之间共享代码
+* [Create a dynamic library with C headers for C/C++ projects](native-dynamic-libraries.md)
+* [Learn how C types are mapped into Kotlin](mapping-primitive-data-types-from-c.md)
+* [Create a native HTTP client using C interop and libcurl](native-app-with-c-and-libcurl.md)
 
-[Kotlin Multiplatform](multiplatform-intro.md) 有助于在多个平台之间共享通用代码，包括 Android、iOS、JVM、
-Web 和本地。跨平台库提供了通用 Kotlin 代码所需的 API，并允许在一个地方编写项目的共享部分。
+### Interoperability with Swift/Objective-C
 
-你可以使用 [创建你的 Kotlin 跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html) 教程
-来创建应用并在 iOS 和 Android 之间共享业务逻辑。  
-要在 iOS、Android、桌面和 Web 之间共享 UI，请完成 [Compose Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html) 的教程，
-它是 JetBrains 基于 Kotlin 和 [Jetpack Compose](https://developer.android.com/jetpack/compose) 的声明式 UI 框架。
+Kotlin/Native provides [interoperability with Swift through Objective-C](native-objc-interop.md). You can use
+Kotlin code directly from Swift/Objective-C applications on macOS and iOS.
 
-## 如何开始
+To learn more, complete the [Kotlin/Native as an Apple framework](apple-framework.md) tutorial.
 
-对 Kotlin 还不熟悉吗？查看 [Kotlin 入门](getting-started.md)。
+## Sharing code between platforms
 
-推荐的文档：
+Kotlin/Native includes a set of prebuilt [platform libraries](native-platform-libs.md) that help share Kotlin code
+between projects. POSIX, gzip, OpenGL, Metal, Foundation, and many other popular libraries and Apple frameworks
+are pre-imported and included as Kotlin/Native libraries in the compiler package.
 
-* [Kotlin 跨平台简介](multiplatform-intro.md)
-* [与 C 的互操作性](native-c-interop.md)
-* [与 Swift/Objective-C 的互操作性](native-objc-interop.md)
+Kotlin/Native is a part of the [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform/get-started.html) technology that helps share common code
+across multiple platforms, including Android, iOS, JVM, web, and native. Multiplatform libraries provide the necessary
+APIs for common Kotlin code and allow writing shared parts of projects in Kotlin all in one place.
 
-推荐的教程：
+## Memory manager
 
-* [开始使用 Kotlin/Native](native-get-started.md)
-* [创建你的 Kotlin 跨平台应用](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
-* [从 C 映射原始数据类型](mapping-primitive-data-types-from-c.md)
-* [Kotlin/Native 作为动态库](native-dynamic-libraries.md)
-* [Kotlin/Native 作为 Apple 框架](apple-framework.md)
+Kotlin/Native uses an automatic [memory manager](native-memory-manager.md) that is similar to the JVM and Go.
+It has its own tracing garbage collector, which is also integrated with Swift/Objective-C's ARC.
+
+The memory consumption is controlled by a custom memory allocator. It optimizes memory usage and helps prevent sudden
+surges in memory allocation.

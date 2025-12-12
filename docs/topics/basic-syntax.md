@@ -1,4 +1,4 @@
-[//]: # (title: 基本语法)
+[//]: # (title: Basic syntax overview)
 
 这是一个包含基本语法元素及示例的集合。每个部分末尾都有一个链接，指向相关主题的详细描述。
 
@@ -156,7 +156,8 @@ fun main() {
 
 在 Kotlin 中，你可以使用关键字 `val` 或 `var` 来声明变量，接着是变量的名称。
 
-使用 `val` 关键字声明的变量在初始化后只能赋值一次，且是不可变的、只读的局部变量，不能重新赋值：
+Use the `val` keyword to declare variables that are assigned a value only once. These are immutable, read-only local variables that can't be reassigned a different value
+after initialization: 
 
 ```kotlin
 fun main() {
@@ -304,7 +305,7 @@ Kotlin 中的块注释可以嵌套：
 
 ```kotlin
 /* 评论从这里开始
-/* 包含嵌套注释 */     
+/* 包含嵌套注释 *​/  
 并在此结束。 */
 ```
 
@@ -692,7 +693,7 @@ fun main() {
 //sampleStart
 fun getStringLength(obj: Any): Int? {
     // 在 `&&` 的右侧，`obj` 会自动转换为 `String`。
-    if (obj is String && obj.length > 0) {
+    if (obj is String && obj.length >= 0) {
         return obj.length
     }
 
@@ -712,4 +713,3 @@ fun main() {
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-basic-syntax-is-operator-logic"}
 
 请参阅 [类](classes.md) 和 [类型转换](typecasts.md)。
-

@@ -215,10 +215,16 @@ fun main() {
 
 编写一个名为 `circleArea` 的函数，该函数以整数格式的圆半径作为参数，并输出该圆的面积。
 
-> 在这个练习中，你需要导入一个包，以便通过 `PI` 访问圆周率的值。
-> 有关导入包的更多信息，请参见 [包和导入](packages.md)。
+> 在这个练习中，你需要导入一个包，以便通过 `PI` 访问 <math>π</math> 的值。
+> 关于导入包的更多信息，请参见 [包和导入](packages.md)。
 >
-{style = "tip"}
+{style="tip"}
+
+<deflist collapsible="true" id="kotlin-tour-functions-exercise-1-hint">
+    <def title="Hint">
+        The formula for calculating the area of a circle is <math>πr^2</math>, where <math>r</math> is the radius.
+    </def>
+</deflist>
 
 |---|---|
 ```kotlin
@@ -391,10 +397,10 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-filter"}
 
-`.filter()` 函数接受 Lambda 表达式作为谓词：
+The `.filter()` function accepts a lambda expression as a predicate and applies it to each element of the list. The function keeps an element only if the predicate returns `true`:
 
-* `{ x -> x > 0 }` 处理列表中的每个元素，并仅返回正数。
-* `{ x -> x < 0 }` 处理列表中的每个元素，并仅返回负数。
+* `{ x -> x > 0 }` returns `true` if the element is positive.
+* `{ x -> x < 0 }` returns `true` if the element is negative.
 
 这个示例演示了两种将 Lambda 表达式传递给函数的方式：
 
@@ -411,7 +417,7 @@ fun main() {
 > 
 > 这是一种 [尾随 Lambda](#trailing-lambdas) 的示例，详细讨论请参见本章末尾。
 >
-{style = "note"}
+{style="note"}
 
 另一个好的例子是使用 [`.map()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/map.html)
 函数来转换集合中的项目：

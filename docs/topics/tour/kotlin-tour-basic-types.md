@@ -55,7 +55,7 @@ fun main() {
 | 字符类型    | `Char`                          | `val separator: Char = ','`                                  |
 | 字符串类型   | `String`                        | `val message: String = "Hello, world!"`                      |
 
-想要了解更多关于基本类型及其属性的信息，请参阅 [基本类型](basic-types.md)。
+关于基础类型及其属性的更多信息，请参见 [类型概览](types-overview.md)。
 
 有了这些知识，你可以声明变量并在稍后初始化它们。
 只要在第一次读取之前进行初始化，Kotlin 就可以管理这些变量。

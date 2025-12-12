@@ -26,7 +26,7 @@ Kotlin 默认将所有异常视为 _unchecked_（未受检）异常。
 
 使用 `throw` 关键字可以手动抛出异常。
 抛出异常表示代码中发生了意外的运行时错误。
-异常是 [对象](classes.md#creating-instances-of-classes)，抛出异常将创建异常类的一个实例。
+异常是 [对象](classes.md#creating-instances)，抛出异常将创建异常类的一个实例。
 
 你可以不带任何参数地抛出异常：
 
@@ -448,17 +448,20 @@ fun main() {
 ```
 {kotlin-runnable="true"}
 
-在具有多种错误场景的应用程序中，创建异常层次结构可以使代码更清晰和更具针对性。
-你可以通过使用 [抽象类](classes.md#abstract-classes) 或 [密封类](sealed-classes.md#constructors)
-作为通用异常功能的基类，并为详细的异常类型创建具体的子类来实现。
-此外，具有可选参数的自定义异常提供了灵活性，允许用不同的消息进行初始化，从而实现更细粒度的错误处理。
+In applications with diverse error scenarios,
+creating a hierarchy of exceptions can help making the code clearer and more specific.
+You can achieve this by using an [abstract class](classes.md#abstract-classes) or a
+[sealed class](sealed-classes.md#constructors) as a base for common exception features and creating specific 
+subclasses for detailed exception types.
+Additionally, custom exceptions including parameters with default values offer flexibility, allowing initialization with varied messages,
+which enables more granular error handling.
 
-让我们看一个示例，使用密封类 `AccountException` 作为异常层次结构的基类，`APIKeyExpiredException`
-类作为子类，展示了如何使用可选参数来提供更详细的异常信息：
+Let's look at an example using the sealed class `AccountException` as the base for an exception hierarchy, 
+and class `APIKeyExpiredException`, a subclass, which showcases the use of parameters with default values for improved exception detail:
 
 ```kotlin
 //sampleStart
-// 创建一个密封类作为与账户相关的错误的异常层次结构的基类
+// Creates a sealed class as the base for an exception hierarchy for account-related errors
 sealed class AccountException(message: String, cause: Throwable? = null):
     Exception(message, cause)
 

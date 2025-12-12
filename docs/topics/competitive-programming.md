@@ -7,8 +7,9 @@
 也可以是复杂的问题，需要了解特殊的算法、数据结构以及大量的实践经验。
 尽管 Kotlin 并非专为竞技编程而设计，但它巧妙地适用于这个领域，减少了程序员在编写和阅读代码时通常需要的样板代码，几乎达到了动态类型脚本语言提供的水平，同时具有静态类型语言的工具和性能。
 
-请参阅 [使用 Kotlin/JVM 入门](jvm-get-started.md) 以了解如何配置 Kotlin 的开发环境。
-在竞技编程中，通常会创建一个项目，每个问题的解决方案都写在一个单独的源文件中。
+For more information on how to create a Kotlin project in IntelliJ IDEA, see the [Create a console app](jvm-get-started.md)
+tutorial. In competitive programming, a single project is usually created and each problem's solution is
+written in a single source file.
 
 ## 简单示例: 可达数字问题
 

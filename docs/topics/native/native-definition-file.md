@@ -65,27 +65,26 @@ Kotlin/Native 允许你使用 C 和 Objective-C 库，从而在 Kotlin 中调用
 以下是可在定义文件中使用的完整属性列表，用于调整生成的二进制文件内容。  
 更多信息请参阅下方对应章节。
 
-| **属性**                                                                              | **描述**                                                                                               |
-|-------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| [`headers`](#import-headers)                                                        | 要包含在绑定中的库头文件列表。                                                                                      |
-| [`modules`](#import-modules)                                                        | 要包含在绑定中的 Objective-C 库的 Clang 模块列表。                                                                  |
-| `language`                                                                          | 指定语言。默认使用 C；必要时可改为 `Objective-C`。                                                                    |
-| [`compilerOpts`](#pass-compiler-and-linker-options)                                 | cinterop 工具传递给 C 编译器的编译选项。                                                                           |
-| [`linkerOpts`](#pass-compiler-and-linker-options)                                   | cinterop 工具传递给链接器的链接选项。                                                                              |
-| [`excludedFunctions`](#ignore-specific-functions)                                   | 应忽略的函数名称列表（以空格分隔）。                                                                                   |                                              
-| `excludedMacros`                                                                    | 应忽略的宏定义列表。                                                                                           |
-| [`staticLibraries`](#include-a-static-library)                                      | [实验性](components-stability.md#stability-levels-explained)。将静态库包含到 `.klib` 中。                         |
-| [`libraryPaths`](#include-a-static-library)                                         | [实验性](components-stability.md#stability-levels-explained)。cinterop 工具搜索要包含到 `.klib` 中的库的目录列表（以空格分隔）。 |
-| `packageName`                                                                       | 生成的 Kotlin API 的包名前缀。                                                                                |
-| [`headerFilter`](#filter-headers-by-globs)                                          | 通过 glob 模式过滤头文件，仅导入匹配的头文件。                                                                           |
-| [`excludeFilter`](#exclude-headers)                                                 | 导入库时排除特定头文件，优先级高于 `headerFilter`。                                                                    |
-| [`strictEnums`](#configure-enums-generation)                                        | 应生成为 [Kotlin 枚举类](enum-classes.md) 的枚举列表（以空格分隔）。                                                     |
-| [`nonStrictEnums`](#configure-enums-generation)                                     | 应生成为整数值的枚举列表（以空格分隔）。                                                                                 |
-| [`noStringConversion`](#set-up-string-conversion)                                   | 不自动将 `const char*` 参数转换为 Kotlin `String` 的函数列表（以空格分隔）。                                               |
-| `allowedOverloadsForCFunctions`                                                     | 默认假定 C 函数具有唯一名称。如果有多个同名函数，则只选取一个。但可以通过在 `allowedOverloadsForCFunctions` 中指定这些函数来更改此行为。               |
-| [`disableDesignatedInitializerChecks`](#allow-calling-a-non-designated-initializer) | 禁用编译器检查，允许将非指定 Objective-C 初始化器作为 `super()` 构造函数调用。                                                  |
-| [`foreignExceptionMode`](#handle-objective-c-exceptions)                            | 将 Objective-C 代码中的异常包装为 Kotlin 的 `ForeignException` 类型异常。                                            |
-| [`userSetupHint`](#help-resolve-linker-errors)                                      | 添加自定义消息（例如帮助用户解决链接错误）。                                                                               |
+| **Property**                                                                        | **Description**                                                                                                                                                                                                          |
+|-------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`headers`](#import-headers)                                                        | The list of headers from a library to be included in the bindings.                                                                                                                                                       |
+| [`modules`](#import-modules)                                                        | The list of Clang modules from an Objective-C library to be included in the bindings.                                                                                                                                    |
+| `language`                                                                          | Specifies the language. C is used by default; change to `Objective-C` if necessary.                                                                                                                                      |
+| [`compilerOpts`](#pass-compiler-and-linker-options)                                 | Compiler options that the cinterop tool passes to the C compiler.                                                                                                                                                        |
+| [`linkerOpts`](#pass-compiler-and-linker-options)                                   | Linker options that the cinterop tool passes to the linker.                                                                                                                                                              |
+| [`excludedFunctions`](#ignore-specific-functions)                                   | A space-separated list of function names that should be ignored.                                                                                                                                                         |                                              
+| [`staticLibraries`](#include-a-static-library)                                      | [Experimental](components-stability.md#stability-levels-explained). Includes a static library into `.klib`.                                                                                                              |
+| [`libraryPaths`](#include-a-static-library)                                         | [Experimental](components-stability.md#stability-levels-explained). A space-separated list of directories where the cinterop tool searches for the library to be included in `.klib`.                                    |
+| `packageName`                                                                       | Package prefix for the generated Kotlin API.                                                                                                                                                                             |
+| [`headerFilter`](#filter-headers-by-globs)                                          | Filters headers by globs and includes only them when importing a library.                                                                                                                                                |
+| [`excludeFilter`](#exclude-headers)                                                 | Excludes specific headers when importing a library and takes priority over `headerFilter`.                                                                                                                               |
+| [`strictEnums`](#configure-enums-generation)                                        | A space-separated list of enums that should be generated as [Kotlin enums](enum-classes.md).                                                                                                                             |
+| [`nonStrictEnums`](#configure-enums-generation)                                     | A space-separated list of enums that should be generated as integral values.                                                                                                                                             |
+| [`noStringConversion`](#set-up-string-conversion)                                   | A space-separated list of functions whose `const char*` parameters should not be auto-converted to Kotlin `String`s.                                                                                                     |
+| `allowedOverloadsForCFunctions`                                                     | By default, it's assumed that C functions have unique names. If several functions have the same name, only one is picked. However, you can change this by specifying these functions in `allowedOverloadsForCFunctions`. |
+| [`disableDesignatedInitializerChecks`](#allow-calling-a-non-designated-initializer) | Disables the compiler check that doesn't allow calling a non-designated Objective-C initializer as a `super()` constructor.                                                                                              |
+| [`foreignExceptionMode`](#handle-objective-c-exceptions)                            | Wraps exceptions from Objective-C code into Kotlin exceptions with the `ForeignException` type.                                                                                                                          |
+| [`userSetupHint`](#help-resolve-linker-errors)                                      | Adds a custom message, for example, to help users resolve linker errors.                                                                                                                                                 |
 
 <!-- | `excludedMacros`                                                                    |                                                                                                                                                                                                                          |
 | `objcClassesIncludingCategories`                                                    |                                                                                                                                                                                                                          | -->
@@ -166,10 +165,7 @@ compilerOpts.macos_x64 = -DFOO=foo2
 
 ### 包含静态库 {id=include-a-static-library}
 
-> 此功能为[实验性](components-stability.md#stability-levels-explained)功能，可能随时会被移除或更改。
-> 请仅用于评估目的。
->
-{style="warning"}
+<primary-label ref="experimental-general"/>
 
 有时将静态库与产品一起分发比假设它在用户环境中可用更为方便。
 要在`.klib`中包含静态库，请使用`staticLibrary`和`libraryPaths`属性：
@@ -207,9 +203,9 @@ libraryPaths = /opt/local/lib /usr/local/opt/curl/lib
 要将 Objective-C 异常传播到 Kotlin 代码，请启用 `foreignExceptionMode = objc-wrap` 属性进行包装处理。
 在此模式下，Objective-C 异常会被转换为 Kotlin 异常，其类型为 `ForeignException`。
 
-#### 解决链接器错误 {id=help-resolve-linker-errors}
+### Help resolve linker errors
 
-当 Kotlin 库依赖 C 或 Objective-C 库（例如使用 [CocoaPods 集成](native-cocoapods.md)）时，可能会出现链接器错误。
+当 Kotlin 库依赖 C 或 Objective-C 库（例如使用 [CocoaPods 集成](https://kotlinlang.org/docs/multiplatform/multiplatform-cocoapods-overview.html)）时，可能会出现链接器错误。
 如果依赖库未在本地机器上安装或在项目构建脚本中显式配置，则会出现 "Framework not found" 错误。
 
 如果您是库作者，可以通过自定义消息帮助用户解决链接器错误。

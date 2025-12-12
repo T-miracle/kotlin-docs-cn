@@ -6,11 +6,9 @@
 
 如果您觉得本文档有错误，或者有晦涩难懂的地方，请提交 [issue](https://github.com/T-miracle/kotlin-docs-cn/issues)。
 
-您也可以 Clone [本文档项目](https://github.com/T-miracle/kotlin-docs-cn.git) 进行本地修改，然后给我的分支推送请求。
-
 ## 如何启动
 
-使用 `IntelliJ IDEA` 安装 `WriterSide` 插件 或者 ~~直接安装 [`WriterSide` 编辑器](https://www.jetbrains.com/writerside/)~~
+使用 `IntelliJ IDEA` 安装 `WriterSide` 插件
 
 Clone 本项目到本地，直接运行打开即可
 
@@ -28,4 +26,4 @@ Clone 本项目到本地，直接运行打开即可
 | [`kotlinx.coroutines`](https://github.com/Kotlin/kotlinx.coroutines.git) | `master` | `%coroutinesCommitId%`    | 协程（kc）       |
 | [`lincheck`](https://github.com/JetBrains/lincheck.git)                  | `master` | `%lincheckCommitId%`      | lincheck（kl） |
 | [`api-guidelines`](https://github.com/Kotlin/api-guidelines.git)         | `main`   | `%apiGuidelinesCommitId%` | 库作者指南        |
-| [`dokka`](https://github.com/Kotlin/dokka.git)                           | `main`   | `%dokkaCommitId%`         | dokka        |
+| [`dokka`](https://github.com/Kotlin/dokka.git)                           | `master` | `%dokkaCommitId%`         | dokka        |

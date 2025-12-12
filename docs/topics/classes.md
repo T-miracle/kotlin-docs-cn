@@ -1,244 +1,596 @@
-[//]: # (title: 类)
+[//]: # (title: Classes)
 
-在 Kotlin 中，使用关键字 `class` 来声明类：
+> Before creating classes, consider using a [data class](data-classes.md) if the purpose is to store data.
+> Alternatively, think about extending an existing class with an [extension](extensions.md), rather than creating a new one from scratch.
+>
+{style="tip"}
+
+Like other object-oriented languages, Kotlin uses _classes_ to encapsulate data (properties) and behavior (functions)
+for reusable, structured code.
+
+Classes are blueprints or templates for objects, which you 
+create via [constructors](#constructors-and-initializer-blocks). 
+When you [create an instance of a class](#creating-instances), you are creating 
+a concrete object based on that blueprint.
+
+Kotlin offers concise syntax for declaring classes. To declare a class, use the `class` keyword 
+followed by the class name:
 
 ```kotlin
 class Person { /*...*/ }
 ```
 
-类声明包括类名、类头（指定其类型参数、主构造函数和其他一些内容）以及由花括号括起来的类体。
-类的头和类体都是可选的；
-如果类没有类体，则可以省略花括号。
+The class declaration consists of: 
+* **Class header**, including but not limited to:
+  * `class` keyword
+  * Class name
+  * Type parameters (if any)
+  * [Primary constructor](#primary-constructor) (optional)
+* **Class body** (optional), surrounded by curly braces `{}`, and including **class members** such as:
+  * [Secondary constructors](#secondary-constructors)
+  * [Initializer blocks](#initializer-blocks)
+  * [Functions](functions.md)
+  * [Properties](properties.md)
+  * [Nested and inner classes](nested-classes.md)
+  * [Object declarations](object-declarations.md)
+
+You can keep both the class header and body to a bare minimum. 
+If the class doesn't have a body, you can omit the curly braces `{}`:
 
 ```kotlin
-class Empty
+// Class with primary constructor, but without a body 
+class Person(val name: String, var age: Int)
 ```
 
-## 构造函数 {id=constructors}
-
-在 Kotlin 中，类有一个**主构造函数**，可能还有一个或多个**次构造函数**。
-主构造函数在类头中声明，他跟在类名和可选类型参数之后。
+Here's an example that declares a class with a header and body, 
+then [creates an instance](#creating-instances) from it:
 
 ```kotlin
-class Person constructor(firstName: String) { /*...*/ }
-```
-
-如果主构造函数没有任何注解或可见性修饰符，则可以省略 `constructor` 关键字：
-
-```kotlin
-class Person(firstName: String) { /*...*/ }
-```
-
-主构造函数在类头中初始化类实例及其属性。类头不能包含任何可运行的代码。
-如果想在对象创建期间运行一些代码，请使用类体内的**初始化块**。
-初始化块使用 `init` 关键字后跟大括号声明。在大括号内你可以写任何想要运行的代码。
-
-在实例初始化期间，初始化块按照它们在类体中出现的顺序执行，与属性初始化器交替进行：
-
-```kotlin
-//sampleStart
-class InitOrderDemo(name: String) {
-    val firstProperty = "First property: $name".also(::println)
-    
-    init {
-        println("First initializer block that prints $name")
-    }
-    
-    val secondProperty = "Second property: ${name.length}".also(::println)
-    
-    init {
-        println("Second initializer block that prints ${name.length}")
-    }
+// Person class with a primary constructor 
+// that initializes the name property
+class Person(val name: String) {
+    // Class body with age property
+    var age: Int = 0
 }
-//sampleEnd
 
 fun main() {
-    InitOrderDemo("hello")
+    // Creates an instance of the Person class by calling the constructor
+    val person = Person("Alice")
+
+    // Accesses the instance's properties
+    println(person.name)
+    // Alice
+    println(person.age)
+    // 0
 }
 ```
-{kotlin-runnable="true"}
+{kotlin-runnable="true" id="class-with-header-and-body"}
 
-主构造函数的参数可以在初始化块中使用，也可以在类体中声明的属性初始化器中使用：
+## Creating instances
+
+An instance is created
+when you use the class as a blueprint to build a real object to work with in your program.
+
+To create an instance of a class, use the class name followed by parentheses `()`, similar to calling a [function](functions.md):
 
 ```kotlin
-class Customer(name: String) {
-    val customerKey = name.uppercase()
+// Creates an instance of the Person class
+val anonymousUser = Person()
+```
+
+In Kotlin, you can create instances:
+
+* **Without arguments** (`Person()`): creates an instance using the default values, if they are declared in the class.
+* **With arguments** (`Person(value)`): creates an instance by passing specific values.
+
+You can assign the created instance to a mutable (`var`) or read-only (`val`) [variable](basic-syntax.md#variables):
+
+```kotlin
+// Creates an instance using the default value 
+// and assigns it to a mutable variable
+var anonymousUser = Person()
+
+// Creates an instance by passing a specific value 
+// and assigns it to a read-only variable
+val namedUser = Person("Joe")
+```
+
+It's possible to create instances wherever you need them, inside the [`main()` function](basic-syntax.md#program-entry-point), within other functions, or inside another class.
+Additionally, you can create instances inside another function and call that function from `main()`.
+
+The following code declares a `Person` class with a property for storing a name. 
+It also demonstrates
+how to create an instance with both the default constructor's value and a specific value:
+
+```kotlin
+// Class header with a primary constructor 
+// that initializes name with a default value
+class Person(val name: String = "Sebastian")
+
+fun main() {
+    // Creates an instance using the default constructor's value
+    val anonymousUser = Person()
+
+    // Creates an instance by passing a specific value
+    val namedUser = Person("Joe")
+
+    // Accesses the instances' name property
+    println(anonymousUser.name)
+    // Sebastian
+    println(namedUser.name)
+    // Joe
+}
+```
+{kotlin-runnable="true" id="create-instance-of-a-class"}
+
+> In Kotlin, unlike other object-oriented programming languages,
+> there is no need for the `new` keyword when creating class instances.
+>
+{style="note"}
+
+For information about creating instances of nested, inner, and anonymous inner classes,
+see the [Nested classes](nested-classes.md) section.
+
+## Constructors and initializer blocks
+
+When you create a class instance, you call one of its constructors. A class in Kotlin can have a 
+[_primary constructor_](#primary-constructor) and one or more [_secondary constructors_](#secondary-constructors).
+
+The primary constructor is the main way to initialize a class. 
+You declare it in the class header.
+A secondary constructor provides additional initialization logic. 
+You declare it in the class body.
+
+Both primary and secondary constructors are optional, but a class must have at least one constructor.
+
+### Primary constructor
+
+The primary constructor sets up the initial state of an instance when [it's created](#creating-instances).
+
+To declare a primary constructor, place it in the class header after the class name:
+
+```kotlin
+class Person constructor(name: String) { /*...*/ }
+```
+
+If the primary constructor doesn't have any [annotations](annotations.md) or [visibility modifiers](visibility-modifiers.md#constructors), 
+you can omit the `constructor` keyword:
+
+```kotlin
+class Person(name: String) { /*...*/ }
+```
+
+The primary constructor can declare parameters as properties. Use the `val` keyword before the argument name to declare a read-only property 
+and the `var` keyword for a mutable property:
+
+```kotlin
+class Person(val name: String, var age: Int) { /*...*/ }
+```
+
+These constructor parameter properties are stored as part of the instance and are accessible from outside the class.
+
+It's also possible to declare primary constructor parameters that are not properties. 
+These parameters don't have 
+`val` or `var` in front of them, so they are not stored in the instance and are available only within the class body:
+
+```kotlin
+// Primary constructor parameter that is also a property
+class PersonWithProperty(val name: String) {
+    fun greet() {
+        println("Hello, $name")
+    }
+}
+
+// Primary constructor parameter only (not stored as a property)
+class PersonWithAssignment(name: String) {
+    // Must be assigned to a property to be usable later
+    val displayName: String = name
+    
+    fun greet() {
+        println("Hello, $displayName")
+    }
 }
 ```
 
-Kotlin 提供了一种简洁的语法，用于声明属性并从主构造函数进行初始化：
+Properties declared in the primary constructor are accessible by
+[member functions](functions.md) of the class:
 
 ```kotlin
-class Person(val firstName: String, val lastName: String, var age: Int)
+// Class with a primary constructor declaring properties
+class Person(val name: String, var age: Int) {
+    // Member function accessing class properties
+    fun introduce(): String {
+        return "Hi, I'm $name and I'm $age years old."
+    }
+}
 ```
 
-这样的声明还可以包含类属性的默认值：
+You can also assign default values to properties in the primary constructor:
 
 ```kotlin
-class Person(val firstName: String, val lastName: String, var isEmployed: Boolean = true)
+class Person(val name: String = "John", var age: Int = 30) { /*...*/ }
 ```
 
-在声明类属性时，你可以使用[尾随逗号](coding-conventions.md#trailing-commas)：
+If no value is passed to the constructor during [instance creation](#creating-instances), 
+properties use their default value:
+
+```kotlin
+// Class with a primary constructor 
+// including default values for name and age
+class Person(val name: String = "John", var age: Int = 30)
+
+fun main() {
+    // Creates an instance using default values
+    val person = Person()
+    println("Name: ${person.name}, Age: ${person.age}")
+    // Name: John, Age: 30
+}
+```
+{kotlin-runnable="true" id="class-with-primary-constructor"}
+
+You can use the primary constructor parameters to initialize additional class properties directly in the class body:
+
+```kotlin
+// Class with a primary constructor 
+// including default values for name and age
+class Person(
+    val name: String = "John",
+    var age: Int = 30
+) {
+    // Initializes the description property 
+    // from the primary constructor parameters
+    val description: String = "Name: $name, Age: $age"
+}
+
+fun main() {
+    // Creates an instance of the Person class
+    val person = Person()
+    // Accesses the description property
+    println(person.description)
+    // Name: John, Age: 30
+}
+```
+{kotlin-runnable="true" id="class-with-default-values"}
+
+As with functions, you can use [trailing commas](coding-conventions.md#trailing-commas) in constructor declarations:
 
 ```kotlin
 class Person(
-    val firstName: String,
+    val name: String,
     val lastName: String,
-    var age: Int, // 尾随逗号
+    var age: Int,
 ) { /*...*/ }
 ```
 
-与普通属性类似，主构造函数中声明的属性可以是可变的 (`var`) 或只读的 (`val`)。
+### Initializer blocks
 
-如果构造函数有注解或可见性修饰符，则需要 `constructor` 关键字，并且修饰符放在其前面：
+The primary constructor initializes the class and sets its properties. 
+In most cases, you can handle this with simple code.
 
-```kotlin
-class Customer public @Inject constructor(name: String) { /*...*/ }
-```
+If you need to perform more complex operations during [instance creation](#creating-instances),
+place that logic in _initializer blocks_ inside the class body. These blocks run when the primary constructor executes.
 
-了解更多关于[可见性修饰符](visibility-modifiers.md#构造函数)的信息。
-
-### 次构造函数 {id=secondary-constructors}
-
-一个类还可以声明**次构造函数**，以 `constructor` 为前缀：
+Declare initializer blocks with the `init` keyword followed by curly braces `{}`. 
+Write within the curly braces any code that you want to run during initialization:
 
 ```kotlin
-class Person(val pets: MutableList<Pet> = mutableListOf())
-
-class Pet {
-    constructor(owner: Person) {
-        owner.pets.add(this) // 将此宠物添加到其所有者的宠物列表中
+// Class with a primary constructor that initializes name and age
+class Person(val name: String, var age: Int) {
+    init {
+        // Initializer block runs when an instance is created
+        println("Person created: $name, age $age.")
     }
 }
-```
 
-如果一个类有一个主构造函数，那么每个次构造函数都需要向主构造函数进行委托。
-这可以直接委托，也可以通过其他次构造函数间接委托。
-委托给同一类的另一个构造函数可以使用 `this` 关键字来实现：
-
-```kotlin
-class Person(val name: String) {
-    val children: MutableList<Person> = mutableListOf()
-    constructor(name: String, parent: Person) : this(name) {
-        parent.children.add(this)
-    }
+fun main() {
+    // Creates an instance of the Person class
+    Person("John", 30)
+    // Person created: John, age 30.
 }
 ```
+{kotlin-runnable="true" id="class-with-initializer-block"}
 
-初始化块中的代码实际上成为主构造函数的一部分。
-当使用次构造函数时，委托给主构造函数会在访问次构造函数的第一条语句时发生。
-因此，初始化块和属性初始化器中的代码会在执行次构造函数体之前被执行。
-这确保了在实例化对象时，无论使用主构造函数还是次构造函数，所有相关的初始化代码都会在构造函数体执行之前完成。
-
-即使类没有主构造函数，委托仍然会隐式发生，并且初始化块仍然会被执行：
+Add as many initializer blocks (`init {}`) as you need. They run in the order in which they appear in the class body, 
+along with property initializers:
 
 ```kotlin
 //sampleStart
-class Constructors {
+// Class with a primary constructor that initializes name and age
+class Person(val name: String, var age: Int) {
+    // First initializer block
     init {
-        println("Init block")
+        // Runs first when an instance is created
+        println("Person created: $name, age $age.")
     }
 
-    constructor(i: Int) {
-        println("Constructor $i")
+    // Second initializer block
+    init {
+        // Runs after the first initializer block
+        if (age < 18) {
+            println("$name is a minor.")
+        } else {
+            println("$name is an adult.")
+        }
     }
 }
-//sampleEnd
 
 fun main() {
-    Constructors(1)
+    // Creates an instance of the Person class
+    Person("John", 30)
+    // Person created: John, age 30.
+    // John is an adult.
 }
+//sampleEnd
 ```
-{kotlin-runnable="true"}
+{kotlin-runnable="true" id="class-with-second-initializer-block"}
 
-如果一个非抽象类没有声明任何构造函数（主构造函数或次构造函数），它将具有一个生成的无参数主构造函数。构造函数的可见性将是 public。
+You can use primary constructor parameters in initializer blocks. For example, in the code above, the first and second initializers use
+the `name` and `age` parameters from the primary constructor. 
 
-如果不希望你的类有一个公共构造函数，请声明一个没有默认可见性的空主构造函数：
+A common use case for `init` blocks is data validation. For example, by calling the [`require` function](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/require.html):
 
 ```kotlin
-class DontCreateMe private constructor() { /*...*/ }
+class Person(val age: Int) {
+    init {
+        require(age > 0, "age must be positive")
+    }
+}
 ```
 
-> 在 JVM 上，如果所有主构造函数参数都有默认值，编译器将生成一个额外的无参数构造函数，该构造函数将使用默认值。
-> 这样可以更容易地将 Kotlin 与通过无参数构造函数创建类实例的库（例如 Jackson 或 JPA）一起使用。
+### Secondary constructors
+
+In Kotlin, secondary constructors are additional constructors that a class can have beyond its primary constructor. 
+Secondary constructors are useful 
+when you need multiple ways to initialize a class or for [Java interoperability](java-to-kotlin-interop.md).
+
+To declare a secondary constructor, use the `constructor`
+keyword inside the class body with the constructor parameters within parentheses `()`. 
+Add the constructor logic within curly braces `{}`:
+
+```kotlin
+// Class header with a primary constructor that initializes name and age
+class Person(val name: String, var age: Int) {
+
+    // Secondary constructor that takes age as a
+    // String and converts it to an Int
+    constructor(name: String, age: String) : this(name, age.toIntOrNull() ?: 0) {
+        println("$name created with converted age: $age")
+    }
+}
+
+fun main() {
+    // Uses the secondary constructor with age as a String
+    Person("Bob", "8")
+    // Bob created with converted age: 8
+}
+```
+{kotlin-runnable="true" id="class-with-secondary-constructor"}
+
+> The expression `age.toIntOrNull() ?: 0` uses the Elvis operator. For more information, see [Null safety](null-safety.md#elvis-operator).
 >
+{style="tip"}
+
+In the code above, the secondary constructor delegates to the primary constructor via the `this` keyword, 
+passing `name` and the `age` value converted to an integer.
+
+In Kotlin, secondary constructors must delegate to the primary constructor. This delegation ensures that all primary 
+constructor initialization logic is executed before any secondary constructor logic runs. 
+
+Constructor delegation can be: 
+* **Direct**, where the secondary constructor calls the primary constructor immediately.
+* **Indirect**, where one secondary constructor calls another, which in turn delegates to the primary constructor.
+
+Here's an example demonstrating how direct and indirect delegation works:
+
+```kotlin
+// Class header with a primary constructor that initializes name and age
+class Person(
+    val name: String,
+    var age: Int
+) {
+    // Secondary constructor with direct delegation 
+    // to the primary constructor
+    constructor(name: String) : this(name, 0) {
+        println("Person created with default age: $age and name: $name.")
+    }
+
+    // Secondary constructor with indirect delegation: 
+    // this("Bob") -> constructor(name: String) -> primary constructor
+    constructor() : this("Bob") {
+        println("New person created with default age: $age and name: $name.")
+    }
+}
+
+fun main() {
+    // Creates an instance based on the direct delegation
+    Person("Alice")
+    // Person created with default age: 0 and name: Alice.
+
+    // Creates an instance based on the indirect delegation
+    Person()
+    // Person created with default age: 0 and name: Bob.
+    // New person created with default age: 0 and name: Bob.
+}
+```
+{kotlin-runnable="true" id="class-delegation"}
+
+In classes with initializer blocks (`init {}`), the code within these blocks becomes part of the primary constructor.
+Given that secondary constructors delegate to the primary constructor first, all initializer blocks
+and property initializers run before the body of the secondary constructor. Even if the class has no primary constructor, 
+the delegation still happens implicitly:
+
+```kotlin
+// Class header with no primary constructor
+class Person {
+    // Initializer block runs when an instance is created
+    init {
+        // Runs before the secondary constructor
+        println("1. First initializer block runs")
+    }
+
+    // Secondary constructor that takes an integer parameter
+    constructor(i: Int) {
+        // Runs after the initializer block
+        println("2. Person $i is created")
+    }
+}
+
+fun main() {
+    // Creates an instance of the Person class
+    Person(1)
+    // 1. First initializer block runs
+    // 2. Person 1 created
+}
+```
+{kotlin-runnable="true" id="class-delegation-sequence"}
+
+### Classes without constructors
+
+Classes that don't declare any constructors (primary or secondary) have an implicit primary constructor
+with no parameters:
+
+```kotlin
+// Class with no explicit constructors
+class Person {
+    // No primary or secondary constructors declared
+}
+
+fun main() {
+    // Creates an instance of the Person class 
+    // using the implicit primary constructor
+    val person = Person()
+}
+```
+
+The visibility of this implicit primary constructor is public, meaning it can be accessed from anywhere.
+If you don't want your class to have a public constructor, declare an empty primary constructor with non-default visibility:
+
+```kotlin
+class Person private constructor() { /*...*/ }
+```
+
+> On the JVM, if all primary constructor parameters have default values, the compiler implicitly provides 
+> a parameterless constructor that uses those default values. 
+> 
+> This makes it easier to use Kotlin with libraries such as [Jackson](https://github.com/FasterXML/jackson) 
+> or [Spring Data JPA](https://spring.io/projects/spring-data-jpa), which create class instances through 
+> parameterless constructors.
+>
+> In the following example, Kotlin implicitly provides a parameterless constructor `Person()` that uses the default value `""`:
+> 
 > ```kotlin
-> class Customer(val customerName: String = "")
+> class Person(val personName: String = "")
 > ```
 >
 {style="note"}
 
-## 创建类的实例 {id=creating-instances-of-classes}
+## Inheritance
 
-要创建一个类的实例，像调用普通函数一样调用其构造函数。你可以将创建的实例分配给一个 [变量](basic-syntax.md#variables)：
+Class inheritance in Kotlin allows you to create a new class (derived class) from an existing class (base class), 
+inheriting its properties and functions while adding or modifying behavior.
+
+For detailed information about inheritance hierarchies and how to use of the `open` keyword, see the [Inheritance](inheritance.md) section.
+
+## Abstract classes
+
+In Kotlin, abstract classes are classes that can't be instantiated directly. They are designed to be inherited by other 
+classes which define their actual behavior. This behavior is called an _implementation_.
+
+An abstract class can declare abstract properties and functions, which must be implemented 
+by subclasses.
+
+Abstract classes can also have constructors. 
+These constructors initialize class properties and enforce required parameters for subclasses.
+Declare an abstract class using the `abstract` keyword:
 
 ```kotlin
-val invoice = Invoice()
-
-val customer = Customer("Joe Smith")
+abstract class Person(val name: String, val age: Int)
 ```
 
-> Kotlin 没有 `new` 关键字。
->
-{style="note"}
+An abstract class can have both abstract and non-abstract members (properties and functions). 
+To declare a member as abstract, you must use the `abstract` keyword explicitly. 
 
-有关创建嵌套、内部和匿名内部类的实例的过程，请参阅 [嵌套类](nested-classes.md)。
+You don't need to annotate abstract classes or functions with the `open`
+keyword because they are implicitly inheritable by default.
+For more details about the `open` keyword, see [Inheritance](inheritance.md#open-keyword).
 
-## 类成员 {id=类成员}
-
-类可以包含：
-
-* [构造函数和初始化块](classes.md#constructors)
-* [函数](functions.md)
-* [属性](properties.md)
-* [嵌套类和内部类](nested-classes.md)
-* [对象声明](object-declarations.md)
-
-## 继承 {id=继承}
-
-类可以相互继承，形成继承层次结构。
-这意味着一个类可以从另一个类继承属性和方法，形成一种层次化的关系。
-在继承结构中，子类可以继承父类的特征，并且可以添加或修改一些新的特征。
-这种继承机制有助于代码的重用和组织，使得类之间可以建立更为有序和结构化的关系。
-
-[了解 Kotlin 中的继承](inheritance.md)。
-
-## 抽象类 {id=abstract-classes}
-
-我们可以声明一个类为`abstract`，同时也可以将类中的一些或全部成员标记为抽象。
-抽象成员意味着在这个类中没有具体的实现。
-这里有一个特别的地方是，对于抽象类或函数，不需要使用`open`关键字进行标注。
+Abstract members don't have an implementation
+in the abstract class.
+You define the implementation in a subclass or inheriting class with an `override` function or property:
 
 ```kotlin
-abstract class Polygon {
-    abstract fun draw()
-}
+// Abstract class with a primary constructor that declares name and age
+abstract class Person(
+    val name: String,
+    val age: Int
+) {
+    // Abstract member 
+    // Doesn't provide implementation,
+    // and it must be implemented by subclasses
+    abstract fun introduce()
 
-class Rectangle : Polygon() {
-    override fun draw() {
-        // 画矩形
-    }
-}
-```
-
-你可以用抽象的方法覆盖非抽象的 `open` 成员。
-
-```kotlin
-open class Polygon {
-    open fun draw() {
-        // 一些默认的多边形绘制方法
+    // Non-abstract member (has an implementation)
+    fun greet() {
+        println("Hello, my name is $name.")
     }
 }
 
-abstract class WildShape : Polygon() {
-    // 继承 WildShape 的类需要提供自己的
-    // draw 方法，而不是使用 Polygon 上的默认方法
-    abstract override fun draw()
+// Subclass that provides an implementation for the abstract member
+class Student(
+    name: String,
+    age: Int,
+    val school: String
+) : Person(name, age) {
+    override fun introduce() {
+        println("I am $name, $age years old, and I study at $school.")
+    }
+}
+
+fun main() {
+    // Creates an instance of the Student class
+    val student = Student("Alice", 20, "Engineering University")
+    
+    // Calls the non-abstract member
+    student.greet()
+    // Hello, my name is Alice.
+    
+    // Calls the overridden abstract member
+    student.introduce()
+    // I am Alice, 20 years old, and I study at Engineering University.
 }
 ```
+{kotlin-runnable="true" id="abstract-class"}
 
-## 伴生对象 {id=companion-objects}
+## Companion objects
 
-如果你需要编写一个函数，该函数可以在没有类实例的情况下调用，但需要访问类的内部（例如工厂方法），你可以将其编写为该类内部的 [对象声明](object-declarations.md) 的成员。
+In Kotlin, each class can have a [companion object](object-declarations.md#companion-objects). 
+Companion objects are a type of object declaration
+that allows you to access its members using the class name without creating a class instance.
 
-更具体地说，如果你在类内部声明了一个[伴生对象](object-declarations.md#companion-objects)，你可以只使用类名作为限定符访问其成员。
+Suppose you need to write a function that can be called without creating an instance of a class, but it is still logically 
+connected to the class (such as a factory function). In that case, you can declare it inside a companion [object declaration](object-declarations.md) within the class:
+
+```kotlin
+// Class with a primary constructor that declares the name property
+class Person(
+    val name: String
+) {
+    // Class body with a companion object
+    companion object {
+        fun createAnonymous() = Person("Anonymous")
+    }
+}
+
+fun main() {
+    // Calls the function without creating an instance of the class
+    val anonymous = Person.createAnonymous()
+    println(anonymous.name)
+    // Anonymous
+}
+```
+{kotlin-runnable="true" id="class-with-companion-object"}
+
+If you declare a companion object inside your class,
+you can access its members using only the class name as a qualifier.
+
+For more information, see [Companion objects](object-declarations.md#companion-objects).

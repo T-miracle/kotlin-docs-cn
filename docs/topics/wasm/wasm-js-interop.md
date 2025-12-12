@@ -1,6 +1,8 @@
 [//]: # (title: 与 JavaScript 的互操作性)
 
-[//]: # (TODO 等待校验)
+<primary-label ref="beta"/> 
+
+Kotlin/Wasm allows you to use both JavaScript code in Kotlin and Kotlin code in JavaScript.
 
 Kotlin/Wasm 允许你在 Kotlin 中使用 JavaScript 代码，也可以在 JavaScript 中使用 Kotlin 代码。
 
@@ -8,7 +10,7 @@ Kotlin/Wasm 允许你在 Kotlin 中使用 JavaScript 代码，也可以在 JavaS
 如果你熟悉 Kotlin/JS 的互操作性，你会发现 Kotlin/Wasm 的互操作性是相似的。
 然而，仍然有一些关键的不同点需要注意。
 
-> Kotlin/Wasm 目前是 [Alpha](components-stability.md) 版本。
+> Kotlin/Wasm 目前是 [Beta](components-stability.md) 版本。
 > 它可能会随时改变。请不要在生产环境中使用。
 > 我们非常感谢你在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492) 上的反馈。
 >
@@ -397,29 +399,15 @@ external fun <T : JsAny> processData(data: JsArray<T>): T
 
 ## 异常处理 {id=exception-handling}
 
-你可以使用 Kotlin 的 `try-catch` 表达式来捕获 JavaScript 异常。  
-然而，默认情况下，在 Kotlin/Wasm 中无法访问有关抛出的值的具体细节。
+You can use Kotlin `try-catch` expressions to catch JavaScript exceptions in Kotlin/Wasm code.
+Exception handling works as follows:
 
-你可以配置 `JsException` 类型，以包含来自 JavaScript 的原始错误信息和堆栈跟踪。  
-为此，请在你的 `build.gradle.kts` 文件中添加以下编译器选项：
+* Exceptions thrown from JavaScript: detailed information is available on the Kotlin side.
+  If such an exception propagates back to JavaScript, it's no longer wrapped into WebAssembly.
 
-```kotlin
-kotlin {
-    wasmJs {
-        compilerOptions {
-            freeCompilerArgs.add("-Xwasm-attach-js-exception")
-        }
-    }
-}
-```
+* Exceptions thrown from Kotlin: they can be caught on JavaScript's side as regular JS errors.
 
-这种行为依赖于 `WebAssembly.JSTag` API，该 API 仅在某些浏览器中可用：
-
-* **Chrome：** 从版本 115 开始支持
-* **Firefox：** 从版本 129 开始支持
-* **Safari：** 尚不支持
-
-以下是演示此行为的示例：
+Here's an example that demonstrates catching a JavaScript exception on the Kotlin side:
 
 ```kotlin
 external object JSON {
@@ -445,17 +433,17 @@ fun main() {
 }
 ```
 
-启用 `-Xwasm-attach-js-exception` 编译器选项后，`JsException` 类型会提供来自 JavaScript 错误的具体细节。  
-如果没有启用此编译器选项，`JsException` 仅包含一条通用消息，指出在运行 JavaScript 代码时抛出了异常。
+This exception handling works automatically in modern browsers
+that support the [`WebAssembly.JSTag`](https://webassembly.github.io/exception-handling/js-api/#dom-webassembly-jstag)
+feature:
 
-如果你尝试使用 JavaScript 的 `try-catch` 表达式来捕获 Kotlin/Wasm 异常，它看起来像是一个通用的
-`WebAssembly.Exception`，没有直接可访问的消息和数据。
+* Chrome 115+
+* Firefox 129+
+* Safari 18.4+
 
 ## Kotlin/Wasm 和 Kotlin/JS 互操作性差异
 
-<a name="differences"/>
-
-尽管 Kotlin/Wasm 互操作性与 Kotlin/JS 互操作性有相似之处，但有一些关键差异需要考虑：
+Although Kotlin/Wasm interoperability shares similarities with Kotlin/JS interoperability, there are key differences to consider:
 
 |                         | **Kotlin/Wasm**                                                                                                      | **Kotlin/JS**                                                                                                |
 |-------------------------|----------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|

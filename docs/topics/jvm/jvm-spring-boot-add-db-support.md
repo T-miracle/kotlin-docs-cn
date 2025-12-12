@@ -1,5 +1,6 @@
-[//]: # (title: 为 Spring Boot 项目添加数据库支持)
-[//]: # (description: 使用 JDBCtemplate 为 Kotlin 编写的 Spring Boot 项目添加数据库支持。)
+[//]: # (title: Add database support for Spring Boot project)
+
+<web-summary>Add a database support for Sprint Boot project written in Kotlin using JDBC template.</web-summary>
 
 <tldr>
     <p>这是<strong>Spring Boot 和 Kotlin 入门</strong>教程的第三部分：</p><br/>  
@@ -9,8 +10,9 @@
       <img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问<br/></p>  
 </tldr>
 
-在本部分教程中，您将使用 JDBC 向项目添加并配置数据库。在 JVM 应用程序中，您使用 JDBC 与数据库进行交互。  
-为了方便，Spring 框架提供了 `JdbcTemplate` 类，它简化了 JDBC 的使用，并帮助避免常见错误。
+In this part of the tutorial, you'll add and configure a database to your project using _Java Database Connectivity_ (JDBC).
+In JVM applications, you use JDBC to interact with databases.
+For convenience, the Spring Framework provides the `JdbcTemplate` class that simplifies the use of JDBC and helps to avoid common errors.
 
 ## 添加数据库支持 {id=add-database-support}
 
@@ -22,7 +24,7 @@
 
 ```kotlin
 // MessageService.kt
-package demo
+package com.example.demo
 
 import org.springframework.stereotype.Service
 import org.springframework.jdbc.core.JdbcTemplate
@@ -88,7 +90,7 @@ class MessageService(private val db: JdbcTemplate) {
 
 ```kotlin
 // MessageController.kt
-package demo
+package com.example.demo
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -97,7 +99,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
-
 
 @RestController
 @RequestMapping("/")
@@ -138,7 +139,7 @@ data class Message(val id: String?, val text: String)
 
 ```kotlin
 // MessageService.kt
-package demo
+package com.example.demo
 
 import org.springframework.stereotype.Service
 import org.springframework.jdbc.core.JdbcTemplate
@@ -158,7 +159,7 @@ class MessageService(private val db: JdbcTemplate) {
             id, message.text
         )
         return message.copy(id = id) // Return a copy of the message with the new id
-   }
+    }
 }
 ```
 
@@ -205,7 +206,7 @@ class MessageService(private val db: JdbcTemplate) {
    ```
 
    这些设置启用 Spring Boot 应用程序的数据库连接。  
-   请参阅 [Spring 文档](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html) 了解常见应用程序属性的完整列表。
+   请参阅 [Spring 文档](https://docs.spring.io/spring-boot/appendix/application-properties/index.html) 了解常见应用程序属性的完整列表。
 
 ## 通过 HTTP 请求将消息添加到数据库 {id=add-messages-to-database-via-http-request}
 
@@ -277,7 +278,7 @@ curl -X GET --location "http://localhost:8080"
 
     ```kotlin
     // MessageService.kt
-    package demo
+    package com.example.demo
 
     import org.springframework.stereotype.Service
     import org.springframework.jdbc.core.JdbcTemplate
@@ -286,7 +287,6 @@ curl -X GET --location "http://localhost:8080"
     
     @Service
     class MessageService(private val db: JdbcTemplate) {
-    
         fun findMessages(): List<Message> = db.query("select * from messages") { response, _ ->
             Message(response.getString("id"), response.getString("text"))
         }
@@ -305,7 +305,20 @@ curl -X GET --location "http://localhost:8080"
         }
     }
     ```
-
+<deflist collapsible="true">
+    <def title="vararg argument position in the parameter list">
+        <p>The <code>query()</code> function takes three arguments:</p>
+        <list>
+            <li>SQL query string that requires a parameter to run</li>
+            <li><code>id</code>, which is a parameter of type String</li>
+            <li><code>RowMapper</code> instance, which implemented by a lambda expression</li>
+        </list>
+        <p>The second parameter for the <code>query()</code> function is declared as a <i>variable argument</i> (<code>vararg</code>). In Kotlin, the position of the variable arguments parameter is not required to be the last in the parameters list.</p>
+    </def>
+    <def title="singleOrNull() function">
+       <p>The <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/single-or-null.html"><code>singleOrNull()</code></a> function returns a single element, or <code>null</code> if the array is empty or has more than one element with the same value.</p>
+    </def>
+   </deflist>
    > 用于通过 id 获取消息的 `.query()` 函数是 Spring 框架提供的 [Kotlin 扩展函数](extensions.md#extension-functions)，  
    > 它需要额外的导入 `import org.springframework.jdbc.core.query`，如上面代码所示。
    >
@@ -315,7 +328,7 @@ curl -X GET --location "http://localhost:8080"
 
     ```kotlin
     // MessageController.kt
-    package demo
+    package com.example.demo
 
     import org.springframework.http.ResponseEntity
     import org.springframework.web.bind.annotation.GetMapping
@@ -348,22 +361,13 @@ curl -X GET --location "http://localhost:8080"
     }
     ```
 
-   <deflist collapsible="true">
-      <def title="从上下文路径中检索值">
-         <p>消息的 <code>id</code> 是通过 Spring 框架从上下文路径中检索的，因为您在新函数上使用了 <code>@GetMapping(&quot;/{id}&quot;)</code> 注解。通过在函数参数上添加 <code>@PathVariable</code> 注解，您告诉框架使用检索到的值作为函数的参数。这个新函数会调用 <code>MessageService</code> 来根据 id 检索单独的消息。</p>
-      </def>
-      <def title="vararg 参数在参数列表中的位置">
-         <p><code>query()</code> 函数接受三个参数：</p>
-         <list>
-            <li>需要参数的 SQL 查询字符串</li>
-            <li><code>id</code>，这是一个类型为 String 的参数</li>
-            <li><code>RowMapper</code> 实例，通过 lambda 表达式实现</li>
-         </list>
-         <p><code>query()</code> 函数的第二个参数声明为一个 <i>可变参数</i>（<code>vararg</code>）。在 Kotlin 中，可变参数的位置不必总是参数列表中的最后一个。</p>
-      </def>
-      <def title="带有可空接收者的扩展函数">
-         <p>可以定义带有可空接收者类型的扩展函数。如果接收者为 <code>null</code>，那么 <code>this</code> 也为 <code>null</code>。因此，在定义带有可空接收者类型的扩展时，建议在函数体内执行 <code>this == null</code> 检查。</p>
-         <p>您还可以使用空安全调用操作符（<code>?.</code>）来执行空检查，如上面 <code>toResponseBody</code> 函数中的代码：</p>
+    <deflist collapsible="true">
+    <def title="Retrieving a value from the context path">
+       <p>The message <code>id</code> is retrieved from the context path by the Spring Framework as you annotated the new function by <code>@GetMapping(&quot;/{id}&quot;)</code>. By annotating the function argument with <code>@PathVariable</code>, you tell the framework to use the retrieved value as a function argument. The new function makes a call to <code>MessageService</code> to retrieve the individual message by its id.</p>
+    </def>
+    <def title="Extension function with nullable receiver">
+         <p>Extensions can be defined with a nullable receiver type. If the receiver is <code>null</code>, then <code>this</code> is also <code>null</code>. So when defining an extension with a nullable receiver type, it is recommended performing a <code>this == null</code> check inside the function body.</p>
+         <p>You can also use the null-safe invocation operator (<code>?.</code>) to perform the null check as in the <code>toResponseEntity()</code> function above:</p>
          <code-block lang="kotlin">
          this?.let { ResponseEntity.ok(it) }
          </code-block>
@@ -377,7 +381,7 @@ curl -X GET --location "http://localhost:8080"
 
 ```kotlin
 // DemoApplication.kt
-package demo
+package com.example.demo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -386,14 +390,14 @@ import org.springframework.boot.runApplication
 class DemoApplication
 
 fun main(args: Array<String>) {
-   runApplication<DemoApplication>(*args)
+    runApplication<DemoApplication>(*args)
 }
 ```
 {initial-collapse-state="collapsed" collapsible="true"}
 
 ```kotlin
 // Message.kt
-package demo
+package com.example.demo
 
 data class Message(val id: String?, val text: String)
 ```
@@ -401,7 +405,7 @@ data class Message(val id: String?, val text: String)
 
 ```kotlin
 // MessageService.kt
-package demo
+package com.example.demo
 
 import org.springframework.stereotype.Service
 import org.springframework.jdbc.core.JdbcTemplate
@@ -432,7 +436,7 @@ class MessageService(private val db: JdbcTemplate) {
 
 ```kotlin
 // MessageController.kt
-package demo
+package com.example.demo
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -442,7 +446,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.net.URI
-
 
 @RestController
 @RequestMapping("/")
@@ -485,7 +488,7 @@ Spring 应用程序已经准备好运行：
 
     ```http request
     ### 通过 id 获取消息
-    GET http://localhost:8080/f16c1d2e-08dc-455c-abfe-68440229b84f
+    GET http://localhost:8080/f910aa7e-11ee-4215-93ed-1aeeac822707
     ```
 
     > 将您自己的消息 id 替换掉上面提到的 id。

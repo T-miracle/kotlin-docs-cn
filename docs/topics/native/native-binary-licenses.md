@@ -14,7 +14,7 @@ Sometimes it is derived work, such as code rewritten from C++ to Kotlin.
 In particular, the Kotlin/Native compiler produces binaries that can include third-party code, data, or derived work.
 This means that the Kotlin/Native-compiled binaries are subject to the terms and conditions of the third-party licenses.
 
-In practice, if you distribute a Kotlin/Native-compiled [final binary](multiplatform-build-native-binaries.md),
+In practice, if you distribute a Kotlin/Native-compiled [final binary](https://kotlinlang.org/docs/multiplatform/multiplatform-build-native-binaries.html),
 you should always include necessary license files in your binary distribution. The files should be accessible
 to users of your distribution in a readable form.
 
@@ -51,7 +51,7 @@ Always include the following license files for the corresponding projects:
         <td><a href="https://github.com/microsoft/mimalloc">mimalloc</a></td>
         <td>
           <p><a href="https://github.com/JetBrains/kotlin/blob/master/kotlin-native/licenses/third_party/mimalloc_LICENSE.txt">MIT license</a></p>
-          <p>Include in case you use the mimaloc memory allocator instead of the default one (the <code>-Xallocator=mimalloc</code> compiler option is set).</p>
+          <p>Include in case you use the mimalloc memory allocator instead of the default one (the <code>-Xallocator=mimalloc</code> compiler option is set).</p>
         </td>
    </tr>
    <tr>

@@ -50,7 +50,9 @@ In the following table, there are the minimum and maximum **fully supported** ve
 
 | KGP version   | Gradle min and max versions           | AGP min and max versions                            |
 |---------------|---------------------------------------|-----------------------------------------------------|
-| 2.1.20        | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% |
+| 2.2.20–2.2.21 | %minGradleVersion%–%maxGradleVersion% | %minAndroidGradleVersion%–%maxAndroidGradleVersion% |
+| 2.2.0–2.2.10  | 7.6.3–8.14                            | 7.3.1–8.10.0                                        |
+| 2.1.20–2.1.21 | 7.6.3–8.12.1                          | 7.3.1–8.7.2                                         |
 | 2.1.0–2.1.10  | 7.6.3–8.10*                           | 7.3.1–8.7.2                                         |
 | 2.0.20–2.0.21 | 6.8.3–8.8*                            | 7.1.3–8.5                                           |
 | 2.0.0         | 6.8.3–8.5                             | 7.1.3–8.3.1                                         |
@@ -65,7 +67,7 @@ In the following table, there are the minimum and maximum **fully supported** ve
 > *Kotlin 2.0.20–2.0.21 and Kotlin 2.1.0–2.1.10 are fully compatible with Gradle up to 8.6.
 > Gradle versions 8.7–8.10 are also supported, with only one exception: If you use the Kotlin Multiplatform Gradle plugin,
 > you may see deprecation warnings in your multiplatform projects calling the `withJava()` function in the JVM target.
-> For more information, see [Java source sets created by default](multiplatform-compatibility-guide.md#java-source-sets-created-by-default).
+> For more information, see [Java source sets created by default](https://kotlinlang.org/docs/multiplatform/multiplatform-compatibility-guide.html#java-source-sets-created-by-default).
 >
 {style="warning"}
 
@@ -185,7 +187,7 @@ in the `java` extension or task cause JVM target incompatibility. For example:
 the `compileKotlin` task has `jvmTarget=1.8`, and
 the `compileJava` task has (or [inherits](https://docs.gradle.org/current/userguide/java_plugin.html#sec:java-extension)) `targetCompatibility=15`.
 
-Configure the behavior of this check for the whole project by setting the `kotlin.jvm.target.validation.mode` property in the `build.gradle(.kts)`
+Configure the behavior of this check for the whole project by setting the `kotlin.jvm.target.validation.mode` property in the `gradle.properties`
 file to:
 
 * `error` – the plugin fails the build; the default value for projects on Gradle 8.0+.
@@ -547,8 +549,6 @@ Learn more about:
 
 ### Other details
 
-Learn more about [Kotlin/JVM](jvm-get-started.md).
-
 #### Disable use of artifact in compilation task
 
 In some rare scenarios, you can experience a build failure caused by a circular dependency error. For example, when you 
@@ -599,7 +599,7 @@ tasks.jar(type: Jar) {
 
 ## Targeting multiple platforms
 
-Projects targeting [multiple platforms](multiplatform-dsl-reference.md#targets), called [multiplatform projects](multiplatform-intro.md),
+Projects targeting [multiple platforms](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html#targets), called [multiplatform projects](https://kotlinlang.org/docs/multiplatform/get-started.html),
 require the `kotlin-multiplatform` plugin.
 
 >The `kotlin-multiplatform` plugin works with Gradle %minGradleVersion% or later.
@@ -627,16 +627,33 @@ plugins {
 </tab>
 </tabs>
 
-Learn more about [Kotlin Multiplatform for different platforms](multiplatform-intro.md) and 
-[Kotlin Multiplatform for iOS and Android](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-getting-started.html).
+Learn more about [Kotlin Multiplatform for different platforms](https://kotlinlang.org/docs/multiplatform/get-started.html) and 
+[Kotlin Multiplatform for iOS and Android](https://kotlinlang.org/docs/multiplatform/multiplatform-getting-started.html).
 
 ## Targeting Android
 
 It's recommended to use Android Studio for creating Android applications. [Learn how to use the Android Gradle plugin](https://developer.android.com/studio/releases/gradle-plugin).
 
-## Targeting JavaScript
+## Targeting the web
 
-When targeting JavaScript, use the `kotlin-multiplatform` plugin as well. [Learn more about setting up a Kotlin/JS project](js-project-setup.md)
+Kotlin, through Kotlin Multiplatform, offers two approaches for web development:
+
+* JavaScript-based (using the Kotlin/JS compiler)
+* WebAssembly-based (using the Kotlin/Wasm compiler)
+
+Both approaches use the Kotlin Multiplatform plugin but support different use cases.
+The sections below explain how to configure each target in your Gradle build and when to use them.
+
+### Targeting JavaScript
+
+Use Kotlin/JS if your goal is to:
+
+* Share business logic with a JavaScript/TypeScript codebase
+* Build non-shareable web apps with Kotlin
+
+For more information, see [Choose the right web target for a Kotlin Multiplatform project](https://kotlinlang.org/docs/multiplatform/choosing-web-target.html).
+
+When targeting JavaScript, use the `kotlin-multiplatform` plugin:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -659,9 +676,84 @@ plugins {
 </tab>
 </tabs>
 
-### Kotlin and Java sources for JavaScript
+Configure the JavaScript target by specifying whether it should run in the browser or the Node.js environment:
 
-This plugin only works for Kotlin files, so it is recommended that you keep Kotlin and Java files separate (if the
+```kotlin
+kotlin {
+    js().browser {  // or js().nodejs
+        /* ... */
+    }
+}
+```
+
+> See [further details about the Gradle configuration for JavaScript](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html#web-targets) and learn more about [setting up a Kotlin/JS project](js-project-setup.md).
+>
+{style="note"}
+
+### Targeting WebAssembly
+
+Use Kotlin/Wasm if you want to share both logic and UI across multiple platforms. For more information,
+see [Choose the right web target for a Kotlin Multiplatform project](https://kotlinlang.org/docs/multiplatform/choosing-web-target.html).
+
+As with JavaScript, use the `kotlin-multiplatform` plugin when targeting WebAssembly (Wasm):
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+plugins {
+    kotlin("multiplatform") version "%kotlinVersion%"
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+plugins {
+    id 'org.jetbrains.kotlin.multiplatform' version '%kotlinVersion%'
+}
+```
+
+</tab>
+</tabs>
+
+Depending on your requirements, you can target:
+
+* **`wasmJs`**: for running in browsers or Node.js
+* **`wasmWasi`**: for running in Wasm environments supporting [WASI (WebAssembly System Interface)](https://wasi.dev/), such as Wasmtime, WasmEdge, and so on.
+
+Configure the `wasmJs` target for web browsers or Node.js:
+
+```kotlin
+kotlin {
+    wasmJs {
+        browser { // or nodejs
+            /* ... */
+        }
+    }
+}
+```
+
+For WASI environments, configure the `wasmWasi` target:
+
+```kotlin
+kotlin {
+    wasmWasi {
+        nodejs {
+            /* ... */
+        }
+    }
+}
+```
+
+> [See further details about the Gradle configuration for Wasm](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html#web-targets).
+>
+{style="note"}
+
+### Kotlin and Java sources for the web target
+
+The KGP only works for Kotlin files, so it is recommended that you keep Kotlin and Java files separate (if the
 project contains Java files). If you don't store them separately, specify the source folder in the `sourceSets{}` block:
 
 <tabs group="build-script">
@@ -759,7 +851,44 @@ kotlin {
 </tab>
 </tabs>
 
-Alternatively, you can [set dependencies at top level](#set-dependencies-at-top-level).
+### Configure dependencies at the top level
+<primary-label ref="experimental-opt-in"/>
+
+You can configure common dependencies in multiplatform projects using a top-level `dependencies {}` block.
+Dependencies declared here behave as if they were added to the `commonMain` or `commonTest` source sets.
+
+To use the top-level `dependencies {}` block, opt in by adding the `@OptIn(ExperimentalKotlinGradlePluginApi::class)`
+annotation before the block:
+
+<tabs group="build-script">
+<tab title="Kotlin" group-key="kotlin">
+
+```kotlin
+kotlin {
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    dependencies {
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%")
+    }
+}
+```
+
+</tab>
+<tab title="Groovy" group-key="groovy">
+
+```groovy
+kotlin {
+    dependencies {
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:%coroutinesVersion%'
+    }
+}
+```
+
+</tab>
+</tabs>
+
+Add platform-specific dependencies inside the `sourceSets {}` block of the corresponding target.
+
+You can share your feedback on this feature in [YouTrack](https://youtrack.jetbrains.com/issue/KT-76446).
 
 ### Dependency types
 
@@ -976,8 +1105,8 @@ Kotlin/Native targets do not require additional test dependencies, and the `kotl
 ```kotlin
 kotlin {
     sourceSets {
-         commonTest.dependencies {
-             implementation(kotlin("test")) // This brings all the platform dependencies automatically
+        commonTest.dependencies {
+            implementation(kotlin("test")) // This brings all the platform dependencies automatically
         }
     }
 }
@@ -1169,33 +1298,6 @@ kotlin {
             }
         }
     }
-}
-```
-
-</tab>
-</tabs>
-
-### Set dependencies at top level
-
-Alternatively, you can specify the dependencies at top level, using the following pattern for the configuration names:
-`<sourceSetName><DependencyType>`. This can be helpful for some Gradle built-in dependencies, like `gradleApi()`, `localGroovy()`,
-or `gradleTestKit()`, which are not available in the source sets' dependency DSL.
-
-<tabs group="build-script">
-<tab title="Kotlin" group-key="kotlin">
-
-```kotlin
-dependencies {
-    "commonMainImplementation"("com.example:my-library:1.0")
-}
-```
-
-</tab>
-<tab title="Groovy" group-key="groovy">
-
-```groovy
-dependencies {
-    commonMainImplementation 'com.example:my-library:1.0'
 }
 ```
 

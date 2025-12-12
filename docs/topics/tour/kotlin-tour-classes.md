@@ -78,7 +78,7 @@ fun main() {
 * `id` 和 `email` 被默认构造函数用来创建 `contact`。
 
 Kotlin 类可以有多个构造函数，包括你自己定义的构造函数。
-要了解更多关于如何声明多个构造函数的信息，请参见 [构造函数](classes.md#constructors)。
+要了解更多关于如何声明多个构造函数的信息，请参见 [构造函数](classes.md#constructors-and-initializer-blocks)。
 
 ## 访问属性 {id=access-properties}
 
@@ -251,9 +251,9 @@ fun main() {
 
 ### 练习 1 {collapsible="true" collapsible="true"}
 
-定义一个数据类 `Employee`，具有两个属性：一个是姓名，另一个是工资。
-确保工资属性是可变的，否则你在年底时将无法获得工资提升！
-主函数演示了如何使用这个数据类。
+Define a data class `Employee` with two properties: one for a name, and another for a salary. Make sure that the property
+for salary is mutable, otherwise you won't get a salary boost at the end of the year! The main function demonstrates how
+you can use this data class.
 
 |---|---|
 ```kotlin
@@ -328,7 +328,7 @@ fun main() {
 > 在这个练习中，您导入一个包，以便可以使用 [`Random.nextInt()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.random/-random/next-int.html) 函数。
 > 有关导入包的更多信息，请参见 [包和导入](packages.md)。
 >
-{style = "tip"}
+{style="tip"}
 
 <deflist collapsible="true" id="kotlin-tour-classes-exercise-3-hint-1">
     <def title="提示 1">

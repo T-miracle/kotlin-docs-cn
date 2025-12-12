@@ -31,8 +31,9 @@ REST APIs 时接收包含大量数据的 JSON 文件，这些只是其中的一�
 
 ## Notebooks {id=notebooks}
 
-_Notebooks_ 是将代码、图形和文本集成在一个环境中的编辑器。
-在使用 Notebooks 时，您可以运行代码单元并立即查看输出。
+A _notebook_ is an interactive document where you can mix executable Kotlin code with text, visualizations, and results. 
+Think of it as a Kotlin REPL extended with the ability to organize your code into cells, document it with Markdown, 
+and immediately display outputs (from text to plots) alongside the code that produced them.
 
 Kotlin 提供了不同的 Notebooks  解决方案，例如 [Kotlin Notebook](#kotlin-notebook)、[Datalore](#kotlin-notebooks-in-datalore)
 和 [Kotlin-Jupyter Notebook](#jupyter-notebook-with-kotlin-kernel)，这些解决方案提供了便捷的数据检索、转换、探索、建模等功能。

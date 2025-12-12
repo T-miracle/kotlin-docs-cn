@@ -110,7 +110,8 @@ fun main() {
 
 请注意，前面三个例子中的局部返回的使用类似于在常规循环中使用 `continue`。
 
-对于 `break` 没有直接的等价物，但可以通过添加另一个嵌套的 lambda 并从其中进行非局部返回来模拟：
+There is no direct equivalent for `break`, but it can be simulated by adding an outer `run` lambda and non-locally
+returning from it:
 
 ```kotlin
 //sampleStart
@@ -131,7 +132,9 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
 
-当返回一个值时，解析器会优先选用标签限定的返回：
+The non-local return here is possible since the nested `forEach()` lambda acts as an [inline function](inline-functions.md).
+
+When returning a value, the parser gives preference to the qualified return:
 
 ```kotlin
 return@a 1

@@ -44,7 +44,7 @@
 
    ![加载 Gradle 变更按钮](load-gradle-changes.png){width=295}
 
-如需了解这些设置的更多信息，请参阅 [跨平台 Gradle DSL 参考文档](multiplatform-dsl-reference.md)。
+如需了解这些设置的更多信息，请参阅 [跨平台 Gradle DSL 参考文档](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html)。
 
 ### 构建并运行应用程序 {id=build-and-run-the-application}
 
@@ -103,14 +103,14 @@ IntelliJ IDEA 会自动执行项目的增量构建。
            binaries {
                executable {
                    entryPoint = "main"
-                   runTask?.standardInput = System.`in`
+                   runTaskProvider?.configure { standardInput = System.`in` }
                }
            }
        }
        //...
    }
    ```
-   {collapsible="true" collapsible="true" collapsed-title="runTask?.standardInput = System.`in`"}
+   {collapsible="true" collapsible="true" collapsed-title="runTaskProvider?.configure { standardInput = System.`in` }"}
 
 3. 去除空格并统计字母数：
 
@@ -302,10 +302,11 @@ Android 和其他生态系统。
 
 要安装编译器：
 
-1. 访问 Kotlin 的 [GitHub 发布页面](%kotlinLatestUrl%)
-2. 查找名称中包含 `kotlin-native` 的文件，下载适合您操作系统的版本，例如 `kotlin-native-prebuilt-linux-x86_64-2.0.21.tar.gz`
-3. 将压缩包解压到您选择的目录
-4. 打开 shell 配置文件，将编译器的 `/bin` 目录路径添加到 `PATH` 环境变量：
+1. Go to the Kotlin's [GitHub releases](%kotlinLatestUrl%) page and scroll down to the **Assets** section.
+2. Look for a file with `kotlin-native` in the name and download one that is suitable for your operating system,
+   for example `kotlin-native-prebuilt-linux-x86_64-%kotlinVersion%.tar.gz`.
+3. Unpack the archive to a directory of your choice.
+4. Open your shell profile and add the path to the compiler's `/bin` directory to the `PATH` environment variable: 
 
    ```bash
    export PATH="/<编译器路径>/kotlin-native/bin:$PATH"
@@ -363,6 +364,7 @@ kotlinc-native hello.kt -o hello
 
 ## 下一步 {id=whats-next}
 
-* 完成 [使用 C 语言互操作和 libcurl 创建应用](native-app-with-c-and-libcurl.md) 教程，了解如何创建原生 HTTP 客户端并与 C 语言库交互
-* 学习如何 [为实际项目编写 Kotlin/Native 的 Gradle 构建脚本](multiplatform-dsl-reference.md)
-* 在 [文档](gradle.md) 中了解更多关于 Gradle 构建系统的内容
+* Complete the [Create an app using C interop and libcurl](native-app-with-c-and-libcurl.md) tutorial that explains how
+  to create a native HTTP client and interoperate with C libraries.
+* Learn how to [write Gradle build scripts for real-life Kotlin/Native projects](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html).
+* Read more about the Gradle build system in the [documentation](gradle.md).

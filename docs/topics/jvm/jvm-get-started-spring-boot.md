@@ -1,5 +1,6 @@
-[//]: # (title: 开始使用 Spring Boot 和 Kotlin)
-[//]: # (description: 开始使用 Spring Boot 和 Kotlin。创建一个使用 Kotlin 的 Spring Boot 应用程序)
+[//]: # (title: Get started with Spring Boot and Kotlin)
+
+<web-summary>Get started with Spring Boot and Kotlin. Create a Spring Boot application with Kotlin.</web-summary>
 
 通过完成这个教程，学习如何使用 Spring Boot 和 Kotlin：它会引导你完成创建一个简单应用程序的过程，并添加一个数据库来存储信息。
 

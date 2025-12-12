@@ -8,9 +8,27 @@
   </p>  
 </tldr>  
 
-在这里，你将学习如何创建你的第一个 [Kotlin Notebook](kotlin-notebook-overview.md)，执行简单操作，并运行代码单元。
+You can start working with your [Kotlin Notebook](kotlin-notebook-overview.md) in three main ways:
 
-## 创建空项目 {id=create-an-empty-project}
+* [Create a new project that includes a Kotlin Notebook](#create-a-new-project) 
+* [Add a Kotlin Notebook to an existing project](#add-a-new-kotlin-notebook-to-your-project)
+* [Create a scratch Kotlin Notebook](#create-a-scratch-kotlin-notebook)
+
+## Create a new project 
+
+To create a new project that includes a Kotlin Notebook:
+
+1. In IntelliJ IDEA's welcome screen, select **Kotlin Notebook** | **New Notebook** from the panel on the left.
+2. Enter a **Name** for your new notebook and select **Type** | **In Folder**.
+   * **Scratch:** This option is to create a scratch notebook without adding it to a project.
+   * **In Folder:** This option is to create a notebook within a project. You have to specify the project's location.
+3. Click **Create**.
+
+![Create a new Kotlin Notebook from IntelliJ IDEA](create-notebook-welcome.png){width=700}
+
+Your new Kotlin Notebook is created within a new project.
+
+Alternatively, create an empty project and then [add a Kotlin Notebook](#add-a-new-kotlin-notebook-to-your-project):
 
 1. 在 IntelliJ IDEA 中，选择 **File | New | Project**。
 2. 在左侧面板选择 **New Project**。
@@ -25,9 +43,9 @@
 
    ![创建新的 Kotlin Notebook 项目](new-notebook-project.png){width=700}
 
-5. 选择 **IntelliJ** 构建系统。
-6. 从 **JDK list** 中选择要用于项目的 [JDK](https://www.oracle.com/java/technologies/downloads/)。
-7. 启用 **Add sample code** 选项来创建包含示例 `"Hello World!"` 应用的文件。
+5. Select the **IntelliJ** build system.
+6. From the **JDK** list, select the [JDK](https://www.oracle.com/java/technologies/downloads/) that you want to use in your project.
+7. Enable the **Add sample code** option to create a file with a sample `"Hello World!"` application.
 
    > 你还可以启用 **Generate code with onboarding tips** 选项为示例代码添加有用的注释说明。
    >
@@ -35,42 +53,24 @@
 
 8. 点击 **Create**。
 
-## 创建 Kotlin Notebook {id=create-a-kotlin-notebook}
 
-1. 要创建新笔记本，选择 **File | New | Kotlin Notebook**，或右键点击文件夹选择 **New | Kotlin Notebook**。
+Once your project is created, add a new Kotlin Notebook (see the next section).
+
+## Add a new Kotlin Notebook to your project
+
+To add a new Kotlin Notebook to an existing project: 
+
+1. Select **File | New | Kotlin Notebook**, or right-click on a folder and select **New | Kotlin Notebook**.
 
    ![创建新的 Kotlin Notebook](new-notebook.png){width=700}
 
-2. 设置新笔记本名称（例如 **first-notebook**）后按 **Enter**。
-   将打开名为 **first-notebook.ipynb** 的 Kotlin Notebook 新标签页。
-3. 在打开的标签页中，在代码单元格输入以下代码：
-
-   ```kotlin
-   println("Hello, this is a Kotlin Notebook!")
-   ```
-4. 要运行代码单元格，点击 **Run Cell and Select Below** ![运行单元格并选择下方](run-cell-and-select-below.png){width=30}{type="joined"} 按钮或按 **Shift** + **Enter**。
-5. 点击 **Add Markdown Cell** 按钮添加 Markdown 单元格。
-6. 在单元格中输入 `# Example operations`，并以运行代码单元格的相同方式运行它以渲染内容。
-7. 在新代码单元格中输入 `10 + 10` 并运行。
-8. 在代码单元格中定义变量，例如 `val a = 100`。
-
-   > 当你运行包含已定义变量的代码单元格后，这些变量将在所有其他代码单元格中可用。
-   >
-   {style="tip"}
-
-9. 创建新代码单元格并添加 `println(a * a)`。
-10. 使用 **Run All** ![全部运行按钮](run-all-button.png){width=30}{type="joined"} 按钮运行笔记本中的所有代码和 Markdown 单元格。
-
-    ![第一个笔记本](first-notebook.png){width=700}
-
-恭喜！你已成功创建第一个 Kotlin Notebook。
+2. Set the name of the new notebook, for example, **first-notebook**.
+3. Press **Enter**. A new tab with a Kotlin Notebook **first-notebook.ipynb** opens.
 
 ## 创建临时 Kotlin Notebook {id=create-a-scratch-kotlin-notebook}
 
-从 IntelliJ IDEA 2024.1.1 开始，你也可以将 Kotlin Notebook 创建为临时文件。
-
-[临时文件](https://www.jetbrains.com/help/idea/scratches.html#create-scratch-file)
-允许你测试小型代码片段，而无需创建新项目或修改现有项目。
+You can also create a Kotlin Notebook as a scratch file. [Scratch files](https://www.jetbrains.com/help/idea/scratches.html#create-scratch-file) allow 
+you to test small pieces of code without creating a new project or modifying an existing one.
 
 创建临时 Kotlin Notebook 的步骤：
 
@@ -79,7 +79,33 @@
 
    ![临时笔记本](kotlin-notebook-scratch-file.png){width=400}
 
-## 下一步 {id=next-step}
+## Perform basic operations
+
+1. In the new Kotlin Notebook, type the following code in the code cell:
+
+   ```kotlin
+   println("Hello, this is a Kotlin Notebook!")
+   ```
+
+2. To run a code cell, click the **Run Cell and Select Below** ![Run Cell and Select Below](run-cell-and-select-below.png){width=30}{type="joined"} button or press **Shift** + **Return**.
+3. Add a markdown cell by clicking on the **Add Markdown Cell** button.
+4. Type `# Example operations` in the cell, and run it the same way you run code cells to render it.
+5. In a new code cell, type `10 + 10` and run it.
+6. Define a variable in a code cell. For example, `val a = 100`.
+
+   > Once you run a code cell with defined variables, those variables become accessible in all other code cells.
+   >
+   {style="tip"}
+
+7. Create a new code cell and add `println(a * a)`.
+8. Run all code and markdown cells in the notebook using the **Run All** ![Run all button](run-all-button.png){width=30}{type="joined"} button.
+
+   ![First notebook](first-notebook.png){width=700}
+
+Congratulations! You have just created and tried out your first Kotlin Notebook.
+
+
+## Next step
 
 在教程的下一部分，你将学习如何向 Kotlin Notebook 添加依赖项。
 

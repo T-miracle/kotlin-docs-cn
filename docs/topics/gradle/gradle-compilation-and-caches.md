@@ -152,7 +152,7 @@ starts using it.
 
 ## The Kotlin daemon and how to use it with Gradle
 
-The Kotlin daemon:
+The [Kotlin daemon](kotlin-daemon.md):
 * Runs with the Gradle daemon to compile the project.
 * Runs separately from the Gradle daemon when you compile the project with an IntelliJ IDEA built-in build system.
 
@@ -334,7 +334,7 @@ There are three compiler execution strategies:
 
 | Strategy       | Where Kotlin compiler is executed          | Incremental compilation | Other characteristics and notes                                                                                                                                                                                                                                                |
 |----------------|--------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Daemon         | Inside its own daemon process              | Yes                     | _The default and fastest strategy_. Can be shared between different Gradle daemons and multiple parallel compilations.                                                                                                                                                         |
+| Kotlin daemon  | Inside its own daemon process              | Yes                     | _The default and fastest strategy_. Can be shared between different Gradle daemons and multiple parallel compilations.                                                                                                                                                         |
 | In process     | Inside the Gradle daemon process           | No                      | May share the heap with the Gradle daemon. The "In process" execution strategy is _slower_ than the "Daemon" execution strategy. Each [worker](https://docs.gradle.org/current/userguide/worker_api.html) creates a separate Kotlin compiler classloader for each compilation. |
 | Out of process | In a separate process for each compilation | No                      | The slowest execution strategy. Similar to the "In process", but additionally creates a separate Java process within a Gradle worker for each compilation.                                                                                                                     |
 
@@ -495,7 +495,7 @@ The following values and their combinations are available for the output:
 | `file` | Saves build reports in a human-readable format to a local file. By default, it's `${project_folder}/build/reports/kotlin-build/${project_name}-timestamp.txt` |
 | `single_file` | Saves build reports in a format of an object to a specified local file. |
 | `build_scan` | Saves build reports in the `custom values` section of the [build scan](https://scans.gradle.com/). Note that the Gradle Enterprise plugin limits the number of custom values and their length. In big projects, some values could be lost. |
-| `http` | Posts build reports using HTTP(S). The POST method sends metrics in JSON format. You can see the current version of the sent data in the [Kotlin repository](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/report/data/GradleCompileStatisticsData.kt). You can find samples of HTTP endpoints in [this blog post](https://blog.jetbrains.com/kotlin/2022/06/introducing-kotlin-build-reports/?_gl=1*1a7pghy*_ga*MTcxMjc1NzE5Ny4xNjY1NDAzNjkz*_ga_9J976DJZ68*MTcxNTA3NjA2NS4zNzcuMS4xNzE1MDc2MDc5LjQ2LjAuMA..&_ga=2.265800911.1124071296.1714976764-1712757197.1665403693#enable_build_reports) |
+| `http` | Posts build reports using HTTP(S). The POST method sends metrics in JSON format. You can see the current version of the sent data in the [Kotlin repository](https://github.com/JetBrains/kotlin/blob/master/libraries/tools/kotlin-gradle-plugin/src/common/kotlin/org/jetbrains/kotlin/gradle/report/data/GradleCompileStatisticsData.kt). You can find samples of HTTP endpoints in [this blog post](https://blog.jetbrains.com/kotlin/2022/06/introducing-kotlin-build-reports/#enable_build_reports) |
 | `json` | Saves build reports in JSON format to a local file. Set the location for your build reports in `kotlin.build.report.json.directory` (see below). By default, it's name is `${project_name}-build-<date-time>-<index>.json`. |
 
 Here's a list of available options for `kotlin.build.report`:

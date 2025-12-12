@@ -109,5 +109,26 @@ class D : A, B {
 它们都实现了 **foo()**，但只有 **B** 实现了 **bar()**（**bar()** 在 **A** 中虽然没有标记为抽象，但是对于没有具体实现的函数，接口默认将其视为抽象）。
 现在，如果你从 **A** <tooltip term="派生">派生</tooltip>一个具体类 **C**，你必须覆盖 **bar()** 并提供实现。
 
-然而，如果你从 **A** 和 **B** <tooltip term="派生">派生</tooltip> **D**，你需要实现你从多个接口继承的所有方法，并且你需要指定 **D** 应该如何实现它们。
-这条规则适用于那些你从单个接口继承了单一实现的方法（**bar()**），也适用于那些你从多个接口继承了多个实现的方法（**foo()**）。
+However, if you derive *D* from *A* and *B*, you need to implement all the methods that you have
+inherited from multiple interfaces, and you need to specify how exactly *D* should implement them. This rule applies
+both to methods for which you've inherited a single implementation (*bar()*) and to those for which you've inherited multiple implementations (*foo()*).
+
+## JVM default method generation for interface functions
+
+On the JVM, functions declared in interfaces are compiled to default methods.
+You can control this behavior using the `-jvm-default` compiler option with the following values:
+
+* `enable` (default): generates default implementations in interfaces and includes bridge functions in subclasses and `DefaultImpls` classes. Use this mode to maintain binary compatibility with older Kotlin versions.
+* `no-compatibility`: generates only default implementations in interfaces. This mode skips compatibility bridges and `DefaultImpls` classes, making it suitable for new Kotlin code.
+* `disable`: skips default methods and generates only compatibility bridges and `DefaultImpls` classes.
+
+To configure the `-jvm-default` compiler option, set the `jvmDefault` property in your Gradle Kotlin DSL:
+
+```kotlin
+kotlin {
+    compilerOptions {
+        jvmDefault = JvmDefaultMode.NO_COMPATIBILITY
+    }
+}
+```
+

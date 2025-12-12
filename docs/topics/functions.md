@@ -39,7 +39,7 @@ fun powerOf(
 ) { /*...*/ }
 ```
 
-### 默认参数 {id=default-arguments}
+### Parameters with default values
 
 函数参数可以有默认值，当跳过相应的实参时，将使用默认值。这减少了重载的数量：
 
@@ -51,7 +51,9 @@ fun read(
 ) { /*...*/ }
 ```
 
-默认值通过在类型后附加 `=` 来设置。
+Such parameters are also referred to as _optional parameters_.
+
+A default value is set by appending `=` to the type.
 
 重写函数时总是使用基函数的默认参数值。当重写一个具有默认参数值的函数时，必须在签名中省略默认参数值：
 
@@ -65,7 +67,8 @@ class B : A() {
 }
 ```
 
-如果默认参数出现在没有默认值的参数之前，只有通过[具名参数](#named-arguments)调用函数时才能使用默认值：
+If a parameter with default value precedes a parameter with no default value, the default value can only be used by calling
+the function with [named arguments](#named-arguments):
 
 ```kotlin
 fun foo(
@@ -76,7 +79,8 @@ fun foo(
 foo(baz = 1) // 使用默认值 bar = 0
 ```
 
-如果默认参数之后的最后一个参数是一个[lambda](lambdas.md#lambda-expression-syntax)，可以将其作为具名函数传递，或者[在括号外传递](lambdas.md#passing-trailing-lambdas)：
+If the last parameter after all parameters with default values has a functional type,
+then you can pass the corresponding [lambda](lambdas.md#lambda-expression-syntax) argument either as a named argument or [outside the parentheses](lambdas.md#passing-trailing-lambdas):
 
 ```kotlin
 fun foo(
@@ -132,7 +136,8 @@ reformat("This is a long String!")
 reformat("This is a short String!", upperCaseFirstLetter = false, wordSeparator = '_')
 ```
 
-可以使用 `展开` 运算符为[可变数量的参数 (`vararg`)](#可变参数数量varargs)传递具名函数：
+You can pass a [variable number of arguments (`vararg`)](#variable-number-of-arguments-varargs) with names using the
+_spread_ operator (prefix the array with `*`):
 
 ```kotlin
 fun foo(vararg strings: String) { /*...*/ }
@@ -205,11 +210,12 @@ val list = asList(1, 2, 3)
 
 在函数内部，类型为 `T` 的 `vararg` 参数可以作为 `T` 类型的数组使用，如上例所示，其中 `ts` 变量的类型为 `Array<out T>`。
 
-只有一个参数可以标记为 `vararg`。
-如果 `vararg` 参数不是列表中的最后一个参数，则可以使用具名函数语法传递后续参数的值，或者如果参数具有函数类型，则可以通过在括号外传递 lambda 来实现。
+Only one parameter can be marked as `vararg`. If a `vararg` parameter is not the last one in the list, values for the
+subsequent parameters must be passed using named argument syntax, or, if the parameter has a function type, by passing
+a lambda outside the parentheses.
 
-调用 `vararg` 函数时，你可以单独传递参数，例如 `asList(1, 2, 3)`。
-如果已经有一个数组并且想将其内容传递给函数，请使用*展开*操作符（在数组前加 `*`）：
+When you call a `vararg`-function, you can pass arguments individually, for example `asList(1, 2, 3)`. If you already have
+an array and want to pass its contents to the function, use the spread operator (prefix the array with `*`):
 
 ```kotlin
 val a = arrayOf(1, 2, 3)
@@ -229,7 +235,7 @@ val list = asList(-1, 0, *a.toTypedArray(), 4)
 
 * 必须是成员函数或[扩展函数](extensions.md)。
 * 必须只有一个参数。
-* 该参数不能[接受可变数量的参数](#可变参数数量varargs)且不能有[默认值](#default-arguments)。
+* 该参数不能[接受可变数量的参数](#可变参数数量varargs)且不能有[默认值](#parameters-with-default-values)。
 
 ```kotlin
 infix fun Int.shl(x: Int): Int { ... }

@@ -1,6 +1,11 @@
 [//]: # (title: 继承)
 
-所有 Kotlin 中的类都有一个共同的超类：`Any`，它是没有声明超类型的类的默认超类：
+> Before creating an inheritance hierarchy with classes, consider using [abstract classes](classes.md#abstract-classes) or [interfaces](interfaces.md). 
+> You can inherit from abstract classes and interfaces by default. They are designed so that other classes can inherit their members amd implement them.
+>
+{style="tip"}
+
+All classes in Kotlin have a common superclass, `Any`, which is the default superclass for a class with no supertypes declared:
 
 ```kotlin
 class Example // 隐式继承自 Any
@@ -15,7 +20,9 @@ class Example // 隐式继承自 Any
 open class Base // 类是可继承的
 ```
 
-如果你想为一个类显式地声明超类型，只需在类头的冒号后面指定相应的类型：
+[For more information, see Open keyword](#open-keyword).
+
+To declare an explicit supertype, place the type after a colon in the class header:
 
 ```kotlin
 open class Base(p: Int)
@@ -38,7 +45,58 @@ class MyView : View {
 }
 ```
 
-## 重写方法 {id=重写方法}
+## Open keyword
+
+In Kotlin, the `open` keyword indicates that a class or a member (function or property) can be overridden in subclasses.
+By default, Kotlin classes and their members are _final_, meaning they cannot be inherited from (for classes) or overridden 
+(for members) unless you explicitly mark them as `open`:
+
+```kotlin
+// Base class with the open keyword to allow inheritance
+open class Person(
+    val name: String
+) {
+    // Open function that can be overridden in a subclass
+    open fun introduce() {
+        println("Hello, my name is $name.")
+    }
+}
+
+// Subclass inheriting from Person and overriding the introduce() function
+class Student(
+    name: String,
+    val school: String
+) : Person(name) {
+    override fun introduce() {
+        println("Hi, I'm $name, and I study at $school.")
+    }
+}
+```
+
+If you override a member of a base class, the overriding member
+is also open by default. If you want to change this and forbid the subclasses of your
+class from overriding your implementation, you can explicitly mark the overriding
+member as `final`:
+
+```kotlin
+// Base class with the open keyword to allow inheritance
+open class Person(val name: String) {
+    // Open function that can be overridden in a subclass
+    open fun introduce() {
+        println("Hello, my name is $name.")
+    }
+}
+
+//  A subclass that inherits from Person and overrides the introduce() function
+class Student(name: String, val school: String) : Person(name) {
+    // The final keyword prevents further overrides in subclasses
+    final override fun introduce() {
+        println("Hi, I'm $name, and I study at $school.")
+    }
+}
+```
+
+## Overriding methods
 
 在 Kotlin 中，对可重写成员和重写方法需要显式添加修饰符：
 

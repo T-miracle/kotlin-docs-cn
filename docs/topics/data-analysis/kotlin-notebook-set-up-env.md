@@ -12,17 +12,19 @@
 
 ## 设置环境 {id=set-up-the-environment}
 
-1. 下载并安装最新版本的 [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/download/index.html)。
-2. 在 IntelliJ IDEA 中，选择 **IntelliJ IDEA | Settings | Plugins** 或 **File | Settings | Plugins**。
-3. 在 **Marketplace** 选项卡中，搜索 **Kotlin Notebook** 插件并安装。
+Kotlin Notebook relies on the [Kotlin Notebook plugin](https://plugins.jetbrains.com/plugin/16340-kotlin-notebook), 
+which is bundled and enabled in IntelliJ IDEA by default.
 
-   ![从 Marketplace 安装 Kotlin Notebook](kotlin-notebook-plugin.png){width=700}
+To use Kotlin Notebook, download and install the latest version of [IntelliJ IDEA](https://www.jetbrains.com/idea/download/index.html).
 
-   > 或者，你也可以手动下载 [Kotlin Notebook 插件](https://plugins.jetbrains.com/plugin/16340-kotlin-notebook) 并安装。
-   >
-   {style="note"}
+If the Kotlin Notebook features are not available, ensure the plugin is enabled:
 
-4. 点击 **OK** 应用更改，并在提示时重启 IDE。
+1. In IntelliJ IDEA, select **IntelliJ IDEA | Settings | Plugins**.
+2. In the **Installed** tab, find the **Kotlin Notebook** plugin, and select the checkbox next to the plugin name.
+
+   ![Install Kotlin Notebook](kotlin-notebook-plugin.png){width=700}
+
+3. 点击 **OK** 应用更改，并在提示时重启 IDE。
 
 ## 下一步 {id=next-step}
 

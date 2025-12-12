@@ -160,15 +160,8 @@ ${'$'}_9.99
 
 ### 多美元符号字符串插值 {id=multi-dollar-string-interpolation}
 
-> 多美元符号字符串插值是[实验性](https://kotlinlang.org/docs/components-stability.html#stability-levels-explained)的，
-> 且需要显式开启（详见下文）。
-> 
-> 它可能随时发生变化。我们非常欢迎您在[YouTrack](https://youtrack.jetbrains.com/issue/KT-2425)上提供反馈。
->
-> {style="warning"}
-
-多美元符号字符串插值允许你指定需要多少个连续的美元符号来触发插值。  
-插值是将变量或表达式直接嵌入到字符串中的过程。
+Multi-dollar string interpolation allows you to specify how many consecutive dollar signs are required to trigger interpolation.
+Interpolation is the process of embedding variables or expressions directly into a string.
 
 虽然你可以为单行字符串[转义字面量](#escaped-strings)，  
 但 Kotlin 中的多行字符串不支持反斜杠转义。  
@@ -184,7 +177,7 @@ val KClass<*>.jsonSchema : String
     {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
       "$id": "https://example.com/product.schema.json",
-      "$dynamicAnchor": "meta"
+      "$dynamicAnchor": "meta",
       "title": "$${simpleName ?: qualifiedName ?: "unknown"}",
       "type": "object"
     }
@@ -220,26 +213,9 @@ println(requestedData)
 
 在这里，`$$$` 前缀允许字符串包含 `$` 和 `$$`，而无需使用 `${'$'}` 构造进行转义。
 
-要启用此功能，可以在命令行中使用以下编译器选项：
-
-```bash
-kotlinc -Xmulti-dollar-interpolation main.kt
-```
-
-或者，更新你 Gradle 构建文件中的 `compilerOptions {}` 块：
-
-```kotlin
-// build.gradle.kts
-kotlin {
-    compilerOptions {
-        freeCompilerArgs.add("-Xmulti-dollar-interpolation")
-    }
-}
-```
-
-此功能不会影响现有的使用单美元符号字符串插值的代码。  
-你可以继续像之前一样使用单个 `$`，
-并在需要处理字符串中的字面量美元符号时，应用多美元符号插值。
+Multi-dollar string interpolation doesn't affect existing code that uses single-dollar string interpolation. 
+You can continue using a single `$`
+as before and apply multi-dollar signs when you need to handle literal dollar signs in strings.
 
 ## 字符串格式化 {id=string-formatting}
 

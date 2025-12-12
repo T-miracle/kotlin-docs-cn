@@ -89,7 +89,7 @@ fun main() {
 ```kotlin
 fun main() {
 //sampleStart
-    // 给变量赋值一个可空字符串  
+    // 给变量赋值一个可空字符串
     var b: String? = "abc"
     // 将 null 重新赋值给可空变量
     b = null
@@ -149,10 +149,10 @@ fun main() {
     // 先检查是否为 null，然后再访问长度
     if (b != null && b.length > 0) {
         print("String of length ${b.length}")
-    // 如果条件不满足，提供替代方案  
+        // String of length 6
     } else {
+        // Provides alternative if the condition is not met
         print("Empty string")
-        // 字符串长度为 6
     }
 //sampleEnd
 }
@@ -199,13 +199,7 @@ fun main() {
 bob?.department?.head?.name
 ```
 
-如果链中的任何一个属性为 `null`，这个链式调用会返回 `null`。以下是用 `if` 条件表达式实现相同的安全调用：
-
-```kotlin
-if (person != null && person.department != null) {
-    person.department.head = managersPool.getManager()
-}
-```
+This chain returns `null` if any of its properties are `null`.
 
 你还可以将安全调用放在赋值语句的左侧：
 
@@ -213,8 +207,14 @@ if (person != null && person.department != null) {
 person?.department?.head = managersPool.getManager()
 ```
 
-在上述示例中，如果安全调用链中的任何接收者为 `null`，赋值操作将被跳过，右侧的表达式根本不会被计算。
-例如，如果 `person` 或 `person.department` 为 `null`，函数将不会被调用。
+In the example above, if one of the receivers in the safe call chain is `null`, the assignment is skipped, and the expression on the right is not evaluated at all. For example, if either
+`person` or `person.department` is `null`, the function is not called. Here's the equivalent of the same safe call but with the `if` conditional:
+
+```kotlin
+if (person != null && person.department != null) {
+    person.department.head = managersPool.getManager()
+}
+```
 
 ## Elvis 操作符 {id=elvis-operator}
 
@@ -279,7 +279,7 @@ fun foo(node: Node): String? {
 ```kotlin
 fun main() {
 //sampleStart
-    // 将一个可空字符串赋值给变量  
+    // 将一个可空字符串赋值给变量
     val b: String? = "Kotlin"
     // 将 b 视为非空并访问其长度
     val l = b!!.length
@@ -306,12 +306,13 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="2.0" validate="false"}
 
-`!!` 操作符特别有用，当你确信一个值不为 `null` 且没有发生空指针异常的风险时，但编译器无法保证这一点（由于某些规则）。
-在这种情况下，你可以使用 `!!` 操作符显式地告诉编译器该值不为 `null`。
+The `!!` operator is particularly useful 
+when you are confident that a value is not `null` and there's no chance of getting an NPE, but the compiler cannot guarantee this due to certain rules. 
+In such cases, you can use the `!!` operator to explicitly tell the compiler that the value is not `null`.
 
 ## 可空接收者 {id=nullable-receiver}
 
-你可以对 [可空接收者类型](extensions.md#nullable-receiver) 使用扩展函数，从而允许这些函数在可能为 `null` 的变量上调用。
+你可以对 [可空接收者类型](extensions.md#nullable-receivers) 使用扩展函数，从而允许这些函数在可能为 `null` 的变量上调用。
 
 通过在可空接收者类型上定义扩展函数，你可以在函数内部处理 `null` 值，而无需在每次调用函数时都进行 `null` 检查。
 

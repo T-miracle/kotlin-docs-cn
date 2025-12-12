@@ -336,14 +336,14 @@ Starting with Kotlin 1.7.0, you no longer need to install the `cocoapods-generat
 CocoaPods in your projects.
 
 Previously, you needed to install both the CocoaPods dependency manager and the `cocoapods-generate` plugin to use
-CocoaPods, for example, to handle [iOS dependencies](multiplatform-ios-dependencies.md#with-cocoapods) in
+CocoaPods, for example, to handle [iOS dependencies](https://kotlinlang.org/docs/multiplatform/multiplatform-ios-dependencies.html#with-cocoapods) in
 Kotlin Multiplatform Mobile projects.
 
 Now setting up the CocoaPods integration is easier, and we've resolved the issue when `cocoapods-generate` couldn't be
 installed on Ruby 3 and later. Now the newest Ruby versions that work better on Apple M1 are also supported.
 
 See how to set up
-the [initial CocoaPods integration](native-cocoapods.md#set-up-an-environment-to-work-with-cocoapods).
+the [initial CocoaPods integration](https://kotlinlang.org/docs/multiplatform/multiplatform-cocoapods-overview.html#set-up-an-environment-to-work-with-cocoapods).
 
 ### Overriding the Kotlin/Native compiler download URL
 
@@ -521,7 +521,7 @@ language and API versions.
 
 With Kotlin 1.7.0, we're supporting three previous language and API versions rather than two. This means Kotlin 1.7.0
 supports the development of libraries targeting Kotlin versions down to 1.4.0. For more information on backward
-compatibility, see [Compatibility modes](compatibility-modes.md).
+compatibility, see [Compatibility options](kotlin-evolution-principles.md#compatibility-options).
 
 ### Access to annotations via reflection
 
@@ -1011,7 +1011,7 @@ We've completed the deprecation cycle for several compiler options:
 
 In Kotlin 1.4.0, the `kotlin2js` and `kotlin-dce-plugin` plugins were deprecated, and they have been removed in this
 release. Instead of `kotlin2js`, use the new `org.jetbrains.kotlin.js` plugin. Dead code elimination (DCE) works when
-the Kotlin/JS Gradle plugin is [properly configured](javascript-dce.md).
+the Kotlin/JS Gradle plugin is properly configured.
 
 In Kotlin 1.6.0, we changed the deprecation level of the `KotlinGradleSubplugin` class to `ERROR`. Developers used this
 class for writing compiler plugins. In this
@@ -1025,7 +1025,7 @@ the `KotlinCompilerPluginSupportPlugin` class instead.
 #### Removal of the deprecated coroutines DSL option and property
 
 We removed the deprecated `kotlin.experimental.coroutines` Gradle DSL option and the `kotlin.coroutines` property used
-in `gradle.properties`. Now you can just use _[suspending functions](coroutines-basics.md#extract-function-refactoring)_
+in `gradle.properties`. Now you can just use _[suspending functions](coroutines-basics.md)_
 or [add the `kotlinx.coroutines` dependency](gradle-configure-project.md#set-a-dependency-on-a-kotlinx-library) to your build
 script.
 

@@ -64,7 +64,6 @@ Kotlin 语言和工具集分为多个组件，例如用于 JVM、JS 和 Native �
 ## 当前 Kotlin 组件的稳定性 {id=current-stability-of-kotlin-components}
 
 > 默认情况下，所有新组件的状态为实验性。
-
 {style="note"}
 
 ### Kotlin 编译器
@@ -74,7 +73,7 @@ Kotlin 语言和工具集分为多个组件，例如用于 JVM、JS 和 Native �
 | Kotlin/JVM                                                    | 稳定版    | 1.0.0      |        |
 | Kotlin/Native                                                 | 稳定版    | 1.9.0      |        |
 | Kotlin/JS                                                     | 稳定版    | 1.3.0      |        |
-| Kotlin/Wasm                                                   | Alpha  | 1.9.20     |        |
+| Kotlin/Wasm                                                   | Beta       | 2.2.20     |        |
 | [分析 API](https://kotlin.github.io/analysis-api/index_md.html) | 稳定版    |            |        |
 
 ### 核心编译器插件 {id=core-compiler-plugins}
@@ -102,22 +101,22 @@ Kotlin 语言和工具集分为多个组件，例如用于 JVM、JS 和 Native �
 
 ### Kotlin 跨平台 {id=kotlin-multiplatform}
 
-| **组件**                        | **状态** | **自版本起生效** | **备注**                                        |
-|-------------------------------|--------|------------|-----------------------------------------------|
-| Kotlin 跨平台                    | 稳定版    | 1.9.20     |                                               |
-| Android Studio 的 Kotlin 跨平台插件 | Beta   | 0.8.0      | [与语言版本分开发布](multiplatform-plugin-releases.md) |
+| **Component**                                  | **Status** | **Status since version** | **Comments**                                                                                                                         |
+|------------------------------------------------|------------|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Kotlin Multiplatform                           | Stable     | 1.9.20                   |                                                                                                                                      |
+| Kotlin Multiplatform plugin for Android Studio | Beta       | 0.8.0                    | [Versioned separately from the language](https://kotlinlang.org/docs/multiplatform/multiplatform-plugin-releases.html) |
 
 ### Kotlin/Native {id=kotlin-native}
 
 | **组件**                               | **状态** | **自版本起生效** | **备注**                 |
-|--------------------------------------|--------|------------|------------------------|
+|--------------------------------------|--------|------------|---------------------------------------------------------------|
 | Kotlin/Native 运行时                    | 稳定版    | 1.9.20     |                        |
-| Kotlin/Native 与 C 和 Objective-C 的互操作 | Beta   | 1.3.0      |                        |
-| klib 二进制文件                           | 稳定版    | 1.9.20     | 不包括 cinterop klibs，见下文 |
-| cinterop klib 二进制文件                  | Beta   | 1.3.0      |                        |
+| Kotlin/Native 与 C 和 Objective-C 的互操作 | Beta   | 1.3.0      |                       [Stability of C and Objective-C library import](native-c-interop-stability.md) |
+| klib 二进制文件                           | 稳定版    | 1.9.20     | 不包括 cinterop klibs，见下文                                        |
+| cinterop klib 二进制文件                  | Beta   | 1.3.0      |                       [Stability of C and Objective-C library import](native-c-interop-stability.md) |
 | CocoaPods 集成                         | 稳定版    | 1.9.20     |                        |
 
-> 有关 Kotlin/Native 目标支持的详细信息，请参阅 [](native-target-support.md)。
+For more information about the level of support for different targets, see [](native-target-support.md).
 
 ### 语言工具 {id=language-tools}
 

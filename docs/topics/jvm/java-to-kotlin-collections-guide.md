@@ -1,5 +1,6 @@
-[//]: # (title: Java 与 Kotlin 中的集合)
-[//]: # (description: 学习如何从 Java 集合迁移到 Kotlin 集合。本指南涵盖了 Kotlin 和 Java 中的列表、ArrayList、映射、集合以及其他数据结构。)
+[//]: # (title: Collections in Java and Kotlin)
+
+<web-summary>Learn how to migrate from Java collections to Kotlin collections. This guide covers such data structures as Kotlin and Java Lists, ArrayLists, Maps, Sets, and others.</web-summary>
 
 _集合_（_Collections_）是包含变量数量（可能为零）并且对解决问题有意义的项目的元素集，通常用于进行各种操作。 
 本指南解释并比较了 Java 和 Kotlin 中的集合概念和操作。
@@ -729,7 +730,7 @@ fun main() {
 
 * 尝试 [Kotlin 练习](koans.md) - 通过完成练习学习 Kotlin 语法。每个练习都是一个失败的单元测试，你的任务是让它通过
 * 浏览其他 [Kotlin 惯用法](idioms.md)
-* 学习如何使用 [Java 转 Kotlin 转换器](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有 Java 代码转换为 Kotlin
+* 学习如何使用 [Java 转 Kotlin 转换器](mixing-java-kotlin-intellij.md#convert-java-files-to-kotlin) 将现有 Java 代码转换为 Kotlin
 * 探索 [Kotlin 中的集合](collections-overview.md)
 
 如果你有喜欢的惯用法，欢迎通过提交 Pull Request 来分享。

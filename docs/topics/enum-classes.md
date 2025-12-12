@@ -116,12 +116,17 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="rgb-enums-properties-kotlin"}
 
-你可以使用 [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html)
-和 [`enumValueOf<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-value-of.html)
-函数，以泛型的方式访问枚举类中的常量。在 Kotlin 2.0.0 中，引入了
-[`enumEntries<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.enums/enum-entries.html) 函数，作为
-[`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) 函数的替代。
-`enumEntries<T>()` 函数返回给定枚举类型 `T` 的所有枚举条目的列表。
+> To reduce repetition when working with enum entries, try out context-sensitive resolution (currently in preview).
+> This feature allows you to omit the enum class name when the expected type is known, such as in `when` expressions or when assigning to a typed variable.
+>
+> For more information, see [Preview of context-sensitive resolution](whatsnew22.md#preview-of-context-sensitive-resolution) or the related [KEEP proposal](https://github.com/Kotlin/KEEP/blob/improved-resolution-expected-type/proposals/context-sensitive-resolution.md).
+>
+{style="tip"}
+
+You can access the constants in an enum class in a generic way using
+the [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html) and [`enumValueOf<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-value-of.html) functions. 
+In Kotlin 2.0.0, the [`enumEntries<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.enums/enum-entries.html) function is introduced as a replacement for the [`enumValues<T>()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/enum-values.html)
+function. The `enumEntries<T>()` function returns a list of all enum entries for the given enum type `T`.
 
 `enumValues<T>()` 函数仍然受支持，但我们建议您使用 `enumEntries<T>()` 函数，因为它的性能影响较小。
 每次调用 `enumValues<T>()` 时都会创建一个新的数组，而每次调用 `enumEntries<T>()` 时都会返回相同的列表，这效率更高。

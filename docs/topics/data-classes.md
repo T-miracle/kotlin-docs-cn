@@ -31,7 +31,7 @@ data class User(val name: String, val age: Int)
 
 数据类可以扩展其他类（参见[密封类](sealed-classes.md)以获取示例）。
 
-> 在 JVM 上，如果生成的类需要一个无参构造函数，必须指定属性的默认值（参见 [构造函数](classes.md#constructors)）：
+> 在 JVM 上，如果生成的类需要一个无参构造函数，必须指定属性的默认值（参见 [构造函数](classes.md#constructors-and-initializer-blocks)）：
 > 
 > 
 > ```kotlin
@@ -95,6 +95,31 @@ fun copy(name: String = this.name, age: Int = this.age) = User(name, age)
 val jack = User(name = "Jack", age = 1)
 val olderJack = jack.copy(age = 2)
 ```
+
+The `copy()` function creates a _shallow_ copy of the instance. In other words, it doesn't copy components recursively.
+As a result, references to other objects are shared.
+
+For example, if a property holds a mutable list, changes made through the "original" value are also visible through the copy,
+and changes made through the copy are visible through the original:
+
+```kotlin
+data class Employee(val name: String, val roles: MutableList<String>)
+
+fun main() {
+    val original = Employee("Jamie", mutableListOf("developer"))
+    val duplicate = original.copy()
+
+    duplicate.roles.add("team lead")
+
+    println(original) 
+    // Employee(name=Jamie, roles=[developer, team lead])
+    println(duplicate) 
+    // Employee(name=Jamie, roles=[developer, team lead])
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
+
+As you can see, modifying the `duplicate.roles` property also changes the `original.roles` property because both properties share the same list reference.
 
 ## 数据类和解构声明
 

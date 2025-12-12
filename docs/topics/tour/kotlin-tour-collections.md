@@ -95,9 +95,9 @@ fun main() {
 > [`.first()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/first.html) 和 [`.last()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/last.html)
 > 函数是 **扩展** 函数的示例。
 > 要在对象上调用扩展函数，在对象后面写上函数名称并附加一个点 `.`。
-> 
-> 有关扩展函数的更多信息，请参见 [扩展函数](extensions.md#extension-functions)。
-> 在本教程中，您只需了解如何调用它们。
+>
+> 扩展函数的详细内容已在 [中级教程](kotlin-tour-intermediate-extension-functions.md#extension-functions) 中讲解。
+> 目前你只需要知道如何调用它们即可。
 > 
 {style="note"}
 

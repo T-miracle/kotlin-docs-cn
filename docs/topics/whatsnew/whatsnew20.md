@@ -383,7 +383,7 @@ at compile time. As a consequence, common code could access platform code, which
 between platforms. In addition, some compiler settings and dependencies from common code used to leak into platform code.
 
 In Kotlin 2.0.0, our implementation of the new Kotlin K2 compiler included a redesign of the compilation scheme to ensure
-strict separation between common and platform source sets. This change is most noticeable when you use [expected and actual functions](multiplatform-expect-actual.md#expected-and-actual-functions).
+strict separation between common and platform source sets. This change is most noticeable when you use [expected and actual functions](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html#expected-and-actual-functions).
 Previously, it was possible for a function call in your common code to resolve to a function in platform code. For example:
 
 <table>
@@ -429,7 +429,7 @@ In Kotlin 2.0.0, common code doesn't have access to platform code, so both platf
 function to the `foo()` function in the common code: `common foo`.
 
 In addition to the improved consistency of behavior across platforms, we also worked hard to fix cases where there was
-conflicting behavior between IntelliJ IDEA or Android Studio and the compiler. For instance, when you used [expected and actual classes](multiplatform-expect-actual.md#expected-and-actual-classes),
+conflicting behavior between IntelliJ IDEA or Android Studio and the compiler. For instance, when you used [expected and actual classes](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html#expected-and-actual-classes),
 the following would happen:
 
 <table>
@@ -532,7 +532,7 @@ In the future, these remaining cases will be more consistent with the new compil
 
 #### Different visibility levels of expected and actual declarations
 
-Before Kotlin 2.0.0, if you used [expected and actual declarations](multiplatform-expect-actual.md) in your
+Before Kotlin 2.0.0, if you used [expected and actual declarations](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html) in your
 Kotlin Multiplatform project, they had to have the same [visibility level](visibility-modifiers.md). 
 Kotlin 2.0.0 now also supports different visibility levels but **only** if the actual declaration is _more_ permissive than 
 the expected declaration. For example:
@@ -775,7 +775,7 @@ Previously, the Kotlin/Native compiler resolved standard library and platform de
 inconsistencies in the way the Kotlin Gradle plugin worked across Kotlin targets.
 
 Now, each Kotlin/Native Gradle compilation explicitly includes standard library and platform dependencies in its
-compile-time library path via the `compileDependencyFiles` [compilation parameter](multiplatform-dsl-reference.md#compilation-parameters).
+compile-time library path via the `compileDependencyFiles` [compilation parameter](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html#compilation-parameters).
 
 ### Tasks error in Gradle configuration cache
 
@@ -1058,7 +1058,7 @@ import { User, me, KtList } from "my-module"
 
 const allMyFriendNames = me.friends
     .asJsReadonlyArrayView()
-    .map(x => x.name) // [‘Kodee']
+    .map(x => x.name) // ['Kodee']
 ```
 
 > Unfortunately, creating Kotlin collections from JavaScript is still unavailable. We're planning to add this
@@ -1220,7 +1220,6 @@ This version brings the following changes:
 
 * [New Gradle DSL for compiler options in multiplatform projects](#new-gradle-dsl-for-compiler-options-in-multiplatform-projects)
 * [New Compose compiler Gradle plugin](#new-compose-compiler-gradle-plugin)
-* [Bumping minimum supported versions](#bumped-minimum-supported-agp-version)
 * [New attribute to distinguish JVM and Android published libraries](#new-attribute-to-distinguish-jvm-and-android-published-libraries)
 * [Improved Gradle dependency handling for CInteropProcess in Kotlin/Native](#improved-gradle-dependency-handling-for-cinteropprocess-in-kotlin-native)
 * [Visibility changes in Gradle](#visibility-changes-in-gradle)
@@ -1295,7 +1294,7 @@ simultaneously with Kotlin. This also bumps the Compose compiler version to 2.0.
 To use the new Compose compiler in your projects, apply the `org.jetbrains.kotlin.plugin.compose` Gradle plugin in
 your `build.gradle(.kts)` file and set its version equal to Kotlin 2.0.0.
 
-To learn more about this change and see the migration instructions, see the [Compose compiler](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compiler.html) documentation.
+To learn more about this change and see the migration instructions, see the [Compose compiler](https://kotlinlang.org/docs/multiplatform/compose-compiler.html) documentation.
 
 ### New attribute to distinguish JVM and Android-published libraries
 
@@ -1634,10 +1633,10 @@ metrics:
             "GRADLE_TASK": 2724000000,
             "COMPILER_INITIALIZATION": 263000000,
             "IR_GENERATION": 74000000,
-…
+...
           }
         }
-…
+...
  "aggregatedMetrics": {
     "buildTimes": {
       "buildTimesNs": {
@@ -1649,7 +1648,7 @@ metrics:
         "GRADLE_TASK": 3234000000,
         "COMPILER_INITIALIZATION": 292000000,
         "IR_GENERATION": 89000000,
-…
+...
       }
     }
 ```
@@ -1676,7 +1675,7 @@ dependencies {
 
 In this example, the `commonAnnotationProcessors` Gradle configuration is your common configuration for annotation
 processing that you want to be used for all your projects. You use the [`extendsFrom()`](https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.Configuration.html#org.gradle.api.artifacts.Configuration:extendsFrom)
-method to add "commonAnnotationProcessors" as a superconfiguration. kapt sees that the `commonAnnotationProcessors` 
+method to add `commonAnnotationProcessors` as a superconfiguration. kapt sees that the `commonAnnotationProcessors` 
 Gradle configuration has a dependency on the Dagger annotation processor. Therefore, kapt includes the Dagger annotation
 processor in its configuration for annotation processing.
 

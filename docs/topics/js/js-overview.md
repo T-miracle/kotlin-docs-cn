@@ -1,80 +1,120 @@
-[//]: # (title: 用于 JavaScript 的 Kotlin)
+[//]: # (title: Kotlin/JavaScript)
 
-Kotlin/JS 提供将您的 Kotlin 代码、Kotlin 标准库和任何兼容的依赖项转译为 JavaScript 的能力。
-目前的 Kotlin/JS 实现面向 [ES5](https://www.ecma-international.org/ecma-262/5.1/)。
+Kotlin/JavaScript (Kotlin/JS) lets you transpile your Kotlin code, the Kotlin standard library, and any compatible dependencies
+to JavaScript. This way, your Kotlin applications can run in any environment that supports JavaScript.
 
-使用 Kotlin/JS 的推荐方式是通过 `kotlin.multiplatform` Gradle 插件。
-它允许您在一个地方轻松设置和控制面向 JavaScript 的 Kotlin 项目。
-这包括关键功能，比如控制应用程序的打包、直接从 npm 添加 JavaScript 依赖项等。
-要了解可用选项的概述，请查看 [设置 Kotlin/JS 项目](js-project-setup.md)。
+Use Kotlin/JS through the [Kotlin Multiplatform Gradle plugin](https://kotlinlang.org/docs/multiplatform/multiplatform-dsl-reference.html) (`kotlin.multiplatform`) to configure and manage 
+Kotlin projects targeting JavaScript from a single place.
 
-## Kotlin/JS IR 编译器
+The Kotlin Multiplatform Gradle plugin gives you access to features
+such as controlling your application's bundling and adding JavaScript dependencies directly from npm.
+To get an overview of the available configuration options, see [Set up a Kotlin/JS project](js-project-setup.md).
 
-[Kotlin/JS IR 编译器](js-ir-compiler.md) 相比旧的默认编译器，带来了许多改进。
-例如，通过消除死代码（冗余代码、从没被调用过的代码），它减小了生成可执行文件的大小，并提供了与 JavaScript 生态系统及其工具更加流畅的互操作性。
+> The current implementation of Kotlin/JS targets the [ES5](https://www.ecma-international.org/ecma-262/5.1/) and [ES2015](https://262.ecma-international.org/6.0/) standards.
+>
+{style="tip"}
 
-> 自 Kotlin 1.8.0 版本以来，旧编译器已被弃用。
-> 
-{style="note"}
 
-通过从 Kotlin 代码生成 TypeScript 声明文件 (`d.ts`)，IR 编译器使得创建“混合”应用程序更加容易，这些应用程序将 TypeScript 和 Kotlin 代码结合在一起，并利用 Kotlin 跨平台 实现代码共享功能。
+## Use cases for Kotlin/JS
 
-要了解有关 Kotlin/JS IR 编译器中可用功能的更多信息，以及如何在项目中尝试它，请访问 [Kotlin/JS IR 编译器文档页面](js-ir-compiler.md) 和 [迁移指南](js-ir-migration.md)。
+Here are some common ways to use Kotlin/JS:
 
-## Kotlin/JS 框架
+*  **Sharing common logic between frontend and JVM backend**
 
-现代 Web 开发在很大程度上受益于简化构建 Web 应用程序的框架。以下是一些由不同作者编写的 Kotlin/JS 的热门 Web 框架示例：
+   If your backend is written in Kotlin or another JVM-compatible language,
+      you can share common code between your web application and the backend.
+      This includes data-transfer objects (DTOs), validation and authentication rules, abstractions for REST API endpoints, and more.
 
-### Kobweb {id=kobweb}
+*  **Sharing common logic between Android, iOS, and web clients**
 
-_Kobweb_ 是一个基于 Kotlin 的强约定框架，用于创建网站和 Web 应用。
-它利用 [Compose HTML](https://github.com/JetBrains/compose-multiplatform?tab=readme-ov-file#compose-html) 和实时重载实现快速开发。
-受 [Next.js](https://nextjs.org/) 启发，Kobweb 提供了一套标准结构来添加组件、布局和页面。
+   You can share business logic between your web interface and mobile applications for Android and iOS, 
+   while keeping native user interfaces. This avoids duplicating common functionality such as REST API abstractions, 
+   user authentication, form validation,
+     and domain models.
 
-开箱即用，Kobweb 提供页面路由、明暗模式、CSS 样式、Markdown 支持、后端 API 等功能。
-它还包含一个名为 Silk 的 UI 库，提供适用于现代 UI 的多功能组件集。
+* **Building frontend web applications using Kotlin/JS**
 
-Kobweb 还支持站点导出，生成页面快照以优化 SEO 并支持自动搜索索引。
-此外，Kobweb 能轻松创建基于 DOM 的 UI，这些 UI 会根据状态变化高效更新。
+     Use Kotlin to develop traditional web frontends while integrating with existing tools and libraries:
 
-访问 [Kobweb 官网](https://kobweb.varabyte.com/) 获取文档和示例。
+     * If you are familiar with Android development, you can build web applications with
+       Compose-based frameworks like [Kobweb](https://kobweb.varabyte.com/) or [Kilua](https://kilua.dev/).
+     * Build fully type-safe React applications with Kotlin/JS using the [Kotlin wrappers for common JavaScript libraries](https://github.com/JetBrains/kotlin-wrappers)
+       provided by JetBrains. The Kotlin wrappers (`kotlin-wrappers`) offer abstractions and integrations for React and other JavaScript frameworks.
+       
+       These wrappers also support complementary libraries, like
+       [React Redux](https://react-redux.js.org/), [React Router](https://reactrouter.com/), and [styled-components](https://styled-components.com/). 
+       You can also use third-party React components and component libraries through interoperability with the JavaScript ecosystem.
+  
+     * Use [Kotlin/JS frameworks](js-frameworks.md),
+       which integrate with the Kotlin ecosystem and support concise and expressive code.
 
-要了解框架更新和参与讨论，请加入 Kotlin Slack 的 [#kobweb](https://kotlinlang.slack.com/archives/C04RTD72RQ8) 和
-[#compose-web](https://kotlinlang.slack.com/archives/C01F2HV7868) 频道。
+*  **Building multiplatform applications that support older browsers**
 
-### KVision
+      With Compose Multiplatform, you can use Kotlin to build applications and reuse mobile and desktop user interfaces in your web projects.
+      While [Kotlin/Wasm](wasm-overview.md) is the primary target for this purpose, you can extend support to older browsers by also targeting Kotlin/JS.
 
-_KVision_ 是一款面向对象的 Web 框架，可以在 Kotlin/JS 中编写具有即用型组件的应用程序，这些组件可以作为应用程序用户界面的构建块使用。
-您可以使用响应式和命令式编程模型来构建前端，使用连接器与 Ktor、Spring Boot 和其他框架集成到您的服务器端应用程序，并使用 [Kotlin 跨平台](multiplatform-intro.md) 共享代码。
+* **Building server-side and serverless applications using Kotlin/JS**
 
-[访问 KVision 网站](https://kvision.io) 获取文档、教程和示例。
+  The Node.js target in Kotlin/JS lets you create applications for server-side or serverless environments on a JavaScript 
+  runtime. This offers a fast startup and low memory usage. The [`kotlinx-nodejs`](https://github.com/Kotlin/kotlinx-nodejs) library
+    provides type-safe access to the [Node.js API](https://nodejs.org/docs/latest/api/) from Kotlin.
 
-要获取关于该框架的更新和讨论，请加入 [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) 中的
-[#kvision](https://kotlinlang.slack.com/messages/kvision) 和 [#javascript](https://kotlinlang.slack.com/archives/C0B8L3U69) 频道。
+Depending on your use case, Kotlin/JS projects can use compatible libraries from the Kotlin ecosystem and 
+third-party libraries from the JavaScript and TypeScript ecosystems. 
 
-### fritz2
+To use third-party libraries from your Kotlin code, you can create your own type-safe wrappers or use community-maintained wrappers. 
+Additionally, you can use the Kotlin/JS [dynamic type](dynamic-type.md), which lets you skip strict typing and library wrappers, at the cost of type safety.
 
-_fritz2_ 是一个用于构建响应式 Web 用户界面的独立框架。
-它提供了自己的类型安全 DSL 用于构建和呈现 HTML 元素，并利用 Kotlin 的协程和流来表达组件及其数据绑定。
-还提供开箱即用的状态管理、验证、路由等功能，并与 Kotlin 跨平台 项目集成。
+Kotlin/JS is also compatible with the most common module systems: [ESM](https://tc39.es/ecma262/#sec-modules), [CommonJS](https://nodejs.org/api/modules.html#modules-commonjs-modules), 
+[UMD](https://github.com/umdjs/umd), and [AMD](https://github.com/amdjs/amdjs-api).
+This allows you to [produce and consume modules](js-modules.md) and integrate with the JavaScript ecosystem in a structured manner.
 
-[访问 fritz2 网站](https://www.fritz2.dev) 获取文档、教程和示例。
+### Share your use cases
 
-要获取有关该框架的更新和讨论，请加入 [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) 中的
-[#fritz2](https://kotlinlang.slack.com/messages/fritz2) 和 [#javascript](https://kotlinlang.slack.com/archives/C0B8L3U69) 频道。
+The list in [Use cases for Kotlin/JS](#use-cases-for-kotlin-js) isn't exhaustive. Feel free to experiment with different approaches
+and find the best fit for your project.
 
-### Doodle
+Share your use cases, experiences, and questions with the Kotlin/JS community in the [#javascript](https://kotlinlang.slack.com/archives/C0B8L3U69) channel on [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up).
 
-_Doodle_ 是一个基于矢量的 Kotlin/JS UI 框架。
-Doodle 应用程序利用浏览器的图形能力来绘制用户界面，而不是依赖于 DOM、CSS 或 JavaScript。
-通过使用这种方法，Doodle 使您能够精确控制任意 UI 元素、矢量形状、渐变和自定义可视化的渲染。
+## Get started with Kotlin/JS
 
-[访问 Doodle 网站](https://nacular.github.io/doodle/) 获取文档、教程和示例。
+Explore the fundamentals and initial steps to start working with Kotlin/JS:
 
-要获取有关该框架的更新和讨论，请加入 [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) 中的
-[#doodle](https://kotlinlang.slack.com/messages/doodle) 和 [#javascript](https://kotlinlang.slack.com/archives/C0B8L3U69) 频道。
+* If you're new to Kotlin, start by reviewing the [basic syntax](basic-syntax.md) and exploring the [Kotlin tour](kotlin-tour-welcome.md).
+* Check out the list of [Kotlin/JS sample projects](#sample-projects-for-kotlin-js) for inspiration. These samples contain 
+  useful code snippets and patterns that can help you get started with your projects.
+* If you’re new to Kotlin/JS, start with the [setup guide](js-project-setup.md) before exploring more advanced topics.
 
-## 加入 Kotlin/JS 社区 {id="加入Kotlin-JS社区"}
+Would you like to try Kotlin/JS yourself?
 
-您可以加入官方 [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) 中的
-[#javascript](https://kotlinlang.slack.com/archives/C0B8L3U69) 频道，与社区和团队进行交流。
+<a href="js-get-started.md"><img src="js-get-started-button.svg" width="500" alt="Get started with Kotlin/JS" style="block"/></a>
+
+## Sample projects for Kotlin/JS
+
+The following table lists a set of sample projects demonstrating various Kotlin/JS use cases, architectures, and code-sharing strategies:
+
+| Project                                                                                                                           | Description                                                                                                                                                                                                                                                                                                                      |
+|-----------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Petclinic with common code between Spring and Angular](https://github.com/Kotlin/kmp-spring-petclinic/#readme)                   | Demonstrates how to avoid code duplication in enterprise applications by sharing data-transfer objects, validation and authentication rules, and abstractions for REST API endpoints. The code is shared between a [Spring Boot](https://spring.io/projects/spring-boot) backend and a [Angular](https://angular.dev/) frontend. |
+| [Fullstack Conference CMS](https://github.com/Kotlin/kmp-fullstack-conference-cms/#readme)                                        | Showcases multiple code-sharing approaches, ranging from the simplest to all-in code sharing between [Ktor](https://ktor.io/), [Jetpack Compose](https://developer.android.com/compose), and [Vue.js](https://vuejs.org/) applications.                                                                                          |
+| [Todo App on a Compose-HTML-based Kobweb framework](https://github.com/varabyte/kobweb-templates/tree/main/examples/todo/#readme) | Shows how to create a to-do list application by reusing an approach familiar to Android developers. It builds a client UI application powered by the [Kobweb framework](https://kobweb.varabyte.com/).                                                                                                                           |
+| [Simple logic sharing between Android, iOS, and web](https://github.com/Kotlin/kmp-logic-sharing-simple-example/#readme)          | Contains a template for building a project with common logic in Kotlin, which is consumed in platform-native UI applications on Android ([Jetpack Compose](https://developer.android.com/compose)), iOS ([SwiftUI](https://developer.apple.com/tutorials/swiftui/)), and web ([React](https://react.dev/)).                      |
+| [Full-stack collaborative to-do list](https://github.com/kotlin-hands-on/jvm-js-fullstack/#readme)                                | Shows how to create a to-do list application for collaborative work using Kotlin Multiplatform with JS and JVM targets. It uses [Ktor](https://ktor.io/) for the backend, and Kotlin/JS with React for the frontend.                                                                                                             |
+
+## Kotlin/JS frameworks
+
+Kotlin/JS frameworks simplify web development by providing ready-to-use components, routing, state management, and other tools for building modern web applications.
+
+[Check the available frameworks for Kotlin/JS written by different authors](js-frameworks.md).
+
+## Join the Kotlin/JS community
+
+You can join the [#javascript](https://kotlinlang.slack.com/archives/C0B8L3U69) channel in the official [Kotlin Slack](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up)
+to chat with the community and the Kotlin/JS team.
+
+## What's next
+
+* [Set up a Kotlin/JS project](js-project-setup.md)
+* [Run Kotlin/JS projects](running-kotlin-js.md)
+* [Debug Kotlin/JS code](js-debugging.md)
+* [Run tests in Kotlin/JS](js-running-tests.md)

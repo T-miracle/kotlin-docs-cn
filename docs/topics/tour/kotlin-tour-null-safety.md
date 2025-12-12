@@ -201,7 +201,7 @@ fun main() {
 
 ## 下一步是什么？
 
-恭喜！现在你已经完成了 Kotlin 之旅，之后请查看我们有关 Kotlin 常用应用的教程：
+Congratulations! Now that you have completed the beginner tour, take your understanding of Kotlin to the next level with
+our intermediate tour:
 
-* [创建后台应用程序](jvm-create-project-with-spring-boot.md)
-* [为 Android 和 iOS 创建跨平台应用程序](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html)
+<a href="kotlin-tour-intermediate-extension-functions.md"><img src="start-intermediate-tour.svg" width="700" alt="Start the intermediate Kotlin tour" style="block"/></a>

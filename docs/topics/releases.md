@@ -1,8 +1,8 @@
 [//]: # (title: Kotlin 发布)
 
 <tldr>
-    <p>最新 Kotlin 版本: <strong>%kotlinVersion%</strong></p>
-    <p>详情请参阅 <a href="%kotlinLatestWhatsnew%">Kotlin %kotlinVersion% 新特性</a></p>
+    <p>Latest Kotlin version: <strong>%kotlinVersion%</strong></p>
+    <p>See <a href="%kotlinLatestWhatsnew%">What's new in Kotlin 2.2.20</a> <!--and find the bug fix details in the <a href="%kotlinLatestUrl%">changelog</a>-->.</p>
 </tldr>
 
 Since Kotlin 2.0.0, we ship the following types of releases:
@@ -27,11 +27,21 @@ Since Kotlin 2.0.0, we ship the following types of releases:
 > 
 {style="note"}
 
-## 更新到新的 Kotlin 版本 {id=update-to-a-new-kotlin-version}
+## Upcoming Kotlin releases
 
-要将项目更新到新版本，需要更新你的构建脚本文件。
-例如，要更新到 Kotlin %kotlinVersion%，请更改 `build.gradle(.kts)` 文件中
-Kotlin Gradle 插件的版本：
+Here is the approximate schedule for upcoming stable Kotlin releases:
+
+* **2.3.0**: Planned for December 2025 – January 2026
+* **2.3.20**: Planned for March – April 2026
+
+## Update to a new Kotlin version
+
+To upgrade your project to a new release, update the Kotlin version in your build system.
+
+### Gradle
+
+To update to Kotlin %kotlinVersion%, change the version of the Kotlin Gradle plugin in your
+`build.gradle(.kts)` file:
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
@@ -64,21 +74,59 @@ plugins {
 </tab>
 </tabs>
 
-如果您有使用较早版本 Kotlin 创建的项目，请在项目中更改 Kotlin 版本，并在需要时更新 kotlinx 库。
+If you have projects created with earlier Kotlin versions, check if you also need to [update the version of any kotlinx
+libraries](gradle-configure-project.md#set-a-dependency-on-a-kotlinx-library).
 
-如果你正在迁移到新的语言版本，Kotlin 插件的迁移工具将帮助你完成迁移。
+If you are migrating to a new language release, the Kotlin plugin's migration tools will help you with the process.
+
+> To learn more about how to work with Gradle in your project, see [Configure a Gradle project](gradle-configure-project.md).
+> 
+{style="tip"}
+
+### Maven
+
+To update to Kotlin %kotlinVersion%, change the version in your `pom.xml` file:
+
+```xml
+<properties>
+    <kotlin.version>%kotlinVersion%</kotlin.version>
+</properties>
+```
+
+Alternatively, you can change the version of the `kotlin-maven-plugin` in your `pom.xml` file:
+
+```xml
+<plugins>
+    <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <version>%kotlinVersion%</version>
+    </plugin>
+</plugins>
+```
+
+If you have projects created with earlier Kotlin versions, check if you also need to [update the version of any kotlinx
+libraries](maven.md#dependency-on-a-kotlinx-library).
+
+> To learn more about how to work with Maven in your project, see [Maven](maven.md).
+>
+{style="tip"}
 
 ## IDE 支持 {id=ide-support}
 
-即使在 K2 编译器发布之后，IntelliJ IDEA 和 Android Studio 仍默认使用以前的编译器进行代码分析、代码完成、高亮显示和其他 IDE 相关功能。
+Kotlin has full out-of-the-box support in [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) and
+[Android Studio](https://developer.android.com/kotlin/get-started) with an official Kotlin plugin developed by JetBrains.
 
-从 2024.1 开始，IntelliJ IDEA 可以使用新的 K2 编译器来分析你的代码，通过其 K2 模式进行分析。
-要启用它，请前往 **Settings** | **Languages & Frameworks** | **Kotlin**，然后选择 **Enable K2 Kotlin Mode** 选项。
+K2 mode in IntelliJ IDEA and Android Studio uses the K2 compiler to improve code analysis, code completion, and highlighting.
 
-![Enable K2 mode](k2-mode.png){width=200}
+IntelliJ IDEA 2025.3 and later always uses K2 mode.
 
-启用 K2 模式后，由于编译器行为的变化，你可能会注意到 IDE 分析中的差异。
-有关新的 K2 编译器与以前编译器的不同之处，请参见 [迁移指南](k2-compiler-migration-guide.md)。
+In Android Studio, you can enable K2 mode starting with 2024.1 by following these steps:
+
+1. Go to **Settings** | **Languages & Frameworks** | **Kotlin**.
+2. Select the **Enable K2 mode** option.
+
+Learn more about K2 mode in [our blog](https://blog.jetbrains.com/idea/2025/04/k2-mode-in-intellij-idea-2025-1-current-state-and-faq/).
 
 ## Kotlin 版本兼容性 {id=kotlin-release-compatibility}
 
@@ -97,6 +145,56 @@ plugins {
         <th>构建信息</th>
         <th>构建亮点</th>
     </tr>
+    <tr>
+        <td><strong>2.2.21</strong>
+            <p>Released: <strong>October 23, 2025</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.21" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A tooling release containing support for Xcode 26, along with other improvements and bug fixes.</p>
+            <p>For more details, please refer to the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.21">changelog</a>.</p>
+    </td>
+    </tr>
+    <tr>
+        <td><strong>2.2.20</strong>
+            <p>Released: <strong>September 10, 2025</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.20" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A tooling release for Kotlin 2.2.0 that contains important changes for web development and other improvements.</p>
+            <p>For more details, please refer to the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.20">changelog</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>2.2.10</strong>
+            <p>Released: <strong>August 14, 2025</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.10" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A bug fix release for Kotlin 2.2.0.</p>
+            <p>For more details, please refer to the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.10">changelog</a>.</p>
+        </td>
+    </tr>
+    <tr>
+        <td><strong>2.2.0</strong>
+            <p>Released: <strong>June 23, 2025</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.0" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A language release including both new and stable language features, tooling updates, performance improvements for different platforms, and important fixes.</p>
+            <p>For more details, please refer to the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.2.0">changelog</a>.</p>
+        </td>
+    </tr> 
+    <tr>
+        <td><strong>2.1.21</strong>
+            <p>Released: <strong>May 13, 2025</strong></p>
+            <p><a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.21" target="_blank">Release on GitHub</a></p>
+        </td>
+        <td>
+            <p>A bug fix release for Kotlin 2.1.20.</p>
+            <p>For more details, please refer to the <a href="https://github.com/JetBrains/kotlin/releases/tag/v2.1.21">changelog</a>.</p>
+        </td>
+    </tr> 
    <tr>
         <td><strong>2.1.20</strong>
             <p>发布日期: <strong>2025.3.20</strong></p>

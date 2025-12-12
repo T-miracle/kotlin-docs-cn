@@ -6,7 +6,7 @@ The Kotlin 2.1.20 release is here! Here are the main highlights:
 
 * **K2 compiler updates**: [updates to the new kapt and Lombok plugins](#kotlin-k2-compiler)
 * **Kotlin Multiplatform**: [new DSL to replace Gradle's Application plugin](#kotlin-multiplatform-new-dsl-to-replace-gradle-s-application-plugin)
-* **Kotlin/Native**: [new inlining optimization](#kotlin-native-new-inlining-optimization)
+* **Kotlin/Native**: [support for Xcode 16.3 and a new inlining optimization](#kotlin-native)
 * **Kotlin/Wasm**: [default custom formatters, support for DWARF, and migration to Provider API](#kotlin-wasm)
 * **Gradle support**: [compatibility with Gradle's Isolated Projects and custom publication variants](#gradle)
 * **Standard library**: [common atomic types, improved UUID support, and new time-tracking functionality](#standard-library)
@@ -119,7 +119,17 @@ plugin is applied on the first `executable {}` block.
 
 If you run into any issues, report them in our [issue tracker](https://kotl.in/issue) or let us know in our [public Slack channel](https://kotlinlang.slack.com/archives/C19FD9681).
 
-## Kotlin/Native: new inlining optimization {id=kotlin-native-new-inlining-optimization}
+## Kotlin/Native
+
+### Support for Xcode 16.3
+
+Starting with Kotlin **2.1.21**, the Kotlin/Native compiler supports Xcode 16.3 – the latest stable version of Xcode.
+Feel free to update your Xcode and continue working on your Kotlin projects for Apple operating systems.
+
+The 2.1.21 release also fixes the related [cinterop issue](https://youtrack.jetbrains.com/issue/KT-75781/) that caused
+compilation failures in Kotlin Multiplatform projects.
+
+### New inlining optimization {id=kotlin-native-new-inlining-optimization}
 <primary-label ref="experimental-opt-in"/>
 
 Kotlin 2.1.20 introduces a new inlining optimization pass, which comes before the actual code generation phase.
@@ -380,7 +390,7 @@ import java.util.concurrent.atomic.*
 //sampleStart
 @OptIn(ExperimentalAtomicApi::class)
 fun main() {
-    // Converts Kotlin AtomicInt to Java's AtomicInteger
+    // Converts Kotlin's AtomicInt to Java's AtomicInteger
     val kotlinAtomic = AtomicInt(42)
     val javaAtomic: AtomicInteger = kotlinAtomic.asJavaAtomic()
     println("Java atomic value: ${javaAtomic.get()}")
@@ -457,9 +467,9 @@ Starting with Kotlin 2.1.20, the standard library provides the ability to repres
 was previously only available in [`kotlinx-datetime`](https://kotlinlang.org/api/kotlinx-datetime/), an official Kotlin
 library.
 
-The [`kotlinx.datetime.Clock`](https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-clock/) interface
-is introduced to the standard library as `kotlin.time.Clock` and the [`kotlinx.datetime.Instant`](https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/kotlinx.datetime/-instant/)
-class as `kotlin.time.Instant`. These concepts naturally align with the `time` package in the standard library because
+The `kotlinx.datetime.Clock` interface
+is introduced to the standard library as [`kotlin.time.Clock`](https://kotlinlang.org/api/core/2.1/kotlin-stdlib/kotlin.time/-clock/) and the `kotlinx.datetime.Instant`
+class as [`kotlin.time.Instant`](https://kotlinlang.org/api/core/2.1/kotlin-stdlib/kotlin.time/-instant/). These concepts naturally align with the `time` package in the standard library because
 they're only concerned with moments in time compared to a more complex calendar and timezone functionality that remains
 in `kotlinx-datetime`.
 
@@ -469,9 +479,9 @@ moment for system processes.
 
 To provide interoperability with other languages, additional converter functions are available:
 
-* `.toKotlinInstant()` converts a time value to a `kotlin.time.Instant` instance.
-* `.toJavaInstant()` converts the `kotlin.time.Instant` value to a `java.time.Instant` value.
-* `Instant.toJSDate()` converts the `kotlin.time.Instant` value to an instance of the JS `Date` class. This conversion
+* [`.toKotlinInstant()`](https://kotlinlang.org/api/core/2.1/kotlin-stdlib/kotlin.time/to-kotlin-instant.html) converts a time value to a `kotlin.time.Instant` instance.
+* [`.toJavaInstant()`](https://kotlinlang.org/api/core/2.1/kotlin-stdlib/kotlin.time/to-java-instant.html) converts the `kotlin.time.Instant` value to a `java.time.Instant` value.
+* [`Instant.toJSDate()`](https://kotlinlang.org/api/core/2.1/kotlin-stdlib/kotlin.time/to-j-s-date.html) converts the `kotlin.time.Instant` value to an instance of the JS `Date` class. This conversion
   is not precise; JS uses millisecond precision to represent dates, while Kotlin allows for nanosecond resolution.
 
 The new time features of the standard library are still [Experimental](components-stability.md#stability-levels-explained).
@@ -504,17 +514,17 @@ In 2.1.20, the Compose compiler relaxes some restrictions on `@Composable` funct
 In addition, the Compose compiler Gradle plugin is set to include source information by default, aligning the behavior
 on all platforms with Android.
 
-### Support for default arguments in open `@Composable` functions
+### Support for parameters with default values in open `@Composable` functions
 
-The compiler previously restricted default arguments in open `@Composable` functions due to incorrect compiler output,
-which would result in crashes at runtime. The underlying issue is now resolved, and default arguments are fully supported
+The compiler previously restricted parameters with default values in open `@Composable` functions due to incorrect compiler output,
+which would result in crashes at runtime. The underlying issue is now resolved, and parameters with default values are fully supported
 when used with Kotlin 2.1.20 or newer.
 
-Compose compiler allowed default arguments in open functions before [version 1.5.8](https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.8),
+Compose compiler allowed parameters with default values in open functions before [version 1.5.8](https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.8),
 so the support depends on project configuration:
 
 * If an open composable function is compiled with Kotlin version 2.1.20 or newer, the compiler generates correct wrappers
-  for default arguments. This includes wrappers compatible with pre-1.5.8 binaries, meaning that downstream libraries
+  for parameters with default values. This includes wrappers compatible with pre-1.5.8 binaries, meaning that downstream libraries
   will also be able to use this open function.
 * If the open composable function is compiled with Kotlin older than 2.1.20, Compose uses a compatibility mode, which
   might result in runtime crashes. When using the compatibility mode, the compiler emits a warning to highlight potential
@@ -552,11 +562,10 @@ alongside the plugin, due to an option being effectively set twice.
 ## Breaking changes and deprecations
 
 * To align Kotlin Multiplatform with upcoming changes in Gradle, we are phasing out the `withJava()` function.
-  [Java source sets are now created by default](multiplatform-compatibility-guide.md#java-source-sets-created-by-default).
-
+  [Java source sets are now created by default](https://kotlinlang.org/docs/multiplatform/multiplatform-compatibility-guide.html#java-source-sets-created-by-default). If you use the [Java test fixtures](https://docs.gradle.org/current/userguide/java_testing.html#sec:java_test_fixtures) Gradle plugin,
+  upgrade directly to [Kotlin 2.1.21](releases.md#release-details) to avoid compatibility issues.
 * The JetBrains team is proceeding with the deprecation of the `kotlin-android-extensions` plugin. If you try to use it
   in your project, you'll now get a configuration error, and no plugin code will be executed.
-
 * The legacy `kotlin.incremental.classpath.snapshot.enabled` property has been removed from the Kotlin Gradle plugin.
   The property used to provide an opportunity to fall back to a built-in ABI snapshot on the JVM. The plugin now uses
   other methods to detect and avoid unnecessary recompilations, making the property obsolete.
@@ -570,16 +579,16 @@ The Kotlin documentation has received some notable changes:
 * [Kotlin roadmap](roadmap.md) – see the updated list of Kotlin's priorities on language and ecosystem evolution.
 * [Gradle best practices](gradle-best-practices.md) page – learn essential best practices for optimizing your Gradle
   builds and improving performance.
-* [Compose Multiplatform and Jetpack Compose](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-and-jetpack-compose.html)
+* [Compose Multiplatform and Jetpack Compose](https://kotlinlang.org/docs/multiplatform/compose-multiplatform-and-jetpack-compose.html)
   – an overview of the relation between the two UI frameworks.
-* [Kotlin Multiplatform and Flutter](https://www.jetbrains.com/help/kotlin-multiplatform-dev/kotlin-multiplatform-flutter.html)
+* [Kotlin Multiplatform and Flutter](https://kotlinlang.org/docs/multiplatform/kotlin-multiplatform-flutter.html)
   – see the comparison of two popular cross-platform frameworks.
 * [Interoperability with C](native-c-interop.md) – explore the details of Kotlin's interoperability with C.
 * [Numbers](numbers.md) – learn about different Kotlin types for representing numbers.
 
 ### New and updated tutorials
 
-* [Publish your library to Maven Central](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html)
+* [Publish your library to Maven Central](https://kotlinlang.org/docs/multiplatform/multiplatform-publish-libraries.html)
   – learn how to publish KMP library artifacts to the most popular Maven repository.
 * [Kotlin/Native as a dynamic library](native-dynamic-libraries.md) – create a dynamic Kotlin library.
 * [Kotlin/Native as an Apple framework](apple-framework.md) – create your own framework and use Kotlin/Native code from

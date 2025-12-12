@@ -1,6 +1,6 @@
 [//]: # (title: Retrieve data from files)
 
-[Kotlin Notebook](kotlin-notebook-overview.md), coupled with the [Kotlin DataFrame library](https://kotlin.github.io/dataframe/gettingstarted.html), enables 
+[Kotlin Notebook](kotlin-notebook-overview.md), coupled with the [Kotlin DataFrame library](https://kotlin.github.io/dataframe/home.html), enables 
 you to work with both non-structured and structured data. This combination offers the flexibility to transform non-structured data, 
 such as data found in TXT files, into structured datasets. 
 
@@ -13,15 +13,17 @@ In this guide, you can learn how to retrieve, refine, and handle data through mu
 
 ## Before you start
 
-1. Download and install the latest version of [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/download/?section=mac).
-2. Install the [Kotlin Notebook plugin](https://plugins.jetbrains.com/plugin/16340-kotlin-notebook) in IntelliJ IDEA.
+Kotlin Notebook relies on the [Kotlin Notebook plugin](https://plugins.jetbrains.com/plugin/16340-kotlin-notebook),
+which is bundled and enabled in IntelliJ IDEA by default.
 
-   > Alternatively, access the Kotlin Notebook plugin from **Settings** | **Plugins** | **Marketplace** within IntelliJ IDEA.
-   >
-   {style="tip"}
+If the Kotlin Notebook features are not available, ensure the plugin is enabled. For more information,
+see [Set up an environment](kotlin-notebook-set-up-env.md).
 
-3. Create a new Kotlin Notebook by selecting **File** | **New** | **Kotlin Notebook**.
-4. In the Kotlin Notebook, import the Kotlin DataFrame library by running the following command:
+Create a new Kotlin Notebook:
+
+1. Select **File** | **New** | **Kotlin Notebook**.
+
+2. In the Kotlin Notebook, import the Kotlin DataFrame library by running the following command:
 
    ```kotlin
    %use dataframe

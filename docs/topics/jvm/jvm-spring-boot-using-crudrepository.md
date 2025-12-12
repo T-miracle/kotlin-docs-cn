@@ -1,5 +1,6 @@
-[//]: # (title: 使用 Spring Data CrudRepository 进行数据库访问)
-[//]: # (description: 在用 Kotlin 编写的 Spring Boot 项目中使用 Spring Data 接口。)
+[//]: # (title: Use Spring Data CrudRepository for database access)
+
+<web-summary>Work with Spring Data interface in a Spring Boot project written in Kotlin.</web-summary>
 
 <tldr>
     <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第四部分：</p><br/>  
@@ -27,7 +28,7 @@ _CrudRepository_ 是一个 Spring Data 接口，用于对指定类型的仓库�
 
     ```kotlin
     // Message.kt
-    package demo
+    package com.example.demo
    
     import org.springframework.data.annotation.Id
     import org.springframework.data.relational.core.mapping.Table
@@ -54,7 +55,7 @@ _CrudRepository_ 是一个 Spring Data 接口，用于对指定类型的仓库�
 
     ```kotlin
     // MessageRepository.kt
-    package demo
+    package com.example.demo
    
     import org.springframework.data.repository.CrudRepository
     
@@ -65,7 +66,7 @@ _CrudRepository_ 是一个 Spring Data 接口，用于对指定类型的仓库�
 
     ```kotlin
     // MessageService.kt
-    package demo
+    package com.example.demo
 
     import org.springframework.data.repository.findByIdOrNull
     import org.springframework.stereotype.Service
@@ -118,7 +119,7 @@ _CrudRepository_ 是一个 Spring Data 接口，用于对指定类型的仓库�
 
 ```kotlin
 // DemoApplication.kt
-package demo
+package com.example.demo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -134,7 +135,7 @@ fun main(args: Array<String>) {
 
 ```kotlin
 // Message.kt
-package demo
+package com.example.demo
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
@@ -146,7 +147,7 @@ data class Message(val text: String, @Id val id: String? = null)
 
 ```kotlin
 // MessageRepository.kt
-package demo
+package com.example.demo
 
 import org.springframework.data.repository.CrudRepository
 
@@ -156,7 +157,7 @@ interface MessageRepository : CrudRepository<Message, String>
 
 ```kotlin
 // MessageService.kt
-package demo
+package com.example.demo
 
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -174,7 +175,7 @@ class MessageService(private val db: MessageRepository) {
 
 ```kotlin
 // MessageController.kt
-package demo
+package com.example.demo
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -210,8 +211,10 @@ class MessageController(private val service: MessageService) {
 
 ## 运行应用程序 {id=run-the-application}
 
-应用程序已经准备好重新运行。  
-通过将 `JdbcTemplate` 替换为 `CrudRepository`，功能没有变化，因此应用程序应该与之前一样正常工作。
+Congratulations! The application is ready to run again.
+After replacing `JdbcTemplate` with `CrudRepository`, the functionality remains the same, so the application works just as before.
+
+You can now [run the POST and GET HTTP requests](jvm-spring-boot-add-db-support.md#add-messages-to-database-via-http-request) from the `requests.http` file and get the same results.
 
 ## 接下来做什么 {id=whats-next}
 
@@ -221,9 +224,6 @@ class MessageController(private val service: MessageService) {
    <img src="get-kotlin-language-map.png" width="700" alt="获取 Kotlin 语言地图" style="block"/>
 </a>
 
-* 了解更多关于 [从 Kotlin 代码调用 Java](java-interop.md) 和 [从 Java 代码调用 Kotlin](java-to-kotlin-interop.md) 的内容。
-* 了解如何使用 [Java 到 Kotlin 转换器](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
-* 查看我们的 Java 到 Kotlin 迁移指南：
-   * [Java 和 Kotlin 中的字符串](java-to-kotlin-idioms-strings.md)。
-   * [Java 和 Kotlin 中的集合](java-to-kotlin-collections-guide.md)。
-   * [Java 和 Kotlin 中的空值处理](java-to-kotlin-nullability-guide.md)。
+* Check out the [Spring Framework](https://docs.spring.io/spring-framework/docs/current/reference/html/languages.html#languages) documentation.
+* Complete the [Building web applications with Spring Boot and Kotlin](https://spring.io/guides/tutorials/spring-boot-kotlin) tutorial.
+* Create a chat application in the [Spring Boot with Kotlin Coroutines and RSocket](https://spring.io/guides/tutorials/spring-webflux-kotlin-rsocket/) tutorial.

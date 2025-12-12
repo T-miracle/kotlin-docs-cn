@@ -1,5 +1,7 @@
-[//]: # (title: Java 和 Kotlin 中的字符串)
-[//]: # (description: 学习如何从 Java 的 String 迁移到 Kotlin 的 String。 本指南涵盖了 Java StringBuilder、字符串拼接、字符串拆分、多行字符串、流等主题。)
+[//]: # (title: Strings in Java and Kotlin)
+
+<web-summary>Learn how to migrate from Java String to Kotlin String. This guide covers Java StringBuilder, 
+string concatenation and splitting strings, multiline strings, streams, and other topics.</web-summary>
 
 本指南包含了如何在 Java 和 Kotlin 中处理字符串的常见任务示例。  
 它将帮助你从 Java 迁移到 Kotlin，并以真正的 Kotlin 风格编写代码。
@@ -361,6 +363,6 @@ fun main() {
 ## 接下来做什么？ {id="whats-next"}
 
 * 浏览其他 [Kotlin 惯用语法](idioms.md)。
-* 学习如何使用 [Java 到 Kotlin 转换器](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有的 Java 代码转换为 Kotlin。
+* 学习如何使用 [Java 到 Kotlin 转换器](mixing-java-kotlin-intellij.md#convert-java-files-to-kotlin) 将现有的 Java 代码转换为 Kotlin。
 
 如果你有自己喜欢的习惯用法，欢迎通过发送 Pull Request 分享给我们。

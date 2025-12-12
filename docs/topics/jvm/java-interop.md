@@ -260,7 +260,7 @@ fun main() {
 
 `Derived` 的上限被设置为 `Base<String?>`，这与 `Base<String>` 不同。
 
-了解更多关于[Kotlin中的 Java 泛型](java-interop.md#java-generics-in-kotlin)。
+了解更多关于[Kotlin中的 Java 泛型](#java-generics-in-kotlin)。
 
 #### 类型形参 {id=type-parameters}
 
@@ -522,7 +522,7 @@ Java 的装箱基本类型被映射为可空的 Kotlin 类型：
 | `Map<K, V>`       | `Map<K, V>`       | `MutableMap<K, V>`             | `(Mutable)Map<K, V>!`                |
 | `Map.Entry<K, V>` | `Map.Entry<K, V>` | `MutableMap.MutableEntry<K,V>` | `(Mutable)Map.(Mutable)Entry<K, V>!` |
 
-Java 的数组映射如[下方](java-interop.md#java-arrays)所述：
+Java 的数组映射如[下方](#java-arrays)所述：
 
 | **Java 类型** | **Kotlin 类型**                  |
 |-------------|--------------------------------|

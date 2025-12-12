@@ -62,13 +62,63 @@ data class Person(val name: String, val age: Int)
 * 该类不能是局部类
 * 该类的主构造函数可见性必须与类本身相同
 
-### 启用 JVM 记录 {id=enabling-jvm-records}
+### Enable JVM records
 
 JVM 记录要求生成的 JVM 字节码目标版本为 `16` 或更高。
 
 要显式指定目标版本，可以在 [Gradle](gradle-compiler-options.md#attributes-specific-to-jvm) 或
 [Maven](maven.md#attributes-specific-to-jvm) 中使用 `jvmTarget` 编译器选项。
 
-## 深入讨论 {id=further-discussion}
+## Annotate record components in Kotlin
+
+<primary-label ref="experimental-general"/>
+
+In Java, [annotations](annotations.md) on a record component are automatically propagated to the backing field, getter, setter, and constructor parameter.
+You can replicate this behavior in Kotlin by using the [`all`](annotations.md#all-meta-target) use-site target.
+
+> To use the `all` use-site target, you must opt in. Either use the `-Xannotation-target-all` compiler option or add
+> the following to your `build.gradle.kts` file:
+>
+> ```kotlin
+> kotlin {
+>     compilerOptions {
+>         freeCompilerArgs.add("-Xannotation-target-all")
+>     }
+> }
+> ```
+>
+{style="warning"}
+
+For example:
+
+```kotlin
+@JvmRecord
+data class Person(val name: String, @all:Positive val age: Int)
+```
+
+When you use `@JvmRecord` with `@all:`, Kotlin:
+
+* Propagates the annotation to the property, backing field, constructor parameter, getter and setter.
+* Applies the annotation to the record component as well, if the annotation supports Java's `RECORD_COMPONENT`.
+
+## Make annotations work with record components
+
+To make an [annotation](annotations.md) available for both Kotlin properties **and** Java record components, add the
+following meta-annotations to your annotation declaration:
+
+* For Kotlin: [`@Target`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.annotation/-target/index.html)
+* For Java record components: [`@java.lang.annotation.Target`](https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Target.html)
+
+For example:
+
+```kotlin
+@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
+@java.lang.annotation.Target(ElementType.CLASS, ElementType.RECORD_COMPONENT)
+annotation class ExampleClass
+```
+
+You can now apply `@ExampleClass` to Kotlin classes and properties, as well as Java classes and record components.
+
+## Further discussion
 
 有关更多技术细节和讨论，请参阅 [JVM 记录的语言提案](https://github.com/Kotlin/KEEP/blob/master/proposals/jvm-records.md)。

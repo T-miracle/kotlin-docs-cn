@@ -21,6 +21,10 @@ Kotlin 的两个最流行的 IDE - [IntelliJ IDEA](https://www.jetbrains.com/ide
 2. 打开 **Incorrect formatting** 检查。
    额外的检查，验证代码风格指南中描述的其他问题（如命名约定）默认已启用。
 
+<!-- Replace with an external link when the guide is moved -->
+
+For more information, see the [Migrate to Kotlin code style with IntelliJ IDEA](code-style-migration-guide.md) guide.
+
 ## 源代码组织
 
 ### 目录结构
@@ -155,16 +159,17 @@ fun Foo(): Foo { return FooImpl() }
 
 ```kotlin
 class MyTestCase {
-     @Test fun `ensure everything works`() { /*...*/ }
-     
-     @Test fun ensureEverythingWorks_onAndroid() { /*...*/ }
+    @Test fun `ensure everything works`() { /*...*/ }
+
+    @Test fun ensureEverythingWorks_onAndroid() { /*...*/ }
 }
 ```
 
 ### 属性命名 {id=property-names}
 
-常量的名称（标记为 `const` 的属性，或没有自定义 `get` 函数且保存深度不可变数据的顶层或对象 `val`
-属性）应使用全大写字母，单词之间用下划线分隔，遵循 ([尖叫蛇命名法](https://en.wikipedia.org/wiki/Snake_case)) 约定：
+Names of constants (properties marked with `const`, or top-level or object `val` properties with no custom `get` function
+that hold deeply immutable data) should use all uppercase, underscore-separated names following the [screaming snake case](https://en.wikipedia.org/wiki/Snake_case)
+convention:
 
 ```kotlin
 const val MAX_COUNT = 8
@@ -195,7 +200,7 @@ class C {
     private val _elementList = mutableListOf<Element>()
 
     val elementList: List<Element>
-         get() = _elementList
+        get() = _elementList
 }
 ```
 
@@ -279,9 +284,9 @@ abstract class Foo<out T : Any> : IFoo {
 
 class FooImpl : Foo() {
     constructor(x: String) : this(x) { /*...*/ }
-    
+
     val x = object : IFoo { /*...*/ } 
-} 
+}
 ```
 
 ### 类头部 {id=class-headers}
@@ -574,10 +579,10 @@ appendCommaSeparated(properties) { prop ->
 
 ```kotlin
 foo {
-   context: Context,
-   environment: Env
-   ->
-   context.configureEnv(environment)
+    context: Context,
+    environment: Env
+    ->
+    context.configureEnv(environment)
 }
 ```
 
@@ -832,10 +837,26 @@ fun foo() { // `": Unit"` 在这里被省略。
 
 ### 字符串模板 {id=string-templates}
 
-在将简单变量插入字符串模板时，不要使用花括号。仅在表达式较长时使用花括号。
+Don't use curly braces when inserting a simple variable into a string template. Use curly braces only for longer expressions:
 
 ```kotlin
 println("$name has ${children.size} children")
+```
+
+Use [multi-dollar string interpolation](strings.md#multi-dollar-string-interpolation)
+to treat the dollar sign chars `$` as string literals:
+
+```kotlin
+val KClass<*>.jsonSchema : String
+    get() = $$"""
+        {
+            "$schema": "https://json-schema.org/draft/2020-12/schema",
+            "$id": "https://example.com/product.schema.json",
+            "$dynamicAnchor": "meta",
+            "title": "$${simpleName ?: qualifiedName ?: "unknown"}",
+            "type": "object"
+        }
+        """
 ```
 
 ## 语言特性的惯用方式 {id=idiomatic-use-of-language-features}
@@ -930,7 +951,7 @@ else
 when(x) {
     0 -> return "zero"
     else -> return "nonzero"
-}    
+}
 ```
 
 ### if 与 when 的选择 {id=if-versus-when}
@@ -1002,25 +1023,25 @@ for (i in 0..<n) { /*...*/ }  // 好的写法
 ```kotlin
 fun main() {
 //sampleStart
-   println("""
-    不是
-    修剪过的
-    文本
-    """
-   )
+    println("""
+     不是
+     修剪过的
+     文本
+     """
+    )
 
-   println("""
-    修剪过的
-    文本
-    """.trimIndent()
-   )
+    println("""
+     修剪过的
+     文本
+     """.trimIndent()
+    )
 
-   println()
+    println()
 
-   val a = """修剪到边距文本：
-          |if(a > 1) {
-          |    return a
-          |}""".trimMargin()
+    val a = """修剪到边距文本：
+            |if(a > 1) {
+            |    return a
+            |}""".trimMargin()
 
    println(a)
 //sampleEnd
@@ -1069,9 +1090,9 @@ class Point(val x: Double, val y: Double) {
 }
 ```
 
-如果你有一个对象有多个重载的构造函数，
-并且它们不调用不同的超类构造函数，也不能简化为带有默认参数值的单个构造函数，
-建议用工厂函数替换重载的构造函数。
+If you have an object with multiple overloaded constructors that don't call different superclass constructors and
+can't be reduced to a single constructor including parameters with default values, prefer to replace the overloaded constructors with
+factory functions.
 
 ### 平台类型 {id=platform-types}
 

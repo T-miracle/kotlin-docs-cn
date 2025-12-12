@@ -46,10 +46,12 @@ class DatabaseError(val source: DataSource): IOError()
 object RuntimeError : Error
 ```
 
-这个示例可以表示一个库的 API，其中包含错误类，允许库用户处理库可能抛出的错误。  
-如果这种错误类的层次结构包括在公共 API 中可见的接口或抽象类，那么没有什么能阻止其他开发者在客户端代码中实现或扩展它们。  
-由于库无法知道库外部声明的错误，因此无法将它们与自己的类一致地处理。  
-然而，通过使用 **密封** 的错误类层次结构，库作者可以确保他们知道所有可能的错误类型，并且其他错误类型不能后来出现。
+This example could represent a library's API that contains error classes to let library users handle errors that it can throw. 
+If the hierarchy of such error classes includes interfaces or abstract classes visible in the public API, then nothing 
+prevents other developers from implementing or extending them in the client code.
+Since the library doesn't know about errors declared outside of it, it can't treat them consistently with its own classes. 
+However, with a **sealed** hierarchy of error classes, library authors can be sure that they know all the possible error 
+types and that other error types can't appear later.
 
 该示例的层次结构如下所示：  
 
@@ -148,15 +150,15 @@ open class CustomError(): Error
 
 ### 跨平台项目中的继承 {id=inheritance-in-multiplatform-projects}
 
-在 [跨平台项目](multiplatform-intro.md) 中，还有一个继承限制：密封类的直接子类必须位于同一个
-[源代码集](multiplatform-discover-project.md#source-sets) 中。
-这适用于没有 [expected 和 actual 修饰符](multiplatform-expect-actual.md) 的密封类。
+在 [跨平台项目](https://kotlinlang.org/docs/multiplatform/get-started.html) 中，还有一个继承限制：密封类的直接子类必须位于同一个
+[源代码集](https://kotlinlang.org/docs/multiplatform/multiplatform-discover-project.html#source-sets) 中。
+这适用于没有 [expected 和 actual 修饰符](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html) 的密封类。
 
 如果一个密封类在公共源代码集中声明为 `expect` 并在平台源代码集中有 `actual`
 实现，`expect` 和 `actual` 版本都可以在它们的源代码集中有子类。
 此外，如果使用层次结构，你可以在 `expect` 和 `actual` 声明之间的任何源代码集中创建子类。
 
-[了解更多关于跨平台项目的层次结构](multiplatform-hierarchy.md)。
+[了解更多关于跨平台项目的层次结构](https://kotlinlang.org/docs/multiplatform/multiplatform-hierarchy.html)。
 
 ## 使用密封类与 when 表达式 {id=use-sealed-classes-with-when-expression}
 
@@ -195,11 +197,18 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.5"}
 
-在使用密封类与 `when` 表达式时，你还可以添加守卫条件，以便在单个分支中包含额外的检查。  
-有关更多信息，请参见 [when 表达式中的守卫条件](control-flow.md#guard-conditions-in-when-expressions)。
+> To reduce repetition in `when` expressions, try out context-sensitive resolution (currently in preview).
+> This feature allows you to omit the type name when matching sealed class members if the expected type is known.
+>
+> For more information, see [Preview of context-sensitive resolution](whatsnew22.md#preview-of-context-sensitive-resolution) or the related [KEEP proposal](https://github.com/Kotlin/KEEP/blob/improved-resolution-expected-type/proposals/context-sensitive-resolution.md).
+> 
+{style="tip"}
+
+When using sealed classes with `when` expressions, you can also add guard conditions to include additional checks in a single branch.
+For more information, see [Guard conditions in when expressions](control-flow.md#guard-conditions-in-when-expressions).
 
 > 在跨平台项目中，如果你在公共代码中有一个带有 `when` 表达式的密封类作为
-> [expected 声明](multiplatform-expect-actual.md)，你仍然需要一个 `else` 分支。  
+> [expected 声明](https://kotlinlang.org/docs/multiplatform/multiplatform-expect-actual.html)，你仍然需要一个 `else` 分支。  
 > 这是因为 `actual` 平台实现的子类可能扩展了在公共代码中未知的密封类。
 >
 {style="note"}

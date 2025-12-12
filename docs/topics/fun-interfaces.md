@@ -10,7 +10,7 @@
 
 ```kotlin
 fun interface KRunnable {
-   fun invoke()
+    fun invoke()
 }
 ```
 
@@ -25,7 +25,7 @@ Kotlin 通过 SAM 转换，能将任何与接口单一方法签名匹配的 lamb
 
 ```kotlin
 fun interface IntPredicate {
-   fun accept(i: Int): Boolean
+    fun accept(i: Int): Boolean
 }
 ```
 
@@ -34,9 +34,9 @@ fun interface IntPredicate {
 ```kotlin
 // 创建类的实例
 val isEven = object : IntPredicate {
-   override fun accept(i: Int): Boolean {
-       return i % 2 == 0
-   }
+    override fun accept(i: Int): Boolean {
+        return i % 2 == 0
+    }
 }
 ```
 
@@ -51,13 +51,13 @@ val isEven = IntPredicate { it % 2 == 0 }
 
 ```kotlin
 fun interface IntPredicate {
-   fun accept(i: Int): Boolean
+    fun accept(i: Int): Boolean
 }
 
 val isEven = IntPredicate { it % 2 == 0 }
 
 fun main() {
-   println("Is 7 even? - ${isEven.accept(7)}")
+    println("Is 7 even? - ${isEven.accept(7)}")
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.4"}
@@ -75,7 +75,9 @@ interface Printer {
     fun print() 
 }
 
-fun Printer(block: () -> Unit): Printer = object : Printer { override fun print() = block() }
+fun Printer(block: () -> Unit): Printer = object : Printer {
+    override fun print() = block()
+}
 ```
 
 启用对函数式接口构造函数的可调用引用后，你可以仅通过使用函数式接口声明来替换这段代码：
@@ -109,7 +111,7 @@ typealias IntPredicate = (i: Int) -> Boolean
 val isEven: IntPredicate = { it % 2 == 0 }
 
 fun main() {
-   println("Is 7 even? - ${isEven(7)}")
+    println("Is 7 even? - ${isEven(7)}")
 }
 ```
 

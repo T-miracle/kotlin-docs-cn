@@ -49,7 +49,7 @@ fun main() {
     class A {
         fun printLine() { println("成员函数") }
 
-        fun invokePrintLine(omitThis: Boolean = false) { 
+        fun invokePrintLine(omitThis: Boolean = false) {
             if (omitThis) printLine()
             else this.printLine()
         }
@@ -60,4 +60,3 @@ fun main() {
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
-

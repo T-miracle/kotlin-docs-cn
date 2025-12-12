@@ -1,5 +1,7 @@
-[//]: # (title: Java 与 Kotlin 中的可空性)
-[//]: # (description: 学习如何将 Java 的可空结构迁移到 Kotlin。本指南涵盖 Kotlin 对可空类型的支持、Kotlin 如何处理来自 Java 的可空注解等内容。)
+[//]: # (title: Nullability in Java and Kotlin)
+
+<web-summary>Learn how to migrate nullable constructions from Java to Kotlin. This guide covers support for nullable types in Kotlin, 
+how Kotlin treats nullable annotations from Java, and more.</web-summary>
 
 _可空性_ 是指变量能够持有 `null` 值的能力。
 当变量包含 `null` 时，尝试解引用该变量会导致 `NullPointerException`。
@@ -84,7 +86,7 @@ fun stringLength(a: String?): Int = if (a != null) a.length else 0
 如果不执行此检查，代码将无法编译并显示以下错误信息：
 "Only [safe (?.)](null-safety.md#safe-call-operator) or
 [non-nullable asserted (!!.) calls](null-safety.md#not-null-assertion-operator) are allowed
-on a [nullable receiver](extensions.md#nullable-receiver) of type String?
+on a [nullable receiver](extensions.md#nullable-receivers) of type String?
 （译：在类型为 String? 的 [可空接收者](extensions.md#nullable-receiver) 上，只允许使用
 [安全调用 (?.)](null-safety.md#safe-call-operator) 或
 [非空断言 (!!.) 调用](null-safety.md#not-null-assertion-operator)）"
@@ -100,12 +102,12 @@ fun stringLength(a: String?): Int = a?.length ?: 0  // 若 a 为 null 则返回 
 
 ## 平台类型 {id=platform-types}
 
-在 Java 中，你可以使用注解来标识变量是否可以为 `null`。
-这类注解并非标准库的一部分，但你可以单独添加它们。
-例如，你可以使用 JetBrains 的 `@Nullable` 和 `@NotNull` 注解（来自 `org.jetbrains.annotations` 包）， 
-或者 Eclipse 的注解（`org.eclipse.jdt.annotation`）。
-Kotlin 在 [从 Kotlin 代码调用 Java 代码](java-interop.md#nullability-annotations) 时可以识别这些注解，
-并根据注解处理相应的类型。
+In Java, you can use annotations showing whether a variable can or cannot be `null`.
+Such annotations aren't part of the standard library, but you can add them separately.
+For example, you can use JetBrains annotations `@Nullable` and `@NotNull` (from the `org.jetbrains.annotations` package),
+annotations from [JSpecify](https://jspecify.dev/) (`org.jspecify.annotations`), or from Eclipse (`org.eclipse.jdt.annotation`).
+Kotlin can recognize such annotations when you're [calling Java code from Kotlin code](java-interop.md#nullability-annotations)
+and will treat types according to their annotations.
 
 如果你的 Java 代码没有这些注解，Kotlin 会将 Java 类型视为 **平台类型**。
 但由于 Kotlin 无法获取这些类型的可空性信息，编译器会允许对它们执行所有操作。
@@ -214,7 +216,7 @@ findOrder()?.customer?.let(::processCustomer)
 
 ## 默认值替代 null {id=default-values-instead-of-null}
 
-检查 `null` 通常与[设置默认值](functions.md#default-arguments)结合使用，
+检查 `null` 通常与[设置默认值](functions.md#parameters-with-default-values)结合使用，
 以防 null 检查成功。
 
 带有 null 检查的 Java 代码：
@@ -312,7 +314,7 @@ void main() {
 ```
 {id="casting-types-java"}
 
-在 Kotlin 中，为避免异常，可使用[安全转换运算符](typecasts.md#安全可空强制转换运算符) `as?`，转换失败时返回 `null`：
+To avoid exceptions in Kotlin, use the [safe cast operator](typecasts.md#unsafe-cast-operator) `as?`, which returns `null` on failure:
 
 ```kotlin
 // Kotlin
@@ -334,10 +336,54 @@ fun getStringLength(y: Any): Int {
 >
 {style="note"}
 
+When migrating Java code to Kotlin, you may want to initially use the regular cast operator `as` with a nullable type
+to preserve the original semantics of your code. However, we recommend adapting your code to use the safe cast operator `as?`
+for a safer and more idiomatic approach. For example, if you have the following Java code:
+
+```java
+public class UserProfile {
+    Object data;
+
+    public static String getUsername(UserProfile profile) {
+        if (profile == null) {
+            return null;
+        }
+        return (String) profile.data;
+    }
+}
+```
+
+Migrating this directly with the `as` operator gives you:
+
+```kotlin
+class UserProfile(var data: Any? = null)
+
+fun getUsername(profile: UserProfile?): String? {
+    if (profile == null) {
+        return null
+    }
+    return profile.data as String?
+}
+```
+
+Here, `profile.data` is cast to a nullable string using `as String?`.
+
+We recommend going one step further and using `as? String` to safely cast the value. This approach returns `null`
+on failure instead of throwing a `ClassCastException`:
+
+```kotlin
+class UserProfile(var data: Any? = null)
+
+fun getUsername(profile: UserProfile?): String? =
+  profile?.data as? String
+```
+
+This version replaces the `if` expression with the [safe call operator](null-safety.md#safe-call-operator) `?.`, which safely accesses the data property before attempting the cast.
+
 ## 下一步 {id=whats-next}
 
 * 浏览其他 [Kotlin 惯用法](idioms.md)
-* 学习如何使用 [Java 转 Kotlin (J2K) 转换器](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) 将现有 Java 代码转换为 Kotlin
+* 学习如何使用 [Java 转 Kotlin (J2K) 转换器](mixing-java-kotlin-intellij.md#convert-java-files-to-kotlin) 将现有 Java 代码转换为 Kotlin
 * 查看其他迁移指南：
   * [Java 和 Kotlin 中的字符串](java-to-kotlin-idioms-strings.md) {id=strings-in-java-and-kotlin}
   * [Java 和 Kotlin 中的集合](java-to-kotlin-collections-guide.md) {id=collections-in-java-and-kotlin}

@@ -1,5 +1,6 @@
-[//]: # (title: 向 Spring Boot 项目添加数据类)
-[//]: # (description: 向 Spring Boot 项目添加一个 Kotlin 数据类。)
+[//]: # (title: Add a data class to Spring Boot project)
+
+<web-summary>Add a Kotlin data class to Spring Boot project.</web-summary>
 
 <tldr>
     <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第二部分：</p><br/>  
@@ -14,11 +15,12 @@
 
 ## 更新您的应用程序 {id=update-your-application}
 
-1. 在相同的包中创建一个名为 `Message.kt` 的文件，并定义一个具有两个属性的数据类：`id` 和 `text`：
+1. In the same package, next to the `DemoApplication.kt` file, create a `Message.kt` file.
+2. In the `Message.kt` file, create a data class with two properties: `id` and `text`:
 
     ```kotlin
     // Message.kt
-    package demo
+    package com.example.demo
    
     data class Message(val id: String?, val text: String)
     ```  
@@ -50,11 +52,11 @@
           </code-block>  
        </def>  
    </deflist>  
-2. 在 `MessageController.kt` 文件中，替换 `index()` 函数，创建一个 `listMessages()` 函数，返回一个 `Message` 对象的列表：
+3. 在 `MessageController.kt` 文件中，替换 `index()` 函数，创建一个 `listMessages()` 函数，返回一个 `Message` 对象的列表：
 
     ```kotlin
     // MessageController.kt
-    package demo
+    package com.example.demo
    
     import org.springframework.web.bind.annotation.GetMapping
     import org.springframework.web.bind.annotation.RequestMapping
@@ -73,12 +75,12 @@
     ```
 
     <deflist collapsible="true">
-       <def title="集合 – listOf()">
-          <p>Kotlin 标准库提供了基本集合类型的实现：集合（sets）、列表（lists）和映射（maps）。<br/>
-          每个集合类型由一对接口表示：</p>
+       <def title="Collections – listOf()">
+          <p>The Kotlin Standard Library provides implementations for basic collection types: sets, lists, and maps.<br/>
+          Each collection type can be <i>read-only</i> or <i>mutable</i>:</p>
           <list>
-              <li>一个 <i>只读</i> 接口，提供访问集合元素的操作。</li>
-              <li>一个 <i>可变</i> 接口，扩展了相应的只读接口，提供写操作：添加、删除和更新元素。</li>
+              <li>A <i>read-only</i> collection comes with operations for accessing collection elements.</li>
+              <li>A <i>mutable</i> collection comes also with write operations for adding, removing, and updating its elements.</li>
           </list>
           <p>Kotlin 标准库还提供了相应的工厂函数来创建这些集合的实例。</p>
           <p>在本教程中，您使用 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/list-of.html"><code>listOf()</code></a> 函数创建一个 `Message` 对象的列表。  
@@ -107,7 +109,7 @@
 
 ```kotlin
 // DemoApplication.kt
-package demo
+package com.example.demo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -123,7 +125,7 @@ fun main(args: Array<String>) {
 
 ```kotlin
 // MessageController.kt
-package demo
+package com.example.demo
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -144,7 +146,7 @@ class MessageController {
 
 ```kotlin
 // Message.kt
-package demo
+package com.example.demo
 
 data class Message(val id: String?, val text: String)
 ```

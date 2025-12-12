@@ -5,7 +5,7 @@ _[Released: August 22, 2024](releases.md#release-details)_
 The Kotlin 2.0.20 release is out! This version includes performance improvements and bug fixes for Kotlin 2.0.0, where we
 announced the Kotlin K2 compiler as Stable. Here are some additional highlights from this release:
 
-* [The data class copy function will have the same visibility as the constructor](#data-class-copy-function-to-have-the-same-visibility-as-constructor)
+* [The data class copy function to have the same visibility as the constructor](#data-class-copy-function-to-have-the-same-visibility-as-constructor)
 * [Static accessors for source sets from the default target hierarchy are now available in multiplatform projects](#static-accessors-for-source-sets-from-the-default-target-hierarchy)
 * [Concurrent marking for Kotlin/Native has been made possible in the garbage collector](#concurrent-marking-in-garbage-collector)
 * [The `@ExperimentalWasmDsl` annotation in Kotlin/Wasm has a new location](#new-location-of-experimentalwasmdsl-annotation)
@@ -174,7 +174,7 @@ with some Gradle Java plugins due to recent changes in Gradle.
 
 ### Static accessors for source sets from the default target hierarchy
 
-Since Kotlin 1.9.20, the [default hierarchy template](multiplatform-hierarchy.md#default-hierarchy-template)
+Since Kotlin 1.9.20, the [default hierarchy template](https://kotlinlang.org/docs/multiplatform/multiplatform-hierarchy.html#default-hierarchy-template)
 is automatically applied to all Kotlin Multiplatform projects.
 And for all of the source sets from the default hierarchy template, the Kotlin Gradle plugin provided type-safe accessors.
 That way, you could finally access source sets for all the specified targets without having to use `by getting` or `by creating` constructs.
@@ -210,7 +210,7 @@ kotlin {
 
 ![Accessing the source sets by name](accessing-sourse-sets.png){width=700}
 
-Learn more about the [hierarchical project structure in Kotlin Multiplatform](multiplatform-hierarchy.md).
+Learn more about the [hierarchical project structure in Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform/multiplatform-hierarchy.html).
 
 ### Deprecated compatibility with Kotlin Multiplatform Gradle plugin and Gradle Java plugins
 
@@ -912,7 +912,7 @@ The Kotlin documentation has received some notable changes:
 * Improved [Exceptions page](exceptions.md) - Learn about exceptions, how to throw and catch them.
 * Improved [Test code using JUnit in JVM - tutorial](jvm-test-using-junit.md) - Learn how to create tests using JUnit.
 * Improved [Interoperability with Swift/Objective-C page](native-objc-interop.md) - Learn how to use Kotlin declarations in Swift/Objective-C code and Objective-C declarations in Kotlin code.
-* Improved [Swift package export setup page](native-spm.md) - Learn how to set up Kotlin/Native output that can be consumed by a Swift package manager dependency.
+* Improved [Swift package export setup page](https://kotlinlang.org/docs/multiplatform/multiplatform-spm-export.html) - Learn how to set up Kotlin/Native output that can be consumed by a Swift package manager dependency.
 
 ## Install Kotlin 2.0.20
 

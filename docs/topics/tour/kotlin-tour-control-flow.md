@@ -185,7 +185,7 @@ fun main() {
 > 在这个练习中，你需要导入一个包，以便使用 `Random.nextInt()` 函数来生成一个随机的 `Int`。
 > 关于导入包的更多信息，请参见 [包和导入](packages.md)。
 >
-{style = "tip"}
+{style="tip"}
 
 <deflist collapsible="true">
     <def title="提示">
@@ -270,9 +270,11 @@ fun main() {
 
 要声明一个不包括结束值的区间，使用 `..<` 运算符。例如，`1..<4` 等价于 `1, 2, 3`。
 
-要声明一个逆序的区间，使用 `downTo`。例如，`4 downTo 1` 等价于 `4, 3, 2, 1`。
+要声明一个倒序的区间，请使用 [`downTo`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/down-to.html)。
+例如，`4 downTo 1` 等价于 `4, 3, 2, 1`。
 
-要声明一个增量不是 1 的区间，使用 `step` 和你想要的增量值。例如，`1..5 step 2` 等价于 `1, 3, 5`。
+要声明一个步长不是 1 的区间，请使用 [`step`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/step.html) 并指定所需的步长值。
+例如，`1..5 step 2` 等价于 `1, 3, 5`。
 
 你也可以对 `Char` 类型的区间做相同的操作：
 
@@ -392,7 +394,7 @@ fun main() {
 
 ### 练习 1 {collapsible="true" collapsible="true" id="loops-exercise-1"}
 
-你有一个程序，它会计数披萨片数，直到有一个完整的 8 片披萨。请以两种方式重构这个程序：
+你有一个程序在累加披萨片数，直到达到一整份披萨的 8 片。请用两种方式重构这个程序：
 
 * 使用 `while` 循环。
 * 使用 `do-while` 循环。

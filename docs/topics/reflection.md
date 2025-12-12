@@ -41,10 +41,10 @@ _反射_ 是一组语言和库的特性，允许你在运行时检查程序的�
 
     ```xml
     <dependencies>
-      <dependency>
-          <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-reflect</artifactId>
-      </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
     </dependencies>
     ```
 

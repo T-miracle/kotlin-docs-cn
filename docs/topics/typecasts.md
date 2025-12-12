@@ -1,71 +1,229 @@
 [//]: # (title: 类型检查和强制转换)
 
-在 Kotlin 中，你可以在运行时进行类型检查来确认对象的类型。
-类型转换允许你将对象转换为其他类型。
+In Kotlin, you can do two things with types at runtime: check whether an object is a specific type, or convert it to another type.
+Type **checks** help you confirm the kind of object you're dealing with, while type **casts** attempt to convert the object to another type.
 
 > 要了解关于 **泛型** 类型检查和转换（例如 `List<T>`、`Map<K,V>`）的具体信息，请参阅
 > [泛型类型检查和转换](generics.md#泛型类型检查和转换)。
 > 
 {style="tip"}
 
-## `is` 和 `!is` 操作符 {id=是或不是操作符}
+## Checks with `is` and `!is` operators {id="is-and-is-operators"}
 
-要在运行时检查对象是否属于某个类型，可以使用 `is` 运算符或其否定形式 `!is`：
-
-```kotlin
-if (obj is String) {
-    print(obj.length)
-}
-
-if (obj !is String) { // 和 !(obj is String) 一样
-    print("Not a String")
-} else {
-    print(obj.length)
-}
-```
-
-## 智能转换 {id=smart-casts}
-
-在大多数情况下，你不需要使用显式类型转换操作符，因为编译器会自动为你进行类型转换。
-这称为智能类型转换。
-编译器会对于不可变值进行 类型跟踪检查 和 [显式类型转换](#unsafe-cast-operator)，并在必要时自动插入隐式（安全）类型转换：
+Use the `is` operator (or `!is` to negate it) to check if an object matches a type at runtime:
 
 ```kotlin
-fun demo(x: Any) {
-    if (x is String) {
-        print(x.length) // x 会自动转换为 String
+fun main() {
+    val input: Any = "Hello, Kotlin"
+
+    if (input is String) {
+        println("Message length: ${input.length}")
+        // Message length: 13
+    }
+
+    if (input !is String) { // 和 !(input is String) 一样
+        println("Input is not a valid message")
+    } else {
+        println("Processing message: ${input.length} characters")
+        // Processing message: 13 characters
     }
 }
 ```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-typecasts-is-operator"}
+
+You can also use `is` and `!is` operators to check if an object matches a subtype:
+
+```kotlin
+interface Animal {
+    val name: String
+    fun speak()
+}
+
+class Dog(override val name: String) : Animal {
+    override fun speak() = println("$name says: Woof!")
+}
+
+class Cat(override val name: String) : Animal {
+    override fun speak() = println("$name says: Meow!")
+}
+//sampleStart
+fun handleAnimal(animal: Animal) {
+    println("Handling animal: ${animal.name}")
+    animal.speak()
+    
+    // Use is operator to check for subtypes
+    if (animal is Dog) {
+        println("Special care instructions: This is a dog.")
+    } else if (animal is Cat) {
+        println("Special care instructions: This is a cat.")
+    }
+}
+//sampleEnd
+fun main() {
+    val pets: List<Animal> = listOf(
+        Dog("Buddy"),
+        Cat("Whiskers"),
+        Dog("Rex")
+    )
+
+    for (pet in pets) {
+        handleAnimal(pet)
+        println("---")
+    }
+    // Handling animal: Buddy
+    // Buddy says: Woof!
+    // Special care instructions: This is a dog.
+    // ---
+    // Handling animal: Whiskers
+    // Whiskers says: Meow!
+    // Special care instructions: This is a cat.
+    // ---
+    // Handling animal: Rex
+    // Rex says: Woof!
+    // Special care instructions: This is a dog.
+    // ---
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-typecasts-is-operator-subtype"}
+
+This example uses the `is` operator to check if the `Animal` class instance has subtype `Dog` or `Cat` to print the relevant
+care instructions.
+
+You can check if an object is a supertype of its declared type, but it's not worthwhile because the answer is always true.
+Every class instance is already an instance of its supertypes.
+
+> To identify the type of an object at runtime, see [Reflection](reflection.md).
+> 
+{type="tip"}
+
+## Type casts
+
+To convert the type of an object in Kotlin to another type is called **casting**.
+
+In some cases, the compiler automatically casts objects for you. This is called smart-casting.
+
+If you need to explicitly cast a type, use `as?` or `as` [cast operators](#unsafe-cast-operator). 
+
+## 智能转换 {id=smart-casts}
+
+The compiler tracks the type checks and [explicit casts](#unsafe-cast-operator) for immutable
+values and inserts implicit (safe) casts automatically:
+
+```kotlin
+fun logMessage(data: Any) {
+    // data is automatically cast to String
+    if (data is String) {
+        println("Received text: ${data.length} characters")
+    }
+}
+
+fun main() {
+    logMessage("Server started")
+    // Received text: 14 characters
+    logMessage(404)
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-typecasts-smartcast"}
 
 编译器甚至可以智能地识别，当负面检查导致 return 时，类型转换是安全的：
 
 ```kotlin
-if (x !is String) return
+fun logMessage(data: Any) {
+    // data is automatically cast to String
+    if (data !is String) return
 
-print(x.length) // x 会自动转换为 String
+    println("Received text: ${data.length} characters")
+}
+
+fun main() {
+    logMessage("User signed in")
+    // Received text: 14 characters
+    logMessage(true)
+}
 ```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-typecasts-smartcast-negative"}
 
 ### 控制流 {id=control-flow}
 
-智能类型转换不仅适用于 `if` 条件表达式，还适用于 [`when` 表达式](control-flow.md#when-expressions-and-statements)
-和 [`while` 循环](control-flow.md#while-loops)：
+Smart casts work not only for `if` conditional expressions, but also for [`when` expressions](control-flow.md#when-expressions-and-statements):
 
 ```kotlin
-when (x) {
-    is Int -> print(x + 1)
-    is String -> print(x.length + 1)
-    is IntArray -> print(x.sum())
+fun processInput(data: Any) {
+    when (data) {
+        // data is automatically cast to Int
+        is Int -> println("Log: Assigned new ID ${data + 1}")
+        // data is automatically cast to String
+        is String -> println("Log: Received message \"$data\"")
+        // data is automatically cast to IntArray
+        is IntArray -> println("Log: Processed scores, total = ${data.sum()}")
+    }
+}
+
+fun main() {
+    processInput(1001)
+    // Log: Assigned new ID 1002
+    processInput("System rebooted")
+    // Log: Received message "System rebooted"
+    processInput(intArrayOf(10, 20, 30))
+    // Log: Processed scores, total = 60
 }
 ```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-typecasts-smartcast-when"}
 
-如果你在 `if`、`when` 或 `while`
-条件中使用之前声明了 `Boolean`
-类型的变量，那么编译器收集的关于该变量的信息将在相应的代码块中可用于智能类型转换。
+And for [`while` loops](control-flow.md#while-loops):
 
-这对想将布尔条件提取到变量时特别有用。
-你可以给变量一个有意义的名字，这样不仅能提高代码的可读性，还能在代码的其他部分重用这个变量。
-例如：
+```kotlin
+sealed interface Status
+data class Ok(val currentRoom: String) : Status
+data object Error : Status
+
+class RobotVacuum(val rooms: List<String>) {
+    var index = 0
+
+    fun status(): Status =
+        if (index < rooms.size) Ok(rooms[index])
+        else Error
+
+    fun clean(): Status {
+        println("Finished cleaning ${rooms[index]}")
+        index++
+        return status()
+    }
+}
+
+fun main() {
+    //sampleStart
+    val robo = RobotVacuum(listOf("Living Room", "Kitchen", "Hallway"))
+
+    var status: Status = robo.status()
+    while (status is Ok) {
+        // The compiler smart casts status to OK type, so the currentRoom
+        // property is accessible.
+        println("Cleaning ${status.currentRoom}...")
+        status = robo.clean()
+    }
+    // Cleaning Living Room...
+    // Finished cleaning Living Room
+    // Cleaning Kitchen...
+    // Finished cleaning Kitchen
+    // Cleaning Hallway...
+    // Finished cleaning Hallway
+    //sampleEnd
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-typecasts-smartcast-while"}
+
+In this example, the sealed interface `Status` has two implementations: the data class `Ok` and the data object `Error`.
+Only the `Ok` data class has the `currentRoom` property. When the `while` loop condition evaluates to true, the
+compiler smart casts the `status` variable to `Ok` type, making the `currentRoom` property accessible within the loop body.
+
+If you declare a variable of `Boolean` type before using it in your `if`, `when`, or `while` condition, any
+information collected by the compiler about the variable is accessible in the corresponding block for
+smart-casting.
+
+This can be useful when you want to do things like extract boolean conditions into variables. Then, you can give the
+variable a meaningful name, which improves your code readability and makes it possible to reuse the variable later
+in your code. For example:
 
 ```kotlin
 class Cat {
@@ -73,7 +231,7 @@ class Cat {
         println("Purr purr")
     }
 }
-
+//sampleStart
 fun petAnimal(animal: Any) {
     val isCat = animal is Cat
     if (isCat) {
@@ -90,6 +248,7 @@ fun main(){
     petAnimal(kitty)
     // Purr purr
 }
+//sampleEnd
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-smart-casts-local-variables" validate="false"}
 
@@ -140,7 +299,8 @@ fun signalCheck(signalStatus: Any) {
 这意味着传递给内联函数的任何 lambda 函数都是在原地调用的。
 由于 lambda 函数是在原地调用的，编译器知道 lambda 函数不能泄漏对其函数体内任何变量的引用。
 
-编译器利用这一知识点，以及其他分析，来决定是否安全地对任何捕获的变量进行智能类型转换。例如：
+The compiler uses this knowledge, along with other analyses, to decide whether it's safe to smart-cast any of the
+captured variables. For example:
 
 ```kotlin
 interface Processor {
@@ -209,11 +369,8 @@ fun main() {
 
 ### 智能类型转换的前提条件 {id=smart-cast-prerequisites}
 
-> 注意，智能转换仅在编译器能够保证变量在检查和使用之间不会改变时起作用。
->
-{style="warning"}
-
-智能转换可以在以下情况下使用：
+Smart casts work only when the compiler can guarantee that the variable won't change between the check and its usage.
+They can be used in the following conditions:
 
 <table style="none">
     <tr>
@@ -252,30 +409,174 @@ fun main() {
     </tr>
 </table>
 
-## "不安全" 强制转换运算符 {id=unsafe-cast-operator}
+## `as` and `as?` cast operators {id="unsafe-cast-operator"}
 
-要显式地将对象转换为非空类型，可以使用 **不安全** 的类型转换操作符 `as`：
+Kotlin has two cast operators: `as` and `as?`. You can use both to cast, but they have different behaviors.
 
-```kotlin
-val x: String = y as String
-```
-
-如果无法进行转换，编译器会抛出异常。这就是为什么它被称为 **不安全** 的原因。
-
-在前面的例子中，如果 `y` 是 `null`，上面的代码也会抛出异常。
-这是因为 `null` 不能转换为 `String`，因为 `String` 不是 [可空的](null-safety.md)。
-为了使示例适应可能的 null 值，在类型转换的右侧使用可空类型：
+If a cast fails with the `as` operator, a `ClassCastException` is thrown at runtime. That's why it's also called the **unsafe** operator.
+You can use `as` when casting to a non-null type:
 
 ```kotlin
-val x: String? = y as String?
+fun main() {
+    val rawInput: Any = "user-1234"
+
+    // Casts to String successfully
+    val userId = rawInput as String
+    println("Logging in user with ID: $userId")
+    // Logging in user with ID: user-1234
+
+    // Triggers ClassCastException
+    val wrongCast = rawInput as Int
+    println("wrongCast contains: $wrongCast")
+    // Exception in thread "main" java.lang.ClassCastException
+}
 ```
+{kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-unsafe-cast-operator" validate="false"}
 
-## "安全"（可空）强制转换运算符 {id=安全可空强制转换运算符}
-
-为了避免异常，使用**安全**强制转换运算符 `as?`，在失败时返回 `null`。
+If you use the `as?` operator instead, and the cast fails, the operator returns `null`. That's why it's also
+called the **safe** operator:
 
 ```kotlin
-val x: String? = y as? String
+fun main() {
+    val rawInput: Any = "user-1234"
+
+    // Casts to String successfully
+    val userId = rawInput as? String
+    println("Logging in user with ID: $userId")
+    // Logging in user with ID: user-1234
+
+    // Assigns a null value to wrongCast
+    val wrongCast = rawInput as? Int
+    println("wrongCast contains: $wrongCast")
+    // wrongCast contains: null
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-safe-cast-operator"}
+
+To cast a nullable type safely, use the `as?` operator to prevent triggering a `ClassCastException` if the cast fails.
+
+You _can_ use `as` with a nullable type. This allows the result to be `null`, but it still throws a `ClassCastException` 
+if the cast is unsuccessful. For this reason, `as?` is the safer option:
+
+```kotlin
+fun main() {
+    val config: Map<String, Any?> = mapOf(
+        "username" to "kodee",
+        "alias" to null,
+        "loginAttempts" to 3
+    )
+
+    // Unsafely casts to a nullable String
+    val username: String? = config["username"] as String?
+    println("Username: $username")
+    // Username: kodee
+
+    // Unsafely casts a null value to a nullable String
+    val alias: String? = config["alias"] as String?
+    println("Alias: $alias")
+    // Alias: null
+
+    // Fails to cast to nullable String and throws ClassCastException
+    // val unsafeAttempts: String? = config["loginAttempts"] as String?
+    // println("Login attempts (unsafe): $unsafeAttempts")
+    // Exception in thread "main" java.lang.ClassCastException
+
+    // Fails to cast to nullable String and returns null
+    val safeAttempts: String? = config["loginAttempts"] as? String
+    println("Login attempts (safe): $safeAttempts")
+    // Login attempts (safe): null
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-cast-nullable-types"}
+
+### Up and downcasting
+
+In Kotlin, you can cast objects to supertypes and subtypes. 
+
+Casting an object to an instance of its superclass is called **upcasting**. Upcasting doesn't need any special syntax or
+cast operators. For example:
+
+```kotlin
+interface Animal {
+    fun makeSound()
+}
+
+class Dog : Animal {
+    // Implements behavior for makeSound()
+    override fun makeSound() {
+        println("Dog says woof!")
+    }
+}
+
+fun printAnimalInfo(animal: Animal) {
+    animal.makeSound()
+}
+
+fun main() {
+    val dog = Dog()
+    // Upcasts Dog instance to Animal
+    printAnimalInfo(dog)  
+    // Dog says woof!
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-upcast"}
+
+In this example, when the `printAnimalInfo()` function is called with a `Dog` instance, the compiler upcasts it
+to `Animal` because that's the expected parameter type. Since the actual object is still a `Dog` instance, the compiler dynamically
+resolves the `makeSound()` function from the `Dog` class, printing `"Dog says woof!"`.
+
+You'll often see explicit upcasting in Kotlin APIs where behavior depends on an abstract type. It's also common in Jetpack Compose
+and UI toolkits, which typically treat all UI elements as supertypes and later operate on specific subclasses:
+
+```kotlin
+    val textView = TextView(this)
+    textView.text = "Hello, View!"
+
+    // Upcasts from TextView to View
+    val view: View = textView  
+
+    // Use View functions
+    view.setPadding(20, 20, 20, 20)
+    // Activity expects a View type
+    setContentView(view)
 ```
 
-请注意，尽管 `as?` 的右侧是非可空类型 `String`，但转换的结果是可空的。
+Casting an object to an instance of a subclass is called **downcasting**. Because downcasting can be unsafe, you need to use
+explicit cast operators. To avoid throwing exceptions on failed casts, we recommend using the safe cast operator `as?`,
+to return `null` if the cast fails:
+
+```kotlin
+interface Animal {
+    fun makeSound()
+}
+
+class Dog : Animal {
+    override fun makeSound() {
+        println("Dog says woof!")
+    }
+
+    fun bark() {
+        println("BARK!")
+    }
+}
+
+fun main() {
+    // Creates animal as a Dog instance with Animal
+    // type
+    val animal: Animal = Dog()
+    
+    // Safely downcasts animal to Dog type
+    val dog: Dog? = animal as? Dog
+
+    // Uses a safe call to call bark() if dog isn't null
+    dog?.bark()
+    // "BARK!"
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="2.0" id="kotlin-downcast"}
+
+In this example, `animal` is declared as type `Animal`, but it holds a `Dog` instance. The code safely casts `animal` to 
+`Dog` type and uses a [safe call](null-safety.md#safe-call-operator) (`?.`) to access the `bark()` function.
+
+You'll use downcasting in serialization when deserializing a base class to a specific subtype. It's also common when 
+working with Java libraries that return supertype objects, which you may need to downcast in Kotlin.

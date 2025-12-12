@@ -21,20 +21,20 @@
         </primary>
         <secondary>
             <title>Kotlin 跨平台</title>
-            <a href="multiplatform.topic" summary="探索 Kotlin 跨平台技术，以便在您的应用程序之间共享代码">Kotlin 跨平台概述</a>
+            <a href="https://kotlinlang.org/docs/multiplatform/get-started.html" summary="探索 Kotlin 跨平台技术，以便在您的应用程序之间共享代码">Kotlin 跨平台概述</a>
             <a href="https://kmp.jetbrains.com/" summary="快速创建并下载一个跨平台项目模板">Kotlin 跨平台向导</a>
-            <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-create-first-app.html" summary="创建一个同时适用于 Android 和 iOS 的移动应用程序">开始使用 Kotlin 跨平台</a>
-            <a href="https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-multiplatform-create-first-app.html" summary="使用 Compose 跨平台在移动、桌面和 Web 上实现统一的用户界面">开始使用 Compose 跨平台</a>
+            <a href="https://kotlinlang.org/docs/multiplatform/multiplatform-create-first-app.html" summary="创建一个同时适用于 Android 和 iOS 的移动应用程序">开始使用 Kotlin 跨平台</a>
+            <a href="https://kotlinlang.org/docs/multiplatform/compose-multiplatform-create-first-app.html" summary="使用 Compose 跨平台在移动、桌面和 Web 上实现统一的用户界面">开始使用 Compose 跨平台</a>
         </secondary>
         <misc>
             <cards narrow="false">
-                <title>精选主题</title>
-                <a href="whatsnew2120.md" summary="新的实验性功能、性能改进和错误修复">Kotlin 2.1.20 中的新变化</a>
-                <a href="releases.md" summary="最新的 Kotlin 版本以及如何更新到这些版本">Kotlin 版本</a>
-                <a href="https://kotlinlang.org/api/latest/jvm/stdlib/" summary="使用 Kotlin 进行日常工作的生活必需品：IO、文件、线程、集合等等">标准库 API 参考</a>
-                <a href="basic-types.md" summary="Kotlin 类型系统：数字、字符串、数组和其他内置类型">基本类型</a>
-                <a href="collections-overview.md" summary="集合：列表、集和映射">集合</a>
-                <a href="coroutines-overview.md" summary="并发性：协程、流、通道">协程</a>
+                <title>特色主题</title>
+                <a href="whatsnew2220.md" summary="针对 Web 开发的重要更新，以及其他改进和错误修复">Kotlin 2.2.20 的最新变化</a>
+                <a href="releases.md" summary="最新的 Kotlin 发布版本以及如何更新">Kotlin 发布版本</a>
+                <a href="https://kotlinlang.org/api/latest/jvm/stdlib/" summary="使用 Kotlin 进行日常开发所需的核心内容：IO、文件、线程、集合等等">标准库 API 参考</a>
+                <a href="types-overview.md" summary="Kotlin 类型系统：数字、字符串、数组，以及其他内置类型">类型概览</a>
+                <a href="collections-overview.md" summary="集合：list、set、map">集合</a>
+                <a href="coroutines-overview.md" summary="并发：协程、flow、channel">协程</a>
             </cards>
         </misc>
     </section-starting-page>

@@ -72,7 +72,7 @@ Kotlin 使用函数类型，比如 `(Int) -> String`，来声明处理函数的�
 - 函数类型可以选择性地有一个额外的 **接收者** 类型，在表示法中的点之前指定：类型 `A.(B) -> C` 表示可以在接收者对象 `A` 上调用带有参数 `B` 并返回值 `C` 的函数。
   [具有接收者的函数字面值](#function-literals-with-receiver)经常与这些类型一起使用。
 
-- [挂起函数](coroutines-basics.md#extract-function-refactoring)属于一种特殊类型的函数类型，其表示法中有一个 **suspend** 修饰符，比如 `suspend () -> Unit` 或 `suspend A.(B) -> C`。
+- [挂起函数](coroutines-basics.md)属于一种特殊类型的函数类型，其表示法中有一个 **suspend** 修饰符，比如 `suspend () -> Unit` 或 `suspend A.(B) -> C`。
 
 函数类型表示法还可以选择性地包括函数参数的名称：`(x: Int, y: Int) -> Point`。这些名称可用于记录参数的含义。
 

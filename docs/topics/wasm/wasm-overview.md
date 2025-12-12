@@ -1,11 +1,6 @@
 [//]: # (title: Kotlin/Wasm)
 
-> Kotlin/Wasm 处于 [Alpha](components-stability.md) 阶段，可能随时发生变化。
-> 在生产环境之前，您可以在其他场景中使用它。我们非常欢迎您在 [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492) 提供反馈。
->
-> [加入 Kotlin/Wasm 社区](https://slack-chats.kotlinlang.org/c/webassembly)。
->
-{style="note"}
+<primary-label ref="beta"/> 
 
 Kotlin/Wasm 具有将您的 Kotlin 代码编译为 [WebAssembly (Wasm)](https://webassembly.org/) 格式的能力。  
 借助 Kotlin/Wasm，您可以创建在支持 Wasm 且满足 Kotlin 要求的不同环境和设备上运行的应用程序。
@@ -18,6 +13,12 @@ Wasm 为 Kotlin 和其他语言提供了一个编译目标。
 Wasm 虚拟机中。在浏览器外的使用场景中， [WebAssembly System Interface (WASI)](https://wasi.dev/)
 提供了对平台 API 的访问，您也可以利用这些 API。
 
+> To run applications built with Kotlin/Wasm in a browser, your users need a [browser version](wasm-configuration.md#browser-versions) that supports 
+> WebAssembly's garbage collection
+> and legacy exception handling proposals. To check the browser support status, see the [WebAssembly
+> roadmap](https://webassembly.org/roadmap/).
+>
+{style="tip"}
 
 ## Kotlin/Wasm 和 Compose 跨平台 {id=kotlin-wasm-and-compose-multiplatform}
 
@@ -33,14 +34,9 @@ Wasm 虚拟机中。在浏览器外的使用场景中， [WebAssembly System Int
 
 ![Kotlin/Wasm 示例](wasm-demo.png){width=700}
 
-> 要在浏览器中运行使用 Kotlin/Wasm 构建的应用程序，您需要支持新垃圾回收机制和旧版异常处理提案的浏览器版本。
-> 要检查浏览器支持状态，请参阅 [WebAssembly 路线图](https://webassembly.org/roadmap/)。
->
-{style="tip"}
-
-此外，您可以在 Kotlin/Wasm 中开箱即用地使用最流行的 Kotlin 库。
-与其他 Kotlin 和跨平台项目一样，您可以在构建脚本中包含依赖声明。
-有关更多信息，请参见 [添加跨平台库的依赖](multiplatform-add-dependencies.md)。
+Additionally, you can use the most popular Kotlin libraries in Kotlin/Wasm out of the box. Like in other Kotlin and Multiplatform
+projects, you can include dependency declarations in the build script. For more information,
+see [Adding dependencies on multiplatform libraries](https://kotlinlang.org/docs/multiplatform/multiplatform-add-dependencies.html).
 
 你想自己尝试一下吗？
 
@@ -62,8 +58,8 @@ WASI 提供了一个安全的标准接口，用于在不同环境中运行编译
 
 ## Kotlin/Wasm 性能
 
-尽管 Kotlin/Wasm 仍处于 Alpha 阶段，运行在 Kotlin/Wasm 上的 Compose Multiplatform 已经展示出令人鼓舞的性能特征。
-你可以看到它的执行速度优于 JavaScript，并接近 JVM 的性能：
+Although Kotlin/Wasm is still in Beta, Compose Multiplatform running on Kotlin/Wasm already shows encouraging performance 
+traits. You can see that its execution speed outperforms JavaScript and is approaching that of the JVM:
 
 ![Kotlin/Wasm 性能](wasm-performance-compose.png){width=700}
 

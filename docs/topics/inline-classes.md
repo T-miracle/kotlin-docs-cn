@@ -176,6 +176,10 @@ fun compute(x: Int) { }
 fun compute(x: UInt) { }
 ```
 
+By default, Kotlin compiles inline classes using **unboxed representations**, which makes them difficult to access from Java.
+To learn how to compile inline classes into **boxed representations** that are accessible from Java, see the guide to
+[Calling Kotlin from Java](java-to-kotlin-interop.md#inline-value-classes).
+
 ## 内联类 vs 类型别名
 
 乍一看，内联类似乎与[type aliases](type-aliases.md)非常相似。事实上，两者都似乎引入了一个新类型，并且在运行时都将被表示为基础类型。

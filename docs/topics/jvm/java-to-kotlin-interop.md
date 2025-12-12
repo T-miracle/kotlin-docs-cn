@@ -8,9 +8,9 @@
 
 Kotlin 属性会被编译为以下 Java 元素：
 
-* 一个 getter 方法，名称通过在属性名前添加 `get` 前缀来计算
-* 一个 setter 方法，名称通过在属性名前添加 `set` 前缀来计算（仅适用于 `var` 属性）
-* 一个私有字段，名称与属性名称相同（仅适用于具有幕后字段的属性）
+ * a getter method, with the name calculated by prepending the `get` prefix.
+ * a setter method, with the name calculated by prepending the `set` prefix (only for `var` properties).
+ * a private field, with the same name as the property name (only for properties with backing fields).
 
 例如，`var firstName: String` 会编译为以下 Java 声明：
 
@@ -26,9 +26,10 @@ public void setFirstName(String firstName) {
 }
 ```
 
-如果属性名称以 `is` 开头，将使用不同的名称映射规则：getter 的名称将与属性名称相同，setter 的名称则是将 `is` 替换为 `set` 得到的名称。
-例如，对于属性 `isOpen`，getter 会被命名为 `isOpen()`，setter 会被命名为 `setOpen()`。
-该规则适用于任何类型的属性，而不仅仅是 `Boolean` 类型。
+If the name of the property starts with `is`, a different name mapping rule is used: the name of the getter is
+the same as the property name, and the name of the setter is obtained by replacing `is` with `set`.
+For example, for a property `isOpen`, the getter is called `isOpen()` and the setter is called `setOpen()`.
+This rule applies for properties of any type, not just `Boolean`.
 
 ## 包级函数 {id=package-level-functions}
 
@@ -104,12 +105,12 @@ org.example.Utils.getDate();
 
 ## 实例字段 {id=instance-fields}
 
-如果需要将 Kotlin 属性暴露为 Java 中的字段，可以使用 [`@JvmField`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html) 注解。
-该字段将具有与底层属性相同的可见性。只有满足以下条件时，可以为属性添加 `@JvmField` 注解：
-* 属性有幕后字段
-* 属性不是私有的
-* 属性没有 `open`、`override` 或 `const` 修饰符
-* 属性不是委托属性
+If you need to expose a Kotlin property as a field in Java, annotate it with the [`@JvmField`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html) annotation.
+The field has the same visibility as the underlying property. You can annotate a property with `@JvmField` if it:
+* has a backing field
+* is not private
+* does not have `open`, `override` or `const` modifiers
+* is not a delegated property
 
 ```kotlin
 class User(id: String) {
@@ -126,14 +127,15 @@ class JavaClient {
 }
 ```
 
-[延迟初始化](properties.md#late-initialized-properties-and-variables) 属性也会作为字段暴露。  
-该字段的可见性将与 `lateinit` 属性 setter 的可见性相同。
+[Late-Initialized](properties.md#late-initialized-properties-and-variables) properties are also exposed as fields. 
+The visibility of the field is the same as the visibility of the `lateinit` property setter.
 
 ## 静态字段 {id=static-fields}
 
-在命名对象或伴生对象中声明的 Kotlin 属性，将具有静态的幕后字段，这些字段要么在该命名对象中，要么在包含伴生对象的类中。
+Kotlin properties declared in a named object or a companion object have static backing fields
+either in that named object or in the class containing the companion object.
 
-通常这些字段是私有的，但可以通过以下方式暴露：
+Usually these fields are private, but they can be exposed in one of the following ways:
 
 - [`@JvmField`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-field/index.html) 注解
 - `lateinit` 修饰符
@@ -200,10 +202,11 @@ int version = C.VERSION;
 
 ## 静态方法 {id=static-methods}
 
-如上所述，Kotlin 将包级函数表示为静态方法。 
-如果为这些函数添加 [`@JvmStatic`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html) 注解，
-Kotlin 还可以为在命名对象或伴生对象中定义的函数生成静态方法。
-使用此注解时，编译器会在对象的外部类中生成一个静态方法，并在对象本身中生成一个实例方法。例如：
+As mentioned above, Kotlin represents package-level functions as static methods.
+Kotlin can also generate static methods for functions defined in named objects or companion objects if you annotate those
+functions as [`@JvmStatic`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-static/index.html).
+If you use this annotation, the compiler generates both a static method in the enclosing class of the object and
+an instance method in the object itself. For example:
 
 ```kotlin
 class C {
@@ -223,7 +226,7 @@ C.Companion.callStatic(); // 实例方法保持不变
 C.Companion.callNonStatic(); // 这是唯一有效的方式
 ```
 
-命名对象同样适用：
+Similarly, for named objects:
 
 ```kotlin
 object Obj {
@@ -254,23 +257,17 @@ interface ChatBot {
 }
 ```
 
-`@JvmStatic` 注解还可以应用于对象或伴生对象的属性，使其
-getter 和 setter 方法成为该对象或包含伴生对象的类中的静态成员。
+You can also apply `@JvmStatic` annotation to the property of an object or a companion object making its getter and setter
+methods static members in that object or the class containing the companion object.
 
 ## 接口中的默认方法 {id=default-methods-in-interfaces}
 
-> 默认方法仅适用于目标 JVM 1.8 及以上版本。
->
-{style="note"}
-
-从 JDK 1.8 开始，Java 接口可以包含 [默认方法](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html)。
-为了使 Kotlin 接口中的所有非抽象成员在实现它们的 Java 类中成为默认方法，可以使用 `-Xjvm-default=all` 编译器选项编译 Kotlin 代码。
+When targeting the JVM, Kotlin compiles functions declared in interfaces to [default methods](https://docs.oracle.com/javase/tutorial/java/IandI/defaultmethods.html) unless [configured otherwise](#compatibility-modes-for-default-methods).
+These are concrete methods in interfaces that Java classes can inherit directly, without reimplementation.
 
 以下是一个带有默认方法的 Kotlin 接口示例：
 
 ```kotlin
-// 使用 -Xjvm-default=all 编译
-
 interface Robot {
     fun move() { println("~walking~") }  // 在 Java 接口中将成为默认方法
     fun speak(): Unit
@@ -314,76 +311,54 @@ public class BB8 implements Robot {
 }
 ```
 
-> 在 Kotlin 1.4 之前，要生成默认方法，可以在这些方法上使用 `@JvmDefault` 注解。
-> 在 1.4 及以上版本中，使用 `-Xjvm-default=all` 编译选项通常相当于为接口的所有非抽象方法添加
-> `@JvmDefault` 注解，并使用 `-Xjvm-default=enable` 进行编译。
-> 然而，在某些情况下，它们的行为有所不同。
-> 关于 Kotlin 1.4 中默认方法生成变化的详细信息，可以参考 Kotlin 博客中的
-> [这篇文章](https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/)。
->
-{style="note"}
+### Compatibility modes for default methods
 
-### 默认方法的兼容模式 {id=compatibility-modes-for-default-methods}
+Kotlin provides three modes for controlling how functions in interfaces are compiled to JVM default methods.
+These modes determine whether the compiler generates compatibility bridges and static methods in `DefaultImpls` classes.
 
-如果有客户端使用的是没有启用 `-Xjvm-default=all` 选项编译的 Kotlin 接口，那么它们可能与使用此选项编译的代码在二进制上不兼容。
-为了避免破坏与这些客户端的兼容性，可以使用 `-Xjvm-default=all` 模式，并使用
-[`@JvmDefaultWithCompatibility`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-default-with-compatibility/)
-注解标记接口。 这样，您只需要在公共 API 中对所有接口添加一次此注解，对于新的非公共代码，则不需要使用任何注解。
+You can control this behavior using the `-jvm-default` compiler option:
 
-> 从 Kotlin 1.6.20 开始，您可以将模块以默认模式（`-Xjvm-default=disable` 编译选项）编译，
-> 并与使用 `-Xjvm-default=all` 或 `-Xjvm-default=all-compatibility` 模式编译的模块兼容。
+> The `-jvm-default` compiler option replaces the deprecated `-Xjvm-default` option.
 >
 {style="note"}
 
 了解更多关于兼容模式的信息：
 
-#### disable {initial-collapse-state="collapsed" collapsible="true"}
+#### enable {initial-collapse-state="collapsed" collapsible="true"}
 
-默认行为。 不生成 JVM 默认方法，并禁止使用 `@JvmDefault` 注解。
+Default behavior.
+Generates default implementations in interfaces and includes compatibility bridges and `DefaultImpls` classes.
+This mode maintains compatibility with older compiled Kotlin code.
 
-#### all {initial-collapse-state="collapsed" collapsible="true"}
+#### no-compatibility {initial-collapse-state="collapsed" collapsible="true"}
 
-为模块中所有带有方法体的接口声明生成 JVM 默认方法。不会为带有方法体的接口声明生成
-[`DefaultImpls`](https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/)
-存根，默认情况下在 `disable` 模式下会生成这些存根。
+Generates only default implementations in interfaces.
+Skips compatibility bridges and `DefaultImpls` classes.
+Use this mode for new codebases that don't interact with code that relies on `DefaultImpls` classes.
+This can break binary compatibility with older Kotlin code.
 
-如果接口继承了在 `disable` 模式下编译的接口中的方法体，并且没有重写它，那么将会为该方法生成一个 `DefaultImpls` 存根。
-
-如果某些客户端代码依赖于 `DefaultImpls` 类的存在，__会破坏二进制兼容性__。
-
-> 如果使用了接口委托，则所有接口方法都会被委托。唯一的例外是那些使用已废弃的 `@JvmDefault` 注解的方法。
+> If interface delegation is used, all interface methods are delegated.
 >
 {style="note"}
 
-#### all-compatibility {initial-collapse-state="collapsed" collapsible="true"}
+#### disable {initial-collapse-state="collapsed" collapsible="true"}
 
-在 `all` 模式的基础上，还会在
-[`DefaultImpls`](https://blog.jetbrains.com/kotlin/2020/07/kotlin-1-4-m3-generating-default-methods-in-interfaces/)
-类中生成兼容性存根。兼容性存根对于库和运行时的开发者来说可能很有用，以保持向后兼容，支持那些编译时依赖于先前库版本的现有客户端代码
-。`all` 和 `all-compatibility` 模式会改变库的 ABI 接口，这将影响库重新编译后的客户端。
-从这个角度来看，客户端可能会与先前的库版本不兼容。这通常意味着你需要进行适当的库版本控制，例如在 SemVer 中增加主版本号。
-
-编译器会为 `DefaultImpls` 中的所有成员加上 `@Deprecated` 注解：
-你不应该在 Java 代码中使用这些成员，因为编译器只会为兼容性目的生成它们。
-
-如果继承自以 `all` 或 `all-compatibility` 模式编译的 Kotlin 接口，
-`DefaultImpls` 兼容性存根将会调用接口的默认方法，并使用标准的 JVM 运行时解析语义。
-
-对继承泛型接口的类进行额外的兼容性检查，在某些情况下，`disable` 模式下会生成具有特定签名的额外隐式方法：
-与 `disable` 模式不同，如果你没有显式重写这些方法且没有用 `@JvmDefaultWithoutCompatibility`
-注解标记类，编译器会报告错误（更多详情请参见 [这个 YouTrack 问题](https://youtrack.jetbrains.com/issue/KT-39603)）。
+Disables default implementations in interfaces.
+Only compatibility bridges and `DefaultImpls` classes are generated.
 
 ## 可见性 {id=visibility}
 
 Kotlin 的可见性修饰符在 Java 中的映射如下：
 
-* `private` 成员会编译为 `private` 成员
-* `private` 顶层声明会编译为 `private` 顶层声明。如果从类内访问，还包括包私有访问器。
-* `protected` 保持为 `protected`（请注意，Java 允许从同一包中的其他类访问受保护的成员，而
-Kotlin 不允许，因此 Java 类对代码的访问范围会更广）
-* `internal` 声明会变成 Java 中的 `public`。
-`internal` 类的成员会进行名称重整，避免在 Java 中被意外使用，并允许对具有相同签名但在 Kotlin 规则下不可见的成员进行重载。
-* `public` 保持为 `public`
+* `private` members are compiled to `private` members.
+* `private` top-level declarations are compiled to `private` top-level declarations. Package-private accessors are also included,
+if accessed from within a class. 
+* `protected` remains `protected`. (Note that Java allows accessing protected members from other classes in the same package
+and Kotlin doesn't, so Java classes will have broader access to the code.)
+* `internal` declarations become `public` in Java. Members of `internal` classes go through name mangling, to make
+it harder to accidentally use them from Java and to allow overloading for members with the same signature that don't see
+each other according to Kotlin rules.
+* `public` remains `public`.
 
 ## KClass {id=kclass}
 
@@ -397,8 +372,8 @@ kotlin.jvm.JvmClassMappingKt.getKotlinClass(MainView.class)
 
 ## 使用 @JvmName 处理签名冲突 {id=handling-signature-clashes-with-jvmname}
 
-有时我们在 Kotlin 中有一个命名函数，需要在字节码中使用不同的 JVM 名称。  
-最常见的例子发生在 *类型擦除* 的情况下：
+Sometimes we have a named function in Kotlin, for which we need a different JVM name in bytecode.
+The most prominent example happens due to *type erasure*:
 
 ```kotlin
 fun List<String>.filterValid(): List<String>
@@ -417,9 +392,9 @@ fun List<String>.filterValid(): List<String>
 fun List<Int>.filterValid(): List<Int>
 ```
 
-从 Kotlin 中，它们将通过相同的名称 `filterValid` 访问，但从 Java 中，它们将分别是 `filterValid` 和 `filterValidInt`。
+From Kotlin, they are accessible by the same name `filterValid`, but from Java it is `filterValid` and `filterValidInt`.
 
-当我们需要同时拥有一个属性 `x` 和一个函数 `getX()` 时，同样的技巧也适用：
+The same trick applies when we need to have a property `x` along with a function `getX()`:
 
 ```kotlin
 val x: Int
@@ -440,9 +415,9 @@ var x: Int = 23
 
 ## 重载生成 {id=overloads-generation}
 
-通常，如果你编写一个带有默认参数值的 Kotlin 函数，它在 Java 中只会作为一个完整的签名显示，其中所有参数都被包含。
-如果你希望向 Java 调用者暴露多个重载函数，可以使用
-[`@JvmOverloads`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html) 注解。
+Normally, if you write a Kotlin function with default parameter values, it is visible in Java only as a full
+signature, with all parameters present. If you wish to expose multiple overloads to Java callers, you can use the
+[`@JvmOverloads`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.jvm/-jvm-overloads/index.html) annotation.
 
 这个注解同样适用于构造函数、静态方法等。但是，它不能用于抽象方法，包括在接口中定义的方法。
 
@@ -452,7 +427,8 @@ class Circle @JvmOverloads constructor(centerX: Int, centerY: Int, radius: Doubl
 }
 ```
 
-对于每个具有默认值的参数，这将生成一个额外的重载，该重载会移除该参数以及参数列表中该参数右侧的所有参数。在这个例子中，将会生成以下内容：
+For every parameter with a default value, this generates one additional overload, which has this parameter and
+all parameters to the right of it in the parameter list removed. In this example, the following is generated:
 
 ```java
 // 构造函数：
@@ -465,8 +441,9 @@ void draw(String label, int lineWidth) { }
 void draw(String label) { }
 ```
 
-请注意，如 [次级构造函数](classes.md#secondary-constructors) 中所描述，如果一个类的所有构造函数参数都有默认值，
-则会为该类生成一个没有参数的公共构造函数。即使没有指定 `@JvmOverloads` 注解，这也能正常工作。
+Note that, as described in [Secondary constructors](classes.md#secondary-constructors), if a class has default
+values for all constructor parameters, a public constructor with no arguments is generated for it. This works even
+if the `@JvmOverloads` annotation is not specified.
 
 ## 受检异常 {id=checked-exceptions}
 
@@ -597,3 +574,83 @@ fun emptyList(): List<Nothing> = listOf()
 // 会被翻译成
 // List emptyList() { ... }
 ```
+
+## Inline value classes
+
+<primary-label ref="experimental-general"/>
+
+If you want Java code to work smoothly with Kotlin's [inline value classes](inline-classes.md), you can use the
+[`@JvmExposeBoxed`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-expose-boxed/) annotation or the `-Xjvm-expose-boxed` compiler option. These approaches ensure Kotlin generates the 
+necessary boxed representations for Java interoperability.
+
+By default, Kotlin compiles inline value classes to use **unboxed representations**, which are often inaccessible from Java.
+For example, you can't call the constructor for the `MyInt` class from Java:
+
+```kotlin
+@JvmInline
+value class MyInt(val value: Int)
+```
+
+So the following Java code fails:
+
+```java
+MyInt input = new MyInt(5);
+```
+
+You can use the `@JvmExposeBoxed` annotation so that Kotlin generates a public constructor that you can call from Java directly.
+You can apply the annotation at the following levels to ensure fine-grained control over what's exposed to Java:
+
+* Class
+* Constructor
+* Function
+
+Before using the `@JvmExposeBoxed` annotation in your code, you must opt in by using `@OptIn(ExperimentalStdlibApi::class)`.
+For example:
+
+```kotlin
+@OptIn(ExperimentalStdlibApi::class)
+@JvmExposeBoxed
+@JvmInline
+value class MyInt(val value: Int)
+
+@OptIn(ExperimentalStdlibApi::class)
+@JvmExposeBoxed
+fun MyInt.timesTwoBoxed(): MyInt = MyInt(this.value * 2)
+```
+
+With these annotations, Kotlin generates a Java-accessible constructor for the `MyInt` class **and** a variant for the 
+extension function that uses the boxed form of the value class. So the following Java code runs successfully:
+
+```java
+MyInt input = new MyInt(5);
+MyInt output = ExampleKt.timesTwoBoxed(input);
+```
+
+To apply this behavior to all inline value classes and the functions that use them within a module, compile it with the `-Xjvm-expose-boxed` option. 
+Compiling with this option has the same effect as if every declaration in the module has the `@JvmExposeBoxed` annotation.
+
+### Inherited functions
+
+The `@JvmExposeBoxed` annotation doesn't automatically generate boxed representations for inherited functions.
+ 
+To generate the necessary representation for an inherited function, override it in the implementing or extending class:
+ 
+```kotlin
+interface IdTransformer {
+    fun transformId(rawId: UInt): UInt = rawId
+}
+
+// Doesn't generate a boxed representation for the transformId() function
+@OptIn(ExperimentalStdlibApi::class)
+@JvmExposeBoxed
+class LightweightTransformer : IdTransformer
+
+// Generates a boxed representation for the transformId() function
+@OptIn(ExperimentalStdlibApi::class)
+@JvmExposeBoxed
+class DefaultTransformer : IdTransformer {
+    override fun transformId(rawId: UInt): UInt = super.transformId(rawId)
+}
+```
+
+To learn how inheritance works in Kotlin and how to call superclass implementations using the `super` keyword, see [Inheritance](inheritance.md#calling-the-superclass-implementation).

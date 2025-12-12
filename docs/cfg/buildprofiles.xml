@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <buildprofiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
-  <sitemap priority="0.8" change-frequency="daily"/>
+  <sitemap priority="0.8" change-frequency="monthly"/>
   <variables>
     <!--头部链接图标-->
     <header-logo>title-icon.svg</header-logo>
@@ -36,9 +36,9 @@
     <feedback-support>https://kotl.in/issue</feedback-support>
     <feedback-url>https://forms-service.jetbrains.com/feedback</feedback-url>
     <webmaster>doc-feedback@kotlinlang.org</webmaster>
-    <algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</algolia-api-key>
-    <algolia-id>7961PKYRXV</algolia-id>
-    <algolia-index>prod_KOTLINLANG_WEBHELP</algolia-index>
+<!--    <algolia-api-key>1bfad5fdbae302b33d844ed1b43ec4d5</algolia-api-key>-->
+<!--    <algolia-id>7961PKYRXV</algolia-id>-->
+<!--    <algolia-index>prod_KOTLINLANG_WEBHELP</algolia-index>-->
     <noindex-content>false</noindex-content>
     <noindex-content status="eap">false</noindex-content>
     <noindex-content status="deprecated">true</noindex-content>
@@ -53,7 +53,6 @@
       https://kotlinlang.org/assets/images/apple-touch-icon-144x144.png?v2
     </custom-favicons>-->
   </variables>
-  <build-profile instance="kr"/>
   <footer>
     <link href="https://github.com/JetBrains/kotlin">Kotlin 源码</link>
     <link href="https://github.com/T-miracle/kotlin-docs-cn">本文档仓库</link>
@@ -62,4 +61,5 @@
     <link href="https://blog.namichong.com/translation-docs/">更多翻译文档</link>
     <icp>桂ICP备2022008261号-1</icp>
   </footer>
+  <build-profile instance="kr"/>
 </buildprofiles>

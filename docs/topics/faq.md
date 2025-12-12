@@ -1,5 +1,6 @@
 [//]: # (title: FAQ)
-[//]: # (description: Kotlin is a concise multiplatform programming language developed by JetBrains.)
+
+<web-summary>Kotlin is a concise multiplatform programming language developed by JetBrains.</web-summary>
 
 ### What is Kotlin?
 
@@ -35,7 +36,7 @@ the ability to write expressive code as well as facilitating creation of DSL.
 Yes. Kotlin is 100% interoperable with the Java programming language, and major emphasis has been placed on making sure
 that your existing codebase can interact properly with Kotlin. You can easily [call Kotlin code from Java](java-to-kotlin-interop.md) and [Java code
 from Kotlin](java-interop.md). This makes adoption much easier and lower-risk. There's also an automated [Java-to-Kotlin converter built
-into the IDE](mixing-java-kotlin-intellij.md#converting-an-existing-java-file-to-kotlin-with-j2k) that simplifies migration of existing code.
+into the IDE](mixing-java-kotlin-intellij.md#convert-java-files-to-kotlin) that simplifies migration of existing code.
 
 ### What can I use Kotlin for?
 
@@ -87,9 +88,8 @@ In addition, a [command line compiler](command-line.md) is available, which prov
   
 ### What build tools support Kotlin?
 
-On the JVM side, the main build tools include [Gradle](gradle.md), [Maven](maven.md), 
-[Ant](ant.md), and [Kobalt](https://beust.com/kobalt/home/index.html). There are also some build tools available
-that target client-side JavaScript. 
+On the JVM side, the main build tools include [Gradle](gradle.md) and [Maven](maven.md).
+There are also some build tools available that target client-side JavaScript. 
 
 ### What does Kotlin compile down to?
 
@@ -104,7 +104,7 @@ When targeting native, Kotlin will produce platform-specific code (via LLVM).
 
 Kotlin lets you choose the version of JVM for execution. By default, the Kotlin/JVM compiler produces Java 8 compatible bytecode.
 If you want to make use of optimizations available in newer versions of Java, you can explicitly specify the target Java
-version from 9 to 23. Note that in this case the resulting bytecode might not run on lower versions.
+version from 9 to 24. Note that in this case the resulting bytecode might not run on lower versions.
 Starting with [Kotlin 1.5](whatsnew15.md#new-default-jvm-target-1-8), the compiler does not support producing bytecode compatible with Java versions below 8.
 
 ### Is Kotlin hard?
@@ -144,7 +144,7 @@ You can learn all the Kotlin essentials while creating working applications with
 A few other courses you can take:
 * [Pluralsight Course: Getting Started with Kotlin](https://www.pluralsight.com/courses/kotlin-getting-started) by Kevin Jones
 * [O'Reilly Course: Introduction to Kotlin Programming](https://www.oreilly.com/library/view/introduction-to-kotlin/9781491964125/) by Hadi Hariri
-* [Udemy Course: 10 Kotlin Tutorials for Beginneres](https://petersommerhoff.com/dev/kotlin/kotlin-beginner-tutorial/) by Peter Sommerhoff
+* [Udemy Course: 10 Kotlin Tutorials for Beginners](https://petersommerhoff.com/dev/kotlin/kotlin-beginner-tutorial/) by Peter Sommerhoff
 
 You can also check out the other tutorials and content on our [YouTube channel](https://www.youtube.com/c/Kotlin).
 

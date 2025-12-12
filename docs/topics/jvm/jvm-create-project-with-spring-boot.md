@@ -1,5 +1,6 @@
-[//]: # (title: 使用 Kotlin 创建一个 Spring Boot 项目)
-[//]: # (description: 在 IntelliJ IDEA 中使用 Kotlin 创建一个 Spring Boot 应用程序)
+[//]: # (title: Create a Spring Boot project with Kotlin)
+
+<web-summary>Create a Spring Boot application with Kotlin using IntelliJ IDEA.</web-summary>
 
 <tldr>
     <p>这是 <strong>Spring Boot 和 Kotlin 入门</strong> 教程的第一部分：</p><br/>  
@@ -9,27 +10,29 @@
       <img src="icon-4-todo.svg" width="20" alt="第四步"/> 使用 Spring Data CrudRepository 进行数据库访问<br/></p>  
 </tldr>
 
-教程的第一部分向您展示如何使用项目向导在 IntelliJ IDEA 中创建一个 Spring Boot 项目。
+The first part of the tutorial shows how to create a Spring Boot project with Gradle in IntelliJ IDEA using the Project Wizard.
+
+> This tutorial doesn't require using Gradle as the build system. You can follow the same steps if you use Maven.
+> 
+{style="note"}
 
 ### 开始之前 {id=before-you-start}
 
 下载并安装最新版本的[IntelliJ IDEA Ultimate Edition](https://www.jetbrains.com/idea/download/index.html)。
 
-> 如果您使用的是 IntelliJ IDEA Community Edition 或其他 IDE，可以通过[基于 Web 的项目生成器](https://start.spring.io)生成一个 Spring Boot 项目。
+> If you use IntelliJ IDEA Community Edition or another IDE, you can generate a Spring Boot project using
+> a [web-based project generator](https://start.spring.io/#!language=kotlin&type=gradle-project-kotlin).
 > 
-{style="note"}
+{style="tip"}
 
 ### 创建一个 Spring Boot 项目 {id=create-a-spring-boot-project}
 
 通过 IntelliJ IDEA Ultimate Edition 中的项目向导使用 Kotlin 创建一个新的 Spring Boot 项目：
 
-> 您也可以使用[带有 Spring Boot 插件的 IntelliJ IDEA](https://www.jetbrains.com/help/idea/spring-boot.html)创建一个新项目。
->
-{style="note"}
-
-1. 在 IntelliJ IDEA 中，选择 **File** | **New** | **Project**。
-2. 在左侧面板中，选择 **New Project** | **Spring Boot**。
-3. 在项目向导窗口中，指定以下字段和选项：
+1. In IntelliJ IDEA, select **File** | **New** | **Project**. 
+2. In the panel on the left, select **New Project** | **Spring Boot**.
+3. Specify the following fields and options in the **New Project** window:
+   
    * **Name**: demo
    * **Language**: Kotlin
    * **Type**: Gradle - Kotlin
@@ -38,15 +41,19 @@
      >
      {style="tip"}
 
-   * **Package name**: demo
+   * **Package name**: com.example.demo
    * **JDK**: Java JDK
 
-     > 本教程使用 **Amazon Corretto version 21**。
+     > 本教程使用 **Amazon Corretto version 23**。
      > 如果您尚未安装 JDK，可以从下拉列表中下载。
      >
      {style="note"}
    
    * **Java**: 17
+   
+     > If you don't have Java 17 installed, you can download it from the JDK dropdown list.
+     >
+     {style="tip"}
 
    ![创建 Spring Boot 项目](create-spring-boot-project.png){width=800}
 
@@ -85,10 +92,10 @@ Gradle 文件是 Spring Boot 的标准配置，但它还包含必要的 Kotlin �
 ```kotlin
 // build.gradle.kts
 plugins {
-    kotlin("jvm") version "1.9.24" // 要使用的 Kotlin 版本
-    kotlin("plugin.spring") version "1.9.24" // Kotlin Spring 插件
-    id("org.springframework.boot") version "3.3.4"
-    id("io.spring.dependency-management") version "1.1.6"
+    kotlin("jvm") version "%springBootSupportedKotlinVersion%" // 要使用的 Kotlin 版本
+    kotlin("plugin.spring") version "%springBootSupportedKotlinVersion%" // Kotlin Spring 插件
+    id("org.springframework.boot") version "%springBootVersion%"
+    id("io.spring.dependency-management") version "1.1.7"
 }
 
 group = "com.example"
@@ -141,13 +148,15 @@ tasks.withType<Test> {
 3. 在依赖项部分之后，您可以看到 `kotlin` 插件配置块。  
    在这里，您可以添加额外的参数给编译器，以启用或禁用各种语言特性。
 
+Learn more about the Kotlin compiler options in [](gradle-compiler-options.md).
+
 ### 探索生成的 Spring Boot 应用程序 {id=explore-the-generated-spring-boot-application}
 
 打开 `DemoApplication.kt` 文件：
 
 ```kotlin
 // DemoApplication.kt
-package demo
+package com.example.demo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -186,12 +195,13 @@ fun main(args: Array<String>) {
 
 应用程序已准备好运行，但首先让我们更新其逻辑。
 
-在 Spring 应用中，控制器用于处理 Web 请求。  
-在与 `DemoApplication.kt` 文件相同的包中，创建 `MessageController.kt` 文件，并定义 `MessageController` 类，如下所示：
+In the Spring application, a controller is used to handle the web requests.
+In the same package, next to the `DemoApplication.kt` file, create the `MessageController.kt` file with the
+`MessageController` class as follows:
 
 ```kotlin
 // MessageController.kt
-package demo
+package com.example.demo
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -239,7 +249,7 @@ class MessageController {
 
 Spring 应用程序现在已经准备好运行：
 
-1. 点击 `main()` 方法旁边的绿色运行图标：
+1. In the `DemoApplication.kt` file, click the green **Run** icon in the gutter beside the `main()` method:
 
    ![运行 Spring Boot 应用程序](run-spring-boot-application.png){width=706}
 

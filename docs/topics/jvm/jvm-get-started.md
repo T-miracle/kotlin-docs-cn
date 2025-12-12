@@ -1,4 +1,4 @@
-[//]: # (title: Kotlin/JVM 入门)
+[//]: # (title: Create a console app – tutorial)
 
 本教程演示了如何使用 IntelliJ IDEA 创建一个控制台应用程序。
 
@@ -18,10 +18,13 @@
 
 4. 选择 **IntelliJ** 构建系统。它是一个不需要下载额外依赖的原生构建器。
 
-   如果您想创建需要进一步配置的更复杂项目，选择 Maven 或 Gradle。对于 Gradle，选择构建脚本的语言：Kotlin 或 Groovy。
-5. 从 **JDK 列表** 中，选择您希望在项目中使用的 [JDK](https://www.oracle.com/java/technologies/downloads/)。
-   * 如果 JDK 已安装在您的计算机上，但未在 IDE 中定义，选择 **Add JDK** 并指定 JDK 主目录的路径。
-   * 如果您的计算机上没有必要的 JDK，选择 **Download JDK**。
+   If you want to create a more complex project that needs further configuration, select Maven or Gradle. For Gradle,
+   choose a language for the build script: Kotlin or Groovy.
+5. From the **JDK** list, select the [JDK](https://www.oracle.com/java/technologies/downloads/) that you want to use in
+   your project.
+   * If the JDK is installed on your computer, but not defined in the IDE, select **Add JDK** and specify the path to the
+   JDK home directory. 
+   * If you don't have the necessary JDK on your computer, select **Download JDK**.
 
 6. 启用 **Add sample code** 选项以创建一个带有 `"Hello World!"` 示例应用程序的文件。
 
@@ -31,16 +34,34 @@
 
 7. 点击 **Create**。
 
-   > 如果您选择了 Gradle 构建系统，您的项目中将包含一个构建脚本文件：`build.gradle(.kts)`。
-   > 它包括 `kotlin("jvm")` 插件以及控制台应用程序所需的依赖项。请确保使用插件的最新版本：
-   > 
-   > ```kotlin
-   > plugins {
-   >     kotlin("jvm") version "%kotlinVersion%"
-   >     application
-   > }
-   > ```
-   > {style="note"}
+    > If you chose the Gradle build system, you have in your project a build script file: `build.gradle(.kts)`. It includes
+    > the `kotlin("jvm")` plugin and dependencies required for your console application. Make sure that you use the latest
+    > version of the plugin:
+    > 
+    > <tabs group="build-script">
+    > <tab title="Kotlin" group-key="kotlin">
+    > 
+    > ```kotlin
+    > plugins {
+    >     kotlin("jvm") version "%kotlinVersion%"
+    >     application
+    > }
+    > ```
+    > 
+    > </tab>
+    > <tab title="Groovy" group-key="groovy">
+    > 
+    > ```groovy
+    > plugins {
+    >     id 'org.jetbrains.kotlin.jvm' version '%kotlinVersion%'
+    >     id 'application'
+    > }
+    > ```
+    > 
+    > </tab>
+    > </tabs>
+    > 
+    {style="note"}
 
 ## 创建应用程序 {id=create-an-application}
 
@@ -85,6 +106,6 @@
 
 一旦您创建了这个应用程序，您可以开始深入学习 Kotlin 语法：
 
-* 添加来自 [Kotlin 示例](https://play.kotlinlang.org/byExample/overview) 的示例代码
-* 安装适用于 IDEA 的 [JetBrains Academy 插件](https://plugins.jetbrains.com/plugin/10081-jetbrains-academy) 并完成
-  [Kotlin Koans 课程](https://plugins.jetbrains.com/plugin/10081-jetbrains-academy/docs/learner-start-guide.html?section=Kotlin%20Koans) 中的练习
+* Take the [Kotlin tour](kotlin-tour-welcome.md) 
+* Install the [JetBrains Academy plugin](https://plugins.jetbrains.com/plugin/10081-jetbrains-academy) for IDEA and complete 
+  exercises from the [Kotlin Koans course](https://plugins.jetbrains.com/plugin/10081-jetbrains-academy/docs/learner-start-guide.html?section=Kotlin%20Koans)

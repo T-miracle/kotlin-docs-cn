@@ -372,5 +372,5 @@ fun main() {
 ## 下一步是什么？
 
 * 要了解为什么我们建议在大多数情况下使用集合，请阅读我们的 [集合概述](collections-overview.md)。
-* 了解其他 [基本类型](basic-types.md)。
+* 了解其他 [基本类型](types-overview.md)。
 * 如果您是 Java 开发人员，请阅读我们的 Java 到 Kotlin 迁移指南，了解 [集合](java-to-kotlin-collections-guide.md)。
