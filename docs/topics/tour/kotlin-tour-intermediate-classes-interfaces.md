@@ -1,42 +1,42 @@
-[//]: # (title: Intermediate: Classes and interfaces)
+[//]: # (title: 中级：类和接口)
 
 <no-index/>
 
-<tldr>
-    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-intermediate-extension-functions.md">Extension functions</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-intermediate-scope-functions.md">Scope functions</a><br />
-        <img src="icon-3-done.svg" width="20" alt="Third step" /> <a href="kotlin-tour-intermediate-lambdas-receiver.md">Lambda expressions with receiver</a><br /> 
-        <img src="icon-4.svg" width="20" alt="Fourth step" /> <strong>Classes and interfaces</strong><br />
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-intermediate-objects.md">Objects</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-intermediate-open-special-classes.md">Open and special classes</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Seventh step" /> <a href="kotlin-tour-intermediate-properties.md">Properties</a><br />
-        <img src="icon-8-todo.svg" width="20" alt="Eighth step" /> <a href="kotlin-tour-intermediate-null-safety.md">Null safety</a><br />
-        <img src="icon-9-todo.svg" width="20" alt="Ninth step" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">Libraries and APIs</a></p>
-</tldr>
+<tldr>  
+    <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-intermediate-extension-functions.md">扩展函数</a><br />  
+        <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-intermediate-scope-functions.md">作用域函数</a><br />  
+        <img src="icon-3-done.svg" width="20" alt="第三步" /> <a href="kotlin-tour-intermediate-lambdas-receiver.md">带接收者的 Lambda 表达式</a><br />   
+        <img src="icon-4.svg" width="20" alt="第四步" /> <strong>类和接口</strong><br />  
+        <img src="icon-5-todo.svg" width="20" alt="第五步" /> <a href="kotlin-tour-intermediate-objects.md">对象</a><br />  
+        <img src="icon-6-todo.svg" width="20" alt="第六步" /> <a href="kotlin-tour-intermediate-open-special-classes.md">开放类和特殊类</a><br />  
+        <img src="icon-7-todo.svg" width="20" alt="第七步" /> <a href="kotlin-tour-intermediate-properties.md">属性</a><br />  
+        <img src="icon-8-todo.svg" width="20" alt="第八步" /> <a href="kotlin-tour-intermediate-null-safety.md">空安全</a><br />  
+        <img src="icon-9-todo.svg" width="20" alt="第九步" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">库和 API</a></p>  
+</tldr>  
 
-In the beginner tour, you learned how to use classes and data classes to store data and maintain a collection of characteristics
-that can be shared in your code. Eventually, you will want to create a hierarchy to efficiently share code within your 
-projects. This chapter explains the options Kotlin provides for sharing code and how they can make your code safer and easier to maintain.
+在初学者教程中，你学习了如何使用类和数据类来存储数据并维护一组可以在代码中共享的特性。
+最终，你会希望创建一个层次结构，以便在项目中高效共享代码。
+本章解释了 Kotlin 提供的共享代码的选项，以及它们如何使你的代码更安全、更易于维护。
 
-## Class inheritance
+## 类继承 {id=class-inheritance}
 
-In a previous chapter, we covered how you can use extension functions to extend classes without modifying the original source code.
-But what if you are working on something complex where sharing code **between** classes would be useful? In such cases, 
-you can use class inheritance.
+在前一章中，我们介绍了如何使用扩展函数在不修改原始源代码的情况下，对类进行功能扩展。
+但当你正在处理更复杂的场景，需要在不同类之间共享代码时，仅靠扩展函数就显得不够用了。
+在这种情况下，可以使用 类继承 来解决问题。
 
-By default, classes in Kotlin can't be inherited. Kotlin is designed this way to prevent unintended inheritance and make
-your classes easier to maintain.
+默认情况下，Kotlin 中的类是不能被继承的。
+Kotlin 之所以这样设计，是为了防止意外继承，从而让你的类更容易维护、行为更可控。
 
-Kotlin classes only support **single inheritance**, meaning it is only possible to inherit from **one class at a time**.
-This class is called the **parent**.
+Kotlin 的类只支持**单继承**，也就是说，同一时间只能继承**一个类**。
+被继承的那个类称为**父类**。
 
-The parent of a class inherits from another class (the grandparent), forming a hierarchy. At the top of Kotlin's class
-hierarchy is the common parent class: `Any`. All classes ultimately inherit from the `Any` class:
+父类还可以再继承另一个类（祖父类），从而形成一个层级结构。
+在 Kotlin 的类层级结构顶部，是一个公共父类：`Any`。所有类最终都会继承自 `Any` 类：
 
-![An example of the class hierarchy with Any type](any-type-class.png){width="200"}
+![一个以 Any 类型为顶层的类层级结构示例](any-type-class.png){width="200"}
 
-The `Any` class provides the `toString()` function as a member function automatically. Therefore, you can
-use this inherited function in any of your classes. For example:
+`Any` 类 会自动 提供 `toString()` 函数 作为 成员函数。
+因此，你可以在任意自定义类中使用这个继承而来的函数。例如：
 
 ```kotlin
 class Car(val make: String, val model: String, val numberOfDoors: Int)
@@ -45,7 +45,7 @@ fun main() {
     //sampleStart
     val car1 = Car("Toyota", "Corolla", 4)
 
-    // Uses the .toString() function via string templates to print class properties
+    // 通过 字符串模板 使用 .toString() 函数 来打印 类属性
     println("Car1: make=${car1.make}, model=${car1.model}, numberOfDoors=${car1.numberOfDoors}")
     // Car1: make=Toyota, model=Corolla, numberOfDoors=4
     //sampleEnd
@@ -53,58 +53,56 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-any-class"}
 
-If you want to use inheritance to share some code between classes, first consider using abstract classes.
+如果你希望通过继承在类之间共享一部分代码，首先应该考虑使用抽象类。
 
-### Abstract classes
+### 抽象类 {id=abstract-classes}
 
-Abstract classes can be inherited by default. The purpose of abstract classes is to provide members that other classes 
-inherit or implement. As a result, they have a constructor, but you can't create instances from them. Within the child 
-class, you define the behavior of the parent's properties and functions with the `override` keyword. In this way, 
-you can say that the child class "overrides" the members of the parent class.
+抽象类默认是可以被继承的。
+抽象类的目的在于提供一些成员，让其他类去继承或实现。
+因此，抽象类可以有构造函数，但你不能直接创建它的实例。
+在子类中，你需要使用`override`关键字来定义父类中属性和函数的具体行为。
+通过这种方式，可以说子类“重写”了父类的成员。
 
-> When you define the behavior of an inherited function or property, we call that an **implementation**.
+> 当你为继承而来的函数或属性定义具体行为时，这被称为一次**实现**。
 > 
 {style="tip"}
 
-Abstract classes can contain both functions and properties **with** implementation as well as functions and properties 
-**without** implementation, known as abstract functions and properties.
+抽象类既可以包含**有实现**的函数和属性，也可以包含**没有实现**的函数和属性，后者被称为抽象函数和抽象属性。
 
-To create an abstract class, use the `abstract` keyword:
+要创建一个抽象类，需要使用`abstract`关键字：
 
 ```kotlin
 abstract class Animal
 ```
 
-To declare a function or a property **without** an implementation, you also use the `abstract` keyword:
+要声明**没有实现**的函数或属性，同样需要使用`abstract`关键字：
 
 ```kotlin
 abstract fun makeSound()
 abstract val sound: String
 ```
 
-For example, let's say that you want to create an abstract class called `Product` that you can create child classes from
-to define different product categories:
+例如，假设你希望创建一个名为`Product`的抽象类，用它派生出子类来定义不同的产品分类：
 
 ```kotlin
 abstract class Product(val name: String, var price: Double) {
-    // Abstract property for the product category
+    // 产品分类的抽象属性
     abstract val category: String
 
-    // A function that can be shared by all products
+    // 所有产品都可以共享的函数
     fun productInfo(): String {
         return "Product: $name, Category: $category, Price: $price"
     }
 }
 ```
 
-In the abstract class:
+在这个抽象类中：
 
-* The constructor has two parameters for the product's `name` and `price`.
-* There is an abstract property that contains the product category as a string.
-* There is a function that prints information about the product.
+* 构造函数包含两个参数，分别表示产品的`name`和`price`。
+* 定义了一个抽象属性，用字符串表示产品分类。
+* 定义了一个函数，用于输出产品的相关信息。
 
-Let's create a child class for electronics. Before you define an implementation for the `category` property in the child class,
-you must use the `override` keyword:
+现在为电子产品创建一个子类。在子类中为`category`属性定义实现之前，必须使用`override`关键字：
 
 ```kotlin
 class Electronic(name: String, price: Double, val warranty: Int) : Product(name, price) {
@@ -112,20 +110,20 @@ class Electronic(name: String, price: Double, val warranty: Int) : Product(name,
 }
 ```
 
-The `Electronic` class:
+`Electronic`类的特点如下：
 
-* Inherits from the `Product` abstract class.
-* Has an additional parameter in the constructor: `warranty`, which is specific to electronics.
-* Overrides the `category` property to contain the string `"Electronic"`.
+* 继承自`Product`抽象类。
+* 构造函数中新增了一个参数`warranty`，用于表示电子产品特有的保修期。
+* 重写了`category`属性，并将其值设置为字符串`"Electronic"`。
 
-Now, you can use these classes like this:
+现在，你可以像下面这样使用这些类：
 
 ```kotlin
 abstract class Product(val name: String, var price: Double) {
-    // Abstract property for the product category
+    // 产品分类的抽象属性
     abstract val category: String
 
-    // A function that can be shared by all products
+    // 所有产品都可以共享的函数
     fun productInfo(): String {
         return "Product: $name, Category: $category, Price: $price"
     }
@@ -137,7 +135,7 @@ class Electronic(name: String, price: Double, val warranty: Int) : Product(name,
 
 //sampleStart
 fun main() {
-    // Creates an instance of the Electronic class
+    // 创建Electronic类的一个实例
     val laptop = Electronic(name = "Laptop", price = 1000.0, warranty = 2)
 
     println(laptop.productInfo())
@@ -147,55 +145,53 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-abstract-class"}
 
-Although abstract classes are great for sharing code in this way, they are restricted because classes in Kotlin
-only support single inheritance. If you need to inherit from multiple sources, consider using interfaces.
+尽管抽象类非常适合用这种方式来共享代码，但它们也有局限性，因为Kotlin中的类只支持单继承。
+如果你需要从多个来源继承行为，应当考虑使用接口。
 
-## Interfaces
+## 接口 {id=interfaces}
 
-Interfaces are similar to classes, but they have some differences:
+接口与类类似，但也存在一些区别：
 
-* You can't create an instance of an interface. They don't have a constructor or header.
-* Their functions and properties are implicitly inheritable by default. In Kotlin, we say that they are "open."
-* You don't need to mark their functions as `abstract` if you don't give them an implementation.
+* 你不能创建接口的实例。接口没有构造函数或类头。
+* 接口中的函数和属性默认都是可继承的。在Kotlin中，我们称它们是“open”的。
+* 如果你没有为函数提供实现，就不需要将它们标记为`abstract`。
 
-Similar to abstract classes, you use interfaces to define a set of functions and properties that classes can inherit and
-implement later. This approach helps you focus on the abstraction described by the interface, rather than the specific
-implementation details. Using interfaces makes your code:
+与抽象类类似，接口用于定义一组函数和属性，供类在之后去继承和实现。
+这种方式可以让你关注接口所描述的抽象能力，而不是具体的实现细节。使用接口可以让你的代码：
 
-* More modular, as it isolates different parts, allowing them to evolve independently.
-* Easier to understand by grouping related functions into a cohesive set.
-* Easier to test, as you can quickly swap an implementation with a mock for testing.
+* 更加模块化，通过隔离不同的部分，使它们可以独立演进。
+* 更容易理解，将相关的函数组织成一个内聚的集合。
+* 更容易测试，因为你可以在测试时快速用 mock 替换具体实现。
 
-To declare an interface, use the `interface` keyword:
+要声明一个接口，需要使用`interface`关键字：
 
 ```kotlin
 interface PaymentMethod
 ```
 
-### Interface implementation
+### 接口实现 {id=interface-implementation}
 
-Interfaces support multiple inheritance so a class can implement multiple interfaces at once. First, let's consider
-the scenario where a class implements **one** interface.
+接口支持多继承，因此一个类可以同时实现多个接口。
+首先来看一个类只实现**一个**接口的场景。
 
-To create a class that implements an interface, add a colon after your class header, followed by the interface name
-that you want to implement. You don't use parentheses `()` after the interface name because interfaces don't have a 
-constructor:
+要创建一个实现接口的类，需要在类头后面加上冒号，然后写上要实现的接口名称。
+接口名称后面不需要使用括号`()`，因为接口没有构造函数：
 
 ```kotlin
 class CreditCardPayment : PaymentMethod
 ```
 
-For example:
+例如：
 
 ```kotlin
 interface PaymentMethod {
-    // Functions are inheritable by default
+    // 函数默认是可继承的
     fun initiatePayment(amount: Double): String
 }
 
 class CreditCardPayment(val cardNumber: String, val cardHolderName: String, val expiryDate: String) : PaymentMethod {
     override fun initiatePayment(amount: Double): String {
-        // Simulate processing payment with credit card
+        // 模拟使用信用卡处理支付
         return "Payment of $$amount initiated using Credit Card ending in ${cardNumber.takeLast(4)}."
     }
 }

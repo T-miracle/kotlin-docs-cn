@@ -1,84 +1,85 @@
-[//]: # (title: Intermediate: Extension functions)
+[//]: # (title: 中级：扩展函数)
 
 <no-index/>
 
 <tldr>
-    <p><img src="icon-1.svg" width="20" alt="First step" /> <strong>Extension functions</strong><br />
-        <img src="icon-2-todo.svg" width="20" alt="Second step" /> <a href="kotlin-tour-intermediate-scope-functions.md">Scope functions</a><br />
-        <img src="icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-intermediate-lambdas-receiver.md">Lambda expressions with receiver</a><br />
-        <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-intermediate-classes-interfaces.md">Classes and interfaces</a><br />
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-intermediate-objects.md">Objects</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-intermediate-open-special-classes.md">Open and special classes</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Seventh step" /> <a href="kotlin-tour-intermediate-properties.md">Properties</a><br />
-        <img src="icon-8-todo.svg" width="20" alt="Eighth step" /> <a href="kotlin-tour-intermediate-null-safety.md">Null safety</a><br />
-        <img src="icon-9-todo.svg" width="20" alt="Ninth step" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">Libraries and APIs</a></p>
+    <p><img src="icon-1.svg" width="20" alt="第一步" /> <strong>扩展函数</strong><br />
+        <img src="icon-2-todo.svg" width="20" alt="第二步" /> <a href="kotlin-tour-intermediate-scope-functions.md">作用域函数</a><br />
+        <img src="icon-3-todo.svg" width="20" alt="第三步" /> <a href="kotlin-tour-intermediate-lambdas-receiver.md">带接收者的 Lambda 表达式</a><br />
+        <img src="icon-4-todo.svg" width="20" alt="第四步" /> <a href="kotlin-tour-intermediate-classes-interfaces.md">类和接口</a><br />
+        <img src="icon-5-todo.svg" width="20" alt="第五步" /> <a href="kotlin-tour-intermediate-objects.md">对象</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="第六步" /> <a href="kotlin-tour-intermediate-open-special-classes.md">开放类和特殊类</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="第七步" /> <a href="kotlin-tour-intermediate-properties.md">属性</a><br />
+        <img src="icon-8-todo.svg" width="20" alt="第八步" /> <a href="kotlin-tour-intermediate-null-safety.md">空安全</a><br />
+        <img src="icon-9-todo.svg" width="20" alt="第九步" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">库和 API</a></p>
 </tldr>
 
-In this chapter, you'll explore special Kotlin functions that make your code more concise and readable. Learn how they
-can help you use efficient design patterns to take your projects to the next level.
+在本章中，你将探索一些特殊的 Kotlin 函数，它们可以让你的代码更加简洁、可读性更强。
+学习这些函数如何帮助你使用高效的设计模式，将你的项目提升到新的层次。
 
-## Extension functions
+## 扩展函数 {id=extension-functions}
 
-In software development, you often need to modify a program's behavior without changing the original source code. 
-For example, you might want to add extra functionality to a class from a third-party library.
+在软件开发中，你经常需要在不修改原始源代码的情况下改变程序的行为。
+例如，你可能希望为来自第三方库的某个类添加额外的功能。
 
-You can do this by adding _extension functions_ to extend a class. You call extension functions the same way 
-you call member functions of a class, using a period `.`.
+你可以通过添加 *扩展函数* 来扩展一个类。调用扩展函数的方式与调用类的成员函数完全相同，都是使用点号 `.`。
 
-Before introducing the complete syntax for extension functions, you need to understand what a **receiver** is.
-The receiver is what the function is called on. In other words, the receiver is where or with whom the information is shared.
+在介绍扩展函数的完整语法之前，你需要先理解什么是 **接收者**。
+接收者是函数被调用的对象。换句话说，接收者就是信息所依附或共享的对象。
+
 
 ![An example of sender and receiver](receiver-highlight.png){width="500"}
 
-In this example, the `main()` function calls the [`.first()`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/first.html) function to return the first element in a list.
-The `.first()` function is called **on** the `readOnlyShapes` variable, so the `readOnlyShapes` variable is the receiver.
+在这个示例中，`main()` 函数调用了 [`.first()`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/first.html)
+函数，用于返回列表中的第一个元素。
+`.first()` 函数是 **在** `readOnlyShapes` 变量上调用的，因此 `readOnlyShapes` 变量就是接收者。
 
-To create an extension function, write the name of the class that you want to extend followed by a `.` and the name of
-your function. Continue with the rest of the function declaration, including its arguments and return type.
+要创建一个扩展函数，需要先写出你想要扩展的类名，然后接一个 `.`，再写上你的函数名。
+接着补全函数声明的其余部分，包括它的参数和返回类型。
 
-For example:
+例如：
 
 ```kotlin
 fun String.bold(): String = "<b>$this</b>"
 
 fun main() {
-    // "hello" is the receiver
+    // “hello” 是接收者
     println("hello".bold())
     // <b>hello</b>
 }
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-extension-function"}
 
-In this example:
+在这个示例中：
 
-* `String` is the extended class.
-* `bold` is the name of the extension function. 
-* The `.bold()` extension function's return type is `String`.
-* `"hello"`, an instance of `String`, as the receiver.
-* The receiver is accessed inside the body by the [keyword](keyword-reference.md): `this`.
-* A string template (`$`) is used to access the value of `this`.
-* The `.bold()` extension function takes a string and returns it in a `<b>` HTML element for bold text.
+* `String` 是被扩展的类。
+* `bold` 是扩展函数的名称。
+* `.bold()` 扩展函数的返回类型是 `String`。
+* `"hello"` 是 `String` 的一个实例，作为接收者。
+* 接收者在函数体内部通过 [关键字](keyword-reference.md) `this` 来访问。
+* 使用了字符串模板（`$`）来访问 `this` 的值。
+* `.bold()` 扩展函数接收一个字符串，并将其包裹在 `<b>` HTML 元素中，以实现加粗文本效果。
 
-## Extension-oriented design
+## 面向扩展的设计 {id=extension-oriented-design}
 
-You can define extension functions anywhere, which enables you to create extension-oriented designs. These designs separate 
-core functionality from useful but non-essential features, making your code easier to read and maintain.
+你可以在任何地方定义 扩展函数，这使你能够创建 面向扩展的设计。
+这类设计将 核心功能 与 有用但非必需的特性 分离开来，从而让你的代码更易读、也更容易维护。
 
-A good example is the [`HttpClient`](https://api.ktor.io/ktor-client/ktor-client-core/io.ktor.client/-http-client/index.html) class from the Ktor library, which helps perform network requests. The core of
-its functionality is a single function `request()`, which takes all the information needed for an HTTP request:
+一个很好的例子是 Ktor 库中的 [`HttpClient`](https://api.ktor.io/ktor-client/ktor-client-core/io.ktor.client/-http-client/index.html)
+类，它用于执行 网络请求。它的核心功能集中在一个名为 `request()` 的函数中，该函数接收 发起一次 HTTP 请求 所需的全部信息：
 
 ```kotlin
 class HttpClient {
     fun request(method: String, url: String, headers: Map<String, String>): HttpResponse {
-        // Network code
+        // 网络相关代码
     }
 }
 ```
 {validate="false"}
 
-In practice, the most popular HTTP requests are GET or POST requests. It makes sense for the library to provide shorter
-names for these common use cases. However, these don't require writing new network code, only a specific request call.
-In other words, they are perfect candidates to be defined as separate `.get()` and `.post()` extension functions:
+在实践中，最常见的 HTTP 请求是 GET 或 POST 请求。为这些常见使用场景提供更短的名称是很合理的。
+不过，它们并不需要编写新的网络代码，只是一次特定形式的 request 调用。
+换句话说，它们非常适合被定义为独立的 `.get()` 和 `.post()` 扩展函数：
 
 ```kotlin
 fun HttpClient.get(url: String): HttpResponse = request("GET", url, emptyMap())
@@ -86,15 +87,15 @@ fun HttpClient.post(url: String): HttpResponse = request("POST", url, emptyMap()
 ```
 {validate="false"}
 
-These `.get()` and `.post()` functions extend the `HttpClient` class. They can directly use the `request()` function from the `HttpClient` class
-because they're called on an instance of the `HttpClient` class as the receiver. You can use these extension functions to
-call the `request()` function with the appropriate HTTP method, which simplifies your code and makes it easier to understand:
+这些 `.get()` 和 `.post()` 函数扩展了 `HttpClient` 类。
+由于它们是以 `HttpClient` 类的实例作为 接收者 来调用的，因此可以直接使用 `HttpClient` 类中的 `request()` 函数。
+你可以通过这些扩展函数，使用合适的 HTTP 方法来调用 `request()` 函数，从而简化代码并提升可读性：
 
 ```kotlin
 class HttpClient {
     fun request(method: String, url: String, headers: Map<String, String>): HttpResponse {
-        println("Requesting $method to $url with headers: $headers")
-        return HttpResponse("Response from $url")
+        println("向 $url 发起 $method 请求，携带的 headers 为：$headers")
+        return HttpResponse("来自 $url 的响应")
     }
 }
 
@@ -103,31 +104,31 @@ fun HttpClient.get(url: String): HttpResponse = request("GET", url, emptyMap())
 fun main() {
     val client = HttpClient()
 
-    // Making a GET request using request() directly
+    // 直接使用 request() 发起 GET 请求
     val getResponseWithMember = client.request("GET", "https://example.com", emptyMap())
 
-    // Making a GET request using the get() extension function
-    // The client instance is the receiver
+    // 使用 get() 扩展函数发起 GET 请求
+    // client 实例是接收者
     val getResponseWithExtension = client.get("https://example.com")
 }
 ```
 {validate="false"}
 
-This extension-oriented approach is widely used in Kotlin's [standard library](https://kotlinlang.org/api/latest/jvm/stdlib/)
-and other libraries. For example, the `String` class has many [extension functions](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/#extension-functions)
-to help you work with strings.
+这种 面向扩展 的方式在 Kotlin 的 [标准库](https://kotlinlang.org/api/latest/jvm/stdlib/) 以及其他库中被广泛使用。
+例如，`String` 类就提供了大量的 [扩展函数](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/#extension-functions)，
+用于帮助你更方便地处理字符串。
 
-For more information about extension functions, see [Extensions](extensions.md).
+有关 扩展函数 的更多信息，请参阅 [扩展](extensions.md)。
 
-## Practice
+## 练习 {id=practice}
 
-### Exercise 1 {initial-collapse-state="collapsed" collapsible="true" id="extension-functions-exercise-1"}
+### 练习 1 {initial-collapse-state="collapsed" collapsible="true" id="extension-functions-exercise-1"}
 
-Write an extension function called `isPositive` that takes an integer and checks whether it is positive.
+编写一个名为 `isPositive` 的扩展函数，它接收一个整数，并检查该整数是否为正数。
 
 |---|---|
 ```kotlin
-fun Int.// Write your code here
+fun Int.// 在这里编写你的代码
 
 fun main() {
     println(1.isPositive())
@@ -147,20 +148,20 @@ fun main() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-extension-functions-solution-1"}
 
-### Exercise 2 {initial-collapse-state="collapsed" collapsible="true" id="extension-functions-exercise-2"}
+### 练习 2 {initial-collapse-state="collapsed" collapsible="true" id="extension-functions-exercise-2"}
 
-Write an extension function called `toLowercaseString` that takes a string and returns a lowercase version.
+编写一个名为 `toLowercaseString` 的扩展函数，它接收一个字符串并返回其小写形式。
 
 <deflist collapsible="true">
-    <def title="Hint">
-        Use the <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/lowercase.html"> <code>.lowercase()</code>
-        </a> function for the <code>String</code> type. 
+    <def title="提示">
+        对于 <code>String</code> 类型，使用 <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/lowercase.html"><code>.lowercase()</code></a>
+        函数。
     </def>
 </deflist>
 
 |---|---|
 ```kotlin
-fun // Write your code here
+fun // 在这里编写你的代码
 
 fun main() {
     println("Hello World!".toLowercaseString())
@@ -178,8 +179,8 @@ fun main() {
     // hello world!
 }
 ```
-{initial-collapse-state="collapsed" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-extension-functions-solution-2"}
+{initial-collapse-state="collapsed" collapsible="true" collapsed-title="示例解决方案" id="kotlin-tour-extension-functions-solution-2"}
 
-## Next step
+## 下一步 {id=next-step}
 
-[Intermediate: Scope functions](kotlin-tour-intermediate-scope-functions.md)
+[中级：作用域函数](kotlin-tour-intermediate-scope-functions.md)

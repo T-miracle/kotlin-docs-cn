@@ -251,9 +251,9 @@ fun main() {
 
 ### 练习 1 {collapsible="true" collapsible="true"}
 
-Define a data class `Employee` with two properties: one for a name, and another for a salary. Make sure that the property
-for salary is mutable, otherwise you won't get a salary boost at the end of the year! The main function demonstrates how
-you can use this data class.
+定义一个数据类 `Employee`，包含两个属性：一个用于姓名，另一个用于薪资。
+请确保薪资属性是可变的，否则你在年末将无法获得加薪。
+`main` 函数演示了如何使用这个数据类。
 
 |---|---|
 ```kotlin

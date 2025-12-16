@@ -201,7 +201,6 @@ fun main() {
 
 ## 下一步是什么？
 
-Congratulations! Now that you have completed the beginner tour, take your understanding of Kotlin to the next level with
-our intermediate tour:
+恭喜你！现在你已经完成了入门导览，可以通过我们的中级导览，将你对 Kotlin 的理解提升到更高层次：
 
 <a href="kotlin-tour-intermediate-extension-functions.md"><img src="start-intermediate-tour.svg" width="700" alt="Start the intermediate Kotlin tour" style="block"/></a>

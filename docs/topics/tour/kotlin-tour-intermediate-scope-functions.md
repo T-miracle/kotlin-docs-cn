@@ -1,52 +1,49 @@
-[//]: # (title: Intermediate: Scope functions)
+[//]: # (title: 中级：作用域函数)
 
 <no-index/>
 
 <tldr>
-    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-intermediate-extension-functions.md">Extension functions</a><br />
-        <img src="icon-2.svg" width="20" alt="Second step" /> <strong>Scope functions</strong><br />
-        <img src="icon-3-todo.svg" width="20" alt="Third step" /> <a href="kotlin-tour-intermediate-lambdas-receiver.md">Lambda expressions with receiver</a><br />
-        <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-intermediate-classes-interfaces.md">Classes and interfaces</a><br />
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-intermediate-objects.md">Objects</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-intermediate-open-special-classes.md">Open and special classes</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Seventh step" /> <a href="kotlin-tour-intermediate-properties.md">Properties</a><br />
-        <img src="icon-8-todo.svg" width="20" alt="Eighth step" /> <a href="kotlin-tour-intermediate-null-safety.md">Null safety</a><br />
-        <img src="icon-9-todo.svg" width="20" alt="Ninth step" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">Libraries and APIs</a></p>
+    <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-intermediate-extension-functions.md">扩展函数</a><br />
+        <img src="icon-2.svg" width="20" alt="第二步" /> <strong>作用域函数</strong><br />
+        <img src="icon-3-todo.svg" width="20" alt="第三步" /> <a href="kotlin-tour-intermediate-lambdas-receiver.md">带接收者的 Lambda 表达式</a><br />
+        <img src="icon-4-todo.svg" width="20" alt="第四步" /> <a href="kotlin-tour-intermediate-classes-interfaces.md">类和接口</a><br />
+        <img src="icon-5-todo.svg" width="20" alt="第五步" /> <a href="kotlin-tour-intermediate-objects.md">对象</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="第六步" /> <a href="kotlin-tour-intermediate-open-special-classes.md">开放类和特殊类</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="第七步" /> <a href="kotlin-tour-intermediate-properties.md">属性</a><br />
+        <img src="icon-8-todo.svg" width="20" alt="第八步" /> <a href="kotlin-tour-intermediate-null-safety.md">空安全</a><br />
+        <img src="icon-9-todo.svg" width="20" alt="第九步" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">库和 API</a></p>
 </tldr>
 
-In this chapter, you'll build on your understanding of extension functions to learn how to use scope functions to 
-write more idiomatic code.
+在本章中，你将在 扩展函数 的基础上，学习如何使用 作用域函数 来编写更加 Kotlin 风格（idiomatic）的代码。
 
-## Scope functions
+## 作用域函数 {id=scope-functions}
 
-In programming, a scope is the area in which your variable or object is recognized. The most commonly referred to scopes
-are the global scope and the local scope:
+在编程中，作用域 指的是 变量 或 对象 被识别和生效的范围。
+最常被提及的作用域是 全局作用域 和 局部作用域：
 
-* **Global scope** – a variable or object that is accessible from anywhere in the program.
-* **Local scope** – a variable or object that is only accessible within the block or function where it is defined.
+* **全局作用域** – 在程序的任何位置都可以访问的变量或对象。
+* **局部作用域** – 只能在其定义所在的代码块或函数内部访问的变量或对象。
 
-In Kotlin, there are also scope functions that allow you to create a temporary scope around an object and execute some code.
+在 Kotlin 中，还提供了一类 作用域函数，它们允许你围绕某个对象创建一个 临时作用域，并在其中执行一段代码。
 
-Scope functions make your code more concise because you don't have to refer to the name of your object within the temporary
-scope. Depending on the scope function, you can access the object either by referencing it via the keyword `this` or using it as an
-argument via the keyword `it`.
+作用域函数 能让代码更加简洁，因为在临时作用域中你不需要反复引用对象的名称。
+根据不同的作用域函数，你可以通过关键字 `this` 来访问对象，或者通过关键字 `it` 将对象作为参数来使用。
 
-Kotlin has five scope functions in total: `let`, `apply`, `run`, `also`, and `with`.
+Kotlin 一共提供了五个 作用域函数：`let`、`apply`、`run`、`also` 和 `with`。
 
-Each scope function takes a lambda expression and returns either the object or the result of the lambda expression. In 
-this tour, we explain each scope function and how to use it.
+每个作用域函数 都接收一个 Lambda 表达式，并返回 对象本身 或 Lambda 表达式的结果。
+在本次导览中，我们将逐一讲解每个作用域函数及其使用方式。
 
-> You can also watch the [Back to the Stdlib: Making the Most of Kotlin's Standard Library](https://youtu.be/DdvgvSHrN9g?feature=shared&t=1511)
-> talk on scope functions by Sebastian Aigner, Kotlin developer advocate.
+> 你还可以观看 Sebastian Aigner（Kotlin 开发者布道师）关于 作用域函数 的演讲
+> [回到 Stdlib：充分利用 Kotlin 的标准库](https://youtu.be/DdvgvSHrN9g?feature=shared&t=1511)
 > 
 {style="tip"}
 
 ### Let
 
-Use the `let` scope function when you want to perform null checks in your code and later perform further actions
-with the returned object.
+当你希望在代码中执行 空值检查，并在之后对 返回的对象 继续执行操作时，可以使用 `let` 作用域函数。
 
-Consider the example:
+请看下面的示例：
 
 ```kotlin
 fun sendNotification(recipientAddress: String): String {
@@ -65,21 +62,19 @@ fun main() {
 ```
 {validate = "false"}
 
-The example has two functions:
-* `sendNotification()`, which has a function parameter `recipientAddress` and returns a string.
-* `getNextAddress()`, which has no function parameters and returns a string.
+该示例包含两个函数：
+* `sendNotification()`：包含一个函数参数 `recipientAddress`，并返回一个字符串。
+* `getNextAddress()`：不包含函数参数，并返回一个字符串。
 
-The example creates a variable `address` that has a nullable `String` type. But this becomes a problem when you call
-the `sendNotification()` function because this function doesn't expect that `address` could be a `null` value.
-The compiler reports an error as a result: 
+该示例创建了一个名为 `address` 的变量，它的类型是 可空的 `String`。
+但当你调用 `sendNotification()` 函数时就会出现问题，因为这个函数并不期望 `address` 可能是 `null` 值。结果，编译器会报错：
 
 ```text
 Argument type mismatch: actual type is 'String?', but 'String' was expected.
 ```
 
-From the beginner tour, you already know that you can perform a null check with an if condition or use the [Elvis operator `?:`](kotlin-tour-null-safety.md#use-elvis-operator). 
-But what if you want to use the returned object later in your code? You could achieve this with an if condition **and** an 
-else branch:
+在 入门导览 中，你已经知道可以使用 `if` 条件来进行 空值检查，或者使用 [Elvis 运算符 `?:`](kotlin-tour-null-safety.md#use-elvis-operator)。
+但如果你希望在代码的后续部分继续使用 返回的对象 呢？你可以通过 一个 `if` 条件 **并且** 搭配一个 `else` 分支 来实现这一点：
 
 ```kotlin
 fun sendNotification(recipientAddress: String): String {
@@ -102,7 +97,7 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-let-non-null-if"}
 
-However, a more concise approach is to use the `let` scope function:
+不过，更加简洁的方式是使用 `let` 作用域函数：
 
 ```kotlin
 fun sendNotification(recipientAddress: String): String {
@@ -125,23 +120,22 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-let-non-null"}
 
-The example:
-* Creates variables called `address` and `confirm`.
-* Uses a safe call for the `let` scope function on the `address` variable.
-* Creates a temporary scope within the `let` scope function.
-* Passes the `sendNotification()` function as a lambda expression into the `let` scope function.
-* Refers to the `address` variable via `it`, using the temporary scope.
-* Assigns the result to the `confirm` variable.
+该示例：
+* 创建了名为 `address` 和 `confirm` 的变量。
+* 在 `address` 变量上对 `let` 作用域函数 使用了安全调用。
+* 在 `let` 作用域函数 内创建了一个临时作用域。
+* 将 `sendNotification()` 函数 以 Lambda 表达式 的形式传入 `let` 作用域函数。
+* 在临时作用域中，通过 `it` 来引用 `address` 变量。
+* 将返回结果赋值给 `confirm` 变量。
 
-With this approach, your code can handle the `address` variable potentially being a `null` value, and you can use the 
-`confirm` variable later in your code.
+通过这种方式，你的代码可以正确处理 `address` 变量 可能为 `null` 的情况，并且你可以在后续代码中继续使用 `confirm` 变量。
 
 ### Apply
 
-Use the `apply` scope function to initialize objects, like a class instance, at the time of creation rather than later
-on in your code. This approach makes your code easier to read and manage.
+使用 `apply` 作用域函数可以在对象创建时（例如类实例）进行初始化，而不是在代码的后续部分再去设置。
+这种方式可以让你的代码更易读，也更易于管理。
 
-Consider the example:
+请看下面的示例：
 
 ```kotlin
 class Client() {
@@ -164,15 +158,12 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-apply-before"}
 
-The example has a `Client` class that contains one property called `token` and three member functions: `connect()`,
-`authenticate()`, and `getData()`.
+该示例中有一个 `Client` 类，它包含一个名为 `token` 的属性和三个成员函数：`connect()`、`authenticate()` 和 `getData()`。
 
-The example creates `client` as an instance of the `Client` class before initializing its `token` property and calling its
-member functions in the `main()` function.
+示例在 `main()` 函数中创建了 `client` 作为 `Client` 类的实例，然后再初始化它的 `token` 属性并调用其成员函数。
 
-Although this example is compact, in the real world, it can be a while before you can configure and use the class instance
-(and its member functions) after you've created it. However, if you use the `apply` scope function you can create, configure and
-use member functions on your class instance all in the same place in your code:
+虽然这个示例已经很简洁，但在实际开发中，通常在创建类实例后，需要等待一段时间才能完成配置并使用它（及其成员函数）。
+如果使用 `apply` 作用域函数，你可以在代码的同一个地方，完成类实例的创建、配置以及成员函数的调用：
 
 ```kotlin
 class Client() {
@@ -197,25 +188,23 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-apply-after"}
 
-The example:
+该示例：
 
-* Creates `client` as an instance of the `Client` class.
-* Uses the `apply` scope function on the `client` instance.
-* Creates a temporary scope within the `apply` scope function so that you don't have to explicitly refer to the `client` instance when accessing its properties or functions.
-* Passes a lambda expression to the `apply` scope function that updates the `token` property and calls the `connect()` and `authenticate()` functions.
-* Calls the `getData()` member function on the `client` instance in the `main()` function.
+* 创建了 `client` 作为 `Client` 类的实例。
+* 在 `client` 实例上使用了 `apply` 作用域函数。
+* 在 `apply` 作用域函数内部创建了一个临时作用域，因此在访问属性或函数时无需显式引用 `client` 实例。
+* 将一个 Lambda 表达式传入 `apply` 作用域函数，在其中更新 `token` 属性并调用 `connect()` 和 `authenticate()` 函数。
+* 在 `main()` 函数中对 `client` 实例调用 `getData()` 成员函数。
 
-As you can see, this strategy is convenient when you are working with large pieces of code.
+如你所见，这种策略在处理较大代码块时非常方便。
 
 ### Run
 
-Similar to `apply`, you can use the `run` scope function to initialize an object, but it's better to use `run` 
-to initialize an object at a specific moment in your code **and** immediately compute a result.
+与 `apply` 类似，你可以使用 `run` 作用域函数来初始化对象，但更适合在代码中的特定时刻初始化对象 **并** 立即计算一个结果。
 
-Let's continue the previous example for the `apply` function, but this time, you want the `connect()` and
-`authenticate()` functions to be grouped so that they are called on every request.
+我们继续前面 `apply` 函数的示例，这一次，你希望将 `connect()` 和 `authenticate()` 函数组合在一起，以便在每次请求时都调用它们。
 
-For example:
+例如：
 
 ```kotlin
 class Client() {
@@ -243,29 +232,28 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-run"}
 
-The example:
+该示例：
 
-* Creates `client` as an instance of the `Client` class.
-* Uses the `apply` scope function on the `client` instance.
-* Creates a temporary scope within the `apply` scope function so that you don't have to explicitly refer to the `client` instance when accessing its properties or functions.
-* Passes a lambda expression to the `apply` scope function that updates the `token` property.
+* 创建了 `client` 作为 `Client` 类的实例。
+* 在 `client` 实例上使用了 `apply` 作用域函数。
+* 在 `apply` 作用域函数内部创建了一个临时作用域，因此在访问属性或函数时无需显式引用 `client` 实例。
+* 将一个 Lambda 表达式传入 `apply` 作用域函数，在其中更新 `token` 属性。
 
-The `main()` function:
+`main()` 函数：
 
-* Creates a `result` variable with type `String`.
-* Uses the `run` scope function on the `client` instance.
-* Creates a temporary scope within the `run` scope function so that you don't have to explicitly refer to the `client` instance when accessing its properties or functions.
-* Passes a lambda expression to the `run` scope function that calls the `connect()`, `authenticate()`, and `getData()` functions.
-* Assigns the result to the `result` variable.
+* 创建了一个类型为 `String` 的 `result` 变量。
+* 在 `client` 实例上使用了 `run` 作用域函数。
+* 在 `run` 作用域函数内部创建了一个临时作用域，因此在访问属性或函数时无需显式引用 `client` 实例。
+* 将一个 Lambda 表达式传入 `run` 作用域函数，在其中调用 `connect()`、`authenticate()` 和 `getData()` 函数。
+* 将返回结果赋值给 `result` 变量。
 
-Now you can use the returned result further in your code.
+现在，你可以在代码的后续部分继续使用返回的结果。
 
 ### Also
 
-Use the `also` scope function to complete an additional action with an object and then return the object to continue 
-using it in your code, like writing a log.
+使用 `also` 作用域函数可以在对象上执行额外操作后，再返回该对象，以便在代码中继续使用它，例如记录日志。
 
-Consider the example:
+请看下面的示例：
 
 ```kotlin
 fun main() {
@@ -281,20 +269,19 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-also-before"}
 
-The example:
+该示例：
 
-* Creates the `medals` variable that contains a list of strings.
-* Creates the `reversedLongUpperCaseMedals` variable that has the `List<String>` type.
-* Uses the `.map()` extension function on the `medals` variable.
-* Passes a lambda expression to the `.map()` function that refers to `medals` via the `it` keyword and calls the `.uppercase()` extension function on it.
-* Uses the `.filter()` extension function on the `medals` variable.
-* Passes a lambda expression as a predicate to the `.filter()` function that refers to `medals` via the `it` keyword and checks if the item in the list has more than 4 characters.
-* Uses the `.reversed()` extension function on the `medals` variable.
-* Assigns the result to the `reversedLongUpperCaseMedals` variable.
-* Prints the list contained in the `reversedLongUpperCaseMedals` variable.
+* 创建了 `medals` 变量，包含一个字符串列表。
+* 创建了 `reversedLongUpperCaseMedals` 变量，类型为 `List<String>`。
+* 在 `medals` 变量上使用了 `.map()` 扩展函数。
+* 将一个 Lambda 表达式传入 `.map()` 函数，在其中通过 `it` 关键字引用 `medals` 并调用 `.uppercase()` 扩展函数。
+* 在 `medals` 变量上使用了 `.filter()` 扩展函数。
+* 将一个 Lambda 表达式作为谓词传入 `.filter()` 函数，通过 `it` 引用 `medals` 并检查列表中的项是否超过 4 个字符。
+* 使用 `.reversed()` 扩展函数对结果进行反转。
+* 将最终结果赋值给 `reversedLongUpperCaseMedals` 变量。
+* 打印 `reversedLongUpperCaseMedals` 变量中的列表。
 
-It would be useful to add some logging in between the function calls to see what is happening to the `medals` variable.
-The `also` function helps with that:
+在函数调用之间添加一些日志以观察 `medals` 变量的变化会很有用，`also` 函数可以帮助实现这一点：
 
 ```kotlin
 fun main() {
@@ -314,23 +301,21 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-also-after"}
 
-Now the example:
+现在该示例：
 
-* Uses the `also` scope function on the `medals` variable.
-* Creates a temporary scope within the `also` scope function so that you don't have to explicitly refer to the `medals` variable when using it as a function parameter.
-* Passes a lambda expression to the `also` scope function that calls the `println()` function using the `medals` variable as a function parameter via the `it` keyword.
+* 在 `medals` 变量上使用了 `also` 作用域函数。
+* 在 `also` 作用域函数内部创建了一个临时作用域，因此在将 `medals` 变量作为函数参数使用时无需显式引用它。
+* 将一个 Lambda 表达式传入 `also` 作用域函数，在其中通过 `it` 关键字将 `medals` 变量作为参数调用 `println()` 函数。
 
-Since the `also` function returns the object, it is useful for not only logging but debugging, chaining
-multiple operations, and performing other side-effect operations that don't affect the main flow of your code.
+由于 `also` 函数会返回对象，因此它不仅适用于日志记录，还适用于调试、链式调用多个操作，以及执行不会影响代码主流程的其他副作用操作。
 
 ### With
 
-Unlike the other scope functions, `with` is not an extension function, so the syntax is different. You pass the receiver
-object to `with` as an argument. 
+与其他作用域函数不同，`with` 不是扩展函数，因此语法有所不同。你需要将接收者对象作为参数传入 `with`。
 
-Use the `with` scope function when you want to call multiple functions on an object.
+当你希望对一个对象调用多个函数时，可以使用 `with` 作用域函数。
 
-Consider this example:
+请看下面的示例：
 
 ```kotlin
 class Canvas {
@@ -356,13 +341,13 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-with-before"}
 
-The example creates a `Canvas` class that has three member functions: `rect()`, `circ()`, and `text()`. Each of these member
-functions prints a statement constructed from the function parameters that you provide.
+该示例创建了一个 `Canvas` 类，它包含三个成员函数：`rect()`、`circ()` 和 `text()`。
+每个成员函数都会根据提供的函数参数打印一条语句。
 
-The example creates `mainMonitorPrimaryBufferBackedCanvas` as an instance of the `Canvas` class before calling a sequence
-of member functions on the instance with different function parameters.
+示例在调用这些成员函数之前，创建了 `mainMonitorPrimaryBufferBackedCanvas` 作为 `Canvas`
+类的实例，并在该实例上依次调用多个成员函数，每次使用不同的函数参数。
 
-You can see that this code is hard to read. If you use the `with` function, the code is streamlined:
+你可以看到，这段代码可读性较差。如果使用 `with` 函数，代码会更加简洁明了：
 
 ```kotlin
 class Canvas {
@@ -391,39 +376,39 @@ fun main() {
 ```
 {kotlin-runnable="true" id="kotlin-tour-scope-function-with-after"}
 
-This example:
-* Uses the `with` scope function with the `mainMonitorSecondaryBufferBackedCanvas` instance as the receiver.
-* Creates a temporary scope within the `with` scope function so that you don't have to explicitly refer to the `mainMonitorSecondaryBufferBackedCanvas` instance when calling its member functions.
-* Passes a lambda expression to the `with` scope function that calls a sequence of member functions with different function parameters.
+该示例：
+* 使用 `with` 作用域函数，并将 `mainMonitorSecondaryBufferBackedCanvas` 实例作为接收者。
+* 在 `with` 作用域函数内部创建了一个临时作用域，因此在调用成员函数时无需显式引用 `mainMonitorSecondaryBufferBackedCanvas` 实例。
+* 将一个 Lambda 表达式传入 `with` 作用域函数，在其中依次调用多个成员函数，并使用不同的函数参数。
 
-Now that this code is much easier to read, you are less likely to make mistakes.
+现在，这段代码可读性大大提高，你也就不太可能出错了。
 
-## Use case overview
+## 使用场景概览 {id=use-case-overview}
 
-This section has covered the different scope functions available in Kotlin and their main use cases for making your code
-more idiomatic. You can use this table as a quick reference. It's important to note that you don't need a complete understanding
-of how these functions work in order to use them in your code.
+本节介绍了 Kotlin 中可用的不同作用域函数及其主要使用场景，帮助你编写更加 idiomatic 的代码。
+你可以将下表作为快速参考。
+需要注意的是，使用这些函数时，并不需要完全理解它们的内部工作原理。
 
-| Function | Access to `x` via | Return value  | Use case                                                                                     |
-|----------|-------------------|---------------|----------------------------------------------------------------------------------------------|
-| `let`    | `it`              | Lambda result | Perform null checks in your code and later perform further actions with the returned object. |
-| `apply`  | `this`            | `x`           | Initialize objects at the time of creation.                                                  |
-| `run`    | `this`            | Lambda result | Initialize objects at the time of creation **AND** compute a result.                         |
-| `also`   | `it`              | `x`           | Complete additional actions before returning the object.                                     |
-| `with`   | `this`            | Lambda result | Call multiple functions on an object.                                                        |
+| 函数      | 通过 `x` 访问 | 返回值       | 使用场景                         |
+|---------|-----------|-----------|------------------------------|
+| `let`   | `it`      | Lambda 结果 | 在代码中执行空值检查，并在之后对返回对象进行进一步操作。 |
+| `apply` | `this`    | `x`       | 在对象创建时进行初始化。                 |
+| `run`   | `this`    | Lambda 结果 | 在对象创建时进行初始化 **并** 计算一个结果。    |
+| `also`  | `it`      | `x`       | 在返回对象之前完成额外操作。               |
+| `with`  | `this`    | Lambda 结果 | 对一个对象调用多个函数。                 |
 
-For more information about scope functions, see [Scope functions](scope-functions.md).
+有关作用域函数的更多信息，请参阅 [作用域函数](scope-functions.md)。
 
-## Practice
+## 练习 {id=practice}
 
-### Exercise 1 {initial-collapse-state="collapsed" collapsible="true" id="scope-functions-exercise-1"}
+### 练习 1 {initial-collapse-state="collapsed" collapsible="true" id="scope-functions-exercise-1"}
 
-Rewrite the `.getPriceInEuros()` function as a single-expression function that uses safe call operators `?.` and the `let` scope function.
+将 `.getPriceInEuros()` 函数重写为 单表达式函数，使用安全调用操作符 `?.` 和 `let` 作用域函数。
 
 <deflist collapsible="true">
-    <def title="Hint">
-        Use safe call operators <code>?.</code> to safely access the <code>priceInDollars</code> property from the <code>getProductInfo()</code>
-        function. Then, use the <code>let</code> scope function to convert the value of <code>priceInDollars</code> into euros.
+    <def title="提示">
+        使用安全调用操作符 <code>?.</code> 安全地访问 <code>getProductInfo()</code> 函数中的 <code>priceInDollars</code> 属性。  
+        然后，使用 <code>let</code> 作用域函数将 <code>priceInDollars</code> 的值转换为欧元。
     </def>
 </deflist>
 
@@ -437,7 +422,7 @@ class Product {
     }
 }
 
-// Rewrite this function
+// 重写这个函数
 fun Product.getPriceInEuros(): Double? {
     val info = getProductInfo()
     if (info == null) return null
@@ -494,10 +479,10 @@ fun main() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-scope-functions-solution-1"}
 
-### Exercise 2 {initial-collapse-state="collapsed" collapsible="true" id="scope-functions-exercise-2"}
+### 练习 2 {initial-collapse-state="collapsed" collapsible="true" id="scope-functions-exercise-2"}
 
-You have an `updateEmail()` function that updates the email address of a user. Use the `apply` scope function
-to update the email address and then the `also` scope function to print a log message: `Updating email for user with ID: ${it.id}`.
+你有一个 `updateEmail()` 函数，用于更新用户的电子邮件地址。
+使用 `apply` 作用域函数更新电子邮件地址，然后使用 `also` 作用域函数打印日志信息：`Updating email for user with ID: ${it.id}`。
 
 |---|---|
 ```kotlin
@@ -535,6 +520,6 @@ fun main() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-scope-functions-solution-2"}
 
-## Next step
+## 下一步
 
-[Intermediate: Lambda expressions with receiver](kotlin-tour-intermediate-lambdas-receiver.md)
+[中级：带接收者的 Lambda 表达式](kotlin-tour-intermediate-lambdas-receiver.md)

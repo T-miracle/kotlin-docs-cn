@@ -221,8 +221,8 @@ fun main() {
 {style="tip"}
 
 <deflist collapsible="true" id="kotlin-tour-functions-exercise-1-hint">
-    <def title="Hint">
-        The formula for calculating the area of a circle is <math>πr^2</math>, where <math>r</math> is the radius.
+    <def title="提示">
+        计算圆面积的公式是 <math>πr^2</math>，其中 <math>r</math> 表示半径。
     </def>
 </deflist>
 
@@ -397,10 +397,10 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-tour-lambda-filter"}
 
-The `.filter()` function accepts a lambda expression as a predicate and applies it to each element of the list. The function keeps an element only if the predicate returns `true`:
+`.filter()` 函数 接受 一个 Lambda 表达式 作为 谓词，并 将其 应用于 列表 中的 每个 元素。该 函数 只会 保留 谓词 返回 `true` 的 元素：
 
-* `{ x -> x > 0 }` returns `true` if the element is positive.
-* `{ x -> x < 0 }` returns `true` if the element is negative.
+* `{ x -> x > 0 }` 如果 元素 为 正数，则 返回 `true`。
+* `{ x -> x < 0 }` 如果 元素 为 负数，则 返回 `true`。
 
 这个示例演示了两种将 Lambda 表达式传递给函数的方式：
 

@@ -1,46 +1,45 @@
-[//]: # (title: Intermediate: Lambda expressions with receiver)
+[//]: # (title: 中级：带接收者的 Lambda 表达式)
 
 <no-index/>
 
 <tldr>
-    <p><img src="icon-1-done.svg" width="20" alt="First step" /> <a href="kotlin-tour-intermediate-extension-functions.md">Extension functions</a><br />
-        <img src="icon-2-done.svg" width="20" alt="Second step" /> <a href="kotlin-tour-intermediate-scope-functions.md">Scope functions</a><br />
-        <img src="icon-3.svg" width="20" alt="Third step" /> <strong>Lambda expressions with receiver</strong><br />
-        <img src="icon-4-todo.svg" width="20" alt="Fourth step" /> <a href="kotlin-tour-intermediate-classes-interfaces.md">Classes and interfaces</a><br />
-        <img src="icon-5-todo.svg" width="20" alt="Fifth step" /> <a href="kotlin-tour-intermediate-objects.md">Objects</a><br />
-        <img src="icon-6-todo.svg" width="20" alt="Sixth step" /> <a href="kotlin-tour-intermediate-open-special-classes.md">Open and special classes</a><br />
-        <img src="icon-7-todo.svg" width="20" alt="Seventh step" /> <a href="kotlin-tour-intermediate-properties.md">Properties</a><br />
-        <img src="icon-8-todo.svg" width="20" alt="Eighth step" /> <a href="kotlin-tour-intermediate-null-safety.md">Null safety</a><br />
-        <img src="icon-9-todo.svg" width="20" alt="Ninth step" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">Libraries and APIs</a></p>
+    <p><img src="icon-1-done.svg" width="20" alt="第一步" /> <a href="kotlin-tour-intermediate-extension-functions.md">扩展函数</a><br />
+        <img src="icon-2-done.svg" width="20" alt="第二步" /> <a href="kotlin-tour-intermediate-scope-functions.md">作用域函数</a><br />
+        <img src="icon-3.svg" width="20" alt="第三步" /> <strong>带接收者的 Lambda 表达式</strong><br />
+        <img src="icon-4-todo.svg" width="20" alt="第四步" /> <a href="kotlin-tour-intermediate-classes-interfaces.md">类和接口</a><br />
+        <img src="icon-5-todo.svg" width="20" alt="第五步" /> <a href="kotlin-tour-intermediate-objects.md">对象</a><br />
+        <img src="icon-6-todo.svg" width="20" alt="第六步" /> <a href="kotlin-tour-intermediate-open-special-classes.md">开放类和特殊类</a><br />
+        <img src="icon-7-todo.svg" width="20" alt="第七步" /> <a href="kotlin-tour-intermediate-properties.md">属性</a><br />
+        <img src="icon-8-todo.svg" width="20" alt="第八步" /> <a href="kotlin-tour-intermediate-null-safety.md">空安全</a><br />
+        <img src="icon-9-todo.svg" width="20" alt="第九步" /> <a href="kotlin-tour-intermediate-libraries-and-apis.md">库和 API</a></p>
 </tldr>
 
-In this chapter, you'll learn how to use receivers with another type of function, lambda expressions, and how they
-can help you create a domain-specific language.
+在本章中，你将学习如何在另一类函数 —— Lambda 表达式中使用接收者，以及它们如何帮助你创建领域特定语言（DSL）。
 
-## Lambda expressions with receiver
+## 带接收者的 Lambda 表达式 {id=lambda-expressions-with-receiver}
 
-In the beginner tour, you learned how to use [lambda expressions](kotlin-tour-functions.md#lambda-expressions). Lambda expressions can also have a receiver. 
-In this case, lambda expressions can access any member functions or properties of the receiver without having
-to explicitly specify the receiver each time. Without these additional references, your code is easier to read and maintain.
+在入门导览中，你学习了如何使用 [Lambda 表达式](kotlin-tour-functions.md#lambda-expressions)。Lambda 表达式也可以拥有接收者。
+在这种情况下，Lambda 表达式可以访问接收者的任何成员函数或属性，而无需每次都显式指定接收者。
+省略这些额外引用后，代码更易读且易于维护。
 
-> Lambda expressions with receiver are also known as function literals with receiver.
+> 带接收者的 Lambda 表达式也称为 带接收者的函数字面量（function literals with receiver）。
 >
 {style="tip"}
 
-The syntax for a lambda expression with receiver is different when you define the function type. First, write the receiver
-that you want to extend. Next, put a `.` and then complete the rest of your function type definition. For example:
+在定义函数类型时，带接收者的 Lambda 表达式的语法有所不同。首先，写出你希望扩展的接收者类型。
+然后加上一个 `.`，接着完成函数类型的剩余定义。例如：
 
 ```kotlin
 MutableList<Int>.() -> Unit
 ```
 
-This function type has:
+该函数类型包含：
 
-* `MutableList<Int>` as the receiver.
-* No function parameters within the parentheses `()`.
-* No return value: `Unit`.
+* `MutableList<Int>` 作为接收者。
+* 括号 `()` 内没有函数参数。
+* 无返回值：`Unit`。
 
-Consider this example that draws shapes on a canvas:
+请看下面这个在画布上绘制图形的示例：
 
 ```kotlin
 class Canvas {
@@ -48,10 +47,10 @@ class Canvas {
     fun drawSquare() = println("🟥 Drawing a square")
 }
 
-// Lambda expression with receiver definition
+// 带接收者的 Lambda 表达式定义
 fun render(block: Canvas.() -> Unit): Canvas {
     val canvas = Canvas()
-    // Use the lambda expression with receiver
+    // 使用带接收者的 Lambda 表达式
     canvas.block()
     return canvas
 }
@@ -67,24 +66,22 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-intermediate-tour-lambda-expression-with-receiver"}
 
-In this example:
+在这个示例中：
 
-* The `Canvas` class has two functions that simulate drawing a circle or a square.
-* The `render()` function takes a `block` parameter and returns an instance of the `Canvas` class.
-* The `block` parameter is a lambda expression with receiver, where the `Canvas` class is the receiver.
-* The `render()` function creates an instance of the `Canvas` class and calls the `block()` lambda expression on the `canvas` instance, using it as the receiver.
-* The `main()` function calls the `render()` function with a lambda expression, which is passed to the `block` parameter.
-* Inside the lambda passed to the `render()` function, the program calls the `drawCircle()` and `drawSquare()` functions on an instance of the `Canvas` class.
+* `Canvas` 类有两个函数，用于模拟绘制圆形或方形。
+* `render()` 函数接收一个 `block` 参数，并返回一个 `Canvas` 类的实例。
+* `block` 参数是一个带接收者的 Lambda 表达式，其中 `Canvas` 类作为接收者。
+* `render()` 函数创建一个 `Canvas` 实例，并在该实例上调用 `block()` Lambda 表达式，将其作为接收者。
+* `main()` 函数调用 `render()` 函数，并传入一个 Lambda 表达式作为 `block` 参数。
+* 在传入 `render()` 的 Lambda 表达式内部，程序直接调用了 `Canvas` 实例的 `drawCircle()` 和 `drawSquare()` 函数。
 
-  Because the `drawCircle()` and `drawSquare()` functions are called in the lambda expression with receiver, they can be called
-  directly as if they are inside the `Canvas` class.
+由于 `drawCircle()` 和 `drawSquare()` 在带接收者的 Lambda 表达式中调用，它们可以直接被调用，就像在 `Canvas` 类内部一样。
 
-Lambda expressions with receiver are helpful when you want to create a domain-specific language (DSL). Since you have
-access to the receiver's member functions and properties without explicitly referencing the receiver, your code 
-becomes leaner.
+带接收者的 Lambda 表达式在创建领域特定语言（DSL）时非常有用。
+由于可以直接访问接收者的成员函数和属性而无需显式引用接收者，代码变得更加简洁。
 
-To demonstrate this, consider an example that configures items in a menu. Let's begin with a `MenuItem` class and a 
-`Menu` class that contains a function to add items to the menu called `item()`, as well as a list of all menu items `items`:
+为了演示这一点，我们来看一个配置菜单项的示例。
+首先定义一个 `MenuItem` 类，以及一个包含添加菜单项函数 `item()` 和存储所有菜单项的列表 `items` 的 `Menu` 类：
 
 ```kotlin
 class MenuItem(val name: String)
@@ -98,20 +95,19 @@ class Menu(val name: String) {
 }
 ```
 
-Let's use a lambda expression with receiver passed as a function parameter (`init`) to the `menu()` function that builds 
-a menu as a starting point:
+我们可以将带接收者的 Lambda 表达式作为函数参数（`init`）传入 `menu()` 函数，用于构建菜单，作为起点：
 
 ```kotlin
 fun menu(name: String, init: Menu.() -> Unit): Menu {
-    // Creates an instance of the Menu class
+    // 创建 Menu 类的实例
     val menu = Menu(name)
-    // Calls the lambda expression with receiver init() on the class instance
+    // 在该类实例上调用带接收者的 Lambda 表达式 init()
     menu.init()
     return menu
 }
 ```
 
-Now you can use the DSL to configure a menu and create a `printMenu()` function to print the menu structure to the console:
+现在，你可以使用这个 DSL 来配置菜单，并创建一个 `printMenu()` 函数，将菜单结构打印到控制台：
 
 ```kotlin
 class MenuItem(val name: String)
@@ -136,17 +132,17 @@ fun printMenu(menu: Menu) {
     menu.items.forEach { println("  Item: ${it.name}") }
 }
 
-// Use the DSL
+// 使用 DSL
 fun main() {
-    // Create the menu
+    // 创建菜单
     val mainMenu = menu("Main Menu") {
-        // Add items to the menu
+        // 将项目添加到菜单
         item("Home")
         item("Settings")
         item("Exit")
     }
 
-    // Print the menu
+    // 打印菜单
     printMenu(mainMenu)
     // Menu: Main Menu
     //   Item: Home
@@ -157,26 +153,25 @@ fun main() {
 ```
 {kotlin-runnable="true" kotlin-min-compiler-version="1.3" id="kotlin-intermediate-tour-lambda-expression-with-receiver-dsl"}
 
-As you can see, using a lambda expression with receiver greatly simplifies the code needed to create your menu. Lambda 
-expressions are not only useful for setup and creation but also for configuration. They are commonly used in building 
-DSLs for APIs, UI frameworks, and configuration builders to produce streamlined code, allowing you to focus more easily 
-on the underlying code structure and logic.
+如你所见，使用带接收者的 Lambda 表达式可以大大简化创建菜单所需的代码。
+Lambda 表达式不仅适用于对象的初始化和创建，也适用于配置。
+它们在构建 API、UI 框架以及配置生成器的 DSL 时非常常用，能够生成简洁的代码，让你更专注于底层代码结构和逻辑。
 
-Kotlin's ecosystem has many examples of this design pattern, such as in the [`buildList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html)
-and [`buildString()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/build-string.html) functions from the 
-standard library.
+Kotlin 生态系统中有许多这种设计模式的示例，例如标准库中的
+[`buildList()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/build-list.html) 和
+[`buildString()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/build-string.html) 函数。
 
-> Lambda expressions with receivers can be combined with **type-safe builders** in Kotlin to make DSLs that detect any problems
-> with types at compile time rather than at runtime. To learn more, see [Type-safe builders](type-safe-builders.md).
+> 带接收者的 Lambda 表达式可以与 Kotlin 的 **类型安全构建器（type-safe builders）** 结合使用，使 DSL 能在编译时而非运行时检测类型问题。
+> 想了解更多，请参阅 [类型安全构建器](type-safe-builders.md)。
 >
 {style="tip"}
 
-## Practice
+## 练习 {id=practice}
 
-### Exercise 1 {initial-collapse-state="collapsed" collapsible="true" id="lambda-receivers-exercise-1"}
+### 练习 1 {initial-collapse-state="collapsed" collapsible="true" id="lambda-receivers-exercise-1"}
 
-You have a `fetchData()` function that accepts a lambda expression with receiver. Update the lambda expression to use 
-the `append()` function so that the output of your code is: `Data received - Processed`.
+你有一个 `fetchData()` 函数，它接受一个带接收者的 Lambda 表达式。
+请更新 Lambda 表达式，使用 `append()` 函数，使代码输出为：`Data received - Processed`。
 
 |---|---|
 ```kotlin
@@ -187,7 +182,7 @@ fun fetchData(callback: StringBuilder.() -> Unit) {
 
 fun main() {
     fetchData {
-        // Write your code here
+        // 在此处编写你的代码
         // Data received - Processed
     }
 }
@@ -211,17 +206,17 @@ fun main() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-lambda-receivers-solution-1"}
 
-### Exercise 2 {initial-collapse-state="collapsed" collapsible="true" id="lambda-receivers-exercise-2"}
+### 练习 2 {initial-collapse-state="collapsed" collapsible="true" id="lambda-receivers-exercise-2"}
 
-You have a `Button` class and `ButtonEvent` and `Position` data classes. Write some code that triggers the `onEvent()`
-member function of the `Button` class to trigger a double-click event. Your code should print `"Double click!"`.
+你有一个 `Button` 类，以及 `ButtonEvent` 和 `Position` 数据类。
+编写代码触发 `Button` 类的 `onEvent()` 成员函数，使其触发双击事件，并打印 `"Double click!"`。
 
 ```kotlin
 class Button {
     fun onEvent(action: ButtonEvent.() -> Unit) {
-        // Simulate a double-click event (not a right-click)
+        // 模拟双击事件（不是右键点击）
         val event = ButtonEvent(isRightClick = false, amount = 2, position = Position(100, 200))
-        event.action() // Trigger the event callback
+        event.action() // 触发事件回调
     }
 }
 
@@ -240,7 +235,7 @@ fun main() {
     val button = Button()
 
     button.onEvent {
-        // Write your code here
+        // 在这里写下你的代码
         // Double click!
     }
 }
@@ -251,9 +246,9 @@ fun main() {
 ```kotlin
 class Button {
     fun onEvent(action: ButtonEvent.() -> Unit) {
-        // Simulate a double-click event (not a right-click)
+        // 模拟双击事件（不是右键点击）
         val event = ButtonEvent(isRightClick = false, amount = 2, position = Position(100, 200))
-        event.action() // Trigger the event callback
+        event.action() // 触发事件回调
     }
 }
 
@@ -281,16 +276,15 @@ fun main() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-lambda-receivers-solution-2"}
 
-### Exercise 3 {initial-collapse-state="collapsed" collapsible="true" id="lambda-receivers-exercise-3"}
+### 练习 3 {initial-collapse-state="collapsed" collapsible="true" id="lambda-receivers-exercise-3"}
 
-Write a function that creates a copy of a list of integers where every element is incremented by 1. Use the provided 
-function skeleton that extends `List<Int>` with an `incremented` function.
+编写一个函数，创建一个整数列表的副本，其中每个元素都加 1。使用提供的函数骨架扩展 `List<Int>` 并定义 `incremented` 函数。
 
 ```kotlin
 fun List<Int>.incremented(): List<Int> {
     val originalList = this
     return buildList {
-        // Write your code here
+        // 在这里编写你的代码
     }
 }
 
@@ -321,6 +315,6 @@ fun main() {
 ```
 {initial-collapse-state="collapsed" collapsible="true" collapsed-title="Example solution" id="kotlin-tour-lambda-receivers-solution-3"}
 
-## Next step
+## 下一步
 
-[Intermediate: Classes and interfaces](kotlin-tour-intermediate-classes-interfaces.md)
+[中级：类和接口](kotlin-tour-intermediate-classes-interfaces.md)
